@@ -7,13 +7,18 @@ for (let index = 0; index < 60; index++) {
 
 export default (req, res) => {
   const randomBoardIds = knuthShuffle(boardIds.slice(0))
-  const boards = []
+  const boardsDistribution = []
 
   for (let index = 0; index < randomBoardIds.length; index += 2) {
-    boards.push(`${randomBoardIds[index]},${randomBoardIds[index + 1]}`)
+    boardsDistribution.push(
+      `${randomBoardIds[index]},${randomBoardIds[index + 1]}`
+    )
   }
+
+  const result = JSON.stringify({ boardsDistribution }, null, 2)
+  console.log(result)
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({ boards }))
+  res.end(result)
 }

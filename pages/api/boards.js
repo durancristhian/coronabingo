@@ -19,11 +19,16 @@ export default (req, res) => {
   firstBoardIndex--
   secondBoardIndex--
 
+  const result = JSON.stringify(
+    {
+      boards: [getBoard(firstBoardIndex), getBoard(secondBoardIndex)]
+    },
+    null,
+    2
+  )
+  console.log(result)
+
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
-  res.end(
-    JSON.stringify({
-      boards: [getBoard(firstBoardIndex), getBoard(secondBoardIndex)]
-    })
-  )
+  res.end(JSON.stringify(result))
 }
