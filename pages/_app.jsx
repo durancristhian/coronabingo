@@ -15,7 +15,7 @@ class MyApp extends App {
           <title>Coronabingo</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className="bg-orange-300 flex items-center font-sans min-h-screen">
+        <main className="bg-orange-300 font-sans min-h-screen">
           <div className="max-w-5xl mx-auto">
             <div className="px-4 py-8">
               <div className="flex items-center justify-center">

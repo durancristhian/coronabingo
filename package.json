@@ -5,6 +5,7 @@
   "scripts": {
     "deploy": "now --prod",
     "dev": "next dev",
+    "download-boards": "node scripts/download-boards",
     "build": "next build",
     "start": "next start"
   },
@@ -24,6 +25,7 @@
     "prettier": "^1.19.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "swr": "^0.1.18",
     "tailwindcss": "^1.2.0",
     "typeface-bungee-shade": "0.0.71",
     "typeface-oswald": "^1.1.4"
