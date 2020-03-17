@@ -1,4 +1,3 @@
-import getRandomInt from '../../helpers/getRandomInt'
 import getRandomRotation from '../../helpers/getRandomRotation'
 import boards from '../../public/boards.json'
 
@@ -14,8 +13,11 @@ const getBoard = index => {
 }
 
 export default (req, res) => {
-  const firstBoardIndex = getRandomInt(0, 59)
-  const secondBoardIndex = getRandomInt(0, 59)
+  const queryParams = req.query.ids
+  let [firstBoardIndex, secondBoardIndex] = queryParams.split(',').map(Number)
+
+  firstBoardIndex--
+  secondBoardIndex--
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')

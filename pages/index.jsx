@@ -3,8 +3,8 @@ import useSWR from 'swr'
 import Boards from '../components/Boards'
 import Message from '../components/Message'
 
-export default function Home() {
-  const url = '/api/boards'
+export default function Home({ query }) {
+  const url = `/api/boards?ids=${query.ids}`
   const { data, error } = useSWR(url, fetcher)
 
   if (error) {
@@ -25,6 +25,8 @@ export default function Home() {
 
   return <Boards boards={data.boards} />
 }
+
+Home.getInitialProps = async ({ _, query }) => ({ query })
 
 const fetcher = async (...args) => {
   const res = await fetch(...args)
