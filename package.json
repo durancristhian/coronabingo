@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "deploy": "now --prod",
     "dev": "next dev",
     "download-boards": "node scripts/download-boards",
-    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "gsheets": "^2.0.0",
     "isomorphic-unfetch": "^3.0.0",
+    "knuth-shuffle": "^1.0.8",
     "next": "^9.3.0",
     "postcss-import": "^12.0.1",
     "prettier": "^1.19.1",
