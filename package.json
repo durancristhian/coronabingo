@@ -1,0 +1,31 @@
+{
+  "name": "coronabingo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy": "now --prod",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@svgr/webpack": "^5.2.0",
+    "@types/classnames": "^2.2.10",
+    "autoprefixer": "^9.7.4",
+    "classnames": "^2.2.6",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gsheets": "^2.0.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.3.0",
+    "postcss-import": "^12.0.1",
+    "prettier": "^1.19.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "tailwindcss": "^1.2.0",
+    "typeface-bungee-shade": "0.0.71",
+    "typeface-oswald": "^1.1.4"
+  }
+}

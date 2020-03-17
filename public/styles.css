@@ -1,0 +1,52 @@
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/* purgecss end ignore */
+
+@import 'tailwindcss/utilities';
+
+.debug * {
+  box-shadow: 0 0 1px red;
+}
+
+.crown {
+  margin-right: 2rem;
+}
+
+.poroto {
+  background-image: url(./poroto.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 0 white;
+}
+
+.title {
+  display: flex;
+  font-size: 5rem;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.title span:nth-child(1) {
+  transform: scale(1.3);
+}
+
+.title span:nth-child(2) {
+  padding-left: 2rem;
+  padding-right: 1rem;
+  transform: scale(1.15);
+}
+
+.title span:nth-child(4) {
+  padding-left: 1rem;
+  padding-right: 2rem;
+  transform: scale(1.15);
+}
+
+.title span:nth-child(5) {
+  transform: scale(1.3);
+}
