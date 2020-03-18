@@ -19,15 +19,15 @@ class MyApp extends App {
           <div className="max-w-5xl mx-auto">
             <div className="px-4 py-8">
               <div className="flex items-center justify-center">
-                <div className="crown">
-                  <Corona className="h-24" />
+                <div className="crown mr-8">
+                  <Corona className="h-12 sm:h-24" />
                 </div>
-                <h1 className="font-bungee-shade title">
-                  <span>B</span>
-                  <span>I</span>
-                  <span>N</span>
-                  <span>G</span>
-                  <span>O</span>
+                <h1 className="flex font-bold font-bungee-shade justify-center text-4xl sm:text-6xl">
+                  <span className="title-letter">B</span>
+                  <span className="ml-4 mr-2 title-letter">I</span>
+                  <span className="title-letter">N</span>
+                  <span className="ml-2 mr-4 title-letter">G</span>
+                  <span className="title-letter">O</span>
                 </h1>
               </div>
               <Component {...pageProps} />

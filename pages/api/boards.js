@@ -1,14 +1,11 @@
-import getRandomRotation from '../../helpers/getRandomRotation'
 import boards from '../../public/boards.json'
 
 const getBoard = index => {
   const numbers = boards[index]
-  const rotations = numbers.map(number => number && getRandomRotation())
 
   return {
     id: index + 1,
-    numbers,
-    rotations
+    numbers
   }
 }
 
@@ -26,7 +23,7 @@ export default (req, res) => {
     null,
     2
   )
-  console.log(result)
+  /* console.log(result) */
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')

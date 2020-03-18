@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { useState } from 'react'
 
-export default function Cells({ numbers, rotations }) {
+export default function Cells({ numbers }) {
   const [selectedNumbers, setSelectedNumbers] = useState([])
   const toggleNumber = number => {
     const currentState = [...selectedNumbers]
@@ -41,10 +41,10 @@ export default function Cells({ numbers, rotations }) {
           selectedNumbers.includes(number) ? 'poroto' : null
         )}
         style={{
-          transform: `rotate(${rotations[i]}deg)`
+          transform: `rotate(${number + i}deg)`
         }}
       ></div>
-      <span className="font-medium font-oswald text-5xl relative text-shadow z-10">
+      <span className="font-medium font-oswald relative text-2xl sm:text-5xl text-shadow z-10">
         {number || ''}
       </span>
     </div>

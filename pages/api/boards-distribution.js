@@ -16,7 +16,7 @@ export default (req, res) => {
   }
 
   const result = JSON.stringify({ boardsDistribution }, null, 2)
-  console.log(result)
+  /* console.log(result) */
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
