@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "deploy": "now --prod",
+    "deploy": "now",
+    "deploy-prod": "now --prod",
     "dev": "next dev",
     "download-boards": "node scripts/download-boards",
     "start": "next start"
