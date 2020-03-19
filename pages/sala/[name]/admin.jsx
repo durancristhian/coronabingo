@@ -36,8 +36,6 @@ export default function AdminSala() {
 
   useEffect(() => {
     const getDocument = async () => {
-      console.log('useEffect', name)
-
       if (!name) return
 
       const room = await db
@@ -61,12 +59,10 @@ export default function AdminSala() {
   }, [name])
 
   useDeepCompareEffect(() => {
-    console.log('useDeepCompareEffect 1')
     if (!name) return
 
     const rooms = db.collection('rooms').doc(name)
 
-    console.log('useDeepCompareEffect 2')
     rooms.set(formData, { merge: true })
 
     setCanAssignBoards(formData.players.length > 1)
