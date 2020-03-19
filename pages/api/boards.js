@@ -10,7 +10,7 @@ const getBoard = index => {
 }
 
 export default (req, res) => {
-  const queryParams = req.query.ids
+  const queryParams = req.query.cartones
   let [firstBoardIndex, secondBoardIndex] = queryParams.split(',').map(Number)
 
   firstBoardIndex--

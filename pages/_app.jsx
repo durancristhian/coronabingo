@@ -1,11 +1,11 @@
 import App from 'next/app'
 import Head from 'next/head'
-import 'typeface-bungee-shade'
+import 'typeface-inter'
 import 'typeface-oswald'
+import Header from '../components/Header'
 import '../public/styles.css'
-import Corona from '../public/corona.svg'
 
-class MyApp extends App {
+class Coronabingo extends App {
   render() {
     const { Component, pageProps } = this.props
 
@@ -15,28 +15,13 @@ class MyApp extends App {
           <title>Coronabingo</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className="bg-orange-300 font-sans min-h-screen">
-          <div className="max-w-5xl mx-auto">
-            <div className="px-4 py-8">
-              <div className="flex items-center justify-center">
-                <div className="crown mr-8">
-                  <Corona className="h-12 sm:h-24" />
-                </div>
-                <h1 className="flex font-bold font-bungee-shade justify-center text-4xl sm:text-6xl">
-                  <span className="title-letter">B</span>
-                  <span className="ml-4 mr-2 title-letter">I</span>
-                  <span className="title-letter">N</span>
-                  <span className="ml-2 mr-4 title-letter">G</span>
-                  <span className="title-letter">O</span>
-                </h1>
-              </div>
-              <Component {...pageProps} />
-            </div>
-          </div>
+        <main className="bg-gray-200 font-inter leading-none min-h-screen text-gray-900">
+          <Header />
+          <Component {...pageProps} />
         </main>
       </>
     )
   }
 }
 
-export default MyApp
+export default Coronabingo

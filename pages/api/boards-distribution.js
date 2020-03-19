@@ -11,7 +11,7 @@ export default (req, res) => {
 
   for (let index = 0; index < randomBoardIds.length; index += 2) {
     boardsDistribution.push(
-      `${randomBoardIds[index]},${randomBoardIds[index + 1]}`
+      `${randomBoardIds[index] + 1},${randomBoardIds[index + 1] + 1}`
     )
   }
 

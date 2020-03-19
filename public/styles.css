@@ -16,22 +16,6 @@
   background-repeat: no-repeat;
 }
 
-.text-shadow {
+.text-shadow-white {
   text-shadow: 1px 1px 0 white;
-}
-
-.title-letter:nth-child(1) {
-  transform: scale(1.3);
-}
-
-.title-letter:nth-child(2) {
-  transform: scale(1.15);
-}
-
-.title-letter:nth-child(4) {
-  transform: scale(1.15);
-}
-
-.title-letter:nth-child(5) {
-  transform: scale(1.3);
 }

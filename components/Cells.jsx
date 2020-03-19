@@ -4,16 +4,16 @@ import { useState } from 'react'
 export default function Cells({ numbers }) {
   const [selectedNumbers, setSelectedNumbers] = useState([])
   const toggleNumber = number => {
-    const currentState = [...selectedNumbers]
-    const index = currentState.findIndex(n => n === number)
+    const nextState = [...selectedNumbers]
+    const index = nextState.findIndex(n => n === number)
 
     if (index !== -1) {
-      currentState.splice(index, 1)
+      nextState.splice(index, 1)
     } else {
-      currentState.push(number)
+      nextState.push(number)
     }
 
-    setSelectedNumbers(currentState)
+    setSelectedNumbers(nextState)
   }
 
   const handleClick = number => {
@@ -26,7 +26,7 @@ export default function Cells({ numbers }) {
     <div
       key={i}
       className={classnames([
-        'border-b-2 border-r-2 border-black flex h-20 items-center justify-center p-1 relative',
+        'border-b-2 border-r-2 border-gray-900 flex h-20 items-center justify-center p-1 relative',
         number ? 'bg-white cursor-pointer' : 'bg-yellow-200',
         selectedNumbers.includes(number) ? 'bg-orange-400' : null
       ])}
@@ -44,7 +44,7 @@ export default function Cells({ numbers }) {
           transform: `rotate(${number + i}deg)`
         }}
       ></div>
-      <span className="font-medium font-oswald relative text-2xl sm:text-5xl text-shadow z-10">
+      <span className="font-medium font-oswald relative text-2xl sm:text-5xl text-shadow-white z-10">
         {number || ''}
       </span>
     </div>
