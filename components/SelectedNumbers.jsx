@@ -12,9 +12,9 @@ export default function SelectedNumbers({
       </div>
       <div className="flex flex-wrap">
         {numbers.map(n => (
-          <div key={n} className="p-1" style={{ width: '10%' }}>
+          <div key={n} className="p-2 text-center" style={{ width: '10%' }}>
             <Button
-              className="w-full"
+              className="h-10 md:h-16 rounded-full w-10 md:w-16"
               onClick={() => onSelectNumber(n)}
               color={selectedNumbers.includes(n) ? 'green' : 'gray'}
             >
