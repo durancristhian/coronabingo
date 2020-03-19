@@ -65,8 +65,8 @@ export default function AdminSala() {
   useDeepCompareEffect(() => {
     if (!name) return
 
-    const rooms = db.collection('rooms').doc(name)
-    rooms.set(formData)
+    const room = db.collection('rooms').doc(name)
+    room.update(formData)
 
     setCanAssignBoards(formData.players.length > 1)
   }, [formData])

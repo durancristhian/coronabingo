@@ -14,7 +14,7 @@ export default function Players({
 }) {
   const [formData, setFormData] = useState(defaultFormData)
   /* TODO: There can be 2 people with the same name */
-  const [admin, setAdmin] = useState(adminName)
+  const [admin, setAdmin] = useState(adminName || '')
 
   const onFieldChange = (key, value) => {
     setFormData({
