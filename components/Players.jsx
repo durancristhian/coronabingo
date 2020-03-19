@@ -1,11 +1,19 @@
 import classnames from 'classnames'
 import { useState } from 'react'
-import { FiPlus, FiTrash2 } from 'react-icons/fi'
+import {
+  FiCircle,
+  FiCheckCircle,
+  FiPlus,
+  FiTrash2,
+  FiCheck
+} from 'react-icons/fi'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
 
 export default function Players({ id, onAddPlayer, onRemovePlayer, players }) {
   const [formData, setFormData] = useState(defaultFormData)
+  /* TODO: There can be 2 people with the same name */
+  const [adminName, setAdminName] = useState('')
 
   const onFieldChange = (key, value) => {
     setFormData({
@@ -73,6 +81,20 @@ export default function Players({ id, onAddPlayer, onRemovePlayer, players }) {
                 index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
               ])}
             >
+              <div className="mr-4">
+                <button
+                  onClick={() => {
+                    setAdminName(player.name)
+                  }}
+                  className="mt-1"
+                >
+                  {adminName === player.name ? (
+                    <FiCheckCircle className="text-blue-500 text-xl" />
+                  ) : (
+                    <FiCircle className="text-xl" />
+                  )}
+                </button>
+              </div>
               <div className="flex-auto">
                 <p>{player.name}</p>
               </div>
