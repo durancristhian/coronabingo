@@ -49,8 +49,8 @@ export default function AdminSala() {
         setRoom(roomData)
         setFormData({
           ...formData,
-          players: roomData.players,
-          videocall: roomData.videocall
+          players: roomData.players || [],
+          videocall: roomData.videocall || ''
         })
       }
     }
@@ -62,7 +62,6 @@ export default function AdminSala() {
     if (!name) return
 
     const rooms = db.collection('rooms').doc(name)
-
     rooms.set(formData, { merge: true })
 
     setCanAssignBoards(formData.players.length > 1)
