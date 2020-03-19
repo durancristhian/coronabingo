@@ -1,19 +1,20 @@
 import classnames from 'classnames'
-import { useState } from 'react'
-import {
-  FiCircle,
-  FiCheckCircle,
-  FiPlus,
-  FiTrash2,
-  FiCheck
-} from 'react-icons/fi'
+import { useEffect, useState } from 'react'
+import { FiCheckCircle, FiCircle, FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
 
-export default function Players({ id, onAddPlayer, onRemovePlayer, players }) {
+export default function Players({
+  adminName,
+  id,
+  onAddPlayer,
+  onAdminChange,
+  onRemovePlayer,
+  players
+}) {
   const [formData, setFormData] = useState(defaultFormData)
   /* TODO: There can be 2 people with the same name */
-  const [adminName, setAdminName] = useState('')
+  const [admin, setAdmin] = useState(adminName)
 
   const onFieldChange = (key, value) => {
     setFormData({
@@ -30,6 +31,10 @@ export default function Players({ id, onAddPlayer, onRemovePlayer, players }) {
       onAddPlayer(id, [...players, { name: formData.name }])
     }
   }
+
+  useEffect(() => {
+    onAdminChange(admin)
+  }, [admin])
 
   return (
     <div className="my-8">
@@ -84,14 +89,14 @@ export default function Players({ id, onAddPlayer, onRemovePlayer, players }) {
               <div className="mr-4">
                 <button
                   onClick={() => {
-                    setAdminName(player.name)
+                    setAdmin(player.name)
                   }}
-                  className="mt-1"
+                  className="focus:outline-none focus:shadow-outline mt-1 text-xl"
                 >
-                  {adminName === player.name ? (
-                    <FiCheckCircle className="text-blue-500 text-xl" />
+                  {admin === player.name ? (
+                    <FiCheckCircle className="text-blue-600" />
                   ) : (
-                    <FiCircle className="text-xl" />
+                    <FiCircle />
                   )}
                 </button>
               </div>

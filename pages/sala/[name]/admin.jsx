@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { FiCheckCircle, FiSmile } from 'react-icons/fi'
 import useSWR from 'swr'
 import useDeepCompareEffect from 'use-deep-compare-effect'
+import Boards from '../../../components/Boards'
 import Button from '../../../components/Button'
 import InputText from '../../../components/InputText'
 import Message from '../../../components/Message'
@@ -20,11 +21,13 @@ export default function AdminSala() {
     players: [],
     videocall: '',
     selectedNumbers: [],
-    readyToPlay: false
+    readyToPlay: false,
+    adminName: ''
   })
   const [canPlay, setCanPlay] = useState(false)
   const [canAssignBoards, setCanAssignBoards] = useState(false)
   const [room, setRoom] = useState({})
+  const [adminBoards, setAdminBoards] = useState([])
 
   if (error) {
     return (
@@ -50,7 +53,8 @@ export default function AdminSala() {
         setFormData({
           ...formData,
           players: roomData.players || [],
-          videocall: roomData.videocall || ''
+          videocall: roomData.videocall || '',
+          adminName: roomData.adminName || ''
         })
       }
     }
@@ -62,10 +66,25 @@ export default function AdminSala() {
     if (!name) return
 
     const rooms = db.collection('rooms').doc(name)
-    rooms.set(formData, { merge: true })
+    rooms.set(formData)
 
     setCanAssignBoards(formData.players.length > 1)
   }, [formData])
+
+  useEffect(() => {
+    const getBoards = async () => {
+      if (formData.adminName && canPlay) {
+        const player = formData.players.find(p => p.name === formData.adminName)
+        const { boards } = await fetcher(
+          `/api/boards?cartones=${player.boards}`
+        )
+
+        setAdminBoards(boards)
+      }
+    }
+
+    getBoards()
+  }, [formData.adminName, canPlay])
 
   const onFieldChange = (key, value) => {
     setFormData({
@@ -118,6 +137,10 @@ export default function AdminSala() {
     onFieldChange('selectedNumbers', nextState)
   }
 
+  const onAdminChange = name => {
+    onFieldChange('adminName', name)
+  }
+
   return (
     <div className="px-4 py-8">
       <div className="max-w-5xl mx-auto">
@@ -156,7 +179,9 @@ export default function AdminSala() {
           />
           <Players
             id="players"
+            adminName={formData.adminName}
             onAddPlayer={onFieldChange}
+            onAdminChange={onAdminChange}
             onRemovePlayer={onRemovePlayer}
             players={formData.players || []}
           />
@@ -184,11 +209,14 @@ export default function AdminSala() {
           </div>
         </div>
         {formData.readyToPlay && (
-          <SelectedNumbers
-            numbers={NUMBERS}
-            selectedNumbers={formData.selectedNumbers}
-            onSelectNumber={onSelectNumber}
-          />
+          <>
+            <Boards boards={adminBoards}></Boards>
+            <SelectedNumbers
+              numbers={NUMBERS}
+              selectedNumbers={formData.selectedNumbers}
+              onSelectNumber={onSelectNumber}
+            />
+          </>
         )}
       </div>
     </div>
