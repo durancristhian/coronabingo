@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import { useEffect, useState } from 'react'
 import { FiCheckCircle, FiCircle, FiPlus, FiTrash2 } from 'react-icons/fi'
-import Button from '../components/Button'
-import InputText from '../components/InputText'
+import Button from './Button'
+import InputText from './InputText'
 
 export default function Players({
   adminName,
@@ -59,7 +59,7 @@ export default function Players({
               <InputText
                 id="name"
                 label="Nombre *"
-                onChange={onFieldChange}
+                onInputChange={onFieldChange}
                 value={formData.name}
               />
             </div>

@@ -1,11 +1,12 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
-const boardIds = []
+const boardIds: number[] = []
 for (let index = 0; index < 60; index++) {
   boardIds.push(index)
 }
 
-export default (req, res) => {
+export default (_req: NextApiRequest, res: NextApiResponse) => {
   const randomBoardIds = knuthShuffle(boardIds.slice(0))
   const boardsDistribution = []
 
@@ -16,7 +17,6 @@ export default (req, res) => {
   }
 
   const result = JSON.stringify({ boardsDistribution }, null, 2)
-  /* console.log(result) */
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')

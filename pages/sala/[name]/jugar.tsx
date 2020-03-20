@@ -6,7 +6,7 @@ import Boards from '../../../components/Boards'
 import Message from '../../../components/Message'
 import SelectedNumbers from '../../../components/SelectedNumbers'
 import fetcher from '../../../utils/fetcher'
-import db from '../../../firebase'
+import db from '../../../utils/firebase'
 
 export default function Jugar({ query }) {
   const router = useRouter()

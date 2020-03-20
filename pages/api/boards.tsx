@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import boards from '../../public/boards.json'
 
-const getBoard = index => {
+const getBoard = (index: number) => {
   const numbers = boards[index]
 
   return {
@@ -9,7 +10,20 @@ const getBoard = index => {
   }
 }
 
-export default (req, res) => {
+export default (req: NextApiRequest, res: NextApiResponse) => {
+  res.setHeader('Content-Type', 'application/json')
+
+  if (typeof req.query.cartones !== 'string') {
+    const badRequestReason = {
+      reason: 'expected "cartones" query param to a string'
+    }
+
+    res.statusCode = 400
+    res.end(badRequestReason)
+
+    return
+  }
+
   const queryParams = req.query.cartones
   let [firstBoardIndex, secondBoardIndex] = queryParams.split(',').map(Number)
 
@@ -23,9 +37,7 @@ export default (req, res) => {
     null,
     2
   )
-  /* console.log(result) */
 
   res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
   res.end(result)
 }

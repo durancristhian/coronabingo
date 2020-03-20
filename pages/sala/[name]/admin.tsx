@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { FiCheckCircle, FiSmile } from 'react-icons/fi'
 import useSWR from 'swr'
 import useDeepCompareEffect from 'use-deep-compare-effect'
@@ -9,7 +9,7 @@ import InputText from '../../../components/InputText'
 import Message from '../../../components/Message'
 import Players from '../../../components/Players'
 import SelectedNumbers from '../../../components/SelectedNumbers'
-import db from '../../../firebase'
+import db from '../../../utils/firebase'
 import fetcher from '../../../utils/fetcher'
 
 export default function AdminSala() {
@@ -174,7 +174,7 @@ export default function AdminSala() {
           <InputText
             id="videocall"
             label="URL de la videollamada"
-            onChange={onFieldChange}
+            onInputChange={onFieldChange}
             value={formData.videocall}
           />
           <Players
@@ -209,14 +209,14 @@ export default function AdminSala() {
           </div>
         </div>
         {formData.readyToPlay && (
-          <>
+          <Fragment>
             <Boards boards={adminBoards}></Boards>
             <SelectedNumbers
               numbers={NUMBERS}
               selectedNumbers={formData.selectedNumbers}
               onSelectNumber={onSelectNumber}
             />
-          </>
+          </Fragment>
         )}
       </div>
     </div>

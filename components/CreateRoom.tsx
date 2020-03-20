@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { FormEvent, Fragment, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import useDeepCompareEffect from 'use-deep-compare-effect'
-import Button from '../components/Button'
-import InputText from '../components/InputText'
-import db from '../firebase'
+import db from '../utils/firebase'
 import isObjectFulfilled from '../utils/isObjectFulfilled'
+import Button from './Button'
+import InputText from './InputText'
+import firebase from 'firebase'
 
 export default function CreateRoom() {
   const router = useRouter()
@@ -20,47 +21,55 @@ export default function CreateRoom() {
     setCanSubmit(isObjectFulfilled(formData))
   }, [formData])
 
-  const onFieldChange = (key, value) => {
+  const onFieldChange = (key: string, value: string) => {
     setFormData({
       ...formData,
       [key]: value
     })
   }
 
-  const onSubmit = async event => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
     const { name } = formData
 
-    /* TODO: Add validations */
-    await db
-      .collection('rooms')
-      .doc(name)
-      .set({ ...formData, date: new Date().toJSON() })
+    const roomDoc = db.collection('rooms').doc(name)
+    const roomData = await roomDoc.get()
 
-    router.push(`/sala/${formData.name}/admin`)
+    if (roomData.exists) {
+      /* TODO: show an because the room already exist */
+
+      return
+    }
+
+    await roomDoc.set({
+      ...formData,
+      date: firebase.database.ServerValue.TIMESTAMP
+    })
+
+    router.push(`/sala/${name}/admin`)
   }
 
   return (
-    <>
+    <Fragment>
       <h2 className="font-medium text-xl text-center uppercase">Crear sala</h2>
       <form onSubmit={onSubmit}>
         <InputText
           id="name"
           label="Nombre *"
-          onChange={onFieldChange}
+          onInputChange={onFieldChange}
           value={formData.name}
         />
         <InputText
           id="password"
           label="Contraseña *"
-          onChange={onFieldChange}
+          onInputChange={onFieldChange}
           value={formData.password}
         />
         <InputText
           id="adminPassword"
           label="Contraseña de administrador *"
-          onChange={onFieldChange}
+          onInputChange={onFieldChange}
           value={formData.adminPassword}
         />
         <div className="mt-8">
@@ -70,6 +79,6 @@ export default function CreateRoom() {
           </Button>
         </div>
       </form>
-    </>
+    </Fragment>
   )
 }

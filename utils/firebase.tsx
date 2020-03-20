@@ -12,12 +12,14 @@ const firebaseConfig = {
   measurementId: 'G-FX1XBFGWLB'
 }
 
+let firebaseApp
+
 if (firebase.apps.length) {
-  firebase.apps[0]
+  firebaseApp = firebase.apps[0]
 } else {
-  firebase.initializeApp(firebaseConfig)
+  firebaseApp = firebase.initializeApp(firebaseConfig)
 }
 
-const db = firebase.firestore()
+const db = firebaseApp.firestore()
 
 export default db

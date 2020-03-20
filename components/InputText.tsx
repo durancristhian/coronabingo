@@ -1,13 +1,23 @@
 import classnames from 'classnames'
+import { FocusEvent } from 'react'
+
+interface IProps {
+  id: string
+  label: string
+  onFocus?: (ev: FocusEvent<HTMLInputElement>) => void
+  onInputChange?: (id: string, value: string) => void
+  readonly?: boolean
+  value: string
+}
 
 export default function InputText({
   id,
   label,
-  onChange,
+  onFocus,
+  onInputChange,
   readonly,
-  value,
-  ...rest
-}) {
+  value
+}: IProps) {
   return (
     <label htmlFor={id} className="flex flex-col my-4">
       <span>{label}</span>
@@ -20,8 +30,10 @@ export default function InputText({
         ])}
         id={id}
         value={value}
-        onChange={event => onChange && onChange(id, event.target.value)}
-        {...rest}
+        onChange={event =>
+          onInputChange && onInputChange(id, event.target.value)
+        }
+        onFocus={event => onFocus && onFocus(event)}
       />
     </label>
   )
