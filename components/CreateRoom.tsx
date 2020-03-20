@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import { useRouter } from 'next/router'
 import { FormEvent, Fragment, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
@@ -6,16 +7,23 @@ import db from '../utils/firebase'
 import isObjectFulfilled from '../utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
-import firebase from 'firebase'
+import Message, { MessageType } from './Message'
 
 export default function CreateRoom() {
   const router = useRouter()
+  const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
     adminPassword: '',
     name: '',
     password: ''
   })
-  const [canSubmit, setCanSubmit] = useState(false)
+  const [messageProps, setMessageProps] = useState<{
+    message: string
+    type: MessageType
+  }>({
+    message: '',
+    type: 'information'
+  })
 
   useDeepCompareEffect(() => {
     setCanSubmit(isObjectFulfilled(formData))
@@ -31,13 +39,21 @@ export default function CreateRoom() {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
+    setMessageProps({
+      message: 'Creando sala...',
+      type: 'information'
+    })
+
     const { name } = formData
 
     const roomDoc = db.collection('rooms').doc(name)
     const roomData = await roomDoc.get()
 
     if (roomData.exists) {
-      /* TODO: show an because the room already exist */
+      setMessageProps({
+        message: 'Ya existe una sala con ese nombre.',
+        type: 'error'
+      })
 
       return
     }
@@ -47,7 +63,14 @@ export default function CreateRoom() {
       date: firebase.database.ServerValue.TIMESTAMP
     })
 
-    router.push(`/sala/${name}/admin`)
+    setMessageProps({
+      message: 'Sala creada con éxito',
+      type: 'success'
+    })
+
+    setTimeout(() => {
+      router.push(`/sala/${name}/admin`)
+    }, 1000)
   }
 
   return (
@@ -79,6 +102,11 @@ export default function CreateRoom() {
           </Button>
         </div>
       </form>
+      {messageProps.message && (
+        <div className="mt-8">
+          <Message type={messageProps.type}>{messageProps.message}</Message>
+        </div>
+      )}
     </Fragment>
   )
 }
