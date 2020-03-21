@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import firebase from 'firebase'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { FiLink2 } from 'react-icons/fi'

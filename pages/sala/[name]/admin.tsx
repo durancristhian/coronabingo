@@ -1,226 +1,134 @@
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
-import { FiCheckCircle, FiSmile } from 'react-icons/fi'
-import useSWR from 'swr'
 import useDeepCompareEffect from 'use-deep-compare-effect'
-import Boards from '../../../components/Boards'
-import Button from '../../../components/Button'
-import InputText from '../../../components/InputText'
-import Message from '../../../components/Message'
-import Players from '../../../components/Players'
-import SelectedNumbers from '../../../components/SelectedNumbers'
-import db from '../../../utils/firebase'
-import fetcher from '../../../utils/fetcher'
+import InputText from '~/components/InputText'
+import Message from '~/components/Message'
+import Players, { IPlayer } from '~/components/Players'
+import db from '~/utils/firebase'
 
 export default function AdminSala() {
-  const url = '/api/boards-distribution'
-  const { data, error } = useSWR(url, fetcher)
   const router = useRouter()
-  const { name } = router.query
-  const [formData, setFormData] = useState({
-    players: [],
-    videocall: '',
-    selectedNumbers: [],
-    readyToPlay: false,
-    adminName: ''
+  const name = router.query.name?.toString()
+  const [room, setRoom] = useState<{
+    data: firebase.firestore.DocumentData | undefined
+    error: string | null
+    loading: boolean
+  }>({
+    data: undefined,
+    error: null,
+    loading: false
   })
-  const [canPlay, setCanPlay] = useState(false)
-  const [canAssignBoards, setCanAssignBoards] = useState(false)
-  const [room, setRoom] = useState({})
-  const [adminBoards, setAdminBoards] = useState([])
-
-  if (error) {
-    return (
-      <Message>
-        <p>Hubo un error.</p>
-      </Message>
-    )
-  }
 
   useEffect(() => {
-    const getDocument = async () => {
-      if (!name) return
+    const getRoomData = async () => {
+      setRoom({
+        data: undefined,
+        error: null,
+        loading: true
+      })
 
-      const room = await db
-        .collection('rooms')
-        .doc(name)
-        .get()
+      try {
+        const roomRef = db.collection('rooms').doc(name)
+        const roomDoc = await roomRef.get()
 
-      if (room.exists) {
-        const roomData = room.data()
+        if (!roomDoc.exists) {
+          router.push('/')
 
-        setRoom(roomData)
-        setFormData({
-          ...formData,
-          players: roomData.players || [],
-          videocall: roomData.videocall || '',
-          adminName: roomData.adminName || ''
+          return
+        }
+
+        const data = roomDoc.data()
+
+        setRoom({
+          loading: false,
+          error: null,
+          data: data
+        })
+      } catch (error) {
+        setRoom({
+          loading: false,
+          error,
+          data: undefined
         })
       }
     }
 
-    getDocument()
+    if (name) getRoomData()
   }, [name])
 
   useDeepCompareEffect(() => {
-    if (!name) return
+    const updateRoom = async () => {
+      const roomRef = db.collection('rooms').doc(name)
+      roomRef.update({ ...room.data })
+    }
 
-    const room = db.collection('rooms').doc(name)
-    room.update(formData)
+    if (name) updateRoom()
+  }, [{ ...room.data }])
 
-    setCanAssignBoards(formData.players.length > 1)
-  }, [formData])
-
-  useEffect(() => {
-    const getBoards = async () => {
-      if (formData.adminName && canPlay) {
-        const player = formData.players.find(p => p.name === formData.adminName)
-        const { boards } = await fetcher(
-          `/api/boards?cartones=${player.boards}`
-        )
-
-        setAdminBoards(boards)
+  const onFieldChange = (key: string, value: string | IPlayer[]) => {
+    setRoom({
+      ...room,
+      data: {
+        ...room.data,
+        [key]: value
       }
-    }
-
-    getBoards()
-  }, [formData.adminName, canPlay])
-
-  const onFieldChange = (key, value) => {
-    setFormData({
-      ...formData,
-      [key]: value
     })
-  }
-
-  const onRemovePlayer = (key, value) => {
-    const nextState = [...formData.players]
-    const index = nextState.findIndex(p => p.name === value)
-
-    nextState.splice(index, 1)
-
-    setFormData({
-      ...formData,
-      [key]: nextState
-    })
-  }
-
-  const assignBoards = () => {
-    const players = [...formData.players]
-    const withBoards = players.map((player, index) => ({
-      ...player,
-      boards: data.boardsDistribution[index]
-    }))
-
-    setFormData({
-      ...formData,
-      players: withBoards
-    })
-
-    setCanPlay(true)
-  }
-
-  const onFinish = () => {
-    onFieldChange('readyToPlay', true)
-  }
-
-  const onSelectNumber = number => {
-    const nextState = [...formData.selectedNumbers]
-    const index = nextState.findIndex(n => n === number)
-
-    if (index !== -1) {
-      nextState.splice(index, 1)
-    } else {
-      nextState.push(number)
-    }
-
-    onFieldChange('selectedNumbers', nextState)
-  }
-
-  const onAdminChange = name => {
-    onFieldChange('adminName', name)
   }
 
   return (
     <div className="px-4 py-8">
       <div className="max-w-5xl mx-auto">
         <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-          <div className="mb-8">
-            <h2 className="font-medium text-center text-xl">
-              Administrar sala
-            </h2>
-          </div>
-          <InputText
-            id="room-name"
-            label="Nombre"
-            value={name || ''}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <InputText
-            id="url"
-            label="URL para unirse"
-            value={name ? `${window.location.host}/sala/${name}` : ''}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <InputText
-            id="password"
-            label="Contraseña"
-            value={room.password || ''}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <InputText
-            id="videocall"
-            label="URL de la videollamada"
-            onInputChange={onFieldChange}
-            value={formData.videocall}
-          />
-          <Players
-            id="players"
-            adminName={formData.adminName}
-            onAddPlayer={onFieldChange}
-            onAdminChange={onAdminChange}
-            onRemovePlayer={onRemovePlayer}
-            players={formData.players || []}
-          />
-          <div className="mt-8">
-            <Button
-              className="w-full"
-              disabled={!canAssignBoards}
-              onClick={assignBoards}
-              type="submit"
-            >
-              <FiCheckCircle className="text-2xl" />
-              <span className="ml-4">Asignar cartones</span>
-            </Button>
-          </div>
-          <div className="mt-8">
-            <Button
-              className="w-full"
-              disabled={!canPlay}
-              onClick={onFinish}
-              type="submit"
-            >
-              <FiSmile className="text-2xl" />
-              <span className="ml-4">A jugar</span>
-            </Button>
-          </div>
+          <h2 className="font-medium text-center text-xl">Administrar sala</h2>
+          {room.error && (
+            <Message type="error">
+              Ocurrió un error al cargar la información de la sala. Intenta de
+              nuevo recargando la página.
+            </Message>
+          )}
+          {room.loading && (
+            <Message type="information">
+              Cargando información de la sala
+            </Message>
+          )}
+          {room.data && (
+            <Fragment>
+              <InputText
+                id="room-name"
+                label="Nombre"
+                value={name}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <InputText
+                id="url"
+                label="URL para unirse"
+                value={`${window.location.host}/sala/${name}`}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <InputText
+                id="password"
+                label="Contraseña"
+                value={room.data.password}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <InputText
+                id="videoCall"
+                label="URL de la videollamada"
+                onInputChange={onFieldChange}
+                value={room.data.videoCall || ''}
+              />
+              <Players
+                id="players"
+                onPlayersChange={onFieldChange}
+                players={room.data.players || []}
+              />
+            </Fragment>
+          )}
         </div>
-        {formData.readyToPlay && (
-          <Fragment>
-            <Boards boards={adminBoards}></Boards>
-            <SelectedNumbers
-              numbers={NUMBERS}
-              selectedNumbers={formData.selectedNumbers}
-              onSelectNumber={onSelectNumber}
-            />
-          </Fragment>
-        )}
       </div>
     </div>
   )
 }
-
-const NUMBERS = [...Array(90).keys()].map(n => n + 1)

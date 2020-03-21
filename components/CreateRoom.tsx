@@ -2,7 +2,10 @@ import firebase from 'firebase'
 import { useRouter } from 'next/router'
 import { FormEvent, Fragment, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
+// @ts-ignore
+import urlSlug from 'url-slug'
 import useDeepCompareEffect from 'use-deep-compare-effect'
+import { v4 as uuid } from 'uuid'
 import db from '../utils/firebase'
 import isObjectFulfilled from '../utils/isObjectFulfilled'
 import Button from './Button'
@@ -45,8 +48,8 @@ export default function CreateRoom() {
     })
 
     const { name } = formData
-
-    const roomDoc = db.collection('rooms').doc(name)
+    const roomName = urlSlug(name)
+    const roomDoc = db.collection('rooms').doc(roomName)
     const roomData = await roomDoc.get()
 
     if (roomData.exists) {
@@ -60,7 +63,9 @@ export default function CreateRoom() {
 
     await roomDoc.set({
       ...formData,
-      date: firebase.database.ServerValue.TIMESTAMP
+      name: roomName,
+      date: firebase.firestore.Timestamp.fromDate(new Date()),
+      id: uuid()
     })
 
     setMessageProps({
@@ -69,7 +74,7 @@ export default function CreateRoom() {
     })
 
     setTimeout(() => {
-      router.push(`/sala/${name}/admin`)
+      router.push(`/sala/${roomName}/admin`)
     }, 1000)
   }
 
@@ -103,9 +108,7 @@ export default function CreateRoom() {
         </div>
       </form>
       {messageProps.message && (
-        <div className="mt-8">
-          <Message type={messageProps.type}>{messageProps.message}</Message>
-        </div>
+        <Message type={messageProps.type}>{messageProps.message}</Message>
       )}
     </Fragment>
   )

@@ -10,7 +10,10 @@ export interface IMessage {
 export default function Message({ children, type }: IMessage) {
   return (
     <div
-      className={classnames(['border-l-2 flex items-center p-4', COLORS[type]])}
+      className={classnames([
+        'border-l-2 flex items-center mt-8 p-4',
+        COLORS[type]
+      ])}
     >
       <div className="mr-4">{ICONS[type]}</div>
       {children}

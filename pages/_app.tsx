@@ -19,7 +19,7 @@ export default class Coronabingo extends App {
           <link rel="icon" href="/favicon.ico" />
           {/* TODO: write some nice metatags */}
         </Head>
-        <main className="bg-gray-200 font-inter leading-none min-h-screen text-gray-900">
+        <main className="bg-gray-200 font-inter leading-none min-h-screen text-gray-900 debug">
           <Header />
           <Component {...pageProps} />
         </main>

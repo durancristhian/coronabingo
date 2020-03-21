@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 
 export default async function fetcher<T>(
   request: RequestInfo,
-  options: RequestInit
+  options?: RequestInit
 ): Promise<T> {
   const response = await fetch(request, options)
   try {

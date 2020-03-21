@@ -1,43 +1,55 @@
 import classnames from 'classnames'
-import { useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { FiCheckCircle, FiCircle, FiPlus, FiTrash2 } from 'react-icons/fi'
+import { v4 as uuid } from 'uuid'
+import { MAX_PLAYERS } from '~/utils/constants'
 import Button from './Button'
 import InputText from './InputText'
 
-export default function Players({
-  adminName,
-  id,
-  onAddPlayer,
-  onAdminChange,
-  onRemovePlayer,
-  players
-}) {
-  const [formData, setFormData] = useState(defaultFormData)
-  /* TODO: There can be 2 people with the same name */
-  const [admin, setAdmin] = useState(adminName || '')
+interface IProps {
+  id: string
+  onPlayersChange: (id: string, value: IPlayer[]) => void
+  players: IPlayer[]
+}
 
-  const onFieldChange = (key, value) => {
-    setFormData({
-      ...formData,
-      [key]: value
-    })
+export default function Players({ id, onPlayersChange, players }: IProps) {
+  const [name, setName] = useState('')
+
+  /* const onAdminChange = (adminId: string) => {
+    onPlayersChange(
+      id,
+      players.map(p => ({ ...p, isAdmin: p.id === adminId }))
+    )
+  } */
+
+  const onFieldChange = (_key: string, value: string) => {
+    setName(value)
   }
 
-  const onSubmit = event => {
+  const onRemovePlayer = (adminId: string) => {
+    onPlayersChange(
+      id,
+      players.filter(p => p.id !== adminId)
+    )
+  }
+
+  const onSubmit = (event: FormEvent) => {
     event.preventDefault()
 
-    if (formData.name) {
-      setFormData(defaultFormData)
-      onAddPlayer(id, [...players, { name: formData.name }])
-    }
+    setName('')
+
+    onPlayersChange(id, [
+      ...players,
+      {
+        id: uuid(),
+        name,
+        isAdmin: false
+      }
+    ])
   }
 
-  useEffect(() => {
-    onAdminChange(admin)
-  }, [admin])
-
   return (
-    <div className="my-8">
+    <div className="my-4">
       <div className="flex justify-between">
         <h3 className="font-medium text-md uppercase">Jugadores</h3>
         <span
@@ -60,7 +72,7 @@ export default function Players({
                 id="name"
                 label="Nombre *"
                 onInputChange={onFieldChange}
-                value={formData.name}
+                value={name}
               />
             </div>
             <div className="mb-4 ml-4">
@@ -68,7 +80,7 @@ export default function Players({
                 className="w-full"
                 color="green"
                 type="submit"
-                disabled={!formData.name}
+                disabled={!name}
               >
                 <FiPlus />
               </Button>
@@ -86,27 +98,28 @@ export default function Players({
                 index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
               ])}
             >
-              <div className="mr-4">
+              {/* <div className="mr-4">
                 <button
-                  onClick={() => {
-                    setAdmin(player.name)
-                  }}
                   className="focus:outline-none focus:shadow-outline mt-1 text-xl"
+                  onClick={() => {
+                    onAdminChange(player.id)
+                  }}
                 >
-                  {admin === player.name ? (
+                  {player.isAdmin ? (
                     <FiCheckCircle className="text-blue-600" />
                   ) : (
                     <FiCircle />
                   )}
                 </button>
-              </div>
+              </div> */}
               <div className="flex-auto">
                 <p>{player.name}</p>
               </div>
               <div className="ml-4">
                 <Button
-                  onClick={() => onRemovePlayer(id, player.name)}
                   color="red"
+                  id="remove-player"
+                  onButtonClick={() => onRemovePlayer(player.id)}
                 >
                   <FiTrash2 />
                 </Button>
@@ -119,7 +132,8 @@ export default function Players({
   )
 }
 
-const defaultFormData = {
-  name: ''
+export interface IPlayer {
+  id: string
+  name: string
+  isAdmin: boolean
 }
-const MAX_PLAYERS = 30
