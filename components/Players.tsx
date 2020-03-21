@@ -2,21 +2,22 @@ import classnames from 'classnames'
 import { FormEvent, useState } from 'react'
 import { FiKey, FiPlus, FiTrash2 } from 'react-icons/fi'
 import { v4 as uuid } from 'uuid'
+import { Field } from '~/pages/sala/[name]/admin'
 import { MAX_PLAYERS } from '~/utils/constants'
 import Button from './Button'
 import InputText from './InputText'
 
 interface IProps {
   adminId: string
+  boards: string[]
   id: string
-  onPlayersChange: (
-    changes: { key: string; value: string | IPlayer[] }[]
-  ) => void
+  onPlayersChange: (changes: { key: string; value: Field }[]) => void
   players: IPlayer[]
 }
 
 export default function Players({
   adminId,
+  boards,
   id,
   onPlayersChange,
   players
@@ -28,16 +29,27 @@ export default function Players({
   }
 
   const onRemovePlayer = (adminId: string) => {
-    onPlayersChange([
+    const cleanAdmin = !!players.find(p => p.id !== adminId)
+    const changes: { key: string; value: Field }[] = [
       {
         key: id,
         value: players.filter(p => p.id !== adminId)
-      },
-      {
+      }
+    ]
+
+    if (cleanAdmin) {
+      changes.push({
         key: 'adminId',
         value: ''
-      }
-    ])
+      })
+
+      changes.push({
+        key: 'readyToPlay',
+        value: false
+      })
+    }
+
+    onPlayersChange(changes)
   }
 
   const onSubmit = (event: FormEvent) => {
@@ -49,9 +61,9 @@ export default function Players({
       {
         key: id,
         value: [
-          ...players,
+          ...players.map((p, i) => ({ ...p, boards: boards[i] })),
           {
-            boards: '',
+            boards: boards[players.length],
             id: uuid(),
             name
           }

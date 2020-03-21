@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
-import { FiCheckCircle } from 'react-icons/fi'
+import { FiSmile } from 'react-icons/fi'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
@@ -11,9 +11,11 @@ import Select from '~/components/Select'
 import fetcher from '~/utils/fetcher'
 import db from '~/utils/firebase'
 
-export default function AdminSala({ boards }: { boards: string[] }) {
-  console.log(boards)
-
+export default function AdminSala({
+  boardsDistribution
+}: {
+  boardsDistribution: string[]
+}) {
   const router = useRouter()
   const name = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -74,11 +76,24 @@ export default function AdminSala({ boards }: { boards: string[] }) {
 
   const assignBoards = () => {
     const players = room.data?.players
+
+    onFieldChange([
+      {
+        key: 'players',
+        // @ts-ignore
+        value: players.map((p, i) => ({
+          ...p,
+          boards: boardsDistribution[i]
+        }))
+      },
+      {
+        key: 'readyToPlay',
+        value: false
+      }
+    ])
   }
 
-  const onFieldChange = (
-    changes: { key: string; value: string | IPlayer[] }[]
-  ) => {
+  const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
       ...room,
       data: Object.assign(
@@ -87,6 +102,15 @@ export default function AdminSala({ boards }: { boards: string[] }) {
         ...[...changes.map(({ key, value }) => ({ [key]: value }))]
       )
     })
+  }
+
+  const readyToPlay = () => {
+    onFieldChange([
+      {
+        key: 'readyToPlay',
+        value: true
+      }
+    ])
   }
 
   return (
@@ -136,26 +160,32 @@ export default function AdminSala({ boards }: { boards: string[] }) {
               />
               <Players
                 adminId={room.data.adminId}
+                boards={boardsDistribution}
                 id="players"
                 onPlayersChange={onFieldChange}
                 players={room.data.players || []}
               />
-              <Select
-                disabled={!room.data.players?.length || false}
-                id="adminId"
-                label="Admin de la sala"
-                onInputChange={(key, value) => onFieldChange([{ key, value }])}
-                options={room.data.players || []}
-                value={room.data.adminId}
-              />
+              <div className="mt-8">
+                <Select
+                  disabled={!room.data.players?.length || false}
+                  id="adminId"
+                  label="Admin de la sala"
+                  onInputChange={(key, value) =>
+                    onFieldChange([{ key, value }])
+                  }
+                  options={room.data.players || []}
+                  value={room.data.adminId}
+                />
+              </div>
               <div className="mt-8">
                 <Button
+                  id="readyToPlay"
                   className="w-full"
                   disabled={!room.data.adminId}
-                  onButtonClick={assignBoards}
+                  onButtonClick={readyToPlay}
                 >
-                  <FiCheckCircle className="text-2xl" />
-                  <span className="ml-4">Repartir cartones</span>
+                  <FiSmile className="text-2xl" />
+                  <span className="ml-4">Jugar</span>
                 </Button>
               </div>
             </Fragment>
@@ -167,18 +197,26 @@ export default function AdminSala({ boards }: { boards: string[] }) {
 }
 
 interface BoardsRes {
-  boards: string[]
+  boardsDistribution: string[]
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const res: Response = await fetcher(
-    `${req.headers.host}/api/boards-distribution`
-  )
-  const { boards }: BoardsRes = await res.json()
+  let data: BoardsRes
+
+  if (process.env.NODE_ENV === 'production') {
+    const res: Response = await fetcher(
+      `http://${req.headers.host}/api/boards-distribution`
+    )
+    data = await res.json()
+  } else {
+    data = require('~/public/boards-distribution.json')
+  }
 
   return {
     props: {
-      boards
+      ...data
     }
   }
 }
+
+export type Field = boolean | string | IPlayer[]
