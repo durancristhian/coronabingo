@@ -1,12 +1,19 @@
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
+import { FiCheckCircle } from 'react-icons/fi'
 import useDeepCompareEffect from 'use-deep-compare-effect'
+import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import Message from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
+import Select from '~/components/Select'
+import fetcher from '~/utils/fetcher'
 import db from '~/utils/firebase'
 
-export default function AdminSala() {
+export default function AdminSala({ boards }: { boards: string[] }) {
+  console.log(boards)
+
   const router = useRouter()
   const name = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -65,13 +72,20 @@ export default function AdminSala() {
     if (name) updateRoom()
   }, [{ ...room.data }])
 
-  const onFieldChange = (key: string, value: string | IPlayer[]) => {
+  const assignBoards = () => {
+    const players = room.data?.players
+  }
+
+  const onFieldChange = (
+    changes: { key: string; value: string | IPlayer[] }[]
+  ) => {
     setRoom({
       ...room,
-      data: {
-        ...room.data,
-        [key]: value
-      }
+      data: Object.assign(
+        {},
+        room.data,
+        ...[...changes.map(({ key, value }) => ({ [key]: value }))]
+      )
     })
   }
 
@@ -117,18 +131,54 @@ export default function AdminSala() {
               <InputText
                 id="videoCall"
                 label="URL de la videollamada"
-                onInputChange={onFieldChange}
+                onInputChange={(key, value) => onFieldChange([{ key, value }])}
                 value={room.data.videoCall || ''}
               />
               <Players
+                adminId={room.data.adminId}
                 id="players"
                 onPlayersChange={onFieldChange}
                 players={room.data.players || []}
               />
+              <Select
+                disabled={!room.data.players?.length || false}
+                id="adminId"
+                label="Admin de la sala"
+                onInputChange={(key, value) => onFieldChange([{ key, value }])}
+                options={room.data.players || []}
+                value={room.data.adminId}
+              />
+              <div className="mt-8">
+                <Button
+                  className="w-full"
+                  disabled={!room.data.adminId}
+                  onButtonClick={assignBoards}
+                >
+                  <FiCheckCircle className="text-2xl" />
+                  <span className="ml-4">Repartir cartones</span>
+                </Button>
+              </div>
             </Fragment>
           )}
         </div>
       </div>
     </div>
   )
+}
+
+interface BoardsRes {
+  boards: string[]
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const res: Response = await fetcher(
+    `${req.headers.host}/api/boards-distribution`
+  )
+  const { boards }: BoardsRes = await res.json()
+
+  return {
+    props: {
+      boards
+    }
+  }
 }

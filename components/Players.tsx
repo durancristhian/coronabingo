@@ -1,36 +1,43 @@
 import classnames from 'classnames'
 import { FormEvent, useState } from 'react'
-import { FiCheckCircle, FiCircle, FiPlus, FiTrash2 } from 'react-icons/fi'
+import { FiKey, FiPlus, FiTrash2 } from 'react-icons/fi'
 import { v4 as uuid } from 'uuid'
 import { MAX_PLAYERS } from '~/utils/constants'
 import Button from './Button'
 import InputText from './InputText'
 
 interface IProps {
+  adminId: string
   id: string
-  onPlayersChange: (id: string, value: IPlayer[]) => void
+  onPlayersChange: (
+    changes: { key: string; value: string | IPlayer[] }[]
+  ) => void
   players: IPlayer[]
 }
 
-export default function Players({ id, onPlayersChange, players }: IProps) {
+export default function Players({
+  adminId,
+  id,
+  onPlayersChange,
+  players
+}: IProps) {
   const [name, setName] = useState('')
-
-  /* const onAdminChange = (adminId: string) => {
-    onPlayersChange(
-      id,
-      players.map(p => ({ ...p, isAdmin: p.id === adminId }))
-    )
-  } */
 
   const onFieldChange = (_key: string, value: string) => {
     setName(value)
   }
 
   const onRemovePlayer = (adminId: string) => {
-    onPlayersChange(
-      id,
-      players.filter(p => p.id !== adminId)
-    )
+    onPlayersChange([
+      {
+        key: id,
+        value: players.filter(p => p.id !== adminId)
+      },
+      {
+        key: 'adminId',
+        value: ''
+      }
+    ])
   }
 
   const onSubmit = (event: FormEvent) => {
@@ -38,12 +45,17 @@ export default function Players({ id, onPlayersChange, players }: IProps) {
 
     setName('')
 
-    onPlayersChange(id, [
-      ...players,
+    onPlayersChange([
       {
-        id: uuid(),
-        name,
-        isAdmin: false
+        key: id,
+        value: [
+          ...players,
+          {
+            boards: '',
+            id: uuid(),
+            name
+          }
+        ]
       }
     ])
   }
@@ -98,20 +110,11 @@ export default function Players({ id, onPlayersChange, players }: IProps) {
                 index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
               ])}
             >
-              {/* <div className="mr-4">
-                <button
-                  className="focus:outline-none focus:shadow-outline mt-1 text-xl"
-                  onClick={() => {
-                    onAdminChange(player.id)
-                  }}
-                >
-                  {player.isAdmin ? (
-                    <FiCheckCircle className="text-blue-600" />
-                  ) : (
-                    <FiCircle />
-                  )}
-                </button>
-              </div> */}
+              {player.id === adminId && (
+                <div className="mr-4">
+                  <FiKey className="text-xl text-blue-600" />
+                </div>
+              )}
               <div className="flex-auto">
                 <p>{player.name}</p>
               </div>
@@ -133,7 +136,7 @@ export default function Players({ id, onPlayersChange, players }: IProps) {
 }
 
 export interface IPlayer {
+  boards: string
   id: string
   name: string
-  isAdmin: boolean
 }
