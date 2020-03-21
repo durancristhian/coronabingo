@@ -51,31 +51,31 @@ const COLORS = {
     `border-gray-600`,
     `focus:bg-gray-500`,
     `focus:border-gray-700`,
-    `focus:text-gray-700`,
-    `text-gray-600`
+    `focus:text-gray-900`,
+    `text-gray-800`
   ],
   green: [
     `bg-green-400`,
     `border-green-600`,
     `focus:bg-green-500`,
     `focus:border-green-700`,
-    `focus:text-green-700`,
-    `text-green-600`
+    `focus:text-green-900`,
+    `text-green-800`
   ],
   red: [
     `bg-red-400`,
     `border-red-600`,
     `focus:bg-red-500`,
     `focus:border-red-700`,
-    `focus:text-red-700`,
-    `text-red-600`
+    `focus:text-red-900`,
+    `text-red-800`
   ],
   yellow: [
     `bg-yellow-400`,
     `border-yellow-600`,
     `focus:bg-yellow-500`,
     `focus:border-yellow-700`,
-    `focus:text-yellow-700`,
-    `text-yellow-600`
+    `focus:text-yellow-900`,
+    `text-yellow-800`
   ]
 }

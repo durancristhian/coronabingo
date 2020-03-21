@@ -74,25 +74,6 @@ export default function AdminSala({
     if (name) updateRoom()
   }, [{ ...room.data }])
 
-  const assignBoards = () => {
-    const players = room.data?.players
-
-    onFieldChange([
-      {
-        key: 'players',
-        // @ts-ignore
-        value: players.map((p, i) => ({
-          ...p,
-          boards: boardsDistribution[i]
-        }))
-      },
-      {
-        key: 'readyToPlay',
-        value: false
-      }
-    ])
-  }
-
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
       ...room,

@@ -1,19 +1,18 @@
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiLink2 } from 'react-icons/fi'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
-import MAX_PLAYERS from '~/utils/constants'
+import { IPlayer } from '~/components/Players'
 import db from '~/utils/firebase'
 
 export default function Sala() {
   const router = useRouter()
-  const name = router.query.name.toString()
+  const name = router.query.name?.toString()
   const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     if (!name) return
 
     /* TODO: Memory leak here */
@@ -23,10 +22,19 @@ export default function Sala() {
         const roomData = doc.data()
 
         if (roomData) {
-          setRoom(roomData)
+          const sorted = {
+            ...roomData,
+            players: roomData.players.sort((p1: IPlayer, p2: IPlayer) =>
+              p1.name
+                .toLocaleLowerCase()
+                .localeCompare(p2.name.toLocaleLowerCase())
+            )
+          }
+
+          setRoom(sorted)
         }
       })
-  }, [name, room])
+  }, [name])
 
   return (
     <div className="px-4 py-8">
@@ -49,49 +57,49 @@ export default function Sala() {
             label="URL de la videollamada"
             readonly
             onFocus={event => event.target.select()}
-            value={room.videocall || ''}
+            value={room.videoCall || ''}
           />
           {room.players && !!room.players.length && (
             <div className="mt-8">
-              <div className="flex justify-between">
-                <h3 className="font-medium text-md uppercase">Jugadores</h3>
-                <span className={classnames(['font-medium'])}>
-                  {room.players.length}/{MAX_PLAYERS}
-                </span>
-              </div>
+              <h3 className="font-medium text-md uppercase">
+                <span>Jugadores: {room.players.length}</span>
+              </h3>
               <div className="border-gray-300 border-t-2 mt-4 -mx-4">
-                {/* TODO: Type this */}
-                {room.players.map(
-                  (
-                    player: { name: string; boards: string[] },
-                    index: number
-                  ) => (
-                    <div
-                      key={index}
-                      className={classnames([
-                        'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                        index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
-                      ])}
-                    >
-                      <div className="flex-auto">
-                        <p>{player.name}</p>
-                      </div>
-                      <div className="ml-4">
-                        {/* TODO: This onClick is one of the most awful things I've ever seen */}
-                        <Button
-                          onClick={() => {
-                            router.push(
-                              `/sala/${name}/jugar?cartones=${player.boards}`
-                            )
-                          }}
-                          disabled={!room.readyToPlay}
-                        >
-                          <FiLink2 />
-                        </Button>
-                      </div>
+                {room.players.map((player: IPlayer, index: number) => (
+                  <div
+                    key={index}
+                    className={classnames([
+                      'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
+                      player.id === room.adminId
+                        ? 'bg-green-100'
+                        : index % 2 === 0
+                        ? 'bg-gray-100'
+                        : 'bg-gray-200'
+                    ])}
+                  >
+                    <div className="flex flex-auto items-center">
+                      <p>{player.name}</p>
+                      {player.id === room.adminId && (
+                        <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                          Admin
+                        </span>
+                      )}
                     </div>
-                  )
-                )}
+                    <div className="ml-4">
+                      <Button
+                        id="play"
+                        onButtonClick={() => {
+                          router.push(
+                            `/sala/${name}/jugar?cartones=${player.boards}`
+                          )
+                        }}
+                        disabled={!room.readyToPlay}
+                      >
+                        <FiLink2 />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

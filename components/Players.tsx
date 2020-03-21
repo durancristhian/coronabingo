@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { FormEvent, useState } from 'react'
-import { FiKey, FiPlus, FiTrash2 } from 'react-icons/fi'
+import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import { v4 as uuid } from 'uuid'
 import { Field } from '~/pages/sala/[name]/admin'
 import { MAX_PLAYERS } from '~/utils/constants'
@@ -28,12 +28,18 @@ export default function Players({
     setName(value)
   }
 
-  const onRemovePlayer = (adminId: string) => {
-    const cleanAdmin = !!players.find(p => p.id !== adminId)
+  const onRemovePlayer = (admin: string) => {
+    const cleanAdmin = players.find(p => p.id === adminId)?.id === admin
     const changes: { key: string; value: Field }[] = [
       {
         key: id,
-        value: players.filter(p => p.id !== adminId)
+        value: players
+          .filter(p => p.id !== admin)
+          .sort((p1: IPlayer, p2: IPlayer) =>
+            p1.name
+              .toLocaleLowerCase()
+              .localeCompare(p2.name.toLocaleLowerCase())
+          )
       }
     ]
 
@@ -61,29 +67,33 @@ export default function Players({
       {
         key: id,
         value: [
+          /* TODO: en every player added I'm mutating all the collection because of the index */
           ...players.map((p, i) => ({ ...p, boards: boards[i] })),
           {
             boards: boards[players.length],
             id: uuid(),
             name
           }
-        ]
+        ].sort((p1: IPlayer, p2: IPlayer) =>
+          p1.name.toLocaleLowerCase().localeCompare(p2.name.toLocaleLowerCase())
+        )
       }
     ])
   }
 
   return (
-    <div className="my-4">
-      <div className="flex justify-between">
-        <h3 className="font-medium text-md uppercase">Jugadores</h3>
-        <span
-          className={classnames([
-            'font-medium',
-            players.length === MAX_PLAYERS && 'text-red-700'
-          ])}
-        >
-          {players.length}/{MAX_PLAYERS}
-        </span>
+    <div className="mb-4 mt-8">
+      <div className="font-medium text-md uppercase">
+        <h3 className="flex font-medium items-center text-md uppercase">
+          <span>Jugadores:&nbsp;</span>
+          <span
+            className={classnames([
+              players.length === MAX_PLAYERS && 'text-red-600'
+            ])}
+          >
+            {players.length} de {MAX_PLAYERS}
+          </span>
+        </h3>
       </div>
       <form onSubmit={onSubmit}>
         <fieldset
@@ -119,16 +129,20 @@ export default function Players({
               key={index}
               className={classnames([
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+                player.id === adminId
+                  ? 'bg-green-100'
+                  : index % 2 === 0
+                  ? 'bg-gray-100'
+                  : 'bg-gray-200'
               ])}
             >
-              {player.id === adminId && (
-                <div className="mr-4">
-                  <FiKey className="text-xl text-blue-600" />
-                </div>
-              )}
-              <div className="flex-auto">
+              <div className="flex flex-auto items-center">
                 <p>{player.name}</p>
+                {player.id === adminId && (
+                  <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                    Admin
+                  </span>
+                )}
               </div>
               <div className="ml-4">
                 <Button
