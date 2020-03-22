@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { ChangeEvent, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 interface IProps {
   children: ReactNode
