@@ -9,12 +9,12 @@ import db from '~/utils/firebase'
 export default function Jugar() {
   const router = useRouter()
   const name = router.query.name?.toString()
-  const player = router.query.jugador?.toString()
+  const playerId = router.query.jugador?.toString()
   const [room, setRoom] = useState<
     firebase.firestore.DocumentData | undefined
   >()
-  const isAdmin = room?.adminId === player
-  const currentPlayer = room?.players.find((p: IPlayer) => p.id === player)
+  const isAdmin = room?.adminId === playerId
+  const currentPlayer = room?.players.find((p: IPlayer) => p.id === playerId)
 
   useEffect(() => {
     if (!name) return
@@ -42,7 +42,10 @@ export default function Jugar() {
         )}
         {room && (
           <Fragment>
-            <Boards boards={currentPlayer.boards} />
+            <Boards
+              boards={currentPlayer.boards}
+              selectedNumbers={currentPlayer.selectedNumbers}
+            />
             <SelectedNumbers
               isAdmin={isAdmin}
               selectedNumbers={room.selectedNumbers || []}

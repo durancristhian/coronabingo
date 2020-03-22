@@ -1,24 +1,50 @@
 import classnames from 'classnames'
-import { Fragment, useState } from 'react'
+import { useRouter } from 'next/router'
+import { Fragment, useEffect, useState } from 'react'
+import db from '~/utils/firebase'
 const poroto = require('~/public/poroto.png')
 
-interface ICells {
-  numbers: number[]
+interface IProps {
+  boardNumbers: number[]
+  selectedNumbers: number[]
 }
 
-export default function Cells({ numbers }: ICells) {
-  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([])
-  const toggleNumber = (number: number) => {
-    const nextState = [...selectedNumbers]
-    const index = nextState.findIndex(n => n === number)
+export default function Cells({ boardNumbers, selectedNumbers }: IProps) {
+  const router = useRouter()
+  const name = router.query.name?.toString()
+  const playerId = router.query.jugador?.toString()
+  const [numbers, setSelectedNumbers] = useState(selectedNumbers || [])
 
-    if (index !== -1) {
-      nextState.splice(index, 1)
-    } else {
-      nextState.push(number)
+  useEffect(() => {
+    const updateRoom = async () => {
+      const roomRef = db.collection('rooms').doc(name)
+      const roomDoc = await roomRef.get()
+      const data = roomDoc.data()
+
+      if (data) {
+        const players = [...data.players].map(p => {
+          if (p.id === playerId) {
+            p.selectedNumbers = numbers
+          }
+
+          return p
+        })
+
+        roomRef.update({
+          players
+        })
+      }
     }
 
-    setSelectedNumbers(nextState)
+    if (name) updateRoom()
+  }, [numbers])
+
+  const toggleNumber = (n: number) => {
+    setSelectedNumbers(
+      numbers.includes(n)
+        ? numbers.filter(number => number !== n)
+        : [...numbers, n]
+    )
   }
 
   const handleClick = (number: number) => {
@@ -29,33 +55,33 @@ export default function Cells({ numbers }: ICells) {
 
   return (
     <Fragment>
-      {numbers.map((number, i) => (
+      {boardNumbers.map((boardNumber, i) => (
         <div
           key={i}
           className={classnames([
             'border-b-2 border-r-2 border-gray-900 flex h-20 items-center justify-center p-1 relative',
-            number ? 'bg-white cursor-pointer' : 'bg-yellow-200',
-            selectedNumbers.includes(number) ? 'bg-orange-400' : null
+            boardNumber ? 'bg-white cursor-pointer' : 'bg-yellow-200',
+            numbers.includes(boardNumber) ? 'bg-orange-400' : null
           ])}
           onClick={() => {
-            handleClick(number)
+            handleClick(boardNumber)
           }}
           style={{ width: 'calc(100% / 9)' }}
         >
           <div
             className={classnames(
               ['absolute bottom-0 left-0 m-2 right-0 top-0 z-0'],
-              selectedNumbers.includes(number) ? 'poroto' : null
+              numbers.includes(boardNumber) ? 'poroto' : null
             )}
             style={{
-              ...(selectedNumbers.includes(number) && {
+              ...(numbers.includes(boardNumber) && {
                 backgroundImage: `url(${poroto || ''})`
               }),
-              transform: `rotate(${number + i}deg)`
+              transform: `rotate(${boardNumber + i}deg)`
             }}
           ></div>
           <span className="font-medium font-oswald relative text-2xl sm:text-5xl text-shadow-white z-10">
-            {number || ''}
+            {boardNumber || ''}
           </span>
         </div>
       ))}

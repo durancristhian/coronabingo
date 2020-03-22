@@ -3,14 +3,12 @@ import useSWR from 'swr'
 import fetcher from '~/utils/fetcher'
 import Cells from './Cells'
 
-interface IBoard {
-  boards: {
-    id: number
-    numbers: number[]
-  }[]
+interface IProps {
+  boards: string
+  selectedNumbers: number[]
 }
 
-export default function Boards({ boards }: { boards: string }) {
+export default function Boards({ boards, selectedNumbers }: IProps) {
   const url = `/api/boards?cartones=${boards}`
   const { data, error } = useSWR<IBoard>(url, fetcher)
 
@@ -26,10 +24,20 @@ export default function Boards({ boards }: { boards: string }) {
         >
           <p className="font-semibold">CARTÓN Nº {board.id}</p>
           <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
-            <Cells numbers={board.numbers} />
+            <Cells
+              boardNumbers={board.numbers}
+              selectedNumbers={selectedNumbers}
+            />
           </div>
         </div>
       ))}
     </Fragment>
   )
+}
+
+interface IBoard {
+  boards: {
+    id: number
+    numbers: number[]
+  }[]
 }

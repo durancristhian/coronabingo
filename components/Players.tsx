@@ -72,7 +72,8 @@ export default function Players({
           {
             boards: boards[players.length],
             id: uuid(),
-            name
+            name,
+            selectedNumbers: []
           }
         ].sort((p1: IPlayer, p2: IPlayer) =>
           p1.name.toLocaleLowerCase().localeCompare(p2.name.toLocaleLowerCase())
@@ -165,4 +166,5 @@ export interface IPlayer {
   boards: string
   id: string
   name: string
+  selectedNumbers: number[]
 }
