@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import boards from '../../public/boards.json'
+import boards from '~/public/boards.json'
 
 const getBoard = (index: number) => {
   const numbers = boards[index]

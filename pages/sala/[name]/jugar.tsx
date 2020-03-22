@@ -1,67 +1,52 @@
-import { NextPageContext } from 'next'
 import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
-import { Fragment, useState } from 'react'
-import useSWR from 'swr'
-import useDeepCompareEffect from 'use-deep-compare-effect'
-import Boards from '~/components/Boards'
+import { Fragment, useEffect, useState } from 'react'
+/* import useDeepCompareEffect from 'use-deep-compare-effect'
+import Boards from '~/components/Boards' */
 import Message from '~/components/Message'
+/* import { IPlayer } from '~/components/Players' */
 import SelectedNumbers from '~/components/SelectedNumbers'
-import { BOARD_NUMBERS } from '~/utils/constants'
-import fetcher from '~/utils/fetcher'
 import db from '~/utils/firebase'
 
-interface IPageProps {
-  query: ParsedUrlQuery
-}
-
-export default function Jugar({ query }: IPageProps) {
+export default function Jugar() {
   const router = useRouter()
   const name = router.query.name?.toString()
-  const url = `/api/boards?cartones=${query.cartones?.toString()}`
-  const { data, error } = useSWR<firebase.firestore.DocumentData>(url, fetcher)
-  const [room, setRoom] = useState({})
+  const player = router.query.jugador?.toString()
+  const [room, setRoom] = useState<
+    firebase.firestore.DocumentData | undefined
+  >()
+  const isAdmin = room?.adminId === player
+  /* const currentPlayer = room?.players.find((p: IPlayer) => p.id === player) */
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     if (!name) return
 
     const unsubscribe = db
       .collection('rooms')
       .doc(name)
       .onSnapshot(doc => {
-        if (doc && doc.exists) {
-          setRoom(doc.data() || {})
-        }
+        setRoom(doc.data())
       })
 
     return unsubscribe
-  }, [name, room])
+  }, [name])
 
   return (
     <div className="px-4 py-8">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-medium text-center text-xl">Sala {name}</h2>
-        {error && (
-          <div className="md:w-2/4 mx-auto px-4">
-            <Message type="error">
-              Ocurrió un error al cargar la información de la sala. Intenta de
-              nuevo recargando la página.
-            </Message>
-          </div>
-        )}
-        {!data && (
+        {!room && (
           <div className="md:w-2/4 mx-auto px-4">
             <Message type="information">
               Cargando información de la sala...
             </Message>
           </div>
         )}
-        {data && (
+        {room && (
           <Fragment>
-            <Boards boards={data.boards} />
+            {/* <Boards boards={currentPlayer.boards} /> */}
             <SelectedNumbers
-              numbers={BOARD_NUMBERS}
-              selectedNumbers={data.selectedNumbers || []}
+              isAdmin={isAdmin}
+              selectedNumbers={room.selectedNumbers || []}
             />
           </Fragment>
         )}
@@ -69,5 +54,3 @@ export default function Jugar({ query }: IPageProps) {
     </div>
   )
 }
-
-Jugar.getInitialProps = async ({ query }: NextPageContext) => ({ query })

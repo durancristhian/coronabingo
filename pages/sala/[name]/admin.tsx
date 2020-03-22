@@ -200,4 +200,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   }
 }
 
-export type Field = boolean | string | IPlayer[]
+export type Field = boolean | number[] | string | IPlayer[]

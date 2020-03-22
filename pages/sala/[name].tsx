@@ -92,7 +92,7 @@ export default function Sala() {
                         id="play"
                         onButtonClick={() => {
                           router.push(
-                            `/sala/${name}/jugar?cartones=${player.boards}`
+                            `/sala/${name}/jugar?jugador=${player.id}`
                           )
                         }}
                         disabled={!room.readyToPlay}
