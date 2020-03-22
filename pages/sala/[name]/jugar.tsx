@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
-/* import useDeepCompareEffect from 'use-deep-compare-effect'
-import Boards from '~/components/Boards' */
+import Boards from '~/components/Boards'
 import Message from '~/components/Message'
-/* import { IPlayer } from '~/components/Players' */
+import { IPlayer } from '~/components/Players'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import db from '~/utils/firebase'
 
@@ -15,7 +14,7 @@ export default function Jugar() {
     firebase.firestore.DocumentData | undefined
   >()
   const isAdmin = room?.adminId === player
-  /* const currentPlayer = room?.players.find((p: IPlayer) => p.id === player) */
+  const currentPlayer = room?.players.find((p: IPlayer) => p.id === player)
 
   useEffect(() => {
     if (!name) return
@@ -43,7 +42,7 @@ export default function Jugar() {
         )}
         {room && (
           <Fragment>
-            {/* <Boards boards={currentPlayer.boards} /> */}
+            <Boards boards={currentPlayer.boards} />
             <SelectedNumbers
               isAdmin={isAdmin}
               selectedNumbers={room.selectedNumbers || []}

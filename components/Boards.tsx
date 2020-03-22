@@ -1,15 +1,24 @@
 import { Fragment } from 'react'
+import useSWR from 'swr'
+import fetcher from '~/utils/fetcher'
 import Cells from './Cells'
 
-export interface IBoard {
-  id: string
-  numbers: number[]
+interface IBoard {
+  boards: {
+    id: number
+    numbers: number[]
+  }[]
 }
 
-export default function Boards({ boards }: { boards: IBoard[] }) {
+export default function Boards({ boards }: { boards: string }) {
+  const url = `/api/boards?cartones=${boards}`
+  const { data, error } = useSWR<IBoard>(url, fetcher)
+
+  if (error || !data) return null
+
   return (
     <Fragment>
-      {boards.map((board, i) => (
+      {data.boards.map((board, i) => (
         <div
           key={i}
           className="bg-white mt-8 p-4 border-2 border-gray-900 shadow"
