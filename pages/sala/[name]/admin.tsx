@@ -11,11 +11,11 @@ import Select from '~/components/Select'
 import fetcher from '~/utils/fetcher'
 import db from '~/utils/firebase'
 
-export default function AdminSala({
-  boardsDistribution
-}: {
+interface IPageProps {
   boardsDistribution: string[]
-}) {
+}
+
+export default function AdminSala({ boardsDistribution }: IPageProps) {
   const router = useRouter()
   const name = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -107,7 +107,7 @@ export default function AdminSala({
           )}
           {room.loading && (
             <Message type="information">
-              Cargando información de la sala
+              Cargando información de la sala...
             </Message>
           )}
           {room.data && (
