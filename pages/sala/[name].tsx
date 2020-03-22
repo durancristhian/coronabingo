@@ -40,7 +40,7 @@ export default function Sala() {
 
   return (
     <div className="px-4 py-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
           <div className="mb-8">
             <h2 className="font-medium text-center text-xl">

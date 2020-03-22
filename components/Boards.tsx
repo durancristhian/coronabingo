@@ -14,6 +14,7 @@ export default function Boards({ boards }: { boards: string }) {
   const url = `/api/boards?cartones=${boards}`
   const { data, error } = useSWR<IBoard>(url, fetcher)
 
+  /* TODO: this is not the best, improve */
   if (error || !data) return null
 
   return (

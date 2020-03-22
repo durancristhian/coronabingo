@@ -31,7 +31,7 @@ export default function Jugar() {
 
   return (
     <div className="px-4 py-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <h2 className="font-medium text-center text-xl">Sala {name}</h2>
         {!room && (
           <div className="md:w-2/4 mx-auto px-4">
