@@ -15,9 +15,7 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <title>Coronabingo v{pkg.version}</title>
-          {/* TODO: get a better favicon */}
           <link rel="icon" href="/favicon.ico" />
-          {/* TODO: write some nice metatags */}
         </Head>
         <main className="bg-gray-200 font-inter leading-none min-h-screen text-gray-900">
           <Header />

@@ -15,8 +15,8 @@ export default function Sala() {
   useEffect(() => {
     if (!name) return
 
-    /* TODO: Memory leak here */
-    db.collection('rooms')
+    const unsubscribe = db
+      .collection('rooms')
       .doc(name)
       .onSnapshot((doc: firebase.firestore.DocumentSnapshot) => {
         const roomData = doc.data()
@@ -34,6 +34,8 @@ export default function Sala() {
           setRoom(sorted)
         }
       })
+
+    return unsubscribe
   }, [name])
 
   return (

@@ -67,7 +67,7 @@ export default function Players({
       {
         key: id,
         value: [
-          /* TODO: en every player added I'm mutating all the collection because of the index */
+          /* TODO: en every player added I'm mutating all the collection because of the index 🤭 */
           ...players.map((p, i) => ({ ...p, boards: boards[i] })),
           {
             boards: boards[players.length],

@@ -25,14 +25,16 @@ export default function Jugar({ query }: IPageProps) {
   useDeepCompareEffect(() => {
     if (!name) return
 
-    /* TODO: Memory leak here */
-    db.collection('rooms')
+    const unsubscribe = db
+      .collection('rooms')
       .doc(name)
       .onSnapshot(doc => {
         if (doc && doc.exists) {
           setRoom(doc.data() || {})
         }
       })
+
+    return unsubscribe
   }, [name, room])
 
   return (
