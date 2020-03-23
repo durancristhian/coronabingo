@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { MAX_PLAYERS } from '~/utils/constants'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 const boardIds: number[] = []
-for (let index = 0; index < 60; index++) {
+for (let index = 0; index < MAX_PLAYERS * 2; index++) {
   boardIds.push(index)
 }
 
