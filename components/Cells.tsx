@@ -5,38 +5,33 @@ import { roomsRef } from '~/utils/firebase'
 const poroto = require('~/public/poroto.png')
 
 interface IProps {
+  boardId: number
   boardNumbers: number[]
   selectedNumbers: number[]
 }
 
-export default function Cells({ boardNumbers, selectedNumbers }: IProps) {
+export default function Cells({
+  boardId,
+  boardNumbers,
+  selectedNumbers
+}: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
-  const [numbers, setSelectedNumbers] = useState(selectedNumbers || [])
+  const [numbers, setSelectedNumbers] = useState(selectedNumbers)
 
   useEffect(() => {
-    const updateRoom = async () => {
-      const roomRef = roomsRef.doc(roomName)
-      const roomDoc = await roomRef.get()
-      const data = roomDoc.data()
-
-      if (data) {
-        const players = [...data.players].map(p => {
-          if (p.id === playerId) {
-            p.selectedNumbers = numbers
-          }
-
-          return p
+    const updatePlayer = async () => {
+      roomsRef
+        .doc(roomName)
+        .collection('players')
+        .doc(playerId)
+        .update({
+          [boardId]: numbers
         })
-
-        roomRef.update({
-          players
-        })
-      }
     }
 
-    if (roomName) updateRoom()
+    updatePlayer()
   }, [numbers])
 
   const toggleNumber = (n: number) => {

@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Boards from '~/components/Boards'
 import Message from '~/components/Message'
-import { IPlayer } from '~/components/Players'
 import SelectedNumbers from '~/components/SelectedNumbers'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 
 export default function Jugar() {
   const router = useRouter()
@@ -13,21 +12,37 @@ export default function Jugar() {
   const [room, setRoom] = useState<
     firebase.firestore.DocumentData | undefined
   >()
+  const [player, setPlayer] = useState<
+    firebase.firestore.DocumentData | undefined
+  >()
   const isAdmin = room?.adminId === playerId
-  const currentPlayer = room?.players.find((p: IPlayer) => p.id === playerId)
 
   useEffect(() => {
     if (!roomName) return
 
-    const unsubscribe = db
-      .collection('rooms')
-      .doc(roomName)
-      .onSnapshot(doc => {
-        setRoom(doc.data())
-      })
+    const unsubscribe = roomsRef.doc(roomName).onSnapshot(doc => {
+      setRoom(doc.data())
+    })
 
     return unsubscribe
   }, [roomName])
+
+  useEffect(() => {
+    if (!playerId || !roomName) return
+
+    const unsubscribe = roomsRef
+      .doc(roomName)
+      .collection('players')
+      .doc(playerId)
+      .onSnapshot(doc => {
+        setPlayer({
+          id: doc.id,
+          ...doc.data()
+        })
+      })
+
+    return unsubscribe
+  }, [playerId, roomName])
 
   return (
     <div className="px-4 py-8">
@@ -40,17 +55,12 @@ export default function Jugar() {
             </Message>
           </div>
         )}
+        {player && <Boards boards={player.boards} />}
         {room && (
-          <Fragment>
-            <Boards
-              boards={currentPlayer.boards}
-              selectedNumbers={currentPlayer.selectedNumbers}
-            />
-            <SelectedNumbers
-              isAdmin={isAdmin}
-              selectedNumbers={room.selectedNumbers || []}
-            />
-          </Fragment>
+          <SelectedNumbers
+            isAdmin={isAdmin}
+            selectedNumbers={room.selectedNumbers || []}
+          />
         )}
       </div>
     </div>

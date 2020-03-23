@@ -32,8 +32,7 @@ export default function Players({ adminId, onChange }: IProps) {
           .map(p => ({
             boards: p.boards,
             id: p.id,
-            name: p.name,
-            selectedNumbers: p.selectedNumbers
+            name: p.name
           }))
 
         setPlayers(data)
@@ -180,5 +179,4 @@ export interface IPlayer {
   boards: string
   id: string
   name: string
-  selectedNumbers: number[]
 }

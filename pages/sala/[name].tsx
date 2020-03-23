@@ -41,7 +41,10 @@ export default function Sala() {
 
           if (playerData) {
             // @ts-ignore
-            players.push(playerData)
+            players.push({
+              id: doc.id,
+              ...playerData
+            })
           }
         })
 
