@@ -15,16 +15,20 @@ export default class Coronabingo extends App {
     return (
       <Fragment>
         <Head>
-          <title>Coronabingo v{pkg.version}</title>
           <link rel="icon" href="/favicon.ico" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:creator" content="@durancristhian" />
-          <meta property="og:url" content="https://coronabingo.now.sh/" />
-          <meta property="og:title" content="Coronabingo" />
+          <title>Coronabingo v{pkg.version}</title>
+          <meta
+            property="description"
+            content="El clásico juego del bingo para jugar en tiempos de cuarentena."
+          />
           <meta
             property="og:description"
             content="El clásico juego del bingo para jugar en tiempos de cuarentena."
           />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:creator" content="@durancristhian" />
+          <meta property="og:url" content="https://coronabingo.now.sh/" />
+          <meta property="og:title" content="Coronabingo" />
           <meta
             property="og:image"
             content="https://coronabingo.now.sh/social.jpg"
