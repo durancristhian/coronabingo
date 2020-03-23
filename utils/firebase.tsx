@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import * as firebase from 'firebase/app'
 import 'firebase/firestore'
 
 /* TODO: configure an .env file */
