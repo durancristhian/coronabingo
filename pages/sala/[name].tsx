@@ -9,15 +9,15 @@ import db from '~/utils/firebase'
 
 export default function Sala() {
   const router = useRouter()
-  const name = router.query.name?.toString()
+  const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
 
   useEffect(() => {
-    if (!name) return
+    if (!roomName) return
 
     const unsubscribe = db
       .collection('rooms')
-      .doc(name)
+      .doc(roomName)
       .onSnapshot((doc: firebase.firestore.DocumentSnapshot) => {
         const roomData = doc.data()
 
@@ -36,7 +36,7 @@ export default function Sala() {
       })
 
     return unsubscribe
-  }, [name])
+  }, [roomName])
 
   return (
     <div className="px-4 py-8">
@@ -50,7 +50,7 @@ export default function Sala() {
           <InputText
             id="room-name"
             label="Nombre"
-            value={name || ''}
+            value={roomName || ''}
             readonly
             onFocus={event => event.target.select()}
           />
@@ -92,7 +92,7 @@ export default function Sala() {
                         id="play"
                         onButtonClick={() => {
                           router.push(
-                            `/sala/${name}/jugar?jugador=${player.id}`
+                            `/sala/${roomName}/jugar?jugador=${player.id}`
                           )
                         }}
                         disabled={!room.readyToPlay}

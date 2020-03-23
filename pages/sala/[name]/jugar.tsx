@@ -8,7 +8,7 @@ import db from '~/utils/firebase'
 
 export default function Jugar() {
   const router = useRouter()
-  const name = router.query.name?.toString()
+  const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
   const [room, setRoom] = useState<
     firebase.firestore.DocumentData | undefined
@@ -17,22 +17,22 @@ export default function Jugar() {
   const currentPlayer = room?.players.find((p: IPlayer) => p.id === playerId)
 
   useEffect(() => {
-    if (!name) return
+    if (!roomName) return
 
     const unsubscribe = db
       .collection('rooms')
-      .doc(name)
+      .doc(roomName)
       .onSnapshot(doc => {
         setRoom(doc.data())
       })
 
     return unsubscribe
-  }, [name])
+  }, [roomName])
 
   return (
     <div className="px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-medium text-center text-xl">Sala {name}</h2>
+        <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
         {!room && (
           <div className="md:w-2/4 mx-auto px-4">
             <Message type="information">

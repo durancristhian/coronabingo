@@ -5,8 +5,7 @@ import { FiSmile } from 'react-icons/fi'
 // @ts-ignore
 import urlSlug from 'url-slug'
 import useDeepCompareEffect from 'use-deep-compare-effect'
-import { v4 as uuid } from 'uuid'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
@@ -49,7 +48,7 @@ export default function CreateRoom() {
 
     const { name } = formData
     const roomName = urlSlug(name)
-    const roomDoc = db.collection('rooms').doc(roomName)
+    const roomDoc = roomsRef.doc(roomName)
     const roomData = await roomDoc.get()
 
     if (roomData.exists) {
@@ -64,8 +63,7 @@ export default function CreateRoom() {
     await roomDoc.set({
       ...formData,
       name: roomName,
-      date: firebase.firestore.Timestamp.fromDate(new Date()),
-      id: uuid()
+      date: firebase.firestore.Timestamp.fromDate(new Date())
     })
 
     setMessageProps({

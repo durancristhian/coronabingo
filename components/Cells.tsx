@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 const poroto = require('~/public/poroto.png')
 
 interface IProps {
@@ -11,13 +11,13 @@ interface IProps {
 
 export default function Cells({ boardNumbers, selectedNumbers }: IProps) {
   const router = useRouter()
-  const name = router.query.name?.toString()
+  const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
   const [numbers, setSelectedNumbers] = useState(selectedNumbers || [])
 
   useEffect(() => {
     const updateRoom = async () => {
-      const roomRef = db.collection('rooms').doc(name)
+      const roomRef = roomsRef.doc(roomName)
       const roomDoc = await roomRef.get()
       const data = roomDoc.data()
 
@@ -36,7 +36,7 @@ export default function Cells({ boardNumbers, selectedNumbers }: IProps) {
       }
     }
 
-    if (name) updateRoom()
+    if (roomName) updateRoom()
   }, [numbers])
 
   const toggleNumber = (n: number) => {

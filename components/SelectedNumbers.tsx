@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import { BOARD_NUMBERS } from '~/utils/constants'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 
 interface IProps {
@@ -12,17 +12,17 @@ interface IProps {
 
 export default function SelectedNumbers({ isAdmin, selectedNumbers }: IProps) {
   const router = useRouter()
-  const name = router.query.name?.toString()
+  const roomName = router.query.name?.toString()
   const [numbers, setNumbers] = useState<number[]>(selectedNumbers)
 
   useDeepCompareEffect(() => {
     const updateRoom = async () => {
-      const roomRef = db.collection('rooms').doc(name)
+      const roomRef = roomsRef.doc(roomName)
       roomRef.update({ selectedNumbers: numbers })
     }
 
     updateRoom()
-  }, [name, numbers])
+  }, [roomName, numbers])
 
   const onFieldChange = (n: number) => {
     if (!isAdmin) return

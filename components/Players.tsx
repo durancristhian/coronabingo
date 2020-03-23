@@ -1,47 +1,54 @@
 import classnames from 'classnames'
-import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/router'
+import { FormEvent, useEffect, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
-import { v4 as uuid } from 'uuid'
+import Select from '~/components/Select'
 import { Field } from '~/pages/sala/[name]/admin'
 import { MAX_PLAYERS } from '~/utils/constants'
+import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 import InputText from './InputText'
 
 interface IProps {
   adminId: string
-  boards: string[]
-  id: string
-  onPlayersChange: (changes: { key: string; value: Field }[]) => void
-  players: IPlayer[]
+  onChange: (changes: { key: string; value: Field }[]) => void
 }
 
-export default function Players({
-  adminId,
-  boards,
-  id,
-  onPlayersChange,
-  players
-}: IProps) {
+export default function Players({ adminId, onChange }: IProps) {
+  const router = useRouter()
+  const roomName = router.query.name?.toString()
   const [name, setName] = useState('')
+  const [players, setPlayers] = useState<IPlayer[]>([])
+
+  useEffect(() => {
+    if (!roomName) return
+
+    const unsubscribe = roomsRef
+      .doc(roomName)
+      .collection('players')
+      .onSnapshot(players => {
+        const data = players.docs
+          .map(p => Object.assign({}, { id: p.id }, p.data()))
+          .map(p => ({
+            boards: p.boards,
+            id: p.id,
+            name: p.name,
+            selectedNumbers: p.selectedNumbers
+          }))
+
+        setPlayers(data)
+      })
+
+    return unsubscribe
+  }, [roomName])
 
   const onFieldChange = (_key: string, value: string) => {
     setName(value)
   }
 
-  const onRemovePlayer = (admin: string) => {
-    const cleanAdmin = players.find(p => p.id === adminId)?.id === admin
-    const changes: { key: string; value: Field }[] = [
-      {
-        key: id,
-        value: players
-          .filter(p => p.id !== admin)
-          .sort((p1: IPlayer, p2: IPlayer) =>
-            p1.name
-              .toLocaleLowerCase()
-              .localeCompare(p2.name.toLocaleLowerCase())
-          )
-      }
-    ]
+  const onRemovePlayer = (playerId: string) => {
+    const cleanAdmin = players.find(p => p.id === adminId)?.id === playerId
+    const changes = []
 
     if (cleanAdmin) {
       changes.push({
@@ -55,35 +62,32 @@ export default function Players({
       })
     }
 
-    onPlayersChange(changes)
+    onChange(changes)
+
+    roomsRef
+      .doc(roomName)
+      .collection('players')
+      .doc(playerId)
+      .delete()
   }
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
-    setName('')
+    roomsRef
+      .doc(roomName)
+      .collection('players')
+      .add({
+        boards: '',
+        name,
+        selectedNumbers: []
+      })
 
-    onPlayersChange([
-      {
-        key: id,
-        value: [
-          /* TODO: en every player added I'm mutating all the collection because of the index 🤭 */
-          ...players.map((p, i) => ({ ...p, boards: boards[i] })),
-          {
-            boards: boards[players.length],
-            id: uuid(),
-            name,
-            selectedNumbers: []
-          }
-        ].sort((p1: IPlayer, p2: IPlayer) =>
-          p1.name.toLocaleLowerCase().localeCompare(p2.name.toLocaleLowerCase())
-        )
-      }
-    ])
+    setName('')
   }
 
   return (
-    <div className="mb-4 mt-8">
+    <div className="mt-8">
       <div className="font-medium text-md uppercase">
         <h3 className="flex font-medium items-center text-md uppercase">
           <span>Jugadores:&nbsp;</span>
@@ -158,6 +162,16 @@ export default function Players({
           ))}
         </div>
       )}
+      <div className="mt-8">
+        <Select
+          disabled={!players.length}
+          id="adminId"
+          label="Admin de la sala"
+          onInputChange={(key, value) => onChange([{ key, value }])}
+          options={players}
+          value={adminId}
+        />
+      </div>
     </div>
   )
 }

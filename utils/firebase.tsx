@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
+/* TODO: configure an .env file */
 const firebaseConfig = {
   apiKey: 'AIzaSyChj93kMbADsP58d-LMCbKZlaZxtwZsi9k',
   authDomain: 'coronabingo-dev.firebaseapp.com',
@@ -23,3 +24,4 @@ if (firebase.apps.length) {
 const db = firebaseApp.firestore()
 
 export default db
+export const roomsRef = db.collection('rooms')

@@ -5,11 +5,10 @@ import { FiSmile } from 'react-icons/fi'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
-import Message from '~/components/Message'
+import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
-import Select from '~/components/Select'
 import fetcher from '~/utils/fetcher'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 
 interface IPageProps {
   boardsDistribution: string[]
@@ -17,7 +16,7 @@ interface IPageProps {
 
 export default function AdminSala({ boardsDistribution }: IPageProps) {
   const router = useRouter()
-  const name = router.query.name?.toString()
+  const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
     data: firebase.firestore.DocumentData | undefined
     error: string | null
@@ -26,6 +25,13 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     data: undefined,
     error: null,
     loading: false
+  })
+  const [message, setMessage] = useState<{
+    content: string
+    type: MessageType
+  }>({
+    content: '',
+    type: 'information'
   })
 
   useEffect(() => {
@@ -37,7 +43,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       })
 
       try {
-        const roomRef = db.collection('rooms').doc(name)
+        const roomRef = roomsRef.doc(roomName)
         const roomDoc = await roomRef.get()
 
         if (!roomDoc.exists) {
@@ -62,16 +68,16 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       }
     }
 
-    if (name) getRoomData()
-  }, [name])
+    if (roomName) getRoomData()
+  }, [roomName])
 
   useDeepCompareEffect(() => {
     const updateRoom = async () => {
-      const roomRef = db.collection('rooms').doc(name)
+      const roomRef = roomsRef.doc(roomName)
       roomRef.update({ ...room.data })
     }
 
-    if (name) updateRoom()
+    if (roomName) updateRoom()
   }, [{ ...room.data }])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
@@ -85,13 +91,40 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     })
   }
 
-  const readyToPlay = () => {
+  const readyToPlay = async () => {
+    setMessage({
+      content: 'Sala configurada con éxito',
+      type: 'success'
+    })
+
+    const snapshot = await roomsRef
+      .doc(roomName)
+      .collection('players')
+      .get()
+
+    let index = 0
+    snapshot.forEach(p => {
+      roomsRef
+        .doc(roomName)
+        .collection('players')
+        .doc(p.id)
+        .update({
+          boards: boardsDistribution[index]
+        })
+
+      index++
+    })
+
     onFieldChange([
       {
         key: 'readyToPlay',
         value: true
       }
     ])
+
+    setTimeout(() => {
+      router.push(`/sala/${roomName}`)
+    }, 1000)
   }
 
   return (
@@ -115,14 +148,14 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
               <InputText
                 id="room-name"
                 label="Nombre"
-                value={name}
+                value={roomName}
                 readonly
                 onFocus={event => event.target.select()}
               />
               <InputText
                 id="url"
                 label="URL para unirse"
-                value={`${window.location.host}/sala/${name}`}
+                value={`${window.location.host}/sala/${roomName}`}
                 readonly
                 onFocus={event => event.target.select()}
               />
@@ -139,25 +172,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                 onInputChange={(key, value) => onFieldChange([{ key, value }])}
                 value={room.data.videoCall || ''}
               />
-              <Players
-                adminId={room.data.adminId}
-                boards={boardsDistribution}
-                id="players"
-                onPlayersChange={onFieldChange}
-                players={room.data.players || []}
-              />
-              <div className="mt-8">
-                <Select
-                  disabled={!room.data.players?.length || false}
-                  id="adminId"
-                  label="Admin de la sala"
-                  onInputChange={(key, value) =>
-                    onFieldChange([{ key, value }])
-                  }
-                  options={room.data.players || []}
-                  value={room.data.adminId}
-                />
-              </div>
+              <Players adminId={room.data.adminId} onChange={onFieldChange} />
               <div className="mt-8">
                 <Button
                   id="readyToPlay"
@@ -170,6 +185,9 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                 </Button>
               </div>
             </Fragment>
+          )}
+          {message.content && (
+            <Message type={message.type}>{message.content}</Message>
           )}
         </div>
       </div>
