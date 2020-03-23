@@ -54,7 +54,7 @@ export default function Cells({
         <div
           key={i}
           className={classnames([
-            'border-b-2 border-r-2 border-gray-900 flex h-20 items-center justify-center p-1 relative',
+            'border-b-2 border-r-2 border-gray-900 flex h-8 sm:h-20 items-center justify-center p-1 relative',
             boardNumber ? 'bg-white cursor-pointer' : 'bg-yellow-200',
             numbers.includes(boardNumber) ? 'bg-orange-400' : null
           ])}
@@ -65,7 +65,7 @@ export default function Cells({
         >
           <div
             className={classnames(
-              ['absolute bottom-0 left-0 m-2 right-0 top-0 z-0'],
+              ['absolute bottom-0 left-0 m-1 sm:m-2 right-0 top-0 z-0'],
               numbers.includes(boardNumber) ? 'poroto' : null
             )}
             style={{
@@ -75,7 +75,7 @@ export default function Cells({
               transform: `rotate(${boardNumber + i}deg)`
             }}
           ></div>
-          <span className="font-medium font-oswald relative text-2xl sm:text-5xl text-shadow-white z-10">
+          <span className="font-medium font-oswald relative text-lg sm:text-5xl text-shadow-white z-10">
             {boardNumber || ''}
           </span>
         </div>
