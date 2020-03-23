@@ -160,13 +160,6 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                 onFocus={event => event.target.select()}
               />
               <InputText
-                id="password"
-                label="Contraseña"
-                value={room.data.password}
-                readonly
-                onFocus={event => event.target.select()}
-              />
-              <InputText
                 id="videoCall"
                 label="URL de la videollamada"
                 onInputChange={(key, value) => onFieldChange([{ key, value }])}

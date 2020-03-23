@@ -15,9 +15,7 @@ export default function CreateRoom() {
   const router = useRouter()
   const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
-    adminPassword: '',
-    name: '',
-    password: ''
+    name: ''
   })
   const [messageProps, setMessageProps] = useState<{
     message: string
@@ -85,18 +83,6 @@ export default function CreateRoom() {
           label="Nombre *"
           onInputChange={onFieldChange}
           value={formData.name}
-        />
-        <InputText
-          id="password"
-          label="Contraseña *"
-          onInputChange={onFieldChange}
-          value={formData.password}
-        />
-        <InputText
-          id="adminPassword"
-          label="Contraseña de administrador *"
-          onInputChange={onFieldChange}
-          value={formData.adminPassword}
         />
         <div className="mt-8">
           <Button className="w-full" disabled={!canSubmit} type="submit">
