@@ -51,7 +51,9 @@ export default function Boards({ boards }: IProps) {
             <Cells
               boardId={board.id}
               boardNumbers={board.numbers}
-              selectedNumbers={player ? player[board.id] : []}
+              selectedNumbers={
+                player && player[board.id] ? player[board.id] : []
+              }
             />
           </div>
         </div>
