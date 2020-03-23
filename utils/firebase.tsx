@@ -1,16 +1,15 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-/* TODO: configure an .env file */
 const firebaseConfig = {
-  apiKey: 'AIzaSyChj93kMbADsP58d-LMCbKZlaZxtwZsi9k',
-  authDomain: 'coronabingo-dev.firebaseapp.com',
-  databaseURL: 'https://coronabingo-dev.firebaseio.com',
-  projectId: 'coronabingo-dev',
-  storageBucket: 'coronabingo-dev.appspot.com',
-  messagingSenderId: '595363826914',
-  appId: '1:595363826914:web:f56e557be9c1454b6522bb',
-  measurementId: 'G-FX1XBFGWLB'
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 }
 
 let firebaseApp

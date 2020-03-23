@@ -6,12 +6,11 @@ import 'typeface-inter'
 import 'typeface-oswald'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
-import pkg from '~/package.json'
+import { version } from '~/package.json'
 import '~/public/styles.css'
 
 Sentry.init({
-  /* TODO: configure an .env file */
-  dsn: 'https://a55593459686417992c947080074947a@sentry.io/5171329'
+  dsn: process.env.SENTRY_DSN
 })
 
 export default class Coronabingo extends App {
@@ -35,7 +34,7 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <title>Coronabingo v{pkg.version}</title>
+          <title>coronabingo - por @durancristhian - v{version}</title>
           <meta
             property="description"
             content="El clásico juego del bingo para jugar en tiempos de cuarentena."

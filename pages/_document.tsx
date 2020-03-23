@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/browser'
 import Document, { Head, Main, NextScript } from 'next/document'
-import { GA_TRACKING_ID } from '~/utils/gtag'
 
 process.on('unhandledRejection', err => {
   Sentry.captureException(err)
@@ -17,7 +16,7 @@ export default class extends Document {
         <Head>
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
           />
           <script
             dangerouslySetInnerHTML={{
@@ -25,7 +24,7 @@ export default class extends Document {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', '${GA_TRACKING_ID}');`
+  gtag('config', '${process.env.GA_TRACKING_ID}');`
             }}
           />
         </Head>

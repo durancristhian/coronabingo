@@ -1,12 +1,12 @@
-const fetch = require('isomorphic-unfetch')
 const { writeFileSync } = require('fs')
 const { getWorksheet } = require('gsheets')
+const fetch = require('isomorphic-unfetch')
 const { join } = require('path')
 
 const downloadBoards = async () => {
   const worksheet = await getWorksheet(
-    '1lJCLVoQKilrNWuxl04GIg-r2My-bNVaxS1uwZCkC1Mw',
-    'cartones'
+    process.env.WOORKSHEET_ID,
+    process.env.WORKSHEET_TITLE,
   )
   const boards = worksheet.data.map(Object.values)
 

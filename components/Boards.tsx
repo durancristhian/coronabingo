@@ -14,7 +14,7 @@ export default function Boards({ boards }: IProps) {
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
   const url = `/api/boards?cartones=${boards}`
-  const { data, error } = useSWR<IBoard>(url, fetcher)
+  const { data, error } = useSWR<IBoards>(url, fetcher)
   const [player, setPlayer] = useState<
     firebase.firestore.DocumentData | undefined
   >()
@@ -36,7 +36,6 @@ export default function Boards({ boards }: IProps) {
     return unsubscribe
   }, [playerId, roomName])
 
-  /* TODO: this is not the best, improve */
   if (error || !data) return null
 
   return (
@@ -62,7 +61,7 @@ export default function Boards({ boards }: IProps) {
   )
 }
 
-interface IBoard {
+interface IBoards {
   boards: {
     id: number
     numbers: number[]

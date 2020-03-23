@@ -204,7 +204,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   if (process.env.NODE_ENV === 'production') {
     const res: Response = await fetcher(
-      `http://${req.headers.host}/api/boards-distribution`
+      `https://${req.headers.host}/api/boards-distribution`
     )
     data = await res.json()
   } else {
