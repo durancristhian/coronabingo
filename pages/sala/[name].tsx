@@ -5,34 +5,47 @@ import { FiLink2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import { IPlayer } from '~/components/Players'
-import db from '~/utils/firebase'
+import { roomsRef } from '~/utils/firebase'
 
 export default function Sala() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
+  const [players, setPlayers] = useState<IPlayer[]>([])
 
   useEffect(() => {
     if (!roomName) return
 
-    const unsubscribe = db
-      .collection('rooms')
+    const unsubscribe = roomsRef.doc(roomName).onSnapshot(snapshot => {
+      const roomData = snapshot.data()
+
+      if (roomData) {
+        setRoom(roomData)
+      }
+    })
+
+    return unsubscribe
+  }, [roomName])
+
+  useEffect(() => {
+    if (!roomName) return
+
+    const unsubscribe = roomsRef
       .doc(roomName)
-      .onSnapshot((doc: firebase.firestore.DocumentSnapshot) => {
-        const roomData = doc.data()
+      .collection('players')
+      .onSnapshot(snapshot => {
+        const players: IPlayer[] = []
 
-        if (roomData) {
-          const sorted = {
-            ...roomData,
-            players: roomData.players.sort((p1: IPlayer, p2: IPlayer) =>
-              p1.name
-                .toLocaleLowerCase()
-                .localeCompare(p2.name.toLocaleLowerCase())
-            )
+        snapshot.docs.forEach(doc => {
+          const playerData = doc.data()
+
+          if (playerData) {
+            // @ts-ignore
+            players.push(playerData)
           }
+        })
 
-          setRoom(sorted)
-        }
+        setPlayers(players)
       })
 
     return unsubscribe
@@ -61,13 +74,13 @@ export default function Sala() {
             onFocus={event => event.target.select()}
             value={room.videoCall || ''}
           />
-          {room.players && !!room.players.length && (
+          {!!players.length && (
             <div className="mt-8">
               <h3 className="font-medium text-md uppercase">
-                <span>Jugadores: {room.players.length}</span>
+                <span>Jugadores: {players.length}</span>
               </h3>
               <div className="border-gray-300 border-t-2 mt-4 -mx-4">
-                {room.players.map((player: IPlayer, index: number) => (
+                {players.map((player: IPlayer, index: number) => (
                   <div
                     key={index}
                     className={classnames([
