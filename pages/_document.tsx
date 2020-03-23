@@ -1,5 +1,14 @@
+import * as Sentry from '@sentry/browser'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { GA_TRACKING_ID } from '~/utils/gtag'
+
+process.on('unhandledRejection', err => {
+  Sentry.captureException(err)
+})
+
+process.on('uncaughtException', err => {
+  Sentry.captureException(err)
+})
 
 export default class extends Document {
   render() {

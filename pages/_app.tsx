@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser'
 import App from 'next/app'
 import Head from 'next/head'
 import { Fragment } from 'react'
@@ -8,7 +9,25 @@ import Header from '~/components/Header'
 import pkg from '~/package.json'
 import '~/public/styles.css'
 
+Sentry.init({
+  /* TODO: configure an .env file */
+  dsn: 'https://a55593459686417992c947080074947a@sentry.io/5171329'
+})
+
 export default class Coronabingo extends App {
+  // @ts-ignore
+  componentDidCatch(error, errorInfo) {
+    Sentry.withScope(scope => {
+      Object.keys(errorInfo).forEach(key => {
+        scope.setExtra(key, errorInfo[key])
+      })
+
+      Sentry.captureException(error)
+    })
+
+    super.componentDidCatch(error, errorInfo)
+  }
+
   render() {
     const { Component, pageProps } = this.props
 

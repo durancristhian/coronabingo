@@ -1,10 +1,13 @@
 const withImages = require('next-images')
 const { join } = require('path');
 const tsconfig = require('./tsconfig.json');
+const withPlugins = require('next-compose-plugins');
 
 const tsPaths = tsconfig.compilerOptions.paths;
 
-module.exports = withImages({
+module.exports = withPlugins([
+  [withImages],
+], {
   env: {
     spreadsheetID: '1lJCLVoQKilrNWuxl04GIg-r2My-bNVaxS1uwZCkC1Mw',
     worksheetName: 'cartones'
@@ -31,4 +34,4 @@ module.exports = withImages({
 
     return config;
   }
-});
+})
