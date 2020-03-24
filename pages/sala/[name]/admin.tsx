@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
+import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
@@ -166,6 +167,16 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                 value={room.data.videoCall || ''}
               />
               <Players adminId={room.data.adminId} onChange={onFieldChange} />
+              <div className="mt-8">
+                <Checkbox
+                  id="turningGlob"
+                  label="Necesitamos bolillero"
+                  onInputChange={(key, value) =>
+                    onFieldChange([{ key, value }])
+                  }
+                  value={room.data.turningGlob || false}
+                />
+              </div>
               <div className="mt-8">
                 <Button
                   id="readyToPlay"

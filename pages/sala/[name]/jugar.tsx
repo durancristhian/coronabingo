@@ -57,10 +57,7 @@ export default function Jugar() {
         )}
         {player && <Boards boards={player.boards} />}
         {room && (
-          <SelectedNumbers
-            isAdmin={isAdmin}
-            selectedNumbers={room.selectedNumbers || []}
-          />
+          <SelectedNumbers selectedNumbers={room.selectedNumbers || []} />
         )}
       </div>
     </div>
