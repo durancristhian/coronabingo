@@ -65,13 +65,13 @@ export default function CreateRoom() {
     })
 
     setMessageProps({
-      message: 'Sala creada con éxito',
+      message: 'Sala creada con éxito. Espere...',
       type: 'success'
     })
 
     setTimeout(() => {
       router.push(`/sala/${roomName}/admin`)
-    }, 1000)
+    }, 3000)
   }
 
   return (

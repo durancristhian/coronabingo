@@ -94,7 +94,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
 
   const readyToPlay = async () => {
     setMessage({
-      content: 'Sala configurada con éxito',
+      content: 'Sala configurada con éxito. Espere...',
       type: 'success'
     })
 
@@ -125,7 +125,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
 
     setTimeout(() => {
       router.push(`/sala/${roomName}`)
-    }, 1000)
+    }, 3000)
   }
 
   return (
