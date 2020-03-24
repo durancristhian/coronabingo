@@ -1,39 +1,61 @@
 import classnames from 'classnames'
 import { FiChevronRight } from 'react-icons/fi'
+import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
+const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
-export default function TurningGlob() {
-  const onNextButtonClick = () => {}
+interface IProps {
+  isAdmin: boolean
+  onNewNumber: (n: number) => void
+  selectedNumbers: number[]
+}
+
+export default function TurningGlob({
+  isAdmin,
+  onNewNumber,
+  selectedNumbers
+}: IProps) {
+  const roomNumbers = selectedNumbers
+  const current = roomNumbers[0]
+  const rest = roomNumbers.slice(1, 6)
+
+  const onNextButtonClick = () => {
+    const missingNumbers = BOARD_NUMBERS.filter(n => !roomNumbers.includes(n))
+    const shuffled = knuthShuffle(missingNumbers.slice(0))
+
+    onNewNumber(shuffled[0])
+  }
 
   return (
     <div className="bg-white mt-8 px-4 py-8 rounded shadow">
       <h2 className="font-medium mb-8 text-center text-xl">Bolillero</h2>
-      <div className="flex items-center">
-        <div className="w-1/3">
-          <div className="border-2 border-gray-600 bg-gray-200 flex items-center justify-center mb-4 px-2 py-4 rounded text-shadow-white">
-            <span className="font-medium text-5xl">10</span>
+      <div className="flex flex-col sm:flex-row items-center">
+        <div className="w-full sm:w-1/3">
+          <div className="border-2 border-gray-600 bg-gray-200 flex h-16 sm:h-24 items-center justify-center mb-4 px-2 py-4 rounded text-shadow-white">
+            <span className="font-medium font-oswald text-3xl sm:text-5xl">
+              {current}
+            </span>
           </div>
-          <Button
-            id="next"
-            className="w-full"
-            /* disabled={false} */
-            onButtonClick={onNextButtonClick}
-          >
-            <span className="mr-4">Siguiente</span>
-            <FiChevronRight className="text-2xl" />
-          </Button>
+          {isAdmin && (
+            <Button
+              id="next"
+              className="w-full"
+              onButtonClick={onNextButtonClick}
+              disabled={roomNumbers.length === 90}
+            >
+              <span className="mr-4">Siguiente</span>
+              <FiChevronRight className="text-lg" />
+            </Button>
+          )}
         </div>
-        <div className="ml-8 w-2/3">
-          <div className="flex items-center justify-center">
-            {[67, 2, 30, 4, 50].map((n, i) => (
+        <div className="mt-8 sm:ml-8 w-full sm:w-2/3">
+          <div className="flex items-center justify-between">
+            {rest.map((n, i) => (
               <div
                 key={n}
-                className={classnames([
-                  'border-2 border-gray-600 bg-gray-200 flex font-medium items-center justify-center mx-4 rounded-full shadow-lg',
-                  i > 0 ? 'h-16 text-2xl w-16' : 'h-24 text-4xl w-24'
-                ])}
+                className="border-2 border-gray-600 bg-gray-200 flex font-medium h-16 items-center rounded text-xl sm:text-3xl w-1/6"
               >
-                <span>{n}</span>
+                <span className=" font-oswald text-center w-full">{n}</span>
               </div>
             ))}
           </div>

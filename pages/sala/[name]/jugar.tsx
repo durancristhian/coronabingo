@@ -45,6 +45,12 @@ export default function Jugar() {
     return unsubscribe
   }, [playerId, roomName])
 
+  const onNewNumber = (n: number) => {
+    roomsRef.doc(roomName).update({
+      selectedNumbers: [n, ...room?.selectedNumbers]
+    })
+  }
+
   return (
     <div className="px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -56,10 +62,20 @@ export default function Jugar() {
             </Message>
           </div>
         )}
-        {room && room.turningGlob && <TurningGlob />}
+        {room && room.turningGlob && (
+          <TurningGlob
+            isAdmin={isAdmin}
+            onNewNumber={onNewNumber}
+            selectedNumbers={room?.selectedNumbers}
+          />
+        )}
         {player && <Boards boards={player.boards} />}
-        {room && room.selectedNumbers && room.selectedNumbers.length && (
-          <SelectedNumbers selectedNumbers={room.selectedNumbers} />
+        {room && room.selectedNumbers && (
+          <SelectedNumbers
+            enableForAdmin={isAdmin && !room.turningGlob}
+            onNewNumber={onNewNumber}
+            selectedNumbers={room.selectedNumbers}
+          />
         )}
       </div>
     </div>
