@@ -87,9 +87,9 @@ export default function Players({ adminId, onChange }: IProps) {
 
   return (
     <div className="mt-8">
-      <div className="font-medium text-md uppercase">
-        <h3 className="flex font-medium items-center text-md uppercase">
-          <span>Jugadores:&nbsp;</span>
+      <div className="font-medium text-md">
+        <h3 className="flex font-medium items-center text-md">
+          <span>Personas que van a jugar:&nbsp;</span>
           <span
             className={classnames([
               players.length === MAX_PLAYERS && 'text-red-600'
@@ -161,15 +161,21 @@ export default function Players({ adminId, onChange }: IProps) {
           ))}
         </div>
       )}
-      <div className="mt-8">
+      <div className="mt-4">
         <Select
           disabled={!players.length}
           id="adminId"
-          label="Admin de la sala"
+          label="Dirige el juego"
           onInputChange={(key, value) => onChange([{ key, value }])}
           options={players}
           value={adminId}
         />
+      </div>
+      <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
+        <p className="my-8">
+          Elegí la persona que se va a hacer cargo de marcar los números para
+          que el resto se entere.
+        </p>
       </div>
     </div>
   )

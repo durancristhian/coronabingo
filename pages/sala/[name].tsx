@@ -63,6 +63,13 @@ export default function Sala() {
               Información de la sala
             </h2>
           </div>
+          <div className="mb-8">
+            <img
+              src={require('~/public/virus/happy.png')}
+              alt="coronavirus feliz"
+              className="h-32 mx-auto"
+            />
+          </div>
           <InputText
             id="room-name"
             label="Nombre"
@@ -70,18 +77,26 @@ export default function Sala() {
             readonly
             onFocus={event => event.target.select()}
           />
-          <InputText
-            id="videocall"
-            label="URL de la videollamada"
-            readonly
-            onFocus={event => event.target.select()}
-            value={room.videoCall || ''}
-          />
+          {room.videoCall && (
+            <InputText
+              id="videocall"
+              label="Link a la videollamada"
+              readonly
+              onFocus={event => event.target.select()}
+              value={room.videoCall || ''}
+            />
+          )}
           {!!players.length && (
             <div className="mt-8">
-              <h3 className="font-medium text-md uppercase">
-                <span>Jugadores: {players.length}</span>
+              <h3 className="font-medium text-md">
+                <span>Personas que van a jugar: {players.length}</span>
               </h3>
+              <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
+                <p className="my-8">
+                  Buscate en esta lista y esperá que se habilite el botón para
+                  acceder a tus cartones y al bolillero.
+                </p>
+              </div>
               <div className="border-gray-300 border-t-2 mt-4 -mx-4">
                 {players.map((player: IPlayer, index: number) => (
                   <div

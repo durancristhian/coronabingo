@@ -132,7 +132,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     <div className="px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-          <h2 className="font-medium text-center text-xl">Administrar sala</h2>
+          <h2 className="font-medium text-center text-xl">Preparar sala</h2>
           {room.error && (
             <Message type="error">
               Ocurrió un error al cargar la información de la sala. Intenta de
@@ -154,28 +154,40 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                 onFocus={event => event.target.select()}
               />
               <InputText
+                id="videoCall"
+                label="Link a la videollamada"
+                onInputChange={(key, value) => onFieldChange([{ key, value }])}
+                value={room.data.videoCall || ''}
+              />
+              <InputText
                 id="url"
-                label="URL para unirse"
+                label="Link a la sala"
                 value={`${window.location.host}/sala/${roomName}`}
                 readonly
                 onFocus={event => event.target.select()}
               />
-              <InputText
-                id="videoCall"
-                label="URL de la videollamada"
-                onInputChange={(key, value) => onFieldChange([{ key, value }])}
-                value={room.data.videoCall || ''}
-              />
+              <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
+                <p className="my-8">
+                  Compartí este link a las personas de la videollamada.
+                </p>
+              </div>
               <Players adminId={room.data.adminId} onChange={onFieldChange} />
-              <div className="mt-8">
+              <div className="mt-4">
                 <Checkbox
                   id="turningGlob"
-                  label="Necesitamos bolillero"
+                  label="Usar bolillero online"
                   onInputChange={(key, value) =>
                     onFieldChange([{ key, value }])
                   }
                   value={room.data.turningGlob || false}
                 />
+              </div>
+              <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
+                <p className="my-8">
+                  Si tenés un bolillero y querés usarlo no tildes esta opción.
+                  De lo contrario, tildala para tener un bolillero durante el
+                  juego.
+                </p>
               </div>
               <div className="mt-8">
                 <Button

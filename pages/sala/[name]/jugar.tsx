@@ -48,12 +48,13 @@ export default function Jugar() {
   const onNewNumber = (n: number) => {
     if (!room) return
 
+    const selectedNumbers = room.selectedNumbers || []
     let numbers
 
-    if (room.selectedNumbers.includes(n)) {
-      numbers = room.selectedNumbers.filter((sn: number) => sn !== n)
+    if (selectedNumbers.includes(n)) {
+      numbers = selectedNumbers.filter((sn: number) => sn !== n)
     } else {
-      numbers = [n, ...room.selectedNumbers]
+      numbers = [n, ...selectedNumbers]
     }
 
     roomsRef.doc(roomName).update({
@@ -82,18 +83,17 @@ export default function Jugar() {
               <TurningGlob
                 isAdmin={isAdmin}
                 onNewNumber={onNewNumber}
-                selectedNumbers={room?.selectedNumbers}
+                selectedNumbers={room?.selectedNumbers || []}
                 turningGlob={room?.turningGlob}
               />
-              {room.selectedNumbers && (
-                <div className="mt-4">
-                  <SelectedNumbers
-                    enableForAdmin={isAdmin && !room.turningGlob}
-                    onNewNumber={onNewNumber}
-                    selectedNumbers={room.selectedNumbers}
-                  />
-                </div>
-              )}
+              <div className="mt-4">
+                <SelectedNumbers
+                  isAdmin={isAdmin}
+                  onNewNumber={onNewNumber}
+                  selectedNumbers={room.selectedNumbers || []}
+                  turningGlob={room.turningGlob}
+                />
+              </div>
             </div>
           </div>
         )}
