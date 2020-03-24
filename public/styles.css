@@ -10,28 +10,21 @@
 }
 
 .poroto {
-  background-image: url(./poroto.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.text-shadow {
+.text-shadow-white {
   text-shadow: 1px 1px 0 white;
 }
 
-.title-letter:nth-child(1) {
-  transform: scale(1.3);
-}
-
-.title-letter:nth-child(2) {
-  transform: scale(1.15);
-}
-
-.title-letter:nth-child(4) {
-  transform: scale(1.15);
-}
-
-.title-letter:nth-child(5) {
-  transform: scale(1.3);
+.visually-hidden {
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  white-space: nowrap; /* added line */
 }
