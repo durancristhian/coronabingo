@@ -144,7 +144,7 @@ export default function Players({ adminId, onChange }: IProps) {
                 <p>{player.name}</p>
                 {player.id === adminId && (
                   <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
-                    Admin
+                    Dirige el juego
                   </span>
                 )}
               </div>
