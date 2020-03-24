@@ -17,6 +17,13 @@ export default function Index() {
             <p className="my-8">
               En esta página vas a poder jugar al bingo con otras personas.
             </p>
+          </div>
+        </div>
+        <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
+          <CreateRoom />
+        </div>
+        <div className="md:w-2/4 mx-auto">
+          <div className="leading-normal">
             <p className="my-8">
               Vas a necesitar crear una videollamada con quienes quieras jugar.
               Te recomiendo&nbsp;
@@ -31,9 +38,6 @@ export default function Index() {
               .
             </p>
           </div>
-        </div>
-        <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-          <CreateRoom />
         </div>
       </div>
     </div>

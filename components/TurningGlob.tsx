@@ -42,7 +42,7 @@ export default function TurningGlob({
           onButtonClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
         >
-          <span className="mr-4">Siguiente</span>
+          <span className="mr-2">Sacar otro número</span>
           <FiChevronRight className="text-lg" />
         </Button>
       )}
