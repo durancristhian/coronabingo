@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { FiChevronRight } from 'react-icons/fi'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
@@ -7,14 +8,16 @@ interface IProps {
   isAdmin: boolean
   onNewNumber: (n: number) => void
   selectedNumbers: number[]
+  turningGlob: boolean
 }
 
 export default function TurningGlob({
   isAdmin,
   onNewNumber,
-  selectedNumbers
+  selectedNumbers,
+  turningGlob
 }: IProps) {
-  const roomNumbers = selectedNumbers
+  const roomNumbers = [...selectedNumbers]
   const current = roomNumbers[0]
   const rest = roomNumbers.slice(1, 6)
 
@@ -26,40 +29,39 @@ export default function TurningGlob({
   }
 
   return (
-    <div className="bg-white mt-8 px-4 py-8 rounded shadow">
-      <h2 className="font-medium mb-8 text-center text-xl">Bolillero</h2>
-      <div className="flex flex-col sm:flex-row items-center">
-        <div className="w-full sm:w-1/3">
-          <div className="bg-green-400 border-2 border-green-600 flex h-16 sm:h-24 items-center justify-center mb-4 px-2 py-4 rounded">
-            <span className="font-medium font-oswald text-3xl sm:text-5xl text-green-800">
-              {current}
-            </span>
-          </div>
-          {isAdmin && (
-            <Button
-              id="next"
-              className="w-full"
-              onButtonClick={onNextButtonClick}
-              disabled={roomNumbers.length === 90}
-            >
-              <span className="mr-4">Siguiente</span>
-              <FiChevronRight className="text-lg" />
-            </Button>
-          )}
-        </div>
-        <div className="mt-8 sm:ml-8 w-full sm:w-2/3">
-          <div className="flex items-center justify-between">
-            {rest.map(n => (
-              <div
-                key={n}
-                className="border-2 border-gray-900 flex font-medium h-8 sm:h-20 items-center text-xl sm:text-3xl w-1/6"
-              >
-                <span className=" font-oswald text-center w-full">{n}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+    <Fragment>
+      <div className="bg-green-400 border-2 border-green-600 flex h-16 items-center justify-center p-4 rounded">
+        <span className="font-medium font-oswald text-3xl text-green-800">
+          {current || '-'}
+        </span>
       </div>
-    </div>
+      {isAdmin && turningGlob && (
+        <Button
+          id="next"
+          className="mt-4 w-full"
+          onButtonClick={onNextButtonClick}
+          disabled={roomNumbers.length === 90}
+        >
+          <span className="mr-4">Siguiente</span>
+          <FiChevronRight className="text-lg" />
+        </Button>
+      )}
+      {!!rest.length && (
+        <div className="flex items-center mt-4">
+          {rest.map(n => (
+            <div
+              key={n}
+              className="border-2 border-gray-900 flex font-medium h-10 items-center"
+              style={{
+                marginRight: '2%',
+                width: '18%'
+              }}
+            >
+              <span className=" font-oswald text-center w-full">{n}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </Fragment>
   )
 }

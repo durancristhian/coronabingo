@@ -46,37 +46,60 @@ export default function Jugar() {
   }, [playerId, roomName])
 
   const onNewNumber = (n: number) => {
+    if (!room) return
+
+    let numbers
+
+    if (room.selectedNumbers.includes(n)) {
+      numbers = room.selectedNumbers.filter((sn: number) => sn !== n)
+    } else {
+      numbers = [n, ...room.selectedNumbers]
+    }
+
     roomsRef.doc(roomName).update({
-      selectedNumbers: [n, ...room?.selectedNumbers]
+      selectedNumbers: numbers
     })
   }
 
   return (
     <div className="px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
-        {!room && (
-          <div className="md:w-2/4 mx-auto">
+      {!room && (
+        <div className="max-w-4xl mx-auto">
+          <div className="md:w-2/4 mx-auto -mt-8">
             <Message type="information">
               Cargando información de la sala...
             </Message>
           </div>
+        </div>
+      )}
+      <div className="lg:flex max-w-6xl mx-auto">
+        {room && (
+          <div className="lg:w-1/3">
+            <div className="bg-white px-4 py-8 rounded shadow">
+              <h2 className="font-medium mb-8 text-center text-xl">
+                Bolillero
+              </h2>
+              <TurningGlob
+                isAdmin={isAdmin}
+                onNewNumber={onNewNumber}
+                selectedNumbers={room?.selectedNumbers}
+                turningGlob={room?.turningGlob}
+              />
+              {room.selectedNumbers && (
+                <div className="mt-4">
+                  <SelectedNumbers
+                    enableForAdmin={isAdmin && !room.turningGlob}
+                    onNewNumber={onNewNumber}
+                    selectedNumbers={room.selectedNumbers}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
         )}
-        {room && room.turningGlob && (
-          <TurningGlob
-            isAdmin={isAdmin}
-            onNewNumber={onNewNumber}
-            selectedNumbers={room?.selectedNumbers}
-          />
-        )}
-        {player && <Boards boards={player.boards} />}
-        {room && room.selectedNumbers && (
-          <SelectedNumbers
-            enableForAdmin={isAdmin && !room.turningGlob}
-            onNewNumber={onNewNumber}
-            selectedNumbers={room.selectedNumbers}
-          />
-        )}
+        <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+          {player && <Boards boards={player.boards} />}
+        </div>
       </div>
     </div>
   )

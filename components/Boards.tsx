@@ -40,6 +40,7 @@ export default function Boards({ boards }: IProps) {
 
   return (
     <Fragment>
+      <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
       {data.boards.map((board, i) => (
         <div
           key={i}
