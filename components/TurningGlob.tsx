@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { FiChevronRight } from 'react-icons/fi'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
@@ -31,8 +30,8 @@ export default function TurningGlob({
       <h2 className="font-medium mb-8 text-center text-xl">Bolillero</h2>
       <div className="flex flex-col sm:flex-row items-center">
         <div className="w-full sm:w-1/3">
-          <div className="border-2 border-gray-600 bg-gray-200 flex h-16 sm:h-24 items-center justify-center mb-4 px-2 py-4 rounded text-shadow-white">
-            <span className="font-medium font-oswald text-3xl sm:text-5xl">
+          <div className="bg-green-400 border-2 border-green-600 flex h-16 sm:h-24 items-center justify-center mb-4 px-2 py-4 rounded">
+            <span className="font-medium font-oswald text-3xl sm:text-5xl text-green-800">
               {current}
             </span>
           </div>
@@ -50,10 +49,10 @@ export default function TurningGlob({
         </div>
         <div className="mt-8 sm:ml-8 w-full sm:w-2/3">
           <div className="flex items-center justify-between">
-            {rest.map((n, i) => (
+            {rest.map(n => (
               <div
                 key={n}
-                className="border-2 border-gray-600 bg-gray-200 flex font-medium h-16 items-center rounded text-xl sm:text-3xl w-1/6"
+                className="border-2 border-gray-900 flex font-medium h-8 sm:h-20 items-center text-xl sm:text-3xl w-1/6"
               >
                 <span className=" font-oswald text-center w-full">{n}</span>
               </div>
