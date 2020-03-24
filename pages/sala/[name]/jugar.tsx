@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Boards from '~/components/Boards'
 import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
+import TurningGlob from '~/components/TurningGlob'
 import { roomsRef } from '~/utils/firebase'
 
 export default function Jugar() {
@@ -55,9 +56,10 @@ export default function Jugar() {
             </Message>
           </div>
         )}
+        {room && room.turningGlob && <TurningGlob />}
         {player && <Boards boards={player.boards} />}
-        {room && (
-          <SelectedNumbers selectedNumbers={room.selectedNumbers || []} />
+        {room && room.selectedNumbers && room.selectedNumbers.length && (
+          <SelectedNumbers selectedNumbers={room.selectedNumbers} />
         )}
       </div>
     </div>
