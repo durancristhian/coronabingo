@@ -33,21 +33,38 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <link rel="icon" href="/favicon.ico" />
+
+          {/* Primary Meta Tags */}
           <title>Coronabingo</title>
+          <meta name="title" content="Coronabingo" />
           <meta
             name="description"
             content="CoronaBingo, el clásico juego del bingo para jugar en tiempos de cuarentena. #CoronaBingo"
           />
+
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://coronabingo.now.sh/" />
+          <meta property="og:title" content="Coronabingo" />
           <meta
             property="og:description"
             content="CoronaBingo, el clásico juego del bingo para jugar en tiempos de cuarentena. #CoronaBingo"
           />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:creator" content="@durancristhian" />
-          <meta property="og:url" content="https://coronabingo.now.sh/" />
-          <meta property="og:title" content="Coronabingo" />
           <meta
             property="og:image"
+            content="https://coronabingo.now.sh/social2.jpg"
+          />
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://coronabingo.now.sh/" />
+          <meta property="twitter:title" content="Coronabingo" />
+          <meta
+            property="twitter:description"
+            content="CoronaBingo, el clásico juego del bingo para jugar en tiempos de cuarentena. #CoronaBingo"
+          />
+          <meta
+            property="twitter:image"
             content="https://coronabingo.now.sh/social2.jpg"
           />
         </Head>
