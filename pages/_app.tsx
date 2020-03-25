@@ -48,7 +48,7 @@ export default class Coronabingo extends App {
           <meta property="og:title" content="Coronabingo" />
           <meta
             property="og:image"
-            content="https://coronabingo.now.sh/social.jpg"
+            content="https://coronabingo.now.sh/social2.jpg"
           />
         </Head>
         <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
