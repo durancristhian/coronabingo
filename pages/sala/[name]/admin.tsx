@@ -9,7 +9,7 @@ import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
-import { roomsRef } from '~/utils/firebase'
+import db, { roomsRef } from '~/utils/firebase'
 
 interface IPageProps {
   boardsDistribution: string[]
@@ -103,15 +103,18 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       .collection('players')
       .get()
 
+    var batch = db.batch()
+
     let index = 0
     snapshot.forEach(p => {
-      roomsRef
+      const playerRef = roomsRef
         .doc(roomName)
         .collection('players')
         .doc(p.id)
-        .update({
-          boards: boardsDistribution[index]
-        })
+
+      batch.update(playerRef, {
+        boards: boardsDistribution[index]
+      })
 
       index++
     })
@@ -123,9 +126,11 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       }
     ])
 
+    await batch.commit()
+
     setTimeout(() => {
       router.push(`/sala/${roomName}`)
-    }, 3000)
+    }, 1000)
   }
 
   return (
