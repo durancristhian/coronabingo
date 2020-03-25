@@ -48,7 +48,11 @@ export default function Sala() {
           }
         })
 
-        setPlayers(players)
+        setPlayers(
+          players.sort((p1, p2) =>
+            p1.name.toLowerCase().localeCompare(p2.name.toLowerCase())
+          )
+        )
       })
 
     return unsubscribe

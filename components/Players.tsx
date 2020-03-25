@@ -34,6 +34,9 @@ export default function Players({ adminId, onChange }: IProps) {
             id: p.id,
             name: p.name
           }))
+          .sort((p1, p2) =>
+            p1.name.toLowerCase().localeCompare(p2.name.toLowerCase())
+          )
 
         setPlayers(data)
       })
