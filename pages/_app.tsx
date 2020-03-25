@@ -6,7 +6,6 @@ import 'typeface-inter'
 import 'typeface-oswald'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
-import { version } from '~/package.json'
 import '~/public/styles.css'
 
 Sentry.init({
@@ -34,14 +33,14 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <title>coronabingo - por @durancristhian - v{version}</title>
+          <title>Coronabingo</title>
           <meta
-            property="description"
-            content="El clásico juego del bingo para jugar en tiempos de cuarentena."
+            name="description"
+            content="CoronaBingo, el clásico juego del bingo para jugar en tiempos de cuarentena. #CoronaBingo"
           />
           <meta
             property="og:description"
-            content="El clásico juego del bingo para jugar en tiempos de cuarentena."
+            content="CoronaBingo, el clásico juego del bingo para jugar en tiempos de cuarentena. #CoronaBingo"
           />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@durancristhian" />

@@ -10,12 +10,10 @@ export default function Index() {
             alt="coronavirus feliz"
             className="h-32 mx-auto"
           />
-          <h2 className="font-medium mt-4 text-center text-2xl uppercase">
-            ¡Hola!
-          </h2>
           <div className="leading-normal">
             <p className="my-8">
-              En esta página vas a poder jugar al bingo con otras personas.
+              Hola!, en esta página vas a poder jugar al bingo con otras
+              personas.
             </p>
           </div>
         </div>
