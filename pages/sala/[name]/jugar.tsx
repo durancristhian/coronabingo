@@ -80,8 +80,6 @@ export default function Jugar() {
     }, 10000)
   }
 
-  console.log(room?.showConfetti)
-
   return (
     <Fragment>
       {room?.showConfetti && <Confetti />}
