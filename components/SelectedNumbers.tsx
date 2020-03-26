@@ -20,8 +20,8 @@ export default function SelectedNumbers({
   return (
     <Fragment>
       {isAdmin && !turningGlob && (
-        <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
-          <p className="mt-8">
+        <div className="italic leading-normal mb-4 text-gray-600 text-sm">
+          <p>
             Marcá en la lista de abajo los números que van saliendo en tu
             bolillero.
           </p>

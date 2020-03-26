@@ -84,41 +84,44 @@ export default function Jugar() {
     <Fragment>
       {room?.showConfetti && <Confetti />}
       <div className="px-4 py-8">
+        <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
         {!room && (
           <div className="max-w-4xl mx-auto">
-            <div className="md:w-2/4 mx-auto -mt-8">
+            <div className="md:w-2/4 mx-auto">
               <Message type="information">
                 Cargando información de la sala...
               </Message>
             </div>
           </div>
         )}
-        <div className="lg:flex max-w-6xl mx-auto">
-          {room && (
-            <div className="lg:w-1/3">
-              <div className="bg-white px-4 py-8 rounded shadow">
-                <h2 className="font-medium mb-8 text-center text-xl">
-                  Bolillero
-                </h2>
-                <TurningGlob
-                  isAdmin={isAdmin}
-                  onNewNumber={onNewNumber}
-                  selectedNumbers={room?.selectedNumbers || []}
-                  turningGlob={room?.turningGlob}
-                />
-                <div className="mt-4">
-                  <SelectedNumbers
+        <div className="max-w-6xl mx-auto">
+          <div className="lg:flex mt-8">
+            {room && (
+              <div className="lg:w-1/3">
+                <div className="bg-white px-4 py-8 rounded shadow">
+                  <h2 className="font-medium mb-4 text-center text-xl">
+                    Bolillero
+                  </h2>
+                  <TurningGlob
                     isAdmin={isAdmin}
                     onNewNumber={onNewNumber}
-                    selectedNumbers={room.selectedNumbers || []}
-                    turningGlob={room.turningGlob}
+                    selectedNumbers={room?.selectedNumbers || []}
+                    turningGlob={room?.turningGlob}
                   />
+                  <div className="mt-4">
+                    <SelectedNumbers
+                      isAdmin={isAdmin}
+                      onNewNumber={onNewNumber}
+                      selectedNumbers={room.selectedNumbers || []}
+                      turningGlob={room.turningGlob}
+                    />
+                  </div>
                 </div>
               </div>
+            )}
+            <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+              {player && <Boards boards={player.boards} />}
             </div>
-          )}
-          <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-            {player && <Boards boards={player.boards} />}
           </div>
         </div>
         {showExperiments && (
