@@ -1,6 +1,10 @@
+import Mousetrap from 'mousetrap'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { FiCloudSnow } from 'react-icons/fi'
 import Boards from '~/components/Boards'
+import Button from '~/components/Button'
+import Confetti from '~/components/Confetti'
 import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import TurningGlob from '~/components/TurningGlob'
@@ -10,13 +14,10 @@ export default function Jugar() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
-  const [room, setRoom] = useState<
-    firebase.firestore.DocumentData | undefined
-  >()
-  const [player, setPlayer] = useState<
-    firebase.firestore.DocumentData | undefined
-  >()
-  const isAdmin = room?.adminId === playerId
+  const [room, setRoom] = useState<firebase.firestore.DocumentData>()
+  const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
+  const [showExperiments, setShowExperiments] = useState(false)
+  const isAdmin = Boolean(room?.adminId) && room?.adminId === playerId
 
   useEffect(() => {
     if (!roomName) return
@@ -27,6 +28,14 @@ export default function Jugar() {
 
     return unsubscribe
   }, [roomName])
+
+  useEffect(() => {
+    if (isAdmin) {
+      Mousetrap.bind('e x p e r i m e n t o s', () => {
+        setShowExperiments(true)
+      })
+    }
+  }, [isAdmin])
 
   useEffect(() => {
     if (!playerId || !roomName) return
@@ -62,45 +71,72 @@ export default function Jugar() {
     })
   }
 
+  const confetti = () => {
+    const roomRef = roomsRef.doc(roomName)
+    roomRef.update({ showConfetti: true })
+
+    setTimeout(() => {
+      roomRef.update({ showConfetti: false })
+    }, 10000)
+  }
+
+  console.log(room?.showConfetti)
+
   return (
-    <div className="px-4 py-8">
-      {!room && (
-        <div className="max-w-4xl mx-auto">
-          <div className="md:w-2/4 mx-auto -mt-8">
-            <Message type="information">
-              Cargando información de la sala...
-            </Message>
-          </div>
-        </div>
-      )}
-      <div className="lg:flex max-w-6xl mx-auto">
-        {room && (
-          <div className="lg:w-1/3">
-            <div className="bg-white px-4 py-8 rounded shadow">
-              <h2 className="font-medium mb-8 text-center text-xl">
-                Bolillero
-              </h2>
-              <TurningGlob
-                isAdmin={isAdmin}
-                onNewNumber={onNewNumber}
-                selectedNumbers={room?.selectedNumbers || []}
-                turningGlob={room?.turningGlob}
-              />
-              <div className="mt-4">
-                <SelectedNumbers
-                  isAdmin={isAdmin}
-                  onNewNumber={onNewNumber}
-                  selectedNumbers={room.selectedNumbers || []}
-                  turningGlob={room.turningGlob}
-                />
-              </div>
+    <Fragment>
+      {room?.showConfetti && <Confetti />}
+      <div className="px-4 py-8">
+        {!room && (
+          <div className="max-w-4xl mx-auto">
+            <div className="md:w-2/4 mx-auto -mt-8">
+              <Message type="information">
+                Cargando información de la sala...
+              </Message>
             </div>
           </div>
         )}
-        <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-          {player && <Boards boards={player.boards} />}
+        <div className="lg:flex max-w-6xl mx-auto">
+          {room && (
+            <div className="lg:w-1/3">
+              <div className="bg-white px-4 py-8 rounded shadow">
+                <h2 className="font-medium mb-8 text-center text-xl">
+                  Bolillero
+                </h2>
+                <TurningGlob
+                  isAdmin={isAdmin}
+                  onNewNumber={onNewNumber}
+                  selectedNumbers={room?.selectedNumbers || []}
+                  turningGlob={room?.turningGlob}
+                />
+                <div className="mt-4">
+                  <SelectedNumbers
+                    isAdmin={isAdmin}
+                    onNewNumber={onNewNumber}
+                    selectedNumbers={room.selectedNumbers || []}
+                    turningGlob={room.turningGlob}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+            {player && <Boards boards={player.boards} />}
+          </div>
         </div>
+        {showExperiments && (
+          <div className="max-w-4xl mt-8 mx-auto">
+            <h2 className="font-medium mb-8 text-center text-xl">
+              Experimentos
+            </h2>
+            <div className="flex justify-center">
+              <Button onClick={confetti}>
+                <FiCloudSnow className="text-lg" />
+                <span className="ml-4">Llueve confetti</span>
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </Fragment>
   )
 }

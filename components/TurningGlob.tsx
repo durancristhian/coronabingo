@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { FiChevronRight } from 'react-icons/fi'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
@@ -42,8 +41,7 @@ export default function TurningGlob({
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
         >
-          <span className="mr-2">Sacar otro número</span>
-          <FiChevronRight className="text-lg" />
+          Próximo número
         </Button>
       )}
       {!!rest.length && (
