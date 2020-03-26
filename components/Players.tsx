@@ -155,7 +155,7 @@ export default function Players({ adminId, onChange }: IProps) {
                 <Button
                   color="red"
                   id="remove-player"
-                  onButtonClick={() => onRemovePlayer(player.id)}
+                  onClick={() => onRemovePlayer(player.id)}
                 >
                   <FiTrash2 />
                 </Button>

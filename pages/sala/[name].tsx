@@ -125,7 +125,7 @@ export default function Sala() {
                     <div className="ml-4">
                       <Button
                         id="play"
-                        onButtonClick={() => {
+                        onClick={() => {
                           router.push(
                             `/sala/${roomName}/jugar?jugador=${player.id}`
                           )

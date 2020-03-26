@@ -199,7 +199,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                   id="readyToPlay"
                   className="w-full"
                   disabled={!room.data.adminId}
-                  onButtonClick={readyToPlay}
+                  onClick={readyToPlay}
                 >
                   <FiSmile className="text-2xl" />
                   <span className="ml-4">Jugar</span>

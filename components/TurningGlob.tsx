@@ -39,7 +39,7 @@ export default function TurningGlob({
         <Button
           id="next"
           className="mt-4 w-full"
-          onButtonClick={onNextButtonClick}
+          onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
         >
           <span className="mr-2">Sacar otro número</span>
