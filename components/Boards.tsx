@@ -1,40 +1,50 @@
 import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
 import useSWR from 'swr'
 import fetcher from '~/utils/fetcher'
-import { roomsRef } from '~/utils/firebase'
 import Cells from './Cells'
+import { Fragment, useEffect } from 'react'
+import { roomsRef } from '~/utils/firebase'
 
 interface IProps {
-  boards: string
+  player: firebase.firestore.DocumentData
+  setPlayerProps: (props: {}) => void
 }
 
-export default function Boards({ boards }: IProps) {
+export default function Boards({ player, setPlayerProps }: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
-  const url = `/api/boards?cartones=${boards}`
+  const url = `/api/boards?cartones=${player.boards}`
   const { data, error } = useSWR<IBoards>(url, fetcher)
-  const [player, setPlayer] = useState<
-    firebase.firestore.DocumentData | undefined
-  >()
 
   useEffect(() => {
-    if (!playerId || !roomName) return
+    const roomValues = JSON.parse(localStorage.getItem('roomValues') || '{}')
+    if (roomValues[roomName]) {
+      roomsRef
+        .doc(roomName)
+        .collection('players')
+        .doc(playerId)
+        .update(roomValues[roomName])
+      setPlayerProps(roomValues[roomName])
+      localStorage.removeItem('roomValues')
+    }
 
-    const unsubscribe = roomsRef
-      .doc(roomName)
-      .collection('players')
-      .doc(playerId)
-      .onSnapshot(doc => {
-        setPlayer({
-          id: doc.id,
-          ...doc.data()
+    window.onbeforeunload = function(e: BeforeUnloadEvent) {
+      localStorage.setItem(
+        'roomValues',
+        JSON.stringify({
+          [roomName]: data?.boards.reduce(
+            (acc, board) => ({
+              ...acc,
+              [board.id]: player?.[board.id]
+            }),
+            {}
+          )
         })
-      })
-
-    return unsubscribe
-  }, [playerId, roomName])
+      )
+      return e.preventDefault()
+    }
+  }, [data, player, roomName])
 
   if (error || !data) return null
 
@@ -49,10 +59,12 @@ export default function Boards({ boards }: IProps) {
           <p className="font-semibold uppercase">Cartón Nº {board.id}</p>
           <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
             <Cells
-              boardId={board.id}
               boardNumbers={board.numbers}
-              selectedNumbers={
-                player && player[board.id] ? player[board.id] : []
+              selectedNumbers={player?.[board.id]}
+              setSelectedNumbers={newSelectedNumbers =>
+                setPlayerProps({
+                  [board.id]: newSelectedNumbers
+                })
               }
             />
           </div>

@@ -54,7 +54,6 @@ export default function CreateRoom() {
         message: 'Ya existe una sala con ese nombre.',
         type: 'error'
       })
-
       return
     }
 
@@ -69,9 +68,7 @@ export default function CreateRoom() {
       type: 'success'
     })
 
-    setTimeout(() => {
-      router.push(`/sala/${roomName}/admin`)
-    }, 10000)
+    router.push(`/sala/${roomName}/admin`)
   }
 
   return (

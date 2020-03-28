@@ -2,14 +2,13 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
-import { roomsRef } from '~/utils/firebase'
+import db, { roomsRef } from '~/utils/firebase'
 
 interface IPageProps {
   boardsDistribution: string[]
@@ -35,6 +34,8 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     type: 'information'
   })
 
+  const [players, setPlayers] = useState<IPlayer[]>([])
+
   useEffect(() => {
     const getRoomData = async () => {
       setRoom({
@@ -42,23 +43,36 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
         error: null,
         loading: true
       })
-
       try {
-        const roomRef = roomsRef.doc(roomName)
-        const roomDoc = await roomRef.get()
+        const roomDoc = roomsRef.doc(roomName)
+        const roomData = await roomDoc.get()
 
-        if (!roomDoc.exists) {
+        if (!roomData.exists) {
           router.push('/')
-
           return
         }
 
-        const data = roomDoc.data()
+        await roomDoc
+          .collection('players')
+          .get()
+          .then(plays =>
+            setPlayers(
+              plays.docs.map(p => {
+                const data = p.data()
+                return {
+                  id: p.id,
+                  name: data.name,
+                  boards: data.boards,
+                  selectedNumbers: data.selectedNumbers
+                }
+              })
+            )
+          )
 
         setRoom({
           loading: false,
           error: null,
-          data: data
+          data: roomData.data()
         })
       } catch (error) {
         setRoom({
@@ -72,15 +86,6 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     if (roomName) getRoomData()
   }, [roomName])
 
-  useDeepCompareEffect(() => {
-    const updateRoom = async () => {
-      const roomRef = roomsRef.doc(roomName)
-      roomRef.update({ ...room.data })
-    }
-
-    if (roomName) updateRoom()
-  }, [{ ...room.data }])
-
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
       ...room,
@@ -92,40 +97,42 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     })
   }
 
+  const removePlayer = (playerId: string) => {
+    roomsRef
+      .doc(roomName)
+      .collection('players')
+      .doc(playerId)
+      .delete()
+  }
+
   const readyToPlay = async () => {
     setMessage({
       content: 'Sala configurada con éxito. Espere...',
       type: 'success'
     })
 
-    const snapshot = await roomsRef
-      .doc(roomName)
-      .collection('players')
-      .get()
+    let batch = db.batch()
 
-    let index = 0
-    snapshot.forEach(p => {
-      roomsRef
-        .doc(roomName)
-        .collection('players')
-        .doc(p.id)
-        .update({
-          boards: boardsDistribution[index]
-        })
+    let roomDoc = roomsRef.doc(roomName)
+    batch.update(roomDoc, { ...room.data, readyToPlay: true })
 
-      index++
+    players.map((player, index) => {
+      const { id, name } = player
+      id
+        ? batch.update(roomDoc.collection('players').doc(id), {
+            boards: boardsDistribution[index],
+            selectedNumbers: []
+          })
+        : batch.set(roomDoc.collection('players').doc(), {
+            name,
+            boards: boardsDistribution[index],
+            selectedNumbers: []
+          })
     })
 
-    onFieldChange([
-      {
-        key: 'readyToPlay',
-        value: true
-      }
-    ])
-
-    setTimeout(() => {
-      router.push(`/sala/${roomName}`)
-    }, 3000)
+    // Commit the batch
+    await batch.commit()
+    router.push(`/sala/${roomName}`)
   }
 
   return (
@@ -171,7 +178,13 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                   Compartí este link a las personas de la videollamada.
                 </p>
               </div>
-              <Players adminId={room.data.adminId} onChange={onFieldChange} />
+              <Players
+                players={players}
+                setPlayers={setPlayers}
+                adminId={room.data.adminId}
+                onChange={onFieldChange}
+                removePlayer={removePlayer}
+              />
               <div className="mt-4">
                 <Checkbox
                   id="turningGlob"

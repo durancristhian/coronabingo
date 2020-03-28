@@ -36,7 +36,7 @@ export default function Select({
       >
         {!value && <option value={''}>--- Selecciona ---</option>}
         {options.map(opt => (
-          <option key={opt.id} value={opt.id}>
+          <option key={opt.name} value={opt.name}>
             {opt.name}
           </option>
         ))}

@@ -16,7 +16,7 @@ export default function Jugar() {
   const [player, setPlayer] = useState<
     firebase.firestore.DocumentData | undefined
   >()
-  const isAdmin = room?.adminId === playerId
+  const isAdmin = room?.adminId === player?.name
 
   useEffect(() => {
     if (!roomName) return
@@ -31,18 +31,17 @@ export default function Jugar() {
   useEffect(() => {
     if (!playerId || !roomName) return
 
-    const unsubscribe = roomsRef
+    roomsRef
       .doc(roomName)
       .collection('players')
       .doc(playerId)
-      .onSnapshot(doc => {
+      .get()
+      .then(doc =>
         setPlayer({
           id: doc.id,
           ...doc.data()
         })
-      })
-
-    return unsubscribe
+      )
   }, [playerId, roomName])
 
   const onNewNumber = (n: number) => {
@@ -98,7 +97,17 @@ export default function Jugar() {
           </div>
         )}
         <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-          {player && <Boards boards={player.boards} />}
+          {player && (
+            <Boards
+              player={player}
+              setPlayerProps={newProps =>
+                setPlayer({
+                  ...player,
+                  ...newProps
+                })
+              }
+            />
+          )}
         </div>
       </div>
     </div>
