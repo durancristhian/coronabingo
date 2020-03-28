@@ -9,9 +9,10 @@ import Header from '~/components/Header'
 import { version } from '~/package.json'
 import '~/public/styles.css'
 
-// Sentry.init({
-//   dsn: process.env.SENTRY_DSN
-// })
+process.env.SENTRY_DSN &&
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN
+  })
 
 export default class Coronabingo extends App {
   // @ts-ignore
