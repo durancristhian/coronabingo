@@ -15,7 +15,7 @@ interface IPageProps {
   boardsDistribution: string[]
 }
 
-export default function AdminSala({ boardsDistribution }: IPageProps) {
+export default function Admin({ boardsDistribution }: IPageProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{

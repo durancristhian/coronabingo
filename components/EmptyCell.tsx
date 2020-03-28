@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 
-export default function Cells() {
+export default function EmptyCell() {
   const { backgroundCell } = useContext(BackgroundCellContext)
 
   return (
