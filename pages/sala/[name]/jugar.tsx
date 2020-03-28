@@ -1,13 +1,15 @@
 import Mousetrap from 'mousetrap'
 import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiCloudSnow } from 'react-icons/fi'
+import BackgroundCells from '~/components/BackgroundCells'
 import Boards from '~/components/Boards'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import TurningGlob from '~/components/TurningGlob'
+import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { roomsRef } from '~/utils/firebase'
 
 export default function Jugar() {
@@ -81,7 +83,7 @@ export default function Jugar() {
   }
 
   return (
-    <Fragment>
+    <BackgroundCellContextProvider>
       {room?.showConfetti && <Confetti />}
       <div className="px-4 py-8">
         <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
@@ -124,12 +126,15 @@ export default function Jugar() {
             </div>
           </div>
         </div>
+        <div className="max-w-4xl mt-8 mx-auto">
+          <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
+            <BackgroundCells />
+          </div>
+        </div>
         {showExperiments && (
           <div className="max-w-4xl mt-8 mx-auto">
-            <h2 className="font-medium mb-8 text-center text-xl">
-              Experimentos
-            </h2>
-            <div className="flex justify-center">
+            <h2 className="font-medium text-center text-xl">Experimentos</h2>
+            <div className="my-8">
               <Button onClick={confetti}>
                 <FiCloudSnow className="text-lg" />
                 <span className="ml-4">Llueve confetti</span>
@@ -138,6 +143,6 @@ export default function Jugar() {
           </div>
         )}
       </div>
-    </Fragment>
+    </BackgroundCellContextProvider>
   )
 }

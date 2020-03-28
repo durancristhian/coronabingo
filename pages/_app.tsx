@@ -6,7 +6,7 @@ import 'typeface-inter'
 import 'typeface-oswald'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
-import '~/public/styles.css'
+import '~/public/css/styles.css'
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN
