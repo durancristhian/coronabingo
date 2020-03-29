@@ -168,7 +168,7 @@ export default function Admin({ boardsDistribution }: IProps) {
               <InputText
                 id="videoCall"
                 label="Link a la videollamada"
-                onInputChange={(key, value) => onFieldChange([{ key, value }])}
+                onChange={value => onFieldChange([{ key: 'videocall', value }])}
                 value={room.data.videoCall || ''}
               />
               <InputText

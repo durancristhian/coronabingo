@@ -5,7 +5,7 @@ interface IProps {
   id: string
   label: string
   onFocus?: (ev: FocusEvent<HTMLInputElement>) => void
-  onInputChange?: (id: string, value: string) => void
+  onChange?: (value: string) => void
   readonly?: boolean
   value: string
 }
@@ -14,7 +14,7 @@ export default function InputText({
   id,
   label,
   onFocus,
-  onInputChange,
+  onChange,
   readonly,
   value
 }: IProps) {
@@ -30,10 +30,7 @@ export default function InputText({
         ])}
         id={id}
         value={value}
-        /* TODO: remove hack */
-        onChange={event =>
-          onInputChange && onInputChange(id, event.target.value)
-        }
+        onChange={event => onChange && onChange(event.target.value)}
         onFocus={event => onFocus && onFocus(event)}
       />
     </label>

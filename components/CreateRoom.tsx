@@ -80,7 +80,7 @@ export default function CreateRoom() {
         <InputText
           id="name"
           label="Nombre *"
-          onInputChange={onFieldChange}
+          onChange={value => onFieldChange('name', value)}
           value={formData.name}
         />
         <div className="mt-8">

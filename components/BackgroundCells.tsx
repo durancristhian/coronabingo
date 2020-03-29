@@ -46,7 +46,7 @@ export default function BackgroundCells() {
         <InputText
           id="background"
           label="Link a una imágen en internet"
-          onInputChange={(_, value: string) => {
+          onChange={value => {
             setBackgroundCell({
               type: 'url',
               value

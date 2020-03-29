@@ -24,7 +24,7 @@ export default function Players({
 }: IProps) {
   const [name, setName] = useState('')
 
-  const onFieldChange = (_key: string, value: string) => {
+  const onFieldChange = (value: string) => {
     setName(value)
   }
 
@@ -93,7 +93,7 @@ export default function Players({
               <InputText
                 id="name"
                 label="Nombre *"
-                onInputChange={onFieldChange}
+                onChange={onFieldChange}
                 value={name}
               />
             </div>
