@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import { Fragment } from 'react'
 import { BOARD_NUMBERS, BOARD_NUMBER_COLOR, DREAMS } from '~/utils/constants'
 import Ball from './Ball'
@@ -44,6 +45,7 @@ export default function TurningGlob({
           <div className="flex items-center overflow-hidden">
             {roomNumbers.map((n, i) => (
               <div
+                className={classnames(i !== 0 && 'opacity-50')}
                 key={n}
                 style={{
                   flex: `0 0 ${i === 0 ? '85px' : '65px'}`
@@ -51,7 +53,7 @@ export default function TurningGlob({
               >
                 <Ball
                   animate={i === 0}
-                  color={i === 0 ? BOARD_NUMBER_COLOR[n - 1] : 'bg-gray-500'}
+                  color={BOARD_NUMBER_COLOR[n - 1]}
                   number={n}
                   size={i === 0 ? 75 : 55}
                 />
