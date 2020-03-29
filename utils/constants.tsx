@@ -20,103 +20,103 @@ export const BOARD_NUMBER_COLOR = BOARD_NUMBERS.map(
   () => knuthShuffle(BALL_COLORS.slice(0))[0]
 )
 export const DREAMS = [
-  'Huevos', // 00
-  'Agua', // 01
-  'Niño', // 02
-  'San Cono', // 03
-  'La Cama', // 04
-  'Gato', // 05
-  'Perro', // 06
-  'Revolver', // 07
-  'Incendio', // 08
-  'Arroyo', // 09
-  'La leche', // 10
-  'Palito', // 11
-  'Soldado', // 12
-  'La yeta', // 13
-  'Borracho', // 14
-  'Niña bonita', // 15
-  'Anillo', // 16
-  'Desgracia', // 17
-  'Sangre', // 18
-  'Pescado', // 19
-  'La fiesta', // 20
-  'La mujer', // 21
-  'El loco', // 22
-  'Mariposa', // 23
-  'Caballo', // 24
-  'Gallina', // 25
-  'La misa', // 26
-  'El peine', // 27
-  'El cerro', // 28
-  'San Pedro', // 29
-  'Santa Rosa', // 30
-  'La luz', // 31
-  'Dinero', // 32
-  'Cristo', // 33
-  'Cabeza', // 34
-  'Pajarito', // 35
-  'Manteca', // 36
-  'Dentista', // 37
-  'Aceite', // 38
-  'Lluvia', // 39
-  'Cura', // 40
-  'Cucho', // 41
-  'Zapatilla', // 42
-  'Balcón', // 43
-  'La cárcel', // 44
-  'El vino', // 45
-  'Tomates', // 46
-  'Muerto', // 47
-  'Muerto habla', // 48
-  'La carne', // 49
-  'El pan', // 50
-  'Serrucho', // 51
-  'Madre', // 52
-  'El barco', // 53
-  'La vaca', // 54
-  'Los gallegos', // 55
-  'La caída', // 56
-  'Jorabajo', // 57
-  'Ahogado', // 58
-  'Planta', // 59
-  'Virgen', // 60
-  'Escopeta', // 61
-  'Inundacion', // 62
-  'Casamiento', // 63
-  'Llanto', // 64
-  'Cazador', // 65
-  'Lombrices', // 66
-  'Víbora', // 67
-  'Sobrinos', // 68
-  'Vicios', // 69
-  'Muerto sueño', // 70
-  'Excrementos', // 71
-  'Sorpresa', // 72
-  'Hospital', // 73
-  'Negros', // 74
-  'Payaso', // 75
-  'Llamas', // 76
-  'Las piernas', // 77
-  'Ramera', // 78
-  'Ladrón', // 79
-  'La bocha', // 80
-  'Flores', // 81
-  'Pelea', // 82
-  'Mal tiempo', // 83
-  'Iglesia', // 84
-  'Linterna', // 85
-  'Humo', // 86
-  'Piojos', // 87
-  'El Papa', // 88
-  'La rata', // 89
-  'El miedo', // 90
-  'Excusado', // 91
-  'Médico', // 92
-  'Enamorado', // 93
-  'Cementerio', // 94
-  'Anteojos', // 95
-  'Marido', // 96
+  'Los Huevos 🥚🥚', // 00
+  'Agua 💦', // 01
+  'El Niño 👦🏻', // 02
+  'San Cono 🙏🔺', // 03
+  'La Cama 🛏️', // 04
+  'El Gato 🐈', // 05
+  'El Perro 🐕', // 06
+  'El Revolver 🔫', // 07
+  'El Incendio 🔥🏢🔥', // 08
+  'El Arroyo 🏞️', // 09
+  'La leche 🍼', // 10
+  'El Palito 🥢', // 11
+  'El Soldado 👮🏻', // 12
+  'La yeta 🥶', // 13
+  'El Borracho 🥴', // 14
+  'La Niña bonita 👩🏻', // 15
+  'El Anillo 💍', // 16
+  'La Desgracia 📵🤬' , // 17
+  'La Sangre 🆎➕', // 18
+  'El Pescado 🐠', // 19
+  'La fiesta 🥳🎊', // 20
+  'La mujer 💁🏻‍', // 21
+  'El loco 🤪', // 22
+  'La Mariposa 🦋', // 23
+  'El Caballo 🐎', // 24
+  'La Gallina 🐔', // 25
+  'La misa 💒', // 26
+  'El peine 🕳️', // 27
+  'El cerro ⛰️', // 28
+  'San Pedro 🧙‍', // 29
+  'Santa Rosa 🦸⛈️', // 30
+  'La luz 💡', // 31
+  'El Dinero 💰', // 32
+  'Cristo 🧙🏿‍', // 33
+  'La Cabeza 🤯', // 34
+  'El Pajarito 🐦', // 35
+  'La Manteca ⚪', // 36
+  'El Dentista 😷🦷', // 37
+  'El Aceite 🛢', // 38
+  'La Lluvia 🌧️', // 39
+  'El Cura 😇', // 40
+  'El Cuchillo 🔪', // 41
+  'La Zapatilla 👟', // 42
+  'El Balcón 🌇', // 43
+  'La cárcel 🚫', // 44
+  'El vino 🍷', // 45
+  'Los Tomates 🍅🍅', // 46
+  'El Muerto 🧟', // 47
+  'El Muerto habla 🧟💬', // 48
+  'La carne 🥩', // 49
+  'El pan 🍞', // 50
+  'El Serrucho 🧰', // 51
+  'La Madre 🤱🏻', // 52
+  'El barco 🚢', // 53
+  'La vaca 🐄', // 54
+  'Los gallegos 🧔🏻🇪🇸🧔🏻', // 55
+  'La caída 😩🕳️🚶🏻', // 56
+  'El Jorobado 👨🏻🐫', // 57
+  'El Ahogado 👨🏻‍🦰🕳️🌊', // 58
+  'La Planta 🌱', // 59
+  'La Virgen 👰', // 60
+  'La Escopeta 🔫💨', // 61
+  'La Inundacion 🌧️🌧️', // 62
+  'El Casamiento 👰🏻👸👸🏻🤴🏻🤴🏼🤵', // 63
+  'El Llanto 😭', // 64
+  'El Cazador 🙍🏻‍♂️🏹', // 65
+  'Las Lombrices 🐉', // 66
+  'La Víbora 🐍', // 67
+  'Los Sobrinos 🐣🐣', // 68
+  'Los Vicios 🎰💉💊🚬🍾', // 69
+  'Muerto sueño ⚰️', // 70
+  'Los Excrementos 💩💩', // 71
+  'La Sorpresa 😱🎁', // 72
+  'El Hospital 🏥', // 73
+  'Los Negros 🤘🏿✊🏿', // 74
+  'El Payaso 🤡', // 75
+  'Las Llamas 🦙🦙', // 76
+  'Las piernas 🦵🦵', // 77
+  'La Ramera 🔥👄', // 78
+  'El Ladrón 🛃🔗', // 79
+  'La bocha ⚽', // 80
+  'Las Flores 💐', // 81
+  'La Pelea 🥊', // 82
+  'El Mal tiempo ⛈️🌪️⛈️', // 83
+  'La Iglesia ⛪', // 84
+  'La Linterna 🔦', // 85
+  'El Humo 💨', // 86
+  'Los Piojos 🐜🎸🐜', // 87
+  'El Papa 👳‍♂️', // 88
+  'La rata 🐀', // 89
+  'El miedo 🙀', // 90
+  'El Excusado 🚽', // 91
+  'El Médico ⚕️', // 92
+  'El Enamorado 😍', // 93
+  'El Cementerio 🏛️⚰️🏛️', // 94
+  'Los Anteojos 🤓', // 95
+  'El Marido 🤵🏻', // 96
   'La mesa', // 97
   'Lavandera', // 98
   'Hermanos' // 99
