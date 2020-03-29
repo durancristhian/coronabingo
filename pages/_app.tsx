@@ -8,20 +8,24 @@ import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import '~/public/css/styles.css'
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN
-})
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN
+  })
+}
 
 export default class Coronabingo extends App {
   // @ts-ignore
   componentDidCatch(error, errorInfo) {
-    Sentry.withScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
-        scope.setExtra(key, errorInfo[key])
-      })
+    if (process.env.NODE_ENV === 'production') {
+      Sentry.withScope(scope => {
+        Object.keys(errorInfo).forEach(key => {
+          scope.setExtra(key, errorInfo[key])
+        })
 
-      Sentry.captureException(error)
-    })
+        Sentry.captureException(error)
+      })
+    }
 
     super.componentDidCatch(error, errorInfo)
   }

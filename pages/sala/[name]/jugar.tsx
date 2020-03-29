@@ -10,50 +10,41 @@ import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
+import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
 
 export default function Jugar() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
-  const [room, setRoom] = useState<firebase.firestore.DocumentData>()
+  const room = useRoom(roomName)
+  /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const [showExperiments, setShowExperiments] = useState(false)
-  const isAdmin = Boolean(room?.adminId) && room?.adminId === playerId
+  const isAdmin = room?.adminId === player?.name
 
   useEffect(() => {
-    if (!roomName) return
+    if (!isAdmin) return
 
-    const unsubscribe = roomsRef.doc(roomName).onSnapshot(doc => {
-      setRoom(doc.data())
+    Mousetrap.bind('e x p e r i m e n t o s', () => {
+      setShowExperiments(true)
     })
-
-    return unsubscribe
-  }, [roomName])
-
-  useEffect(() => {
-    if (isAdmin) {
-      Mousetrap.bind('e x p e r i m e n t o s', () => {
-        setShowExperiments(true)
-      })
-    }
   }, [isAdmin])
 
   useEffect(() => {
     if (!playerId || !roomName) return
 
-    const unsubscribe = roomsRef
+    roomsRef
       .doc(roomName)
       .collection('players')
       .doc(playerId)
-      .onSnapshot(doc => {
+      .get()
+      .then(doc =>
         setPlayer({
           id: doc.id,
           ...doc.data()
         })
-      })
-
-    return unsubscribe
+      )
   }, [playerId, roomName])
 
   const onNewNumber = (n: number) => {
@@ -73,6 +64,7 @@ export default function Jugar() {
     })
   }
 
+  /* TODO: make this a toggle */
   const confetti = () => {
     const roomRef = roomsRef.doc(roomName)
     roomRef.update({ showConfetti: true })
@@ -122,7 +114,17 @@ export default function Jugar() {
               </div>
             )}
             <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-              {player && <Boards boards={player.boards} />}
+              {player && (
+                <Boards
+                  player={player}
+                  setPlayerProps={newProps =>
+                    setPlayer({
+                      ...player,
+                      ...newProps
+                    })
+                  }
+                />
+              )}
             </div>
           </div>
         </div>

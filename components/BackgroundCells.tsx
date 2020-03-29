@@ -42,7 +42,7 @@ export default function BackgroundCells() {
           </label>
         ))}
       </div>
-      <div className="mt-4">
+      <div className="-mb-4 mt-4">
         <InputText
           id="background"
           label="Link a una imágen en internet"

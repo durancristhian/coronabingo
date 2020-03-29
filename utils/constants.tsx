@@ -1,8 +1,8 @@
 export const BACKGROUND_CELL_VALUES = [
-  { name: 'Amarillito', type: 'color', value: 'bg-yellow-400' },
-  { name: 'Azulcito', type: 'color', value: 'bg-blue-400' },
-  { name: 'Naranjita', type: 'color', value: 'bg-orange-400' },
-  { name: 'Verdecito', type: 'color', value: 'bg-green-400' },
+  { name: 'Amarillito', type: 'color', value: 'bg-yellow-300' },
+  { name: 'Azulcito', type: 'color', value: 'bg-blue-300' },
+  { name: 'Naranjita', type: 'color', value: 'bg-orange-300' },
+  { name: 'Verdecito', type: 'color', value: 'bg-green-300' },
   { name: 'Pikachu', type: 'img', value: 'pikachu.jpg' },
   { name: 'Cremona', type: 'img', value: 'cremona.jpg' },
   { name: 'Coronavirus', type: 'img', value: 'coronavirus.gif' }
