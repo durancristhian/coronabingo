@@ -4,34 +4,11 @@
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
+@import 'background-cell.css';
+@import 'ball.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
-}
-
-.coronavirus,
-.cremona,
-.pikachu,
-.poroto {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.coronavirus {
-  background-image: url('/background-cells/coronavirus.gif');
-}
-
-.cremona {
-  background-image: url('/background-cells/cremona.jpg');
-}
-
-.pikachu {
-  background-image: url('/background-cells/pikachu.jpg');
-}
-
-.poroto {
-  background-image: url('/background-cells/poroto.png');
 }
 
 .text-shadow-white {

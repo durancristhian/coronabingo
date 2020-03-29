@@ -1,0 +1,24 @@
+.coronavirus,
+.cremona,
+.pikachu,
+.poroto {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.coronavirus {
+  background-image: url('/background-cells/coronavirus.gif');
+}
+
+.cremona {
+  background-image: url('/background-cells/cremona.jpg');
+}
+
+.pikachu {
+  background-image: url('/background-cells/pikachu.jpg');
+}
+
+.poroto {
+  background-image: url('/background-cells/poroto.png');
+}

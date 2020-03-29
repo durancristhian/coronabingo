@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { BOARD_NUMBERS, DREAMS } from '~/utils/constants'
 import Button from './Button'
+import Ball from './Ball'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 interface IProps {
@@ -29,11 +30,7 @@ export default function TurningGlob({
 
   return (
     <Fragment>
-      <div className="bg-green-400 border-2 border-green-600 flex h-16 items-center justify-center p-4 rounded">
-        <span className="font-medium font-oswald text-3xl text-green-800">
-          {current || '-'}
-        </span>
-      </div>
+      {current && <Ball>{current}</Ball>}
       <p className="mt-2 text-center text-gray-600 text-sm">
         {DREAMS[current]}
       </p>
