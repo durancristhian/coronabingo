@@ -5,7 +5,7 @@ interface IProps {
   disabled?: boolean
   id: string
   label: string
-  onInputChange?: (id: string, value: string) => void
+  onChange?: (value: string) => void
   options: IPlayer[]
   value: string
 }
@@ -14,7 +14,7 @@ export default function Select({
   disabled = false,
   id,
   label,
-  onInputChange,
+  onChange,
   options,
   value
 }: IProps) {
@@ -29,9 +29,7 @@ export default function Select({
           'disabled:opacity-50'
         ])}
         value={value}
-        onChange={event =>
-          onInputChange && onInputChange(id, event.target.value)
-        }
+        onChange={event => onChange && onChange(event.target.value)}
         disabled={disabled}
       >
         {!value && <option value={''}>--- Selecciona ---</option>}

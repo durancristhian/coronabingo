@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
 
 interface IProps {
   children: ReactNode
@@ -7,7 +7,7 @@ interface IProps {
   color?: 'gray' | 'green' | 'red' | 'yellow'
   disabled?: boolean
   id?: string
-  onButtonClick?: (id: string, value: string) => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   type?: 'submit' | 'button'
 }
 
@@ -17,11 +17,12 @@ export default function Button({
   color = 'yellow',
   disabled,
   id,
-  onButtonClick,
+  onClick,
   type = 'button'
 }: IProps) {
   return (
     <button
+      id={id}
       type={type}
       className={classnames([
         'border-2 font-medium h-12 px-4 py-2 rounded text-center uppercase',
@@ -32,11 +33,7 @@ export default function Button({
         [...COLORS[color]]
       ])}
       disabled={disabled}
-      onClick={event =>
-        id &&
-        onButtonClick &&
-        onButtonClick(id, (event.target as HTMLInputElement).value)
-      }
+      onClick={onClick}
     >
       <span className="flex items-center justify-center w-full">
         {children}

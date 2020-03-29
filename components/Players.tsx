@@ -45,14 +45,18 @@ export default function Players({
     }
 
     onChange(changes)
+
     const playersCopy = [...players]
     playersCopy.splice(index, 1)
+
     setPlayers(playersCopy)
+
     if (player.id) removePlayer(player.id)
   }
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
+
     setPlayers([
       ...players,
       {
@@ -61,6 +65,7 @@ export default function Players({
         selectedNumbers: []
       }
     ])
+
     setName('')
   }
 
@@ -131,7 +136,7 @@ export default function Players({
                 <Button
                   color="red"
                   id="remove-player"
-                  onButtonClick={() => onRemovePlayer(index, player)}
+                  onClick={() => onRemovePlayer(index, player)}
                 >
                   <FiTrash2 />
                 </Button>
@@ -145,7 +150,7 @@ export default function Players({
           disabled={!players.length}
           id="adminId"
           label="Dirige el juego"
-          onInputChange={(key, value) => onChange([{ key, value }])}
+          onChange={value => onChange([{ key: 'adminId', value }])}
           options={players}
           value={adminId}
         />

@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { Fragment } from 'react'
-const poroto = require('~/public/poroto.png')
+import EmptyCell from './EmptyCell'
 
 interface IProps {
   boardNumbers: number[]
@@ -29,36 +29,33 @@ export default function Cells({
 
   return (
     <Fragment>
-      {boardNumbers.map((boardNumber, i) => (
-        <div
-          key={i}
-          className={classnames([
-            'border-b-2 border-r-2 border-gray-900 flex h-8 sm:h-20 items-center justify-center p-1 relative',
-            boardNumber ? 'bg-white cursor-pointer' : 'bg-yellow-200',
-            selectedNumbers.includes(boardNumber) ? 'bg-orange-400' : null
-          ])}
-          onClick={() => {
-            handleClick(boardNumber)
-          }}
-          style={{ width: 'calc(100% / 9)' }}
-        >
+      {boardNumbers.map((boardNumber, i) => {
+        if (!boardNumber) return <EmptyCell key={i} />
+
+        return (
           <div
-            className={classnames(
-              ['absolute bottom-0 left-0 m-1 sm:m-2 right-0 top-0 z-0'],
-              selectedNumbers.includes(boardNumber) ? 'poroto' : null
-            )}
-            style={{
-              ...(selectedNumbers.includes(boardNumber) && {
-                backgroundImage: `url(${poroto || ''})`
-              }),
-              transform: `rotate(${boardNumber + i}deg)`
-            }}
-          ></div>
-          <span className="font-medium font-oswald relative text-lg sm:text-5xl text-shadow-white z-10">
-            {boardNumber || ''}
-          </span>
-        </div>
-      ))}
+            key={i}
+            className={classnames([
+              'bg-white border-b-2 border-r-2 border-gray-900 cursor-pointer flex h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
+              selectedNumbers.includes(boardNumber) && 'bg-orange-400'
+            ])}
+            onClick={() => handleClick(boardNumber)}
+          >
+            <div
+              className={classnames(
+                ['absolute bottom-0 left-0 m-1 sm:m-2 right-0 top-0 z-0'],
+                selectedNumbers.includes(boardNumber) && 'poroto'
+              )}
+              style={{
+                transform: `rotate(${boardNumber + i}deg)`
+              }}
+            ></div>
+            <span className="font-medium font-oswald relative text-lg sm:text-5xl text-shadow-white z-10">
+              {boardNumber}
+            </span>
+          </div>
+        )
+      })}
     </Fragment>
   )
 }

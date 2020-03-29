@@ -1,13 +1,15 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultConfig = require('tailwindcss/defaultConfig')
 
 module.exports = {
   theme: {
     fontFamily: {
-      inter: ['Inter', ...defaultTheme.fontFamily.sans],
-      oswald: ['Oswald', ...defaultTheme.fontFamily.sans]
+      inter: ['Inter', ...defaultConfig.theme.fontFamily.sans],
+      oswald: ['Oswald', ...defaultConfig.theme.fontFamily.sans]
     }
   },
   variants: {
-    opacity: ['disabled']
+    boxShadow: ['focus-within', ...defaultConfig.variants.boxShadow],
+    opacity: ['disabled'],
+    outline: ['focus-within', ...defaultConfig.variants.outline],
   }
 }

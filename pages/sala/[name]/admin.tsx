@@ -10,11 +10,11 @@ import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
 import db, { roomsRef } from '~/utils/firebase'
 
-interface IPageProps {
+interface IProps {
   boardsDistribution: string[]
 }
 
-export default function AdminSala({ boardsDistribution }: IPageProps) {
+export default function Admin({ boardsDistribution }: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -33,7 +33,6 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     content: '',
     type: 'information'
   })
-
   const [players, setPlayers] = useState<IPlayer[]>([])
 
   useEffect(() => {
@@ -43,22 +42,25 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
         error: null,
         loading: true
       })
+
       try {
         const roomDoc = roomsRef.doc(roomName)
         const roomData = await roomDoc.get()
 
         if (!roomData.exists) {
           router.push('/')
+
           return
         }
 
         await roomDoc
           .collection('players')
           .get()
-          .then(plays =>
+          .then(roomPlayers =>
             setPlayers(
-              plays.docs.map(p => {
+              roomPlayers.docs.map(p => {
                 const data = p.data()
+
                 return {
                   id: p.id,
                   name: data.name,
@@ -111,13 +113,14 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       type: 'success'
     })
 
-    let batch = db.batch()
-
     let roomDoc = roomsRef.doc(roomName)
+
+    let batch = db.batch()
     batch.update(roomDoc, { ...room.data, readyToPlay: true })
 
     players.map((player, index) => {
       const { id, name } = player
+
       id
         ? batch.update(roomDoc.collection('players').doc(id), {
             boards: boardsDistribution[index],
@@ -130,9 +133,11 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
           })
     })
 
-    // Commit the batch
     await batch.commit()
-    router.push(`/sala/${roomName}`)
+
+    setTimeout(() => {
+      router.push(`/sala/${roomName}`)
+    }, 1000)
   }
 
   return (
@@ -207,7 +212,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                   id="readyToPlay"
                   className="w-full"
                   disabled={!room.data.adminId}
-                  onButtonClick={readyToPlay}
+                  onClick={readyToPlay}
                 >
                   <FiSmile className="text-2xl" />
                   <span className="ml-4">Jugar</span>

@@ -4,13 +4,14 @@ import { FiLink2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import { IPlayer } from '~/components/Players'
-import { usePlayers, useRoom } from '~/utils/firebase'
+import useRoom from '~/hooks/useRoom'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
 export default function Sala() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
-  const players = usePlayers(roomName)
+  const players = useRoomPlayers(roomName)
 
   return (
     <div className="px-4 py-8">
@@ -79,7 +80,7 @@ export default function Sala() {
                     <div className="ml-4">
                       <Button
                         id="play"
-                        onButtonClick={() => {
+                        onClick={() => {
                           router.push(
                             `/sala/${roomName}/jugar?jugador=${player.id}`
                           )

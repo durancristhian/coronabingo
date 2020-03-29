@@ -30,6 +30,7 @@ export default function InputText({
         ])}
         id={id}
         value={value}
+        /* TODO: remove hack */
         onChange={event =>
           onInputChange && onInputChange(id, event.target.value)
         }

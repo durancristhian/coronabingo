@@ -9,10 +9,29 @@
   box-shadow: 0 0 1px red;
 }
 
+.coronavirus,
+.cremona,
+.pikachu,
 .poroto {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.coronavirus {
+  background-image: url('/background-cells/coronavirus.gif');
+}
+
+.cremona {
+  background-image: url('/background-cells/cremona.jpg');
+}
+
+.pikachu {
+  background-image: url('/background-cells/pikachu.jpg');
+}
+
+.poroto {
+  background-image: url('/background-cells/poroto.png');
 }
 
 .text-shadow-white {
@@ -27,4 +46,8 @@
   position: absolute !important;
   width: 1px;
   white-space: nowrap; /* added line */
+}
+
+.w-1\/10 {
+  width: calc(100% / 9);
 }
