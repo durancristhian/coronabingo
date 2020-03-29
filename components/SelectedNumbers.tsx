@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
 import classnames from 'classnames'
+import { Fragment } from 'react'
 import { BOARD_NUMBERS } from '~/utils/constants'
 
 interface IProps {
@@ -33,10 +33,9 @@ export default function SelectedNumbers({
             type="button"
             key={n}
             className={classnames([
-              'cursor-default flex items-center justify-center h-10',
+              'cursor-default flex items-center justify-center h-8',
               'focus:outline-none',
               'duration-150 ease-in-out transition',
-              i >= 10 ? 'mt-2' : null,
               selectedNumbers.includes(n) && 'bg-green-400 text-green-800',
               enableForAdmin && 'cursor-pointer focus:shadow-outline'
             ])}

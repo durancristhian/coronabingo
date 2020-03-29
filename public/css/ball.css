@@ -1,6 +1,8 @@
 .ball {
   border-radius: 50%;
-  display: inline-block;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
 }
 
@@ -14,7 +16,6 @@
 .ball > div > span {
   background: #fff;
   border-radius: 50%;
-  font-weight: bold;
   height: 60%;
   left: 50%;
   line-height: 175%;

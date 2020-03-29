@@ -92,7 +92,7 @@ export default function Jugar() {
               <div className="lg:w-1/3">
                 <div className="bg-white px-4 py-8 rounded shadow">
                   <h2 className="font-medium mb-4 text-center text-xl">
-                    Bolillero
+                    Últimos números
                   </h2>
                   <TurningGlob
                     isAdmin={isAdmin}
@@ -100,13 +100,20 @@ export default function Jugar() {
                     selectedNumbers={room?.selectedNumbers || []}
                     turningGlob={room?.turningGlob}
                   />
-                  <div className="mt-4">
-                    <SelectedNumbers
-                      isAdmin={isAdmin}
-                      onNewNumber={onNewNumber}
-                      selectedNumbers={room.selectedNumbers || []}
-                      turningGlob={room.turningGlob}
-                    />
+                </div>
+                <div className="hidden lg:block mt-8">
+                  <div className="bg-white px-4 py-8 rounded shadow">
+                    <h2 className="font-medium mb-4 text-center text-xl">
+                      Bolillero
+                    </h2>
+                    <div className="mt-4">
+                      <SelectedNumbers
+                        isAdmin={isAdmin}
+                        onNewNumber={onNewNumber}
+                        selectedNumbers={room.selectedNumbers || []}
+                        turningGlob={room.turningGlob}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -123,6 +130,21 @@ export default function Jugar() {
                   }
                 />
               )}
+            </div>
+            <div className="lg:hidden mt-8">
+              <div className="bg-white px-4 py-8 rounded shadow">
+                <h2 className="font-medium mb-4 text-center text-xl">
+                  Bolillero
+                </h2>
+                <div className="mt-4">
+                  <SelectedNumbers
+                    isAdmin={isAdmin}
+                    onNewNumber={onNewNumber}
+                    selectedNumbers={room.selectedNumbers || []}
+                    turningGlob={room.turningGlob}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
