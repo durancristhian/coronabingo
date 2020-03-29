@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { BOARD_NUMBERS } from '~/utils/constants'
+import { BOARD_NUMBERS, DREAMS } from '~/utils/constants'
 import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
@@ -34,6 +34,9 @@ export default function TurningGlob({
           {current || '-'}
         </span>
       </div>
+      <p className="mt-2 text-center text-gray-600 text-sm">
+        {DREAMS[current]}
+      </p>
       {isAdmin && turningGlob && (
         <Button
           id="next"
