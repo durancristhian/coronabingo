@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { BOARD_NUMBERS, DREAMS } from '~/utils/constants'
-import Button from './Button'
 import Ball from './Ball'
+import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 interface IProps {
@@ -30,10 +30,7 @@ export default function TurningGlob({
 
   return (
     <Fragment>
-      {current && <Ball>{current}</Ball>}
-      <p className="mt-2 text-center text-gray-600 text-sm">
-        {DREAMS[current]}
-      </p>
+      {current && <Ball meaning={DREAMS[current]}>{current}</Ball>}
       {isAdmin && turningGlob && (
         <Button
           id="next"
@@ -45,17 +42,10 @@ export default function TurningGlob({
         </Button>
       )}
       {!!rest.length && (
-        <div className="flex items-center mt-4">
+        <div className="flex mt-4">
           {rest.map(n => (
-            <div
-              key={n}
-              className="border-2 border-gray-900 flex font-medium h-10 items-center"
-              style={{
-                marginRight: '2%',
-                width: '18%'
-              }}
-            >
-              <span className=" font-oswald text-center w-full">{n}</span>
+            <div className="w-1/5">
+              <Ball size={50}>{n}</Ball>
             </div>
           ))}
         </div>

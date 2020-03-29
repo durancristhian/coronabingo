@@ -1,3 +1,5 @@
+const knuthShuffle = require('knuth-shuffle').knuthShuffle
+
 export const BACKGROUND_CELL_VALUES = [
   { name: 'Amarillito', type: 'color', value: 'bg-yellow-300' },
   { name: 'Azulcito', type: 'color', value: 'bg-blue-300' },
@@ -7,7 +9,16 @@ export const BACKGROUND_CELL_VALUES = [
   { name: 'Cremona', type: 'img', value: 'cremona.jpg' },
   { name: 'Coronavirus', type: 'img', value: 'coronavirus.gif' }
 ]
+export const BALL_COLORS = [
+  'bg-blue-600',
+  'bg-green-600',
+  'bg-red-600',
+  'bg-yellow-600'
+]
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
+export const BOARD_NUMBER_COLOR = BOARD_NUMBERS.map(
+  () => knuthShuffle(BALL_COLORS.slice(0))[0]
+)
 export const DREAMS = [
   'Huevos', // 00
   'Agua', // 01

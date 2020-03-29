@@ -1,139 +1,26 @@
-:root {
-  --ball-size: 300px;
-}
-
 .ball {
-  animation: ballGrow 2s ease-out forwards;
-  background: radial-gradient(
-    circle at 50% 40%,
-    #fcfcfc,
-    #efeff1 66%,
-    #9b5050 100%
-  );
   border-radius: 50%;
   display: inline-block;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
   position: relative;
-  transform: scale(0.5);
-  width: 100%;
 }
 
-.ball:after {
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.8) 14%,
-    rgba(255, 255, 255, 0) 24%
-  );
+.ball > div {
   border-radius: 50%;
-  content: '';
   height: 100%;
-  left: 10%;
   position: absolute;
-  top: 5%;
-  transform: translateX(-80px) translateY(-90px) skewX(-20deg);
   width: 100%;
 }
 
-.number {
-  animation: ballRoll 2s ease-out;
-  font-family: 'Oswald';
-  font-size: calc(var(--ball-size) / 2);
-  line-height: var(--ball-size);
+.ball > div > span {
+  background: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  height: 60%;
+  left: 50%;
+  line-height: 175%;
   position: absolute;
   text-align: center;
-  width: 100%;
-}
-
-.number:after {
-  animation: numberReveal 0.1s 1.5s reverse forwards;
-  content: attr(data-number);
-  opacity: 0;
-  position: absolute;
-  transform: translateX(-50%);
-}
-
-.number:before {
-  animation: numberReveal 0.1s 1.5s forwards;
-  content: '?';
-  position: absolute;
-  transform: translateX(-50%);
-}
-
-.stage {
-  display: inline-block;
-  height: var(--ball-size);
-  perspective: 1200px;
-  perspective-origin: 50% 50%;
-  width: 100%;
-}
-
-@keyframes ballRoll {
-  0%,
-  20%,
-  50% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-  }
-  10%,
-  35%,
-  75% {
-    transform: translateY(100%) rotateX(170deg) scale(0.4);
-  }
-  11%,
-  36%,
-  76% {
-    opacity: 0;
-    transform: translateY(-100%) rotateX(-170deg) scale(0.3);
-  }
-}
-
-@keyframes ballGrow {
-  0% {
-    transform: scale(0.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes numberReveal {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.stage:nth-child(2) .ball,
-.stage:nth-child(2) .number {
-  animation-delay: 0.3s;
-}
-
-.stage:nth-child(2) .number:after,
-.stage:nth-child(2) .number:before {
-  animation-delay: 1.8s;
-}
-
-.stage:nth-child(3) .ball,
-.stage:nth-child(3) .number {
-  animation-delay: 0.6s;
-}
-
-.stage:nth-child(3) .number:after,
-.stage:nth-child(3) .number:before {
-  animation-delay: 2.1s;
-}
-
-.stage:nth-child(4) .ball,
-.stage:nth-child(4) .number {
-  animation-delay: 0.9s;
-}
-
-.stage:nth-child(4) .number:after,
-.stage:nth-child(4) .number:before {
-  animation-delay: 2.4s;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
 }
