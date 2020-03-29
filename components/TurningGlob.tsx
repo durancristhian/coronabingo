@@ -1,9 +1,8 @@
 import { Fragment } from 'react'
-import { BOARD_NUMBERS, DREAMS } from '~/utils/constants'
+import { BOARD_NUMBERS, BOARD_NUMBER_COLOR, DREAMS } from '~/utils/constants'
 import Ball from './Ball'
 import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
-import { BOARD_NUMBER_COLOR } from '~/utils/constants'
 
 interface IProps {
   isAdmin: boolean
@@ -41,24 +40,26 @@ export default function TurningGlob({
         </Button>
       )}
       {!!roomNumbers.length && (
-        <div className="flex items-center overflow-hidden">
-          {roomNumbers.map((n, i) => (
-            <div
-              key={n}
-              style={{
-                flex: `0 0 ${i === 0 ? '85px' : '65px'}`
-              }}
-            >
-              <Ball
-                animate={i === 0}
-                color={i === 0 ? BOARD_NUMBER_COLOR[n - 1] : 'bg-gray-500'}
-                meaning={i === 0 ? DREAMS[current] : ''}
-                number={n}
-                size={i === 0 ? 75 : 55}
-              />
-            </div>
-          ))}
-        </div>
+        <Fragment>
+          <div className="flex items-center overflow-hidden">
+            {roomNumbers.map((n, i) => (
+              <div
+                key={n}
+                style={{
+                  flex: `0 0 ${i === 0 ? '85px' : '65px'}`
+                }}
+              >
+                <Ball
+                  animate={i === 0}
+                  color={i === 0 ? BOARD_NUMBER_COLOR[n - 1] : 'bg-gray-500'}
+                  number={n}
+                  size={i === 0 ? 75 : 55}
+                />
+              </div>
+            ))}
+          </div>
+          <p className="font-medium mt-4">{DREAMS[current]}</p>
+        </Fragment>
       )}
     </Fragment>
   )
