@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { FiCloudSnow } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Boards from '~/components/Boards'
 import Button from '~/components/Button'
@@ -69,19 +68,13 @@ export default function Jugar() {
     })
   }
 
-  /* TODO: make this a toggle */
   const confetti = () => {
     const roomRef = roomsRef.doc(roomName)
-    roomRef.update({ showConfetti: true })
-
-    setTimeout(() => {
-      roomRef.update({ showConfetti: false })
-    }, 10000)
+    roomRef.update({ showConfetti: !room?.showConfetti })
   }
 
   return (
     <BackgroundCellContextProvider>
-      {room?.showConfetti && <Confetti />}
       <div className="px-4 py-8">
         <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
         {!room && (
@@ -142,11 +135,15 @@ export default function Jugar() {
           <div className="max-w-4xl mt-8 mx-auto">
             <h2 className="font-medium text-center text-xl">Experimentos</h2>
             <div className="my-8">
-              <Button onClick={confetti}>
-                <FiCloudSnow className="text-lg" />
-                <span className="ml-4">Llueve confetti</span>
+              <p className="mb-1">Tirar confetti</p>
+              <Button
+                onClick={confetti}
+                color={room?.showConfetti ? 'red' : 'green'}
+              >
+                {room?.showConfetti ? 'No festejar más' : 'Festejar'}
               </Button>
             </div>
+            {room?.showConfetti && <Confetti />}
           </div>
         )}
       </div>
