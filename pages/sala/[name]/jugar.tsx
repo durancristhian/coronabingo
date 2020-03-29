@@ -1,4 +1,3 @@
-import Mousetrap from 'mousetrap'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { FiCloudSnow } from 'react-icons/fi'
@@ -26,9 +25,15 @@ export default function Jugar() {
   useEffect(() => {
     if (!isAdmin) return
 
-    Mousetrap.bind('e x p e r i m e n t o s', () => {
-      setShowExperiments(true)
-    })
+    const configureExperiments = async () => {
+      const Mousetrap = (await import('mousetrap')).default
+
+      Mousetrap.bind('e x p e r i m e n t o s', () => {
+        setShowExperiments(true)
+      })
+    }
+
+    configureExperiments()
   }, [isAdmin])
 
   useEffect(() => {
