@@ -9,6 +9,7 @@ import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
 import db, { roomsRef } from '~/utils/firebase'
+import shuffleArray from '~/utils/shuffleArray'
 
 interface IProps {
   boardsDistribution: string[]
@@ -118,7 +119,8 @@ export default function Admin({ boardsDistribution }: IProps) {
     let batch = db.batch()
     batch.update(roomDoc, { ...room.data, readyToPlay: true })
 
-    players.map((player, index) => {
+    // shuffle to get random boards position
+    shuffleArray(players).map((player, index) => {
       const { id, name } = player
 
       id

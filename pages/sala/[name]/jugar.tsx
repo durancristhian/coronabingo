@@ -1,15 +1,19 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { FiMenu } from 'react-icons/fi'
+import firebase from 'firebase'
 import BackgroundCells from '~/components/BackgroundCells'
 import Boards from '~/components/Boards'
 import Button from '~/components/Button'
+import CreateRoom from '~/components/CreateRoom'
 import Confetti from '~/components/Confetti'
 import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import useRoom from '~/hooks/useRoom'
-import { roomsRef } from '~/utils/firebase'
+import db, { roomsRef } from '~/utils/firebase'
+import Drawer from '~/components/Drawer'
 
 export default function Jugar() {
   const router = useRouter()
@@ -19,6 +23,7 @@ export default function Jugar() {
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const [showExperiments, setShowExperiments] = useState(false)
+  const [openDrawer, setOpenDrawer] = useState(false)
   const isAdmin = room?.adminId === player?.name
 
   useEffect(() => {
@@ -73,9 +78,57 @@ export default function Jugar() {
     roomRef.update({ showConfetti: !room?.showConfetti })
   }
 
-  return (
+  const gameOver = () => {
+    const roomRef = roomsRef.doc(roomName)
+    roomRef.update({ isGameOver: true })
+  }
+
+  const duplicateRoom = async (newName: string) => {
+    const players = (
+      await roomsRef
+        .doc(roomName)
+        .collection('players')
+        .get()
+    ).docs
+    let batch = db.batch()
+
+    players.map(player => {
+      const { name } = player.data()
+      batch.set(
+        roomsRef
+          .doc(newName)
+          .collection('players')
+          .doc(player.id),
+        {
+          boards: '',
+          name,
+          selectedNumbers: []
+        }
+      )
+    })
+
+    await batch.commit()
+  }
+
+  return !room?.isGameOver ? (
     <BackgroundCellContextProvider>
       <div className="px-4 py-8">
+        <button
+          className="absolute top-0 mt-4"
+          onClick={() => setOpenDrawer(true)}
+        >
+          <FiMenu className="text-2xl" />
+        </button>
+        <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+          <div>
+            <h1 className="text-xl font-bold pt-5 mb-4">Tema</h1>
+            <BackgroundCells />
+            <Button className="mt-4" onClick={gameOver}>
+              Terminar juego
+            </Button>
+            <Button className="mt-4">Otra opción</Button>
+          </div>
+        </Drawer>
         <h2 className="font-medium text-center text-xl">Sala {roomName}</h2>
         {!room && (
           <div className="max-w-4xl mx-auto">
@@ -126,11 +179,6 @@ export default function Jugar() {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl mt-8 mx-auto">
-          <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-            <BackgroundCells />
-          </div>
-        </div>
         {showExperiments && (
           <div className="max-w-4xl mt-8 mx-auto">
             <h2 className="font-medium text-center text-xl">Experimentos</h2>
@@ -148,5 +196,17 @@ export default function Jugar() {
         )}
       </div>
     </BackgroundCellContextProvider>
+  ) : (
+    <div className="text-center pt-16">
+      <h2 className="text-2xl mb-4">¡Este juego terminó!</h2>
+      {isAdmin && (
+        <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow text-left">
+          <CreateRoom
+            title="Podés crear una sala nueva a partir de esta:"
+            onRoomCreated={duplicateRoom}
+          />
+        </div>
+      )}
+    </div>
   )
 }

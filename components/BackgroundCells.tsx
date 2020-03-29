@@ -11,8 +11,6 @@ export default function BackgroundCells() {
 
   return (
     <Fragment>
-      <h3 className="font-medium mb-8 text-center">Celdas vacías</h3>
-      <p className="mb-1">Motivos predefinidos</p>
       <div className="flex flex-wrap -mb-2">
         {BACKGROUND_CELL_VALUES.map((bc, i) => (
           <label
@@ -20,6 +18,7 @@ export default function BackgroundCells() {
             htmlFor={i.toString()}
             className={classnames([
               'bg-gray-100 border-2 border-gray-300 cursor-pointer mb-2 mr-4 px-4 py-2 rounded',
+              'w-full text-center',
               'focus-within:outline-none focus-within:shadow-outline',
               'duration-150 ease-in-out transition',
               backgroundCell.value === bc.value && 'bg-gray-300 border-gray-600'

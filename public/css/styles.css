@@ -28,3 +28,15 @@
 .w-1\/10 {
   width: calc(100% / 9);
 }
+
+.navbar {
+  transition: all 330ms ease-out;
+  width: 300px;
+}
+
+.navbar-open {
+  transform: translateX(-16px);
+}
+.navbar-close {
+  transform: translateX(-316px);
+}

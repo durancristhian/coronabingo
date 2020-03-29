@@ -10,7 +10,10 @@ import Button from './Button'
 import InputText from './InputText'
 import Message, { MessageType } from './Message'
 
-export default function CreateRoom() {
+export default function CreateRoom({
+  onRoomCreated = (s: string) => Promise.resolve(),
+  title = 'Crear sala'
+}) {
   const router = useRouter()
   const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
@@ -68,6 +71,8 @@ export default function CreateRoom() {
       type: 'success'
     })
 
+    await onRoomCreated(roomName)
+
     setTimeout(() => {
       router.push(`/sala/${roomName}/admin`)
     }, 1000)
@@ -75,7 +80,7 @@ export default function CreateRoom() {
 
   return (
     <Fragment>
-      <h2 className="font-medium text-xl text-center uppercase">Crear sala</h2>
+      <h2 className="font-medium text-xl text-center uppercase">{title}</h2>
       <form onSubmit={onSubmit}>
         <InputText
           id="name"

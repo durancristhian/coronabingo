@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export default function Cells({
-  boardNumbers,
+  boardNumbers = [],
   selectedNumbers = [],
   setSelectedNumbers
 }: IProps) {
