@@ -10,6 +10,7 @@ import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
+import { FiFrown, FiSmile } from 'react-icons/fi'
 
 export default function Jugar() {
   const router = useRouter()
@@ -22,8 +23,6 @@ export default function Jugar() {
   const isAdmin = room?.adminId === player?.name
 
   useEffect(() => {
-    if (!isAdmin) return
-
     const configureExperiments = async () => {
       const Mousetrap = (await import('mousetrap')).default
 
@@ -33,7 +32,7 @@ export default function Jugar() {
     }
 
     configureExperiments()
-  }, [isAdmin])
+  }, [roomName])
 
   useEffect(() => {
     if (!playerId || !roomName) return
@@ -148,24 +147,29 @@ export default function Jugar() {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl mt-8 mx-auto">
-          <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-            <BackgroundCells />
-          </div>
-        </div>
         {showExperiments && (
           <div className="max-w-4xl mt-8 mx-auto">
-            <h2 className="font-medium text-center text-xl">Experimentos</h2>
-            <div className="my-8">
-              <p className="mb-1">Tirar confetti</p>
-              <Button
-                onClick={confetti}
-                color={room?.showConfetti ? 'red' : 'green'}
-              >
-                {room?.showConfetti ? 'No festejar más' : 'Festejar'}
-              </Button>
-            </div>
-            {room?.showConfetti && <Confetti />}
+            <h2 className="font-medium mb-8 text-center text-xl">
+              Experimentos
+            </h2>
+            {isAdmin && (
+              <div className="mb-8 text-center">
+                <p className="mb-1">Tirar confetti</p>
+                <Button
+                  color={room?.showConfetti ? 'red' : 'green'}
+                  onClick={confetti}
+                >
+                  {room?.showConfetti ? (
+                    <FiFrown className="mr-4 text-2xl" />
+                  ) : (
+                    <FiSmile className="mr-4 text-2xl" />
+                  )}
+                  {room?.showConfetti ? 'No festejar más' : 'Festejar'}
+                </Button>
+                {room?.showConfetti && <Confetti />}
+              </div>
+            )}
+            <BackgroundCells />
           </div>
         )}
       </div>

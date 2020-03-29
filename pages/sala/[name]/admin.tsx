@@ -214,8 +214,8 @@ export default function Admin({ boardsDistribution }: IProps) {
                   disabled={!room.data.adminId}
                   onClick={readyToPlay}
                 >
-                  <FiSmile className="text-2xl" />
-                  <span className="ml-4">Jugar</span>
+                  <FiSmile className="text-2xl mr-4" />
+                  <span>Jugar</span>
                 </Button>
               </div>
             </Fragment>
