@@ -194,8 +194,8 @@ export default function Admin({ boardsDistribution }: IProps) {
                 <Checkbox
                   id="turningGlob"
                   label="Usar bolillero online"
-                  onInputChange={(key, value) =>
-                    onFieldChange([{ key, value }])
+                  onChange={value =>
+                    onFieldChange([{ key: 'turningGlob', value }])
                   }
                   value={room.data.turningGlob || false}
                 />

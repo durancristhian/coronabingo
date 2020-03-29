@@ -1,35 +1,27 @@
-import { createRef } from 'react'
-import { FiCheckSquare, FiSquare } from 'react-icons/fi'
+import classnames from 'classnames'
 
 interface IProps {
   id: string
   label: string
-  onInputChange: (id: string, value: boolean) => void
+  onChange: (value: boolean) => void
   value: boolean
 }
 
-export default function Checkbox({ id, label, onInputChange, value }: IProps) {
+export default function Checkbox({ id, label, onChange, value }: IProps) {
   return (
-    <label className="cursor-pointer flex items-center">
-      <span
-        className="focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500 text-2xl"
-        /* onClick={() => onInputChange(id, !value)} */
-      >
-        {value ? (
-          <FiCheckSquare
-            onClick={() => onInputChange(id, !value)}
-            className="text-blue-600"
-          />
-        ) : (
-          <FiSquare onClick={() => onInputChange(id, !value)} />
-        )}
-      </span>
-      <span
-        className="flex-auto pl-4 py-2"
-        onClick={() => onInputChange(id, !value)}
-      >
-        {label}
-      </span>
+    <label htmlFor={id} className="cursor-pointer flex items-center">
+      <input
+        className={classnames([
+          'block p-2',
+          'focus:outline-none focus:shadow-outline',
+          'duration-150 ease-in-out transition'
+        ])}
+        type="checkbox"
+        id={id}
+        checked={value}
+        onChange={event => onChange && onChange(event.target.checked)}
+      />
+      <span className="flex-auto pl-4 py-2">{label}</span>
     </label>
   )
 }

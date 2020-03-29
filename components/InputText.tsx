@@ -26,6 +26,7 @@ export default function InputText({
         className={classnames([
           'border-2 border-gray-300 h-12 mt-1 p-2 rounded',
           'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
+          'duration-150 ease-in-out transition',
           readonly && 'bg-gray-200'
         ])}
         id={id}
