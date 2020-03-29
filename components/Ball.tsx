@@ -1,13 +1,22 @@
+import classnames from 'classnames'
+
 interface IProps {
+  animate: boolean
   color: string
   meaning?: string
   number: number
   size?: number
 }
 
-export default function Ball({ color, number, meaning, size = 90 }: IProps) {
+export default function Ball({
+  animate,
+  color,
+  number,
+  meaning,
+  size = 90
+}: IProps) {
   return (
-    <div className="text-center">
+    <div className={classnames(['text-center', animate && 'appear'])}>
       <div
         className={`ball ${color}`}
         style={{
@@ -24,7 +33,9 @@ export default function Ball({ color, number, meaning, size = 90 }: IProps) {
           </span>
         </div>
       </div>
-      {meaning && <p className="font-medium mt-2 text-sm">{meaning}</p>}
+      {meaning && (
+        <p className="font-medium leading-normal mt-2 text-sm">{meaning}</p>
+      )}
     </div>
   )
 }

@@ -20,7 +20,6 @@ export default function TurningGlob({
 }: IProps) {
   const roomNumbers = [...selectedNumbers]
   const current = roomNumbers[0]
-  const rest = roomNumbers.slice(0, 4)
 
   const onNextButtonClick = () => {
     const missingNumbers = BOARD_NUMBERS.filter(n => !roomNumbers.includes(n))
@@ -41,11 +40,17 @@ export default function TurningGlob({
           Próximo número
         </Button>
       )}
-      {!!rest.length && (
-        <div className="flex items-center justify-center">
-          {rest.map((n, i) => (
-            <div key={n} className={i === 0 ? 'w-1/3' : 'w-1/5'}>
+      {!!roomNumbers.length && (
+        <div className="flex items-center overflow-hidden">
+          {roomNumbers.map((n, i) => (
+            <div
+              key={n}
+              style={{
+                flex: `0 0 ${i === 0 ? '85px' : '65px'}`
+              }}
+            >
               <Ball
+                animate={i === 0}
                 color={i === 0 ? BOARD_NUMBER_COLOR[n - 1] : 'bg-gray-500'}
                 meaning={i === 0 ? DREAMS[current] : ''}
                 number={n}
