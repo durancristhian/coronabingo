@@ -5,8 +5,8 @@
   "scripts": {
     "prebuild": "node scripts/download-boards",
     "build": "next build",
-    "deploy": "now",
-    "deploy-prod": "now --prod",
+    "deploy-staging": "cp now.staging.json now.json && now",
+    "deploy-prod": "cp now.prod.json now.json && now --prod",
     "dev": "next dev",
     "start": "next start"
   },
