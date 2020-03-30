@@ -1,0 +1,18 @@
+{
+  "build": {
+    "env": {
+      "API_KEY": "@api_key",
+      "AUTH_DOMAIN": "@auth_domain",
+      "DATABASE_URL": "@database_url",
+      "PROJECT_ID": "@project_id",
+      "STORAGE_BUCKET": "@storage_bucket",
+      "MESSAGING_SENDER_ID": "@messaging_sender_id",
+      "APP_ID": "@app_id",
+      "MEASUREMENT_ID": "@measurement_id",
+      "GA_TRACKING_ID": "@ga_tracking_id",
+      "SENTRY_DSN": "@sentry_dsn",
+      "WOORKSHEET_ID": "@woorksheet_id",
+      "WORKSHEET_TITLE": "@worksheet_title"
+    }
+  }
+}
