@@ -28,9 +28,9 @@ export default function Pato() {
   return (
     <div>
       <p className="mb-1">Patonera</p>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-wrap">
         {sounds.map(sound => (
-          <div key={sound} className="mr-4">
+          <div key={sound} className="mb-4 mr-4">
             <Button
               onClick={() => onClick(sound)}
               /* 
@@ -47,10 +47,17 @@ export default function Pato() {
   )
 }
 
-const sounds = ['carton', 'coronabingo', 'eseBolilleroPapa', 'linea']
+const sounds = [
+  'carton',
+  'coronabingo',
+  'cruzarDedos',
+  'eseBolilleroPapa',
+  'linea'
+]
 const soundNames: { [key: string]: string } = {
   carton: 'Cartón',
   coronabingo: 'Coronabingo',
+  cruzarDedos: 'Cruzar los dedos',
   eseBolilleroPapa: 'Ese bolillero papá',
   linea: 'Línea'
 }

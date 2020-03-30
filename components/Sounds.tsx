@@ -7,6 +7,8 @@ import carton from '~/public/sounds/carton.mp3'
 // @ts-ignore
 import coronabingo from '~/public/sounds/coronabingo.mp3'
 // @ts-ignore
+import cruzarDedos from '~/public/sounds/cruzar-dedos.mp3'
+// @ts-ignore
 import eseBolilleroPapa from '~/public/sounds/ese-bolillero-papa.mp3'
 // @ts-ignore
 import linea from '~/public/sounds/linea.mp3'
@@ -17,6 +19,7 @@ export default function Sounds() {
   const room = useRoom(roomName)
   const [playCarton, { stop: stopCarton }] = useSound(carton)
   const [playCoronabingo, { stop: stopCoronabingo }] = useSound(coronabingo)
+  const [playCruzarDedos, { stop: stopCruzarDedos }] = useSound(cruzarDedos)
   const [playEseBolilleroPapa, { stop: stopEseBolilleroPapa }] = useSound(
     eseBolilleroPapa
   )
@@ -25,7 +28,7 @@ export default function Sounds() {
   useEffect(() => {
     if (!room) return
 
-    const { eseBolilleroPapa, linea, carton, coronabingo } = room
+    const { carton, coronabingo, cruzarDedos, eseBolilleroPapa, linea } = room
 
     if (carton) {
       stopCarton()
@@ -35,6 +38,11 @@ export default function Sounds() {
     if (coronabingo) {
       stopCoronabingo()
       playCoronabingo({})
+    }
+
+    if (cruzarDedos) {
+      stopCruzarDedos()
+      playCruzarDedos({})
     }
 
     if (eseBolilleroPapa) {
