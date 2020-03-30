@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Boards from '~/components/Boards'
 import Button from '~/components/Button'
@@ -10,7 +11,6 @@ import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
-import { FiFrown, FiSmile } from 'react-icons/fi'
 
 export default function Jugar() {
   const router = useRouter()
@@ -93,12 +93,7 @@ export default function Jugar() {
                   <h2 className="font-medium mb-4 text-center text-xl">
                     Últimos números
                   </h2>
-                  <TurningGlob
-                    isAdmin={isAdmin}
-                    onNewNumber={onNewNumber}
-                    selectedNumbers={room?.selectedNumbers || []}
-                    turningGlob={room?.turningGlob}
-                  />
+                  <TurningGlob selectedNumbers={room?.selectedNumbers || []} />
                 </div>
                 <div className="hidden lg:block mt-8">
                   <div className="bg-white px-4 py-8 rounded shadow">

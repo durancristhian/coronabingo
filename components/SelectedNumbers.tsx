@@ -1,6 +1,8 @@
 import classnames from 'classnames'
 import { Fragment } from 'react'
 import { BOARD_NUMBERS } from '~/utils/constants'
+import Button from './Button'
+const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 interface IProps {
   isAdmin: boolean
@@ -16,6 +18,14 @@ export default function SelectedNumbers({
   turningGlob
 }: IProps) {
   const enableForAdmin = isAdmin && !turningGlob
+  const roomNumbers = [...selectedNumbers]
+
+  const onNextButtonClick = () => {
+    const missingNumbers = BOARD_NUMBERS.filter(n => !roomNumbers.includes(n))
+    const shuffled = knuthShuffle(missingNumbers.slice(0))
+
+    onNewNumber(shuffled[0])
+  }
 
   return (
     <Fragment>
@@ -26,6 +36,16 @@ export default function SelectedNumbers({
             bolillero.
           </p>
         </div>
+      )}
+      {isAdmin && turningGlob && (
+        <Button
+          id="next"
+          className="mb-4 w-full"
+          onClick={onNextButtonClick}
+          disabled={roomNumbers.length === 90}
+        >
+          Próximo número
+        </Button>
       )}
       <div className="flex flex-wrap">
         {BOARD_NUMBERS.map((n, i) => (
