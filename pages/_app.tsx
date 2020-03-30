@@ -8,7 +8,7 @@ import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import '~/public/css/styles.css'
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.SENTRY_DSN
   })
