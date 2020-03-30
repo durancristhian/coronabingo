@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Boards from '~/components/Boards'
@@ -9,6 +9,7 @@ import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
+import { EasterEggContext } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
 
@@ -19,20 +20,8 @@ export default function Jugar() {
   const room = useRoom(roomName)
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
-  const [showExperiments, setShowExperiments] = useState(false)
   const isAdmin = room?.adminId === playerId
-
-  useEffect(() => {
-    const configureExperiments = async () => {
-      const Mousetrap = (await import('mousetrap')).default
-
-      Mousetrap.bind('t r u c o s', () => {
-        setShowExperiments(true)
-      })
-    }
-
-    configureExperiments()
-  }, [roomName])
+  const { isVisible } = useContext(EasterEggContext)
 
   useEffect(() => {
     if (!playerId || !roomName) return
@@ -142,14 +131,12 @@ export default function Jugar() {
             </div>
           </div>
         </div>
-        {showExperiments && (
+        {isVisible && (
           <div className="max-w-4xl mt-8 mx-auto">
-            <h2 className="font-medium mb-8 text-center text-xl">
-              Experimentos
-            </h2>
+            <h2 className="font-medium mb-8 text-center text-xl">Trucos</h2>
             {isAdmin && (
               <div className="mb-8 text-center">
-                <p className="mb-1">Tirar confetti</p>
+                <p className="mb-1">Tirar confetti en la sala</p>
                 <Button
                   color={room?.showConfetti ? 'red' : 'green'}
                   onClick={confetti}

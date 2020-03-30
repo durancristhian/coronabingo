@@ -6,6 +6,7 @@ import 'typeface-inter'
 import 'typeface-oswald'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
+import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import '~/public/css/styles.css'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
@@ -81,11 +82,13 @@ export default class Coronabingo extends App {
           />
         </Head>
         <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
-          <Header />
-          <div className="flex-auto">
-            <Component {...pageProps} />
-          </div>
-          <Footer />
+          <EasterEggContextProvider>
+            <Header />
+            <div className="flex-auto">
+              <Component {...pageProps} />
+            </div>
+            <Footer />
+          </EasterEggContextProvider>
         </main>
       </Fragment>
     )
