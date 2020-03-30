@@ -18,7 +18,6 @@
     "@types/mousetrap": "^1.6.3",
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.23",
-    "@types/uuid": "^7.0.2",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "autoprefixer": "^9.7.4",

@@ -4,6 +4,7 @@ import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Select from '~/components/Select'
 import { Field } from '~/pages/sala/[name]/admin'
 import { MAX_PLAYERS } from '~/utils/constants'
+import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 import InputText from './InputText'
 
@@ -12,6 +13,7 @@ interface IProps {
   onChange: (changes: { key: string; value: Field }[]) => void
   players: IPlayer[]
   removePlayer: Function
+  roomName: string
   setPlayers: Function
 }
 
@@ -20,6 +22,7 @@ export default function Players({
   onChange,
   players,
   removePlayer,
+  roomName,
   setPlayers
 }: IProps) {
   const [name, setName] = useState('')
@@ -29,7 +32,7 @@ export default function Players({
   }
 
   const onRemovePlayer = (index: number, player: IPlayer) => {
-    const cleanAdmin = adminId === player.name
+    const cleanAdmin = adminId === player.id
     const changes = []
 
     if (cleanAdmin) {
@@ -51,7 +54,7 @@ export default function Players({
 
     setPlayers(playersCopy)
 
-    if (player.id) removePlayer(player.id)
+    removePlayer(player.id)
   }
 
   const onSubmit = async (event: FormEvent) => {
@@ -61,6 +64,11 @@ export default function Players({
       ...players,
       {
         boards: '',
+        /* TODO: extract this to somewhere else. Maybe db utils */
+        id: roomsRef
+          .doc(roomName)
+          .collection('players')
+          .doc().id,
         name,
         selectedNumbers: []
       }
@@ -68,6 +76,9 @@ export default function Players({
 
     setName('')
   }
+
+  const isNameRepeated =
+    Boolean(players.length) && players.some(p => p.name === name)
 
   return (
     <div className="mt-8">
@@ -102,7 +113,7 @@ export default function Players({
                 className="w-full"
                 color="green"
                 type="submit"
-                disabled={!name}
+                disabled={!name || isNameRepeated}
               >
                 <FiPlus />
               </Button>
@@ -117,7 +128,7 @@ export default function Players({
               key={index}
               className={classnames([
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                player.name === adminId
+                player.id === adminId
                   ? 'bg-green-100'
                   : index % 2 === 0
                   ? 'bg-gray-100'
@@ -126,7 +137,7 @@ export default function Players({
             >
               <div className="flex flex-auto items-center">
                 <p>{player.name}</p>
-                {player.name === adminId && (
+                {player.id === adminId && (
                   <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                     Dirige el juego
                   </span>

@@ -121,16 +121,11 @@ export default function Admin({ boardsDistribution }: IProps) {
     players.map((player, index) => {
       const { id, name } = player
 
-      id
-        ? batch.update(roomDoc.collection('players').doc(id), {
-            boards: boardsDistribution[index],
-            selectedNumbers: []
-          })
-        : batch.set(roomDoc.collection('players').doc(), {
-            name,
-            boards: boardsDistribution[index],
-            selectedNumbers: []
-          })
+      batch.set(roomDoc.collection('players').doc(id), {
+        name,
+        boards: boardsDistribution[index],
+        selectedNumbers: []
+      })
     })
 
     await batch.commit()
@@ -189,6 +184,7 @@ export default function Admin({ boardsDistribution }: IProps) {
                 adminId={room.data.adminId}
                 onChange={onFieldChange}
                 removePlayer={removePlayer}
+                roomName={roomName}
               />
               <div className="mt-4">
                 <Checkbox

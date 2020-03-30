@@ -62,7 +62,7 @@ export default function Sala() {
                     key={index}
                     className={classnames([
                       'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                      player.name === room.adminId
+                      player.id === room.adminId
                         ? 'bg-green-100'
                         : index % 2 === 0
                         ? 'bg-gray-100'
@@ -71,7 +71,7 @@ export default function Sala() {
                   >
                     <div className="flex flex-auto items-center">
                       <p>{player.name}</p>
-                      {player.name === room.adminId && (
+                      {player.id === room.adminId && (
                         <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                           Dirige el juego
                         </span>

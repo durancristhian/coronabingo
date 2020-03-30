@@ -20,7 +20,7 @@ export default function Jugar() {
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const [showExperiments, setShowExperiments] = useState(false)
-  const isAdmin = room?.adminId === player?.name
+  const isAdmin = room?.adminId === playerId
 
   useEffect(() => {
     const configureExperiments = async () => {
