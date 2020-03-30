@@ -43,7 +43,6 @@
     "typeface-oswald": "^1.1.4",
     "typescript": "^3.8.3",
     "url-loader": "^4.0.0",
-    "url-slug": "^2.3.1",
-    "use-sound": "^1.0.1"
+    "url-slug": "^2.3.1"
   }
 }

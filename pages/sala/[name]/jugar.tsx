@@ -153,13 +153,14 @@ export default function Jugar() {
                 {room?.showConfetti && <Confetti />}
                 <div className="mt-4">
                   <Pato />
-                  <Sounds />
                 </div>
               </div>
             )}
+
             <BackgroundCells />
           </div>
         )}
+        <Sounds isAdmin={isAdmin} />
       </div>
     </BackgroundCellContextProvider>
   )

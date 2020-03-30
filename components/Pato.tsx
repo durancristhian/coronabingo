@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
@@ -7,20 +6,17 @@ import Button from './Button'
 export default function Pato() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
-  const [playing, setPlaying] = useState(false)
 
-  const onClick = async () => {
+  const onClick = async (fileName: string) => {
     await roomsRef.doc(roomName).update({
-      miraEseBolilleroPapa: !playing
+      soundToPlay: fileName
     })
-
-    setPlaying(!playing)
   }
 
   return (
     <div>
       <p className="mb-1">Patonera</p>
-      <Button onClick={onClick}>
+      <Button onClick={() => onClick('mira-ese-bolillero-papa')}>
         <FiPlayCircle className="mr-4 text-2xl" />
         Mirá ese bolillero papá
       </Button>

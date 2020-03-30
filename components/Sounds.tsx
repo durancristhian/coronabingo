@@ -1,24 +1,24 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import useSound from 'use-sound'
 import useRoom from '~/hooks/useRoom'
-// @ts-ignore
-import miraEseBolilleroPapa from '~/public/sounds/mira-ese-bolillero-papa.mp3'
+import { roomsRef } from '~/utils/firebase'
 
-export default function Sounds() {
+export default function Sounds({ isAdmin }: { isAdmin?: boolean }) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
-  const [play, { stop }] = useSound(miraEseBolilleroPapa)
 
   useEffect(() => {
     if (!room) return
+    const { soundToPlay } = room
 
-    const { miraEseBolilleroPapa } = room
-
-    if (miraEseBolilleroPapa) {
-      stop()
-      play({})
+    if (soundToPlay) {
+      new Audio(`/sounds/${soundToPlay}.mp3`).play().finally(() => {
+        isAdmin &&
+          roomsRef.doc(roomName).update({
+            soundToPlay: ''
+          })
+      })
     }
   }, [room])
 
