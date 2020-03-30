@@ -44,8 +44,8 @@ module.exports = withPlugins([
     });
 
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack']
+      test: /\.mp3$/,
+      loader: 'url-loader',
     });
 
     return config;

@@ -6,7 +6,9 @@ import Boards from '~/components/Boards'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import Message from '~/components/Message'
+import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
+import Sounds from '~/components/Sounds'
 import TurningGlob from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
@@ -149,6 +151,10 @@ export default function Jugar() {
                   {room?.showConfetti ? 'No festejar más' : 'Festejar'}
                 </Button>
                 {room?.showConfetti && <Confetti />}
+                <div className="mt-4">
+                  <Pato />
+                  <Sounds />
+                </div>
               </div>
             )}
             <BackgroundCells />
