@@ -26,7 +26,7 @@ export default function Jugar() {
     const configureExperiments = async () => {
       const Mousetrap = (await import('mousetrap')).default
 
-      Mousetrap.bind('e x p e r i m e n t o s', () => {
+      Mousetrap.bind('t r u c o s', () => {
         setShowExperiments(true)
       })
     }
