@@ -11,7 +11,13 @@ export default function Ball({ animate, color, number, size = 90 }: IProps) {
   return (
     <div className={classnames(['text-center', animate && 'appear'])}>
       <div
-        className={`ball ${color}`}
+        className={classnames([
+          'ball',
+          color === 'blue' && 'bg-blue-600',
+          color === 'green' && 'bg-green-600',
+          color === 'red' && 'bg-red-600',
+          color === 'yellow' && 'bg-yellow-600'
+        ])}
         style={{
           height: `${size}px`,
           width: `${size}px`

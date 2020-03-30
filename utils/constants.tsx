@@ -9,12 +9,7 @@ export const BACKGROUND_CELL_VALUES = [
   { name: 'Cremona', type: 'img', value: 'cremona.jpg' },
   { name: 'Coronavirus', type: 'img', value: 'coronavirus.gif' }
 ]
-export const BALL_COLORS = [
-  'bg-blue-600',
-  'bg-green-600',
-  'bg-red-600',
-  'bg-yellow-600'
-]
+export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const BOARD_NUMBER_COLOR = BOARD_NUMBERS.map(
   () => knuthShuffle(BALL_COLORS.slice(0))[0]
@@ -37,7 +32,7 @@ export const DREAMS = [
   'El Borracho 🥴', // 14
   'La Niña bonita 👩🏻', // 15
   'El Anillo 💍', // 16
-  'La Desgracia 📵🤬' , // 17
+  'La Desgracia 📵🤬', // 17
   'La Sangre 🆎➕', // 18
   'El Pescado 🐠', // 19
   'La fiesta 🥳🎊', // 20
