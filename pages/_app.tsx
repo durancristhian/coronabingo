@@ -37,6 +37,11 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <link rel="icon" href="/favicon.ico" />
+          {/* Google Search Console */}
+          <meta
+            name="google-site-verification"
+            content="EmqI8hufGnrAf3Liky84ItzkmjJejzCk382djGct8HA"
+          />
 
           {/* Primary Meta Tags */}
           <title>Coronabingo</title>
