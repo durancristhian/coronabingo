@@ -3,22 +3,48 @@ import { useEffect } from 'react'
 import useSound from 'use-sound'
 import useRoom from '~/hooks/useRoom'
 // @ts-ignore
-import miraEseBolilleroPapa from '~/public/sounds/mira-ese-bolillero-papa.mp3'
+import carton from '~/public/sounds/carton.mp3'
+// @ts-ignore
+import coronabingo from '~/public/sounds/coronabingo.mp3'
+// @ts-ignore
+import eseBolilleroPapa from '~/public/sounds/ese-bolillero-papa.mp3'
+// @ts-ignore
+import linea from '~/public/sounds/linea.mp3'
 
 export default function Sounds() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
-  const [play, { stop }] = useSound(miraEseBolilleroPapa)
+  const [playCarton, { stop: stopCarton }] = useSound(carton)
+  const [playCoronabingo, { stop: stopCoronabingo }] = useSound(coronabingo)
+  const [playEseBolilleroPapa, { stop: stopEseBolilleroPapa }] = useSound(
+    eseBolilleroPapa
+  )
+  const [playLinea, { stop: stopLinea }] = useSound(linea)
 
   useEffect(() => {
     if (!room) return
 
-    const { miraEseBolilleroPapa } = room
+    const { eseBolilleroPapa, linea, carton, coronabingo } = room
 
-    if (miraEseBolilleroPapa) {
-      stop()
-      play({})
+    if (carton) {
+      stopCarton()
+      playCarton({})
+    }
+
+    if (coronabingo) {
+      stopCoronabingo()
+      playCoronabingo({})
+    }
+
+    if (eseBolilleroPapa) {
+      stopEseBolilleroPapa()
+      playEseBolilleroPapa({})
+    }
+
+    if (linea) {
+      stopLinea()
+      playLinea({})
     }
   }, [room])
 

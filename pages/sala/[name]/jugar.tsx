@@ -133,6 +133,8 @@ export default function Jugar() {
             </div>
           </div>
         </div>
+        <Sounds />
+        {room?.showConfetti && <Confetti />}
         {isVisible && (
           <div className="max-w-4xl mt-8 mx-auto">
             <h2 className="font-medium mb-8 text-center text-xl">Trucos</h2>
@@ -150,10 +152,8 @@ export default function Jugar() {
                   )}
                   {room?.showConfetti ? 'No festejar más' : 'Festejar'}
                 </Button>
-                {room?.showConfetti && <Confetti />}
                 <div className="mt-4">
                   <Pato />
-                  <Sounds />
                 </div>
               </div>
             )}

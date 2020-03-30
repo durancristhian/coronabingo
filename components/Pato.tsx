@@ -7,23 +7,50 @@ import Button from './Button'
 export default function Pato() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
-  const [playing, setPlaying] = useState(false)
+  /* TODO: This should be initialized from Firebase */
+  const [status, setStatus] = useState(
+    sounds.reduce((prev, curr) => ({ ...prev, [curr]: false }), {})
+  )
 
-  const onClick = async () => {
+  const onClick = async (key: string) => {
     await roomsRef.doc(roomName).update({
-      miraEseBolilleroPapa: !playing
+      // @ts-ignore
+      [key]: !status[key]
     })
 
-    setPlaying(!playing)
+    setStatus(status => ({
+      ...status,
+      // @ts-ignore
+      [key]: !status[key]
+    }))
   }
 
   return (
     <div>
       <p className="mb-1">Patonera</p>
-      <Button onClick={onClick}>
-        <FiPlayCircle className="mr-4 text-2xl" />
-        Mirá ese bolillero papá
-      </Button>
+      <div className="flex justify-center">
+        {sounds.map(sound => (
+          <div key={sound} className="mr-4">
+            <Button
+              onClick={() => onClick(sound)}
+              /* 
+              // @ts-ignore */
+              color={status[sound] ? 'red' : 'yellow'}
+            >
+              <FiPlayCircle className="mr-4 text-2xl" />
+              <span>{soundNames[sound]}</span>
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   )
+}
+
+const sounds = ['carton', 'coronabingo', 'eseBolilleroPapa', 'linea']
+const soundNames: { [key: string]: string } = {
+  carton: 'Cartón',
+  coronabingo: 'Coronabingo',
+  eseBolilleroPapa: 'Ese bolillero papá',
+  linea: 'Línea'
 }
