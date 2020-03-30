@@ -1,10 +1,9 @@
 import firebase from 'firebase'
 import { useRouter } from 'next/router'
-import { FormEvent, Fragment, useState } from 'react'
+import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 // @ts-ignore
 import urlSlug from 'url-slug'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import { roomsRef } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
@@ -25,9 +24,9 @@ export default function CreateRoom() {
     type: 'information'
   })
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     setCanSubmit(isObjectFulfilled(formData))
-  }, [formData])
+  }, [formData.name])
 
   const onFieldChange = (key: string, value: string) => {
     setFormData({
@@ -71,7 +70,7 @@ export default function CreateRoom() {
 
     setTimeout(() => {
       router.push(`/sala/${roomName}/admin`)
-    }, 10000)
+    }, 1000)
   }
 
   return (
@@ -81,7 +80,7 @@ export default function CreateRoom() {
         <InputText
           id="name"
           label="Nombre *"
-          onInputChange={onFieldChange}
+          onChange={value => onFieldChange('name', value)}
           value={formData.name}
         />
         <div className="mt-8">

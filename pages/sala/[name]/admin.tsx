@@ -2,20 +2,19 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
-import { roomsRef } from '~/utils/firebase'
+import db, { roomsRef } from '~/utils/firebase'
 
-interface IPageProps {
+interface IProps {
   boardsDistribution: string[]
 }
 
-export default function AdminSala({ boardsDistribution }: IPageProps) {
+export default function Admin({ boardsDistribution }: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -34,6 +33,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     content: '',
     type: 'information'
   })
+  const [players, setPlayers] = useState<IPlayer[]>([])
 
   useEffect(() => {
     const getRoomData = async () => {
@@ -44,21 +44,37 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
       })
 
       try {
-        const roomRef = roomsRef.doc(roomName)
-        const roomDoc = await roomRef.get()
+        const roomDoc = roomsRef.doc(roomName)
+        const roomData = await roomDoc.get()
 
-        if (!roomDoc.exists) {
+        if (!roomData.exists) {
           router.push('/')
 
           return
         }
 
-        const data = roomDoc.data()
+        await roomDoc
+          .collection('players')
+          .get()
+          .then(roomPlayers =>
+            setPlayers(
+              roomPlayers.docs.map(p => {
+                const data = p.data()
+
+                return {
+                  id: p.id,
+                  name: data.name,
+                  boards: data.boards,
+                  selectedNumbers: data.selectedNumbers
+                }
+              })
+            )
+          )
 
         setRoom({
           loading: false,
           error: null,
-          data: data
+          data: roomData.data()
         })
       } catch (error) {
         setRoom({
@@ -72,15 +88,6 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     if (roomName) getRoomData()
   }, [roomName])
 
-  useDeepCompareEffect(() => {
-    const updateRoom = async () => {
-      const roomRef = roomsRef.doc(roomName)
-      roomRef.update({ ...room.data })
-    }
-
-    if (roomName) updateRoom()
-  }, [{ ...room.data }])
-
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
       ...room,
@@ -92,40 +99,45 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
     })
   }
 
+  const removePlayer = (playerId: string) => {
+    roomsRef
+      .doc(roomName)
+      .collection('players')
+      .doc(playerId)
+      .delete()
+  }
+
   const readyToPlay = async () => {
     setMessage({
       content: 'Sala configurada con éxito. Espere...',
       type: 'success'
     })
 
-    const snapshot = await roomsRef
-      .doc(roomName)
-      .collection('players')
-      .get()
+    let roomDoc = roomsRef.doc(roomName)
 
-    let index = 0
-    snapshot.forEach(p => {
-      roomsRef
-        .doc(roomName)
-        .collection('players')
-        .doc(p.id)
-        .update({
-          boards: boardsDistribution[index]
-        })
+    let batch = db.batch()
+    batch.update(roomDoc, { ...room.data, readyToPlay: true })
 
-      index++
+    players.map((player, index) => {
+      const { id, name } = player
+
+      id
+        ? batch.update(roomDoc.collection('players').doc(id), {
+            boards: boardsDistribution[index],
+            selectedNumbers: []
+          })
+        : batch.set(roomDoc.collection('players').doc(), {
+            name,
+            boards: boardsDistribution[index],
+            selectedNumbers: []
+          })
     })
 
-    onFieldChange([
-      {
-        key: 'readyToPlay',
-        value: true
-      }
-    ])
+    await batch.commit()
 
     setTimeout(() => {
       router.push(`/sala/${roomName}`)
-    }, 3000)
+    }, 1000)
   }
 
   return (
@@ -156,7 +168,7 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
               <InputText
                 id="videoCall"
                 label="Link a la videollamada"
-                onInputChange={(key, value) => onFieldChange([{ key, value }])}
+                onChange={value => onFieldChange([{ key: 'videocall', value }])}
                 value={room.data.videoCall || ''}
               />
               <InputText
@@ -171,13 +183,19 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                   Compartí este link a las personas de la videollamada.
                 </p>
               </div>
-              <Players adminId={room.data.adminId} onChange={onFieldChange} />
+              <Players
+                players={players}
+                setPlayers={setPlayers}
+                adminId={room.data.adminId}
+                onChange={onFieldChange}
+                removePlayer={removePlayer}
+              />
               <div className="mt-4">
                 <Checkbox
                   id="turningGlob"
                   label="Usar bolillero online"
-                  onInputChange={(key, value) =>
-                    onFieldChange([{ key, value }])
+                  onChange={value =>
+                    onFieldChange([{ key: 'turningGlob', value }])
                   }
                   value={room.data.turningGlob || false}
                 />
@@ -194,10 +212,10 @@ export default function AdminSala({ boardsDistribution }: IPageProps) {
                   id="readyToPlay"
                   className="w-full"
                   disabled={!room.data.adminId}
-                  onButtonClick={readyToPlay}
+                  onClick={readyToPlay}
                 >
-                  <FiSmile className="text-2xl" />
-                  <span className="ml-4">Jugar</span>
+                  <FiSmile className="text-2xl mr-4" />
+                  <span>Jugar</span>
                 </Button>
               </div>
             </Fragment>

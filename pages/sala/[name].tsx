@@ -1,58 +1,17 @@
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import { IPlayer } from '~/components/Players'
-import { roomsRef } from '~/utils/firebase'
+import useRoom from '~/hooks/useRoom'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
 export default function Sala() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
-  const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
-  const [players, setPlayers] = useState<IPlayer[]>([])
-
-  useEffect(() => {
-    if (!roomName) return
-
-    const unsubscribe = roomsRef.doc(roomName).onSnapshot(snapshot => {
-      const roomData = snapshot.data()
-
-      if (roomData) {
-        setRoom(roomData)
-      }
-    })
-
-    return unsubscribe
-  }, [roomName])
-
-  useEffect(() => {
-    if (!roomName) return
-
-    const unsubscribe = roomsRef
-      .doc(roomName)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        const players: IPlayer[] = []
-
-        snapshot.docs.forEach(doc => {
-          const playerData = doc.data()
-
-          if (playerData) {
-            // @ts-ignore
-            players.push({
-              id: doc.id,
-              ...playerData
-            })
-          }
-        })
-
-        setPlayers(players)
-      })
-
-    return unsubscribe
-  }, [roomName])
+  const room = useRoom(roomName)
+  const players = useRoomPlayers(roomName)
 
   return (
     <div className="px-4 py-8">
@@ -72,7 +31,7 @@ export default function Sala() {
           </div>
           <InputText
             id="room-name"
-            label="Nombre"
+            label="Nombre de la sala"
             value={roomName || ''}
             readonly
             onFocus={event => event.target.select()}
@@ -103,7 +62,7 @@ export default function Sala() {
                     key={index}
                     className={classnames([
                       'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                      player.id === room.adminId
+                      player.name === room.adminId
                         ? 'bg-green-100'
                         : index % 2 === 0
                         ? 'bg-gray-100'
@@ -112,7 +71,7 @@ export default function Sala() {
                   >
                     <div className="flex flex-auto items-center">
                       <p>{player.name}</p>
-                      {player.id === room.adminId && (
+                      {player.name === room.adminId && (
                         <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                           Dirige el juego
                         </span>
@@ -121,7 +80,7 @@ export default function Sala() {
                     <div className="ml-4">
                       <Button
                         id="play"
-                        onButtonClick={() => {
+                        onClick={() => {
                           router.push(
                             `/sala/${roomName}/jugar?jugador=${player.id}`
                           )

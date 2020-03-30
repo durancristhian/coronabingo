@@ -1,0 +1,41 @@
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.appear {
+  animation: appear 1s ease-in forwards;
+  opacity: 0;
+}
+
+.ball {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.ball > div {
+  border-radius: 50%;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.ball > div > span {
+  background: #fff;
+  border-radius: 50%;
+  height: 60%;
+  left: 50%;
+  line-height: 175%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+}

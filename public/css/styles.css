@@ -4,15 +4,11 @@
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
+@import 'background-cell.css';
+@import 'ball.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
-}
-
-.poroto {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .text-shadow-white {
@@ -27,4 +23,8 @@
   position: absolute !important;
   width: 1px;
   white-space: nowrap; /* added line */
+}
+
+.w-1\/10 {
+  width: calc(100% / 9);
 }
