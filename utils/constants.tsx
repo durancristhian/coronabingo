@@ -1,10 +1,10 @@
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 export const BACKGROUND_CELL_VALUES = [
-  { name: 'Amarillito', type: 'color', value: 'bg-yellow-300' },
-  { name: 'Azulcito', type: 'color', value: 'bg-blue-300' },
-  { name: 'Naranjita', type: 'color', value: 'bg-orange-300' },
-  { name: 'Verdecito', type: 'color', value: 'bg-green-300' },
+  { name: 'Amarillito', type: 'color', value: 'yellow' },
+  { name: 'Azulcito', type: 'color', value: 'blue' },
+  { name: 'Naranjita', type: 'color', value: 'orange' },
+  { name: 'Verdecito', type: 'color', value: 'green' },
   { name: 'Pikachu', type: 'img', value: 'pikachu.jpg' },
   { name: 'Cremona', type: 'img', value: 'cremona.jpg' },
   { name: 'Coronavirus', type: 'img', value: 'coronavirus.gif' }
