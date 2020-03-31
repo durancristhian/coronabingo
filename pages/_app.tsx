@@ -7,6 +7,7 @@ import 'typeface-oswald'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
+import { version } from '~/package.json'
 import '~/public/css/styles.css'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
@@ -29,6 +30,10 @@ export default class Coronabingo extends App {
     }
 
     super.componentDidCatch(error, errorInfo)
+  }
+
+  componentDidMount() {
+    console.log(`Coronabingo v${version}`)
   }
 
   render() {
