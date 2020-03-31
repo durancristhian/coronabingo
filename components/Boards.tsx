@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import { Fragment, useEffect } from 'react'
-import useSWR from 'swr'
-import fetcher from '~/utils/fetcher'
+import useBoards from '~/hooks/useBoards'
 import { roomsRef } from '~/utils/firebase'
 import Cells from './Cells'
 
@@ -14,8 +13,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
-  const url = `/api/boards?cartones=${player.boards}`
-  const { data, error } = useSWR<IBoards>(url, fetcher)
+  const boards = useBoards(player.boards)
 
   useEffect(() => {
     const roomValues = JSON.parse(localStorage.getItem('roomValues') || '{}')
@@ -36,7 +34,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
       localStorage.setItem(
         'roomValues',
         JSON.stringify({
-          [roomName]: data?.boards.reduce(
+          [roomName]: boards.reduce(
             (acc, board) => ({
               ...acc,
               [board.id]: player?.[board.id]
@@ -48,13 +46,11 @@ export default function Boards({ player, setPlayerProps }: IProps) {
 
       return e.preventDefault()
     }
-  }, [data, player, roomName])
-
-  if (error || !data) return null
+  }, [boards, player, roomName])
 
   return (
     <Fragment>
-      {data.boards.map((board, i) => (
+      {boards.map((board, i) => (
         <div
           key={i}
           className="bg-white mb-8 p-4 border-2 border-gray-900 shadow"
@@ -75,11 +71,4 @@ export default function Boards({ player, setPlayerProps }: IProps) {
       ))}
     </Fragment>
   )
-}
-
-interface IBoards {
-  boards: {
-    id: number
-    numbers: number[]
-  }[]
 }
