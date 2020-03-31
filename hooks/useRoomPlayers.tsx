@@ -13,16 +13,18 @@ export default function useRoomPlayers(roomName: string): IPlayer[] {
       .collection('players')
       .onSnapshot(snapshot => {
         setPlayers(
-          snapshot.docs.map(p => {
-            const data = p.data()
+          snapshot.docs
+            .map(p => {
+              const data = p.data()
 
-            return {
-              id: p.id,
-              name: data.name,
-              boards: data.boards,
-              selectedNumbers: data.selectedNumbers
-            }
-          })
+              return {
+                id: p.id,
+                name: data.name,
+                boards: data.boards,
+                selectedNumbers: data.selectedNumbers
+              }
+            })
+            .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
         )
       })
 
