@@ -53,16 +53,17 @@ export default function SelectedNumbers({
             type="button"
             key={n}
             className={classnames([
-              'cursor-default flex items-center justify-center h-8',
+              'cursor-default flex items-center justify-center h-8 text-gray-600',
               'focus:outline-none',
               'duration-150 ease-in-out transition',
-              selectedNumbers.includes(n) && 'bg-green-400 text-green-800',
+              selectedNumbers.includes(n) &&
+                'bg-green-400 font-medium text-green-800',
               enableForAdmin && 'cursor-pointer focus:shadow-outline'
             ])}
             style={{ width: '10%' }}
             onClick={() => enableForAdmin && onNewNumber(n)}
           >
-            <span className="font-medium font-oswald uppercase">{n}</span>
+            <span className="font-oswald uppercase">{n}</span>
           </button>
         ))}
       </div>
