@@ -8,9 +8,7 @@ export default function useRoomPlayers(
   const [players, setPlayers] = useState<IPlayer[]>([])
 
   const sortAndSet = (array: IPlayer[]) =>
-    setPlayers(
-      array.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
-    )
+    setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
 
   useEffect(() => {
     if (!roomName) return
