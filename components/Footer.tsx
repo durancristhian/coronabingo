@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 
@@ -23,34 +23,52 @@ export default function Footer() {
   }
 
   return (
-    <div className="bg-white p-4 shadow">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between">
-          <div>
-            <p>
-              Hecho por <span onClick={tricks}>Cristhian Duran</span>
-            </p>
-          </div>
-          <div className="flex items-center">
+    <Fragment>
+      <div className="bg-yellow-100 px-4 py-2">
+        <div className="max-w-4xl mx-auto">
+          <div className="leading-normal text-center">
+            <span>Dejanos tu feedback completando&nbsp;</span>
             <a
-              href="https://github.com/durancristhian/coronabingo/"
+              href="https://forms.gle/egSBrsKSFnEgabff7"
               target="_blank"
               rel="noopener noreferrer"
-              className="focus:outline-none focus:shadow-outline mr-4 text-2xl"
+              className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
             >
-              <FaGithub />
+              esta encuesta
             </a>
-            <a
-              href="https://twitter.com/DuranCristhian"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus:outline-none focus:shadow-outline text-2xl"
-            >
-              <FaTwitter />
-            </a>
+            <span>&nbsp;🤩</span>
           </div>
         </div>
       </div>
-    </div>
+      <div className="bg-white p-4 shadow">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between">
+            <div>
+              <p>
+                Hecho por <span onClick={tricks}>Cristhian Duran</span>
+              </p>
+            </div>
+            <div className="flex items-center">
+              <a
+                href="https://github.com/durancristhian/coronabingo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none focus:shadow-outline mr-4 text-2xl"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://twitter.com/DuranCristhian"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none focus:shadow-outline text-2xl"
+              >
+                <FaTwitter />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   )
 }
