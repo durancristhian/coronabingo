@@ -8,6 +8,7 @@ import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import db, { roomsRef } from '~/utils/firebase'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
 export default function Admin() {
   const router = useRouter()
@@ -28,7 +29,7 @@ export default function Admin() {
     content: '',
     type: 'information'
   })
-  const [players, setPlayers] = useState<IPlayer[]>([])
+  const [players, setPlayers] = useRoomPlayers(roomName)
   const randomBoards = useRandomBoards()
 
   useEffect(() => {
@@ -48,24 +49,6 @@ export default function Admin() {
 
           return
         }
-
-        await roomDoc
-          .collection('players')
-          .get()
-          .then(roomPlayers =>
-            setPlayers(
-              roomPlayers.docs.map(p => {
-                const data = p.data()
-
-                return {
-                  id: p.id,
-                  name: data.name,
-                  boards: data.boards,
-                  selectedNumbers: data.selectedNumbers
-                }
-              })
-            )
-          )
 
         setRoom({
           loading: false,
