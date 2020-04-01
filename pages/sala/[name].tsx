@@ -11,7 +11,7 @@ export default function Sala() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
-  const players = useRoomPlayers(roomName)
+  const [players] = useRoomPlayers(roomName)
 
   return (
     <div className="px-4 py-8">

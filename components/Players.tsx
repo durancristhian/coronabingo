@@ -60,21 +60,19 @@ export default function Players({
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
-    setPlayers(
-      [
-        ...players,
-        {
-          boards: '',
-          /* TODO: extract this to somewhere else. Maybe db utils */
-          id: roomsRef
-            .doc(roomName)
-            .collection('players')
-            .doc().id,
-          name,
-          selectedNumbers: []
-        }
-      ].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
-    )
+    setPlayers([
+      ...players,
+      {
+        boards: '',
+        /* TODO: extract this to somewhere else. Maybe db utils */
+        id: roomsRef
+          .doc(roomName)
+          .collection('players')
+          .doc().id,
+        name,
+        selectedNumbers: []
+      }
+    ])
 
     setName('')
   }

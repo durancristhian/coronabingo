@@ -9,6 +9,7 @@ import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import fetcher from '~/utils/fetcher'
 import db, { roomsRef } from '~/utils/firebase'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
 interface IProps {
   boardsDistribution: string[]
@@ -33,7 +34,8 @@ export default function Admin({ boardsDistribution }: IProps) {
     content: '',
     type: 'information'
   })
-  const [players, setPlayers] = useState<IPlayer[]>([])
+
+  const [players, setPlayers] = useRoomPlayers(roomName)
 
   useEffect(() => {
     const getRoomData = async () => {
@@ -52,24 +54,6 @@ export default function Admin({ boardsDistribution }: IProps) {
 
           return
         }
-
-        await roomDoc
-          .collection('players')
-          .get()
-          .then(roomPlayers =>
-            setPlayers(
-              roomPlayers.docs.map(p => {
-                const data = p.data()
-
-                return {
-                  id: p.id,
-                  name: data.name,
-                  boards: data.boards,
-                  selectedNumbers: data.selectedNumbers
-                }
-              })
-            )
-          )
 
         setRoom({
           loading: false,
