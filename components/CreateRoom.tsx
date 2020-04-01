@@ -69,7 +69,7 @@ export default function CreateRoom() {
     })
 
     setTimeout(() => {
-      router.push(`/sala/${roomName}/admin`)
+      router.push('/sala/[name]/admin', `/sala/${roomName}/admin`)
     }, 1000)
   }
 

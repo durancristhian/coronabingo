@@ -16,19 +16,20 @@ export default function Boards({ player, setPlayerProps }: IProps) {
   const boards = useBoards(player.boards)
 
   useEffect(() => {
-    const roomValues = JSON.parse(localStorage.getItem('roomValues') || '{}')
+    try {
+      const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
+      if (roomValues[roomName]) {
+        roomsRef
+          .doc(roomName)
+          .collection('players')
+          .doc(playerId)
+          .update(roomValues[roomName])
 
-    if (roomValues[roomName]) {
-      roomsRef
-        .doc(roomName)
-        .collection('players')
-        .doc(playerId)
-        .update(roomValues[roomName])
+        setPlayerProps(roomValues[roomName])
 
-      setPlayerProps(roomValues[roomName])
-
-      localStorage.removeItem('roomValues')
-    }
+        localStorage.removeItem('roomValues')
+      }
+    } catch (e) {}
 
     window.onbeforeunload = (e: BeforeUnloadEvent) => {
       localStorage.setItem(
@@ -46,7 +47,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
 
       return e.preventDefault()
     }
-  }, [boards, player, roomName])
+  }, [boards, playerId, roomName])
 
   return (
     <Fragment>
