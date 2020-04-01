@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
@@ -7,15 +6,11 @@ import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
-import fetcher from '~/utils/fetcher'
+import useRandomBoards from '~/hooks/useRandomBoards'
 import db, { roomsRef } from '~/utils/firebase'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 
-interface IProps {
-  boardsDistribution: string[]
-}
-
-export default function Admin({ boardsDistribution }: IProps) {
+export default function Admin() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -34,8 +29,8 @@ export default function Admin({ boardsDistribution }: IProps) {
     content: '',
     type: 'information'
   })
-
   const [players, setPlayers] = useRoomPlayers(roomName)
+  const randomBoards = useRandomBoards()
 
   useEffect(() => {
     const getRoomData = async () => {
@@ -107,7 +102,7 @@ export default function Admin({ boardsDistribution }: IProps) {
 
       batch.set(roomDoc.collection('players').doc(id), {
         name,
-        boards: boardsDistribution[index],
+        boards: randomBoards[index],
         selectedNumbers: []
       })
     })
@@ -207,26 +202,6 @@ export default function Admin({ boardsDistribution }: IProps) {
       </div>
     </div>
   )
-}
-
-interface BoardsRes {
-  boardsDistribution: string[]
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  let data: BoardsRes
-
-  if (process.env.NODE_ENV === 'production') {
-    data = await fetcher(`https://${req.headers.host}/api/boards-distribution`)
-  } else {
-    data = require('~/public/boards-distribution.json')
-  }
-
-  return {
-    props: {
-      ...data
-    }
-  }
 }
 
 export type Field = boolean | number[] | string | IPlayer[]
