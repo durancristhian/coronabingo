@@ -143,12 +143,10 @@ export default function Jugar() {
                   color={room?.showConfetti ? 'red' : 'green'}
                   onClick={confetti}
                 >
-                  {room?.showConfetti ? (
-                    <FiFrown className="mr-4 text-2xl" />
-                  ) : (
-                    <FiSmile className="mr-4 text-2xl" />
-                  )}
-                  {room?.showConfetti ? 'No festejar más' : 'Festejar'}
+                  {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                  <span className="ml-4">
+                    {room?.showConfetti ? 'No festejar más' : 'Festejar'}
+                  </span>
                 </Button>
               </div>
             )}

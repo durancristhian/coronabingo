@@ -85,7 +85,7 @@ export default function CreateRoom() {
         />
         <div className="mt-8">
           <Button className="w-full" disabled={!canSubmit} type="submit">
-            <FiSmile className="text-2xl" />
+            <FiSmile />
             <span className="ml-4">Listo</span>
           </Button>
         </div>

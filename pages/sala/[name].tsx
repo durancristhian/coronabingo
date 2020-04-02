@@ -60,8 +60,8 @@ export default function Sala() {
               </h3>
               <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
                 <p className="my-8">
-                  Buscate en esta lista y esperá que se habilite el botón para
-                  acceder a tus cartones y al bolillero.
+                  Buscate en esta lista y presioná el botón jugar para acceder a
+                  tus cartones.
                 </p>
               </div>
               <div className="border-gray-300 border-t-2 mt-4 -mx-4">
