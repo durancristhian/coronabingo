@@ -16,7 +16,7 @@ export default function Pato() {
 
   return (
     <Fragment>
-      <p className="mb-1">Patonera</p>
+      <p className="mb-1">Botonera</p>
       <div className="flex justify-center flex-wrap">
         {Object.keys(sounds).map(sound => (
           <div key={sound} className="mb-4 mr-4">
