@@ -140,12 +140,6 @@ export default function Admin() {
                 onFocus={event => event.target.select()}
               />
               <InputText
-                id="videoCall"
-                label="Link a la videollamada"
-                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
-                value={room.data.videoCall || ''}
-              />
-              <InputText
                 id="url"
                 label="Link a la sala"
                 value={`${window.location.host}/sala/${roomName}`}
@@ -157,6 +151,12 @@ export default function Admin() {
                   Compartí este link a las personas de la videollamada.
                 </p>
               </div>
+              <InputText
+                id="videoCall"
+                label="Link a la videollamada"
+                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
+                value={room.data.videoCall || ''}
+              />
               <Players
                 players={players}
                 setPlayers={setPlayers}

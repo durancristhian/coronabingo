@@ -45,7 +45,15 @@ export default function Sala() {
               value={room.videoCall || ''}
             />
           )}
-          {!!players.length && (
+          {!room.readyToPlay && (
+            <div className="mt-8">
+              <div className="italic leading-normal text-gray-600 text-sm">
+                La sala no está lista para jugar todavía. Cuando lo esté, esta
+                página se actualizará.
+              </div>
+            </div>
+          )}
+          {room.readyToPlay && (
             <div className="mt-8">
               <h3 className="font-medium text-md">
                 <span>Personas que van a jugar: {players.length}</span>
