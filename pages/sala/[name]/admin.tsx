@@ -110,7 +110,7 @@ export default function Admin() {
     await batch.commit()
 
     setTimeout(() => {
-      router.push(`/sala/${roomName}`)
+      router.push('/sala/[name]', `/sala/${roomName}`)
     }, 1000)
   }
 

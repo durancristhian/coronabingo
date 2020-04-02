@@ -80,12 +80,13 @@ export default function Sala() {
                     <div className="ml-4">
                       <Button
                         id="play"
-                        onClick={() => {
+                        disabled={!room.readyToPlay}
+                        onClick={() =>
                           router.push(
+                            `/sala/[name]/jugar?jugador=${player.id}`,
                             `/sala/${roomName}/jugar?jugador=${player.id}`
                           )
-                        }}
-                        disabled={!room.readyToPlay}
+                        }
                       >
                         <FiLink2 />
                       </Button>
