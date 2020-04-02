@@ -18,10 +18,6 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 }
 
 export default class Coronabingo extends App {
-  state = {
-    webSocketEnabled: true
-  }
-
   // @ts-ignore
   componentDidCatch(error, errorInfo) {
     if (process.env.NODE_ENV === 'production') {
@@ -39,17 +35,10 @@ export default class Coronabingo extends App {
 
   componentDidMount() {
     console.log(`v${version}`)
-
-    if (!window.WebSocket) {
-      this.setState({
-        webSocketEnabled: false
-      })
-    }
   }
 
   render() {
     const { Component, pageProps } = this.props
-    const { webSocketEnabled } = this.state
 
     return (
       <Fragment>
@@ -101,15 +90,6 @@ export default class Coronabingo extends App {
         <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
           <EasterEggContextProvider>
             <Header />
-            {!webSocketEnabled && (
-              <Banner type="error">
-                <span>
-                  Detectamos que el navegador, un AD Blocker o quizás una VPN
-                  puede estar blockeando el acceso al juego. Esto significa que
-                  no vas a poder jugar 😭
-                </span>
-              </Banner>
-            )}
             <div className="flex-auto">
               <Component {...pageProps} />
             </div>
