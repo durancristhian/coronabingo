@@ -69,13 +69,16 @@ export default function Sala() {
                         : 'bg-gray-200'
                     ])}
                   >
-                    <div className="flex flex-auto items-center">
+                    <div className="flex flex-auto flex-wrap items-center">
                       <p>{player.name}</p>
                       {player.id === room.adminId && (
                         <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                           Dirige el juego
                         </span>
                       )}
+                      <p className="italic mt-4 text-gray-600 text-sm w-full">
+                        Cartones nº {player.boards.split(',').join(' y ')}
+                      </p>
                     </div>
                     <div className="ml-4">
                       <Button
@@ -89,6 +92,7 @@ export default function Sala() {
                         }
                       >
                         <FiLink2 />
+                        <span className="ml-4">Jugar</span>
                       </Button>
                     </div>
                   </div>
