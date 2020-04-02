@@ -16,38 +16,39 @@ export default function Boards({ player, setPlayerProps }: IProps) {
   const boards = useBoards(player.boards)
 
   useEffect(() => {
-    try {
-      const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
-      if (roomValues[roomName]) {
+    if (roomName && playerId) {
+      try {
+        const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
+        const playerValues = roomValues?.[playerId] || {}
         roomsRef
           .doc(roomName)
           .collection('players')
           .doc(playerId)
-          .update(roomValues[roomName])
-
-        setPlayerProps(roomValues[roomName])
-
+          .update(playerValues)
+        setPlayerProps(playerValues)
         localStorage.removeItem('roomValues')
+      } catch (e) {}
+
+      const saveOnLeave = (e: BeforeUnloadEvent | PopStateEvent) => {
+        localStorage.setItem(
+          'roomValues',
+          JSON.stringify({
+            [playerId]: boards.reduce(
+              (acc, board) => ({
+                ...acc,
+                [board.id]: player?.[board.id] || []
+              }),
+              {}
+            )
+          })
+        )
+        return e.preventDefault()
       }
-    } catch (e) {}
 
-    window.onbeforeunload = (e: BeforeUnloadEvent) => {
-      localStorage.setItem(
-        'roomValues',
-        JSON.stringify({
-          [roomName]: boards.reduce(
-            (acc, board) => ({
-              ...acc,
-              [board.id]: player?.[board.id]
-            }),
-            {}
-          )
-        })
-      )
-
-      return e.preventDefault()
+      window.onbeforeunload = saveOnLeave
+      window.onpopstate = saveOnLeave
     }
-  }, [boards, playerId, roomName])
+  }, [boards, player, playerId, roomName])
 
   return (
     <Fragment>
