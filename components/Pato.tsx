@@ -16,11 +16,6 @@ export default function Pato() {
   return (
     <div>
       <p className="mb-1">Patonera</p>
-      <Button onClick={() => onClick('mira-ese-bolillero-papa')}>
-        <FiPlayCircle className="mr-4 text-2xl" />
-        Mirá ese bolillero papá
-      </Button>
-
       <div className="flex justify-center flex-wrap">
         {Object.keys(sounds).map(sound => (
           <div key={sound} className="mb-4 mr-4">
@@ -28,7 +23,7 @@ export default function Pato() {
               onClick={() => onClick(sound)}
               /* 
               // @ts-ignore */
-              color='yellow'
+              color="yellow"
             >
               <FiPlayCircle className="mr-4 text-2xl" />
               <span>{sounds[sound]}</span>
@@ -45,5 +40,6 @@ const sounds: { [key: string]: string } = {
   coronabingo: 'Coronabingo',
   'cruzar-dedos': 'Cruzar los dedos',
   'ese-bolillero-papa': 'Ese bolillero papá',
-  linea: 'Línea'
+  linea: 'Línea',
+  'hundiste-mi-acorazado': 'Hundiste mi acorazado'
 }
