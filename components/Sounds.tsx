@@ -14,6 +14,7 @@ export default function Sounds({ isAdmin }: IProps) {
 
   useEffect(() => {
     if (!room) return
+
     const { soundToPlay } = room
 
     if (soundToPlay) {

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { Fragment } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
@@ -14,32 +15,31 @@ export default function Pato() {
   }
 
   return (
-    <div>
+    <Fragment>
       <p className="mb-1">Patonera</p>
       <div className="flex justify-center flex-wrap">
         {Object.keys(sounds).map(sound => (
           <div key={sound} className="mb-4 mr-4">
-            <Button
-              onClick={() => onClick(sound)}
-              /* 
-              // @ts-ignore */
-              color="yellow"
-            >
-              <FiPlayCircle className="mr-4 text-2xl" />
-              <span>{sounds[sound]}</span>
+            <Button onClick={() => onClick(sound)} color="yellow">
+              <FiPlayCircle />
+              <span className="ml-4">{sounds[sound]}</span>
             </Button>
           </div>
         ))}
       </div>
-    </div>
+    </Fragment>
   )
 }
 
-const sounds: { [key: string]: string } = {
+interface ISound {
+  [key: string]: string
+}
+
+const sounds: ISound = {
   carton: 'Cartón',
   coronabingo: 'Coronabingo',
   'cruzar-dedos': 'Cruzar los dedos',
   'ese-bolillero-papa': 'Ese bolillero papá',
-  linea: 'Línea',
-  'hundiste-mi-acorazado': 'Hundiste mi acorazado'
+  'hundiste-mi-acorazado': 'Hundiste mi acorazado',
+  linea: 'Línea'
 }
