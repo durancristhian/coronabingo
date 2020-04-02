@@ -11,7 +11,7 @@ export default function TurningGlob({ selectedNumbers }: IProps) {
 
   return (
     <Fragment>
-      {!!rest.length && (
+      {!!last && (
         <Fragment>
           <div className="flex items-center overflow-hidden">
             <div style={{ flex: '0 0 85px' }}>
