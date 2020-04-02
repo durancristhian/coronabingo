@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
@@ -7,14 +6,11 @@ import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
-import fetcher from '~/utils/fetcher'
+import useRandomBoards from '~/hooks/useRandomBoards'
 import db, { roomsRef } from '~/utils/firebase'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
-interface IProps {
-  boardsDistribution: string[]
-}
-
-export default function Admin({ boardsDistribution }: IProps) {
+export default function Admin() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -33,7 +29,8 @@ export default function Admin({ boardsDistribution }: IProps) {
     content: '',
     type: 'information'
   })
-  const [players, setPlayers] = useState<IPlayer[]>([])
+  const [players, setPlayers] = useRoomPlayers(roomName)
+  const randomBoards = useRandomBoards()
 
   useEffect(() => {
     const getRoomData = async () => {
@@ -52,24 +49,6 @@ export default function Admin({ boardsDistribution }: IProps) {
 
           return
         }
-
-        await roomDoc
-          .collection('players')
-          .get()
-          .then(roomPlayers =>
-            setPlayers(
-              roomPlayers.docs.map(p => {
-                const data = p.data()
-
-                return {
-                  id: p.id,
-                  name: data.name,
-                  boards: data.boards,
-                  selectedNumbers: data.selectedNumbers
-                }
-              })
-            )
-          )
 
         setRoom({
           loading: false,
@@ -123,7 +102,7 @@ export default function Admin({ boardsDistribution }: IProps) {
 
       batch.set(roomDoc.collection('players').doc(id), {
         name,
-        boards: boardsDistribution[index],
+        boards: randomBoards[index],
         selectedNumbers: []
       })
     })
@@ -131,7 +110,7 @@ export default function Admin({ boardsDistribution }: IProps) {
     await batch.commit()
 
     setTimeout(() => {
-      router.push(`/sala/${roomName}`)
+      router.push('/sala/[name]', `/sala/${roomName}`)
     }, 1000)
   }
 
@@ -161,12 +140,6 @@ export default function Admin({ boardsDistribution }: IProps) {
                 onFocus={event => event.target.select()}
               />
               <InputText
-                id="videoCall"
-                label="Link a la videollamada"
-                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
-                value={room.data.videoCall || ''}
-              />
-              <InputText
                 id="url"
                 label="Link a la sala"
                 value={`${window.location.host}/sala/${roomName}`}
@@ -178,6 +151,12 @@ export default function Admin({ boardsDistribution }: IProps) {
                   Compartí este link a las personas de la videollamada.
                 </p>
               </div>
+              <InputText
+                id="videoCall"
+                label="Link a la videollamada"
+                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
+                value={room.data.videoCall || ''}
+              />
               <Players
                 players={players}
                 setPlayers={setPlayers}
@@ -223,26 +202,6 @@ export default function Admin({ boardsDistribution }: IProps) {
       </div>
     </div>
   )
-}
-
-interface BoardsRes {
-  boardsDistribution: string[]
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  let data: BoardsRes
-
-  if (process.env.NODE_ENV === 'production') {
-    data = await fetcher(`https://${req.headers.host}/api/boards-distribution`)
-  } else {
-    data = require('~/public/boards-distribution.json')
-  }
-
-  return {
-    props: {
-      ...data
-    }
-  }
 }
 
 export type Field = boolean | number[] | string | IPlayer[]

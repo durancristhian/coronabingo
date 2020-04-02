@@ -28,17 +28,18 @@ export default function Jugar() {
   useEffect(() => {
     if (!playerId || !roomName) return
 
-    roomsRef
+    const unsubscribe = roomsRef
       .doc(roomName)
       .collection('players')
       .doc(playerId)
-      .get()
-      .then(doc =>
+      .onSnapshot(doc =>
         setPlayer({
           id: doc.id,
           ...doc.data()
         })
       )
+
+    return unsubscribe
   }, [playerId, roomName])
 
   const onNewNumber = (n: number) => {
@@ -133,7 +134,6 @@ export default function Jugar() {
             </div>
           </div>
         </div>
-        <Sounds />
         {room?.showConfetti && <Confetti />}
         {isVisible && (
           <div className="max-w-4xl mt-8 mx-auto">

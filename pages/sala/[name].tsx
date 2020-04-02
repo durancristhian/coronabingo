@@ -11,7 +11,7 @@ export default function Sala() {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
-  const players = useRoomPlayers(roomName)
+  const [players] = useRoomPlayers(roomName)
 
   return (
     <div className="px-4 py-8">
@@ -45,7 +45,15 @@ export default function Sala() {
               value={room.videoCall || ''}
             />
           )}
-          {!!players.length && (
+          {!room.readyToPlay && (
+            <div className="mt-8">
+              <div className="italic leading-normal text-gray-600 text-sm">
+                La sala no está lista para jugar todavía. Cuando lo esté, esta
+                página se actualizará.
+              </div>
+            </div>
+          )}
+          {room.readyToPlay && (
             <div className="mt-8">
               <h3 className="font-medium text-md">
                 <span>Personas que van a jugar: {players.length}</span>
@@ -69,25 +77,30 @@ export default function Sala() {
                         : 'bg-gray-200'
                     ])}
                   >
-                    <div className="flex flex-auto items-center">
+                    <div className="flex flex-auto flex-wrap items-center">
                       <p>{player.name}</p>
                       {player.id === room.adminId && (
                         <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                           Dirige el juego
                         </span>
                       )}
+                      <p className="italic mt-4 text-gray-600 text-sm w-full">
+                        Cartones nº {player.boards.split(',').join(' y ')}
+                      </p>
                     </div>
                     <div className="ml-4">
                       <Button
                         id="play"
-                        onClick={() => {
+                        disabled={!room.readyToPlay}
+                        onClick={() =>
                           router.push(
+                            `/sala/[name]/jugar?jugador=${player.id}`,
                             `/sala/${roomName}/jugar?jugador=${player.id}`
                           )
-                        }}
-                        disabled={!room.readyToPlay}
+                        }
                       >
                         <FiLink2 />
+                        <span className="ml-4">Jugar</span>
                       </Button>
                     </div>
                   </div>

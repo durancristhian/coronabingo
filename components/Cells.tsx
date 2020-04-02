@@ -1,9 +1,10 @@
 import classnames from 'classnames'
 import { Fragment } from 'react'
+import { IBoardNumbers } from '~/hooks/useBoards'
 import EmptyCell from './EmptyCell'
 
 interface IProps {
-  boardNumbers: number[]
+  boardNumbers: IBoardNumbers
   selectedNumbers: number[]
   setSelectedNumbers: (ns: number[]) => void
 }

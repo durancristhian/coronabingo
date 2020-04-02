@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { Fragment } from 'react'
 import { BOARD_NUMBER_COLOR, DREAMS } from '~/utils/constants'
 import Ball from './Ball'
@@ -8,32 +7,38 @@ interface IProps {
 }
 
 export default function TurningGlob({ selectedNumbers }: IProps) {
-  const roomNumbers = [...selectedNumbers]
-  const current = roomNumbers[0]
+  const [last, ...rest] = selectedNumbers
 
   return (
     <Fragment>
-      {!!roomNumbers.length && (
+      {!!last && (
         <Fragment>
           <div className="flex items-center overflow-hidden">
-            {roomNumbers.map((n, i) => (
-              <div
-                className={classnames(i !== 0 && 'opacity-50')}
-                key={n}
-                style={{
-                  flex: `0 0 ${i === 0 ? '85px' : '65px'}`
-                }}
-              >
-                <Ball
-                  animate={i === 0}
-                  color={BOARD_NUMBER_COLOR[n - 1]}
-                  number={n}
-                  size={i === 0 ? 75 : 55}
-                />
-              </div>
-            ))}
+            <div style={{ flex: '0 0 85px' }}>
+              <Ball
+                animate
+                color={BOARD_NUMBER_COLOR[last - 1]}
+                number={last}
+                size={75}
+              />
+            </div>
+            <div className="flex flex-auto overflow-x-scroll">
+              {rest.map((n, i) => (
+                <div
+                  className="opacity-50"
+                  key={n}
+                  style={{ flex: '0 0 65px' }}
+                >
+                  <Ball
+                    color={BOARD_NUMBER_COLOR[n - 1]}
+                    number={n}
+                    size={55}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="font-medium mt-4">{DREAMS[current]}</p>
+          <p className="font-medium mt-4">{DREAMS[last]}</p>
         </Fragment>
       )}
     </Fragment>
