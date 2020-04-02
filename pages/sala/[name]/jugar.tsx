@@ -7,7 +7,7 @@ import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import Message from '~/components/Message'
 import SelectedNumbers from '~/components/SelectedNumbers'
-import TurningGlob from '~/components/TurningGlob'
+import LastNumbers from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
@@ -83,7 +83,7 @@ export default function Jugar() {
                   <h2 className="font-medium mb-4 text-center text-xl">
                     Últimos números
                   </h2>
-                  <TurningGlob selectedNumbers={room?.selectedNumbers || []} />
+                  <LastNumbers selectedNumbers={room?.selectedNumbers || []} />
                 </div>
                 <div className="hidden lg:block mt-8">
                   <div className="bg-white px-4 py-8 rounded shadow">
