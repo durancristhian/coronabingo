@@ -3,7 +3,11 @@ import { useEffect } from 'react'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
 
-export default function Sounds({ isAdmin }: { isAdmin?: boolean }) {
+interface IProps {
+  isAdmin: boolean
+}
+
+export default function Sounds({ isAdmin }: IProps) {
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)

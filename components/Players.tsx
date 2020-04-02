@@ -159,18 +159,13 @@ export default function Players({
       <div className="mt-4">
         <Select
           disabled={!players.length}
+          hint="Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere."
           id="adminId"
           label="Dirige el juego"
           onChange={value => onChange([{ key: 'adminId', value }])}
           options={players}
           value={adminId}
         />
-      </div>
-      <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
-        <p className="my-8">
-          Elegí la persona que se va a hacer cargo de marcar los números para
-          que el resto se entere.
-        </p>
       </div>
     </div>
   )

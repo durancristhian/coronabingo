@@ -6,7 +6,7 @@ interface IProps {
   selectedNumbers: number[]
 }
 
-export default function TurningGlob({ selectedNumbers }: IProps) {
+export default function LastNumbers({ selectedNumbers }: IProps) {
   const [last, ...rest] = selectedNumbers
 
   return (

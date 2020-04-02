@@ -9,7 +9,7 @@ import Message from '~/components/Message'
 import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
-import TurningGlob from '~/components/TurningGlob'
+import LastNumbers from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
@@ -85,7 +85,7 @@ export default function Jugar() {
                   <h2 className="font-medium mb-4 text-center text-xl">
                     Últimos números
                   </h2>
-                  <TurningGlob selectedNumbers={room?.selectedNumbers || []} />
+                  <LastNumbers selectedNumbers={room?.selectedNumbers || []} />
                 </div>
                 <div className="hidden lg:block mt-8">
                   <div className="bg-white px-4 py-8 rounded shadow">
@@ -145,12 +145,10 @@ export default function Jugar() {
                   color={room?.showConfetti ? 'red' : 'green'}
                   onClick={confetti}
                 >
-                  {room?.showConfetti ? (
-                    <FiFrown className="mr-4 text-2xl" />
-                  ) : (
-                    <FiSmile className="mr-4 text-2xl" />
-                  )}
-                  {room?.showConfetti ? 'No festejar más' : 'Festejar'}
+                  {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                  <span className="ml-4">
+                    {room?.showConfetti ? 'No festejar más' : 'Festejar'}
+                  </span>
                 </Button>
                 <div className="mt-4">
                   <Pato />

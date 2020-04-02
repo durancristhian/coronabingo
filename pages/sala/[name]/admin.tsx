@@ -140,17 +140,13 @@ export default function Admin() {
                 onFocus={event => event.target.select()}
               />
               <InputText
+                hint="Compartí este link a las personas de la videollamada."
                 id="url"
                 label="Link a la sala"
                 value={`${window.location.host}/sala/${roomName}`}
                 readonly
                 onFocus={event => event.target.select()}
               />
-              <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
-                <p className="my-8">
-                  Compartí este link a las personas de la videollamada.
-                </p>
-              </div>
               <InputText
                 id="videoCall"
                 label="Link a la videollamada"
@@ -167,6 +163,7 @@ export default function Admin() {
               />
               <div className="mt-4">
                 <Checkbox
+                  hint="Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego."
                   id="turningGlob"
                   label="Usar bolillero online"
                   onChange={value =>
@@ -175,13 +172,6 @@ export default function Admin() {
                   value={room.data.turningGlob || false}
                 />
               </div>
-              <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
-                <p className="my-8">
-                  Si tenés un bolillero y querés usarlo no tildes esta opción.
-                  De lo contrario, tildala para tener un bolillero durante el
-                  juego.
-                </p>
-              </div>
               <div className="mt-8">
                 <Button
                   id="readyToPlay"
@@ -189,8 +179,8 @@ export default function Admin() {
                   disabled={!room.data.adminId}
                   onClick={readyToPlay}
                 >
-                  <FiSmile className="text-2xl mr-4" />
-                  <span>Jugar</span>
+                  <FiSmile />
+                  <span className="ml-4">Jugar</span>
                 </Button>
               </div>
             </Fragment>
