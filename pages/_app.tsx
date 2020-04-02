@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { Fragment } from 'react'
 import 'typeface-inter'
 import 'typeface-oswald'
+import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
@@ -17,6 +18,10 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 }
 
 export default class Coronabingo extends App {
+  state = {
+    webSocketEnabled: true
+  }
+
   // @ts-ignore
   componentDidCatch(error, errorInfo) {
     if (process.env.NODE_ENV === 'production') {
@@ -34,10 +39,17 @@ export default class Coronabingo extends App {
 
   componentDidMount() {
     console.log(`Coronabingo v${version}`)
+
+    if (!window.WebSocket) {
+      this.setState({
+        webSocketEnabled: false
+      })
+    }
   }
 
   render() {
     const { Component, pageProps } = this.props
+    const { webSocketEnabled } = this.state
 
     return (
       <Fragment>
@@ -89,9 +101,30 @@ export default class Coronabingo extends App {
         <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
           <EasterEggContextProvider>
             <Header />
+            {!webSocketEnabled && (
+              <Banner type="error">
+                <span>
+                  Detectamos que el navegador, un AD Blocker o quizás una VPN
+                  puede estar blockeando el acceso al juego. Esto significa que
+                  no vas a poder jugar 😭
+                </span>
+              </Banner>
+            )}
             <div className="flex-auto">
               <Component {...pageProps} />
             </div>
+            <Banner>
+              <span>Dejanos tu feedback completando&nbsp;</span>
+              <a
+                href="https://forms.gle/egSBrsKSFnEgabff7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
+              >
+                esta encuesta
+              </a>
+              <span>&nbsp;🤩</span>
+            </Banner>
             <Footer />
           </EasterEggContextProvider>
         </main>
