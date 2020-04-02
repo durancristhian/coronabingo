@@ -38,7 +38,7 @@ export default class Coronabingo extends App {
   }
 
   componentDidMount() {
-    console.log(`Coronabingo v${version}`)
+    console.log(`v${version}`)
 
     if (!window.WebSocket) {
       this.setState({
