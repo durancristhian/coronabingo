@@ -157,9 +157,11 @@ export default function Jugar() {
                 </div>
               </div>
             )}
+
             <BackgroundCells />
           </div>
         )}
+        <Sounds isAdmin={isAdmin} />
       </div>
     </BackgroundCellContextProvider>
   )
