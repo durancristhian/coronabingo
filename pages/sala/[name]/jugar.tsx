@@ -67,7 +67,7 @@ export default function Jugar() {
     <BackgroundCellContextProvider>
       <div className="px-4 py-8">
         <h2 className="font-medium text-center text-xl">
-          Hola {'Mateo' || player?.name}, estás en la sala <b>{roomName}</b>
+          Hola {player?.name}, estás en la sala <b>{roomName}</b>
         </h2>
         {!room && (
           <div className="max-w-4xl mx-auto">
