@@ -5,9 +5,9 @@ export const BACKGROUND_CELL_VALUES = [
   { name: 'Azulcito', type: 'color', value: 'blue' },
   { name: 'Naranjita', type: 'color', value: 'orange' },
   { name: 'Verdecito', type: 'color', value: 'green' },
-  { name: 'Pikachu', type: 'img', value: 'pikachu.jpg' },
-  { name: 'Cremona', type: 'img', value: 'cremona.jpg' },
-  { name: 'Coronavirus', type: 'img', value: 'coronavirus.gif' }
+  { name: 'Pikachu', type: 'img', value: 'pikachu.png' },
+  { name: 'Cremona', type: 'img', value: 'cremona.png' },
+  { name: 'COVID-19', type: 'img', value: 'coronavirus.gif' }
 ]
 export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
