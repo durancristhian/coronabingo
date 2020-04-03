@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Fragment, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
@@ -12,7 +12,6 @@ import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
-import { EasterEggContext } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
 
@@ -24,7 +23,6 @@ export default function Jugar() {
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const isAdmin = room?.adminId === playerId
-  const { isVisible } = useContext(EasterEggContext)
 
   useEffect(() => {
     if (!playerId || !roomName) return
@@ -135,42 +133,38 @@ export default function Jugar() {
             </div>
           </div>
         </div>
-        {room?.showConfetti && <Confetti />}
-        {isVisible && (
-          <Fragment>
-            {isAdmin && (
-              <div className="max-w-4xl mt-8 mx-auto">
-                <div className="bg-white p-4 rounded shadow">
-                  <Banner>
-                    Estás viendo este panel porque sos quien dirige la sala 😎
-                  </Banner>
-                  <div className="my-8 text-center">
-                    <h2 className="font-medium mb-8 text-center text-xl">
-                      Festejos
-                    </h2>
-                    <Button
-                      color={room?.showConfetti ? 'red' : 'green'}
-                      onClick={confetti}
-                    >
-                      {room?.showConfetti ? <FiFrown /> : <FiSmile />}
-                      <span className="ml-4">
-                        {room?.showConfetti ? 'Desactivar' : 'Activar'}
-                      </span>
-                      <span>&nbsp;confetti</span>
-                    </Button>
-                  </div>
-                  <Pato />
-                </div>
+        {isAdmin && (
+          <div className="max-w-4xl mt-8 mx-auto">
+            <div className="bg-white p-4 rounded shadow">
+              <Banner>
+                Estás viendo este panel porque sos quien dirige la sala 😎
+              </Banner>
+              <div className="my-8 text-center">
+                <h2 className="font-medium mb-8 text-center text-xl">
+                  Festejos
+                </h2>
+                <Button
+                  color={room?.showConfetti ? 'red' : 'green'}
+                  onClick={confetti}
+                >
+                  {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                  <span className="ml-4">
+                    {room?.showConfetti ? 'Desactivar' : 'Activar'}
+                  </span>
+                  <span>&nbsp;confetti</span>
+                </Button>
               </div>
-            )}
-            <div className="max-w-4xl mt-8 mx-auto">
-              <div className="bg-white p-4 rounded shadow">
-                <BackgroundCells />
-              </div>
+              <Pato />
             </div>
-          </Fragment>
+          </div>
         )}
+        {room?.showConfetti && <Confetti />}
         <Sounds isAdmin={isAdmin} />
+        <div className="max-w-4xl mt-8 mx-auto">
+          <div className="bg-white p-4 rounded shadow">
+            <BackgroundCells />
+          </div>
+        </div>
       </div>
     </BackgroundCellContextProvider>
   )
