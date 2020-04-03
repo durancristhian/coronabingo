@@ -11,7 +11,7 @@ export default function BackgroundCells() {
 
   return (
     <Fragment>
-      <h3 className="font-medium mb-8 text-center">Celdas vacías</h3>
+      <h2 className="font-medium mb-8 text-center text-xl">Celdas vacías</h2>
       <p className="mb-1">Motivos predefinidos</p>
       <div className="flex flex-wrap -mb-2">
         {BACKGROUND_CELL_VALUES.map((bc, i) => (

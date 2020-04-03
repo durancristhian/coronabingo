@@ -1,6 +1,8 @@
+import classnames from 'classnames'
 import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
+import { SOUNDS } from '~/utils/constants'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 
@@ -16,30 +18,27 @@ export default function Pato() {
 
   return (
     <Fragment>
-      <p className="mb-1">Botonera</p>
-      <div className="flex justify-center flex-wrap">
-        {Object.keys(sounds).map(sound => (
-          <div key={sound} className="mb-4 mr-4">
-            <Button onClick={() => onClick(sound)} color="yellow">
-              <FiPlayCircle />
-              <span className="ml-4">{sounds[sound]}</span>
-            </Button>
+      <h2 className="font-medium mb-8 text-center text-xl">Botonera</h2>
+      <div className="border-gray-300 border-l-2 border-r-2 border-t-2 rounded">
+        {SOUNDS.map(({ name, url }, index) => (
+          <div
+            key={index}
+            className={classnames([
+              'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
+              index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+            ])}
+          >
+            <div className="mr-4">
+              <Button onClick={() => onClick(url)}>
+                <FiPlayCircle />
+              </Button>
+            </div>
+            <div className="flex flex-auto items-center">
+              <p className="leading-normal">{name}</p>
+            </div>
           </div>
         ))}
       </div>
     </Fragment>
   )
-}
-
-interface ISound {
-  [key: string]: string
-}
-
-const sounds: ISound = {
-  carton: 'Cartón',
-  coronabingo: 'Coronabingo',
-  'cruzar-dedos': 'Cruzar los dedos',
-  'ese-bolillero-papa': 'Ese bolillero papá',
-  'hundiste-mi-acorazado': 'Hundiste mi acorazado',
-  linea: 'Línea'
 }

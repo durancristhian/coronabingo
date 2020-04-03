@@ -1,15 +1,16 @@
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
+import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
+import LastNumbers from '~/components/LastNumbers'
 import Message from '~/components/Message'
 import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
-import LastNumbers from '~/components/TurningGlob'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
@@ -136,28 +137,38 @@ export default function Jugar() {
         </div>
         {room?.showConfetti && <Confetti />}
         {isVisible && (
-          <div className="max-w-4xl mt-8 mx-auto">
-            <h2 className="font-medium mb-8 text-center text-xl">Trucos</h2>
+          <Fragment>
             {isAdmin && (
-              <div className="mb-8 text-center">
-                <p className="mb-1">Tirar confetti en la sala</p>
-                <Button
-                  color={room?.showConfetti ? 'red' : 'green'}
-                  onClick={confetti}
-                >
-                  {room?.showConfetti ? <FiFrown /> : <FiSmile />}
-                  <span className="ml-4">
-                    {room?.showConfetti ? 'No festejar más' : 'Festejar'}
-                  </span>
-                </Button>
-                <div className="mt-4">
+              <div className="max-w-4xl mt-8 mx-auto">
+                <div className="bg-white p-4 rounded shadow">
+                  <Banner>
+                    Estás viendo este panel porque sos quien dirige la sala 😎
+                  </Banner>
+                  <div className="my-8 text-center">
+                    <h2 className="font-medium mb-8 text-center text-xl">
+                      Festejos
+                    </h2>
+                    <Button
+                      color={room?.showConfetti ? 'red' : 'green'}
+                      onClick={confetti}
+                    >
+                      {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                      <span className="ml-4">
+                        {room?.showConfetti ? 'Desactivar' : 'Activar'}
+                      </span>
+                      <span>&nbsp;confetti</span>
+                    </Button>
+                  </div>
                   <Pato />
                 </div>
               </div>
             )}
-
-            <BackgroundCells />
-          </div>
+            <div className="max-w-4xl mt-8 mx-auto">
+              <div className="bg-white p-4 rounded shadow">
+                <BackgroundCells />
+              </div>
+            </div>
+          </Fragment>
         )}
         <Sounds isAdmin={isAdmin} />
       </div>

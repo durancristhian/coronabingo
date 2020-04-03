@@ -18,7 +18,7 @@ export default function Sounds({ isAdmin }: IProps) {
     const { soundToPlay } = room
 
     if (soundToPlay) {
-      new Audio(`/sounds/${soundToPlay}.mp3`).play().finally(() => {
+      new Audio(soundToPlay).play().finally(() => {
         isAdmin &&
           roomsRef.doc(roomName).update({
             soundToPlay: ''

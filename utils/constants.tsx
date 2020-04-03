@@ -117,3 +117,38 @@ export const DREAMS = [
   'Hermanos' // 99
 ]
 export const MAX_PLAYERS = 60
+
+interface ISound {
+  name: string
+  url: string
+}
+export const SOUNDS = [
+  {
+    name: 'Chino cirujano - Pero pagaraprata',
+    url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
+  },
+  {
+    name: 'Guido - Mirá la repe',
+    url: '/sounds/guido/mira-la-repe.mp3'
+  },
+  {
+    name: 'Guido - Preparado, listo, ya',
+    url: '/sounds/guido/preparado-listo-ya.mp3'
+  },
+  {
+    name: 'Riverito - A cruzar los dedos',
+    url: '/sounds/riverito/cruzar-dedos.mp3'
+  },
+  {
+    name: 'Los simpsons - Hundiste mi acorazado',
+    url: '/sounds/simpsons/hundiste-mi-acorazado.mp3'
+  },
+  {
+    name: 'Susana - Correctou',
+    url: '/sounds/susana/correctou.mp3'
+  },
+  {
+    name: 'Tano Pasman - Nooooo',
+    url: '/sounds/tano/nooooo.mp3'
+  }
+]

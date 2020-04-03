@@ -23,7 +23,7 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
               />
             </div>
             <div className="flex flex-auto overflow-x-scroll">
-              {rest.map((n, i) => (
+              {rest.map(n => (
                 <div
                   className="opacity-50"
                   key={n}
