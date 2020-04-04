@@ -1,6 +1,8 @@
 import classnames from 'classnames'
 // @ts-ignore
 import Router from 'next-translate/Router'
+// @ts-ignore
+import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import { FiLink2 } from 'react-icons/fi'
 import Button from '~/components/Button'
@@ -15,6 +17,7 @@ export default function Sala() {
   const roomName = router.query.name?.toString()
   const room = useRoom(roomName)
   const [players] = useRoomPlayers(roomName)
+  const { t } = useTranslation()
 
   return (
     <Layout>
@@ -23,7 +26,7 @@ export default function Sala() {
           <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
             <div className="mb-8">
               <h2 className="font-medium text-center text-xl">
-                Información de la sala
+                {t('sala:title')}
               </h2>
             </div>
             <div className="mb-8">
@@ -35,7 +38,7 @@ export default function Sala() {
             </div>
             <InputText
               id="room-name"
-              label="Nombre de la sala"
+              label={t('sala:roomname')}
               value={roomName || ''}
               readonly
               onFocus={event => event.target.select()}
@@ -43,7 +46,7 @@ export default function Sala() {
             {room.videoCall && (
               <InputText
                 id="videocall"
-                label="Link a la videollamada"
+                label={t('sala:call-link')}
                 readonly
                 onFocus={event => event.target.select()}
                 value={room.videoCall || ''}
@@ -52,21 +55,17 @@ export default function Sala() {
             {!room.readyToPlay && (
               <div className="mt-8">
                 <div className="italic leading-normal text-gray-600 text-sm">
-                  La sala no está lista para jugar todavía. Cuando lo esté, esta
-                  página se actualizará.
+                  {t('sala:not-ready')}
                 </div>
               </div>
             )}
             {room.readyToPlay && (
               <div className="mt-8">
                 <h3 className="font-medium text-md">
-                  <span>Personas que van a jugar: {players.length}</span>
+                  <span>{t('sala:people', { count: players.length })}</span>
                 </h3>
                 <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
-                  <p className="my-8">
-                    Buscate en esta lista y presioná el botón jugar para acceder
-                    a tus cartones.
-                  </p>
+                  <p className="my-8">{t('sala:list-description')}</p>
                 </div>
                 <div className="border-gray-300 border-t-2 mt-4 -mx-4">
                   {players.map((player: IPlayer, index: number) => (
@@ -85,11 +84,12 @@ export default function Sala() {
                         <p>{player.name}</p>
                         {player.id === room.adminId && (
                           <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
-                            Dirige el juego
+                            {t('sala:is-admin')}
                           </span>
                         )}
                         <p className="italic mt-4 text-gray-600 text-sm w-full">
-                          Cartones nº {player.boards.split(',').join(' y ')}
+                          {t('common:board_plural')} nº{' '}
+                          {player.boards.split(',').join(' y ')}
                         </p>
                       </div>
                       <div className="ml-4">
@@ -104,7 +104,7 @@ export default function Sala() {
                           }
                         >
                           <FiLink2 />
-                          <span className="ml-4">Jugar</span>
+                          <span className="ml-4">{t('sala:play')}</span>
                         </Button>
                       </div>
                     </div>

@@ -16,8 +16,16 @@ export default function Header() {
   }))
 
   const onLanguageChange = (l: string) => {
-    Router.pushI18n({
-      url: '/',
+    const { asPath, route, replaceI18n } = Router
+    const slash = '/'
+    const getPath = (path: string) =>
+      path
+        .split(slash)
+        .slice(2)
+        .join(slash) || slash
+    replaceI18n({
+      url: getPath(route),
+      as: getPath(asPath),
       options: {
         lang: l
       }
