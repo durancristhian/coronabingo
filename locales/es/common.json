@@ -1,4 +1,9 @@
 {
   "language-es": "Español 🇪🇸",
-  "language-en": "English 🇺🇸"
+  "language-en": "English 🇺🇸",
+  "turning-globe": "Bolillero",
+  "board": "Cartón",
+  "board_plural": "Cartónes",
+  "owner": "Hecho por {{ownerName}}",
+  "feedback": "<0>Dejanos tu feedback completando <1>esta encuesta</1></0>"
 }

@@ -1,4 +1,9 @@
 {
   "language-es": "Español 🇪🇸",
-  "language-en": "English 🇺🇸"
+  "language-en": "English 🇺🇸",
+  "turning-globe": "Turning Globe",
+  "board": "Board",
+  "board_plural": "Boards",
+  "owner": "Made by {{ownerName}}",
+  "feedback": "<0>Leave us your feedback filling up <1>this survey</1></0>"
 }

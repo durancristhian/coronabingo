@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
+// @ts-ignore
+import useTranslation from 'next-translate/useTranslation'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
@@ -21,6 +23,7 @@ export default function Jugar() {
   const roomName = router.query.name?.toString()
   const playerId = router.query.jugador?.toString()
   const room = useRoom(roomName)
+  const { t } = useTranslation()
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const isAdmin = room?.adminId === playerId
@@ -69,14 +72,15 @@ export default function Jugar() {
       <BackgroundCellContextProvider>
         <div className="px-4 py-8">
           <h2 className="font-medium text-center text-xl">
-            Hola {player?.name}, estás en la sala <b>{roomName}</b>
+            {t('jugar:title', {
+              playerName: player?.name || '',
+              roomName: roomName || ''
+            })}
           </h2>
-          {!room && (
+          {!room?.name && (
             <div className="max-w-4xl mx-auto">
               <div className="md:w-2/4 mx-auto">
-                <Message type="information">
-                  Cargando información de la sala...
-                </Message>
+                <Message type="information">{t('jugar:loading')}</Message>
               </div>
             </div>
           )}
@@ -86,7 +90,7 @@ export default function Jugar() {
                 <div className="lg:w-1/3">
                   <div className="bg-white px-4 py-8 rounded shadow">
                     <h2 className="font-medium mb-4 text-center text-xl">
-                      Últimos números
+                      {t('jugar:last-numbers')}
                     </h2>
                     <LastNumbers
                       selectedNumbers={room?.selectedNumbers || []}
@@ -95,7 +99,7 @@ export default function Jugar() {
                   <div className="hidden lg:block mt-8">
                     <div className="bg-white px-4 py-8 rounded shadow">
                       <h2 className="font-medium mb-4 text-center text-xl">
-                        Bolillero
+                        {t('common:turning-globe')}
                       </h2>
                       <div className="mt-4">
                         <SelectedNumbers
@@ -125,7 +129,7 @@ export default function Jugar() {
               <div className="lg:hidden mt-8">
                 <div className="bg-white px-4 py-8 rounded shadow">
                   <h2 className="font-medium mb-4 text-center text-xl">
-                    Bolillero
+                    {t('common:turning-globe')}
                   </h2>
                   <div className="mt-4">
                     <SelectedNumbers
@@ -142,12 +146,10 @@ export default function Jugar() {
           {isAdmin && (
             <div className="max-w-4xl mt-8 mx-auto">
               <div className="bg-white p-4 rounded shadow">
-                <Banner>
-                  Estás viendo este panel porque sos quien dirige la sala 😎
-                </Banner>
+                <Banner>{t('jugar:admin-title')} 😎</Banner>
                 <div className="my-8 text-center">
                   <h2 className="font-medium mb-8 text-center text-xl">
-                    Festejos
+                    {t('jugar:celebrate')}
                   </h2>
                   <Button
                     color={room?.showConfetti ? 'red' : 'green'}
@@ -155,9 +157,10 @@ export default function Jugar() {
                   >
                     {room?.showConfetti ? <FiFrown /> : <FiSmile />}
                     <span className="ml-4">
-                      {room?.showConfetti ? 'Desactivar' : 'Activar'}
+                      {t(
+                        `jugar:${room?.showConfetti ? 'hide' : 'show'}-confetti`
+                      )}
                     </span>
-                    <span>&nbsp;confetti</span>
                   </Button>
                 </div>
                 <Pato />

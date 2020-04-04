@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 import Banner from './Banner'
 import Footer from './Footer'
 import Header from './Header'
+// @ts-ignore
+import Trans from 'next-translate/Trans'
 
 interface IProps {
   children: ReactNode
@@ -13,16 +15,19 @@ export default function Layout({ children }: IProps) {
       <Header />
       <div className="flex-auto">{children}</div>
       <Banner>
-        <span>Dejanos tu feedback completando&nbsp;</span>
-        <a
-          href="https://forms.gle/egSBrsKSFnEgabff7"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
-        >
-          esta encuesta
-        </a>
-        <span>&nbsp;🤩</span>
+        <Trans
+          i18nKey="common:feedback"
+          components={[
+            <span />,
+            <a
+              href="https://forms.gle/egSBrsKSFnEgabff7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
+            />
+          ]}
+        />{' '}
+        🤩
       </Banner>
       <Footer />
     </main>
