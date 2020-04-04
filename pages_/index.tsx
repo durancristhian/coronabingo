@@ -26,8 +26,7 @@ export default function Index() {
           <div className="md:w-2/4 mx-auto">
             <div className="leading-normal">
               <p className="my-8">
-                Vas a necesitar crear una videollamada con quienes quieras
-                jugar. Te recomiendo&nbsp;
+                <span>{t('index:videocall-suggestion')} </span>
                 <a
                   href="https://hangouts.google.com/"
                   target="_blank"

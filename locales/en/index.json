@@ -1,3 +1,12 @@
 {
-  "intro": "Hello!, in this page you'll be able to play bingo with other people."
+  "intro": "Hello!, in this page you'll be able to play bingo with other people.",
+  "videocall-suggestion": "You'll need to create a videocall with whom you want to play. I recommend you",
+  "create-room": {
+    "title": "Create a room",
+    "saving": "Creating room...",
+    "already-exist": "Already exist a room with that name.",
+    "success": "Successfully created room. Wait...",
+    "field-name": "Name *",
+    "field-submit": "Ready"
+  }
 }

@@ -1,6 +1,8 @@
 import firebase from 'firebase'
 // @ts-ignore
 import Router from 'next-translate/Router'
+// @ts-ignore
+import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 // @ts-ignore
@@ -12,6 +14,7 @@ import InputText from './InputText'
 import Message, { MessageType } from './Message'
 
 export default function CreateRoom() {
+  const { t } = useTranslation()
   const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
     name: ''
@@ -39,7 +42,7 @@ export default function CreateRoom() {
     event.preventDefault()
 
     setMessageProps({
-      message: 'Creando sala...',
+      message: t('index:create-room.saving'),
       type: 'information'
     })
 
@@ -50,7 +53,7 @@ export default function CreateRoom() {
 
     if (roomData.exists) {
       setMessageProps({
-        message: 'Ya existe una sala con ese nombre.',
+        message: t('index:create-room.already-exist'),
         type: 'error'
       })
 
@@ -64,7 +67,7 @@ export default function CreateRoom() {
     })
 
     setMessageProps({
-      message: 'Sala creada con éxito. Espere...',
+      message: t('index:create-room.success'),
       type: 'success'
     })
 
@@ -75,18 +78,20 @@ export default function CreateRoom() {
 
   return (
     <Fragment>
-      <h2 className="font-medium text-xl text-center uppercase">Crear sala</h2>
+      <h2 className="font-medium text-xl text-center uppercase">
+        {t('index:create-room.title')}
+      </h2>
       <form onSubmit={onSubmit}>
         <InputText
           id="name"
-          label="Nombre *"
+          label={t('index:create-room.field-name')}
           onChange={value => onFieldChange('name', value)}
           value={formData.name}
         />
         <div className="mt-8">
           <Button className="w-full" disabled={!canSubmit} type="submit">
             <FiSmile />
-            <span className="ml-4">Listo</span>
+            <span className="ml-4">{t('index:create-room.field-submit')}</span>
           </Button>
         </div>
       </form>
