@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { Fragment } from 'react'
 

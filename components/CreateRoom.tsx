@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 import Router from 'next-translate/Router'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'

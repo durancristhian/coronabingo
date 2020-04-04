@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
