@@ -7,6 +7,7 @@ import Boards from '~/components/Boards'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import LastNumbers from '~/components/LastNumbers'
+import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
@@ -64,110 +65,114 @@ export default function Jugar() {
   }
 
   return (
-    <BackgroundCellContextProvider>
-      <div className="px-4 py-8">
-        <h2 className="font-medium text-center text-xl">
-          Hola {player?.name}, estás en la sala <b>{roomName}</b>
-        </h2>
-        {!room && (
-          <div className="max-w-4xl mx-auto">
-            <div className="md:w-2/4 mx-auto">
-              <Message type="information">
-                Cargando información de la sala...
-              </Message>
+    <Layout>
+      <BackgroundCellContextProvider>
+        <div className="px-4 py-8">
+          <h2 className="font-medium text-center text-xl">
+            Hola {player?.name}, estás en la sala <b>{roomName}</b>
+          </h2>
+          {!room && (
+            <div className="max-w-4xl mx-auto">
+              <div className="md:w-2/4 mx-auto">
+                <Message type="information">
+                  Cargando información de la sala...
+                </Message>
+              </div>
             </div>
-          </div>
-        )}
-        <div className="max-w-6xl mx-auto">
-          <div className="lg:flex mt-8">
-            {room && (
-              <div className="lg:w-1/3">
-                <div className="bg-white px-4 py-8 rounded shadow">
-                  <h2 className="font-medium mb-4 text-center text-xl">
-                    Últimos números
-                  </h2>
-                  <LastNumbers selectedNumbers={room?.selectedNumbers || []} />
-                </div>
-                <div className="hidden lg:block mt-8">
+          )}
+          <div className="max-w-6xl mx-auto">
+            <div className="lg:flex mt-8">
+              {room && (
+                <div className="lg:w-1/3">
                   <div className="bg-white px-4 py-8 rounded shadow">
                     <h2 className="font-medium mb-4 text-center text-xl">
-                      Bolillero
+                      Últimos números
                     </h2>
-                    <div className="mt-4">
-                      <SelectedNumbers
-                        isAdmin={isAdmin}
-                        onNewNumber={onNewNumber}
-                        selectedNumbers={room.selectedNumbers || []}
-                        turningGlob={room.turningGlob}
-                      />
+                    <LastNumbers
+                      selectedNumbers={room?.selectedNumbers || []}
+                    />
+                  </div>
+                  <div className="hidden lg:block mt-8">
+                    <div className="bg-white px-4 py-8 rounded shadow">
+                      <h2 className="font-medium mb-4 text-center text-xl">
+                        Bolillero
+                      </h2>
+                      <div className="mt-4">
+                        <SelectedNumbers
+                          isAdmin={isAdmin}
+                          onNewNumber={onNewNumber}
+                          selectedNumbers={room.selectedNumbers || []}
+                          turningGlob={room.turningGlob}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-            <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-              {player && (
-                <Boards
-                  player={player}
-                  setPlayerProps={newProps =>
-                    setPlayer({
-                      ...player,
-                      ...newProps
-                    })
-                  }
-                />
               )}
-            </div>
-            <div className="lg:hidden mt-8">
-              <div className="bg-white px-4 py-8 rounded shadow">
-                <h2 className="font-medium mb-4 text-center text-xl">
-                  Bolillero
-                </h2>
-                <div className="mt-4">
-                  <SelectedNumbers
-                    isAdmin={isAdmin}
-                    onNewNumber={onNewNumber}
-                    selectedNumbers={room.selectedNumbers || []}
-                    turningGlob={room.turningGlob}
+              <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+                {player && (
+                  <Boards
+                    player={player}
+                    setPlayerProps={newProps =>
+                      setPlayer({
+                        ...player,
+                        ...newProps
+                      })
+                    }
                   />
+                )}
+              </div>
+              <div className="lg:hidden mt-8">
+                <div className="bg-white px-4 py-8 rounded shadow">
+                  <h2 className="font-medium mb-4 text-center text-xl">
+                    Bolillero
+                  </h2>
+                  <div className="mt-4">
+                    <SelectedNumbers
+                      isAdmin={isAdmin}
+                      onNewNumber={onNewNumber}
+                      selectedNumbers={room.selectedNumbers || []}
+                      turningGlob={room.turningGlob}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {isAdmin && (
+          {isAdmin && (
+            <div className="max-w-4xl mt-8 mx-auto">
+              <div className="bg-white p-4 rounded shadow">
+                <Banner>
+                  Estás viendo este panel porque sos quien dirige la sala 😎
+                </Banner>
+                <div className="my-8 text-center">
+                  <h2 className="font-medium mb-8 text-center text-xl">
+                    Festejos
+                  </h2>
+                  <Button
+                    color={room?.showConfetti ? 'red' : 'green'}
+                    onClick={confetti}
+                  >
+                    {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                    <span className="ml-4">
+                      {room?.showConfetti ? 'Desactivar' : 'Activar'}
+                    </span>
+                    <span>&nbsp;confetti</span>
+                  </Button>
+                </div>
+                <Pato />
+              </div>
+            </div>
+          )}
+          {room?.showConfetti && <Confetti />}
+          <Sounds isAdmin={isAdmin} />
           <div className="max-w-4xl mt-8 mx-auto">
             <div className="bg-white p-4 rounded shadow">
-              <Banner>
-                Estás viendo este panel porque sos quien dirige la sala 😎
-              </Banner>
-              <div className="my-8 text-center">
-                <h2 className="font-medium mb-8 text-center text-xl">
-                  Festejos
-                </h2>
-                <Button
-                  color={room?.showConfetti ? 'red' : 'green'}
-                  onClick={confetti}
-                >
-                  {room?.showConfetti ? <FiFrown /> : <FiSmile />}
-                  <span className="ml-4">
-                    {room?.showConfetti ? 'Desactivar' : 'Activar'}
-                  </span>
-                  <span>&nbsp;confetti</span>
-                </Button>
-              </div>
-              <Pato />
+              <BackgroundCells />
             </div>
           </div>
-        )}
-        {room?.showConfetti && <Confetti />}
-        <Sounds isAdmin={isAdmin} />
-        <div className="max-w-4xl mt-8 mx-auto">
-          <div className="bg-white p-4 rounded shadow">
-            <BackgroundCells />
-          </div>
         </div>
-      </div>
-    </BackgroundCellContextProvider>
+      </BackgroundCellContextProvider>
+    </Layout>
   )
 }

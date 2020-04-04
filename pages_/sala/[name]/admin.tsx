@@ -1,14 +1,17 @@
+// @ts-ignore
+import Router from 'next-translate/Router'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
+import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
 import Players, { IPlayer } from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
-import db, { roomsRef } from '~/utils/firebase'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import db, { roomsRef } from '~/utils/firebase'
 
 export default function Admin() {
   const router = useRouter()
@@ -45,7 +48,7 @@ export default function Admin() {
         const roomData = await roomDoc.get()
 
         if (!roomData.exists) {
-          router.push('/')
+          Router.pushI18n('/')
 
           return
         }
@@ -110,87 +113,91 @@ export default function Admin() {
     await batch.commit()
 
     setTimeout(() => {
-      router.push('/sala/[name]', `/sala/${roomName}`)
+      Router.pushI18n('/sala/[name]', `/sala/${roomName}`)
     }, 1000)
   }
 
   return (
-    <div className="px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-          <h2 className="font-medium text-center text-xl">Preparar sala</h2>
-          {room.error && (
-            <Message type="error">
-              Ocurrió un error al cargar la información de la sala. Intenta de
-              nuevo recargando la página.
-            </Message>
-          )}
-          {room.loading && (
-            <Message type="information">
-              Cargando información de la sala...
-            </Message>
-          )}
-          {room.data && (
-            <Fragment>
-              <InputText
-                id="room-name"
-                label="Nombre"
-                value={roomName}
-                readonly
-                onFocus={event => event.target.select()}
-              />
-              <InputText
-                hint="Compartí este link a las personas de la videollamada."
-                id="url"
-                label="Link a la sala"
-                value={`${window.location.host}/sala/${roomName}`}
-                readonly
-                onFocus={event => event.target.select()}
-              />
-              <InputText
-                id="videoCall"
-                label="Link a la videollamada"
-                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
-                value={room.data.videoCall || ''}
-              />
-              <Players
-                players={players}
-                setPlayers={setPlayers}
-                adminId={room.data.adminId}
-                onChange={onFieldChange}
-                removePlayer={removePlayer}
-                roomName={roomName}
-              />
-              <div className="mt-4">
-                <Checkbox
-                  hint="Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego."
-                  id="turningGlob"
-                  label="Usar bolillero online"
-                  onChange={value =>
-                    onFieldChange([{ key: 'turningGlob', value }])
-                  }
-                  value={room.data.turningGlob || false}
+    <Layout>
+      <div className="px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
+            <h2 className="font-medium text-center text-xl">Preparar sala</h2>
+            {room.error && (
+              <Message type="error">
+                Ocurrió un error al cargar la información de la sala. Intenta de
+                nuevo recargando la página.
+              </Message>
+            )}
+            {room.loading && (
+              <Message type="information">
+                Cargando información de la sala...
+              </Message>
+            )}
+            {room.data && (
+              <Fragment>
+                <InputText
+                  id="room-name"
+                  label="Nombre"
+                  value={roomName}
+                  readonly
+                  onFocus={event => event.target.select()}
                 />
-              </div>
-              <div className="mt-8">
-                <Button
-                  id="readyToPlay"
-                  className="w-full"
-                  disabled={!room.data.adminId}
-                  onClick={readyToPlay}
-                >
-                  <FiSmile />
-                  <span className="ml-4">Jugar</span>
-                </Button>
-              </div>
-            </Fragment>
-          )}
-          {message.content && (
-            <Message type={message.type}>{message.content}</Message>
-          )}
+                <InputText
+                  hint="Compartí este link a las personas de la videollamada."
+                  id="url"
+                  label="Link a la sala"
+                  value={`${window.location.host}/sala/${roomName}`}
+                  readonly
+                  onFocus={event => event.target.select()}
+                />
+                <InputText
+                  id="videoCall"
+                  label="Link a la videollamada"
+                  onChange={value =>
+                    onFieldChange([{ key: 'videoCall', value }])
+                  }
+                  value={room.data.videoCall || ''}
+                />
+                <Players
+                  players={players}
+                  setPlayers={setPlayers}
+                  adminId={room.data.adminId}
+                  onChange={onFieldChange}
+                  removePlayer={removePlayer}
+                  roomName={roomName}
+                />
+                <div className="mt-4">
+                  <Checkbox
+                    hint="Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego."
+                    id="turningGlob"
+                    label="Usar bolillero online"
+                    onChange={value =>
+                      onFieldChange([{ key: 'turningGlob', value }])
+                    }
+                    value={room.data.turningGlob || false}
+                  />
+                </div>
+                <div className="mt-8">
+                  <Button
+                    id="readyToPlay"
+                    className="w-full"
+                    disabled={!room.data.adminId}
+                    onClick={readyToPlay}
+                  >
+                    <FiSmile />
+                    <span className="ml-4">Jugar</span>
+                  </Button>
+                </div>
+              </Fragment>
+            )}
+            {message.content && (
+              <Message type={message.type}>{message.content}</Message>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 
