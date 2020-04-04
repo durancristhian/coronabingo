@@ -1,13 +1,13 @@
 import classnames from 'classnames'
-import { IPlayer } from './Players'
+import { Fragment } from 'react'
 
 interface IProps {
   disabled?: boolean
   hint?: string
   id: string
-  label: string
+  label?: string
   onChange?: (value: string) => void
-  options: IPlayer[]
+  options: IOption[]
   value: string
 }
 
@@ -21,13 +21,13 @@ export default function Select({
   value
 }: IProps) {
   return (
-    <div className="my-4">
+    <Fragment>
       <label htmlFor={id} className="flex flex-col">
-        <span>{label}</span>
+        {label && <span className="mb-1">{label}</span>}
         <select
           id={id}
           className={classnames([
-            'border-2 border-gray-300 h-12 mt-1 p-2 rounded',
+            'border-2 border-gray-300 h-12 p-2 rounded',
             'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
             'duration-150 ease-in-out transition',
             'disabled:opacity-50'
@@ -49,6 +49,11 @@ export default function Select({
           {hint}
         </p>
       )}
-    </div>
+    </Fragment>
   )
+}
+
+interface IOption {
+  id: string
+  name: string
 }

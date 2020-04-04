@@ -157,15 +157,17 @@ export default function Players({
         </div>
       )}
       <div className="mt-4">
-        <Select
-          disabled={!players.length}
-          hint="Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere."
-          id="adminId"
-          label="Dirige el juego"
-          onChange={value => onChange([{ key: 'adminId', value }])}
-          options={players}
-          value={adminId}
-        />
+        <div className="my-4">
+          <Select
+            disabled={!players.length}
+            hint="Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere."
+            id="adminId"
+            label="Dirige el juego"
+            onChange={value => onChange([{ key: 'adminId', value }])}
+            options={players}
+            value={adminId}
+          />
+        </div>
       </div>
     </div>
   )
