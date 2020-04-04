@@ -1,8 +1,5 @@
-// @ts-ignore
 import Link from 'next-translate/Link'
-// @ts-ignore
 import Router from 'next-translate/Router'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { allLanguages } from '~/i18n.json'
 import Select from './Select'

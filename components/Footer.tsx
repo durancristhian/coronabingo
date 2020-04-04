@@ -1,4 +1,3 @@
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 

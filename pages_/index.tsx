@@ -1,4 +1,3 @@
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'

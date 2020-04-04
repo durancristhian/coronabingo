@@ -1,4 +1,3 @@
-// @ts-ignore
 import Router from 'next-translate/Router'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
@@ -12,6 +11,7 @@ import Players, { IPlayer } from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import db, { roomsRef } from '~/utils/firebase'
+import Field from '~/interfaces/Field'
 
 export default function Admin() {
   const router = useRouter()
@@ -200,5 +200,3 @@ export default function Admin() {
     </Layout>
   )
 }
-
-export type Field = boolean | number[] | string | IPlayer[]

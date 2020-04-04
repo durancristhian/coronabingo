@@ -1,7 +1,5 @@
 import classnames from 'classnames'
-// @ts-ignore
 import Router from 'next-translate/Router'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import { FiLink2 } from 'react-icons/fi'
@@ -88,8 +86,9 @@ export default function Sala() {
                           </span>
                         )}
                         <p className="italic mt-4 text-gray-600 text-sm w-full">
-                          {t('common:board_plural')} nº{' '}
-                          {player.boards.split(',').join(' y ')}
+                          {t('common:board_plural', {
+                            boardId: player.boards.split(',').join(' & ')
+                          })}
                         </p>
                       </div>
                       <div className="ml-4">

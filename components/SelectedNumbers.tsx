@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { Fragment } from 'react'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
