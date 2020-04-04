@@ -1,11 +1,12 @@
 {
   "allLanguages": ["es", "en"],
-  "defaultLanguage": "es",
   "currentPagesDir": "pages_",
+  "defaultLanguage": "es",
   "finalPagesDir": "pages",
   "localesPath": "locales",
-  "redirectToDefaultLang": true,
   "pages": {
-    "*": ["common"]
-  }
+    "*": ["common"],
+    "/": ["index"]
+  },
+  "redirectToDefaultLang": true
 }
