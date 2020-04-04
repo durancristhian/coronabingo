@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <div>
-            <p>{t('common:owner', { ownerName: 'Cristhian Duran' })}</p>
+            <p>{t('common:made-by')}</p>
           </div>
           <div className="flex items-center">
             <a

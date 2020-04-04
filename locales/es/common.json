@@ -1,11 +1,12 @@
 {
-  "feedback-form-intro": "Dejanos tu feedback completando",
-  "feedback-form-link": "esta encuesta",
+  "feedback-form": {
+    "intro": "Dejanos tu feedback completando",
+    "link": "esta encuesta"
+  },
   "language-es": "Español 🇪🇸",
   "language-en": "English 🇺🇸",
   "turning-globe": "Bolillero",
   "board": "Cartón",
   "board_plural": "Cartones",
-  "made-by": "Hecho por Cristhian Duran",
-  "feedback": "<0>Dejanos tu feedback completando <1>esta encuesta</1></0>"
+  "made-by": "Hecho por Cristhian Duran"
 }

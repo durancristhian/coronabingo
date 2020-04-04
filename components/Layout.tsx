@@ -17,14 +17,14 @@ export default function Layout({ children }: IProps) {
       <Header />
       <div className="flex-auto">{children}</div>
       <Banner>
-        <span>{t('common:feedback-form-intro')} </span>
+        <span>{t('common:feedback-form.intro')} </span>
         <a
           href="https://forms.gle/egSBrsKSFnEgabff7"
           target="_blank"
           rel="noopener noreferrer"
           className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
         >
-          {t('common:feedback-form-link')}
+          {t('common:feedback-form.link')}
         </a>
         <span>&nbsp;🤩</span>
       </Banner>
