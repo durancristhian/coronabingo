@@ -4,9 +4,6 @@ import Head from 'next/head'
 import { Fragment } from 'react'
 import 'typeface-inter'
 import 'typeface-oswald'
-import Banner from '~/components/Banner'
-import Footer from '~/components/Footer'
-import Header from '~/components/Header'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
 
@@ -86,25 +83,7 @@ export default class Coronabingo extends App {
             content="https://coronabingo.now.sh/social2.jpg"
           />
         </Head>
-        <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
-          <Header />
-          <div className="flex-auto">
-            <Component {...pageProps} />
-          </div>
-          <Banner>
-            <span>Dejanos tu feedback completando&nbsp;</span>
-            <a
-              href="https://forms.gle/egSBrsKSFnEgabff7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
-            >
-              esta encuesta
-            </a>
-            <span>&nbsp;🤩</span>
-          </Banner>
-          <Footer />
-        </main>
+        <Component {...pageProps} />
       </Fragment>
     )
   }

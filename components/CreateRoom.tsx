@@ -1,5 +1,6 @@
 import firebase from 'firebase'
-import { useRouter } from 'next/router'
+// @ts-ignore
+import Router from 'next-translate/Router'
 import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 // @ts-ignore
@@ -11,7 +12,6 @@ import InputText from './InputText'
 import Message, { MessageType } from './Message'
 
 export default function CreateRoom() {
-  const router = useRouter()
   const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
     name: ''
@@ -69,7 +69,7 @@ export default function CreateRoom() {
     })
 
     setTimeout(() => {
-      router.push('/sala/[name]/admin', `/sala/${roomName}/admin`)
+      Router.pushI18n('/sala/[name]/admin', `/sala/${roomName}/admin`)
     }, 1000)
   }
 
