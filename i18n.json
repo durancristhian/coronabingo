@@ -8,6 +8,7 @@
     "*": ["common"],
     "/": ["index"],
     "/sala/[name]": ["sala"],
+    "/sala/[name]/admin": ["admin"],
     "/sala/[name]/jugar": ["jugar"]
   },
   "redirectToDefaultLang": true

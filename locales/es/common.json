@@ -8,5 +8,6 @@
   "turning-globe": "Bolillero",
   "board": "Cartón Nº {{boardId}}",
   "board_plural": "Cartones Nº {{boardId}}",
-  "made-by": "Hecho por Cristhian Duran"
+  "made-by": "Hecho por Cristhian Duran",
+  "select-empty-option": "--- Selecciona ---"
 }

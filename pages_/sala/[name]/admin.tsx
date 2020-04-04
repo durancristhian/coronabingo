@@ -1,4 +1,6 @@
 import Router from 'next-translate/Router'
+// @ts-ignore
+import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
@@ -14,6 +16,7 @@ import db, { roomsRef } from '~/utils/firebase'
 import Field from '~/interfaces/Field'
 
 export default function Admin() {
+  const { t } = useTranslation()
   const router = useRouter()
   const roomName = router.query.name?.toString()
   const [room, setRoom] = useState<{
@@ -91,7 +94,7 @@ export default function Admin() {
 
   const readyToPlay = async () => {
     setMessage({
-      content: 'Sala configurada con éxito. Espere...',
+      content: t('admin:success'),
       type: 'success'
     })
 
@@ -122,38 +125,33 @@ export default function Admin() {
       <div className="px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-            <h2 className="font-medium text-center text-xl">Preparar sala</h2>
-            {room.error && (
-              <Message type="error">
-                Ocurrió un error al cargar la información de la sala. Intenta de
-                nuevo recargando la página.
-              </Message>
-            )}
+            <h2 className="font-medium text-center text-xl">
+              {t('admin:title')}
+            </h2>
+            {room.error && <Message type="error">{t('admin:error')}</Message>}
             {room.loading && (
-              <Message type="information">
-                Cargando información de la sala...
-              </Message>
+              <Message type="information">{t('admin:loading')}</Message>
             )}
             {room.data && (
               <Fragment>
                 <InputText
                   id="room-name"
-                  label="Nombre"
+                  label={t('admin:field-name')}
                   value={roomName}
                   readonly
                   onFocus={event => event.target.select()}
                 />
                 <InputText
-                  hint="Compartí este link a las personas de la videollamada."
+                  hint={t('admin:field-link-hint')}
                   id="url"
-                  label="Link a la sala"
+                  label={t('admin:field-link')}
                   value={`${window.location.host}/sala/${roomName}`}
                   readonly
                   onFocus={event => event.target.select()}
                 />
                 <InputText
                   id="videoCall"
-                  label="Link a la videollamada"
+                  label={t('admin:field-videocall')}
                   onChange={value =>
                     onFieldChange([{ key: 'videoCall', value }])
                   }
@@ -169,9 +167,9 @@ export default function Admin() {
                 />
                 <div className="mt-4">
                   <Checkbox
-                    hint="Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego."
+                    hint={t('admin:field-turningGlob-hint')}
                     id="turningGlob"
-                    label="Usar bolillero online"
+                    label={t('admin:field-turningGlob')}
                     onChange={value =>
                       onFieldChange([{ key: 'turningGlob', value }])
                     }
@@ -186,7 +184,7 @@ export default function Admin() {
                     onClick={readyToPlay}
                   >
                     <FiSmile />
-                    <span className="ml-4">Jugar</span>
+                    <span className="ml-4">{t('admin:field-submit')}</span>
                   </Button>
                 </div>
               </Fragment>
