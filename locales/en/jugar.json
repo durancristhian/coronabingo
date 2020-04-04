@@ -11,5 +11,13 @@
   "empty-cells": {
     "title": "Empty cells background",
     "url": "Or paste here the link of a random image from the internet"
+  },
+  "backgrounds": {
+    "yellow": "Yellow",
+    "green": "Green",
+    "blue": "Blue",
+    "orange": "Orange",
+    "pikachu": "Pikachu",
+    "covid-19": "COVID-19"
   }
 }

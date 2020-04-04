@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { BOARD_NUMBER_COLOR, DREAMS } from '~/utils/constants'
+import { BOARD_NUMBER_COLOR /* DREAMS */ } from '~/utils/constants'
 import Ball from './Ball'
 
 interface IProps {
@@ -38,7 +38,8 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
               ))}
             </div>
           </div>
-          <p className="font-medium mt-4">{DREAMS[last]}</p>
+          {/* TODO: create a flag and load a component */}
+          {/* <p className="font-medium mt-4">{DREAMS[last]}</p> */}
         </Fragment>
       )}
     </Fragment>

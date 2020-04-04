@@ -1,6 +1,6 @@
 import classnames from 'classnames'
-import { Fragment, useContext } from 'react'
 import useTranslation from 'next-translate/useTranslation'
+import { Fragment, useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
@@ -17,7 +17,7 @@ export default function BackgroundCells() {
       </h2>
       <div className="flex flex-wrap">
         {BACKGROUND_CELL_VALUES.map((bc, i) => (
-          <div className="pb-4 pr-4 w-36" key={bc.value}>
+          <div className="pb-4 pr-4 w-32" key={bc.value}>
             <label
               htmlFor={i.toString()}
               className={classnames([
@@ -59,7 +59,7 @@ export default function BackgroundCells() {
                   })
                 }}
               ></div>
-              <span className="italic">{bc.name}</span>
+              <p className="italic text-center">{t(bc.key)}</p>
             </label>
           </div>
         ))}

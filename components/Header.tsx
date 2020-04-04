@@ -20,6 +20,7 @@ export default function Header() {
         .split(slash)
         .slice(2)
         .join(slash) || slash
+
     replaceI18n({
       url: getPath(route),
       as: getPath(asPath),

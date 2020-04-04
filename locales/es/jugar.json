@@ -11,5 +11,13 @@
   "empty-cells": {
     "title": "Fondo de las celdas vacías",
     "url": "O bien, pegá el link a una imágen en internet"
+  },
+  "backgrounds": {
+    "yellow": "Amarillo",
+    "green": "Verde",
+    "blue": "Azul",
+    "orange": "Naranja",
+    "pikachu": "Pikachu",
+    "covid-19": "COVID-19"
   }
 }

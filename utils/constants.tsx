@@ -1,13 +1,13 @@
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 export const BACKGROUND_CELL_VALUES = [
-  { name: 'Amarillito', type: 'color', value: 'yellow' },
-  { name: 'Azulcito', type: 'color', value: 'blue' },
-  { name: 'Naranjita', type: 'color', value: 'orange' },
-  { name: 'Verdecito', type: 'color', value: 'green' },
-  { name: 'Pikachu', type: 'img', value: 'pikachu.png' },
-  { name: 'Cremona', type: 'img', value: 'cremona.png' },
-  { name: 'COVID-19', type: 'img', value: 'coronavirus.gif' }
+  { key: 'jugar:backgrounds.yellow', type: 'color', value: 'yellow' },
+  { key: 'jugar:backgrounds.blue', type: 'color', value: 'blue' },
+  { key: 'jugar:backgrounds.orange', type: 'color', value: 'orange' },
+  { key: 'jugar:backgrounds.green', type: 'color', value: 'green' },
+  { key: 'jugar:backgrounds.pikachu', type: 'img', value: 'pikachu.png' },
+  /* { key: 'jugar:backgrounds.cremona', type: 'img', value: 'cremona.png' }, */
+  { key: 'jugar:backgrounds.covid-19', type: 'img', value: 'coronavirus.gif' }
 ]
 export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
@@ -117,31 +117,27 @@ export const DREAMS = [
   'Hermanos' // 99
 ]
 export const MAX_PLAYERS = 60
-
-interface ISound {
-  name: string
-  url: string
-}
+/* TODO: Add Patao sounds with an easter egg */
 export const SOUNDS = [
   {
     name: 'Chino cirujano - Pero pagaraprata',
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
   },
   {
-    name: 'Guido - Mirá la repe',
+    name: 'Guido Kaczka  - Mirá la repe',
     url: '/sounds/guido/mira-la-repe.mp3'
   },
   {
-    name: 'Guido - Preparado, listo, ya',
+    name: 'Guido Kaczka - Preparado, listo, ya',
     url: '/sounds/guido/preparado-listo-ya.mp3'
-  },
-  {
-    name: 'Riverito - A cruzar los dedos',
-    url: '/sounds/riverito/cruzar-dedos.mp3'
   },
   {
     name: 'Los simpsons - Hundiste mi acorazado',
     url: '/sounds/simpsons/hundiste-mi-acorazado.mp3'
+  },
+  {
+    name: 'Riverito - A cruzar los dedos',
+    url: '/sounds/riverito/cruzar-dedos.mp3'
   },
   {
     name: 'Susana - Correctou',
