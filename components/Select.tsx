@@ -1,4 +1,6 @@
 import classnames from 'classnames'
+// @ts-ignore
+import useTranslation from 'next-translate/useTranslation'
 import { Fragment } from 'react'
 
 interface IProps {
@@ -20,6 +22,8 @@ export default function Select({
   options,
   value
 }: IProps) {
+  const { t } = useTranslation()
+
   return (
     <Fragment>
       <label htmlFor={id} className="flex flex-col">
@@ -36,7 +40,9 @@ export default function Select({
           onChange={event => onChange && onChange(event.target.value)}
           disabled={disabled}
         >
-          {!value && <option value={''}>--- Selecciona ---</option>}
+          {!value && (
+            <option value={''}>{t('common:select-empty-option')}</option>
+          )}
           {options.map(opt => (
             <option key={opt.name} value={opt.id}>
               {opt.name}
