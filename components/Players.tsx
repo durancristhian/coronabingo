@@ -1,10 +1,9 @@
 import classnames from 'classnames'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Select from '~/components/Select'
-import { Field } from '~/pages_/sala/[name]/admin'
+import Field from '~/interfaces/Field'
 import { MAX_PLAYERS } from '~/utils/constants'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'

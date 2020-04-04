@@ -6,8 +6,8 @@
   "language-es": "Español 🇪🇸",
   "language-en": "English 🇺🇸",
   "turning-globe": "Turning Globe",
-  "board": "Board",
-  "board_plural": "Boards",
+  "board": "Board Nº {{boardId}}",
+  "board_plural": "Boards Nº {{boardId}}",
   "made-by": "Made by Cristhian Duran",
   "select-empty-option": "--- Select ---"
 }

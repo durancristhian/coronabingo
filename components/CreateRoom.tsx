@@ -1,11 +1,8 @@
 import firebase from 'firebase'
-// @ts-ignore
 import Router from 'next-translate/Router'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
-// @ts-ignore
 import urlSlug from 'url-slug'
 import { roomsRef } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'

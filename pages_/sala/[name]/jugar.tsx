@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'

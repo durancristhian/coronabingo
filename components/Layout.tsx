@@ -1,4 +1,3 @@
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { ReactNode } from 'react'
 import Banner from './Banner'

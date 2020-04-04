@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { Fragment, useContext } from 'react'
-// @ts-ignore
 import useTranslation from 'next-translate/useTranslation'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'

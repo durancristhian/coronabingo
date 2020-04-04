@@ -1,8 +1,8 @@
 {
   "title": "Room Lobby",
   "roomname": "Room name",
-  "people": "There are {{count}} person",
-  "people_plural": "There are {{count}} persons",
+  "people": "There are {{count}} person waiting to play",
+  "people_plural": "There are {{count}} persons waiting to play",
   "call-link": "Link to call",
   "not-ready": "The room is not ready to play yet. When it is, this page will be updated.",
   "list-description": "Search yourself in this list and press the play button to access your boards.",
