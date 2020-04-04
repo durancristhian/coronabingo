@@ -3,5 +3,9 @@
   "feedback-form-link": "this form",
   "language-es": "Español 🇪🇸",
   "language-en": "English 🇺🇸",
-  "made-by": "Made by Cristhian Duran"
+  "turning-globe": "Turning Globe",
+  "board": "Board",
+  "board_plural": "Boards",
+  "made-by": "Made by Cristhian Duran",
+  "feedback": "<0>Leave us your feedback filling up <1>this survey</1></0>"
 }

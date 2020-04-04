@@ -6,7 +6,8 @@
   "localesPath": "locales",
   "pages": {
     "*": ["common"],
-    "/": ["index"]
+    "/": ["index"],
+    "/sala/[name]/jugar": ["jugar"]
   },
   "redirectToDefaultLang": true
 }

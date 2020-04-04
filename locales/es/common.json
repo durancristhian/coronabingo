@@ -3,5 +3,9 @@
   "feedback-form-link": "esta encuesta",
   "language-es": "Español 🇪🇸",
   "language-en": "English 🇺🇸",
-  "made-by": "Hecho por Cristhian Duran"
+  "turning-globe": "Bolillero",
+  "board": "Cartón",
+  "board_plural": "Cartones",
+  "made-by": "Hecho por Cristhian Duran",
+  "feedback": "<0>Dejanos tu feedback completando <1>esta encuesta</1></0>"
 }

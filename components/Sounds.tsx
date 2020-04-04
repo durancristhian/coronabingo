@@ -16,14 +16,16 @@ export default function Sounds({ isAdmin }: IProps) {
     if (!room) return
 
     const { soundToPlay } = room
-
     if (soundToPlay) {
-      new Audio(soundToPlay).play().finally(() => {
-        isAdmin &&
-          roomsRef.doc(roomName).update({
-            soundToPlay: ''
-          })
-      })
+      new Audio(soundToPlay)
+        .play()
+        .catch(() => null)
+        .finally(() => {
+          isAdmin &&
+            roomsRef.doc(roomName).update({
+              soundToPlay: ''
+            })
+        })
     }
   }, [room])
 
