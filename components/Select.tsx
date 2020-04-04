@@ -32,7 +32,7 @@ export default function Select({
           <select
             id={id}
             className={classnames([
-              'appearance-none border-2 border-gray-300 h-12 leading-normal p-2 pr-8 rounded',
+              'appearance-none border-2 border-gray-300 h-12 leading-normal p-2 pr-8 rounded w-full',
               'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
               'duration-150 ease-in-out transition',
               'disabled:opacity-50'
