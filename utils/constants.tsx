@@ -65,7 +65,7 @@ export const SOUNDS = [
     url: '/sounds/riverito/cruzar-dedos.mp3'
   },
   {
-    name: 'Snoop dog !',
+    name: 'Snoop dog!',
     language: '🇺🇸',
     url: '/sounds/snoop-dog.mp3'
   },
@@ -80,12 +80,12 @@ export const SOUNDS = [
     url: '/sounds/tano/nooooo.mp3'
   },
   {
-    name: 'The Simpsons - Bingo !',
+    name: 'The Simpsons - Bingo',
     language: '🇺🇸',
     url: '/sounds/simpsons/homer-bingo.mp3'
   },
   {
-    name: 'You what ?',
+    name: 'You what?',
     language: '🇺🇸',
     url: '/sounds/you-what.mp3'
   },

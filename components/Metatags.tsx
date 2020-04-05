@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { Fragment } from 'react'
 import { allLanguages } from '~/i18n.json'
 
@@ -11,7 +10,7 @@ export default function Metatags({ pathname }: IProps) {
   const lang = allLanguages.includes(locale) && locale
 
   return (
-    <Head>
+    <Fragment>
       {lang === 'en' && (
         <Fragment>
           <link rel="canonical" href="https://coronabingo.now.sh/en/" />
@@ -25,7 +24,7 @@ export default function Metatags({ pathname }: IProps) {
             hrefLang="en-ES"
             href="https://coronabingo.now.sh/es/"
           />
-          <title>Coronabingo</title>
+          <title>Coronabingo | Bingo online</title>
           <meta name="title" content="Coronabingo | Bingo online" />
           <meta
             name="description"
@@ -36,13 +35,16 @@ export default function Metatags({ pathname }: IProps) {
             property="og:description"
             content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
           />
-
-          <meta property="twitter:url" content="https://coronabingo.now.sh/" />
+          <meta
+            property="twitter:url"
+            content="https://coronabingo.now.sh/en/"
+          />
           <meta property="twitter:title" content="Coronabingo | Bingo online" />
           <meta
             property="twitter:description"
             content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
           />
+          <meta property="og:url" content="https://coronabingo.now.sh/en/" />
         </Fragment>
       )}
 
@@ -59,7 +61,7 @@ export default function Metatags({ pathname }: IProps) {
             hrefLang="en-US"
             href="https://coronabingo.now.sh/en/"
           />
-          <title>Coronabingo</title>
+          <title>Coronabingo | Tu juego de Bingo Online</title>
           <meta name="title" content="Coronabingo | Tu juego de Bingo Online" />
           <meta
             name="description"
@@ -73,8 +75,10 @@ export default function Metatags({ pathname }: IProps) {
             property="og:description"
             content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
           />
-
-          <meta property="twitter:url" content="https://coronabingo.now.sh/" />
+          <meta
+            property="twitter:url"
+            content="https://coronabingo.now.sh/es/"
+          />
           <meta
             property="twitter:title"
             content="Coronabingo | Tu juego de Bingo Online"
@@ -83,6 +87,7 @@ export default function Metatags({ pathname }: IProps) {
             property="twitter:description"
             content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
           />
+          <meta property="og:url" content="https://coronabingo.now.sh/es/" />
         </Fragment>
       )}
 
@@ -104,7 +109,7 @@ export default function Metatags({ pathname }: IProps) {
             hrefLang="es-ES"
             href="https://coronabingo.now.sh/es/"
           />
-          <title>Coronabingo</title>
+          <title>Coronabingo | Tu juego de Bingo Online</title>
           <meta name="title" content="Coronabingo | Tu juego de Bingo Online" />
           <meta
             name="description"
@@ -118,7 +123,6 @@ export default function Metatags({ pathname }: IProps) {
             property="og:description"
             content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
           />
-
           <meta property="twitter:url" content="https://coronabingo.now.sh/" />
           <meta
             property="twitter:title"
@@ -128,11 +132,11 @@ export default function Metatags({ pathname }: IProps) {
             property="twitter:description"
             content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
           />
+          <meta property="og:url" content="https://coronabingo.now.sh/" />
         </Fragment>
       )}
 
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://coronabingo.now.sh/" />
       <meta
         property="og:image"
         content="https://coronabingo.now.sh/social2.jpg"
@@ -142,7 +146,7 @@ export default function Metatags({ pathname }: IProps) {
         property="twitter:image"
         content="https://coronabingo.now.sh/social2.jpg"
       />
-    </Head>
+    </Fragment>
   )
 }
 
