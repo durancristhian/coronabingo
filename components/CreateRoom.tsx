@@ -1,6 +1,8 @@
 import firebase from 'firebase'
 import { useRouter } from 'next/router'
-import { FormEvent, Fragment, useEffect, useState } from 'react'
+import React, {
+  FormEvent, useEffect, useState, ReactNode,
+} from 'react'
 import { FiSmile } from 'react-icons/fi'
 // @ts-ignore
 import urlSlug from 'url-slug'
@@ -17,7 +19,7 @@ export default function CreateRoom() {
     name: ''
   })
   const [messageProps, setMessageProps] = useState<{
-    message: string
+    message: string | ReactNode
     type: MessageType
   }>({
     message: '',
@@ -50,8 +52,21 @@ export default function CreateRoom() {
 
     if (roomData.exists) {
       setMessageProps({
-        message: 'Ya existe una sala con ese nombre.',
-        type: 'error'
+        message: (
+          <div>
+            <span>Ya existe una sala con ese nombre, si vos la creaste clickea </span>
+            <a
+              href={`/sala/${roomName}/admin`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-blue-600 underline"
+            >
+              acá
+            </a>
+            .
+          </div>
+        ),
+        type: 'information',
       })
 
       return
@@ -74,13 +89,13 @@ export default function CreateRoom() {
   }
 
   return (
-    <Fragment>
+    <>
       <h2 className="font-medium text-xl text-center uppercase">Crear sala</h2>
       <form onSubmit={onSubmit}>
         <InputText
           id="name"
           label="Nombre *"
-          onChange={value => onFieldChange('name', value)}
+          onChange={(value) => onFieldChange('name', value)}
           value={formData.name}
         />
         <div className="mt-8">
@@ -93,6 +108,6 @@ export default function CreateRoom() {
       {messageProps.message && (
         <Message type={messageProps.type}>{messageProps.message}</Message>
       )}
-    </Fragment>
+    </>
   )
 }
