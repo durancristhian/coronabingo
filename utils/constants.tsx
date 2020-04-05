@@ -35,6 +35,11 @@ export const MAX_PLAYERS = 60
 /* TODO: Add Patao sounds with an easter egg */
 export const SOUNDS = [
   {
+    name: 'Cardi B - Coronavirus',
+    language: '🇺🇸',
+    url: '/sounds/chino-cirujano/coronavirus.mp3'
+  },
+  {
     name: 'Chino cirujano - Pero pagaraprata',
     language: '🇦🇷',
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
