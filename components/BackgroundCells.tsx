@@ -38,7 +38,7 @@ export default function BackgroundCells() {
                     value: bc.value
                   })
                 }
-                defaultChecked={backgroundCell.value === bc.value}
+                checked={backgroundCell.value === bc.value}
               />
               <div
                 className={classnames([
