@@ -8,14 +8,7 @@ interface IProps {
 
 export default function Metatags({ pathname }: IProps) {
   const locale = pathname.split('/')?.[1]
-  const langs: ILanguage = allLanguages.reduce(
-    (prev, curr) => ({
-      ...prev,
-      [curr]: curr
-    }),
-    {}
-  )
-  const lang = locale && langs[locale]
+  const lang = allLanguages.includes(locale) && locale
 
   return (
     <Head>
@@ -32,20 +25,23 @@ export default function Metatags({ pathname }: IProps) {
             hrefLang="en-ES"
             href="https://coronabingo.now.sh/es/"
           />
-          <title></title>
-          <meta name="title" content="Coronabingo | " />
-          <meta name="description" content="CoronaBingo, . #CoronaBingo" />
-          <meta property="og:title" content="Coronabingo | " />
+          <title>Coronabingo</title>
+          <meta name="title" content="Coronabingo | Bingo online" />
+          <meta
+            name="description"
+            content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
+          />
+          <meta property="og:title" content="Coronabingo | Bingo online" />
           <meta
             property="og:description"
-            content="CoronaBingo, . #CoronaBingo"
+            content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
           />
 
           <meta property="twitter:url" content="https://coronabingo.now.sh/" />
-          <meta property="twitter:title" content="Coronabingo | " />
+          <meta property="twitter:title" content="Coronabingo | Bingo online" />
           <meta
             property="twitter:description"
-            content="CoronaBingo, . #CoronaBingo"
+            content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
           />
         </Fragment>
       )}
