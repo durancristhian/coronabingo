@@ -42,7 +42,7 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
           </div>
           <div className="flex items-center justify-between mt-4">
             <p className="flex-auto font-medium">{t(`jugar:dreams.${last}`)}</p>
-            <p>
+            <p className="text-right w-24">
               <a
                 href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
                 target="_blank"
