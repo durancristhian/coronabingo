@@ -162,12 +162,12 @@ export default function Jugar() {
                     </span>
                   </Button>
                 </div>
-                {/* <Pato /> */}
+                <Pato />
               </div>
             </div>
           )}
           {room?.showConfetti && <Confetti />}
-          {/* <Sounds isAdmin={isAdmin} /> */}
+          <Sounds isAdmin={isAdmin} />
           <div className="max-w-4xl mt-8 mx-auto">
             <div className="bg-white p-4 rounded shadow">
               <BackgroundCells />

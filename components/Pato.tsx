@@ -20,7 +20,7 @@ export default function Pato() {
     <Fragment>
       <h2 className="font-medium mb-8 text-center text-xl">Botonera</h2>
       <div className="border-gray-300 border-l-2 border-r-2 border-t-2 rounded">
-        {SOUNDS.map(({ name, url }, index) => (
+        {SOUNDS.map(({ language, name, url }, index) => (
           <div
             key={index}
             className={classnames([
@@ -34,7 +34,10 @@ export default function Pato() {
               </Button>
             </div>
             <div className="flex flex-auto items-center">
-              <p className="leading-normal">{name}</p>
+              <p className="flex items-center leading-normal">
+                <span className="mr-4 text-2xl">{language}</span>
+                <span>{name}</span>
+              </p>
             </div>
           </div>
         ))}

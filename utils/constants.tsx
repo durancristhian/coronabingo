@@ -138,37 +138,37 @@ export const MAX_PLAYERS = 60
 export const SOUNDS = [
   {
     name: 'Chino cirujano - Pero pagaraprata',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
   },
   {
     name: 'Guido Kaczka  - Mirá la repe',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/guido/mira-la-repe.mp3'
   },
   {
     name: 'Guido Kaczka - Preparado, listo, ya',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/guido/preparado-listo-ya.mp3'
   },
   {
     name: 'Los Simpsons - Hundiste mi acorazado',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/simpsons/hundiste-mi-acorazado.mp3'
   },
   {
     name: 'Riverito - A cruzar los dedos',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/riverito/cruzar-dedos.mp3'
   },
   {
     name: 'Susana - Correctou',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/susana/correctou.mp3'
   },
   {
     name: 'Tano Pasman - Nooooo',
-    language: 'ar',
+    language: '🇦🇷',
     url: '/sounds/tano/nooooo.mp3'
   }
 ]
