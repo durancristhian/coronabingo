@@ -15,17 +15,21 @@ export default function Header() {
   const onLanguageChange = (l: string) => {
     const { asPath, replaceI18n } = Router
     const slash = '/'
-    const getPath = (path: string) =>
-      path
-        .split(slash)
-        .slice(2)
-        .join(slash) || slash
-    replaceI18n({
-      url: getPath(asPath),
-      options: {
-        lang: l
-      }
-    })
+    const url = asPath
+      .split(slash)
+      .filter(p => p && !allLanguages.includes(p))
+      .join(slash)
+    if (url) {
+      return replaceI18n({
+        url,
+        options: {
+          lang: l
+        }
+      })
+    } else {
+      // only in home
+      window.location.replace(`${slash}${l}`)
+    }
   }
 
   return (
