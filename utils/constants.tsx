@@ -37,7 +37,7 @@ export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',
     language: '🇺🇸',
-    url: '/sounds/chino-cirujano/coronavirus.mp3'
+    url: '/sounds/coronavirus.mp3'
   },
   {
     name: 'Chino cirujano - Pero pagaraprata',
