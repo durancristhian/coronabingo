@@ -40,6 +40,11 @@ export const SOUNDS = [
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
   },
   {
+    name: 'GTA - Ah sh*t, here we go again',
+    language: '🇺🇸',
+    url: '/sounds/gta-ah-shit-here-we-go-again.mp3'
+  },
+  {
     name: 'Guido Kaczka  - Mirá la repe',
     language: '🇦🇷',
     url: '/sounds/guido/mira-la-repe.mp3'
@@ -60,6 +65,11 @@ export const SOUNDS = [
     url: '/sounds/riverito/cruzar-dedos.mp3'
   },
   {
+    name: 'Snoop dog !',
+    language: '🇺🇸',
+    url: '/sounds/snoop-dog.mp3'
+  },
+  {
     name: 'Susana - Correctou',
     language: '🇦🇷',
     url: '/sounds/susana/correctou.mp3'
@@ -68,5 +78,20 @@ export const SOUNDS = [
     name: 'Tano Pasman - Nooooo',
     language: '🇦🇷',
     url: '/sounds/tano/nooooo.mp3'
+  },
+  {
+    name: 'The Simpsons - Bingo !',
+    language: '🇺🇸',
+    url: '/sounds/simpsons/homer-bingo.mp3'
+  },
+  {
+    name: 'You what ?',
+    language: '🇺🇸',
+    url: '/sounds/you-what.mp3'
+  },
+  {
+    name: 'Windows - Error',
+    language: '🇺🇸',
+    url: '/sounds/windows/windows-error.mp3'
   }
 ]
