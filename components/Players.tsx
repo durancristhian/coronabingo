@@ -66,7 +66,6 @@ export default function Players({
       ...players,
       {
         boards: '',
-        /* TODO: extract this to somewhere else. Maybe db utils */
         id: roomsRef
           .doc(roomName)
           .collection('players')

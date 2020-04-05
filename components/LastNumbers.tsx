@@ -1,5 +1,6 @@
+import useTranslation from 'next-translate/useTranslation'
 import { Fragment } from 'react'
-import { BOARD_NUMBER_COLOR /* DREAMS */ } from '~/utils/constants'
+import { BOARD_NUMBER_COLOR, DREAMS } from '~/utils/constants'
 import Ball from './Ball'
 
 interface IProps {
@@ -7,6 +8,7 @@ interface IProps {
 }
 
 export default function LastNumbers({ selectedNumbers }: IProps) {
+  const { t } = useTranslation()
   const [last, ...rest] = selectedNumbers
 
   return (
@@ -38,8 +40,19 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
               ))}
             </div>
           </div>
-          {/* TODO: create a flag and load a component */}
-          {/* <p className="font-medium mt-4">{DREAMS[last]}</p> */}
+          <div className="flex items-center justify-between mt-4">
+            <p className="flex-auto font-medium">{DREAMS[last]}</p>
+            <p>
+              <a
+                href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block focus:outline-none focus:shadow-outline font-medium text-blue-600 text-xs underline"
+              >
+                {t('jugar:dreams-link')}
+              </a>
+            </p>
+          </div>
         </Fragment>
       )}
     </Fragment>
