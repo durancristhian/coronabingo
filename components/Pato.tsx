@@ -1,9 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import { Fragment } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
-import { SOUNDS } from '~/utils/constants'
+import { EasterEggContext } from '~/contexts/EasterEggContext'
+import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 
@@ -11,6 +12,14 @@ export default function Pato() {
   const { t } = useTranslation()
   const router = useRouter()
   const roomName = router.query.name?.toString()
+  const [times, setTimes] = useState(0)
+  const { isVisible, setVisibility } = useContext(EasterEggContext)
+
+  useEffect(() => {
+    if (times !== 7) return
+
+    setVisibility(true)
+  }, [times])
 
   const onClick = async (sound: string) => {
     await roomsRef.doc(roomName).update({
@@ -18,13 +27,21 @@ export default function Pato() {
     })
   }
 
+  const tricks = () => {
+    if (times < 7) {
+      setTimes(t => t + 1)
+    }
+  }
+
+  const sounds = isVisible ? SOUNDS_EXTRAS : SOUNDS
+
   return (
     <Fragment>
       <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
-        {t('jugar:sounds')}
+        <span onClick={tricks}>{t('jugar:sounds')}</span>
       </h2>
       <div className="border-gray-300 border-l-2 border-r-2 border-t-2 rounded">
-        {SOUNDS.map(({ language, name, url }, index) => (
+        {sounds.map(({ language, name, url }, index) => (
           <div
             key={index}
             className={classnames([

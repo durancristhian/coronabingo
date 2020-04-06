@@ -100,3 +100,26 @@ export const SOUNDS = [
     url: '/sounds/windows/windows-error.mp3'
   }
 ]
+export const SOUNDS_EXTRAS = [
+  ...SOUNDS,
+  {
+    name: 'Patao - Cartón',
+    language: '🇦🇷',
+    url: '/sounds/patao/carton.mp3'
+  },
+  {
+    name: 'Patao - Coronabingo',
+    language: '🇦🇷',
+    url: '/sounds/patao/coronabingo.mp3'
+  },
+  {
+    name: 'Patao - Ese bolillero papá',
+    language: '🇦🇷',
+    url: '/sounds/patao/ese-bolillero-papa.mp3'
+  },
+  {
+    name: 'Patao - Linea',
+    language: '🇦🇷',
+    url: '/sounds/patao/linea.mp3'
+  }
+]
