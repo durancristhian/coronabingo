@@ -30,7 +30,7 @@ export default function Index() {
                   href="https://hangouts.google.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-blue-600 underline"
+                  className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
                 >
                   Google Hangouts
                 </a>

@@ -4,7 +4,7 @@ import { MouseEvent, ReactNode } from 'react'
 interface IProps {
   children: ReactNode
   className?: string
-  color?: 'gray' | 'green' | 'red' | 'yellow'
+  color?: 'green' | 'pink' | 'red' | 'yellow'
   disabled?: boolean
   id?: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
@@ -43,14 +43,6 @@ export default function Button({
 }
 
 const COLORS = {
-  gray: [
-    'bg-gray-400',
-    'border-gray-600',
-    'focus:bg-gray-500',
-    'focus:border-gray-700',
-    'focus:text-gray-900',
-    'text-gray-800'
-  ],
   green: [
     'bg-green-400',
     'border-green-600',
@@ -58,6 +50,14 @@ const COLORS = {
     'focus:border-green-700',
     'focus:text-green-900',
     'text-green-800'
+  ],
+  pink: [
+    'bg-pink-400',
+    'border-pink-600',
+    'focus:bg-pink-500',
+    'focus:border-pink-700',
+    'focus:text-pink-900',
+    'text-pink-800'
   ],
   red: [
     'bg-red-400',

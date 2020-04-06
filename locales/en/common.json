@@ -8,6 +8,7 @@
   "turning-globe": "Turning Globe",
   "board": "Board Nº {{boardId}}",
   "board_plural": "Boards Nº {{boardId}}",
-  "made-by": "Made by Cristhian Duran",
-  "select-empty-option": "--- Select ---"
+  "made-by": "By ",
+  "select-empty-option": "--- Select ---",
+  "donate": "Donate"
 }
