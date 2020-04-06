@@ -60,7 +60,7 @@ export default function Sala() {
             {room.readyToPlay && (
               <div className="mt-8">
                 <h3 className="font-medium">
-                  <span>{t('sala:people', { count: players.length })}</span>
+                  {t('sala:people', { count: players.length })}
                 </h3>
                 <div className="italic -mt-6 text-gray-600 text-xs md:text-sm">
                   <p className="my-8">{t('sala:list-description')}</p>
@@ -85,7 +85,7 @@ export default function Sala() {
                             {t('sala:is-admin')}
                           </span>
                         )}
-                        <p className="italic mt-4 text-gray-600 text-sm w-full">
+                        <p className="italic mt-2 text-gray-600 text-sm w-full">
                           {t('common:board_plural', {
                             boardId: player.boards.split(',').join(' & ')
                           })}

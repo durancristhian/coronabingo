@@ -85,7 +85,7 @@ export default function Players({
     <div className="mt-8">
       <div className="font-medium">
         <h3 className="flex font-medium items-center">
-          <span>{t('admin:players.title')} </span>
+          <span>{t('admin:players.title')}&nbsp;</span>
           <span
             className={classnames([
               players.length === MAX_PLAYERS && 'text-red-600'
