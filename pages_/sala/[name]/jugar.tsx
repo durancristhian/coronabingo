@@ -13,6 +13,7 @@ import Message from '~/components/Message'
 import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
+import VideoChat from '~/components/VideoChat'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
@@ -85,6 +86,7 @@ export default function Jugar() {
           )}
           <div className="max-w-6xl mx-auto">
             <div className="lg:flex mt-8">
+              <VideoChat roomName={roomName} playerName={player?.name} />
               {room && (
                 <div className="lg:w-1/3">
                   <div className="bg-white px-4 py-8 rounded shadow">
