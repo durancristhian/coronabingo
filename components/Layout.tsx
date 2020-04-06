@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
+import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import Banner from './Banner'
 import Footer from './Footer'
@@ -10,10 +11,17 @@ interface IProps {
 
 export default function Layout({ children }: IProps) {
   const { t } = useTranslation()
+  const router = useRouter()
+  const playerId = router.query.jugador?.toString()
 
   return (
     <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
       <Header />
+      {playerId && (
+        <Banner type="emphasis">
+          <span>{t('common:post-your-photo')} </span>
+        </Banner>
+      )}
       <div className="flex-auto">{children}</div>
       <Banner>
         <span>{t('common:feedback-form.intro')} </span>

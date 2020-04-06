@@ -12,6 +12,7 @@ export default function Banner({ children, type = 'information' }: IProps) {
       className={classnames([
         'px-4 py-2',
         type === 'information' && 'bg-yellow-200',
+        type === 'emphasis' && 'bg-purple-200',
         type === 'error' && 'bg-red-200'
       ])}
     >
@@ -22,4 +23,4 @@ export default function Banner({ children, type = 'information' }: IProps) {
   )
 }
 
-type BannerType = 'information' | 'error'
+type BannerType = 'information' | 'emphasis' | 'error'
