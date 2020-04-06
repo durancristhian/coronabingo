@@ -1,11 +1,11 @@
 {
   "title": "Room Lobby",
   "roomname": "Room name",
-  "people": "There are {{count}} person waiting to play",
-  "people_plural": "There are {{count}} persons waiting to play",
+  "people": "There are {{count}} player waiting to play",
+  "people_plural": "There are {{count}} players waiting to play",
   "call-link": "Link to call",
   "not-ready": "The room is not ready to play yet. When it is, this page will be updated.",
   "list-description": "Search yourself in this list and press the play button to access your boards.",
-  "is-admin": "Commands the game",
+  "is-admin": "Admin",
   "play": "Play"
 }

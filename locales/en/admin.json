@@ -11,11 +11,11 @@
   "field-turningGlob": "Use online turning glob",
   "field-submit": "Play",
   "players": {
-    "title": "People who is going to play: ",
+    "title": "People who is going to play:",
     "amount": "{{amount}} of {{max}}",
     "field-name": "Name *",
-    "admin": "Commands the game",
+    "admin": "Admin",
     "field-admin-hint": "Choose the person who'll be in charge of select the numbers in the turning glob so other players get notified.",
-    "field-admin": "Commands the game"
+    "field-admin": "Admin"
   }
 }

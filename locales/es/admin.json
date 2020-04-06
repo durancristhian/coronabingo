@@ -11,7 +11,7 @@
   "field-turningGlob": "Usar bolillero online",
   "field-submit": "Jugar",
   "players": {
-    "title": "Personas que van a jugar: ",
+    "title": "Personas que van a jugar:",
     "amount": "{{amount}} de {{max}}",
     "field-name": "Nombre *",
     "admin": "Dirige el juego",
