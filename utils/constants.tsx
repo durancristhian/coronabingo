@@ -45,6 +45,11 @@ export const SOUNDS = [
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3'
   },
   {
+    name: "Friends - Let's get ready to rumble",
+    language: '🇺🇸',
+    url: '/sounds/friends/lets-get-ready-to-rumble.mp3'
+  },
+  {
     name: 'GTA - Ah sh*t, here we go again',
     language: '🇺🇸',
     url: '/sounds/gta-ah-shit-here-we-go-again.mp3'
@@ -85,6 +90,16 @@ export const SOUNDS = [
     url: '/sounds/tano/nooooo.mp3'
   },
   {
+    name: 'The Office - No, God, no',
+    language: '🇺🇸',
+    url: '/sounds/the-office/no-god-no.mp3'
+  },
+  {
+    name: 'The Office - This is the worst',
+    language: '🇺🇸',
+    url: '/sounds/the-office/this-is-the-worst.mp3'
+  },
+  {
     name: 'The Simpsons - Bingo',
     language: '🇺🇸',
     url: '/sounds/simpsons/homer-bingo.mp3'
@@ -96,7 +111,7 @@ export const SOUNDS = [
   },
   {
     name: 'Windows - Error',
-    language: '🇺🇸',
+    language: '🌎',
     url: '/sounds/windows/windows-error.mp3'
   }
 ]
