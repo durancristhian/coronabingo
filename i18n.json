@@ -1,0 +1,14 @@
+{
+  "allLanguages": ["es", "en"],
+  "currentPagesDir": "pages_",
+  "defaultLanguage": "es",
+  "finalPagesDir": "pages",
+  "localesPath": "locales",
+  "pages": {
+    "*": ["common"],
+    "/": ["index"],
+    "/sala/[name]": ["sala"],
+    "/sala/[name]/admin": ["admin"],
+    "/sala/[name]/jugar": ["jugar"]
+  }
+}

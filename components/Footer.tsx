@@ -1,12 +1,15 @@
+import useTranslation from 'next-translate/useTranslation'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 
 export default function Footer() {
+  const { t } = useTranslation()
+
   return (
     <div className="bg-white p-4 shadow">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <div>
-            <p>Hecho por Cristhian Duran</p>
+            <p>{t('common:made-by')}</p>
           </div>
           <div className="flex items-center">
             <a

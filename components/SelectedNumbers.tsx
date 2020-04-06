@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import { Fragment } from 'react'
+import useTranslation from 'next-translate/useTranslation'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
@@ -27,14 +28,13 @@ export default function SelectedNumbers({
     onNewNumber(shuffled[0])
   }
 
+  const { t } = useTranslation()
+
   return (
     <Fragment>
       {isAdmin && !turningGlob && (
         <div className="italic leading-normal mb-4 text-gray-600 text-sm">
-          <p>
-            Marcá en la lista de abajo los números que van saliendo en tu
-            bolillero.
-          </p>
+          <p>{t('jugar:no-turningglob-description')}</p>
         </div>
       )}
       {isAdmin && turningGlob && (
@@ -44,7 +44,7 @@ export default function SelectedNumbers({
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
         >
-          Próximo número
+          {t('jugar:next-number')}
         </Button>
       )}
       <div className="flex flex-wrap">

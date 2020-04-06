@@ -1,0 +1,12 @@
+{
+  "intro": "Hola!, en esta página vas a poder jugar al bingo con otras personas.",
+  "videocall-suggestion": "Vas a necesitar crear una videollamada con quienes quieras jugar. Te recomiendo",
+  "create-room": {
+    "title": "Crear una sala",
+    "saving": "Creando sala...",
+    "already-exist": "Ya existe una sala con ese nombre.",
+    "success": "Sala creada con éxito. Espere...",
+    "field-name": "Nombre *",
+    "field-submit": "Listo"
+  }
+}

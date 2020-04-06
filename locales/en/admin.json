@@ -1,0 +1,21 @@
+{
+  "success": "Successfully configured room. Wait...",
+  "title": "Configure room",
+  "error": "An error occurred trying to fetch the room information. Try again by refreshing the page.",
+  "loading": "Loading room information...",
+  "field-name": "Name",
+  "field-link-hint": "Share this link with the people in the videocall.",
+  "field-link": "Link to the room",
+  "field-videocall": "Link to the videocall",
+  "field-turningGlob-hint": "If you have a turning glob and you want to use it don't check this option. If not, check it to have a turning glob during the game.",
+  "field-turningGlob": "Use online turning glob",
+  "field-submit": "Play",
+  "players": {
+    "title": "People who is going to play: ",
+    "amount": "{{amount}} of {{max}}",
+    "field-name": "Name *",
+    "admin": "Commands the game",
+    "field-admin-hint": "Choose the person who'll be in charge of select the numbers in the turning glob so other players get notified.",
+    "field-admin": "Commands the game"
+  }
+}

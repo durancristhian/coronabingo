@@ -1,0 +1,21 @@
+{
+  "success": "Sala configurada con éxito. Espere...",
+  "title": "Preparar sala",
+  "error": "Ocurrió un error al cargar la información de la sala. Intenta de nuevo recargando la página.",
+  "loading": "Cargando información de la sala...",
+  "field-name": "Nombre",
+  "field-link-hint": "Compartí este link a las personas de la videollamada.",
+  "field-link": "Link a la sala",
+  "field-videocall": "Link a la videollamada",
+  "field-turningGlob-hint": "Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego.",
+  "field-turningGlob": "Usar bolillero online",
+  "field-submit": "Jugar",
+  "players": {
+    "title": "Personas que van a jugar: ",
+    "amount": "{{amount}} de {{max}}",
+    "field-name": "Nombre *",
+    "admin": "Dirige el juego",
+    "field-admin-hint": "Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere.",
+    "field-admin": "Dirige el juego"
+  }
+}

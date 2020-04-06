@@ -1,0 +1,13 @@
+{
+  "feedback-form": {
+    "intro": "Dejanos tu feedback completando",
+    "link": "esta encuesta"
+  },
+  "language-es": "Español 🇪🇸",
+  "language-en": "English 🇺🇸",
+  "turning-globe": "Bolillero",
+  "board": "Cartón Nº {{boardId}}",
+  "board_plural": "Cartones Nº {{boardId}}",
+  "made-by": "Hecho por Cristhian Duran",
+  "select-empty-option": "--- Selecciona ---"
+}

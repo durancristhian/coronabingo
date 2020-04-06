@@ -1,8 +1,9 @@
 import classnames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Select from '~/components/Select'
-import { Field } from '~/pages/sala/[name]/admin'
+import Field from '~/interfaces/Field'
 import { MAX_PLAYERS } from '~/utils/constants'
 import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
@@ -25,6 +26,7 @@ export default function Players({
   roomName,
   setPlayers
 }: IProps) {
+  const { t } = useTranslation()
   const [name, setName] = useState('')
 
   const onFieldChange = (value: string) => {
@@ -64,7 +66,6 @@ export default function Players({
       ...players,
       {
         boards: '',
-        /* TODO: extract this to somewhere else. Maybe db utils */
         id: roomsRef
           .doc(roomName)
           .collection('players')
@@ -84,13 +85,16 @@ export default function Players({
     <div className="mt-8">
       <div className="font-medium text-md">
         <h3 className="flex font-medium items-center text-md">
-          <span>Personas que van a jugar:&nbsp;</span>
+          <span>{t('admin:players.title')}</span>
           <span
             className={classnames([
               players.length === MAX_PLAYERS && 'text-red-600'
             ])}
           >
-            {players.length} de {MAX_PLAYERS}
+            {t('admin:players.amount', {
+              amount: players.length,
+              max: MAX_PLAYERS
+            })}
           </span>
         </h3>
       </div>
@@ -103,7 +107,7 @@ export default function Players({
             <div className="flex-auto">
               <InputText
                 id="name"
-                label="Nombre *"
+                label={t('admin:players.field-name')}
                 onChange={onFieldChange}
                 value={name}
               />
@@ -139,7 +143,7 @@ export default function Players({
                 <p>{player.name}</p>
                 {player.id === adminId && (
                   <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
-                    Dirige el juego
+                    {t('admin:players.admin')}
                   </span>
                 )}
               </div>
@@ -157,15 +161,17 @@ export default function Players({
         </div>
       )}
       <div className="mt-4">
-        <Select
-          disabled={!players.length}
-          hint="Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere."
-          id="adminId"
-          label="Dirige el juego"
-          onChange={value => onChange([{ key: 'adminId', value }])}
-          options={players}
-          value={adminId}
-        />
+        <div className="my-4">
+          <Select
+            disabled={!players.length}
+            hint={t('admin:players.field-admin-hint')}
+            id="adminId"
+            label={t('admin:players.field-admin')}
+            onChange={value => onChange([{ key: 'adminId', value }])}
+            options={players}
+            value={adminId}
+          />
+        </div>
       </div>
     </div>
   )

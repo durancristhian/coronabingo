@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { Fragment, useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
@@ -8,15 +9,15 @@ export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(
     BackgroundCellContext
   )
-
+  const { t } = useTranslation()
   return (
     <Fragment>
       <h2 className="font-medium mb-8 text-center text-xl">
-        Fondo de las celdas vacías
+        {t('jugar:empty-cells.title')}
       </h2>
       <div className="flex flex-wrap">
         {BACKGROUND_CELL_VALUES.map((bc, i) => (
-          <div className="pb-4 pr-4 w-36" key={bc.value}>
+          <div className="pb-4 pr-4 w-32" key={bc.value}>
             <label
               htmlFor={i.toString()}
               className={classnames([
@@ -58,7 +59,7 @@ export default function BackgroundCells() {
                   })
                 }}
               ></div>
-              <span className="italic">{bc.name}</span>
+              <p className="italic text-center">{t(bc.key)}</p>
             </label>
           </div>
         ))}
@@ -66,7 +67,7 @@ export default function BackgroundCells() {
       <div className="-mb-4 mt-4">
         <InputText
           id="background"
-          label="O bien, pegá el link a una imágen en internet:"
+          label={t('jugar:empty-cells.url')}
           onChange={value => {
             setBackgroundCell({
               type: 'url',
