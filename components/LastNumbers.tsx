@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import { Fragment } from 'react'
 import { BOARD_NUMBER_COLOR } from '~/utils/constants'
+import Anchor from './Anchor'
 import Ball from './Ball'
 
 interface IProps {
@@ -43,14 +44,9 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
           <div className="flex items-center justify-between mt-4">
             <p className="flex-auto font-medium">{t(`jugar:dreams.${last}`)}</p>
             <p className="text-right w-24">
-              <a
-                href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block focus:outline-none focus:shadow-outline font-medium text-blue-600 text-xs md:text-sm underline"
-              >
+              <Anchor href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)">
                 {t('jugar:dreams-link')}
-              </a>
+              </Anchor>
             </p>
           </div>
         </Fragment>
