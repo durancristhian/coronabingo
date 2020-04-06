@@ -23,7 +23,7 @@ export default function Sala() {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
             <div className="mb-8">
-              <h2 className="font-medium text-center text-xl">
+              <h2 className="font-medium text-center text-lg md:text-xl">
                 {t('sala:title')}
               </h2>
             </div>
@@ -52,17 +52,17 @@ export default function Sala() {
             )}
             {!room.readyToPlay && (
               <div className="mt-8">
-                <div className="italic leading-normal text-gray-600 text-sm">
+                <div className="italic text-gray-600 text-xs md:text-sm">
                   {t('sala:not-ready')}
                 </div>
               </div>
             )}
             {room.readyToPlay && (
               <div className="mt-8">
-                <h3 className="font-medium text-md">
+                <h3 className="font-medium">
                   <span>{t('sala:people', { count: players.length })}</span>
                 </h3>
-                <div className="italic leading-normal -mt-6 text-gray-600 text-sm">
+                <div className="italic -mt-6 text-gray-600 text-xs md:text-sm">
                   <p className="my-8">{t('sala:list-description')}</p>
                 </div>
                 <div className="border-gray-300 border-t-2 mt-4 -mx-4">

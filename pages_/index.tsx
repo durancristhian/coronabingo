@@ -15,28 +15,24 @@ export default function Index() {
               alt="coronavirus feliz"
               className="h-32 mx-auto"
             />
-            <div className="leading-normal">
-              <p className="my-8">{t('index:intro')}</p>
-            </div>
+            <p className="my-8">{t('index:intro')}</p>
           </div>
           <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
             <CreateRoom />
           </div>
           <div className="md:w-2/4 mx-auto">
-            <div className="leading-normal">
-              <p className="my-8">
-                <span>{t('index:videocall-suggestion')} </span>
-                <a
-                  href="https://hangouts.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
-                >
-                  Google Hangouts
-                </a>
-                .
-              </p>
-            </div>
+            <p className="my-8">
+              <span>{t('index:videocall-suggestion')} </span>
+              <a
+                href="https://hangouts.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
+              >
+                Google Hangouts
+              </a>
+              .
+            </p>
           </div>
         </div>
       </div>

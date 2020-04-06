@@ -75,7 +75,7 @@ export default function CreateRoom() {
 
   return (
     <Fragment>
-      <h2 className="font-medium text-xl text-center uppercase">
+      <h2 className="font-medium text-lg md:text-xl text-center uppercase">
         {t('index:create-room.title')}
       </h2>
       <form onSubmit={onSubmit}>

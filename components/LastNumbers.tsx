@@ -47,7 +47,7 @@ export default function LastNumbers({ selectedNumbers }: IProps) {
                 href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block focus:outline-none focus:shadow-outline font-medium text-blue-600 text-xs underline"
+                className="block focus:outline-none focus:shadow-outline font-medium text-blue-600 text-xs md:text-sm underline"
               >
                 {t('jugar:dreams-link')}
               </a>
