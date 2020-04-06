@@ -61,7 +61,7 @@ export default function Select({
         </div>
       </label>
       {hint && (
-        <p className="italic leading-normal mt-1 text-gray-600 text-sm">
+        <p className="italic leading-normal mt-1 text-gray-600 text-xs md:text-sm">
           {hint}
         </p>
       )}

@@ -83,8 +83,8 @@ export default function Players({
 
   return (
     <div className="mt-8">
-      <div className="font-medium text-md">
-        <h3 className="flex font-medium items-center text-md">
+      <div className="font-medium">
+        <h3 className="flex font-medium items-center">
           <span>{t('admin:players.title')} </span>
           <span
             className={classnames([

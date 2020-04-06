@@ -70,7 +70,7 @@ export default function Jugar() {
     <Layout>
       <BackgroundCellContextProvider>
         <div className="px-4 py-8">
-          <h2 className="font-medium text-center text-xl">
+          <h2 className="font-medium text-center text-lg md:text-xl">
             {t('jugar:title', {
               playerName: player?.name || '',
               roomName: roomName || ''
@@ -88,7 +88,7 @@ export default function Jugar() {
               {room && (
                 <div className="lg:w-1/3">
                   <div className="bg-white px-4 py-8 rounded shadow">
-                    <h2 className="font-medium mb-4 text-center text-xl">
+                    <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                       {t('jugar:last-numbers')}
                     </h2>
                     <LastNumbers
@@ -97,7 +97,7 @@ export default function Jugar() {
                   </div>
                   <div className="hidden lg:block mt-8">
                     <div className="bg-white px-4 py-8 rounded shadow">
-                      <h2 className="font-medium mb-4 text-center text-xl">
+                      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                         {t('common:turning-globe')}
                       </h2>
                       <div className="mt-4">
@@ -127,7 +127,7 @@ export default function Jugar() {
               </div>
               <div className="lg:hidden mt-8">
                 <div className="bg-white px-4 py-8 rounded shadow">
-                  <h2 className="font-medium mb-4 text-center text-xl">
+                  <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                     {t('common:turning-globe')}
                   </h2>
                   <div className="mt-4">
@@ -147,7 +147,7 @@ export default function Jugar() {
               <div className="bg-white p-4 rounded shadow">
                 <Banner>{t('jugar:admin-title')} 😎</Banner>
                 <div className="my-8 text-center">
-                  <h2 className="font-medium mb-8 text-center text-xl">
+                  <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
                     {t('jugar:celebrate')}
                   </h2>
                   <Button

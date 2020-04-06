@@ -124,7 +124,7 @@ export default function Admin() {
       <div className="px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-            <h2 className="font-medium text-center text-xl">
+            <h2 className="font-medium text-center text-lg md:text-xl">
               {t('admin:title')}
             </h2>
             {room.error && <Message type="error">{t('admin:error')}</Message>}

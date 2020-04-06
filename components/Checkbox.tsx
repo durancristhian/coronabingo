@@ -33,7 +33,7 @@ export default function Checkbox({
         <span className="flex-auto pl-4 py-2">{label}</span>
       </label>
       {hint && (
-        <p className="italic leading-normal mt-2 text-gray-600 text-sm">
+        <p className="italic leading-normal mt-2 text-gray-600 md:text-sm">
           {hint}
         </p>
       )}

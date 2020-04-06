@@ -15,7 +15,7 @@ export default function Layout({ children }: IProps) {
   const playerId = router.query.jugador?.toString()
 
   return (
-    <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900">
+    <main className="bg-gray-200 flex flex-col font-inter leading-none min-h-screen text-gray-900 text-sm md:text-base">
       <Header />
       {playerId && (
         <Banner type="emphasis">
