@@ -33,7 +33,7 @@ export default function SelectedNumbers({
   return (
     <Fragment>
       {isAdmin && !turningGlob && (
-        <div className="italic leading-normal mb-4 text-gray-600 text-xs md:text-sm">
+        <div className="italic mb-4 text-gray-600 text-xs md:text-sm">
           <p>{t('jugar:no-turningglob-description')}</p>
         </div>
       )}

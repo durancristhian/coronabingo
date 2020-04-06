@@ -38,7 +38,7 @@ export default function Pato() {
               </Button>
             </div>
             <div className="flex flex-auto items-center">
-              <p className="flex items-center leading-normal">
+              <p className="flex items-center">
                 <span className="mr-4 text-xl md:text-2xl">{language}</span>
                 <span>{name}</span>
               </p>

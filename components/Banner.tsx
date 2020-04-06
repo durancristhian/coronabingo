@@ -17,7 +17,7 @@ export default function Banner({ children, type = 'information' }: IProps) {
       ])}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="leading-normal text-center">{children}</div>
+        <div className="text-center">{children}</div>
       </div>
     </div>
   )
