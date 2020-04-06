@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FiHeart } from 'react-icons/fi'
+import Anchor from './Anchor'
 import Button from './Button'
 
 export default function Footer() {
@@ -21,14 +22,9 @@ export default function Footer() {
           </Button>
           <p>
             <span>{t('common:made-by')}</span>
-            <a
-              href="https://twitter.com/DuranCristhian"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus:outline-none focus:shadow-outline font-medium text-blue-600 underline"
-            >
+            <Anchor href="https://twitter.com/DuranCristhian">
               Cristhian Duran
-            </a>
+            </Anchor>
           </p>
         </div>
       </div>
