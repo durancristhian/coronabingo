@@ -76,12 +76,12 @@ export default class Coronabingo extends App {
               <meta name="title" content="Coronabingo | Bingo online" />
               <meta
                 name="description"
-                content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta property="og:title" content="Coronabingo | Bingo online" />
               <meta
                 property="og:description"
-                content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta
                 property="twitter:url"
@@ -93,7 +93,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:description"
-                content="CoronaBingo, now you can play free bingo with boards and a turning globe. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta
                 property="og:url"
