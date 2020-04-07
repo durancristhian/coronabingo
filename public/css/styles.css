@@ -28,3 +28,13 @@
 .w-1\/10 {
   width: calc(100% / 9);
 }
+
+.cursor-poroto {
+  cursor: url('/cursor/poroto-md.png'), auto;
+}
+
+@media (max-width: 640px) {
+  .cursor-poroto {
+    cursor: url('/cursor/poroto-sm.png'), auto;
+  }
+}
