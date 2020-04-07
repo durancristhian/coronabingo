@@ -7,7 +7,7 @@
   "field-link-hint": "Share this link with the people in the videocall.",
   "field-link": "Link to the room",
   "field-videocall": "Link to the videocall",
-  "field-turningGlob-hint": "If you have a bingo spinner and you want to use it don't check this option. If not, check it to have a bingo spinner during the game.",
+  "field-turningGlob-hint": "If you have a bingo spinner and you want to use it don't check this option.",
   "field-turningGlob": "Use online bingo spinner",
   "field-submit": "Play",
   "players": {
@@ -15,7 +15,7 @@
     "amount": "{{amount}} of {{max}}",
     "field-name": "Name *",
     "admin": "Admin",
-    "field-admin-hint": "Choose the person who'll be in charge of select the numbers in the bingo spinner so other players get notified.",
+    "field-admin-hint": "Choose the person who'll be in charge of selecting the numbers in the bingo spinner so other players get notified.",
     "field-admin": "Admin"
   }
 }
