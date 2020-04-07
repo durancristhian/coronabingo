@@ -57,7 +57,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
       {boards.map((board, i) => (
         <div
           key={i}
-          className="bg-white mb-8 p-4 border-2 border-gray-900 shadow"
+          className="bg-white mb-8 p-4 border-2 border-gray-900 shadow cursor-poroto"
         >
           <p className="font-semibold uppercase">
             {t('common:board', { boardId: board.id })}
