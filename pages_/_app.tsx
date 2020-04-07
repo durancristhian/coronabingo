@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import 'typeface-inter'
 import 'typeface-oswald'
 import { allLanguages } from '~/i18n.json'
+import { FirebaseProvider } from '~/contexts/Firebase'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
 
@@ -207,7 +208,9 @@ export default class Coronabingo extends App {
             content="https://coronabingo.now.sh/social2.jpg"
           />
         </Head>
-        <Component {...pageProps} />
+        <FirebaseProvider routerQuery={router.query}>
+          <Component {...pageProps} />
+        </FirebaseProvider>
       </Fragment>
     )
   }

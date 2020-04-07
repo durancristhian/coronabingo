@@ -1,36 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { FirebaseContext } from '~/contexts/Firebase'
 import { IPlayer } from '~/components/Players'
-import { roomsRef } from '~/utils/firebase'
 
-export default function useRoomPlayers(roomId: string): [IPlayer[], Function] {
-  const [players, setPlayers] = useState<IPlayer[]>([])
+export default function useRoomPlayers() {
+  const { currentPlayer, players, setPlayers } = useContext(FirebaseContext)
 
-  const sortAndSet = (array: IPlayer[]) =>
-    setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
+  const setPlayer = (player: IPlayer) => {
+    const playerIndex = players.map(p => p.id).indexOf(player.id)
+    const playersCopy = [...players]
+    if (playerIndex > -1) {
+      playersCopy[playerIndex] = player
+      setPlayers(playersCopy)
+    }
+  }
 
-  useEffect(() => {
-    if (!roomId) return
-
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        sortAndSet(
-          snapshot.docs.map(p => {
-            const data = p.data()
-
-            return {
-              id: p.id,
-              name: data.name,
-              boards: data.boards,
-              selectedNumbers: data.selectedNumbers
-            }
-          })
-        )
-      })
-
-    return unsubscribe
-  }, [roomId])
-
-  return [players, sortAndSet]
+  return { player: currentPlayer, players, setPlayer, setPlayers }
 }

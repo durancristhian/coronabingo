@@ -1,17 +1,17 @@
+import { Fragment, useContext, useEffect, useState } from 'react'
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
-import { Fragment, useContext, useEffect, useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
-import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 
-export default function Pato() {
+interface Props {
+  onClick: (s: string) => void
+}
+
+export default function Pato({ onClick }: Props) {
   const { t } = useTranslation()
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
   const [times, setTimes] = useState(0)
   const { isVisible, setVisibility } = useContext(EasterEggContext)
 
@@ -20,12 +20,6 @@ export default function Pato() {
 
     setVisibility(true)
   }, [times])
-
-  const onClick = async (sound: string) => {
-    await roomsRef.doc(roomId).update({
-      soundToPlay: sound
-    })
-  }
 
   const tricks = () => {
     if (times < 7) {

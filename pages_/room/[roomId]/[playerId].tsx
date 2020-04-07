@@ -1,6 +1,4 @@
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
@@ -17,33 +15,14 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 
-export default function Play() {
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const playerId = router.query.playerId?.toString()
-  const room = useRoom(roomId)
+export default function Jugar() {
+  const room = useRoom()
+  const { player, setPlayer } = useRoomPlayers()
   const { t } = useTranslation()
-  /* TODO: can we make a custom hook? */
-  const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
-  const isAdmin = room?.adminId === playerId
 
-  useEffect(() => {
-    if (!playerId || !roomId) return
-
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .doc(playerId)
-      .onSnapshot(doc =>
-        setPlayer({
-          id: doc.id,
-          ...doc.data()
-        })
-      )
-
-    return unsubscribe
-  }, [playerId, roomId])
+  const isAdmin = room?.adminId === player?.id
 
   const onNewNumber = (n: number) => {
     if (!room) return
@@ -57,15 +36,17 @@ export default function Play() {
       numbers = [n, ...selectedNumbers]
     }
 
-    roomsRef.doc(roomId).update({
+    roomsRef.doc(room.id).update({
       selectedNumbers: numbers
     })
   }
 
   const confetti = () => {
-    const roomRef = roomsRef.doc(roomId)
-    roomRef.update({ showConfetti: !room?.showConfetti })
+    roomsRef.doc(room.id).update({ showConfetti: !room.showConfetti })
   }
+
+  const setSoundToPlay = (soundToPlay: string = '') =>
+    isAdmin && roomsRef.doc(room.id).update({ soundToPlay })
 
   return (
     <Layout>
@@ -118,6 +99,7 @@ export default function Play() {
                   {player && (
                     <Boards
                       player={player}
+                      room={room}
                       setPlayerProps={newProps =>
                         setPlayer({
                           ...player,
@@ -153,10 +135,10 @@ export default function Play() {
                       {t('jugar:celebrate')}
                     </h2>
                     <Button
-                      color={room?.showConfetti ? 'red' : 'green'}
+                      color={room.showConfetti ? 'red' : 'green'}
                       onClick={confetti}
                     >
-                      {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                      {room.showConfetti ? <FiFrown /> : <FiSmile />}
                       <span className="ml-4">
                         {t(
                           `jugar:${
@@ -166,12 +148,15 @@ export default function Play() {
                       </span>
                     </Button>
                   </div>
-                  <Pato />
+                  <Pato onClick={setSoundToPlay} />
                 </div>
               </div>
             )}
-            {room?.showConfetti && <Confetti />}
-            <Sounds isAdmin={isAdmin} />
+            {room.showConfetti && <Confetti />}
+            <Sounds
+              onAudioEnd={setSoundToPlay}
+              soundToPlay={room.soundToPlay}
+            />
             <div className="max-w-4xl mt-8 mx-auto">
               <div className="bg-white p-4 rounded shadow">
                 <BackgroundCells />

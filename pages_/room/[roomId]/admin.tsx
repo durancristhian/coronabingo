@@ -8,7 +8,7 @@ import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
-import Players, { IPlayer } from '~/components/Players'
+import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import db, { roomsRef } from '~/utils/firebase'
@@ -18,6 +18,7 @@ export default function Admin() {
   const { t } = useTranslation()
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
+
   const [room, setRoom] = useState<{
     data: firebase.firestore.DocumentData | undefined
     error: string | null
@@ -34,7 +35,7 @@ export default function Admin() {
     content: '',
     type: 'information'
   })
-  const [players, setPlayers] = useRoomPlayers(roomId)
+  const { players = [], setPlayers } = useRoomPlayers()
   const randomBoards = useRandomBoards()
 
   useEffect(() => {

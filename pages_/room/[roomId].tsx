@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import { FiLink2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
@@ -10,11 +9,9 @@ import { IPlayer } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 
-export default function Room() {
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const room = useRoom(roomId)
-  const [players] = useRoomPlayers(roomId)
+export default function Sala() {
+  const room = useRoom()
+  const { players = [] } = useRoomPlayers()
   const { t } = useTranslation()
 
   return (
@@ -34,15 +31,13 @@ export default function Room() {
                 className="h-32 mx-auto"
               />
             </div>
-            {room.name && (
-              <InputText
-                id="room-name"
-                label={t('sala:room-name')}
-                value={roomId || ''}
-                readonly
-                onFocus={event => event.target.select()}
-              />
-            )}
+            <InputText
+              id="room-name"
+              label={t('sala:room-name')}
+              value={room?.name || ''}
+              readonly
+              onFocus={event => event.target.select()}
+            />
             {room.videoCall && (
               <InputText
                 id="videocall"
@@ -100,7 +95,7 @@ export default function Room() {
                           onClick={() =>
                             Router.pushI18n(
                               `/room/[id]/[playerId]`,
-                              `/room/${roomId}/${player.id}`
+                              `/room/${room.id}/${player.id}`
                             )
                           }
                         >
