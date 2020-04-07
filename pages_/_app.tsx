@@ -1,17 +1,23 @@
 import * as Sentry from '@sentry/browser'
 import App from 'next/app'
 import Head from 'next/head'
+import Router from 'next/router'
 import { Fragment } from 'react'
 import 'typeface-inter'
 import 'typeface-oswald'
 import { allLanguages } from '~/i18n.json'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
+import * as gtag from '~/utils/gtag'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.SENTRY_DSN
   })
+}
+
+if (process.env.GA_TRACKING_ID) {
+  Router.events.on('routeChangeComplete', url => gtag.pageview(url))
 }
 
 export default class Coronabingo extends App {
