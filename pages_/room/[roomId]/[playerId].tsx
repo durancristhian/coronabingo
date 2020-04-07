@@ -17,6 +17,7 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
+import Box from '~/components/Box'
 
 export default function Play() {
   const router = useRouter()
@@ -89,16 +90,16 @@ export default function Play() {
               <div className="lg:flex mt-8">
                 {room && (
                   <div className="lg:w-1/3">
-                    <div className="bg-white px-4 py-8 rounded shadow">
+                    <Box>
                       <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                         {t('jugar:last-numbers')}
                       </h2>
                       <LastNumbers
                         selectedNumbers={room?.selectedNumbers || []}
                       />
-                    </div>
+                    </Box>
                     <div className="hidden lg:block mt-8">
-                      <div className="bg-white px-4 py-8 rounded shadow">
+                      <Box>
                         <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                           {t('common:turning-globe')}
                         </h2>
@@ -110,7 +111,7 @@ export default function Play() {
                             turningGlob={room.turningGlob}
                           />
                         </div>
-                      </div>
+                      </Box>
                     </div>
                   </div>
                 )}
@@ -128,7 +129,7 @@ export default function Play() {
                   )}
                 </div>
                 <div className="lg:hidden mt-8">
-                  <div className="bg-white px-4 py-8 rounded shadow">
+                  <Box>
                     <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                       {t('common:turning-globe')}
                     </h2>
@@ -140,13 +141,13 @@ export default function Play() {
                         turningGlob={room.turningGlob}
                       />
                     </div>
-                  </div>
+                  </Box>
                 </div>
               </div>
             </div>
             {isAdmin && (
               <div className="max-w-4xl mt-8 mx-auto">
-                <div className="bg-white p-4 rounded shadow">
+                <Box>
                   <Banner>{t('jugar:admin-title')} 😎</Banner>
                   <div className="my-8 text-center">
                     <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
@@ -167,15 +168,15 @@ export default function Play() {
                     </Button>
                   </div>
                   <Pato />
-                </div>
+                </Box>
               </div>
             )}
             {room?.showConfetti && <Confetti />}
             <Sounds isAdmin={isAdmin} />
             <div className="max-w-4xl mt-8 mx-auto">
-              <div className="bg-white p-4 rounded shadow">
+              <Box>
                 <BackgroundCells />
-              </div>
+              </Box>
             </div>
           </div>
         </BackgroundCellContextProvider>
