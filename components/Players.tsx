@@ -14,7 +14,7 @@ interface IProps {
   onChange: (changes: { key: string; value: Field }[]) => void
   players: IPlayer[]
   removePlayer: Function
-  roomName: string
+  roomId: string
   setPlayers: Function
 }
 
@@ -23,7 +23,7 @@ export default function Players({
   onChange,
   players,
   removePlayer,
-  roomName,
+  roomId,
   setPlayers
 }: IProps) {
   const { t } = useTranslation()
@@ -67,7 +67,7 @@ export default function Players({
       {
         boards: '',
         id: roomsRef
-          .doc(roomName)
+          .doc(roomId)
           .collection('players')
           .doc().id,
         name,

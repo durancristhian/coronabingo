@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react'
 import { IPlayer } from '~/components/Players'
 import { roomsRef } from '~/utils/firebase'
 
-export default function useRoomPlayers(
-  roomName: string
-): [IPlayer[], Function] {
+export default function useRoomPlayers(roomId: string): [IPlayer[], Function] {
   const [players, setPlayers] = useState<IPlayer[]>([])
 
   const sortAndSet = (array: IPlayer[]) =>
     setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
 
   useEffect(() => {
-    if (!roomName) return
+    if (!roomId) return
 
     const unsubscribe = roomsRef
-      .doc(roomName)
+      .doc(roomId)
       .collection('players')
       .onSnapshot(snapshot => {
         sortAndSet(
@@ -32,7 +30,7 @@ export default function useRoomPlayers(
       })
 
     return unsubscribe
-  }, [roomName])
+  }, [roomId])
 
   return [players, sortAndSet]
 }

@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import { roomsRef } from '~/utils/firebase'
 
 export default function useRoom(
-  roomName: string
+  roomId: string
 ): firebase.firestore.DocumentData {
   const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
 
   useEffect(() => {
-    if (!roomName) return
+    if (!roomId) return
 
-    const unsubscribe = roomsRef.doc(roomName).onSnapshot(snapshot => {
+    const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
       const roomData = snapshot.data()
 
       if (roomData) {
@@ -18,7 +18,7 @@ export default function useRoom(
     })
 
     return unsubscribe
-  }, [roomName])
+  }, [roomId])
 
   return room
 }

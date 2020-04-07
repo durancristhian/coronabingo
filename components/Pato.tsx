@@ -11,7 +11,7 @@ import Button from './Button'
 export default function Pato() {
   const { t } = useTranslation()
   const router = useRouter()
-  const roomName = router.query.name?.toString()
+  const roomId = router.query.id?.toString()
   const [times, setTimes] = useState(0)
   const { isVisible, setVisibility } = useContext(EasterEggContext)
 
@@ -22,7 +22,7 @@ export default function Pato() {
   }, [times])
 
   const onClick = async (sound: string) => {
-    await roomsRef.doc(roomName).update({
+    await roomsRef.doc(roomId).update({
       soundToPlay: sound
     })
   }

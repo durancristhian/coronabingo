@@ -9,8 +9,8 @@ interface IProps {
 
 export default function Sounds({ isAdmin }: IProps) {
   const router = useRouter()
-  const roomName = router.query.name?.toString()
-  const room = useRoom(roomName)
+  const roomId = router.query.id?.toString()
+  const room = useRoom(roomId)
 
   useEffect(() => {
     if (!room) return
@@ -22,7 +22,7 @@ export default function Sounds({ isAdmin }: IProps) {
         .catch(() => null)
         .finally(() => {
           isAdmin &&
-            roomsRef.doc(roomName).update({
+            roomsRef.doc(roomId).update({
               soundToPlay: ''
             })
         })

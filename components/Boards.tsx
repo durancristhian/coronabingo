@@ -12,18 +12,18 @@ interface IProps {
 
 export default function Boards({ player, setPlayerProps }: IProps) {
   const router = useRouter()
-  const roomName = router.query.name?.toString()
+  const roomId = router.query.id?.toString()
   const playerId = router.query.jugador?.toString()
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (roomName && playerId) {
+    if (roomId && playerId) {
       try {
         const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
         const playerValues = roomValues?.[playerId] || {}
         roomsRef
-          .doc(roomName)
+          .doc(roomId)
           .collection('players')
           .doc(playerId)
           .update(playerValues)
@@ -50,7 +50,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
       window.onbeforeunload = saveOnLeave
       window.onpopstate = saveOnLeave
     }
-  }, [boards, player, playerId, roomName])
+  }, [boards, player, playerId, roomId])
 
   return (
     <Fragment>

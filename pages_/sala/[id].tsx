@@ -12,9 +12,9 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 
 export default function Sala() {
   const router = useRouter()
-  const roomName = router.query.name?.toString()
-  const room = useRoom(roomName)
-  const [players] = useRoomPlayers(roomName)
+  const roomId = router.query.id?.toString()
+  const room = useRoom(roomId)
+  const [players] = useRoomPlayers(roomId)
   const { t } = useTranslation()
 
   return (
@@ -34,13 +34,15 @@ export default function Sala() {
                 className="h-32 mx-auto"
               />
             </div>
-            <InputText
-              id="room-name"
-              label={t('sala:roomname')}
-              value={roomName || ''}
-              readonly
-              onFocus={event => event.target.select()}
-            />
+            {room.name && (
+              <InputText
+                id="room-name"
+                label={t('sala:room-name')}
+                value={roomId || ''}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+            )}
             {room.videoCall && (
               <InputText
                 id="videocall"
@@ -97,8 +99,8 @@ export default function Sala() {
                           disabled={!room.readyToPlay}
                           onClick={() =>
                             Router.pushI18n(
-                              `/sala/[name]/jugar?jugador=${player.id}`,
-                              `/sala/${roomName}/jugar?jugador=${player.id}`
+                              `/sala/[id]/jugar?jugador=${player.id}`,
+                              `/sala/${roomId}/jugar?jugador=${player.id}`
                             )
                           }
                         >

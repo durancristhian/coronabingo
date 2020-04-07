@@ -20,19 +20,19 @@ import { roomsRef } from '~/utils/firebase'
 
 export default function Jugar() {
   const router = useRouter()
-  const roomName = router.query.name?.toString()
+  const roomId = router.query.id?.toString()
   const playerId = router.query.jugador?.toString()
-  const room = useRoom(roomName)
+  const room = useRoom(roomId)
   const { t } = useTranslation()
   /* TODO: can we make a custom hook? */
   const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
   const isAdmin = room?.adminId === playerId
 
   useEffect(() => {
-    if (!playerId || !roomName) return
+    if (!playerId || !roomId) return
 
     const unsubscribe = roomsRef
-      .doc(roomName)
+      .doc(roomId)
       .collection('players')
       .doc(playerId)
       .onSnapshot(doc =>
@@ -43,7 +43,7 @@ export default function Jugar() {
       )
 
     return unsubscribe
-  }, [playerId, roomName])
+  }, [playerId, roomId])
 
   const onNewNumber = (n: number) => {
     if (!room) return
@@ -57,13 +57,13 @@ export default function Jugar() {
       numbers = [n, ...selectedNumbers]
     }
 
-    roomsRef.doc(roomName).update({
+    roomsRef.doc(roomId).update({
       selectedNumbers: numbers
     })
   }
 
   const confetti = () => {
-    const roomRef = roomsRef.doc(roomName)
+    const roomRef = roomsRef.doc(roomId)
     roomRef.update({ showConfetti: !room?.showConfetti })
   }
 
@@ -75,7 +75,7 @@ export default function Jugar() {
             <h2 className="font-medium text-center text-lg md:text-xl">
               {t('jugar:title', {
                 playerName: player?.name || '',
-                roomName: roomName || ''
+                roomName: room.name || ''
               })}
             </h2>
             {!room?.name && (

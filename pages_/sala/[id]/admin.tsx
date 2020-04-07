@@ -17,7 +17,7 @@ import Field from '~/interfaces/Field'
 export default function Admin() {
   const { t } = useTranslation()
   const router = useRouter()
-  const roomName = router.query.name?.toString()
+  const roomId = router.query.id?.toString()
   const [room, setRoom] = useState<{
     data: firebase.firestore.DocumentData | undefined
     error: string | null
@@ -34,7 +34,7 @@ export default function Admin() {
     content: '',
     type: 'information'
   })
-  const [players, setPlayers] = useRoomPlayers(roomName)
+  const [players, setPlayers] = useRoomPlayers(roomId)
   const randomBoards = useRandomBoards()
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Admin() {
       })
 
       try {
-        const roomDoc = roomsRef.doc(roomName)
+        const roomDoc = roomsRef.doc(roomId)
         const roomData = await roomDoc.get()
 
         if (!roomData.exists) {
@@ -69,8 +69,8 @@ export default function Admin() {
       }
     }
 
-    if (roomName) getRoomData()
-  }, [roomName])
+    if (roomId) getRoomData()
+  }, [roomId])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
@@ -85,7 +85,7 @@ export default function Admin() {
 
   const removePlayer = (playerId: string) => {
     roomsRef
-      .doc(roomName)
+      .doc(roomId)
       .collection('players')
       .doc(playerId)
       .delete()
@@ -97,7 +97,7 @@ export default function Admin() {
       type: 'success'
     })
 
-    let roomDoc = roomsRef.doc(roomName)
+    let roomDoc = roomsRef.doc(roomId)
 
     let batch = db.batch()
     batch.update(roomDoc, { ...room.data, readyToPlay: true })
@@ -115,7 +115,7 @@ export default function Admin() {
     await batch.commit()
 
     setTimeout(() => {
-      Router.pushI18n('/sala/[name]', `/sala/${roomName}`)
+      Router.pushI18n('/sala/[id]', `/sala/${roomId}`)
     }, 1000)
   }
 
@@ -136,7 +136,7 @@ export default function Admin() {
                 <InputText
                   id="room-name"
                   label={t('admin:field-name')}
-                  value={roomName}
+                  value={room.data.name}
                   readonly
                   onFocus={event => event.target.select()}
                 />
@@ -144,7 +144,7 @@ export default function Admin() {
                   hint={t('admin:field-link-hint')}
                   id="url"
                   label={t('admin:field-link')}
-                  value={`${window.location.host}/sala/${roomName}`}
+                  value={`${window.location.host}/sala/${roomId}`}
                   readonly
                   onFocus={event => event.target.select()}
                 />
@@ -162,7 +162,7 @@ export default function Admin() {
                   adminId={room.data.adminId}
                   onChange={onFieldChange}
                   removePlayer={removePlayer}
-                  roomName={roomName}
+                  roomId={roomId}
                 />
                 <div className="mt-4">
                   <Checkbox

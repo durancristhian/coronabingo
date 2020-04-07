@@ -1,6 +1,6 @@
 {
   "title": "Información de la sala",
-  "roomname": "Nombre de la sala",
+  "room-name": "Nombre de la sala",
   "people": "Va a jugar {{count}} persona",
   "people_plural": "Van a jugar {{count}} personas",
   "call-link": "Link a la videollamada",

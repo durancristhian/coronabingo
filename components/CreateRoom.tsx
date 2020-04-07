@@ -3,7 +3,6 @@ import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
-import urlSlug from 'url-slug'
 import { roomsRef } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
@@ -43,13 +42,12 @@ export default function CreateRoom() {
       type: 'information'
     })
 
-    const roomName = urlSlug(name)
     const roomDoc = roomsRef.doc()
     const roomId = roomDoc.id
 
     try {
       await roomDoc.set({
-        name: roomName,
+        name: formData.name,
         date: firebase.firestore.Timestamp.fromDate(new Date())
       })
 
@@ -59,7 +57,7 @@ export default function CreateRoom() {
       })
 
       setTimeout(() => {
-        Router.pushI18n('/sala/[name]/admin', `/sala/${roomId}/admin`)
+        Router.pushI18n('/sala/[id]/admin', `/sala/${roomId}/admin`)
       }, 1000)
     } catch (error) {
       setMessageProps({
