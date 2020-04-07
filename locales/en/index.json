@@ -4,7 +4,7 @@
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",
-    "already-exist": "Already exist a room with that name.",
+    "error": "An error has ocurred. Try again.",
     "success": "Successfully created room. Wait...",
     "field-name": "Name *",
     "field-submit": "Ready"

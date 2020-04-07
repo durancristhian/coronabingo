@@ -4,7 +4,7 @@
   "create-room": {
     "title": "Crear una sala",
     "saving": "Creando sala...",
-    "already-exist": "Ya existe una sala con ese nombre.",
+    "error": "Ha ocurrido un error. Intente nuevamente.",
     "success": "Sala creada con éxito. Espere...",
     "field-name": "Nombre *",
     "field-submit": "Listo"

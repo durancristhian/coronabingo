@@ -43,34 +43,30 @@ export default function CreateRoom() {
       type: 'information'
     })
 
-    const { name } = formData
     const roomName = urlSlug(name)
-    const roomDoc = roomsRef.doc(roomName)
-    const roomData = await roomDoc.get()
+    const roomDoc = roomsRef.doc()
+    const roomId = roomDoc.id
 
-    if (roomData.exists) {
-      setMessageProps({
-        message: t('index:create-room.already-exist'),
-        type: 'error'
+    try {
+      await roomDoc.set({
+        name: roomName,
+        date: firebase.firestore.Timestamp.fromDate(new Date())
       })
 
-      return
+      setMessageProps({
+        message: t('index:create-room.success'),
+        type: 'success'
+      })
+
+      setTimeout(() => {
+        Router.pushI18n('/sala/[name]/admin', `/sala/${roomId}/admin`)
+      }, 1000)
+    } catch (error) {
+      setMessageProps({
+        message: t('index:create-room.error'),
+        type: 'error'
+      })
     }
-
-    await roomDoc.set({
-      ...formData,
-      name: roomName,
-      date: firebase.firestore.Timestamp.fromDate(new Date())
-    })
-
-    setMessageProps({
-      message: t('index:create-room.success'),
-      type: 'success'
-    })
-
-    setTimeout(() => {
-      Router.pushI18n('/sala/[name]/admin', `/sala/${roomName}/admin`)
-    }, 1000)
   }
 
   return (
