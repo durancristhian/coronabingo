@@ -13,7 +13,7 @@ interface IProps {
 export default function Layout({ children }: IProps) {
   const { t } = useTranslation()
   const router = useRouter()
-  const playerId = router.query.jugador?.toString()
+  const playerId = router.query.playerId?.toString()
 
   return (
     <main className="bg-gray-200 flex flex-col font-inter leading-normal min-h-screen text-gray-900 text-sm md:text-base">

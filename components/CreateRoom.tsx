@@ -57,7 +57,7 @@ export default function CreateRoom() {
       })
 
       setTimeout(() => {
-        Router.pushI18n('/sala/[id]/admin', `/sala/${roomId}/admin`)
+        Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
       }, 1000)
     } catch (error) {
       setMessageProps({

@@ -12,8 +12,8 @@ interface IProps {
 
 export default function Boards({ player, setPlayerProps }: IProps) {
   const router = useRouter()
-  const roomId = router.query.id?.toString()
-  const playerId = router.query.jugador?.toString()
+  const roomId = router.query.roomId?.toString()
+  const playerId = router.query.playerId?.toString()
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
 

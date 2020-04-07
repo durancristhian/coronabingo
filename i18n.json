@@ -7,8 +7,8 @@
   "pages": {
     "*": ["common"],
     "/": ["index"],
-    "/sala/[id]": ["sala"],
-    "/sala/[id]/admin": ["admin"],
-    "/sala/[id]/jugar": ["jugar"]
+    "/room/[roomId]": ["sala"],
+    "/room/[roomId]/admin": ["admin"],
+    "/room/[roomId]/[playerId]": ["jugar"]
   }
 }

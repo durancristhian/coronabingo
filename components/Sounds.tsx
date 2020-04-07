@@ -9,7 +9,7 @@ interface IProps {
 
 export default function Sounds({ isAdmin }: IProps) {
   const router = useRouter()
-  const roomId = router.query.id?.toString()
+  const roomId = router.query.roomId?.toString()
   const room = useRoom(roomId)
 
   useEffect(() => {

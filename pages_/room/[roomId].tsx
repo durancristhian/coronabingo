@@ -10,9 +10,9 @@ import { IPlayer } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 
-export default function Sala() {
+export default function Room() {
   const router = useRouter()
-  const roomId = router.query.id?.toString()
+  const roomId = router.query.roomId?.toString()
   const room = useRoom(roomId)
   const [players] = useRoomPlayers(roomId)
   const { t } = useTranslation()
@@ -99,8 +99,8 @@ export default function Sala() {
                           disabled={!room.readyToPlay}
                           onClick={() =>
                             Router.pushI18n(
-                              `/sala/[id]/jugar?jugador=${player.id}`,
-                              `/sala/${roomId}/jugar?jugador=${player.id}`
+                              `/room/[id]/[playerId]`,
+                              `/room/${roomId}/${player.id}`
                             )
                           }
                         >

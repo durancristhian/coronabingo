@@ -18,10 +18,10 @@ import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
 
-export default function Jugar() {
+export default function Play() {
   const router = useRouter()
-  const roomId = router.query.id?.toString()
-  const playerId = router.query.jugador?.toString()
+  const roomId = router.query.roomId?.toString()
+  const playerId = router.query.playerId?.toString()
   const room = useRoom(roomId)
   const { t } = useTranslation()
   /* TODO: can we make a custom hook? */

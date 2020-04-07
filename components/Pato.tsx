@@ -11,7 +11,7 @@ import Button from './Button'
 export default function Pato() {
   const { t } = useTranslation()
   const router = useRouter()
-  const roomId = router.query.id?.toString()
+  const roomId = router.query.roomId?.toString()
   const [times, setTimes] = useState(0)
   const { isVisible, setVisibility } = useContext(EasterEggContext)
 

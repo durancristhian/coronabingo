@@ -17,7 +17,7 @@ import Field from '~/interfaces/Field'
 export default function Admin() {
   const { t } = useTranslation()
   const router = useRouter()
-  const roomId = router.query.id?.toString()
+  const roomId = router.query.roomId?.toString()
   const [room, setRoom] = useState<{
     data: firebase.firestore.DocumentData | undefined
     error: string | null
@@ -115,7 +115,7 @@ export default function Admin() {
     await batch.commit()
 
     setTimeout(() => {
-      Router.pushI18n('/sala/[id]', `/sala/${roomId}`)
+      Router.pushI18n('/room/[roomId]', `/room/${roomId}`)
     }, 1000)
   }
 
@@ -144,7 +144,7 @@ export default function Admin() {
                   hint={t('admin:field-link-hint')}
                   id="url"
                   label={t('admin:field-link')}
-                  value={`${window.location.host}/sala/${roomId}`}
+                  value={`${window.location.host}/room/${roomId}`}
                   readonly
                   onFocus={event => event.target.select()}
                 />
