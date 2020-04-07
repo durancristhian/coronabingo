@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Anchor from '~/components/Anchor'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
+import Box from '~/components/Box'
 
 export default function Index() {
   const { t } = useTranslation()
@@ -18,8 +19,10 @@ export default function Index() {
             />
             <p className="my-8">{t('index:intro')}</p>
           </div>
-          <div className="bg-white md:w-2/4 mx-auto px-4 py-8 rounded shadow">
-            <CreateRoom />
+          <div className="md:w-2/4 mx-auto">
+            <Box>
+              <CreateRoom />
+            </Box>
           </div>
           <div className="md:w-2/4 mx-auto">
             <p className="my-8">
