@@ -38,7 +38,7 @@ export default function Select({
               'disabled:opacity-50',
             ])}
             value={value}
-            onChange={event => onChange && onChange(event.target.value)}
+            onBlur={event => onChange && onChange(event.target.value)}
             disabled={disabled}
           >
             {!value && (

@@ -39,9 +39,9 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <h1 className="font-medium text-xl md:text-2xl">
             <Link href="/">
-              <a className="block focus:outline-none focus:shadow-outline">
+              <button className="focus:outline-none focus:shadow-outline">
                 Coronabingo
-              </a>
+              </button>
             </Link>
           </h1>
           <Select

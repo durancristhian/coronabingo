@@ -168,7 +168,12 @@ export default function Play() {
               {isAdmin && (
                 <div className="max-w-4xl mt-8 mx-auto">
                   <Box>
-                    <Banner>{t('jugar:admin-title')} 😎</Banner>
+                    <Banner>
+                      {t('jugar:admin-title')}
+                      <span role="img" aria-label="emoji">
+                        &nbsp;😎
+                      </span>
+                    </Banner>
                     <div className="my-8 text-center">
                       <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
                         {t('jugar:celebrate')}

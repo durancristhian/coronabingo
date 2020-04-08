@@ -41,6 +41,9 @@ export default function Cells({
               selectedNumbers.includes(boardNumber) && 'bg-orange-400',
             ])}
             onClick={() => handleClick(boardNumber)}
+            onKeyPress={() => handleClick(boardNumber)}
+            role="button"
+            tabIndex={0}
           >
             <div
               className={classnames(

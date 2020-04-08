@@ -29,7 +29,9 @@ export default function Layout({ children }: Props) {
         <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
           {t('common:feedback-form.link')}
         </Anchor>
-        <span>&nbsp;🤩</span>
+        <span role="img" aria-label="emoji">
+          &nbsp;🤩
+        </span>
       </Banner>
       <Footer />
     </main>

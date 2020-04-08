@@ -15,6 +15,8 @@ if (process.env.NODE_ENV === 'production') {
 export default class extends Document {
   render() {
     return (
+      /* TODO: improve this by setting a cookie? */
+      // eslint-disable-next-line jsx-a11y/html-has-lang
       <html>
         <Head>
           {process.env.GA_TRACKING_ID && (

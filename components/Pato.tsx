@@ -38,7 +38,9 @@ export default function Pato() {
   return (
     <Fragment>
       <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
-        <span onClick={tricks}>{t('jugar:sounds')}</span>
+        <span onClick={tricks} role="button" tabIndex={0} onKeyPress={tricks}>
+          {t('jugar:sounds')}
+        </span>
       </h2>
       <div className="border-gray-300 border-l-2 border-r-2 border-t-2 rounded">
         {sounds.map(({ language, name, url }, index) => (
