@@ -1,6 +1,40 @@
 import classnames from 'classnames'
 import React, { MouseEvent, ReactNode } from 'react'
-import { BUTTON_COLORS } from '~/utils/constants'
+
+const BUTTON_COLORS = {
+  green: [
+    'bg-green-400',
+    'border-green-600',
+    'focus:bg-green-500',
+    'focus:border-green-700',
+    'focus:text-green-900',
+    'text-green-800',
+  ],
+  pink: [
+    'bg-pink-400',
+    'border-pink-600',
+    'focus:bg-pink-500',
+    'focus:border-pink-700',
+    'focus:text-pink-900',
+    'text-pink-800',
+  ],
+  red: [
+    'bg-red-400',
+    'border-red-600',
+    'focus:bg-red-500',
+    'focus:border-red-700',
+    'focus:text-red-900',
+    'text-red-800',
+  ],
+  yellow: [
+    'bg-yellow-400',
+    'border-yellow-600',
+    'focus:bg-yellow-500',
+    'focus:border-yellow-700',
+    'focus:text-yellow-900',
+    'text-yellow-800',
+  ],
+}
 
 interface Props {
   children: ReactNode
