@@ -1,11 +1,24 @@
 module.exports = {
-    root: true,
-    parser: '@typescript-eslint/parser',
-    plugins: [
-        '@typescript-eslint'
-    ],
+    parser: "@typescript-eslint/parser",
     extends: [
-        'airbnb-typescript',
-        'prettier/@typescript-eslint'
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
     ],
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        }
+    },
+    settings: {
+        react: {
+            version: "detect"
+        },
+        settings: {
+            "import/resolver": {
+                typescript: {}
+            },
+        }
+    }
 };
