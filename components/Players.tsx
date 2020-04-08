@@ -5,7 +5,6 @@ import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Select from '~/components/Select'
 import Field from '~/interfaces/Field'
 import { MAX_PLAYERS } from '~/utils/constants'
-import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 import InputText from './InputText'
 
@@ -14,7 +13,7 @@ interface Props {
   onChange: (changes: { key: string; value: Field }[]) => void
   players: Player[]
   removePlayer: Function
-  roomId: string
+  roomRef: firebase.firestore.DocumentReference
   setPlayers: Function
 }
 
@@ -23,7 +22,7 @@ export default function Players({
   onChange,
   players,
   removePlayer,
-  roomId,
+  roomRef,
   setPlayers,
 }: Props) {
   const { t } = useTranslation()
@@ -56,20 +55,21 @@ export default function Players({
 
     setPlayers(playersCopy)
 
-    removePlayer(player.id)
+    removePlayer(player.ref)
   }
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
+    const playerDoc = roomRef.collection('players').doc()
+
     setPlayers([
       ...players,
       {
         boards: '',
-        id: roomsRef
-          .doc(roomId)
-          .collection('players')
-          .doc().id,
+        id: playerDoc.id,
+        exists: false,
+        ref: playerDoc,
         name,
         selectedNumbers: [],
       },
@@ -181,4 +181,6 @@ export interface Player {
   boards: string
   id: string
   name: string
+  exists: boolean
+  ref: firebase.firestore.DocumentReference
 }

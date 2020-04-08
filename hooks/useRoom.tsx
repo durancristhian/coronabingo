@@ -1,24 +1,7 @@
-import { useEffect, useState } from 'react'
-import { roomsRef } from '~/utils/firebase'
+import { useContext } from 'react'
+import { FirebaseContext } from '~/contexts/Firebase'
 
-export default function useRoom(
-  roomId: string,
-): firebase.firestore.DocumentData {
-  const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
-
-  useEffect(() => {
-    if (!roomId) return
-
-    const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
-      const roomData = snapshot.data()
-
-      if (roomData) {
-        setRoom(roomData)
-      }
-    })
-
-    return unsubscribe
-  }, [roomId])
-
-  return room
+export default function useRoom(): [firebase.firestore.DocumentData, Function] {
+  const { room = {}, changeRoom } = useContext(FirebaseContext)
+  return [room, changeRoom]
 }

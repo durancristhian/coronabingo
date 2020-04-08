@@ -1,6 +1,5 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
@@ -12,22 +11,12 @@ import Message, { MessageType } from '~/components/Message'
 import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import useRoom from '~/hooks/useRoom'
 import Field from '~/interfaces/Field'
-import db, { roomsRef } from '~/utils/firebase'
+import db from '~/utils/firebase'
 
 export default function Admin() {
   const { t } = useTranslation()
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const [room, setRoom] = useState<{
-    data: firebase.firestore.DocumentData | undefined
-    error: string | null
-    loading: boolean
-  }>({
-    data: undefined,
-    error: null,
-    loading: false,
-  })
   const [message, setMessage] = useState<{
     content: string
     type: MessageType
@@ -35,61 +24,18 @@ export default function Admin() {
     content: '',
     type: 'information',
   })
-  const [players, setPlayers] = useRoomPlayers(roomId)
+  const { players = [], setPlayers } = useRoomPlayers()
+  const [room, setRoom] = useRoom()
   const randomBoards = useRandomBoards()
-
-  useEffect(() => {
-    const getRoomData = async () => {
-      setRoom({
-        data: undefined,
-        error: null,
-        loading: true,
-      })
-
-      try {
-        const roomDoc = roomsRef.doc(roomId)
-        const roomData = await roomDoc.get()
-
-        if (!roomData.exists) {
-          Router.pushI18n('/')
-
-          return
-        }
-
-        setRoom({
-          loading: false,
-          error: null,
-          data: roomData.data(),
-        })
-      } catch (error) {
-        setRoom({
-          loading: false,
-          error,
-          data: undefined,
-        })
-      }
-    }
-
-    if (roomId) getRoomData()
-  }, [roomId])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom({
-      ...room,
-      data: Object.assign(
-        {},
-        room.data,
-        ...[...changes.map(({ key, value }) => ({ [key]: value }))],
-      ),
+      ...[...changes.map(({ key, value }) => ({ [key]: value }))],
     })
   }
 
-  const removePlayer = (playerId: string) => {
-    roomsRef
-      .doc(roomId)
-      .collection('players')
-      .doc(playerId)
-      .delete()
+  const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
+    playerRef.delete()
   }
 
   const readyToPlay = async () => {
@@ -98,20 +44,17 @@ export default function Admin() {
       type: 'success',
     })
 
-    const roomDoc = roomsRef.doc(roomId)
-
     const batch = db.batch()
-    batch.update(roomDoc, {
-      ...room.data,
+    batch.update(room.ref, {
+      ...room,
       selectedNumbers: [],
       showConfetti: false,
       readyToPlay: true,
     })
 
     players.map((player, index) => {
-      const { id, name } = player
-
-      batch.set(roomDoc.collection('players').doc(id), {
+      const { name, ref } = player
+      batch.set(ref, {
         name,
         boards: randomBoards[index],
         selectedNumbers: [],
@@ -121,7 +64,7 @@ export default function Admin() {
     await batch.commit()
 
     setTimeout(() => {
-      Router.pushI18n('/room/[roomId]', `/room/${roomId}`)
+      Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
     }, 1000)
   }
 
@@ -134,16 +77,15 @@ export default function Admin() {
               <h2 className="font-medium text-center text-lg md:text-xl">
                 {t('admin:title')}
               </h2>
-              {room.error && <Message type="error">{t('admin:error')}</Message>}
-              {room.loading && (
+              {!room?.id && (
                 <Message type="information">{t('admin:loading')}</Message>
               )}
-              {room.data && (
+              {room?.id && (
                 <Fragment>
                   <InputText
                     id="room-name"
                     label={t('admin:field-name')}
-                    value={room.data.name}
+                    value={room.name}
                     readonly
                     onFocus={event => event.target.select()}
                   />
@@ -151,7 +93,7 @@ export default function Admin() {
                     hint={t('admin:field-link-hint')}
                     id="url"
                     label={t('admin:field-link')}
-                    value={`${window.location.host}/room/${roomId}`}
+                    value={`${window.location.host}/room/${room.id}`}
                     readonly
                     onFocus={event => event.target.select()}
                   />
@@ -161,15 +103,15 @@ export default function Admin() {
                     onChange={value =>
                       onFieldChange([{ key: 'videoCall', value }])
                     }
-                    value={room.data.videoCall || ''}
+                    value={room.videoCall || ''}
                   />
                   <Players
                     players={players}
                     setPlayers={setPlayers}
-                    adminId={room.data.adminId}
+                    adminId={room.adminId}
                     onChange={onFieldChange}
                     removePlayer={removePlayer}
-                    roomId={roomId}
+                    roomRef={room.ref}
                   />
                   <div className="mt-4">
                     <Checkbox
@@ -179,14 +121,14 @@ export default function Admin() {
                       onChange={value =>
                         onFieldChange([{ key: 'turningGlob', value }])
                       }
-                      value={room.data.turningGlob || false}
+                      value={room.turningGlob || false}
                     />
                   </div>
                   <div className="mt-8">
                     <Button
                       id="readyToPlay"
                       className="w-full"
-                      disabled={!room.data.adminId}
+                      disabled={!room.adminId}
                       onClick={readyToPlay}
                     >
                       <FiSmile />
