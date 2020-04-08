@@ -101,7 +101,12 @@ export default function Admin() {
     let roomDoc = roomsRef.doc(roomId)
 
     let batch = db.batch()
-    batch.update(roomDoc, { ...room.data, readyToPlay: true })
+    batch.update(roomDoc, {
+      ...room.data,
+      selectedNumbers: [],
+      showConfetti: false,
+      readyToPlay: true
+    })
 
     players.map((player, index) => {
       const { id, name } = player
