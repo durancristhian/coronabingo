@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 import Document, { Head, Main, NextScript } from 'next/document'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
 if (process.env.NODE_ENV === 'production') {
   process.on('unhandledRejection', err => {
@@ -15,9 +15,11 @@ if (process.env.NODE_ENV === 'production') {
 export default class extends Document {
   render() {
     return (
+      /* TODO: improve this by setting a cookie? */
+      // eslint-disable-next-line jsx-a11y/html-has-lang
       <html>
         <Head>
-          {process.env.NODE_ENV === 'production' && process.env.GA_TRACKING_ID && (
+          {process.env.GA_TRACKING_ID && (
             <Fragment>
               <script
                 async
@@ -33,7 +35,7 @@ export default class extends Document {
                     gtag('config', '${process.env.GA_TRACKING_ID}', {
                       page_path: window.location.pathname,
                     });
-                  `
+                  `,
                 }}
               />
             </Fragment>

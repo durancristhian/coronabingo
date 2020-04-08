@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 
 export default function EmptyCell() {
@@ -13,15 +13,15 @@ export default function EmptyCell() {
           ((backgroundCell.value === 'blue' && 'bg-blue-300') ||
             (backgroundCell.value === 'green' && 'bg-green-300') ||
             (backgroundCell.value === 'orange' && 'bg-orange-300') ||
-            (backgroundCell.value === 'yellow' && 'bg-yellow-300'))
+            (backgroundCell.value === 'yellow' && 'bg-yellow-300')),
       ])}
       style={{
         ...(backgroundCell.type === 'img' && {
-          backgroundImage: `url(/background-cells/${backgroundCell.value})`
+          backgroundImage: `url(/background-cells/${backgroundCell.value})`,
         }),
         ...(backgroundCell.type === 'url' && {
-          backgroundImage: `url(${backgroundCell.value})`
-        })
+          backgroundImage: `url(${backgroundCell.value})`,
+        }),
       }}
     ></div>
   )

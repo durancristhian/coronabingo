@@ -1,11 +1,29 @@
 module.exports = {
-    root: true,
-    parser: '@typescript-eslint/parser',
-    plugins: [
-        '@typescript-eslint'
-    ],
+    parser: "@typescript-eslint/parser",
     extends: [
-        'airbnb-typescript',
-        'prettier/@typescript-eslint'
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended"
     ],
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        }
+    },
+    rules: {
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
+    },
+    settings: {
+        react: {
+            version: "detect"
+        },
+        settings: {
+            "import/resolver": {
+                typescript: {}
+            },
+        }
+    }
 };

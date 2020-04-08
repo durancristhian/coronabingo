@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import boardsData from '~/public/boards.json'
 
-export default function useBoards(boardNumbers: string): IBoard[] {
-  const [boards, setBoards] = useState<IBoard[]>([])
+export default function useBoards(boardNumbers: string): Board[] {
+  const [boards, setBoards] = useState<Board[]>([])
 
   const getBoard = (index: number) => ({
     id: index,
-    numbers: boardsData[index - 1]
+    numbers: boardsData[index - 1],
   })
 
   useEffect(() => {
@@ -16,16 +16,16 @@ export default function useBoards(boardNumbers: string): IBoard[] {
       boardNumbers
         .split(',')
         .map(Number)
-        .map(getBoard)
+        .map(getBoard),
     )
   }, [boardNumbers])
 
   return boards
 }
 
-interface IBoard {
+interface Board {
   id: number
-  numbers: IBoardNumbers
+  numbers: BoardNumbers
 }
 
-export type IBoardNumbers = (number | null)[]
+export type BoardNumbers = (number | null)[]

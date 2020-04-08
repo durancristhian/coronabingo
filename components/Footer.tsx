@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
+import React from 'react'
 import { FiHeart } from 'react-icons/fi'
 import Anchor from './Anchor'
 import Button from './Button'
@@ -8,12 +9,12 @@ export default function Footer() {
 
   const donate = () => {
     window.open(
-      'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=82474655-1d35f08f-7cf8-4a0a-9b8e-100b6e87ceab'
+      'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=82474655-1d35f08f-7cf8-4a0a-9b8e-100b6e87ceab',
     )
   }
 
   return (
-    <div className="bg-white p-4 shadow">
+    <footer className="bg-white p-4 shadow">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <Button color="pink" onClick={donate}>
@@ -28,6 +29,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }

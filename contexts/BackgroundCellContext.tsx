@@ -1,31 +1,33 @@
-import { createContext, ReactNode, useState, useEffect } from 'react'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 
 const defaultContextValue = {
   type: BACKGROUND_CELL_VALUES[0].type,
-  value: BACKGROUND_CELL_VALUES[0].value
+  value: BACKGROUND_CELL_VALUES[0].value,
 }
-const BackgroundCellContext = createContext<IBackgrounCell>({
+const BackgroundCellContext = createContext<BackgrounCell>({
   backgroundCell: defaultContextValue,
-  setBackgroundCell: () => {}
+  setBackgroundCell: () => void 0,
 })
 
-interface IProps {
+interface Props {
   children: ReactNode
 }
 
-const BackgroundCellContextProvider = ({ children }: IProps) => {
-  let [backgroundCell, setBackgroundCell] = useState<ICell>(defaultContextValue)
+const BackgroundCellContextProvider = ({ children }: Props) => {
+  const [backgroundCell, setBackgroundCell] = useState<Cell>(
+    defaultContextValue,
+  )
 
   useEffect(() => {
     try {
       setBackgroundCell(
-        JSON.parse(localStorage.getItem('backgroundCell') || '')
+        JSON.parse(localStorage.getItem('backgroundCell') || ''),
       )
     } catch (e) {}
   }, [])
 
-  const saveAndSetBackgroundCell = (backgroundCell: ICell) => {
+  const saveAndSetBackgroundCell = (backgroundCell: Cell) => {
     try {
       setBackgroundCell(backgroundCell)
       localStorage.setItem('backgroundCell', JSON.stringify(backgroundCell))
@@ -43,12 +45,12 @@ const BackgroundCellContextProvider = ({ children }: IProps) => {
 
 export { BackgroundCellContext, BackgroundCellContextProvider }
 
-export interface ICell {
+export interface Cell {
   type: string
   value: string
 }
 
-interface IBackgrounCell {
-  backgroundCell: ICell
-  setBackgroundCell: (cell: ICell) => void
+interface BackgrounCell {
+  backgroundCell: Cell
+  setBackgroundCell: (cell: Cell) => void
 }

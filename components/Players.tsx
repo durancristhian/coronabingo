@@ -1,20 +1,19 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import { FormEvent, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Select from '~/components/Select'
 import Field from '~/interfaces/Field'
 import { MAX_PLAYERS } from '~/utils/constants'
-import { roomsRef } from '~/utils/firebase'
 import Button from './Button'
 import InputText from './InputText'
 
-interface IProps {
+interface Props {
   adminId: string
   onChange: (changes: { key: string; value: Field }[]) => void
-  players: IPlayer[]
+  players: Player[]
   removePlayer: Function
-  roomId: string
+  roomRef: firebase.firestore.DocumentReference
   setPlayers: Function
 }
 
@@ -23,9 +22,9 @@ export default function Players({
   onChange,
   players,
   removePlayer,
-  roomId,
-  setPlayers
-}: IProps) {
+  roomRef,
+  setPlayers,
+}: Props) {
   const { t } = useTranslation()
   const [name, setName] = useState('')
 
@@ -33,19 +32,19 @@ export default function Players({
     setName(value)
   }
 
-  const onRemovePlayer = (index: number, player: IPlayer) => {
+  const onRemovePlayer = (index: number, player: Player) => {
     const cleanAdmin = adminId === player.id
     const changes = []
 
     if (cleanAdmin) {
       changes.push({
         key: 'adminId',
-        value: ''
+        value: '',
       })
 
       changes.push({
         key: 'readyToPlay',
-        value: false
+        value: false,
       })
     }
 
@@ -56,23 +55,24 @@ export default function Players({
 
     setPlayers(playersCopy)
 
-    removePlayer(player.id)
+    removePlayer(player.ref)
   }
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
+    const playerDoc = roomRef.collection('players').doc()
+
     setPlayers([
       ...players,
       {
         boards: '',
-        id: roomsRef
-          .doc(roomId)
-          .collection('players')
-          .doc().id,
+        id: playerDoc.id,
+        exists: false,
+        ref: playerDoc,
         name,
-        selectedNumbers: []
-      }
+        selectedNumbers: [],
+      },
     ])
 
     setName('')
@@ -88,12 +88,12 @@ export default function Players({
           <span>{t('admin:players.title')}&nbsp;</span>
           <span
             className={classnames([
-              players.length === MAX_PLAYERS && 'text-red-600'
+              players.length === MAX_PLAYERS && 'text-red-600',
             ])}
           >
             {t('admin:players.amount', {
               amount: players.length,
-              max: MAX_PLAYERS
+              max: MAX_PLAYERS,
             })}
           </span>
         </h3>
@@ -136,7 +136,7 @@ export default function Players({
                   ? 'bg-green-100'
                   : index % 2 === 0
                   ? 'bg-gray-100'
-                  : 'bg-gray-200'
+                  : 'bg-gray-200',
               ])}
             >
               <div className="flex flex-auto items-center">
@@ -177,8 +177,10 @@ export default function Players({
   )
 }
 
-export interface IPlayer {
+export interface Player {
   boards: string
   id: string
   name: string
+  exists: boolean
+  ref: firebase.firestore.DocumentReference
 }

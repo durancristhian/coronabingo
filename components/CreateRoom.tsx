@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import { FormEvent, Fragment, useEffect, useState } from 'react'
+import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import { roomsRef } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
@@ -13,14 +13,14 @@ export default function CreateRoom() {
   const { t } = useTranslation()
   const [canSubmit, setCanSubmit] = useState(false)
   const [formData, setFormData] = useState({
-    name: ''
+    name: '',
   })
   const [messageProps, setMessageProps] = useState<{
     message: string
     type: MessageType
   }>({
     message: '',
-    type: 'information'
+    type: 'information',
   })
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function CreateRoom() {
   const onFieldChange = (key: string, value: string) => {
     setFormData({
       ...formData,
-      [key]: value
+      [key]: value,
     })
   }
 
@@ -39,7 +39,7 @@ export default function CreateRoom() {
 
     setMessageProps({
       message: t('index:create-room.saving'),
-      type: 'information'
+      type: 'information',
     })
 
     const roomDoc = roomsRef.doc()
@@ -48,12 +48,12 @@ export default function CreateRoom() {
     try {
       await roomDoc.set({
         name: formData.name,
-        date: firebase.firestore.Timestamp.fromDate(new Date())
+        date: firebase.firestore.Timestamp.fromDate(new Date()),
       })
 
       setMessageProps({
         message: t('index:create-room.success'),
-        type: 'success'
+        type: 'success',
       })
 
       setTimeout(() => {
@@ -62,7 +62,7 @@ export default function CreateRoom() {
     } catch (error) {
       setMessageProps({
         message: t('index:create-room.error'),
-        type: 'error'
+        type: 'error',
       })
     }
   }

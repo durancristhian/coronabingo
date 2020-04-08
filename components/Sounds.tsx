@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 
-interface IProps {
+interface Props {
   onAudioEnd: () => void
   soundToPlay: string
 }
 
-export default function Sounds({ onAudioEnd, soundToPlay }: IProps) {
+export default function Sounds({ onAudioEnd, soundToPlay }: Props) {
   useEffect(() => {
     if (!soundToPlay) return
     new Audio(soundToPlay)

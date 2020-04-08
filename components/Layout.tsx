@@ -1,16 +1,16 @@
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import Anchor from './Anchor'
 import Banner from './Banner'
 import Footer from './Footer'
 import Header from './Header'
 
-interface IProps {
+interface Props {
   children: ReactNode
 }
 
-export default function Layout({ children }: IProps) {
+export default function Layout({ children }: Props) {
   const { t } = useTranslation()
   const router = useRouter()
   const playerId = router.query.playerId?.toString()
@@ -29,7 +29,9 @@ export default function Layout({ children }: IProps) {
         <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
           {t('common:feedback-form.link')}
         </Anchor>
-        <span>&nbsp;🤩</span>
+        <span role="img" aria-label="emoji">
+          &nbsp;🤩
+        </span>
       </Banner>
       <Footer />
     </main>

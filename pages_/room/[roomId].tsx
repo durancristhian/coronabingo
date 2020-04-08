@@ -1,17 +1,18 @@
+import React from 'react'
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import { FiLink2 } from 'react-icons/fi'
+import Box from '~/components/Box'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
-import { IPlayer } from '~/components/Players'
+import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import Box from '~/components/Box'
 
 export default function Sala() {
-  const room = useRoom()
+  const [room] = useRoom()
   const { players = [] } = useRoomPlayers()
   const { t } = useTranslation()
 
@@ -51,14 +52,13 @@ export default function Sala() {
                   value={room.videoCall || ''}
                 />
               )}
-              {!room.readyToPlay && (
+              {!room.readyToPlay ? (
                 <div className="mt-8">
                   <div className="italic text-gray-600 text-xs md:text-sm">
                     {t('sala:not-ready')}
                   </div>
                 </div>
-              )}
-              {room.readyToPlay && (
+              ) : (
                 <div className="mt-8">
                   <h3 className="font-medium">
                     {t('sala:people', { count: players.length })}
@@ -67,7 +67,7 @@ export default function Sala() {
                     <p className="my-8">{t('sala:list-description')}</p>
                   </div>
                   <div className="border-gray-300 border-t-2 mt-4 -mx-4">
-                    {players.map((player: IPlayer, index: number) => (
+                    {players.map((player: Player, index: number) => (
                       <div
                         key={index}
                         className={classnames([
@@ -76,7 +76,7 @@ export default function Sala() {
                             ? 'bg-green-100'
                             : index % 2 === 0
                             ? 'bg-gray-100'
-                            : 'bg-gray-200'
+                            : 'bg-gray-200',
                         ])}
                       >
                         <div className="flex flex-auto flex-wrap items-center">
@@ -88,7 +88,7 @@ export default function Sala() {
                           )}
                           <p className="italic mt-2 text-gray-600 text-sm w-full">
                             {t('common:board_plural', {
-                              boardId: player.boards.split(',').join(' & ')
+                              boardId: player.boards.split(',').join(' & '),
                             })}
                           </p>
                         </div>
@@ -98,8 +98,8 @@ export default function Sala() {
                             disabled={!room.readyToPlay}
                             onClick={() =>
                               Router.pushI18n(
-                                `/room/[id]/[playerId]`,
-                                `/room/${room.id}/${player.id}`
+                                `/room/[roomId]/[playerId]`,
+                                `/room/${room.id}/${player.id}`,
                               )
                             }
                           >

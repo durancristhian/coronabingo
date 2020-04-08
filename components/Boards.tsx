@@ -1,16 +1,15 @@
-import { Fragment, useEffect } from 'react'
 import useTranslation from 'next-translate/useTranslation'
+import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
-import { roomsRef } from '~/utils/firebase'
 import Cells from './Cells'
 
-interface IProps {
+interface Props {
   player: firebase.firestore.DocumentData
   room: firebase.firestore.DocumentData
   setPlayerProps: (props: {}) => void
 }
 
-export default function Boards({ player, room, setPlayerProps }: IProps) {
+export default function Boards({ player, room, setPlayerProps }: Props) {
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
 
@@ -19,11 +18,7 @@ export default function Boards({ player, room, setPlayerProps }: IProps) {
       try {
         const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
         const playerValues = roomValues?.[player.id] || {}
-        roomsRef
-          .doc(room.id)
-          .collection('players')
-          .doc(player.id)
-          .update(playerValues)
+        player.ref.update(playerValues)
         localStorage.removeItem('roomValues')
       } catch (e) {}
 
@@ -34,11 +29,11 @@ export default function Boards({ player, room, setPlayerProps }: IProps) {
             [player.id]: boards.reduce(
               (acc, board) => ({
                 ...acc,
-                [board.id]: player?.[board.id] || []
+                [board.id]: player?.[board.id] || [],
               }),
-              {}
-            )
-          })
+              {},
+            ),
+          }),
         )
         return e.preventDefault()
       }
@@ -64,7 +59,7 @@ export default function Boards({ player, room, setPlayerProps }: IProps) {
               selectedNumbers={player?.[board.id]}
               setSelectedNumbers={newSelectedNumbers =>
                 setPlayerProps({
-                  [board.id]: newSelectedNumbers
+                  [board.id]: newSelectedNumbers,
                 })
               }
             />

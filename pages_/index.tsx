@@ -1,8 +1,9 @@
 import useTranslation from 'next-translate/useTranslation'
+import React from 'react'
 import Anchor from '~/components/Anchor'
+import Box from '~/components/Box'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
-import Box from '~/components/Box'
 
 export default function Index() {
   const { t } = useTranslation()

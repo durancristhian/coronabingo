@@ -1,15 +1,15 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 
-interface IProps {
+interface Props {
   disabled?: boolean
   hint?: string
   id: string
   label?: string
   onChange?: (value: string) => void
-  options: IOption[]
+  options: Option[]
   value: string
 }
 
@@ -20,8 +20,8 @@ export default function Select({
   label,
   onChange,
   options,
-  value
-}: IProps) {
+  value,
+}: Props) {
   const { t } = useTranslation()
 
   return (
@@ -35,11 +35,12 @@ export default function Select({
               'appearance-none bg-white border-2 border-gray-300 h-12 p-2 pr-6 rounded w-full',
               'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
               'duration-150 ease-in-out transition',
-              'disabled:opacity-50'
+              'disabled:opacity-50',
             ])}
             value={value}
             onChange={event => onChange && onChange(event.target.value)}
             disabled={disabled}
+            onBlur={() => void 0}
           >
             {!value && (
               <option value={''}>{t('common:select-empty-option')}</option>
@@ -53,7 +54,7 @@ export default function Select({
           <div
             className="absolute right-0 transform -translate-x-1/2 -translate-y-1/2"
             style={{
-              top: '50%'
+              top: '50%',
             }}
           >
             <FiChevronDown className="text-gray-500" />
@@ -67,7 +68,7 @@ export default function Select({
   )
 }
 
-interface IOption {
+interface Option {
   id: string
   name: string
 }

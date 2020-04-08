@@ -1,41 +1,51 @@
+import React from 'react'
 import { createContext, ReactNode, useState, useEffect } from 'react'
 import { roomsRef } from '~/utils/firebase'
 import { ParsedUrlQuery } from 'querystring'
-import { IPlayer } from '~/components/Players'
+import { Player } from '~/components/Players'
 
-interface IContext {
-  currentPlayer?: IPlayer
-  players: IPlayer[]
+interface Context {
+  currentPlayer?: Player
+  players: Player[]
   room?: firebase.firestore.DocumentData
-  setPlayers: (array: IPlayer[]) => void
+  changeRoom: (data: {}) => void
+  setPlayers: (array: Player[]) => void
 }
 
-const FirebaseContext = createContext<IContext>({
+const FirebaseContext = createContext<Context>({
   players: [],
-  setPlayers: () => null
+  changeRoom: () => null,
+  setPlayers: () => null,
 })
 
-interface IProps {
+interface Props {
   children: ReactNode
   routerQuery: ParsedUrlQuery
 }
 
-const FirebaseProvider = ({ children, routerQuery }: IProps) => {
+const FirebaseProvider = ({ children, routerQuery }: Props) => {
   const roomId = routerQuery.roomId?.toString()
   const playerId = routerQuery.playerId?.toString()
   const [room, setRoom] = useState({})
-  const [players, setPlayers] = useState<IPlayer[]>([])
-  const [currentPlayer, setCurrentPlayer] = useState<IPlayer>()
+  const [players, setPlayers] = useState<Player[]>([])
+  const [currentPlayer, setCurrentPlayer] = useState<Player>()
 
-  const sortAndSet = (array: IPlayer[]) =>
+  const sortAndSet = (array: Player[]) =>
     setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
+
+  const changeRoom = (data: {}) => setRoom({ ...room, ...data })
 
   useEffect(() => {
     if (!roomId) return
     const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
       const roomData = snapshot.data()
       if (roomData) {
-        setRoom({ id: snapshot.id, ...roomData })
+        setRoom({
+          id: snapshot.id,
+          exists: snapshot.exists,
+          ref: snapshot.ref,
+          ...roomData,
+        })
       }
     })
 
@@ -50,13 +60,14 @@ const FirebaseProvider = ({ children, routerQuery }: IProps) => {
       .onSnapshot(snapshot => {
         sortAndSet(
           snapshot.docs.map(p => {
-            const data = p.data() as IPlayer
-
+            const data = p.data() as Player
             return {
               id: p.id,
-              ...data
+              exists: p.exists,
+              ref: p.ref,
+              ...data,
             }
-          })
+          }),
         )
       })
 
@@ -70,7 +81,13 @@ const FirebaseProvider = ({ children, routerQuery }: IProps) => {
 
   return (
     <FirebaseContext.Provider
-      value={{ currentPlayer, players, room, setPlayers: sortAndSet }}
+      value={{
+        currentPlayer,
+        players,
+        room,
+        changeRoom,
+        setPlayers: sortAndSet,
+      }}
     >
       {children}
     </FirebaseContext.Provider>

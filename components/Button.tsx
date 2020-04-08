@@ -1,7 +1,8 @@
 import classnames from 'classnames'
-import { MouseEvent, ReactNode } from 'react'
+import React, { MouseEvent, ReactNode } from 'react'
+import { BUTTON_COLORS } from '~/utils/constants'
 
-interface IProps {
+interface Props {
   children: ReactNode
   className?: string
   color?: 'green' | 'pink' | 'red' | 'yellow'
@@ -18,8 +19,8 @@ export default function Button({
   disabled,
   id,
   onClick,
-  type = 'button'
-}: IProps) {
+  type = 'button',
+}: Props) {
   return (
     <button
       id={id}
@@ -30,7 +31,7 @@ export default function Button({
         'duration-150 ease-in-out transition',
         'disabled:opacity-50',
         className,
-        [...COLORS[color]]
+        [...BUTTON_COLORS[color]],
       ])}
       disabled={disabled}
       onClick={onClick}
@@ -40,39 +41,4 @@ export default function Button({
       </span>
     </button>
   )
-}
-
-const COLORS = {
-  green: [
-    'bg-green-400',
-    'border-green-600',
-    'focus:bg-green-500',
-    'focus:border-green-700',
-    'focus:text-green-900',
-    'text-green-800'
-  ],
-  pink: [
-    'bg-pink-400',
-    'border-pink-600',
-    'focus:bg-pink-500',
-    'focus:border-pink-700',
-    'focus:text-pink-900',
-    'text-pink-800'
-  ],
-  red: [
-    'bg-red-400',
-    'border-red-600',
-    'focus:bg-red-500',
-    'focus:border-red-700',
-    'focus:text-red-900',
-    'text-red-800'
-  ],
-  yellow: [
-    'bg-yellow-400',
-    'border-yellow-600',
-    'focus:bg-yellow-500',
-    'focus:border-yellow-700',
-    'focus:text-yellow-900',
-    'text-yellow-800'
-  ]
 }

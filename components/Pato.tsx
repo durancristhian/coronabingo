@@ -1,6 +1,6 @@
-import { Fragment, useContext, useEffect, useState } from 'react'
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
@@ -32,7 +32,9 @@ export default function Pato({ onClick }: Props) {
   return (
     <Fragment>
       <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
-        <span onClick={tricks}>{t('jugar:sounds')}</span>
+        <span onClick={tricks} role="button" tabIndex={0} onKeyPress={tricks}>
+          {t('jugar:sounds')}
+        </span>
       </h2>
       <div className="border-gray-300 border-l-2 border-r-2 border-t-2 rounded">
         {sounds.map(({ language, name, url }, index) => (
@@ -40,7 +42,7 @@ export default function Pato({ onClick }: Props) {
             key={index}
             className={classnames([
               'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-              index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+              index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
             ])}
           >
             <div className="mr-4">

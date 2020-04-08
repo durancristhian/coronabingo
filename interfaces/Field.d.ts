@@ -1,3 +1,3 @@
-type Field = boolean | number[] | string | IPlayer[]
+type Field = boolean | number[] | string | Player[]
 
 export default Field
