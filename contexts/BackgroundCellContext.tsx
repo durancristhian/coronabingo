@@ -7,7 +7,7 @@ const defaultContextValue = {
 }
 const BackgroundCellContext = createContext<BackgrounCell>({
   backgroundCell: defaultContextValue,
-  setBackgroundCell: () => {},
+  setBackgroundCell: () => void 0,
 })
 
 interface Props {

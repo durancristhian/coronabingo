@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { IPlayer } from '~/components/Players'
+import { Player } from '~/components/Players'
 import { roomsRef } from '~/utils/firebase'
 
-export default function useRoomPlayers(roomId: string): [IPlayer[], Function] {
-  const [players, setPlayers] = useState<IPlayer[]>([])
+export default function useRoomPlayers(roomId: string): [Player[], Function] {
+  const [players, setPlayers] = useState<Player[]>([])
 
-  const sortAndSet = (array: IPlayer[]) =>
+  const sortAndSet = (array: Player[]) =>
     setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
 
   useEffect(() => {

@@ -9,7 +9,7 @@ interface Props {
   id: string
   label?: string
   onChange?: (value: string) => void
-  options: IOption[]
+  options: Option[]
   value: string
 }
 
@@ -67,7 +67,7 @@ export default function Select({
   )
 }
 
-interface IOption {
+interface Option {
   id: string
   name: string
 }

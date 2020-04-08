@@ -7,6 +7,18 @@ export interface Message {
   type: MessageType
 }
 
+const ICONS = {
+  error: <FiThumbsDown />,
+  information: <FiInfo />,
+  success: <FiThumbsUp />,
+}
+
+const COLORS = {
+  error: 'bg-red-200 border-red-600',
+  information: 'bg-orange-200 border-orange-600',
+  success: 'bg-green-200 border-green-600',
+}
+
 export default function Message({ children, type }: Message) {
   return (
     <div
@@ -19,18 +31,6 @@ export default function Message({ children, type }: Message) {
       {children}
     </div>
   )
-}
-
-const ICONS = {
-  error: <FiThumbsDown />,
-  information: <FiInfo />,
-  success: <FiThumbsUp />,
-}
-
-const COLORS = {
-  error: 'bg-red-200 border-red-600',
-  information: 'bg-orange-200 border-orange-600',
-  success: 'bg-green-200 border-green-600',
 }
 
 export type MessageType = 'error' | 'information' | 'success'

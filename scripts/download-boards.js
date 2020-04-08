@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { writeFileSync } = require('fs')
 const { getWorksheet } = require('gsheets')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetch = require('isomorphic-unfetch')
 const { join } = require('path')
 

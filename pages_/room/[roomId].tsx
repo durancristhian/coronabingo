@@ -8,7 +8,7 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
-import { IPlayer } from '~/components/Players'
+import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 
@@ -71,7 +71,7 @@ export default function Room() {
                     <p className="my-8">{t('sala:list-description')}</p>
                   </div>
                   <div className="border-gray-300 border-t-2 mt-4 -mx-4">
-                    {players.map((player: IPlayer, index: number) => (
+                    {players.map((player: Player, index: number) => (
                       <div
                         key={index}
                         className={classnames([

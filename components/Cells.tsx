@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import React, { Fragment } from 'react'
-import { IBoardNumbers } from '~/hooks/useBoards'
+import { BoardNumbers } from '~/hooks/useBoards'
 import EmptyCell from './EmptyCell'
 
 interface Props {
-  boardNumbers: IBoardNumbers
+  boardNumbers: BoardNumbers
   selectedNumbers: number[]
   setSelectedNumbers: (ns: number[]) => void
 }

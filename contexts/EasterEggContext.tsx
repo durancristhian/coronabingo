@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useState } from 'react'
 
 const EasterEggContext = createContext<EasterEgg>({
   isVisible: false,
-  setVisibility: () => {},
+  setVisibility: () => void 0,
 })
 
 interface Props {

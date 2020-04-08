@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import boardsData from '~/public/boards.json'
 
-export default function useBoards(boardNumbers: string): IBoard[] {
-  const [boards, setBoards] = useState<IBoard[]>([])
+export default function useBoards(boardNumbers: string): Board[] {
+  const [boards, setBoards] = useState<Board[]>([])
 
   const getBoard = (index: number) => ({
     id: index,
@@ -23,9 +23,9 @@ export default function useBoards(boardNumbers: string): IBoard[] {
   return boards
 }
 
-interface IBoard {
+interface Board {
   id: number
-  numbers: IBoardNumbers
+  numbers: BoardNumbers
 }
 
-export type IBoardNumbers = (number | null)[]
+export type BoardNumbers = (number | null)[]

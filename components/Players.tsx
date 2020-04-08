@@ -12,7 +12,7 @@ import InputText from './InputText'
 interface Props {
   adminId: string
   onChange: (changes: { key: string; value: Field }[]) => void
-  players: IPlayer[]
+  players: Player[]
   removePlayer: Function
   roomId: string
   setPlayers: Function
@@ -33,7 +33,7 @@ export default function Players({
     setName(value)
   }
 
-  const onRemovePlayer = (index: number, player: IPlayer) => {
+  const onRemovePlayer = (index: number, player: Player) => {
     const cleanAdmin = adminId === player.id
     const changes = []
 
@@ -177,7 +177,7 @@ export default function Players({
   )
 }
 
-export interface IPlayer {
+export interface Player {
   boards: string
   id: string
   name: string

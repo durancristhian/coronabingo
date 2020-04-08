@@ -11,6 +11,9 @@ module.exports = {
             jsx: true
         }
     },
+    rules: {
+        "@typescript-eslint/ban-ts-ignore": "off"
+    },
     settings: {
         react: {
             version: "detect"
