@@ -38,8 +38,9 @@ export default function Select({
               'disabled:opacity-50',
             ])}
             value={value}
-            onBlur={event => onChange && onChange(event.target.value)}
+            onChange={event => onChange && onChange(event.target.value)}
             disabled={disabled}
+            onBlur={() => void 0}
           >
             {!value && (
               <option value={''}>{t('common:select-empty-option')}</option>

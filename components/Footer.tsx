@@ -14,7 +14,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="bg-white p-4 shadow">
+    <footer className="bg-white p-4 shadow">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <Button color="pink" onClick={donate}>
@@ -29,6 +29,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
