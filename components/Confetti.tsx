@@ -1,4 +1,4 @@
-import { Component, CSSProperties, Fragment } from 'react'
+import React, { Component, CSSProperties, Fragment } from 'react'
 
 const confettiBaseStyles = {
   animation: 'confetti 5s ease-in-out -2s infinite',
@@ -7,7 +7,7 @@ const confettiBaseStyles = {
   top: 0,
   transformOrigin: 'left top',
   width: '15px',
-  zIndex: 9999
+  zIndex: 9999,
 }
 
 const confetti1 = {
@@ -15,140 +15,140 @@ const confetti1 = {
 
   animationDelay: '0',
   backgroundColor: '#f2d74e',
-  left: '5%'
+  left: '5%',
 }
 const confetti2 = {
   ...confettiBaseStyles,
 
   animationDelay: '-5s',
   backgroundColor: '#95c3de',
-  left: '10%'
+  left: '10%',
 }
 const confetti3 = {
   ...confettiBaseStyles,
 
   animationDelay: '-3s',
   backgroundColor: '#ff9a91',
-  left: '15%'
+  left: '15%',
 }
 const confetti4 = {
   ...confettiBaseStyles,
 
   animationDelay: '-2.5s',
   backgroundColor: '#f2d74e',
-  left: '20%'
+  left: '20%',
 }
 const confetti5 = {
   ...confettiBaseStyles,
 
   animationDelay: '-4s',
   backgroundColor: '#f2d74e',
-  left: '25%'
+  left: '25%',
 }
 const confetti6 = {
   ...confettiBaseStyles,
 
   animationDelay: '-6s',
   backgroundColor: '#95c3de',
-  left: '30%'
+  left: '30%',
 }
 const confetti7 = {
   ...confettiBaseStyles,
 
   animationDelay: '-1.5s',
   backgroundColor: '#ff9a91',
-  left: '35%'
+  left: '35%',
 }
 const confetti8 = {
   ...confettiBaseStyles,
 
   animationDelay: '-2s',
   backgroundColor: '#f2d74e',
-  left: '40%'
+  left: '40%',
 }
 const confetti9 = {
   ...confettiBaseStyles,
 
   animationDelay: '-3.5s',
   backgroundColor: '#f2d74e',
-  left: '45%'
+  left: '45%',
 }
 const confetti10 = {
   ...confettiBaseStyles,
 
   animationDelay: '-2.5s',
   backgroundColor: '#95c3de',
-  left: '50%'
+  left: '50%',
 }
 const confetti11 = {
   ...confettiBaseStyles,
 
   animationDelay: '0',
   backgroundColor: '#ff9a91',
-  left: '55%'
+  left: '55%',
 }
 const confetti12 = {
   ...confettiBaseStyles,
 
   animationDelay: '-5s',
   backgroundColor: '#f2d74e',
-  left: '60%'
+  left: '60%',
 }
 const confetti13 = {
   ...confettiBaseStyles,
 
   animationDelay: '-3s',
   backgroundColor: '#f2d74e',
-  left: '65%'
+  left: '65%',
 }
 const confetti14 = {
   ...confettiBaseStyles,
 
   animationDelay: '-2.5s',
   backgroundColor: '#95c3de',
-  left: '70%'
+  left: '70%',
 }
 const confetti15 = {
   ...confettiBaseStyles,
 
   animationDelay: '-4s',
   backgroundColor: '#ff9a91',
-  left: '75%'
+  left: '75%',
 }
 const confetti16 = {
   ...confettiBaseStyles,
 
   animationDelay: '-6s',
   backgroundColor: '#f2d74e',
-  left: '80%'
+  left: '80%',
 }
 const confetti17 = {
   ...confettiBaseStyles,
 
   animationDelay: '-1.5s',
   backgroundColor: '#f2d74e',
-  left: '85%'
+  left: '85%',
 }
 const confetti18 = {
   ...confettiBaseStyles,
 
   animationDelay: '-2s',
   backgroundColor: '#95c3de',
-  left: '90%'
+  left: '90%',
 }
 const confetti19 = {
   ...confettiBaseStyles,
 
   animationDelay: '-3.5s',
   backgroundColor: '#ff9a91',
-  left: '95%'
+  left: '95%',
 }
 const confetti20 = {
   ...confettiBaseStyles,
 
   animationDelay: '-3.5s',
   backgroundColor: '#f2d74e',
-  left: '95%'
+  left: '95%',
 }
 
 const injectStyle = (style: string) => {

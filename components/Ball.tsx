@@ -1,6 +1,7 @@
 import classnames from 'classnames'
+import React from 'react'
 
-interface IProps {
+interface Props {
   animate?: boolean
   color: string
   number: number
@@ -11,8 +12,8 @@ export default function Ball({
   animate = false,
   color,
   number,
-  size = 90
-}: IProps) {
+  size = 90,
+}: Props) {
   return (
     <div className={classnames(['text-center', animate && 'appear'])}>
       <div
@@ -21,11 +22,11 @@ export default function Ball({
           color === 'blue' && 'bg-blue-600',
           color === 'green' && 'bg-green-600',
           color === 'red' && 'bg-red-600',
-          color === 'yellow' && 'bg-yellow-600'
+          color === 'yellow' && 'bg-yellow-600',
         ])}
         style={{
           height: `${size}px`,
-          width: `${size}px`
+          width: `${size}px`,
         }}
       >
         <div>

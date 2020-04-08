@@ -1,16 +1,18 @@
-import useTranslation from 'next-translate/useTranslation'
 import Router from 'next-translate/Router'
+import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Modal from 'react-modal'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
+import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Pato from '~/components/Pato'
 import SelectedNumbers from '~/components/SelectedNumbers'
@@ -19,8 +21,6 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
-import Box from '~/components/Box'
-import Loading from '~/components/Loading'
 
 export default function Play() {
   const router = useRouter()
@@ -44,7 +44,7 @@ export default function Play() {
         doc.exists &&
           setPlayer({
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
           })
       })
 
@@ -64,7 +64,7 @@ export default function Play() {
     }
 
     roomsRef.doc(roomId).update({
-      selectedNumbers: numbers
+      selectedNumbers: numbers,
     })
   }
 
@@ -96,7 +96,7 @@ export default function Play() {
               <h2 className="font-medium text-center text-lg md:text-xl">
                 {t('jugar:title', {
                   playerName: player?.name || '',
-                  roomName: room.name || ''
+                  roomName: room.name || '',
                 })}
               </h2>
               {!room?.name && (
@@ -142,7 +142,7 @@ export default function Play() {
                         setPlayerProps={newProps =>
                           setPlayer({
                             ...player,
-                            ...newProps
+                            ...newProps,
                           })
                         }
                       />
@@ -182,7 +182,7 @@ export default function Play() {
                           {t(
                             `jugar:${
                               room?.showConfetti ? 'hide' : 'show'
-                            }-confetti`
+                            }-confetti`,
                           )}
                         </span>
                       </Button>
@@ -217,14 +217,14 @@ export default function Play() {
                       outline: 'none',
                       padding: 20,
                       margin: 8,
-                      textAlign: 'center'
+                      textAlign: 'center',
                     },
                     overlay: {
                       zIndex: 99,
                       display: 'flex',
                       justifyContent: 'center',
-                      alignItems: 'center'
-                    }
+                      alignItems: 'center',
+                    },
                   }}
                 >
                   <p>

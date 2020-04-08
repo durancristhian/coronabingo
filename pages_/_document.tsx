@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 import Document, { Head, Main, NextScript } from 'next/document'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
 if (process.env.NODE_ENV === 'production') {
   process.on('unhandledRejection', err => {
@@ -33,7 +33,7 @@ export default class extends Document {
                     gtag('config', '${process.env.GA_TRACKING_ID}', {
                       page_path: window.location.pathname,
                     });
-                  `
+                  `,
                 }}
               />
             </Fragment>

@@ -5,12 +5,12 @@ import useBoards from '~/hooks/useBoards'
 import { roomsRef } from '~/utils/firebase'
 import Cells from './Cells'
 
-interface IProps {
+interface Props {
   player: firebase.firestore.DocumentData
   setPlayerProps: (props: {}) => void
 }
 
-export default function Boards({ player, setPlayerProps }: IProps) {
+export default function Boards({ player, setPlayerProps }: Props) {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
   const playerId = router.query.playerId?.toString()
@@ -38,11 +38,11 @@ export default function Boards({ player, setPlayerProps }: IProps) {
             [playerId]: boards.reduce(
               (acc, board) => ({
                 ...acc,
-                [board.id]: player?.[board.id] || []
+                [board.id]: player?.[board.id] || [],
               }),
-              {}
-            )
-          })
+              {},
+            ),
+          }),
         )
         return e.preventDefault()
       }
@@ -68,7 +68,7 @@ export default function Boards({ player, setPlayerProps }: IProps) {
               selectedNumbers={player?.[board.id]}
               setSelectedNumbers={newSelectedNumbers =>
                 setPlayerProps({
-                  [board.id]: newSelectedNumbers
+                  [board.id]: newSelectedNumbers,
                 })
               }
             />

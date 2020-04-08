@@ -1,11 +1,11 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
-interface IProps {
+interface Props {
   children: ReactNode
   href?: string
 }
 
-export default function Anchor({ children, href }: IProps) {
+export default function Anchor({ children, href }: Props) {
   return (
     <a
       href={href}

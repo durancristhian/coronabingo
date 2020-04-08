@@ -1,16 +1,16 @@
-import { createContext, ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useState } from 'react'
 
-const EasterEggContext = createContext<IEasterEgg>({
+const EasterEggContext = createContext<EasterEgg>({
   isVisible: false,
-  setVisibility: () => {}
+  setVisibility: () => {},
 })
 
-interface IProps {
+interface Props {
   children: ReactNode
 }
 
-const EasterEggContextProvider = ({ children }: IProps) => {
-  let [isVisible, setVisibility] = useState(false)
+const EasterEggContextProvider = ({ children }: Props) => {
+  const [isVisible, setVisibility] = useState(false)
 
   return (
     <EasterEggContext.Provider value={{ isVisible, setVisibility }}>
@@ -21,7 +21,7 @@ const EasterEggContextProvider = ({ children }: IProps) => {
 
 export { EasterEggContext, EasterEggContextProvider }
 
-interface IEasterEgg {
+interface EasterEgg {
   isVisible: boolean
   setVisibility: (visibility: boolean) => void
 }

@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import { Fragment, useContext, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
@@ -23,7 +23,7 @@ export default function Pato() {
 
   const onClick = async (sound: string) => {
     await roomsRef.doc(roomId).update({
-      soundToPlay: sound
+      soundToPlay: sound,
     })
   }
 
@@ -46,7 +46,7 @@ export default function Pato() {
             key={index}
             className={classnames([
               'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-              index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+              index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
             ])}
           >
             <div className="mr-4">

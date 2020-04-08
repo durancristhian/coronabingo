@@ -1,11 +1,11 @@
 import classnames from 'classnames'
-import { Fragment } from 'react'
 import useTranslation from 'next-translate/useTranslation'
+import React, { Fragment } from 'react'
 import { BOARD_NUMBERS } from '~/utils/constants'
 import Button from './Button'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
-interface IProps {
+interface Props {
   isAdmin: boolean
   onNewNumber: (n: number) => void
   selectedNumbers: number[]
@@ -16,8 +16,8 @@ export default function SelectedNumbers({
   isAdmin,
   onNewNumber,
   selectedNumbers,
-  turningGlob
-}: IProps) {
+  turningGlob,
+}: Props) {
   const enableForAdmin = isAdmin && !turningGlob
   const roomNumbers = [...selectedNumbers]
 
@@ -58,7 +58,7 @@ export default function SelectedNumbers({
               'duration-150 ease-in-out transition',
               selectedNumbers.includes(n) &&
                 'bg-green-400 font-medium text-green-800',
-              enableForAdmin && 'cursor-pointer focus:shadow-outline'
+              enableForAdmin && 'cursor-pointer focus:shadow-outline',
             ])}
             style={{ width: '10%' }}
             onClick={() => enableForAdmin && onNewNumber(n)}

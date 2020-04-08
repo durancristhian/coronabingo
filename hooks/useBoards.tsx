@@ -6,7 +6,7 @@ export default function useBoards(boardNumbers: string): IBoard[] {
 
   const getBoard = (index: number) => ({
     id: index,
-    numbers: boardsData[index - 1]
+    numbers: boardsData[index - 1],
   })
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function useBoards(boardNumbers: string): IBoard[] {
       boardNumbers
         .split(',')
         .map(Number)
-        .map(getBoard)
+        .map(getBoard),
     )
   }, [boardNumbers])
 

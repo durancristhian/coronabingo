@@ -1,19 +1,19 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
+import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
-import Players, { IPlayer } from '~/components/Players'
+import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import db, { roomsRef } from '~/utils/firebase'
 import Field from '~/interfaces/Field'
-import Box from '~/components/Box'
+import db, { roomsRef } from '~/utils/firebase'
 
 export default function Admin() {
   const { t } = useTranslation()
@@ -26,14 +26,14 @@ export default function Admin() {
   }>({
     data: undefined,
     error: null,
-    loading: false
+    loading: false,
   })
   const [message, setMessage] = useState<{
     content: string
     type: MessageType
   }>({
     content: '',
-    type: 'information'
+    type: 'information',
   })
   const [players, setPlayers] = useRoomPlayers(roomId)
   const randomBoards = useRandomBoards()
@@ -43,7 +43,7 @@ export default function Admin() {
       setRoom({
         data: undefined,
         error: null,
-        loading: true
+        loading: true,
       })
 
       try {
@@ -59,13 +59,13 @@ export default function Admin() {
         setRoom({
           loading: false,
           error: null,
-          data: roomData.data()
+          data: roomData.data(),
         })
       } catch (error) {
         setRoom({
           loading: false,
           error,
-          data: undefined
+          data: undefined,
         })
       }
     }
@@ -79,8 +79,8 @@ export default function Admin() {
       data: Object.assign(
         {},
         room.data,
-        ...[...changes.map(({ key, value }) => ({ [key]: value }))]
-      )
+        ...[...changes.map(({ key, value }) => ({ [key]: value }))],
+      ),
     })
   }
 
@@ -95,17 +95,17 @@ export default function Admin() {
   const readyToPlay = async () => {
     setMessage({
       content: t('admin:success'),
-      type: 'success'
+      type: 'success',
     })
 
-    let roomDoc = roomsRef.doc(roomId)
+    const roomDoc = roomsRef.doc(roomId)
 
-    let batch = db.batch()
+    const batch = db.batch()
     batch.update(roomDoc, {
       ...room.data,
       selectedNumbers: [],
       showConfetti: false,
-      readyToPlay: true
+      readyToPlay: true,
     })
 
     players.map((player, index) => {
@@ -114,7 +114,7 @@ export default function Admin() {
       batch.set(roomDoc.collection('players').doc(id), {
         name,
         boards: randomBoards[index],
-        selectedNumbers: []
+        selectedNumbers: [],
       })
     })
 

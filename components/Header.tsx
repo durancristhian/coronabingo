@@ -1,6 +1,7 @@
 import Link from 'next-translate/Link'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
+import React from 'react'
 import { allLanguages } from '~/i18n.json'
 import Select from './Select'
 
@@ -9,7 +10,7 @@ export default function Header() {
 
   const languages = allLanguages.map(l => ({
     id: l,
-    name: t(`common:language-${l}`)
+    name: t(`common:language-${l}`),
   }))
 
   const onLanguageChange = (l: string) => {
@@ -23,8 +24,8 @@ export default function Header() {
       return replaceI18n({
         url,
         options: {
-          lang: l
-        }
+          lang: l,
+        },
       })
     } else {
       // only in home

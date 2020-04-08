@@ -1,14 +1,14 @@
 import useTranslation from 'next-translate/useTranslation'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { BOARD_NUMBER_COLOR } from '~/utils/constants'
 import Anchor from './Anchor'
 import Ball from './Ball'
 
-interface IProps {
+interface Props {
   selectedNumbers: number[]
 }
 
-export default function LastNumbers({ selectedNumbers }: IProps) {
+export default function LastNumbers({ selectedNumbers }: Props) {
   const { t } = useTranslation()
   const [last, ...rest] = selectedNumbers
 

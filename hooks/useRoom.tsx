@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { roomsRef } from '~/utils/firebase'
 
 export default function useRoom(
-  roomId: string
+  roomId: string,
 ): firebase.firestore.DocumentData {
   const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
 

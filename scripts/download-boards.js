@@ -12,7 +12,7 @@ const downloadBoards = async () => {
 
   writeFileSync(
     join(__dirname, '../public', 'boards.json'),
-    JSON.stringify(boards, null, 2)
+    JSON.stringify(boards, null, 2),
   )
 }
 

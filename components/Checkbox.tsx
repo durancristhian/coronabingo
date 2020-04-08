@@ -1,7 +1,7 @@
 import classnames from 'classnames'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
-interface IProps {
+interface Props {
   hint?: string
   id: string
   label: string
@@ -14,8 +14,8 @@ export default function Checkbox({
   id,
   label,
   onChange,
-  value
-}: IProps) {
+  value,
+}: Props) {
   return (
     <Fragment>
       <label htmlFor={id} className="cursor-pointer flex items-center">
@@ -23,7 +23,7 @@ export default function Checkbox({
           className={classnames([
             'block p-2',
             'focus:outline-none focus:shadow-outline',
-            'duration-150 ease-in-out transition'
+            'duration-150 ease-in-out transition',
           ])}
           type="checkbox"
           id={id}

@@ -1,13 +1,13 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import { Fragment, useContext } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(
-    BackgroundCellContext
+    BackgroundCellContext,
   )
   const { t } = useTranslation()
   return (
@@ -25,7 +25,7 @@ export default function BackgroundCells() {
                 'focus-within:outline-none focus-within:shadow-outline',
                 'duration-150 ease-in-out transition',
                 backgroundCell.value === bc.value &&
-                  'bg-gray-300 border-gray-600'
+                  'bg-gray-300 border-gray-600',
               ])}
             >
               <input
@@ -36,7 +36,7 @@ export default function BackgroundCells() {
                 onChange={() =>
                   setBackgroundCell({
                     type: bc.type,
-                    value: bc.value
+                    value: bc.value,
                   })
                 }
                 checked={backgroundCell.value === bc.value}
@@ -48,15 +48,15 @@ export default function BackgroundCells() {
                     ((bc.value === 'blue' && 'bg-blue-300') ||
                       (bc.value === 'green' && 'bg-green-300') ||
                       (bc.value === 'orange' && 'bg-orange-300') ||
-                      (bc.value === 'yellow' && 'bg-yellow-300'))
+                      (bc.value === 'yellow' && 'bg-yellow-300')),
                 ])}
                 style={{
                   ...(bc.type === 'img' && {
-                    backgroundImage: `url(/background-cells/${bc.value})`
+                    backgroundImage: `url(/background-cells/${bc.value})`,
                   }),
                   ...(bc.type === 'url' && {
-                    backgroundImage: `url(${bc.value})`
-                  })
+                    backgroundImage: `url(${bc.value})`,
+                  }),
                 }}
               ></div>
               <p className="italic text-center">{t(bc.key)}</p>
@@ -71,7 +71,7 @@ export default function BackgroundCells() {
           onChange={value => {
             setBackgroundCell({
               type: 'url',
-              value
+              value,
             })
           }}
           value={(backgroundCell.type === 'url' && backgroundCell.value) || ''}

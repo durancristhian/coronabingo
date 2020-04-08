@@ -23,9 +23,9 @@ export default function useRoomPlayers(roomId: string): [IPlayer[], Function] {
               id: p.id,
               name: data.name,
               boards: data.boards,
-              selectedNumbers: data.selectedNumbers
+              selectedNumbers: data.selectedNumbers,
             }
-          })
+          }),
         )
       })
 
