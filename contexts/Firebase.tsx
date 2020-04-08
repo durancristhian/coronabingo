@@ -1,6 +1,6 @@
 import React from 'react'
 import { createContext, ReactNode, useState, useEffect } from 'react'
-import { roomsRef } from '~/utils/firebase'
+import api from '~/utils/firebase/api'
 import { ParsedUrlQuery } from 'querystring'
 import { Player } from '~/components/Players'
 
@@ -26,7 +26,7 @@ interface Props {
 const FirebaseProvider = ({ children, routerQuery }: Props) => {
   const roomId = routerQuery.roomId?.toString()
   const playerId = routerQuery.playerId?.toString()
-  const [room, setRoom] = useState({})
+  const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
   const [players, setPlayers] = useState<Player[]>([])
   const [currentPlayer, setCurrentPlayer] = useState<Player>()
 
@@ -37,42 +37,15 @@ const FirebaseProvider = ({ children, routerQuery }: Props) => {
 
   useEffect(() => {
     if (!roomId) return
-    const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
-      const roomData = snapshot.data()
-      if (roomData) {
-        setRoom({
-          id: snapshot.id,
-          exists: snapshot.exists,
-          ref: snapshot.ref,
-          ...roomData,
-        })
-      }
-    })
-
+    const unsubscribe = api.room.onChange(roomId, setRoom)
     return unsubscribe
   }, [roomId])
 
   useEffect(() => {
-    if (!roomId) return
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        sortAndSet(
-          snapshot.docs.map(p => {
-            const data = p.data() as Player
-            return {
-              id: p.id,
-              exists: p.exists,
-              ref: p.ref,
-              ...data,
-            }
-          }),
-        )
-      })
-
+    if (!room.id) return
+    const unsubscribe = api.players.onChange(room.ref, sortAndSet)
     return unsubscribe
-  }, [roomId])
+  }, [room])
 
   useEffect(() => {
     if (!players || !playerId) return
