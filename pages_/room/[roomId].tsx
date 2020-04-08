@@ -10,6 +10,7 @@ import { IPlayer } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Box from '~/components/Box'
+import { useEffect } from 'react'
 
 export default function Room() {
   const router = useRouter()
@@ -40,7 +41,7 @@ export default function Room() {
                 <InputText
                   id="room-name"
                   label={t('sala:room-name')}
-                  value={roomId || ''}
+                  value={room.name || ''}
                   readonly
                   onFocus={event => event.target.select()}
                 />
