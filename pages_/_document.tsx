@@ -17,7 +17,7 @@ export default class extends Document {
     return (
       <html>
         <Head>
-          {process.env.NODE_ENV === 'production' && process.env.GA_TRACKING_ID && (
+          {process.env.GA_TRACKING_ID && (
             <Fragment>
               <script
                 async
