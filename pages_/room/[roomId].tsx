@@ -11,6 +11,7 @@ import Layout from '~/components/Layout'
 import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import * as gtag from '~/utils/gtag'
 
 export default function Room() {
   const router = useRouter()
@@ -18,6 +19,12 @@ export default function Room() {
   const room = useRoom(roomId)
   const [players] = useRoomPlayers(roomId)
   const { t } = useTranslation()
+
+  const readyToPlay = (playerId: string) => {
+    gtag.event('click', 'room', 'cartones', playerId)
+
+    Router.pushI18n(`/room/[id]/[playerId]`, `/room/${roomId}/${playerId}`)
+  }
 
   return (
     <Layout>
@@ -100,12 +107,7 @@ export default function Room() {
                           <Button
                             id="play"
                             disabled={!room.readyToPlay}
-                            onClick={() =>
-                              Router.pushI18n(
-                                `/room/[id]/[playerId]`,
-                                `/room/${roomId}/${player.id}`,
-                              )
-                            }
+                            onClick={() => readyToPlay(player.id)}
                           >
                             <FiLink2 />
                             <span className="ml-4">{t('sala:play')}</span>

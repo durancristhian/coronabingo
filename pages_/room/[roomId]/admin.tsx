@@ -14,6 +14,7 @@ import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Field from '~/interfaces/Field'
 import db, { roomsRef } from '~/utils/firebase'
+import * as gtag from '~/utils/gtag'
 
 export default function Admin() {
   const { t } = useTranslation()
@@ -119,6 +120,8 @@ export default function Admin() {
     })
 
     await batch.commit()
+
+    gtag.event('create', 'room', 'players', players.length.toString())
 
     setTimeout(() => {
       Router.pushI18n('/room/[roomId]', `/room/${roomId}`)

@@ -13,12 +13,13 @@ export const event = (
   action: string,
   category: string,
   label: string,
-  value: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any,
 ): void => {
   // @ts-ignore
   window.gtag('event', action, {
     event_category: category,
     event_label: label,
-    value: value,
+    value: JSON.stringify(value),
   })
 }

@@ -21,6 +21,7 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import { roomsRef } from '~/utils/firebase'
+import * as gtag from '~/utils/gtag'
 
 export default function Play() {
   const router = useRouter()
@@ -50,6 +51,14 @@ export default function Play() {
 
     return unsubscribe
   }, [playerId, roomId])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      gtag.event('stay', 'cartones', 'time', { playerId, roomId })
+    }, 120000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const onNewNumber = (n: number) => {
     if (!room) return
