@@ -37,7 +37,7 @@ export default function Cells({
           <div
             key={i}
             className={classnames([
-              'bg-white border-b-2 border-r-2 border-gray-900 flex h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
+              'bg-white border-b-2 border-r-2 border-gray-900 flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
               selectedNumbers.includes(boardNumber) && 'bg-orange-400',
             ])}
             onClick={() => handleClick(boardNumber)}
