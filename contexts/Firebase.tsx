@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { Player } from '~/components/Players'
-import api from '~/utils/firebase/api'
+import { roomsRef } from '~/utils/firebase'
 
 interface Context {
   currentPlayer?: Player
@@ -25,7 +25,7 @@ interface Props {
 const FirebaseProvider = ({ children, routerQuery }: Props) => {
   const roomId = routerQuery.roomId?.toString()
   const playerId = routerQuery.playerId?.toString()
-  const [room, setRoom] = useState<firebase.firestore.DocumentData>({})
+  const [room, setRoom] = useState({})
   const [players, setPlayers] = useState<Player[]>([])
   const [currentPlayer, setCurrentPlayer] = useState<Player>()
 
@@ -36,16 +36,43 @@ const FirebaseProvider = ({ children, routerQuery }: Props) => {
 
   useEffect(() => {
     if (!roomId) return
-    const unsubscribe = api.room.onChange(roomId, setRoom)
+    const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
+      const roomData = snapshot.data()
+      if (roomData) {
+        setRoom({
+          id: snapshot.id,
+          exists: snapshot.exists,
+          ref: snapshot.ref,
+          ...roomData,
+        })
+      }
+    })
+
     return unsubscribe
   }, [roomId])
 
-  /* TODO: by commenting this, it makes the players don't disappear */
-  /* useEffect(() => {
-    if (!room.id) return
-    const unsubscribe = api.players.onChange(room.ref, sortAndSet)
+  useEffect(() => {
+    if (!roomId) return
+
+    const unsubscribe = roomsRef
+      .doc(roomId)
+      .collection('players')
+      .onSnapshot(snapshot => {
+        sortAndSet(
+          snapshot.docs.map(p => {
+            const data = p.data() as Player
+            return {
+              id: p.id,
+              exists: p.exists,
+              ref: p.ref,
+              ...data,
+            }
+          }),
+        )
+      })
+
     return unsubscribe
-  }, [room]) */
+  }, [roomId])
 
   useEffect(() => {
     if (!players || !playerId) return
