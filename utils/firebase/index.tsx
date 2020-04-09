@@ -1,3 +1,4 @@
+import 'firebase/analytics'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -12,7 +13,8 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENT_ID,
 }
 
-let firebaseApp
+let firebaseApp: firebase.app.App
+let analytics: firebase.analytics.Analytics
 
 if (firebase.apps.length) {
   firebaseApp = firebase.apps[0]
@@ -20,7 +22,12 @@ if (firebase.apps.length) {
   firebaseApp = firebase.initializeApp(firebaseConfig)
 }
 
+if (typeof window !== 'undefined') {
+  analytics = firebase.analytics()
+}
+
 const db = firebaseApp.firestore()
+const roomsRef = db.collection('rooms')
 
 export default db
-export const roomsRef = db.collection('rooms')
+export { analytics, roomsRef }

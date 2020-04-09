@@ -13,8 +13,9 @@ module.exports = {
         }
     },
     rules: {
+        "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/ban-ts-ignore": "off",
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/explicit-function-return-type": "off",
     },
     settings: {
         react: {
