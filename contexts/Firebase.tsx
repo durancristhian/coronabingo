@@ -40,11 +40,12 @@ const FirebaseProvider = ({ children, routerQuery }: Props) => {
     return unsubscribe
   }, [roomId])
 
-  useEffect(() => {
+  /* TODO: by commenting this, it makes the players don't disappear */
+  /* useEffect(() => {
     if (!room.id) return
     const unsubscribe = api.players.onChange(room.ref, sortAndSet)
     return unsubscribe
-  }, [room])
+  }, [room]) */
 
   useEffect(() => {
     if (!players || !playerId) return
