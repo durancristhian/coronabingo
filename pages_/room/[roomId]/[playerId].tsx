@@ -152,6 +152,7 @@ export default function Jugar() {
                         😎
                       </span>
                     </Banner>
+                    <Restart />
                     <div className="my-8 text-center">
                       <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
                         {t('jugar:celebrate')}
@@ -171,7 +172,6 @@ export default function Jugar() {
                       </Button>
                     </div>
                     <Pato onClick={setSoundToPlay} />
-                    <Restart />
                   </Box>
                 </div>
               )}

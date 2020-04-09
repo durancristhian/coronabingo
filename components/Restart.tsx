@@ -22,7 +22,7 @@ export default function Restart() {
     <div className="text-center mt-8">
       <Button onClick={() => setShowModal(true)}>
         <FiRepeat />
-        <span className="ml-4">Reiniciar sala</span>
+        <span className="ml-4">Reiniciar partida</span>
       </Button>
       <Modal
         contentLabel="Reiniciar sala"
