@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
+import React, { useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Modal from 'react-modal'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
+import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import LastNumbers from '~/components/LastNumbers'
@@ -18,9 +19,7 @@ import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
-import * as gtag from '~/utils/gtag'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import Box from '~/components/Box'
 
 export default function Jugar() {
   const [room] = useRoom()
@@ -29,14 +28,6 @@ export default function Jugar() {
   const { t } = useTranslation()
 
   const isAdmin = room?.adminId === player?.id
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      gtag.event('stay', 'cartones', 'time', { playerId, roomId })
-    }, 120000)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   const onNewNumber = (n: number) => {
     if (!room) return

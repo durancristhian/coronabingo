@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import { roomsRef } from '~/utils/firebase'
-import * as gtag from '~/utils/gtag'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
@@ -51,8 +50,6 @@ export default function CreateRoom() {
         name: formData.name,
         date: firebase.firestore.Timestamp.fromDate(new Date()),
       })
-
-      gtag.event('create', 'room', 'crear', formData.name)
 
       setMessageProps({
         message: t('index:create-room.success'),

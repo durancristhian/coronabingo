@@ -1,7 +1,7 @@
-import React from 'react'
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
+import React from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -10,18 +10,11 @@ import Layout from '~/components/Layout'
 import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import * as gtag from '~/utils/gtag'
 
 export default function Sala() {
   const [room] = useRoom()
   const { players = [] } = useRoomPlayers()
   const { t } = useTranslation()
-
-  const readyToPlay = (playerId: string) => {
-    gtag.event('click', 'room', 'cartones', playerId)
-
-    Router.pushI18n(`/room/[id]/[playerId]`, `/room/${roomId}/${playerId}`)
-  }
 
   return (
     <Layout>
@@ -103,7 +96,12 @@ export default function Sala() {
                           <Button
                             id="play"
                             disabled={!room.readyToPlay}
-                            onClick={() => readyToPlay(player.id)}
+                            onClick={() => {
+                              Router.pushI18n(
+                                `/room/[id]/[playerId]`,
+                                `/room/${room.id}/${player.id}`,
+                              )
+                            }}
                           >
                             <FiLink2 />
                             <span className="ml-4">{t('sala:play')}</span>

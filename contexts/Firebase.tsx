@@ -1,8 +1,7 @@
-import React from 'react'
-import { createContext, ReactNode, useState, useEffect } from 'react'
-import api from '~/utils/firebase/api'
 import { ParsedUrlQuery } from 'querystring'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { Player } from '~/components/Players'
+import api from '~/utils/firebase/api'
 
 interface Context {
   currentPlayer?: Player

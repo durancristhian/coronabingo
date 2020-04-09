@@ -1,6 +1,6 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -10,10 +10,9 @@ import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
 import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
-import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useRoom from '~/hooks/useRoom'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Field from '~/interfaces/Field'
-import * as gtag from '~/utils/gtag'
 import db from '~/utils/firebase'
 
 export default function Admin() {
@@ -63,8 +62,6 @@ export default function Admin() {
     })
 
     await batch.commit()
-
-    gtag.event('create', 'room', 'players', players.length.toString())
 
     setTimeout(() => {
       Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
