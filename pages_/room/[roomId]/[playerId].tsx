@@ -1,13 +1,11 @@
+import React, { useState } from 'react'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Modal from 'react-modal'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
-import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import LastNumbers from '~/components/LastNumbers'
@@ -20,37 +18,17 @@ import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
-import { roomsRef } from '~/utils/firebase'
 import * as gtag from '~/utils/gtag'
+import useRoomPlayers from '~/hooks/useRoomPlayers'
+import Box from '~/components/Box'
 
-export default function Play() {
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const playerId = router.query.playerId?.toString()
-  const room = useRoom(roomId)
+export default function Jugar() {
+  const [room] = useRoom()
+  const { player, setPlayer } = useRoomPlayers()
   const [showModal, setShowModal] = useState(false)
   const { t } = useTranslation()
-  /* TODO: can we make a custom hook? */
-  const [player, setPlayer] = useState<firebase.firestore.DocumentData>()
-  const isAdmin = room?.adminId === playerId
 
-  useEffect(() => {
-    if (!playerId || !roomId) return
-
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .doc(playerId)
-      .onSnapshot(doc => {
-        doc.exists &&
-          setPlayer({
-            id: doc.id,
-            ...doc.data(),
-          })
-      })
-
-    return unsubscribe
-  }, [playerId, roomId])
+  const isAdmin = room?.adminId === player?.id
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,19 +50,21 @@ export default function Play() {
       numbers = [n, ...selectedNumbers]
     }
 
-    roomsRef.doc(roomId).update({
+    room.ref.update({
       selectedNumbers: numbers,
     })
   }
 
   const confetti = () => {
-    const roomRef = roomsRef.doc(roomId)
-    roomRef.update({ showConfetti: !room?.showConfetti })
+    room.ref.update({ showConfetti: !room.showConfetti })
   }
 
+  const setSoundToPlay = (soundToPlay = '') =>
+    isAdmin && room.ref.update({ soundToPlay })
+
   const replay = async () => {
-    await roomsRef.doc(roomId).update({ readyToPlay: false })
-    Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
+    await room.ref.update({ readyToPlay: false })
+    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (
@@ -148,6 +128,7 @@ export default function Play() {
                     {player && (
                       <Boards
                         player={player}
+                        room={room}
                         setPlayerProps={newProps =>
                           setPlayer({
                             ...player,
@@ -157,30 +138,31 @@ export default function Play() {
                       />
                     )}
                   </div>
-                  <div className="lg:hidden mt-8">
-                    <Box>
-                      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                        {t('common:turning-globe')}
-                      </h2>
-                      <div className="mt-4">
-                        <SelectedNumbers
-                          isAdmin={isAdmin}
-                          onNewNumber={onNewNumber}
-                          selectedNumbers={room.selectedNumbers || []}
-                          turningGlob={room.turningGlob}
-                        />
-                      </div>
-                    </Box>
-                  </div>
+                </div>
+                <div className="lg:hidden mt-8">
+                  <Box>
+                    <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
+                      {t('common:turning-globe')}
+                    </h2>
+                    <div className="mt-4">
+                      <SelectedNumbers
+                        isAdmin={isAdmin}
+                        onNewNumber={onNewNumber}
+                        selectedNumbers={room.selectedNumbers || []}
+                        turningGlob={room.turningGlob}
+                      />
+                    </div>
+                  </Box>
                 </div>
               </div>
+              {room?.showConfetti && <Confetti />}
               {isAdmin && (
                 <div className="max-w-4xl mt-8 mx-auto">
                   <Box>
                     <Banner>
                       {t('jugar:admin-title')}
-                      <span role="img" aria-label="emoji">
-                        &nbsp;😎
+                      <span role="img" aria-label="sunglasses">
+                        😎
                       </span>
                     </Banner>
                     <div className="my-8 text-center">
@@ -188,10 +170,10 @@ export default function Play() {
                         {t('jugar:celebrate')}
                       </h2>
                       <Button
-                        color={room?.showConfetti ? 'red' : 'green'}
+                        color={room.showConfetti ? 'red' : 'green'}
                         onClick={confetti}
                       >
-                        {room?.showConfetti ? <FiFrown /> : <FiSmile />}
+                        {room.showConfetti ? <FiFrown /> : <FiSmile />}
                         <span className="ml-4">
                           {t(
                             `jugar:${
@@ -201,56 +183,59 @@ export default function Play() {
                         </span>
                       </Button>
                     </div>
-                    <Pato />
+                    <Pato onClick={setSoundToPlay} />
                   </Box>
                 </div>
               )}
-              {room?.showConfetti && <Confetti />}
-              <Sounds isAdmin={isAdmin} />
+              {room.showConfetti && <Confetti />}
+              <Sounds
+                onAudioEnd={setSoundToPlay}
+                soundToPlay={room.soundToPlay}
+              />
               <div className="max-w-4xl mt-8 mx-auto">
                 <Box>
                   <BackgroundCells />
                 </Box>
               </div>
-            </div>
-            {isAdmin && (
-              <div className="text-center mb-8">
-                <Button className="mt-8" onClick={() => setShowModal(true)}>
-                  Reiniciar sala
-                </Button>
-                <Modal
-                  contentLabel="Example Modal"
-                  isOpen={showModal}
-                  onRequestClose={() => setShowModal(false)}
-                  style={{
-                    content: {
-                      position: 'initial',
-                      border: '1px solid rgb(204, 204, 204)',
-                      background: 'white',
-                      borderRadius: 4,
-                      outline: 'none',
-                      padding: 20,
-                      margin: 8,
-                      textAlign: 'center',
-                    },
-                    overlay: {
-                      zIndex: 99,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    },
-                  }}
-                >
-                  <p>
-                    Esta acción va a reiniciar los valores de la sala para
-                    comenzar de nuevo el juego. Estas segurx ?
-                  </p>
-                  <Button className="mt-8" onClick={replay}>
-                    Confirmar
+              {isAdmin && (
+                <div className="text-center mb-8">
+                  <Button className="mt-8" onClick={() => setShowModal(true)}>
+                    Reiniciar sala
                   </Button>
-                </Modal>
-              </div>
-            )}
+                  <Modal
+                    contentLabel="Example Modal"
+                    isOpen={showModal}
+                    onRequestClose={() => setShowModal(false)}
+                    style={{
+                      content: {
+                        position: 'initial',
+                        border: '1px solid rgb(204, 204, 204)',
+                        background: 'white',
+                        borderRadius: 4,
+                        outline: 'none',
+                        padding: 20,
+                        margin: 8,
+                        textAlign: 'center',
+                      },
+                      overlay: {
+                        zIndex: 99,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      },
+                    }}
+                  >
+                    <p>
+                      Esta acción va a reiniciar los valores de la sala para
+                      comenzar de nuevo el juego. Estas segurx ?
+                    </p>
+                    <Button className="mt-8" onClick={replay}>
+                      Confirmar
+                    </Button>
+                  </Modal>
+                </div>
+              )}
+            </div>
           </BackgroundCellContextProvider>
         </EasterEggContextProvider>
       )}

@@ -1,8 +1,7 @@
+import React from 'react'
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
-import React from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -13,11 +12,9 @@ import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import * as gtag from '~/utils/gtag'
 
-export default function Room() {
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const room = useRoom(roomId)
-  const [players] = useRoomPlayers(roomId)
+export default function Sala() {
+  const [room] = useRoom()
+  const { players = [] } = useRoomPlayers()
   const { t } = useTranslation()
 
   const readyToPlay = (playerId: string) => {
@@ -62,14 +59,13 @@ export default function Room() {
                   value={room.videoCall || ''}
                 />
               )}
-              {!room.readyToPlay && (
+              {!room.readyToPlay ? (
                 <div className="mt-8">
                   <div className="italic text-gray-600 text-xs md:text-sm">
                     {t('sala:not-ready')}
                   </div>
                 </div>
-              )}
-              {room.readyToPlay && (
+              ) : (
                 <div className="mt-8">
                   <h3 className="font-medium">
                     {t('sala:people', { count: players.length })}

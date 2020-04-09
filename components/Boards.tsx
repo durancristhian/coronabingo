@@ -1,33 +1,24 @@
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
-import { roomsRef } from '~/utils/firebase'
 import Cells from './Cells'
 
 interface Props {
   player: firebase.firestore.DocumentData
+  room: firebase.firestore.DocumentData
   setPlayerProps: (props: {}) => void
 }
 
-export default function Boards({ player, setPlayerProps }: Props) {
-  const router = useRouter()
-  const roomId = router.query.roomId?.toString()
-  const playerId = router.query.playerId?.toString()
+export default function Boards({ player, room, setPlayerProps }: Props) {
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (roomId && playerId) {
+    if (room && player) {
       try {
         const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
-        const playerValues = roomValues?.[playerId] || {}
-        roomsRef
-          .doc(roomId)
-          .collection('players')
-          .doc(playerId)
-          .update(playerValues)
-        setPlayerProps(playerValues)
+        const playerValues = roomValues?.[player.id] || {}
+        player.ref.update(playerValues)
         localStorage.removeItem('roomValues')
       } catch (e) {}
 
@@ -35,7 +26,7 @@ export default function Boards({ player, setPlayerProps }: Props) {
         localStorage.setItem(
           'roomValues',
           JSON.stringify({
-            [playerId]: boards.reduce(
+            [player.id]: boards.reduce(
               (acc, board) => ({
                 ...acc,
                 [board.id]: player?.[board.id] || [],
@@ -50,7 +41,7 @@ export default function Boards({ player, setPlayerProps }: Props) {
       window.onbeforeunload = saveOnLeave
       window.onpopstate = saveOnLeave
     }
-  }, [boards, player, playerId, roomId])
+  }, [boards, player, room])
 
   return (
     <Fragment>
