@@ -9,7 +9,7 @@
       "MESSAGING_SENDER_ID": "@messaging_sender_id_staging",
       "APP_ID": "@app_id_staging",
       "MEASUREMENT_ID": "@measurement_id_staging",
-      "GA_TRACKING_ID": "",
+      "GA_TRACKING_ID": "@ga_tracking_id_staging",
       "SENTRY_DSN": "",
       "WOORKSHEET_ID": "@woorksheet_id_staging",
       "WORKSHEET_TITLE": "@worksheet_title_staging"

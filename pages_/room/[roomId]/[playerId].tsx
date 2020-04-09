@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
+import React, { useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Modal from 'react-modal'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
+import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Confetti from '~/components/Confetti'
 import LastNumbers from '~/components/LastNumbers'
@@ -19,7 +20,6 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import Box from '~/components/Box'
 
 export default function Jugar() {
   const [room] = useRoom()

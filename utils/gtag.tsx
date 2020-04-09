@@ -7,18 +7,3 @@ export const pageview = (url: string): void => {
     page_path: url,
   })
 }
-
-// https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = (
-  action: string,
-  category: string,
-  label: string,
-  value: string,
-): void => {
-  // @ts-ignore
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  })
-}

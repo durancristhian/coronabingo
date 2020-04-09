@@ -1,7 +1,7 @@
-import React from 'react'
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
+import React from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -96,12 +96,12 @@ export default function Sala() {
                           <Button
                             id="play"
                             disabled={!room.readyToPlay}
-                            onClick={() =>
+                            onClick={() => {
                               Router.pushI18n(
-                                `/room/[roomId]/[playerId]`,
+                                `/room/[id]/[playerId]`,
                                 `/room/${room.id}/${player.id}`,
                               )
-                            }
+                            }}
                           >
                             <FiLink2 />
                             <span className="ml-4">{t('sala:play')}</span>
