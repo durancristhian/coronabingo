@@ -29,9 +29,7 @@ export default function Admin() {
   const randomBoards = useRandomBoards()
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
-    setRoom({
-      ...[...changes.map(({ key, value }) => ({ [key]: value }))],
-    })
+    setRoom(...changes.map(({ key, value }) => ({ [key]: value })))
   }
 
   const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
