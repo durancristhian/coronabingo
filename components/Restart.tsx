@@ -1,6 +1,6 @@
 import Router from 'next-translate/Router'
 import React, { useState } from 'react'
-import { FiRepeat, FiX } from 'react-icons/fi'
+import { FiRepeat, FiThumbsUp, FiX } from 'react-icons/fi'
 import Modal from 'react-modal'
 import useRoom from '~/hooks/useRoom'
 import Box from './Box'
@@ -32,19 +32,23 @@ export default function Restart() {
         overlayClassName="overlay"
       >
         <Box>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-8">
             <h2 className="font-medium text-lg md:text-xl">Reiniciar sala</h2>
             <Button color="gray" onClick={() => setShowModal(false)}>
               <FiX />
             </Button>
           </div>
           <p>
-            Esta acción va a reiniciar los valores de la sala para comenzar de
-            nuevo el juego. Estas segurx ?
+            Esta acción te permitirá volver a configurar la sala para que se
+            adapte a un nuevo juego. Podrás editar la lista de personas que van
+            a jugar, cambiar roles y redistribuir los cartones.
           </p>
-          <Button className="mt-8" onClick={replay}>
-            Confirmar
-          </Button>
+          <div className="mt-8 text-center">
+            <Button onClick={replay} color="green">
+              <FiThumbsUp />
+              <span className="ml-4">Confirmar</span>
+            </Button>
+          </div>
         </Box>
       </Modal>
     </div>
