@@ -21,6 +21,8 @@ import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 
+Modal.setAppElement('#__next')
+
 export default function Jugar() {
   const [room] = useRoom()
   const { player, setPlayer } = useRoomPlayers()
