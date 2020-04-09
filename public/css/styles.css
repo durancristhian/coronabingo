@@ -30,12 +30,12 @@
 }
 
 .cursor-poroto {
-  cursor: url('/cursor/poroto-md.png'), auto;
+  cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
 
 @media (max-width: 640px) {
   .cursor-poroto {
-    cursor: url('/cursor/poroto-sm.png'), auto;
+    cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
   }
 }
 
