@@ -2,6 +2,14 @@ import classnames from 'classnames'
 import React, { MouseEvent, ReactNode } from 'react'
 
 const BUTTON_COLORS = {
+  gray: [
+    'bg-gray-400',
+    'border-gray-600',
+    'focus:bg-gray-500',
+    'focus:border-gray-700',
+    'focus:text-gray-900',
+    'text-gray-800',
+  ],
   green: [
     'bg-green-400',
     'border-green-600',
@@ -39,7 +47,7 @@ const BUTTON_COLORS = {
 interface Props {
   children: ReactNode
   className?: string
-  color?: 'green' | 'pink' | 'red' | 'yellow'
+  color?: 'gray' | 'green' | 'pink' | 'red' | 'yellow'
   disabled?: boolean
   id?: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void

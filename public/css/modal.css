@@ -1,0 +1,28 @@
+.modal {
+  border-radius: 0.25rem;
+  bottom: auto;
+  left: 50%;
+  margin-right: -50%;
+  max-width: 480px;
+  padding: 1rem;
+  outline: none;
+  position: absolute;
+  right: auto;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.modal:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9;
+}

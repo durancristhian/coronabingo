@@ -6,6 +6,7 @@
 @import 'tailwindcss/utilities';
 @import 'background-cell.css';
 @import 'ball.css';
+@import 'modal.css';
 
 .debug * {
   box-shadow: 0 0 1px red;

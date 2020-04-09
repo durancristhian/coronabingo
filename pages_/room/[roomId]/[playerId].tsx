@@ -1,6 +1,5 @@
-import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { useState } from 'react'
+import React from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Modal from 'react-modal'
 import BackgroundCells from '~/components/BackgroundCells'
@@ -14,6 +13,7 @@ import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Pato from '~/components/Pato'
+import Restart from '~/components/Restart'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
@@ -26,7 +26,6 @@ Modal.setAppElement('#__next')
 export default function Jugar() {
   const [room] = useRoom()
   const { player, setPlayer } = useRoomPlayers()
-  const [showModal, setShowModal] = useState(false)
   const { t } = useTranslation()
 
   const isAdmin = room?.adminId === player?.id
@@ -54,11 +53,6 @@ export default function Jugar() {
 
   const setSoundToPlay = (soundToPlay = '') =>
     isAdmin && room.ref.update({ soundToPlay })
-
-  const replay = async () => {
-    await room.ref.update({ readyToPlay: false })
-    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
-  }
 
   return (
     <Layout>
@@ -177,6 +171,7 @@ export default function Jugar() {
                       </Button>
                     </div>
                     <Pato onClick={setSoundToPlay} />
+                    <Restart />
                   </Box>
                 </div>
               )}
@@ -190,44 +185,6 @@ export default function Jugar() {
                   <BackgroundCells />
                 </Box>
               </div>
-              {isAdmin && (
-                <div className="text-center mb-8">
-                  <Button className="mt-8" onClick={() => setShowModal(true)}>
-                    Reiniciar sala
-                  </Button>
-                  <Modal
-                    contentLabel="Example Modal"
-                    isOpen={showModal}
-                    onRequestClose={() => setShowModal(false)}
-                    style={{
-                      content: {
-                        position: 'initial',
-                        border: '1px solid rgb(204, 204, 204)',
-                        background: 'white',
-                        borderRadius: 4,
-                        outline: 'none',
-                        padding: 20,
-                        margin: 8,
-                        textAlign: 'center',
-                      },
-                      overlay: {
-                        zIndex: 99,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      },
-                    }}
-                  >
-                    <p>
-                      Esta acción va a reiniciar los valores de la sala para
-                      comenzar de nuevo el juego. Estas segurx ?
-                    </p>
-                    <Button className="mt-8" onClick={replay}>
-                      Confirmar
-                    </Button>
-                  </Modal>
-                </div>
-              )}
             </div>
           </BackgroundCellContextProvider>
         </EasterEggContextProvider>
