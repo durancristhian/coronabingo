@@ -3,17 +3,19 @@
     "version": "1.7.0",
     "private": true,
     "scripts": {
-        "prebuild": "node scripts/download-boards",
+        "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
         "deploy-staging": "cp now.staging.json now.json && now",
         "deploy-prod": "cp now.prod.json now.json && now --prod",
         "dev": "next-translate && next dev",
+        "download-boards": "ts-node scripts/download-boards",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-        "start": "next start"
+        "start": "next start",
+        "validate-locales": "ts-node scripts/validate-locales"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "tsc --noEmit && lint-staged"
+            "pre-commit": "validate-locales && tsc --noEmit && lint-staged"
         }
     },
     "lint-staged": {
@@ -58,6 +60,7 @@
         "react-modal": "^3.11.2",
         "swr": "^0.1.18",
         "tailwindcss": "^1.2.0",
+        "ts-node": "^8.8.2",
         "typeface-inter": "^3.12.0",
         "typeface-oswald": "^1.1.4",
         "typescript": "^3.8.3",
