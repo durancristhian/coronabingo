@@ -1,12 +1,19 @@
 {
   "title": "Hola {{playerName}}, estás en la sala {{roomName}}",
   "loading": "Cargando información de la sala...",
+  "room-not-ready": "La sala se está configurando. Espere...",
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
   "no-turningglob-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
   "admin-title": "Estás viendo este panel porque sos quien dirige la sala",
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
+  "replay": {
+    "reboot-game": "Reiniciar partida",
+    "reboot-room": "Reiniciar sala",
+    "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas, cambiar roles y redistribuir los cartones.",
+    "confirm": "Confirmar"
+  },
   "empty-cells": {
     "title": "Fondo de las celdas vacías",
     "url": "O bien, pegá el link a una imágen en internet"

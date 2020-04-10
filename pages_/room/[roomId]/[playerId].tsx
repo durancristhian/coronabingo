@@ -51,7 +51,7 @@ export default function Jugar() {
   const setSoundToPlay = (soundToPlay = '') =>
     isAdmin && room.ref.update({ soundToPlay })
 
-  if (!room) {
+  if (!room.id) {
     return (
       <Layout>
         <Container>
@@ -65,9 +65,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="information">
-            La sala se está configurando. Espere...
-          </Message>
+          <Message type="information">{t('jugar:room-not-ready')}</Message>
         </Container>
       </Layout>
     )

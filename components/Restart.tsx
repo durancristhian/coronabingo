@@ -1,4 +1,5 @@
 import Router from 'next-translate/Router'
+import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import { FiRepeat, FiThumbsUp, FiX } from 'react-icons/fi'
 import Modal from 'react-modal'
@@ -11,20 +12,21 @@ Modal.setAppElement('#__next')
 export default function Restart() {
   const [showModal, setShowModal] = useState(false)
   const [room] = useRoom()
+  const { t } = useTranslation()
 
   const replay = async () => {
     await room.ref.update({
       readyToPlay: false,
     })
 
-    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
+    Router.replaceI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (
     <Fragment>
       <Button onClick={() => setShowModal(true)}>
         <FiRepeat />
-        <span className="ml-4">Reiniciar partida</span>
+        <span className="ml-4">{t('jugar:replay.reboot-game')}</span>
       </Button>
       <Modal
         contentLabel="Reiniciar sala"
@@ -35,20 +37,18 @@ export default function Restart() {
       >
         <Box>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-medium text-lg md:text-xl">Reiniciar sala</h2>
+            <h2 className="font-medium text-lg md:text-xl">
+              {t('jugar:replay.reboot-room')}
+            </h2>
             <Button color="gray" onClick={() => setShowModal(false)}>
               <FiX />
             </Button>
           </div>
-          <p>
-            Esta acción te permitirá volver a configurar la sala para que se
-            adapte a un nuevo juego. Podrás editar la lista de personas que van
-            a jugar, cambiar roles y redistribuir los cartones.
-          </p>
+          <p>{t('jugar:replay.description')}</p>
           <div className="mt-8 text-center">
             <Button onClick={replay} color="green">
               <FiThumbsUp />
-              <span className="ml-4">Confirmar</span>
+              <span className="ml-4">{t('jugar:replay.confirm')}</span>
             </Button>
           </div>
         </Box>
