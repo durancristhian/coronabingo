@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/browser'
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React, { Fragment } from 'react'
+import { allLanguages, defaultLanguage } from '~/i18n.json'
 
 if (process.env.NODE_ENV === 'production') {
   process.on('unhandledRejection', err => {
@@ -14,10 +15,13 @@ if (process.env.NODE_ENV === 'production') {
 
 export default class extends Document {
   render() {
+    const langFromUrl = this.props.__NEXT_DATA__.page.substring(1, 3)
+    const lang = allLanguages.includes(langFromUrl)
+      ? langFromUrl
+      : defaultLanguage
+
     return (
-      /* TODO: improve this by setting a cookie? */
-      // eslint-disable-next-line jsx-a11y/html-has-lang
-      <html>
+      <Html lang={lang}>
         <Head>
           {process.env.GA_TRACKING_ID && (
             <Fragment>
@@ -45,7 +49,7 @@ export default class extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
