@@ -15,11 +15,7 @@ export default function Restart() {
   const { t } = useTranslation()
 
   const replay = async () => {
-    await room.ref.update({
-      readyToPlay: false,
-    })
-
-    Router.replaceI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
+    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (
