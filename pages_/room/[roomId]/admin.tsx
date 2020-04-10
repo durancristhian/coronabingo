@@ -6,6 +6,7 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import Container from '~/components/Container'
+import Copy from '~/components/Copy'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
@@ -99,6 +100,7 @@ export default function Admin() {
                 readonly
                 onFocus={event => event.target.select()}
               />
+              <Copy content={`${window.location.host}/room/${room.id}`} />
               <InputText
                 id="videoCall"
                 label={t('admin:field-videocall')}

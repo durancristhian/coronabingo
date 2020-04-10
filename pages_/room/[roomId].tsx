@@ -1,11 +1,12 @@
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
+import Copy from '~/components/Copy'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import { Player } from '~/components/Players'
@@ -43,14 +44,17 @@ export default function Sala() {
             />
           )}
           {room.id && (
-            <InputText
-              hint={t('sala:field-link-hint')}
-              id="url"
-              label={t('sala:field-link')}
-              value={`${window.location.host}/room/${room.id}`}
-              readonly
-              onFocus={event => event.target.select()}
-            />
+            <Fragment>
+              <InputText
+                hint={t('sala:field-link-hint')}
+                id="url"
+                label={t('sala:field-link')}
+                value={`${window.location.host}/room/${room.id}`}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <Copy content={`${window.location.host}/room/${room.id}`} />
+            </Fragment>
           )}
           {room.videoCall && (
             <InputText
