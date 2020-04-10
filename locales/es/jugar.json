@@ -11,7 +11,7 @@
   "replay": {
     "reboot-game": "Reiniciar partida",
     "reboot-room": "Reiniciar sala",
-    "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas que van a jugar, cambiar roles y redistribuir los cartones.",
+    "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas, cambiar roles y redistribuir los cartones.",
     "confirm": "Confirmar"
   },
   "empty-cells": {
