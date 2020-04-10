@@ -48,7 +48,7 @@ export default function Boards({ player, room, setPlayerProps }: Props) {
   return (
     <Fragment>
       {boards.map((board, i) => (
-        <div key={i} className={classnames([i !== 0 && 'mt-4 lg:mt-0'])}>
+        <div key={i} className={classnames([i !== 0 && 'mt-4'])}>
           <Box>
             <p className="font-semibold uppercase">
               {t('common:board', { boardId: board.id })}
