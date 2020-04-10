@@ -12,7 +12,7 @@ export default function BackgroundCells() {
   const { t } = useTranslation()
   return (
     <Fragment>
-      <h2 className="font-medium mb-8 text-center text-lg md:text-xl">
+      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
         {t('jugar:empty-cells.title')}
       </h2>
       <div className="flex flex-wrap">
@@ -64,7 +64,7 @@ export default function BackgroundCells() {
           </div>
         ))}
       </div>
-      <div className="-mb-4 mt-4">
+      <div className="-mb-4">
         <InputText
           id="background"
           label={t('jugar:empty-cells.url')}
