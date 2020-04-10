@@ -8,7 +8,7 @@ export const BACKGROUND_CELL_VALUES = [
   {
     key: 'jugar:backgrounds.multicolor',
     type: 'color',
-    value: ['purple', 'green', 'yellow', 'blue', 'orange'],
+    value: ['indigo', 'pink', 'purple', 'teal'],
   },
   {
     key: 'jugar:backgrounds.pikachu',

@@ -5,9 +5,12 @@ import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 export const COLORS: { [k: string]: string } = {
   blue: 'bg-blue-300',
   green: 'bg-green-300',
+  indigo: 'bg-indigo-300',
   orange: 'bg-orange-300',
-  yellow: 'bg-yellow-300',
+  pink: 'bg-pink-300',
   purple: 'bg-purple-300',
+  teal: 'bg-teal-300',
+  yellow: 'bg-yellow-300',
 }
 
 export default function EmptyCell({ index }: { index: number }) {
