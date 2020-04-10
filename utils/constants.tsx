@@ -50,6 +50,16 @@ export const BACKGROUND_CELL_VALUES = [
       'pallbearers/pallbearer-3.png',
     ],
   },
+  {
+    key: 'jugar:backgrounds.frameworks',
+    type: 'img',
+    value: [
+      'frameworks/react.png',
+      'frameworks/angular.png',
+      'frameworks/vue.png',
+      'frameworks/svelte.png',
+    ],
+  },
 ]
 export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
