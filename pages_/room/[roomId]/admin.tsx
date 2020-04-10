@@ -78,7 +78,9 @@ export default function Admin() {
             {t('admin:title')}
           </h2>
           {!room?.id && (
-            <Message type="information">{t('admin:loading')}</Message>
+            <div className="mt-8">
+              <Message type="information">{t('admin:loading')}</Message>
+            </div>
           )}
           {room?.id && (
             <Fragment>

@@ -7,5 +7,7 @@
   "not-ready": "The room is not ready to play yet. When it is, this page will be updated.",
   "list-description": "Find your name in the list and press the play button to access your boards.",
   "is-admin": "Admin",
-  "play": "Play"
+  "play": "Play",
+  "field-link-hint": "Share this link with the people in the videocall.",
+  "field-link": "Link to the room"
 }

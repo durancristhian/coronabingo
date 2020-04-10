@@ -42,6 +42,16 @@ export default function Sala() {
               onFocus={event => event.target.select()}
             />
           )}
+          {room.id && (
+            <InputText
+              hint={t('sala:field-link-hint')}
+              id="url"
+              label={t('sala:field-link')}
+              value={`${window.location.host}/room/${room.id}`}
+              readonly
+              onFocus={event => event.target.select()}
+            />
+          )}
           {room.videoCall && (
             <InputText
               id="videocall"

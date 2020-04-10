@@ -7,5 +7,7 @@
   "not-ready": "La sala no está lista para jugar todavía. Cuando lo esté, esta página se actualizará.",
   "list-description": "Buscate en esta lista y presioná el botón jugar para acceder a tus cartones.",
   "is-admin": "Dirige el juego",
-  "play": "Jugar"
+  "play": "Jugar",
+  "field-link-hint": "Compartí este link a las personas de la videollamada.",
+  "field-link": "Link a la sala"
 }
