@@ -1,15 +1,7 @@
 .modal {
   border-radius: 0.25rem;
-  bottom: auto;
-  left: 50%;
-  margin-right: -50%;
   max-width: 480px;
-  padding: 1rem;
   outline: none;
-  position: absolute;
-  right: auto;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
 }
 
@@ -18,9 +10,13 @@
 }
 
 .overlay {
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
+  display: flex;
+  justify-content: center;
   left: 0;
+  padding: 1rem;
   position: fixed;
   right: 0;
   top: 0;
