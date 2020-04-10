@@ -23,7 +23,9 @@ export default function Layout({ children }: Props) {
           <span>{t('common:post-your-photo')} </span>
         </Banner>
       )}
-      <div className="flex-auto">{children}</div>
+      <div className="flex-auto">
+        <div className="px-4 py-8">{children}</div>
+      </div>
       <Banner>
         <span>{t('common:feedback-form.intro')} </span>
         <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">

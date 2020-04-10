@@ -83,21 +83,19 @@ export default function Players({
 
   return (
     <div className="mt-8">
-      <div className="font-medium">
-        <h3 className="flex font-medium items-center">
-          <span>{t('admin:players.title')}&nbsp;</span>
-          <span
-            className={classnames([
-              players.length === MAX_PLAYERS && 'text-red-600',
-            ])}
-          >
-            {t('admin:players.amount', {
-              amount: players.length,
-              max: MAX_PLAYERS,
-            })}
-          </span>
-        </h3>
-      </div>
+      <p className="flex items-center">
+        <span>{t('admin:players.title')}&nbsp;</span>
+        <span
+          className={classnames([
+            players.length === MAX_PLAYERS && 'text-red-600',
+          ])}
+        >
+          {t('admin:players.amount', {
+            amount: players.length,
+            max: MAX_PLAYERS,
+          })}
+        </span>
+      </p>
       <form onSubmit={onSubmit}>
         <fieldset
           className="disabled:opacity-50"

@@ -1,10 +1,12 @@
 import Router from 'next-translate/Router'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { FiRepeat, FiThumbsUp, FiX } from 'react-icons/fi'
 import Modal from 'react-modal'
 import useRoom from '~/hooks/useRoom'
 import Box from './Box'
 import Button from './Button'
+
+Modal.setAppElement('#__next')
 
 export default function Restart() {
   const [showModal, setShowModal] = useState(false)
@@ -19,7 +21,7 @@ export default function Restart() {
   }
 
   return (
-    <div className="text-center mt-8">
+    <Fragment>
       <Button onClick={() => setShowModal(true)}>
         <FiRepeat />
         <span className="ml-4">Reiniciar partida</span>
@@ -51,6 +53,6 @@ export default function Restart() {
           </div>
         </Box>
       </Modal>
-    </div>
+    </Fragment>
   )
 }

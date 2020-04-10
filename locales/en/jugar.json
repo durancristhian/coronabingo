@@ -5,7 +5,6 @@
   "next-number": "Next number",
   "no-turningglob-description": "In the list below, mark the numbers that come out in your bingo spinner.",
   "admin-title": "You are viewing this panel because you are the one who runs the room",
-  "celebrate": "Let's celebrate!",
   "show-confetti": "Show confetti",
   "hide-confetti": "Hide confetti",
   "empty-cells": {
@@ -23,7 +22,6 @@
     "clippy": "Clippy"
   },
   "dreams-link": "What's this?",
-  "sounds": "Sounds",
   "dreams": {
     "1": "Water 💦",
     "2": "Child 👦🏻",

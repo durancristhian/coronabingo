@@ -5,6 +5,7 @@ import { FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
+import Container from '~/components/Container'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
@@ -68,80 +69,76 @@ export default function Admin() {
 
   return (
     <Layout>
-      <div className="px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="md:w-2/4 mx-auto">
-            <Box>
-              <h2 className="font-medium text-center text-lg md:text-xl">
-                {t('admin:title')}
-              </h2>
-              {!room?.id && (
-                <Message type="information">{t('admin:loading')}</Message>
-              )}
-              {room?.id && (
-                <Fragment>
-                  <InputText
-                    id="room-name"
-                    label={t('admin:field-name')}
-                    value={room.name}
-                    readonly
-                    onFocus={event => event.target.select()}
-                  />
-                  <InputText
-                    hint={t('admin:field-link-hint')}
-                    id="url"
-                    label={t('admin:field-link')}
-                    value={`${window.location.host}/room/${room.id}`}
-                    readonly
-                    onFocus={event => event.target.select()}
-                  />
-                  <InputText
-                    id="videoCall"
-                    label={t('admin:field-videocall')}
-                    onChange={value =>
-                      onFieldChange([{ key: 'videoCall', value }])
-                    }
-                    value={room.videoCall || ''}
-                  />
-                  <Players
-                    players={players}
-                    setPlayers={setPlayers}
-                    adminId={room.adminId}
-                    onChange={onFieldChange}
-                    removePlayer={removePlayer}
-                    roomRef={room.ref}
-                  />
-                  <div className="mt-4">
-                    <Checkbox
-                      hint={t('admin:field-turningGlob-hint')}
-                      id="turningGlob"
-                      label={t('admin:field-turningGlob')}
-                      onChange={value =>
-                        onFieldChange([{ key: 'turningGlob', value }])
-                      }
-                      value={room.turningGlob || false}
-                    />
-                  </div>
-                  <div className="mt-8">
-                    <Button
-                      id="readyToPlay"
-                      className="w-full"
-                      disabled={!room.adminId}
-                      onClick={readyToPlay}
-                    >
-                      <FiSmile />
-                      <span className="ml-4">{t('admin:field-submit')}</span>
-                    </Button>
-                  </div>
-                </Fragment>
-              )}
-              {message.content && (
-                <Message type={message.type}>{message.content}</Message>
-              )}
-            </Box>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Box>
+          <h2 className="font-medium text-center text-lg md:text-xl">
+            {t('admin:title')}
+          </h2>
+          {!room?.id && (
+            <Message type="information">{t('admin:loading')}</Message>
+          )}
+          {room?.id && (
+            <Fragment>
+              <InputText
+                id="room-name"
+                label={t('admin:field-name')}
+                value={room.name}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <InputText
+                hint={t('admin:field-link-hint')}
+                id="url"
+                label={t('admin:field-link')}
+                value={`${window.location.host}/room/${room.id}`}
+                readonly
+                onFocus={event => event.target.select()}
+              />
+              <InputText
+                id="videoCall"
+                label={t('admin:field-videocall')}
+                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
+                value={room.videoCall || ''}
+              />
+              <Players
+                players={players}
+                setPlayers={setPlayers}
+                adminId={room.adminId}
+                onChange={onFieldChange}
+                removePlayer={removePlayer}
+                roomRef={room.ref}
+              />
+              <div className="mt-4">
+                <Checkbox
+                  hint={t('admin:field-turningGlob-hint')}
+                  id="turningGlob"
+                  label={t('admin:field-turningGlob')}
+                  onChange={value =>
+                    onFieldChange([{ key: 'turningGlob', value }])
+                  }
+                  value={room.turningGlob || false}
+                />
+              </div>
+              <div className="mt-8">
+                <Button
+                  id="readyToPlay"
+                  className="w-full"
+                  disabled={!room.adminId}
+                  onClick={readyToPlay}
+                >
+                  <FiSmile />
+                  <span className="ml-4">{t('admin:field-submit')}</span>
+                </Button>
+              </div>
+            </Fragment>
+          )}
+          {message.content && (
+            <div className="mt-8">
+              <Message type={message.type}>{message.content}</Message>
+            </div>
+          )}
+        </Box>
+      </Container>
     </Layout>
   )
 }

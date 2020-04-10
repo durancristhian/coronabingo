@@ -5,7 +5,6 @@
   "next-number": "Próximo número",
   "no-turningglob-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
   "admin-title": "Estás viendo este panel porque sos quien dirige la sala",
-  "celebrate": "Festejos",
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
   "empty-cells": {
@@ -23,7 +22,6 @@
     "clippy": "Clippy"
   },
   "dreams-link": "¿Qué es esto?",
-  "sounds": "Botonera",
   "dreams": {
     "1": "Agua 💦",
     "2": "El niño 👦🏻",

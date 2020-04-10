@@ -87,7 +87,9 @@ export default function CreateRoom() {
         </div>
       </form>
       {messageProps.message && (
-        <Message type={messageProps.type}>{messageProps.message}</Message>
+        <div className="mt-8">
+          <Message type={messageProps.type}>{messageProps.message}</Message>
+        </div>
       )}
     </Fragment>
   )
