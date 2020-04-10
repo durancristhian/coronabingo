@@ -61,11 +61,21 @@ export default function Jugar() {
     )
   }
 
-  if (room && !room.readyToPlay) {
+  if (room.id && !room.readyToPlay) {
     return (
       <Layout>
         <Container>
           <Message type="information">{t('jugar:room-not-ready')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!player) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="information">{t('jugar:out-of-room')}</Message>
         </Container>
       </Layout>
     )
