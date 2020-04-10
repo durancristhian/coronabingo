@@ -37,7 +37,7 @@ export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',
     language: '🇺🇸',
-    url: '/sounds/coronavirus.mp3',
+    url: '/sounds/cardi-b/coronavirus.mp3',
   },
   {
     name: 'Chino cirujano - Pero pagaraprata',
@@ -45,14 +45,15 @@ export const SOUNDS = [
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3',
   },
   {
+    name:
+      'Africanos bailando con el cajón - African guys dancing with the coffin',
+    language: '🌎',
+    url: '/sounds/funeral/dance-with-the-coffin.mp3',
+  },
+  {
     name: "Friends - Let's get ready to rumble",
     language: '🇺🇸',
     url: '/sounds/friends/lets-get-ready-to-rumble.mp3',
-  },
-  {
-    name: 'GTA - Ah sh*t, here we go again',
-    language: '🇺🇸',
-    url: '/sounds/gta-ah-shit-here-we-go-again.mp3',
   },
   {
     name: 'Guido Kaczka  - Mirá la repe',
@@ -73,11 +74,6 @@ export const SOUNDS = [
     name: 'Riverito - A cruzar los dedos',
     language: '🇦🇷',
     url: '/sounds/riverito/cruzar-dedos.mp3',
-  },
-  {
-    name: 'Snoop dog!',
-    language: '🇺🇸',
-    url: '/sounds/snoop-dog.mp3',
   },
   {
     name: 'Susana - Correctou',
@@ -105,12 +101,7 @@ export const SOUNDS = [
     url: '/sounds/simpsons/homer-bingo.mp3',
   },
   {
-    name: 'You what?',
-    language: '🇺🇸',
-    url: '/sounds/you-what.mp3',
-  },
-  {
-    name: 'Windows - Error',
+    name: 'Error de Windows - Windows Error',
     language: '🌎',
     url: '/sounds/windows/windows-error.mp3',
   },
