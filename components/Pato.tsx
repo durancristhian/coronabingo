@@ -7,12 +7,11 @@ import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import Button from './Button'
 
 interface Props {
-  disabled: boolean
+  activeSound: string
   onClick: (s: string) => void
-  soundToPlay: string
 }
 
-export default function Pato({ disabled, onClick, soundToPlay }: Props) {
+export default function Pato({ activeSound, onClick }: Props) {
   const { t } = useTranslation()
   const [times, setTimes] = useState(0)
   const { isVisible, setVisibility } = useContext(EasterEggContext)
@@ -51,11 +50,14 @@ export default function Pato({ disabled, onClick, soundToPlay }: Props) {
             className={classnames([
               'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
               index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
-              url === soundToPlay && 'bg-yellow-200',
+              url === activeSound && 'bg-yellow-200',
             ])}
           >
             <div className="mr-4">
-              <Button disabled={disabled} onClick={() => onClick(url)}>
+              <Button
+                disabled={activeSound !== ''}
+                onClick={() => onClick(url)}
+              >
                 <FiPlayCircle />
               </Button>
             </div>

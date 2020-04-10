@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
@@ -24,6 +24,7 @@ export default function Jugar() {
   const [room] = useRoom()
   const { player, setPlayer } = useRoomPlayers()
   const { t } = useTranslation()
+  const [activeSound, setActiveSound] = useState('')
 
   const isAdmin = room?.adminId === player?.id
 
@@ -191,9 +192,11 @@ export default function Jugar() {
                     </div>
                   </div>
                   <Pato
-                    disabled={room.soundToPlay}
-                    onClick={setSoundToPlay}
-                    soundToPlay={room.soundToPlay}
+                    activeSound={activeSound}
+                    onClick={sound => {
+                      setSoundToPlay(sound)
+                      setActiveSound(sound)
+                    }}
                   />
                 </Box>
               </Container>
@@ -208,7 +211,11 @@ export default function Jugar() {
           </div>
         </Layout>
         <Confetti enabled={room.showConfetti} />
-        <Sounds onAudioEnd={setSoundToPlay} soundToPlay={room.soundToPlay} />
+        <Sounds
+          onAudioPlayed={setSoundToPlay}
+          onAudioEnd={() => setActiveSound('')}
+          soundToPlay={room.soundToPlay}
+        />
       </BackgroundCellContextProvider>
     </EasterEggContextProvider>
   )
