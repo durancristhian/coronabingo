@@ -83,7 +83,7 @@ export default function Jugar() {
 
   return (
     <EasterEggContextProvider>
-      <BackgroundCellContextProvider>
+      <BackgroundCellContextProvider playerId={player.id}>
         <Layout>
           <h2 className="font-medium text-center text-lg md:text-xl">
             {t('jugar:title', {
