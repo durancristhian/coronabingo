@@ -1,6 +1,8 @@
+import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
+import Box from './Box'
 import Cells from './Cells'
 
 interface Props {
@@ -46,24 +48,23 @@ export default function Boards({ player, room, setPlayerProps }: Props) {
   return (
     <Fragment>
       {boards.map((board, i) => (
-        <div
-          key={i}
-          className="bg-white mb-8 p-4 border-2 border-gray-900 shadow cursor-poroto"
-        >
-          <p className="font-semibold uppercase">
-            {t('common:board', { boardId: board.id })}
-          </p>
-          <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
-            <Cells
-              boardNumbers={board.numbers}
-              selectedNumbers={player?.[board.id]}
-              setSelectedNumbers={newSelectedNumbers =>
-                setPlayerProps({
-                  [board.id]: newSelectedNumbers,
-                })
-              }
-            />
-          </div>
+        <div key={i} className={classnames([i !== 0 && 'mt-4 lg:mt-0'])}>
+          <Box>
+            <p className="font-semibold uppercase">
+              {t('common:board', { boardId: board.id })}
+            </p>
+            <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
+              <Cells
+                boardNumbers={board.numbers}
+                selectedNumbers={player?.[board.id]}
+                setSelectedNumbers={newSelectedNumbers =>
+                  setPlayerProps({
+                    [board.id]: newSelectedNumbers,
+                  })
+                }
+              />
+            </div>
+          </Box>
         </div>
       ))}
     </Fragment>

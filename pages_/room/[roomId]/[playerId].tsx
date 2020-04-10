@@ -83,15 +83,8 @@ export default function Jugar() {
               roomName: room.name || '',
             })}
           </h2>
-          {!room?.name && (
-            <div className="max-w-4xl mx-auto">
-              <div className="md:w-2/4 mx-auto">
-                <Message type="information">{t('jugar:loading')}</Message>
-              </div>
-            </div>
-          )}
           <div className="max-w-6xl mx-auto">
-            <div className="lg:flex mt-8">
+            <div className="lg:flex mt-4">
               {room && (
                 <div className="lg:w-1/3">
                   <Box>
@@ -102,7 +95,7 @@ export default function Jugar() {
                       selectedNumbers={room?.selectedNumbers || []}
                     />
                   </Box>
-                  <div className="hidden lg:block mt-8">
+                  <div className="hidden lg:block mt-4">
                     <Box>
                       <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                         {t('common:turning-globe')}
@@ -121,20 +114,22 @@ export default function Jugar() {
               )}
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
                 {player && (
-                  <Boards
-                    player={player}
-                    room={room}
-                    setPlayerProps={newProps =>
-                      setPlayer({
-                        ...player,
-                        ...newProps,
-                      })
-                    }
-                  />
+                  <div className="lg:flex lg:flex-col lg:justify-between lg:h-full">
+                    <Boards
+                      player={player}
+                      room={room}
+                      setPlayerProps={newProps =>
+                        setPlayer({
+                          ...player,
+                          ...newProps,
+                        })
+                      }
+                    />
+                  </div>
                 )}
               </div>
             </div>
-            <div className="lg:hidden mt-8">
+            <div className="lg:hidden mt-4">
               <Box>
                 <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
                   {t('common:turning-globe')}
