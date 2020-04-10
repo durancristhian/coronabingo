@@ -138,7 +138,7 @@ export default function Index() {
   }
 
   return (
-    <main className="bg-gray-200 font-inter leading-normal min-h-screen px-4 py-8 text-gray-900 text-sm md:text-base">
+    <main className="bg-gray-200 leading-normal min-h-screen px-4 py-8 text-gray-900 text-sm md:text-base">
       <Container size="large">
         <Box>
           <h1 className="font-medium text-center text-lg md:text-xl">

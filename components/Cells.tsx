@@ -54,7 +54,7 @@ export default function Cells({
                 transform: `rotate(${boardNumber + i}deg)`,
               }}
             ></div>
-            <span className="font-medium font-oswald relative text-lg sm:text-5xl text-shadow-white z-10">
+            <span className="font-medium relative text-lg sm:text-5xl text-shadow-white z-10">
               {boardNumber}
             </span>
           </div>

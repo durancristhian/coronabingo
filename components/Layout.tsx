@@ -16,7 +16,7 @@ export default function Layout({ children }: Props) {
   const playerId = router.query.playerId?.toString()
 
   return (
-    <main className="bg-gray-200 flex flex-col font-inter leading-normal min-h-screen text-gray-900 text-sm md:text-base">
+    <main className="bg-gray-200 flex flex-col font-sans leading-normal min-h-screen text-gray-900 text-sm md:text-base">
       <Header />
       {playerId && (
         <Banner type="emphasis">
