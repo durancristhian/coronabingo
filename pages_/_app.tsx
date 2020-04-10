@@ -211,6 +211,10 @@ export default class Coronabingo extends App {
             property="twitter:image"
             content="https://coronabingo.now.sh/social2.jpg"
           />
+          <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,maximum-scale=1"
+          />
         </Head>
         <FirebaseProvider routerQuery={router.query}>
           <Component {...pageProps} />
