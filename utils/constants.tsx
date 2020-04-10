@@ -6,9 +6,24 @@ export const BACKGROUND_CELL_VALUES = [
   { key: 'jugar:backgrounds.orange', type: 'color', value: 'orange' },
   { key: 'jugar:backgrounds.green', type: 'color', value: 'green' },
   {
+    key: 'jugar:backgrounds.multicolor',
+    type: 'color',
+    value: ['purple', 'green', 'yellow', 'blue', 'orange'],
+  },
+  {
     key: 'jugar:backgrounds.pikachu',
     type: 'img',
     value: 'pikachu.png',
+  },
+  {
+    key: 'jugar:backgrounds.pokemon',
+    type: 'url',
+    value: [
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png',
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/129.png',
+    ],
   },
   {
     key: 'jugar:backgrounds.cremona',
@@ -24,6 +39,16 @@ export const BACKGROUND_CELL_VALUES = [
     key: 'jugar:backgrounds.clippy',
     type: 'img',
     value: 'clippy.png',
+  },
+  {
+    key: 'jugar:backgrounds.ghana-pallbearers',
+    type: 'img',
+    value: [
+      'pallbearers/pallbearer.png',
+      'pallbearers/pallbearer-1.png',
+      'pallbearers/pallbearer-2.png',
+      'pallbearers/pallbearer-3.png',
+    ],
   },
 ]
 export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']

@@ -47,7 +47,7 @@ export { BackgroundCellContext, BackgroundCellContextProvider }
 
 export interface Cell {
   type: string
-  value: string
+  value: string[] | string
 }
 
 interface BackgrounCell {

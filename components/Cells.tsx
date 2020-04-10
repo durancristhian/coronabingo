@@ -31,7 +31,7 @@ export default function Cells({
   return (
     <Fragment>
       {boardNumbers.map((boardNumber, i) => {
-        if (!boardNumber) return <EmptyCell key={i} />
+        if (!boardNumber) return <EmptyCell key={i} index={i} />
 
         return (
           <div
