@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext } from 'react'
+import { COLORS } from '~/components/EmptyCell'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
-import { colors } from '~/components/EmptyCell'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(
@@ -47,7 +47,7 @@ export default function BackgroundCells() {
                 <div
                   className={classnames([
                     'bg-center bg-contain bg-no-repeat h-16 mb-2 w-full',
-                    type === 'color' && colors[firstOrDefault],
+                    type === 'color' && COLORS[firstOrDefault],
                   ])}
                   style={{
                     ...(type === 'img' && {
@@ -58,7 +58,7 @@ export default function BackgroundCells() {
                     }),
                   }}
                 ></div>
-                <p className="italic text-center">{t(key)}</p>
+                <p className="italic text-center truncate">{t(key)}</p>
               </label>
             </div>
           )

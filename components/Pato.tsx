@@ -9,9 +9,10 @@ import Button from './Button'
 interface Props {
   disabled: boolean
   onClick: (s: string) => void
+  soundToPlay: string
 }
 
-export default function Pato({ disabled, onClick }: Props) {
+export default function Pato({ disabled, onClick, soundToPlay }: Props) {
   const { t } = useTranslation()
   const [times, setTimes] = useState(0)
   const { isVisible, setVisibility } = useContext(EasterEggContext)
@@ -50,6 +51,7 @@ export default function Pato({ disabled, onClick }: Props) {
             className={classnames([
               'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
               index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
+              url === soundToPlay && 'bg-yellow-200',
             ])}
           >
             <div className="mr-4">

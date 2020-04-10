@@ -13,16 +13,16 @@ export const BACKGROUND_CELL_VALUES = [
   {
     key: 'jugar:backgrounds.pikachu',
     type: 'img',
-    value: 'pikachu.png',
+    value: 'pokemon/025.png',
   },
   {
     key: 'jugar:backgrounds.pokemon',
-    type: 'url',
+    type: 'img',
     value: [
-      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png',
-      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
-      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/129.png',
+      'pokemon/001.png',
+      'pokemon/004.png',
+      'pokemon/007.png',
+      'pokemon/129.png',
     ],
   },
   {

@@ -190,7 +190,11 @@ export default function Jugar() {
                       </Button>
                     </div>
                   </div>
-                  <Pato disabled={room.soundToPlay} onClick={setSoundToPlay} />
+                  <Pato
+                    disabled={room.soundToPlay}
+                    onClick={setSoundToPlay}
+                    soundToPlay={room.soundToPlay}
+                  />
                 </Box>
               </Container>
             </div>

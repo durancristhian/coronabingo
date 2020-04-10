@@ -13,12 +13,11 @@ export default function Sounds({ onAudioEnd, soundToPlay }: Props) {
     audio
       .play()
       .catch(() => null)
-      .finally(
-        () =>
-          setTimeout(() => {
-            onAudioEnd()
-            audio.remove()
-          }, audio.duration * 1000), // ms
+      .finally(() =>
+        setTimeout(() => {
+          onAudioEnd()
+          audio.remove()
+        }, audio.duration * 1000),
       )
   }, [soundToPlay])
 

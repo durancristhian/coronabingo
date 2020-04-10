@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import React, { useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 
-export const colors: { [k: string]: string } = {
+export const COLORS: { [k: string]: string } = {
   blue: 'bg-blue-300',
   green: 'bg-green-300',
   orange: 'bg-orange-300',
@@ -23,7 +23,7 @@ export default function EmptyCell({ index }: { index: number }) {
     <div
       className={classnames([
         'bg-center bg-contain bg-gray-200 bg-no-repeat border-b-2 border-r-2 border-gray-900 flex h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
-        type === 'color' && colors[randomValue],
+        type === 'color' && COLORS[randomValue],
       ])}
       style={{
         ...(type === 'img' && {
