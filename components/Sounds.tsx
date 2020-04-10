@@ -2,10 +2,15 @@ import { useEffect } from 'react'
 
 interface Props {
   onAudioEnd: () => void
+  onAudioPlayed: () => void
   soundToPlay: string
 }
 
-export default function Sounds({ onAudioEnd, soundToPlay }: Props) {
+export default function Sounds({
+  onAudioEnd,
+  onAudioPlayed,
+  soundToPlay,
+}: Props) {
   useEffect(() => {
     if (!soundToPlay) return
     const audio = new Audio(soundToPlay)
@@ -13,12 +18,13 @@ export default function Sounds({ onAudioEnd, soundToPlay }: Props) {
     audio
       .play()
       .catch(() => null)
-      .finally(() =>
+      .finally(() => {
+        onAudioPlayed()
         setTimeout(() => {
           onAudioEnd()
           audio.remove()
-        }, audio.duration * 1000),
-      )
+        }, audio.duration * 1000)
+      })
   }, [soundToPlay])
 
   return null
