@@ -44,16 +44,19 @@ export default function Admin() {
     })
 
     const batch = db.batch()
+
+    const { ref, ...roomValues } = room
+
     batch.update(room.ref, {
-      ...room,
+      ...roomValues,
       selectedNumbers: [],
       showConfetti: false,
       readyToPlay: true,
     })
 
     players.map((player, index) => {
-      const { name, ref } = player
-      batch.set(ref, {
+      const { name, ref: playerRef } = player
+      batch.set(playerRef, {
         name,
         boards: randomBoards[index],
         selectedNumbers: [],
