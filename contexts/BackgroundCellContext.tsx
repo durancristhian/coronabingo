@@ -12,25 +12,30 @@ const BackgroundCellContext = createContext<BackgrounCell>({
 
 interface Props {
   children: ReactNode
+  playerId: string
 }
 
-const BackgroundCellContextProvider = ({ children }: Props) => {
+const BackgroundCellContextProvider = ({ children, playerId }: Props) => {
   const [backgroundCell, setBackgroundCell] = useState<Cell>(
     defaultContextValue,
   )
 
   useEffect(() => {
     try {
-      setBackgroundCell(
-        JSON.parse(localStorage.getItem('backgroundCell') || ''),
-      )
+      const backgroundCell = JSON.parse(
+        localStorage.getItem('backgroundCell') || '',
+      )?.[playerId]
+      backgroundCell && setBackgroundCell(backgroundCell)
     } catch (e) {}
   }, [])
 
   const saveAndSetBackgroundCell = (backgroundCell: Cell) => {
     try {
       setBackgroundCell(backgroundCell)
-      localStorage.setItem('backgroundCell', JSON.stringify(backgroundCell))
+      localStorage.setItem(
+        'backgroundCell',
+        JSON.stringify({ [playerId]: backgroundCell }),
+      )
     } catch (e) {}
   }
 
