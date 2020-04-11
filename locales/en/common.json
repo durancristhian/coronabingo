@@ -3,8 +3,8 @@
     "intro": "Give us your feedback by filling",
     "link": "this form"
   },
-  "language-es": "Español 🇪🇸",
-  "language-en": "English 🇺🇸",
+  "language-es": "Español",
+  "language-en": "English",
   "turning-globe": "Bingo spinner",
   "board": "Board Nº {{boardId}}",
   "board_plural": "Boards Nº {{boardId}}",

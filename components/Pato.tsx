@@ -44,7 +44,7 @@ export default function Pato({ activeSound, onClick }: Props) {
         </span>
       </h2>
       <div className="border-gray-300 border-t-2 -mx-4">
-        {sounds.map(({ language, name, url }, index) => (
+        {sounds.map(({ name, url }, index) => (
           <div
             key={index}
             className={classnames([
@@ -63,7 +63,6 @@ export default function Pato({ activeSound, onClick }: Props) {
             </div>
             <div className="flex flex-auto items-center">
               <p className="flex items-center">
-                <span className="mr-4 text-xl md:text-2xl">{language}</span>
                 <span>{name}</span>
               </p>
             </div>

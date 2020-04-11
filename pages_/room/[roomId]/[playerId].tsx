@@ -158,12 +158,7 @@ export default function Jugar() {
             <div className="mt-8">
               <Container size="large">
                 <Box>
-                  <Banner>
-                    {t('jugar:admin-title')}
-                    <span role="img" aria-label="sunglasses">
-                      &nbsp;😎
-                    </span>
-                  </Banner>
+                  <Banner>{t('jugar:admin-title')}</Banner>
                   <div className="flex flex-col md:flex-row items-center justify-center my-8">
                     <div className="mb-4 md:mb-0 mr-4">
                       <Restart />

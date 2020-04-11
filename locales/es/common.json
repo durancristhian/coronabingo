@@ -3,8 +3,8 @@
     "intro": "Dejanos tu feedback completando",
     "link": "esta encuesta"
   },
-  "language-es": "Español 🇪🇸",
-  "language-en": "English 🇺🇸",
+  "language-es": "Español",
+  "language-en": "English",
   "turning-globe": "Bolillero",
   "board": "Cartón Nº {{boardId}}",
   "board_plural": "Cartones Nº {{boardId}}",

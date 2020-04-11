@@ -46,6 +46,7 @@ export default function Admin() {
 
     const batch = db.batch()
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { ref, ...roomValues } = room
 
     batch.update(room.ref, {
