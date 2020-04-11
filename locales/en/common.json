@@ -12,6 +12,9 @@
   "select-empty-option": "--- Select ---",
   "donate": "Donate",
   "post-your-photo": "Post your picture playing with the hashtag #CoronaBingo",
+  "share-link": "Share link",
   "copy": "Copy",
-  "whatsapp-share": "WhatsApp"
+  "copied": "Copied to Clipboard.",
+  "whatsapp-share": "WhatsApp",
+  "telegram-share": "Telegram"
 }
