@@ -5,7 +5,7 @@
   },
   "language-es": "Español",
   "language-en": "English",
-  "turning-globe": "Bingo spinner",
+  "bingo-spinner": "Bingo spinner",
   "board": "Board Nº {{boardId}}",
   "board_plural": "Boards Nº {{boardId}}",
   "made-by": "By ",

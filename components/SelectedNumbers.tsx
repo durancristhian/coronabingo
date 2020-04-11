@@ -9,16 +9,16 @@ interface Props {
   isAdmin: boolean
   onNewNumber: (n: number) => void
   selectedNumbers: number[]
-  turningGlob: boolean
+  bingoSpinner: boolean
 }
 
 export default function SelectedNumbers({
   isAdmin,
   onNewNumber,
   selectedNumbers,
-  turningGlob,
+  bingoSpinner,
 }: Props) {
-  const enableForAdmin = isAdmin && !turningGlob
+  const enableForAdmin = isAdmin && !bingoSpinner
   const roomNumbers = [...selectedNumbers]
 
   const onNextButtonClick = () => {
@@ -32,12 +32,12 @@ export default function SelectedNumbers({
 
   return (
     <Fragment>
-      {isAdmin && !turningGlob && (
+      {isAdmin && !bingoSpinner && (
         <div className="italic mb-4 text-gray-600 text-xs md:text-sm">
-          <p>{t('jugar:no-turningglob-description')}</p>
+          <p>{t('jugar:no-bingospinner-description')}</p>
         </div>
       )}
-      {isAdmin && turningGlob && (
+      {isAdmin && bingoSpinner && (
         <Button
           id="next"
           className="mb-4 w-full"

@@ -118,13 +118,13 @@ export default function Admin() {
               />
               <div className="mt-4">
                 <Checkbox
-                  hint={t('admin:field-turningGlob-hint')}
-                  id="turningGlob"
-                  label={t('admin:field-turningGlob')}
+                  hint={t('admin:field-bingoSpinner-hint')}
+                  id="bingoSpinner"
+                  label={t('admin:field-bingoSpinner')}
                   onChange={value =>
-                    onFieldChange([{ key: 'turningGlob', value }])
+                    onFieldChange([{ key: 'bingoSpinner', value }])
                   }
-                  value={room.turningGlob || false}
+                  value={room.bingoSpinner || false}
                 />
               </div>
               <div className="mt-8">
