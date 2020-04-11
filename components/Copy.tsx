@@ -1,31 +1,44 @@
+import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { SyntheticEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import { FaWhatsapp, FaTelegram } from 'react-icons/fa'
-import { FiCopy } from 'react-icons/fi'
-import Modal from 'react-modal'
+import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
+import { FiCopy, FiShare2 } from 'react-icons/fi'
+import Modal from '~/components/Modal'
 import Button from './Button'
-import Box from './Box'
 import Toast from './Toast'
 
 interface ShareButtonProps {
   Icon: Function
-  iconColor: string
+  iconBgColor: string
   label: string
-  onClick?: (e: SyntheticEvent) => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-const ShareButton = ({ Icon, iconColor, label, onClick }: ShareButtonProps) => (
-  <button className="text-center m-2 mx-4 outline-none" onClick={onClick}>
-    <Icon className="m-auto text-3xl" style={{ color: iconColor }} />
-    <p>{label}</p>
+const ShareButton = ({
+  Icon,
+  iconBgColor,
+  label,
+  onClick,
+}: ShareButtonProps) => (
+  <button
+    className={classnames([
+      'flex flex-col items-center mx-2 p-1 outline-none rounded text-center',
+      'focus:outline-none focus:shadow-outline',
+      'duration-150 ease-in-out transition',
+    ])}
+    onClick={onClick}
+  >
+    <div className={classnames(['h-16 p-4 rounded-full w-16', iconBgColor])}>
+      <Icon className={classnames('m-auto text-2xl md:text-3xl text-white')} />
+    </div>
+    <p className="mt-2 text-gray-600 text-xs md:text-sm">{label}</p>
   </button>
 )
+
 interface Props {
   content: string
 }
-
-Modal.setAppElement('#__next')
 
 export default function Share({ content }: Props) {
   const [showModal, setShowModal] = useState(false)
@@ -48,7 +61,7 @@ export default function Share({ content }: Props) {
   return (
     <div>
       <Button className="mb-4" onClick={() => setShowModal(true)}>
-        <FiCopy />
+        <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
       <Toast onDismiss={setShowToast} show={showToast} type="success">
@@ -60,37 +73,33 @@ export default function Share({ content }: Props) {
         onRequestClose={() => setShowModal(false)}
         className="modal"
         overlayClassName="overlay"
+        title={t('common:share-link')}
       >
-        <Box>
-          <div className="text-center">
-            <h2 className="mb-4 mr-4">{t('common:share-link')}:</h2>
-            <div className="flex justify-evenly flex-wrap">
-              <CopyToClipboard text={content}>
-                <ShareButton
-                  Icon={FiCopy}
-                  iconColor="gray"
-                  label={t('common:copy')}
-                  onClick={() => {
-                    shareAndClose()
-                    setShowToast(true)
-                  }}
-                />
-              </CopyToClipboard>
-              <ShareButton
-                Icon={FaWhatsapp}
-                iconColor="#25d366"
-                label={t('common:whatsapp-share')}
-                onClick={() => shareAndClose(shareOnWhatsApp)}
-              />
-              <ShareButton
-                Icon={FaTelegram}
-                iconColor="#0088cc"
-                label={t('common:telegram-share')}
-                onClick={() => shareAndClose(shareOnTelegram)}
-              />
-            </div>
-          </div>
-        </Box>
+        <div className="flex flex-wrap items-center justify-center">
+          <CopyToClipboard text={content}>
+            <ShareButton
+              Icon={FiCopy}
+              iconBgColor="bg-gray-500"
+              label={t('common:copy')}
+              onClick={() => {
+                shareAndClose()
+                setShowToast(true)
+              }}
+            />
+          </CopyToClipboard>
+          <ShareButton
+            Icon={FaWhatsapp}
+            iconBgColor="bg-whatsapp"
+            label={t('common:whatsapp-share')}
+            onClick={() => shareAndClose(shareOnWhatsApp)}
+          />
+          <ShareButton
+            Icon={FaTelegramPlane}
+            iconBgColor="bg-telegram"
+            label={t('common:telegram-share')}
+            onClick={() => shareAndClose(shareOnTelegram)}
+          />
+        </div>
       </Modal>
     </div>
   )
