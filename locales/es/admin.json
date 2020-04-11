@@ -8,7 +8,7 @@
   "field-link": "Link a la sala",
   "field-videocall": "Link a la videollamada",
   "field-bingo-spinner-hint": "Si tenés un bolillero y querés usarlo no tildes esta opción. De lo contrario, tildala para tener un bolillero durante el juego.",
-  "field-bingoSpinner": "Usar bolillero online",
+  "field-bingo-spinner": "Usar bolillero online",
   "field-submit": "Jugar",
   "players": {
     "title": "Personas que van a jugar:",
