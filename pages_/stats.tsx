@@ -84,7 +84,7 @@ export default function Index() {
             prev.roomsOfFamilies++
           }
 
-          if (curr.turningGlob) {
+          if (curr.bingoSpinner) {
             prev.roomsWithOnlineBingoSpinner++
           }
 

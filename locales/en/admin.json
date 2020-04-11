@@ -7,8 +7,8 @@
   "field-link-hint": "Share this link with the people in the videocall.",
   "field-link": "Link to the room",
   "field-videocall": "Link to the videocall",
-  "field-turningGlob-hint": "If you need an online bingo spinner check this option.",
-  "field-turningGlob": "Use online bingo spinner",
+  "field-bingo-spinner-hint": "If you need an online bingo spinner check this option.",
+  "field-bingo-spinner": "Use online bingo spinner",
   "field-submit": "Play",
   "players": {
     "title": "People who is going to play:",

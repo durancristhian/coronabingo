@@ -110,14 +110,14 @@ export default function Jugar() {
                   <div className="hidden lg:block mt-4">
                     <Box>
                       <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                        {t('common:turning-globe')}
+                        {t('common:bingo-spinner')}
                       </h2>
                       <div className="mt-4">
                         <SelectedNumbers
                           isAdmin={isAdmin}
                           onNewNumber={onNewNumber}
                           selectedNumbers={room.selectedNumbers || []}
-                          turningGlob={room.turningGlob}
+                          bingoSpinner={room.bingoSpinner}
                         />
                       </div>
                     </Box>
@@ -144,14 +144,14 @@ export default function Jugar() {
             <div className="lg:hidden mt-4">
               <Box>
                 <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                  {t('common:turning-globe')}
+                  {t('common:bingo-spinner')}
                 </h2>
                 <div className="mt-4">
                   <SelectedNumbers
                     isAdmin={isAdmin}
                     onNewNumber={onNewNumber}
                     selectedNumbers={room.selectedNumbers || []}
-                    turningGlob={room.turningGlob}
+                    bingoSpinner={room.bingoSpinner}
                   />
                 </div>
               </Box>
