@@ -1,6 +1,6 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -16,6 +16,7 @@ import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Field from '~/interfaces/Field'
 import db from '~/utils/firebase'
+import scrollToTop from '~/utils/scrollToTop'
 
 export default function Admin() {
   const { t } = useTranslation()
@@ -29,6 +30,8 @@ export default function Admin() {
   const { players = [], setPlayers } = useRoomPlayers()
   const [room, setRoom] = useRoom()
   const randomBoards = useRandomBoards()
+
+  useEffect(scrollToTop, [])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
     setRoom(...changes.map(({ key, value }) => ({ [key]: value })))
