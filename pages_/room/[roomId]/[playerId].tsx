@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
@@ -19,12 +19,15 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
   const [room] = useRoom()
   const { player, setPlayer } = useRoomPlayers()
   const { t } = useTranslation()
   const [activeSound, setActiveSound] = useState('')
+
+  useEffect(scrollToTop, [])
 
   const isAdmin = room?.adminId === player?.id
 
