@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
@@ -19,12 +19,15 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
   const [room] = useRoom()
   const { player, setPlayer } = useRoomPlayers()
   const { t } = useTranslation()
   const [activeSound, setActiveSound] = useState('')
+
+  useEffect(scrollToTop, [])
 
   const isAdmin = room?.adminId === player?.id
 
@@ -107,14 +110,14 @@ export default function Jugar() {
                   <div className="hidden lg:block mt-4">
                     <Box>
                       <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                        {t('common:turning-globe')}
+                        {t('common:bingo-spinner')}
                       </h2>
                       <div className="mt-4">
                         <SelectedNumbers
                           isAdmin={isAdmin}
                           onNewNumber={onNewNumber}
                           selectedNumbers={room.selectedNumbers || []}
-                          turningGlob={room.turningGlob}
+                          bingoSpinner={room.bingoSpinner}
                         />
                       </div>
                     </Box>
@@ -141,14 +144,14 @@ export default function Jugar() {
             <div className="lg:hidden mt-4">
               <Box>
                 <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                  {t('common:turning-globe')}
+                  {t('common:bingo-spinner')}
                 </h2>
                 <div className="mt-4">
                   <SelectedNumbers
                     isAdmin={isAdmin}
                     onNewNumber={onNewNumber}
                     selectedNumbers={room.selectedNumbers || []}
-                    turningGlob={room.turningGlob}
+                    bingoSpinner={room.bingoSpinner}
                   />
                 </div>
               </Box>

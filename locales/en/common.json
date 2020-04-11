@@ -5,13 +5,16 @@
   },
   "language-es": "Español",
   "language-en": "English",
-  "turning-globe": "Bingo spinner",
+  "bingo-spinner": "Bingo spinner",
   "board": "Board Nº {{boardId}}",
   "board_plural": "Boards Nº {{boardId}}",
   "made-by": "By ",
   "select-empty-option": "--- Select ---",
   "donate": "Donate",
   "post-your-photo": "Post your picture playing with the hashtag #CoronaBingo",
+  "share-link": "Share link",
   "copy": "Copy",
-  "whatsapp-share": "WhatsApp"
+  "copied": "Copied to Clipboard.",
+  "whatsapp-share": "WhatsApp",
+  "telegram-share": "Telegram"
 }

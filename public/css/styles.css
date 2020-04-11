@@ -16,9 +16,20 @@
   cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
 
+.toast {
+  @apply fixed;
+  left: 16px;
+  transition: bottom 0.5s;
+  width: 300px;
+}
+
 @media (max-width: 640px) {
   .cursor-poroto {
     cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
+  }
+
+  .toast {
+    width: calc(100% - 32px);
   }
 }
 

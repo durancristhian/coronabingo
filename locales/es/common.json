@@ -5,13 +5,16 @@
   },
   "language-es": "Español",
   "language-en": "English",
-  "turning-globe": "Bolillero",
+  "bingo-spinner": "Bolillero",
   "board": "Cartón Nº {{boardId}}",
   "board_plural": "Cartones Nº {{boardId}}",
   "made-by": "Por ",
   "select-empty-option": "--- Selecciona ---",
   "donate": "Donar",
   "post-your-photo": "Posteá tu foto jugando con el hashtag #CoronaBingo",
+  "share-link": "Compartir link",
   "copy": "Copiar",
-  "whatsapp-share": "WhatsApp"
+  "copied": "Copiado al portapapeles.",
+  "whatsapp-share": "WhatsApp",
+  "telegram-share": "Telegram"
 }
