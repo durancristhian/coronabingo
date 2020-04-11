@@ -120,7 +120,7 @@ export default function Admin() {
                 <Checkbox
                   hint={t('admin:field-bingo-spinner-hint')}
                   id="bingoSpinner"
-                  label={t('admin:field-bingoSpinner')}
+                  label={t('admin:field-bingo-spinner')}
                   onChange={value =>
                     onFieldChange([{ key: 'bingoSpinner', value }])
                   }
