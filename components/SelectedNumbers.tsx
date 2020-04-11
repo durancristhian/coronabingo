@@ -34,7 +34,7 @@ export default function SelectedNumbers({
     <Fragment>
       {isAdmin && !bingoSpinner && (
         <div className="italic mb-4 text-gray-600 text-xs md:text-sm">
-          <p>{t('jugar:no-bingospinner-description')}</p>
+          <p>{t('jugar:no-bingo-spinner-description')}</p>
         </div>
       )}
       {isAdmin && bingoSpinner && (
