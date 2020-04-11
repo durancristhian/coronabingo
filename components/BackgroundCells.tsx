@@ -5,6 +5,7 @@ import { COLORS } from '~/components/EmptyCell'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
+import Heading from '~/components/Heading'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(
@@ -13,9 +14,7 @@ export default function BackgroundCells() {
   const { t } = useTranslation()
   return (
     <Fragment>
-      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-        {t('jugar:empty-cells.title')}
-      </h2>
+      <Heading type="h2">{t('jugar:empty-cells.title')}</Heading>
       <div className="flex flex-wrap">
         {BACKGROUND_CELL_VALUES.map(({ key, type, value }, i) => {
           const firstOrDefault = Array.isArray(value) ? value[0] : value

@@ -8,6 +8,7 @@ import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
 import Message, { MessageType } from './Message'
+import Heading from '~/components/Heading'
 
 export default function CreateRoom() {
   const { t } = useTranslation()
@@ -69,9 +70,9 @@ export default function CreateRoom() {
 
   return (
     <Fragment>
-      <h2 className="font-medium text-lg md:text-xl text-center uppercase">
-        {t('index:create-room.title')}
-      </h2>
+      <Heading type="h2">
+        <span className="uppercase">{t('index:create-room.title')}</span>
+      </Heading>
       <form onSubmit={onSubmit}>
         <InputText
           id="name"

@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { allLanguages } from '~/i18n.json'
 import Select from './Select'
+import Heading from '~/components/Heading'
 
 export default function Header() {
   const { t, lang } = useTranslation()
@@ -37,14 +38,14 @@ export default function Header() {
     <header className="bg-white px-4 py-2 shadow">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
-          <h1 className="font-medium text-xl md:text-2xl">
+          <Heading type="h1">
             <Link href="/">
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a className="focus:outline-none focus:shadow-outline">
                 Coronabingo
               </a>
             </Link>
-          </h1>
+          </Heading>
           <Select
             id="language"
             onChange={onLanguageChange}
