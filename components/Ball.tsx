@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Props {
   animate?: boolean
-  color: string
+  color: 'yellow' | 'gray'
   number: number
   size?: number
 }
@@ -19,10 +19,8 @@ export default function Ball({
       <div
         className={classnames([
           'ball',
-          color === 'blue' && 'bg-blue-600',
-          color === 'green' && 'bg-green-600',
-          color === 'red' && 'bg-red-600',
-          color === 'yellow' && 'bg-yellow-600',
+          color === 'yellow' && 'bg-yellow-500',
+          color === 'gray' && 'bg-gray-400',
         ])}
         style={{
           height: `${size}px`,

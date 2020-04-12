@@ -1,5 +1,3 @@
-const knuthShuffle = require('knuth-shuffle').knuthShuffle
-
 export const BACKGROUND_CELL_VALUES = [
   { key: 'jugar:backgrounds.yellow', type: 'color', value: 'yellow' },
   { key: 'jugar:backgrounds.blue', type: 'color', value: 'blue' },
@@ -61,11 +59,9 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
 ]
-export const BALL_COLORS = ['blue', 'green', 'red', 'yellow']
+
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
-export const BOARD_NUMBER_COLOR = BOARD_NUMBERS.map(
-  () => knuthShuffle(BALL_COLORS.slice(0))[0],
-)
+
 export const DREAMS_EMOJIS = [
   'em-sweat_drops',
   'em-boy',
