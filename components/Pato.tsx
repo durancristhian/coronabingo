@@ -1,10 +1,32 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, {
+  Fragment,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import Button from './Button'
+
+const emojis: { [key: string]: ReactNode } = {
+  ar: (
+    <i className="em em-flag-ar" tabIndex={-1} aria-label="Argentina Flag"></i>
+  ),
+  en: (
+    <i className="em em-us" tabIndex={-1} aria-label="United States Flag"></i>
+  ),
+  world: (
+    <i
+      className="em em-earth_americas"
+      tabIndex={-1}
+      aria-label="Earth globe americas"
+    ></i>
+  ),
+}
 
 interface Props {
   activeSound: string
@@ -44,7 +66,7 @@ export default function Pato({ activeSound, onClick }: Props) {
         </span>
       </h2>
       <div className="border-gray-300 border-t-2 -mx-4">
-        {sounds.map(({ name, url }, index) => (
+        {sounds.map(({ language, name, url }, index) => (
           <div
             key={index}
             className={classnames([
@@ -63,7 +85,8 @@ export default function Pato({ activeSound, onClick }: Props) {
             </div>
             <div className="flex flex-auto items-center">
               <p className="flex items-center">
-                <span>{name}</span>
+                <span>{emojis[language]}</span>
+                <span className="ml-4">{name}</span>
               </p>
             </div>
           </div>

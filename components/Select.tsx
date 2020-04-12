@@ -45,9 +45,9 @@ export default function Select({
             {!value && (
               <option value={''}>{t('common:select-empty-option')}</option>
             )}
-            {options.map(opt => (
-              <option key={opt.name} value={opt.id}>
-                {opt.name}
+            {options.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
               </option>
             ))}
           </select>

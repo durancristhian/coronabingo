@@ -44,6 +44,7 @@ export default class extends Document {
               />
             </Fragment>
           )}
+          <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />

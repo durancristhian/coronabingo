@@ -161,7 +161,14 @@ export default function Jugar() {
             <div className="mt-8">
               <Container size="large">
                 <Box>
-                  <Banner>{t('jugar:admin-title')}</Banner>
+                  <Banner>
+                    <span className="mr-1">{t('jugar:admin-title')}</span>
+                    <i
+                      className="em em-sunglasses"
+                      tabIndex={-1}
+                      aria-label="Smiling face with sunglasses"
+                    ></i>
+                  </Banner>
                   <div className="flex flex-col md:flex-row items-center justify-center my-8">
                     <div className="mb-4 md:mb-0 mr-4">
                       <Restart />
