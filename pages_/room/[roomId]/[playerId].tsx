@@ -18,13 +18,13 @@ import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
-import useRoomPlayers from '~/hooks/useRoomPlayers'
+import usePlayer from '~/hooks/usePlayer'
 import scrollToTop from '~/utils/scrollToTop'
 import Heading from '~/components/Heading'
 
 export default function Jugar() {
   const [room] = useRoom()
-  const { player, setPlayer } = useRoomPlayers()
+  const { player, setPlayer } = usePlayer()
   const { t } = useTranslation()
   const [activeSound, setActiveSound] = useState('')
 

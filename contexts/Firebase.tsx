@@ -5,6 +5,7 @@ import { roomsRef } from '~/utils/firebase'
 
 interface Context {
   currentPlayer?: Player
+  setCurrentPlayer: (array: Player) => void
   players: Player[]
   room?: firebase.firestore.DocumentData
   changeRoom: (data: {}) => void
@@ -15,6 +16,7 @@ const FirebaseContext = createContext<Context>({
   players: [],
   changeRoom: () => null,
   setPlayers: () => null,
+  setCurrentPlayer: () => null,
 })
 
 interface Props {
@@ -53,36 +55,35 @@ const FirebaseProvider = ({ children, routerQuery }: Props) => {
 
   useEffect(() => {
     if (!roomId) return
-
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        sortAndSet(
-          snapshot.docs.map(p => {
-            const data = p.data() as Player
-            return {
-              id: p.id,
-              exists: p.exists,
-              ref: p.ref,
-              ...data,
-            }
+    return playerId
+      ? roomsRef.doc(`${roomId}/players/${playerId}`).onSnapshot(p =>
+          setCurrentPlayer({
+            id: p.id,
+            exists: p.exists,
+            ref: p.ref,
+            ...(p.data() as Player),
           }),
         )
-      })
-
-    return unsubscribe
-  }, [roomId])
-
-  useEffect(() => {
-    if (!players || !playerId) return
-    setCurrentPlayer(players.find(player => player.id === playerId))
-  }, [players, playerId])
+      : roomsRef
+          .doc(roomId)
+          .collection('players')
+          .onSnapshot(snapshot => {
+            sortAndSet(
+              snapshot.docs.map(p => ({
+                id: p.id,
+                exists: p.exists,
+                ref: p.ref,
+                ...(p.data() as Player),
+              })),
+            )
+          })
+  }, [roomId, playerId])
 
   return (
     <FirebaseContext.Provider
       value={{
         currentPlayer,
+        setCurrentPlayer,
         players,
         room,
         changeRoom,
