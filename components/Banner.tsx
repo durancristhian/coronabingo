@@ -17,7 +17,7 @@ export default function Banner({ children, type = 'information' }: Props) {
       ])}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="text-center">{children}</div>
+        <div className="flex items-center justify-center">{children}</div>
       </div>
     </div>
   )

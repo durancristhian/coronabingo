@@ -27,10 +27,15 @@ export default function Layout({ children }: Props) {
         <div className="px-4 py-8">{children}</div>
       </div>
       <Banner>
-        <span>{t('common:feedback-form.intro')} </span>
+        <span className="mr-1">{t('common:feedback-form.intro')}</span>
         <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
-          {t('common:feedback-form.link')}
+          <span className="mr-1">{t('common:feedback-form.link')}</span>
         </Anchor>
+        <i
+          className="em em-star-struck"
+          tabIndex={-1}
+          aria-label="Grinning face with star eyes"
+        ></i>
       </Banner>
       <Footer />
     </main>
