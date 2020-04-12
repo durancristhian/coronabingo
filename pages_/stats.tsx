@@ -4,6 +4,7 @@ import Box from '~/components/Box'
 import Container from '~/components/Container'
 import Message from '~/components/Message'
 import db from '~/utils/firebase'
+import Heading from '~/components/Heading'
 
 interface Stats {
   roomsByDay: {
@@ -147,9 +148,7 @@ export default function Index() {
     <main className="bg-gray-200 leading-normal min-h-screen px-4 py-8 text-gray-900 text-sm md:text-base">
       <Container size="large">
         <Box>
-          <h1 className="font-medium text-center text-lg md:text-xl">
-            Estadísticas
-          </h1>
+          <Heading type="h1">Estadísticas</Heading>
           {!stats && (
             <div className="mt-8">
               <Message type="information">Obteniendo información...</Message>
@@ -158,9 +157,9 @@ export default function Index() {
           {stats && (
             <Fragment>
               <div className="mt-8">
-                <h2 className="font-medium text-md md:text-lg">
+                <Heading type="h2" textCenter={false}>
                   Sobre las salas
-                </h2>
+                </Heading>
               </div>
               <div className="border-gray-300 border-l-2 border-r-2 border-t-2 flex flex-col mt-8 rounded">
                 {renderRow(
@@ -220,9 +219,9 @@ export default function Index() {
                 )}
               </div>
               <div className="mt-8">
-                <h2 className="font-medium text-md md:text-lg">
+                <Heading type="h2" textCenter={false}>
                   Los 10 días donde se configuraron más salas
-                </h2>
+                </Heading>
               </div>
               <div className="border-gray-300 border-l-2 border-r-2 border-t-2 flex flex-col mt-8 rounded">
                 {stats.sortedRoomsByDay.map(({ date, value }, i) => (

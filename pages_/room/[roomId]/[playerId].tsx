@@ -20,6 +20,7 @@ import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import scrollToTop from '~/utils/scrollToTop'
+import Heading from '~/components/Heading'
 
 export default function Jugar() {
   const [room] = useRoom()
@@ -89,29 +90,25 @@ export default function Jugar() {
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
         <Layout>
-          <h2 className="font-medium text-center text-lg md:text-xl">
+          <Heading type="h2">
             {t('jugar:title', {
               playerName: player?.name || '',
               roomName: room.name || '',
             })}
-          </h2>
+          </Heading>
           <div className="max-w-6xl mx-auto">
             <div className="lg:flex mt-4">
               {room && (
                 <div className="lg:w-1/3">
                   <Box>
-                    <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                      {t('jugar:last-numbers')}
-                    </h2>
+                    <Heading type="h2">{t('jugar:last-numbers')}</Heading>
                     <LastNumbers
                       selectedNumbers={room?.selectedNumbers || []}
                     />
                   </Box>
                   <div className="hidden lg:block mt-4">
                     <Box>
-                      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                        {t('common:bingo-spinner')}
-                      </h2>
+                      <Heading type="h2">{t('common:bingo-spinner')}</Heading>
                       <div className="mt-4">
                         <SelectedNumbers
                           isAdmin={isAdmin}
@@ -143,9 +140,7 @@ export default function Jugar() {
             </div>
             <div className="lg:hidden mt-4">
               <Box>
-                <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
-                  {t('common:bingo-spinner')}
-                </h2>
+                <Heading type="h2">{t('common:bingo-spinner')}</Heading>
                 <div className="mt-4">
                   <SelectedNumbers
                     isAdmin={isAdmin}

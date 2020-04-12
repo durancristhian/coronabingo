@@ -13,6 +13,7 @@ import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import scrollToTop from '~/utils/scrollToTop'
+import Heading from '~/components/Heading'
 
 export default function Sala() {
   const [room] = useRoom()
@@ -26,9 +27,7 @@ export default function Sala() {
       <Container>
         <Box>
           <div className="mb-8">
-            <h2 className="font-medium text-center text-lg md:text-xl">
-              {t('sala:title')}
-            </h2>
+            <Heading type="h2">{t('sala:title')}</Heading>
           </div>
           <div className="mb-8">
             <img
@@ -76,9 +75,9 @@ export default function Sala() {
             </div>
           ) : (
             <div className="mt-8">
-              <h3 className="font-medium">
+              <Heading type="h3" textCenter={false}>
                 {t('sala:people', { count: players.length })}
-              </h3>
+              </Heading>
               <div className="italic -mt-6 text-gray-600 text-xs md:text-sm">
                 <p className="my-8">{t('sala:list-description')}</p>
               </div>

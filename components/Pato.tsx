@@ -11,6 +11,7 @@ import { FiPlayCircle } from 'react-icons/fi'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import Button from './Button'
+import Heading from '~/components/Heading'
 
 const emojis: { [key: string]: ReactNode } = {
   ar: (
@@ -54,7 +55,7 @@ export default function Pato({ activeSound, onClick }: Props) {
 
   return (
     <Fragment>
-      <h2 className="font-medium mb-4 text-center text-lg md:text-xl">
+      <Heading type="h2">
         <span
           onClick={tricks}
           role="button"
@@ -64,7 +65,7 @@ export default function Pato({ activeSound, onClick }: Props) {
         >
           {t('jugar:sounds')}
         </span>
-      </h2>
+      </Heading>
       <div className="border-gray-300 border-t-2 -mx-4">
         {sounds.map(({ language, name, url }, index) => (
           <div

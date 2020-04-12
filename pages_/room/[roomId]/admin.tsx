@@ -17,6 +17,7 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Field from '~/interfaces/Field'
 import db from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
+import Heading from '~/components/Heading'
 
 export default function Admin() {
   const { t } = useTranslation()
@@ -79,9 +80,7 @@ export default function Admin() {
     <Layout>
       <Container>
         <Box>
-          <h2 className="font-medium text-center text-lg md:text-xl">
-            {t('admin:title')}
-          </h2>
+          <Heading type="h2">{t('admin:title')}</Heading>
           {!room?.id && (
             <div className="mt-8">
               <Message type="information">{t('admin:loading')}</Message>
