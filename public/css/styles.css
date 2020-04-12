@@ -12,6 +12,14 @@
   box-shadow: 0 0 1px red;
 }
 
+.bg-telegram {
+  background-color: #0088cc;
+}
+
+.bg-whatsapp {
+  background-color: #25d366;
+}
+
 .cursor-poroto {
   cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
