@@ -22,6 +22,7 @@ if (firebase.apps.length) {
 
 const db = firebaseApp.firestore()
 const roomsRef = db.collection('rooms')
+const { Timestamp } = firebase.firestore
 
 export default db
-export { roomsRef }
+export { roomsRef, Timestamp }

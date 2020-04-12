@@ -1,9 +1,8 @@
-import firebase from 'firebase'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
-import { roomsRef } from '~/utils/firebase'
+import { roomsRef, Timestamp } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
@@ -49,7 +48,7 @@ export default function CreateRoom() {
     try {
       await roomDoc.set({
         name: formData.name,
-        date: firebase.firestore.Timestamp.fromDate(new Date()),
+        date: Timestamp.fromDate(new Date()),
       })
 
       setMessageProps({
