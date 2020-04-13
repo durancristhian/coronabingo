@@ -20,7 +20,7 @@ import scrollToTop from '~/utils/scrollToTop'
 import Heading from '~/components/Heading'
 
 export default function Admin() {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const [message, setMessage] = useState<{
     content: string
     type: MessageType
@@ -99,11 +99,13 @@ export default function Admin() {
                 hint={t('admin:field-link-hint')}
                 id="url"
                 label={t('admin:field-link')}
-                value={`${window.location.host}/room/${room.id}`}
+                value={`${window.location.host}/${lang}/room/${room.id}`}
                 readonly
                 onFocus={event => event.target.select()}
               />
-              <Copy content={`${window.location.host}/room/${room.id}`} />
+              <Copy
+                content={`${window.location.host}/${lang}/room/${room.id}`}
+              />
               <InputText
                 id="videoCall"
                 label={t('admin:field-videocall')}
