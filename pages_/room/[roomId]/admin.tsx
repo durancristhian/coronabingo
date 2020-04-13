@@ -126,7 +126,7 @@ export default function Admin() {
                   onChange={value =>
                     onFieldChange([{ key: 'bingoSpinner', value }])
                   }
-                  value={room.bingoSpinner || false}
+                  value={room.bingoSpinner || true}
                 />
               </div>
               <div className="mt-8">
