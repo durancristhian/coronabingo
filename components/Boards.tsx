@@ -49,17 +49,18 @@ export default function Boards({ player, room, setPlayerProps }: Props) {
         return e && e.preventDefault()
       }
 
+      update()
+
       /*
         Because onbeforeunload doesn't work on iOS devices
         we save every number on firebase
       */
       if (isIOS) {
-        saveOnLeave()
+        window.onpagehide = saveOnLeave
+      } else {
+        window.onbeforeunload = saveOnLeave
       }
 
-      update()
-
-      window.onbeforeunload = saveOnLeave
       window.onpopstate = saveOnLeave
     }
   }, [boards, player, room])
