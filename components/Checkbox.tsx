@@ -27,7 +27,7 @@ export default function Checkbox({
           ])}
           type="checkbox"
           id={id}
-          checked={value}
+          defaultChecked={value}
           onChange={event => onChange && onChange(event.target.checked)}
         />
         <span className="flex-auto pl-4 py-2">{label}</span>

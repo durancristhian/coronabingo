@@ -47,6 +47,7 @@ export default function CreateRoom() {
 
     try {
       await roomDoc.set({
+        bingoSpinner: true,
         name: formData.name,
         date: Timestamp.fromDate(new Date()),
       })
