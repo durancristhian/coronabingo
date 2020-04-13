@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
+import useIOSDetection from '~/hooks/useIOSDetection'
 import Box from './Box'
 import Cells from './Cells'
 
@@ -14,17 +15,24 @@ interface Props {
 export default function Boards({ player, room, setPlayerProps }: Props) {
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
+  const isIOS = useIOSDetection()
 
   useEffect(() => {
     if (room && player) {
-      try {
-        const roomValues = JSON.parse(localStorage.getItem('roomValues') || '')
-        const playerValues = roomValues?.[player.id] || {}
-        player.ref.update(playerValues)
-        localStorage.removeItem('roomValues')
-      } catch (e) {}
+      const update = () => {
+        try {
+          const roomValues = JSON.parse(
+            localStorage.getItem('roomValues') || '{}',
+          )
+          const playerValues = roomValues?.[player.id] || {}
+          player.ref.update(playerValues)
+          localStorage.removeItem('roomValues')
+        } catch (e) {
+          console.error(e)
+        }
+      }
 
-      const saveOnLeave = (e: BeforeUnloadEvent | PopStateEvent) => {
+      const saveOnLeave = (e?: Event) => {
         localStorage.setItem(
           'roomValues',
           JSON.stringify({
@@ -37,8 +45,19 @@ export default function Boards({ player, room, setPlayerProps }: Props) {
             ),
           }),
         )
-        return e.preventDefault()
+
+        return e && e.preventDefault()
       }
+
+      /*
+        Because onbeforeunload doesn't work on iOS devices
+        we save every number on firebase
+      */
+      if (isIOS) {
+        saveOnLeave()
+      }
+
+      update()
 
       window.onbeforeunload = saveOnLeave
       window.onpopstate = saveOnLeave
