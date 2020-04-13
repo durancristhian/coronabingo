@@ -2,68 +2,49 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
-import useIOSDetection from '~/hooks/useIOSDetection'
 import Box from './Box'
 import Cells from './Cells'
 
 interface Props {
   player: firebase.firestore.DocumentData
-  room: firebase.firestore.DocumentData
   setPlayerProps: (props: {}) => void
 }
 
-export default function Boards({ player, room, setPlayerProps }: Props) {
+export default function Boards({ player, setPlayerProps }: Props) {
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
-  const isIOS = useIOSDetection()
 
   useEffect(() => {
-    if (room && player) {
-      const update = () => {
-        try {
-          const roomValues = JSON.parse(
-            localStorage.getItem('roomValues') || '{}',
-          )
-          const playerValues = roomValues?.[player.id] || {}
-          player.ref.update(playerValues)
-          localStorage.removeItem('roomValues')
-        } catch (e) {
-          console.error(e)
-        }
-      }
-
-      const saveOnLeave = (e?: Event) => {
-        localStorage.setItem(
-          'roomValues',
-          JSON.stringify({
-            [player.id]: boards.reduce(
-              (acc, board) => ({
-                ...acc,
-                [board.id]: player?.[board.id] || [],
-              }),
-              {},
-            ),
-          }),
+    if (player.id) {
+      try {
+        const roomValues = JSON.parse(
+          localStorage.getItem('roomValues') || '{}',
         )
-
-        return e && e.preventDefault()
+        const playerValues = roomValues?.[player.id] || {}
+        player.ref.update(playerValues)
+        localStorage.removeItem('roomValues')
+      } catch (e) {
+        console.error(e)
       }
-
-      update()
-
-      /*
-        Because onbeforeunload doesn't work on iOS devices
-        we save every number on firebase
-      */
-      if (isIOS) {
-        window.onpagehide = saveOnLeave
-      } else {
-        window.onbeforeunload = saveOnLeave
-      }
-
-      window.onpopstate = saveOnLeave
     }
-  }, [boards, player, room])
+  }, [player.id])
+
+  useEffect(() => {
+    if (player.id && boards) {
+      localStorage.setItem(
+        'roomValues',
+        JSON.stringify({
+          [player.id]: boards.reduce(
+            (acc, board) => ({
+              ...acc,
+              [board.id]: player?.[board.id] || [],
+            }),
+            {},
+          ),
+        }),
+      )
+    }
+  }, [boards, player])
 
   return (
     <Fragment>

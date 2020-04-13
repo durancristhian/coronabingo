@@ -126,7 +126,6 @@ export default function Jugar() {
                   <div className="lg:flex lg:flex-col lg:justify-between lg:h-full">
                     <Boards
                       player={player}
-                      room={room}
                       setPlayerProps={newProps =>
                         setPlayer({
                           ...player,
