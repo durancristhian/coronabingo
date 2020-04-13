@@ -1,10 +1,9 @@
-import Link from 'next-translate/Link'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
+import Heading from '~/components/Heading'
 import { allLanguages } from '~/i18n.json'
 import Select from './Select'
-import Heading from '~/components/Heading'
 
 export default function Header() {
   const { t, lang } = useTranslation()
@@ -21,31 +20,20 @@ export default function Header() {
       .split(slash)
       .filter(p => p && !allLanguages.includes(p))
       .join(slash)
-    if (url) {
-      return replaceI18n({
-        url,
-        options: {
-          lang: l,
-        },
-      })
-    } else {
-      // only in home
-      window.location.replace(`${slash}${l}`)
-    }
+
+    return replaceI18n({
+      url: url || slash,
+      options: {
+        lang: l,
+      },
+    })
   }
 
   return (
     <header className="bg-white px-4 py-2 shadow">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
-          <Heading type="h1">
-            <Link href="/">
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a className="focus:outline-none focus:shadow-outline">
-                Coronabingo
-              </a>
-            </Link>
-          </Heading>
+          <Heading type="h1">Coronabingo</Heading>
           <Select
             id="language"
             onChange={onLanguageChange}
