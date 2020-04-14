@@ -1,0 +1,146 @@
+@keyframes confetti {
+  0% {
+    transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+  }
+  50% {
+    transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+  }
+  75% {
+    transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+  }
+  100% {
+    transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+  }
+}
+
+.confetti-base {
+  animation: confetti 5s ease-in-out -2s infinite;
+  height: 15px;
+  position: fixed;
+  top: 0;
+  transform-origin: left top;
+  width: 15px;
+  z-index: 9999;
+}
+
+.confetti-1 {
+  animation-delay: 0;
+  background-color: #f2d74e;
+  left: 5%;
+}
+
+.confetti-2 {
+  animation-delay: -5s;
+  background-color: #95c3de;
+  left: 10%;
+}
+
+.confetti-3 {
+  animation-delay: -3s;
+  background-color: #ff9a91;
+  left: 15%;
+}
+
+.confetti-4 {
+  animation-delay: -2.5s;
+  background-color: #f2d74e;
+  left: 20%;
+}
+
+.confetti-5 {
+  animation-delay: -4s;
+  background-color: #f2d74e;
+  left: 25%;
+}
+
+.confetti-6 {
+  animation-delay: -6s;
+  background-color: #95c3de;
+  left: 30%;
+}
+
+.confetti-7 {
+  animation-delay: -1.5s;
+  background-color: #ff9a91;
+  left: 35%;
+}
+
+.confetti-8 {
+  animation-delay: -2s;
+  background-color: #f2d74e;
+  left: 40%;
+}
+
+.confetti-9 {
+  animation-delay: -3.5s;
+  background-color: #f2d74e;
+  left: 45%;
+}
+
+.confetti-10 {
+  animation-delay: -2.5s;
+  background-color: #95c3de;
+  left: 50%;
+}
+.confetti-11 {
+  animation-delay: 0;
+  background-color: #ff9a91;
+  left: 55%;
+}
+
+.confetti-12 {
+  animation-delay: -5s;
+  background-color: #f2d74e;
+  left: 60%;
+}
+
+.confetti-13 {
+  animation-delay: -3s;
+  background-color: #f2d74e;
+  left: 65%;
+}
+
+.confetti-14 {
+  animation-delay: -2.5s;
+  background-color: #95c3de;
+  left: 70%;
+}
+
+.confetti-15 {
+  animation-delay: -4s;
+  background-color: #ff9a91;
+  left: 75%;
+}
+
+.confetti-16 {
+  animation-delay: -6s;
+  background-color: #f2d74e;
+  left: 80%;
+}
+
+.confetti-17 {
+  animation-delay: -1.5s;
+  background-color: #f2d74e;
+  left: 85%;
+}
+
+.confetti-18 {
+  animation-delay: -2s;
+  background-color: #95c3de;
+  left: 90%;
+}
+
+.confetti-19 {
+  animation-delay: -3.5s;
+  background-color: #ff9a91;
+  left: 95%;
+}
+
+.confetti-20 {
+  animation-delay: -3.5s;
+  background-color: #f2d74e;
+  left: 95%;
+}
