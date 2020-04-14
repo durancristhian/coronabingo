@@ -1,39 +1,74 @@
-import React, { Component, Fragment } from 'react'
+import classnames from 'classnames'
+import React, { Component } from 'react'
+
+const confettiClasses = [
+  'confetti-1',
+  'confetti-2',
+  'confetti-3',
+  'confetti-4',
+  'confetti-5',
+  'confetti-6',
+  'confetti-7',
+  'confetti-8',
+  'confetti-9',
+  'confetti-10',
+  'confetti-11',
+  'confetti-12',
+  'confetti-13',
+  'confetti-14',
+  'confetti-15',
+  'confetti-16',
+  'confetti-17',
+  'confetti-18',
+  'confetti-19',
+  'confetti-20',
+]
+
+const pallbearersClasses = [
+  'pallbearer-1',
+  'pallbearer-2',
+  'pallbearer-3',
+  'pallbearer-4',
+  'pallbearer-1',
+  'pallbearer-2',
+  'pallbearer-3',
+  'pallbearer-4',
+  'pallbearer-1',
+  'pallbearer-2',
+  'pallbearer-3',
+  'pallbearer-4',
+  'pallbearer-1',
+  'pallbearer-2',
+  'pallbearer-3',
+  'pallbearer-4',
+  'pallbearer-1',
+  'pallbearer-2',
+  'pallbearer-3',
+  'pallbearer-4',
+]
+
+const confettiType = {
+  confetti: confettiClasses,
+  pallbearers: pallbearersClasses,
+}
+
+export type ConfettiType = 'confetti' | 'pallbearers'
 
 interface Props {
-  enabled: boolean
+  type: ConfettiType | ''
 }
 
 class Confetti extends Component<Props> {
   render() {
-    const { enabled } = this.props
+    const { type } = this.props
 
-    if (!enabled) return null
+    if (!type) return null
 
-    return (
-      <Fragment>
-        <div className="confetti-base confetti-1" />
-        <div className="confetti-base confetti-2" />
-        <div className="confetti-base confetti-3" />
-        <div className="confetti-base confetti-4" />
-        <div className="confetti-base confetti-5" />
-        <div className="confetti-base confetti-6" />
-        <div className="confetti-base confetti-7" />
-        <div className="confetti-base confetti-8" />
-        <div className="confetti-base confetti-9" />
-        <div className="confetti-base confetti-10" />
-        <div className="confetti-base confetti-11" />
-        <div className="confetti-base confetti-12" />
-        <div className="confetti-base confetti-13" />
-        <div className="confetti-base confetti-14" />
-        <div className="confetti-base confetti-15" />
-        <div className="confetti-base confetti-16" />
-        <div className="confetti-base confetti-17" />
-        <div className="confetti-base confetti-18" />
-        <div className="confetti-base confetti-19" />
-        <div className="confetti-base confetti-20" />
-      </Fragment>
-    )
+    const classes = confettiType[type]
+
+    return classes.map((c, i) => (
+      <div className={classnames(['confetti-base', c])} key={i} />
+    ))
   }
 }
 

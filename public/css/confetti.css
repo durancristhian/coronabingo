@@ -18,129 +18,211 @@
 
 .confetti-base {
   animation: confetti 5s ease-in-out -2s infinite;
-  height: 15px;
+  height: 20px;
   position: fixed;
   top: 0;
   transform-origin: left top;
-  width: 15px;
+  width: 20px;
   z-index: 9999;
 }
 
-.confetti-1 {
+.confetti-base:nth-child(1) {
   animation-delay: 0;
-  background-color: #f2d74e;
   left: 5%;
 }
 
-.confetti-2 {
+.confetti-base:nth-child(2) {
   animation-delay: -5s;
-  background-color: #95c3de;
   left: 10%;
 }
 
-.confetti-3 {
+.confetti-base:nth-child(3) {
   animation-delay: -3s;
-  background-color: #ff9a91;
   left: 15%;
 }
 
-.confetti-4 {
+.confetti-base:nth-child(4) {
   animation-delay: -2.5s;
-  background-color: #f2d74e;
   left: 20%;
 }
 
-.confetti-5 {
+.confetti-base:nth-child(5) {
   animation-delay: -4s;
-  background-color: #f2d74e;
   left: 25%;
 }
 
-.confetti-6 {
+.confetti-base:nth-child(6) {
   animation-delay: -6s;
-  background-color: #95c3de;
   left: 30%;
 }
 
-.confetti-7 {
+.confetti-base:nth-child(7) {
   animation-delay: -1.5s;
-  background-color: #ff9a91;
   left: 35%;
 }
 
-.confetti-8 {
+.confetti-base:nth-child(8) {
   animation-delay: -2s;
-  background-color: #f2d74e;
   left: 40%;
 }
 
-.confetti-9 {
+.confetti-base:nth-child(9) {
   animation-delay: -3.5s;
-  background-color: #f2d74e;
   left: 45%;
 }
 
-.confetti-10 {
+.confetti-base:nth-child(10) {
   animation-delay: -2.5s;
-  background-color: #95c3de;
   left: 50%;
 }
-.confetti-11 {
+.confetti-base:nth-child(11) {
   animation-delay: 0;
-  background-color: #ff9a91;
   left: 55%;
 }
 
-.confetti-12 {
+.confetti-base:nth-child(12) {
   animation-delay: -5s;
-  background-color: #f2d74e;
   left: 60%;
 }
 
-.confetti-13 {
+.confetti-base:nth-child(13) {
   animation-delay: -3s;
-  background-color: #f2d74e;
   left: 65%;
 }
 
-.confetti-14 {
+.confetti-base:nth-child(14) {
   animation-delay: -2.5s;
-  background-color: #95c3de;
   left: 70%;
 }
 
-.confetti-15 {
+.confetti-base:nth-child(15) {
   animation-delay: -4s;
-  background-color: #ff9a91;
   left: 75%;
 }
 
-.confetti-16 {
+.confetti-base:nth-child(16) {
   animation-delay: -6s;
-  background-color: #f2d74e;
   left: 80%;
 }
 
-.confetti-17 {
+.confetti-base:nth-child(17) {
   animation-delay: -1.5s;
-  background-color: #f2d74e;
   left: 85%;
 }
 
-.confetti-18 {
+.confetti-base:nth-child(18) {
   animation-delay: -2s;
-  background-color: #95c3de;
   left: 90%;
 }
 
-.confetti-19 {
+.confetti-base:nth-child(19) {
   animation-delay: -3.5s;
-  background-color: #ff9a91;
   left: 95%;
 }
 
-.confetti-20 {
+.confetti-base:nth-child(20) {
   animation-delay: -3.5s;
-  background-color: #f2d74e;
   left: 95%;
+}
+
+.confetti-1 {
+  background-color: #f2d74e;
+}
+
+.confetti-2 {
+  background-color: #95c3de;
+}
+
+.confetti-3 {
+  background-color: #ff9a91;
+}
+
+.confetti-4 {
+  background-color: #f2d74e;
+}
+
+.confetti-5 {
+  background-color: #f2d74e;
+}
+
+.confetti-6 {
+  background-color: #95c3de;
+}
+
+.confetti-7 {
+  background-color: #ff9a91;
+}
+
+.confetti-8 {
+  background-color: #f2d74e;
+}
+
+.confetti-9 {
+  background-color: #f2d74e;
+}
+
+.confetti-10 {
+  background-color: #95c3de;
+}
+
+.confetti-11 {
+  background-color: #ff9a91;
+}
+
+.confetti-12 {
+  background-color: #f2d74e;
+}
+
+.confetti-13 {
+  background-color: #f2d74e;
+}
+
+.confetti-14 {
+  background-color: #95c3de;
+}
+
+.confetti-15 {
+  background-color: #ff9a91;
+}
+
+.confetti-16 {
+  background-color: #f2d74e;
+}
+
+.confetti-17 {
+  background-color: #f2d74e;
+}
+
+.confetti-18 {
+  background-color: #95c3de;
+}
+
+.confetti-19 {
+  background-color: #ff9a91;
+}
+
+.confetti-20 {
+  background-color: #f2d74e;
+}
+
+[class*="pallbearer-"] {
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.pallbearer-1 {
+  background-image: url('/background-cells/pallbearers/pallbearer-1.png');
+}
+
+.pallbearer-2 {
+  background-image: url('/background-cells/pallbearers/pallbearer-2.png');
+}
+
+.pallbearer-3 {
+  background-image: url('/background-cells/pallbearers/pallbearer-3.png');
+}
+
+.pallbearer-4 {
+  background-image: url('/background-cells/pallbearers/pallbearer-4.png');
 }

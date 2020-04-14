@@ -9,6 +9,9 @@
   "admin-title": "You are viewing this panel because you are the one who runs the room",
   "show-confetti": "Show confetti",
   "hide-confetti": "Hide confetti",
+  "show-pallbearers": "Show ghana pallbearers",
+  "hide-pallbearers": "Hide ghana pallbearers",
+  "celebrations": "Celebrations",
   "empty-cells": {
     "title": "Empty cells background",
     "url": "Or paste here the link of a random image from the internet"
@@ -30,7 +33,7 @@
     "cremona": "Cremona",
     "covid-19": "COVID-19",
     "clippy": "Clippy",
-    "ghana-pallbearers": "African guys dancing with the coffin",
+    "ghana-pallbearers": "Ghana pallbearers",
     "frameworks": "Frameworks"
   },
   "dreams-link": "What's this?",

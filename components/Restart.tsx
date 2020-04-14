@@ -1,6 +1,6 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { FiRepeat, FiThumbsUp } from 'react-icons/fi'
 import Modal from '~/components/Modal'
 import useRoom from '~/hooks/useRoom'
@@ -16,7 +16,7 @@ export default function Restart() {
   }
 
   return (
-    <Fragment>
+    <div className="flex flex-col md:flex-row items-center justify-center">
       <Button onClick={() => setShowModal(true)}>
         <FiRepeat />
         <span className="ml-4">{t('jugar:replay.reboot-game')}</span>
@@ -37,6 +37,6 @@ export default function Restart() {
           </Button>
         </div>
       </Modal>
-    </Fragment>
+    </div>
   )
 }
