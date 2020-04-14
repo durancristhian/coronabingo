@@ -16,5 +16,6 @@
   "copy": "Copiar",
   "copied": "Copiado al portapapeles.",
   "whatsapp-share": "WhatsApp",
-  "telegram-share": "Telegram"
+  "telegram-share": "Telegram",
+  "staging": "Entorno: Staging - Version: {{version}}"
 }
