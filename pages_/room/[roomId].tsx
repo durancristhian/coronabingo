@@ -7,13 +7,13 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
+import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import scrollToTop from '~/utils/scrollToTop'
-import Heading from '~/components/Heading'
 
 export default function Sala() {
   const [room] = useRoom()
@@ -82,48 +82,49 @@ export default function Sala() {
                 <p className="my-8">{t('sala:list-description')}</p>
               </div>
               <div className="border-gray-300 border-t-2 mt-4 -mx-4">
-                {players.map((player: Player, index: number) => (
-                  <div
-                    key={index}
-                    className={classnames([
-                      'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                      player.id === room.adminId
-                        ? 'bg-green-100'
-                        : index % 2 === 0
-                        ? 'bg-gray-100'
-                        : 'bg-gray-200',
-                    ])}
-                  >
-                    <div className="flex flex-auto flex-wrap items-center">
-                      <p>{player.name}</p>
-                      {player.id === room.adminId && (
-                        <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
-                          {t('sala:is-admin')}
-                        </span>
-                      )}
-                      <p className="italic mt-2 text-gray-600 text-sm w-full">
-                        {t('common:board_plural', {
-                          boardId: player.boards.split(',').join(' & '),
-                        })}
-                      </p>
+                {players.length &&
+                  players.map((player: Player, index: number) => (
+                    <div
+                      key={index}
+                      className={classnames([
+                        'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
+                        player.id === room.adminId
+                          ? 'bg-green-100'
+                          : index % 2 === 0
+                          ? 'bg-gray-100'
+                          : 'bg-gray-200',
+                      ])}
+                    >
+                      <div className="flex flex-auto flex-wrap items-center">
+                        <p>{player.name}</p>
+                        {player.id === room.adminId && (
+                          <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                            {t('sala:is-admin')}
+                          </span>
+                        )}
+                        <p className="italic mt-2 text-gray-600 text-sm w-full">
+                          {t('common:board_plural', {
+                            boardId: player.boards.split(',').join(' & '),
+                          })}
+                        </p>
+                      </div>
+                      <div className="ml-4">
+                        <Button
+                          id="play"
+                          disabled={!room.readyToPlay}
+                          onClick={() => {
+                            Router.pushI18n(
+                              `/room/[roomId]/[playerId]`,
+                              `/room/${room.id}/${player.id}`,
+                            )
+                          }}
+                        >
+                          <FiLink2 />
+                          <span className="ml-4">{t('sala:play')}</span>
+                        </Button>
+                      </div>
                     </div>
-                    <div className="ml-4">
-                      <Button
-                        id="play"
-                        disabled={!room.readyToPlay}
-                        onClick={() => {
-                          Router.pushI18n(
-                            `/room/[roomId]/[playerId]`,
-                            `/room/${room.id}/${player.id}`,
-                          )
-                        }}
-                      >
-                        <FiLink2 />
-                        <span className="ml-4">{t('sala:play')}</span>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           )}
