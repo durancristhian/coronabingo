@@ -9,7 +9,7 @@ export default () => {
     if (err instanceof TypeError) {
       window.scroll(0, 0)
     } else {
-      throw err
+      console.error(err)
     }
   }
 }
