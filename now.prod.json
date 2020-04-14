@@ -12,7 +12,8 @@
       "GA_TRACKING_ID": "@ga_tracking_id",
       "SENTRY_DSN": "@sentry_dsn",
       "WOORKSHEET_ID": "@woorksheet_id",
-      "WORKSHEET_TITLE": "@worksheet_title"
+      "WORKSHEET_TITLE": "@worksheet_title",
+      "URL": "@url"
     }
   }
 }

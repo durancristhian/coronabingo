@@ -17,5 +17,5 @@
   "copied": "Copied to Clipboard.",
   "whatsapp-share": "WhatsApp",
   "telegram-share": "Telegram",
-  "staging": "Environment: Staging - Version: {{version}}"
+  "staging": "Staging v{{version}}"
 }

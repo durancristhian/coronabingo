@@ -15,10 +15,9 @@ export default function Layout({ children }: Props) {
   const { t } = useTranslation()
   const router = useRouter()
   const playerId = router.query.playerId?.toString()
-  const isStaging =
-    typeof window !== 'undefined'
-      ? window.location.hostname.split('.').includes('cduran')
-      : false
+  const isStaging = process.env.URL?.toString()
+    .split('.')
+    .includes('cduran')
 
   return (
     <main className="bg-gray-200 flex flex-col font-sans leading-normal min-h-screen text-gray-900 text-sm md:text-base">
