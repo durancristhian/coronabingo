@@ -19,9 +19,7 @@ export default function Celebrations({
 
   return (
     <div className="my-8">
-      <Heading type="h2">
-        <span className="uppercase">{t('jugar:celebrations')}</span>
-      </Heading>
+      <Heading type="h2">{t('jugar:celebrations')}</Heading>
       <div className="flex flex-col md:flex-row items-center justify-center">
         {confettiTypes.map((ct, i) => (
           <div
