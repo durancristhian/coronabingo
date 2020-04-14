@@ -2,12 +2,12 @@ import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
+import Heading from '~/components/Heading'
 import { roomsRef, Timestamp } from '~/utils/firebase'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
 import Message, { MessageType } from './Message'
-import Heading from '~/components/Heading'
 
 export default function CreateRoom() {
   const { t } = useTranslation()

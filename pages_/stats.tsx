@@ -2,9 +2,9 @@ import classnames from 'classnames'
 import React, { Fragment, ReactNode, useEffect, useState } from 'react'
 import Box from '~/components/Box'
 import Container from '~/components/Container'
+import Heading from '~/components/Heading'
 import Message from '~/components/Message'
 import db from '~/utils/firebase'
-import Heading from '~/components/Heading'
 
 interface Stats {
   roomsByDay: {
@@ -118,7 +118,7 @@ export default function Index() {
               prev.roomsOfFamilies++
             }
 
-            if (curr.bingoSpinner) {
+            if (curr.bingoSpinner || curr.turningGlob) {
               prev.roomsWithOnlineBingoSpinner++
             }
 

@@ -2,10 +2,10 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext } from 'react'
 import { COLORS } from '~/components/EmptyCell'
+import Heading from '~/components/Heading'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
-import Heading from '~/components/Heading'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(

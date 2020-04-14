@@ -8,10 +8,10 @@ import React, {
   useState,
 } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
+import Heading from '~/components/Heading'
 import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import Button from './Button'
-import Heading from '~/components/Heading'
 
 const emojis: { [key: string]: ReactNode } = {
   ar: (

@@ -7,6 +7,7 @@ import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
+import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message, { MessageType } from '~/components/Message'
@@ -17,7 +18,6 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 import Field from '~/interfaces/Field'
 import db from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
-import Heading from '~/components/Heading'
 
 export default function Admin() {
   const { t, lang } = useTranslation()
