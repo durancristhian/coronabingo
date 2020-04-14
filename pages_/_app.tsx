@@ -8,6 +8,7 @@ import { allLanguages } from '~/i18n.json'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
 import * as gtag from '~/utils/gtag'
+import '~/utils/polyfills'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
