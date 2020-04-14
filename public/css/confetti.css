@@ -1,0 +1,228 @@
+@keyframes confetti {
+  0% {
+    transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+  }
+  50% {
+    transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+  }
+  75% {
+    transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+  }
+  100% {
+    transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+  }
+}
+
+.confetti-base {
+  animation: confetti 5s ease-in-out -2s infinite;
+  height: 20px;
+  position: fixed;
+  top: 0;
+  transform-origin: left top;
+  width: 20px;
+  z-index: 9999;
+}
+
+.confetti-base:nth-child(1) {
+  animation-delay: 0;
+  left: 5%;
+}
+
+.confetti-base:nth-child(2) {
+  animation-delay: -5s;
+  left: 10%;
+}
+
+.confetti-base:nth-child(3) {
+  animation-delay: -3s;
+  left: 15%;
+}
+
+.confetti-base:nth-child(4) {
+  animation-delay: -2.5s;
+  left: 20%;
+}
+
+.confetti-base:nth-child(5) {
+  animation-delay: -4s;
+  left: 25%;
+}
+
+.confetti-base:nth-child(6) {
+  animation-delay: -6s;
+  left: 30%;
+}
+
+.confetti-base:nth-child(7) {
+  animation-delay: -1.5s;
+  left: 35%;
+}
+
+.confetti-base:nth-child(8) {
+  animation-delay: -2s;
+  left: 40%;
+}
+
+.confetti-base:nth-child(9) {
+  animation-delay: -3.5s;
+  left: 45%;
+}
+
+.confetti-base:nth-child(10) {
+  animation-delay: -2.5s;
+  left: 50%;
+}
+.confetti-base:nth-child(11) {
+  animation-delay: 0;
+  left: 55%;
+}
+
+.confetti-base:nth-child(12) {
+  animation-delay: -5s;
+  left: 60%;
+}
+
+.confetti-base:nth-child(13) {
+  animation-delay: -3s;
+  left: 65%;
+}
+
+.confetti-base:nth-child(14) {
+  animation-delay: -2.5s;
+  left: 70%;
+}
+
+.confetti-base:nth-child(15) {
+  animation-delay: -4s;
+  left: 75%;
+}
+
+.confetti-base:nth-child(16) {
+  animation-delay: -6s;
+  left: 80%;
+}
+
+.confetti-base:nth-child(17) {
+  animation-delay: -1.5s;
+  left: 85%;
+}
+
+.confetti-base:nth-child(18) {
+  animation-delay: -2s;
+  left: 90%;
+}
+
+.confetti-base:nth-child(19) {
+  animation-delay: -3.5s;
+  left: 95%;
+}
+
+.confetti-base:nth-child(20) {
+  animation-delay: -3.5s;
+  left: 95%;
+}
+
+.confetti-1 {
+  background-color: #f2d74e;
+}
+
+.confetti-2 {
+  background-color: #95c3de;
+}
+
+.confetti-3 {
+  background-color: #ff9a91;
+}
+
+.confetti-4 {
+  background-color: #f2d74e;
+}
+
+.confetti-5 {
+  background-color: #f2d74e;
+}
+
+.confetti-6 {
+  background-color: #95c3de;
+}
+
+.confetti-7 {
+  background-color: #ff9a91;
+}
+
+.confetti-8 {
+  background-color: #f2d74e;
+}
+
+.confetti-9 {
+  background-color: #f2d74e;
+}
+
+.confetti-10 {
+  background-color: #95c3de;
+}
+
+.confetti-11 {
+  background-color: #ff9a91;
+}
+
+.confetti-12 {
+  background-color: #f2d74e;
+}
+
+.confetti-13 {
+  background-color: #f2d74e;
+}
+
+.confetti-14 {
+  background-color: #95c3de;
+}
+
+.confetti-15 {
+  background-color: #ff9a91;
+}
+
+.confetti-16 {
+  background-color: #f2d74e;
+}
+
+.confetti-17 {
+  background-color: #f2d74e;
+}
+
+.confetti-18 {
+  background-color: #95c3de;
+}
+
+.confetti-19 {
+  background-color: #ff9a91;
+}
+
+.confetti-20 {
+  background-color: #f2d74e;
+}
+
+[class*="pallbearer-"] {
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.pallbearer-1 {
+  background-image: url('/background-cells/pallbearers/pallbearer-1.png');
+}
+
+.pallbearer-2 {
+  background-image: url('/background-cells/pallbearers/pallbearer-2.png');
+}
+
+.pallbearer-3 {
+  background-image: url('/background-cells/pallbearers/pallbearer-3.png');
+}
+
+.pallbearer-4 {
+  background-image: url('/background-cells/pallbearers/pallbearer-4.png');
+}

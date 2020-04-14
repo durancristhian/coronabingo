@@ -9,6 +9,9 @@
   "admin-title": "Estás viendo este panel porque sos quien dirige la sala",
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
+  "show-pallbearers": "Mostrar ghaneses del ataúd",
+  "hide-pallbearers": "Ocultar ghaneses del ataúd",
+  "celebrations": "Festejos",
   "replay": {
     "reboot-game": "Reiniciar partida",
     "reboot-room": "Reiniciar sala",
@@ -30,7 +33,7 @@
     "cremona": "Cremona",
     "covid-19": "COVID-19",
     "clippy": "Clippy",
-    "ghana-pallbearers": "Africanos bailando con el cajón",
+    "ghana-pallbearers": "Ghaneses del ataúd",
     "frameworks": "Frameworks"
   },
   "dreams-link": "¿Qué es esto?",

@@ -42,10 +42,10 @@ export const BACKGROUND_CELL_VALUES = [
     key: 'jugar:backgrounds.ghana-pallbearers',
     type: 'img',
     value: [
-      'pallbearers/pallbearer.png',
       'pallbearers/pallbearer-1.png',
       'pallbearers/pallbearer-2.png',
       'pallbearers/pallbearer-3.png',
+      'pallbearers/pallbearer-4.png',
     ],
   },
   {
@@ -168,8 +168,7 @@ export const SOUNDS = [
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3',
   },
   {
-    name:
-      'Africanos bailando con el cajón - African guys dancing with the coffin',
+    name: 'Ghaneses del ataúd - Ghana pallbearers',
     language: 'world',
     url: '/sounds/funeral/dance-with-the-coffin.mp3',
   },
