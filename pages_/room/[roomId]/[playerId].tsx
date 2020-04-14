@@ -85,8 +85,6 @@ export default function Jugar() {
     )
   }
 
-  console.log(room.confettiType)
-
   return (
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
