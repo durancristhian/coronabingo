@@ -1,13 +1,13 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect, useState } from 'react'
-import { FiFrown, FiSmile } from 'react-icons/fi'
+import React, { useEffect, useState } from 'react'
 import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
-import Button from '~/components/Button'
-import Confetti from '~/components/Confetti'
+import Celebrations from '~/components/Celebrations'
+import Confetti, { ConfettiType } from '~/components/Confetti'
 import Container from '~/components/Container'
+import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
@@ -17,10 +17,9 @@ import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
-import useRoom from '~/hooks/useRoom'
 import usePlayer from '~/hooks/usePlayer'
+import useRoom from '~/hooks/useRoom'
 import scrollToTop from '~/utils/scrollToTop'
-import Heading from '~/components/Heading'
 
 export default function Jugar() {
   const [room] = useRoom()
@@ -49,8 +48,8 @@ export default function Jugar() {
     })
   }
 
-  const confetti = () => {
-    room.ref.update({ showConfetti: !room.showConfetti })
+  const onConfettiChange = (confettiType: ConfettiType | '') => {
+    room.ref.update({ confettiType })
   }
 
   const setSoundToPlay = (soundToPlay = '') =>
@@ -85,6 +84,8 @@ export default function Jugar() {
       </Layout>
     )
   }
+
+  console.log(room.confettiType)
 
   return (
     <EasterEggContextProvider>
@@ -163,40 +164,24 @@ export default function Jugar() {
                       aria-label="Smiling face with sunglasses"
                     ></i>
                   </Banner>
-                  <div className="flex flex-col md:flex-row items-center justify-center my-8">
-                    <div className="mb-4 md:mb-0 mr-4">
-                      <Restart />
-                    </div>
-                    <div className="mr-4 md:mr-0">
-                      <Button
-                        color={room.showConfetti ? 'red' : 'green'}
-                        onClick={confetti}
-                      >
-                        {room.showConfetti ? (
-                          <Fragment>
-                            <FiFrown />
-                            <span className="ml-4">
-                              {t('jugar:hide-confetti')}
-                            </span>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <FiSmile />
-                            <span className="ml-4">
-                              {t('jugar:show-confetti')}
-                            </span>
-                          </Fragment>
-                        )}
-                      </Button>
-                    </div>
+                  <div className="mt-8">
+                    <Restart />
                   </div>
-                  <Pato
-                    activeSound={activeSound}
-                    onClick={sound => {
-                      setSoundToPlay(sound)
-                      setActiveSound(sound)
-                    }}
-                  />
+                  <div className="mt-8">
+                    <Celebrations
+                      confettiType={room.confettiType}
+                      onConfettiChange={onConfettiChange}
+                    />
+                  </div>
+                  <div className="mt-8">
+                    <Pato
+                      activeSound={activeSound}
+                      onClick={sound => {
+                        setSoundToPlay(sound)
+                        setActiveSound(sound)
+                      }}
+                    />
+                  </div>
                 </Box>
               </Container>
             </div>
@@ -209,7 +194,7 @@ export default function Jugar() {
             </Container>
           </div>
         </Layout>
-        <Confetti enabled={room.showConfetti} />
+        <Confetti type={room.confettiType} />
         <Sounds
           onAudioPlayed={setSoundToPlay}
           onAudioEnd={() => setActiveSound('')}

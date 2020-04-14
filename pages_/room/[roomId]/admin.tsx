@@ -56,7 +56,7 @@ export default function Admin() {
     batch.update(room.ref, {
       ...roomValues,
       selectedNumbers: [],
-      showConfetti: false,
+      confettiType: '',
       readyToPlay: true,
     })
 
