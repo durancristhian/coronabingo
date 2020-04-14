@@ -1,8 +1,9 @@
+import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Button from './Button'
-import { ConfettiType } from './Confetti'
+import { ConfettiType, confettiTypes } from './Confetti'
 import Heading from './Heading'
 
 interface Props {
@@ -22,48 +23,33 @@ export default function Celebrations({
         <span className="uppercase">{t('jugar:celebrations')}</span>
       </Heading>
       <div className="flex flex-col md:flex-row items-center justify-center">
-        <div className="mb-4 md:mb-0 mr-4">
-          <Button
-            color={confettiType === 'confetti' ? 'red' : 'green'}
-            onClick={() =>
-              onConfettiChange(confettiType === 'confetti' ? '' : 'confetti')
-            }
+        {confettiTypes.map((ct, i) => (
+          <div
+            key={ct}
+            className={classnames([i !== 0 && 'mt-4 md:mt-0 md:ml-4'])}
           >
-            {confettiType === 'confetti' ? (
-              <Fragment>
-                <FiFrown />
-                <span className="ml-4">{t('jugar:hide-confetti')}</span>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <FiSmile />
-                <span className="ml-4">{t('jugar:show-confetti')}</span>
-              </Fragment>
-            )}
-          </Button>
-        </div>
-        <div className="mr-4 md:mr-0">
-          <Button
-            color={confettiType === 'pallbearers' ? 'red' : 'green'}
-            onClick={() =>
-              onConfettiChange(
-                confettiType === 'pallbearers' ? '' : 'pallbearers',
-              )
-            }
-          >
-            {confettiType === 'pallbearers' ? (
-              <Fragment>
-                <FiFrown />
-                <span className="ml-4">{t('jugar:hide-pallbearers')}</span>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <FiSmile />
-                <span className="ml-4">{t('jugar:show-pallbearers')}</span>
-              </Fragment>
-            )}
-          </Button>
-        </div>
+            <Button
+              color={ct === confettiType ? 'red' : 'green'}
+              onClick={() =>
+                onConfettiChange(
+                  confettiType === ct ? '' : (ct as ConfettiType),
+                )
+              }
+            >
+              {ct === confettiType ? (
+                <Fragment>
+                  <FiFrown />
+                  <span className="ml-4">{t(`jugar:hide-${ct}`)}</span>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <FiSmile />
+                  <span className="ml-4">{t(`jugar:show-${ct}`)}</span>
+                </Fragment>
+              )}
+            </Button>
+          </div>
+        ))}
       </div>
     </div>
   )

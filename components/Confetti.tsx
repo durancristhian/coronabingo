@@ -53,6 +53,7 @@ const confettiType = {
 }
 
 export type ConfettiType = 'confetti' | 'pallbearers'
+export const confettiTypes = ['confetti', 'pallbearers']
 
 interface Props {
   type: ConfettiType | ''
