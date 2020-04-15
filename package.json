@@ -1,12 +1,10 @@
 {
     "name": "coronabingo",
-    "version": "1.8.14",
+    "version": "1.9.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
-        "deploy-staging": "cp now.staging.json now.json && now",
-        "deploy-prod": "cp now.prod.json now.json && now --prod",
         "dev": "next-translate && next dev",
         "download-boards": "ts-node scripts/download-boards",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
