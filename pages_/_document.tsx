@@ -43,7 +43,7 @@ export default class extends Document {
               />
             </Fragment>
           )}
-          <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
+          <link rel="preconnect" href="https://twemoji.maxcdn.com" />
         </Head>
         <body>
           <Main />

@@ -8,6 +8,7 @@
 @import 'ball.css';
 @import 'confetti.css';
 @import 'modal.css';
+@import 'emojis.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
