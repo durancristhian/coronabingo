@@ -176,6 +176,7 @@ export default function Players({
 }
 
 export interface Player {
+  [key: number]: number[]
   boards: string
   id: string
   name: string
