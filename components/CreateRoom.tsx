@@ -46,6 +46,7 @@ export default function CreateRoom() {
     const roomId = roomDoc.id
 
     try {
+      /* TODO: Add default values for all attributes in the room */
       await roomDoc.set({
         bingoSpinner: true,
         name: formData.name,

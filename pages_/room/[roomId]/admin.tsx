@@ -36,7 +36,7 @@ export default function Admin() {
   useEffect(scrollToTop, [])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
-    const partialRoomChanges = changes.reduce(
+    const roomChanges = changes.reduce(
       (prev, curr) => ({
         ...prev,
         ...{ [curr.key]: curr.value },
@@ -44,7 +44,7 @@ export default function Admin() {
       {},
     )
 
-    updateRoom(partialRoomChanges)
+    updateRoom(roomChanges)
   }
 
   const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
