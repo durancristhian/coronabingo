@@ -12,24 +12,17 @@ export default function Index() {
   return (
     <Layout>
       <Container>
-        <img
-          src={require('~/public/virus/success.png')}
-          alt="coronavirus feliz"
-          className="h-32 mx-auto"
-        />
+        <p>{t('index:intro')}</p>
         <div className="my-8">
-          <p>{t('index:intro')}</p>
+          <Box>
+            <CreateRoom />
+          </Box>
         </div>
-        <Box>
-          <CreateRoom />
-        </Box>
-        <div className="mt-8">
-          <p>
-            <span>{t('index:videocall-suggestion')} </span>
-            <Anchor href="https://hangouts.google.com/">Google Hangouts</Anchor>
-            <span>.</span>
-          </p>
-        </div>
+        <p>
+          <span>{t('index:videocall-suggestion')} </span>
+          <Anchor href="https://hangouts.google.com/">Google Hangouts</Anchor>
+          <span>.</span>
+        </p>
       </Container>
     </Layout>
   )

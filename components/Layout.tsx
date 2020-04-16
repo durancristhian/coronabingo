@@ -32,10 +32,12 @@ export default function Layout({ children }: Props) {
         <div className="px-4 py-8">{children}</div>
       </div>
       <Banner>
-        <span className="mr-1">{t('common:feedback-form.intro')}</span>
-        <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
-          <span className="mr-1">{t('common:feedback-form.link')}</span>
-        </Anchor>
+        <span className="mr-1">
+          <span className="mr-1">{t('common:feedback-form.intro')}</span>
+          <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
+            {t('common:feedback-form.link')}
+          </Anchor>
+        </span>
         <i
           className="em em-star-struck"
           tabIndex={-1}
