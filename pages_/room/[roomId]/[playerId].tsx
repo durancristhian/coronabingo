@@ -48,14 +48,6 @@ export default function Jugar() {
     })
   }
 
-  const onConfettiChange = (confettiType: ConfettiType | '') => {
-    room?.ref.update({ confettiType })
-  }
-
-  const setSoundToPlay = (soundToPlay = '') => {
-    isAdmin && room?.ref.update({ soundToPlay })
-  }
-
   if (!room) {
     return (
       <Layout>
@@ -84,6 +76,14 @@ export default function Jugar() {
         </Container>
       </Layout>
     )
+  }
+
+  const onConfettiChange = (confettiType: ConfettiType | '') => {
+    room.ref.update({ confettiType })
+  }
+
+  const setSoundToPlay = (soundToPlay = '') => {
+    isAdmin && room?.ref.update({ soundToPlay })
   }
 
   return (

@@ -11,12 +11,11 @@ export default function Restart() {
   const { room } = useRoom()
   const { t } = useTranslation()
 
-  const replay = async () => {
-    if (room) {
-      Router.pushI18n('/room/[roomId]/admin', `/room/${room?.id}/admin`)
-    }
+  /* TODO: code smell here */
+  if (!room) return null
 
-    /* TODO: This should never happen. Show/Do something so the user knows about it */
+  const replay = async () => {
+    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (

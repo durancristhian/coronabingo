@@ -21,9 +21,16 @@ if (process.env.GA_TRACKING_ID) {
   Router.events.on('routeChangeComplete', url => gtag.pageview(url))
 }
 
+interface ErrorInfo extends React.ErrorInfo {
+  [key: string]: string
+}
+
 export default class Coronabingo extends App {
-  // @ts-ignore
-  componentDidCatch(error, errorInfo) {
+  state = {
+    hasError: false,
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (process.env.NODE_ENV === 'production') {
       Sentry.withScope(scope => {
         Object.keys(errorInfo).forEach(key => {
