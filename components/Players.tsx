@@ -112,6 +112,7 @@ export default function Players({
             </div>
             <div className="mb-4 ml-4">
               <Button
+                ariaLabel={t('admin:players.add-player')}
                 className="w-full"
                 color="green"
                 type="submit"
@@ -147,6 +148,7 @@ export default function Players({
               </div>
               <div className="ml-4">
                 <Button
+                  ariaLabel={t('admin:players.remove-player')}
                   color="red"
                   id="remove-player"
                   onClick={() => onRemovePlayer(index, player)}

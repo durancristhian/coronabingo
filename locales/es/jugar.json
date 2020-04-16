@@ -37,6 +37,7 @@
     "frameworks": "Frameworks"
   },
   "dreams-link": "¿Qué es esto?",
+  "play-sound": "Reproducir {{name}}",
   "sounds": "Botonera",
   "dreams": {
     "1": "Agua",

@@ -3,41 +3,41 @@ import React, { MouseEvent, ReactNode } from 'react'
 
 const BUTTON_COLORS = {
   gray: [
-    'bg-gray-400',
+    'bg-gray-200',
     'border-gray-600',
-    'focus:bg-gray-500',
+    'focus:bg-gray-300',
     'focus:border-gray-700',
     'focus:text-gray-900',
     'text-gray-800',
   ],
   green: [
-    'bg-green-400',
+    'bg-green-200',
     'border-green-600',
-    'focus:bg-green-500',
+    'focus:bg-green-300',
     'focus:border-green-700',
     'focus:text-green-900',
     'text-green-800',
   ],
   pink: [
-    'bg-pink-400',
+    'bg-pink-200',
     'border-pink-600',
-    'focus:bg-pink-500',
+    'focus:bg-pink-300',
     'focus:border-pink-700',
     'focus:text-pink-900',
     'text-pink-800',
   ],
   red: [
-    'bg-red-400',
+    'bg-red-200',
     'border-red-600',
-    'focus:bg-red-500',
+    'focus:bg-red-300',
     'focus:border-red-700',
     'focus:text-red-900',
     'text-red-800',
   ],
   yellow: [
-    'bg-yellow-400',
+    'bg-yellow-200',
     'border-yellow-600',
-    'focus:bg-yellow-500',
+    'focus:bg-yellow-300',
     'focus:border-yellow-700',
     'focus:text-yellow-900',
     'text-yellow-800',
@@ -45,6 +45,7 @@ const BUTTON_COLORS = {
 }
 
 interface Props {
+  ariaLabel?: string
   children: ReactNode
   className?: string
   color?: 'gray' | 'green' | 'pink' | 'red' | 'yellow'
@@ -55,6 +56,7 @@ interface Props {
 }
 
 export default function Button({
+  ariaLabel,
   children,
   className,
   color = 'yellow',
@@ -65,6 +67,7 @@ export default function Button({
 }: Props) {
   return (
     <button
+      aria-label={ariaLabel}
       id={id}
       type={type}
       className={classnames([
