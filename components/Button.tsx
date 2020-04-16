@@ -24,7 +24,7 @@ const BUTTON_COLORS = {
     'focus:bg-pink-300',
     'focus:border-pink-700',
     'focus:text-pink-900',
-    'text-black-800',
+    'text-pink-800',
   ],
   red: [
     'bg-red-200',
