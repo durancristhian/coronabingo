@@ -1,5 +1,6 @@
 {
   "title": "Información de la sala",
+  "loading": "Cargando...",
   "room-name": "Nombre de la sala",
   "people": "Va a jugar {{count}} persona",
   "people_plural": "Van a jugar {{count}} personas",
