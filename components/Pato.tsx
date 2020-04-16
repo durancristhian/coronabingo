@@ -78,6 +78,7 @@ export default function Pato({ activeSound, onClick }: Props) {
           >
             <div className="mr-4">
               <Button
+                ariaLabel={`play ${name}`}
                 disabled={activeSound !== ''}
                 onClick={() => onClick(url)}
               >
