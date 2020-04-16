@@ -205,12 +205,12 @@ export default class Coronabingo extends App {
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://coronabingo.now.sh/social2.jpg"
+            content="https://coronabingo.now.sh/social.jpg"
           />
           <meta property="twitter:card" content="summary_large_image" />
           <meta
             property="twitter:image"
-            content="https://coronabingo.now.sh/social2.jpg"
+            content="https://coronabingo.now.sh/social.jpg"
           />
           <meta
             name="viewport"
