@@ -14,10 +14,11 @@ import Message from '~/components/Message'
 import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import { Room } from '~/interfaces'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Sala() {
-  const [room] = useRoom()
+  const { room } = useRoom()
   const { players = [] } = useRoomPlayers()
   const { t } = useTranslation()
 
@@ -31,7 +32,7 @@ export default function Sala() {
     )
   }
 
-  const renderRoom = () => {
+  const renderRoom = (room: Room) => {
     return (
       <Fragment>
         <InputText
@@ -63,8 +64,8 @@ export default function Sala() {
     )
   }
 
-  const renderPlayers = (readyToPlay: boolean) => {
-    if (!readyToPlay) {
+  const renderPlayers = (room: Room, players: Player[]) => {
+    if (!room.readyToPlay) {
       return (
         <div className="mt-8">
           <Message type="information">{t('sala:not-ready')}</Message>
@@ -136,8 +137,8 @@ export default function Sala() {
     )
   }
 
-  const roomContent = room.id ? renderRoom() : renderEmptyState()
-  const playersContent = room.id ? renderPlayers(room.readyToPlay) : null
+  const roomContent = room ? renderRoom(room) : renderEmptyState()
+  const playersContent = room ? renderPlayers(room, players) : null
 
   return (
     <Layout>

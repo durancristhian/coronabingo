@@ -15,6 +15,7 @@ import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import { Room } from '~/interfaces'
 import Field from '~/interfaces/Field'
 import db from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
@@ -29,20 +30,28 @@ export default function Admin() {
     type: 'information',
   })
   const { players = [], setPlayers } = useRoomPlayers()
-  const [room, setRoom] = useRoom()
+  const { room, updateRoom } = useRoom()
   const randomBoards = useRandomBoards()
 
   useEffect(scrollToTop, [])
 
   const onFieldChange = (changes: { key: string; value: Field }[]) => {
-    setRoom(...changes.map(({ key, value }) => ({ [key]: value })))
+    const partialRoomChanges = changes.reduce(
+      (prev, curr) => ({
+        ...prev,
+        ...{ [curr.key]: curr.value },
+      }),
+      {},
+    )
+
+    updateRoom(partialRoomChanges)
   }
 
   const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
     playerRef.delete()
   }
 
-  const readyToPlay = async () => {
+  const readyToPlay = async (room: Room) => {
     setMessage({
       content: t('admin:success'),
       type: 'success',
@@ -50,10 +59,11 @@ export default function Admin() {
 
     const batch = db.batch()
 
+    /* TODO: exclude data coming from firebase.firestore.DocumentReference */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { ref, ...roomValues } = room
+    const { exists, id, ref: roomRef, ...roomValues } = room
 
-    batch.update(room.ref, {
+    batch.update(roomRef, {
       ...roomValues,
       selectedNumbers: [],
       confettiType: '',
@@ -62,6 +72,7 @@ export default function Admin() {
 
     players.map((player, index) => {
       const { name, ref: playerRef } = player
+
       batch.set(playerRef, {
         name,
         boards: randomBoards[index],
@@ -136,7 +147,7 @@ export default function Admin() {
                   id="readyToPlay"
                   className="w-full"
                   disabled={!room.adminId}
-                  onClick={readyToPlay}
+                  onClick={() => readyToPlay(room)}
                 >
                   <FiSmile />
                   <span className="ml-4">{t('admin:field-submit')}</span>

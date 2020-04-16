@@ -8,11 +8,15 @@ import Button from './Button'
 
 export default function Restart() {
   const [showModal, setShowModal] = useState(false)
-  const [room] = useRoom()
+  const { room } = useRoom()
   const { t } = useTranslation()
 
   const replay = async () => {
-    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
+    if (room) {
+      Router.pushI18n('/room/[roomId]/admin', `/room/${room?.id}/admin`)
+    }
+
+    /* TODO: This should never happen. Show/Do something so the user knows about it */
   }
 
   return (

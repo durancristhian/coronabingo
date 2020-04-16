@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { FirebaseProvider } from '~/contexts/Firebase'
+import { RoomContextProvider } from '~/contexts/RoomContext'
 import { allLanguages } from '~/i18n.json'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
@@ -217,9 +218,11 @@ export default class Coronabingo extends App {
             content="width=device-width,initial-scale=1,maximum-scale=1"
           />
         </Head>
-        <FirebaseProvider routerQuery={router.query}>
-          <Component {...pageProps} />
-        </FirebaseProvider>
+        <RoomContextProvider>
+          <FirebaseProvider routerQuery={router.query}>
+            <Component {...pageProps} />
+          </FirebaseProvider>
+        </RoomContextProvider>
       </Fragment>
     )
   }

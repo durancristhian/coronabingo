@@ -22,7 +22,7 @@ import useRoom from '~/hooks/useRoom'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
-  const [room] = useRoom()
+  const { room } = useRoom()
   const { player, setPlayer } = usePlayer()
   const { t } = useTranslation()
   const [activeSound, setActiveSound] = useState('')
@@ -49,13 +49,14 @@ export default function Jugar() {
   }
 
   const onConfettiChange = (confettiType: ConfettiType | '') => {
-    room.ref.update({ confettiType })
+    room?.ref.update({ confettiType })
   }
 
-  const setSoundToPlay = (soundToPlay = '') =>
-    isAdmin && room.ref.update({ soundToPlay })
+  const setSoundToPlay = (soundToPlay = '') => {
+    isAdmin && room?.ref.update({ soundToPlay })
+  }
 
-  if (!room.id) {
+  if (!room) {
     return (
       <Layout>
         <Container>
@@ -65,7 +66,7 @@ export default function Jugar() {
     )
   }
 
-  if (room.id && !room.readyToPlay) {
+  if (room && !room.readyToPlay) {
     return (
       <Layout>
         <Container>
@@ -101,9 +102,7 @@ export default function Jugar() {
                 <div className="lg:w-1/3">
                   <Box>
                     <Heading type="h2">{t('jugar:last-numbers')}</Heading>
-                    <LastNumbers
-                      selectedNumbers={room?.selectedNumbers || []}
-                    />
+                    <LastNumbers selectedNumbers={room.selectedNumbers || []} />
                   </Box>
                   <div className="hidden lg:block mt-4">
                     <Box>
