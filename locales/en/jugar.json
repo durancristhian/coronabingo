@@ -38,6 +38,7 @@
   },
   "dreams-link": "What's this?",
   "sounds": "Sounds",
+  "play-sound": "Play {{name}}",
   "dreams": {
     "1": "Water",
     "2": "Child",
