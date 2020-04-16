@@ -146,13 +146,6 @@ export default function Sala() {
           <div className="mb-8">
             <Heading type="h2">{t('sala:title')}</Heading>
           </div>
-          <div className="mb-8">
-            <img
-              src={require('~/public/virus/happy.png')}
-              alt="coronavirus feliz"
-              className="h-32 mx-auto"
-            />
-          </div>
           {roomContent}
           {playersContent}
         </Box>
