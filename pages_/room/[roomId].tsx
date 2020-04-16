@@ -85,7 +85,7 @@ export default function Sala() {
         <Heading type="h3" textCenter={false}>
           {t('sala:people', { count: players.length })}
         </Heading>
-        <div className="italic -mt-6 text-blue-800 text-xs md:text-sm">
+        <div className="italic -mt-6 text-gray-800 text-xs md:text-sm">
           <p className="my-8">{t('sala:list-description')}</p>
         </div>
         <div className="border-gray-300 border-t-2 mt-4 -mx-4">
