@@ -3,16 +3,16 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { useState } from 'react'
 import { FiRepeat, FiThumbsUp } from 'react-icons/fi'
 import Modal from '~/components/Modal'
-import useRoom from '~/hooks/useRoom'
+import { Room } from '~/interfaces'
 import Button from './Button'
 
-export default function Restart() {
-  const [showModal, setShowModal] = useState(false)
-  const { room } = useRoom()
-  const { t } = useTranslation()
+interface Props {
+  room: Room
+}
 
-  /* TODO: code smell here */
-  if (!room) return null
+export default function Restart({ room }: Props) {
+  const [showModal, setShowModal] = useState(false)
+  const { t } = useTranslation()
 
   const replay = async () => {
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)

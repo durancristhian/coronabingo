@@ -162,7 +162,7 @@ export default function Jugar() {
                     ></i>
                   </Banner>
                   <div className="mt-8">
-                    <Restart />
+                    <Restart room={room} />
                   </div>
                   <div className="mt-8">
                     <Celebrations
