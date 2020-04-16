@@ -62,7 +62,7 @@ export default function Select({
         </div>
       </label>
       {hint && (
-        <p className="italic mt-1 text-blue-800 text-xs md:text-sm">{hint}</p>
+        <p className="italic mt-1 text-gray-800 text-xs md:text-sm">{hint}</p>
       )}
     </Fragment>
   )
