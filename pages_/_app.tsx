@@ -26,10 +26,6 @@ interface ErrorInfo extends React.ErrorInfo {
 }
 
 export default class Coronabingo extends App {
-  state = {
-    hasError: false,
-  }
-
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (process.env.NODE_ENV === 'production') {
       Sentry.withScope(scope => {
