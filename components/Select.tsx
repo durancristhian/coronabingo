@@ -31,6 +31,7 @@ export default function Select({
         <div className="relative">
           <select
             id={id}
+            aria-label={id}
             className={classnames([
               'appearance-none bg-white border-2 border-gray-300 h-12 p-2 pr-6 rounded w-full',
               'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
