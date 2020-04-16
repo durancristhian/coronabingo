@@ -43,7 +43,9 @@ export default class extends Document {
               />
             </Fragment>
           )}
-          <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
+          <link rel="preconnect" href="https://twemoji.maxcdn.com" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
+          <link rel="preconnect" href="https://firestore.googleapis.com" />
         </Head>
         <body>
           <Main />

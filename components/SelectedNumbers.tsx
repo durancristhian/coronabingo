@@ -53,7 +53,7 @@ export default function SelectedNumbers({
             type="button"
             key={n}
             className={classnames([
-              'cursor-default flex items-center justify-center h-8 text-gray-600',
+              'cursor-default flex items-center justify-center h-8 text-gray-800',
               'focus:outline-none',
               'duration-150 ease-in-out transition',
               selectedNumbers.includes(n) &&
