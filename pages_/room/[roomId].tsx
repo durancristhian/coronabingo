@@ -14,7 +14,6 @@ import Message from '~/components/Message'
 import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import { Room } from '~/interfaces'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Sala() {
@@ -24,65 +23,29 @@ export default function Sala() {
 
   useEffect(scrollToTop, [])
 
-  const renderEmptyState = () => {
+  if (!room) {
     return (
-      <div className="mt-8">
-        <Message type="information">{t('sala:loading')}</Message>
-      </div>
+      <Layout>
+        <Container>
+          <Box>
+            <Message type="information">{t('sala:loading')}</Message>
+          </Box>
+        </Container>
+      </Layout>
     )
   }
 
-  const renderRoom = (room: Room) => {
-    return (
-      <Fragment>
-        <InputText
-          id="room-name"
-          label={t('sala:room-name')}
-          value={room.name || ''}
-          readonly
-          onFocus={event => event.target.select()}
-        />
-        <InputText
-          hint={t('sala:field-link-hint')}
-          id="url"
-          label={t('sala:field-link')}
-          value={`${window.location.host}/room/${room.id}`}
-          readonly
-          onFocus={event => event.target.select()}
-        />
-        <Copy content={`${window.location.host}/room/${room.id}`} />
-        {room.videoCall && (
-          <InputText
-            id="videocall"
-            label={t('sala:call-link')}
-            readonly
-            onFocus={event => event.target.select()}
-            value={room.videoCall || ''}
-          />
-        )}
-      </Fragment>
-    )
-  }
-
-  const renderPlayers = (room: Room, players: Player[]) => {
+  const renderPlayers = () => {
     if (!room.readyToPlay) {
-      return (
-        <div className="mt-8">
-          <Message type="information">{t('sala:not-ready')}</Message>
-        </div>
-      )
+      return <Message type="information">{t('sala:not-ready')}</Message>
     }
 
     if (!players.length) {
-      return (
-        <div className="mt-8">
-          <Message type="information">{t('sala:loading')}</Message>
-        </div>
-      )
+      return <Message type="information">{t('sala:loading')}</Message>
     }
 
     return (
-      <div className="mt-8">
+      <Fragment>
         <Heading type="h3" textCenter={false}>
           {t('sala:people', { count: players.length })}
         </Heading>
@@ -133,12 +96,9 @@ export default function Sala() {
             </div>
           ))}
         </div>
-      </div>
+      </Fragment>
     )
   }
-
-  const roomContent = room ? renderRoom(room) : renderEmptyState()
-  const playersContent = room ? renderPlayers(room, players) : null
 
   return (
     <Layout>
@@ -147,8 +107,32 @@ export default function Sala() {
           <div className="mb-8">
             <Heading type="h2">{t('sala:title')}</Heading>
           </div>
-          {roomContent}
-          {playersContent}
+          <InputText
+            id="room-name"
+            label={t('sala:room-name')}
+            value={room.name || ''}
+            readonly
+            onFocus={event => event.target.select()}
+          />
+          <InputText
+            hint={t('sala:field-link-hint')}
+            id="url"
+            label={t('sala:field-link')}
+            value={`${window.location.host}/room/${room.id}`}
+            readonly
+            onFocus={event => event.target.select()}
+          />
+          <Copy content={`${window.location.host}/room/${room.id}`} />
+          {room.videoCall && (
+            <InputText
+              id="videocall"
+              label={t('sala:call-link')}
+              readonly
+              onFocus={event => event.target.select()}
+              value={room.videoCall || ''}
+            />
+          )}
+          <div className="mt-8">{renderPlayers()}</div>
         </Box>
       </Container>
     </Layout>

@@ -29,25 +29,6 @@ export default function Jugar() {
 
   useEffect(scrollToTop, [])
 
-  const isAdmin = room?.adminId === player?.id
-
-  const onNewNumber = (n: number) => {
-    if (!room) return
-
-    const selectedNumbers = room.selectedNumbers || []
-    let numbers
-
-    if (selectedNumbers.includes(n)) {
-      numbers = selectedNumbers.filter((sn: number) => sn !== n)
-    } else {
-      numbers = [n, ...selectedNumbers]
-    }
-
-    room.ref.update({
-      selectedNumbers: numbers,
-    })
-  }
-
   if (!room) {
     return (
       <Layout>
@@ -58,7 +39,7 @@ export default function Jugar() {
     )
   }
 
-  if (room && !room.readyToPlay) {
+  if (!room.readyToPlay) {
     return (
       <Layout>
         <Container>
@@ -78,12 +59,29 @@ export default function Jugar() {
     )
   }
 
+  const isAdmin = room.adminId === player?.id
+
+  const onNewNumber = (n: number) => {
+    const selectedNumbers = room.selectedNumbers || []
+    let numbers
+
+    if (selectedNumbers.includes(n)) {
+      numbers = selectedNumbers.filter((sn: number) => sn !== n)
+    } else {
+      numbers = [n, ...selectedNumbers]
+    }
+
+    room.ref.update({
+      selectedNumbers: numbers,
+    })
+  }
+
   const onConfettiChange = (confettiType: ConfettiType | '') => {
     room.ref.update({ confettiType })
   }
 
   const setSoundToPlay = (soundToPlay = '') => {
-    isAdmin && room?.ref.update({ soundToPlay })
+    isAdmin && room.ref.update({ soundToPlay })
   }
 
   return (

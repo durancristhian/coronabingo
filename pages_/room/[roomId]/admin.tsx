@@ -92,12 +92,7 @@ export default function Admin() {
       <Container>
         <Box>
           <Heading type="h2">{t('admin:title')}</Heading>
-          {!room?.id && (
-            <div className="mt-8">
-              <Message type="information">{t('admin:loading')}</Message>
-            </div>
-          )}
-          {room?.id && (
+          {room ? (
             <Fragment>
               <InputText
                 id="room-name"
@@ -121,7 +116,7 @@ export default function Admin() {
                 id="videoCall"
                 label={t('admin:field-videocall')}
                 onChange={value => onFieldChange([{ key: 'videoCall', value }])}
-                value={room.videoCall || ''}
+                value={room.videoCall}
               />
               <Players
                 players={players}
@@ -154,6 +149,10 @@ export default function Admin() {
                 </Button>
               </div>
             </Fragment>
+          ) : (
+            <div className="mt-8">
+              <Message type="information">{t('admin:loading')}</Message>
+            </div>
           )}
           {message.content && (
             <div className="mt-8">
