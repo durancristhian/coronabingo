@@ -28,6 +28,7 @@ export default function Celebrations({
             className={classnames([i !== 0 && 'mt-4 md:mt-0 md:ml-4'])}
           >
             <Button
+              id={`click-${ct}`}
               color={ct === confettiType ? 'red' : 'green'}
               onClick={() =>
                 onConfettiChange(

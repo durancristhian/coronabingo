@@ -32,7 +32,11 @@ export default function Share({ content }: Props) {
 
   return (
     <div>
-      <Button className="mb-4" onClick={() => setShowModal(true)}>
+      <Button
+        id="open-share-modal"
+        className="mb-4"
+        onClick={() => setShowModal(true)}
+      >
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
