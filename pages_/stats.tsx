@@ -4,22 +4,8 @@ import Box from '~/components/Box'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Message from '~/components/Message'
+import { Stats } from '~/interfaces'
 import db from '~/utils/firebase'
-
-interface Stats {
-  roomsByDay: {
-    [key: string]: number
-  }
-  roomsConfigured: number
-  roomsOfFamilies: number
-  roomsWithOnlineBingoSpinner: number
-  roomsWithVideoCall: number
-  sortedRoomsByDay: {
-    date: string
-    value: number
-  }[]
-  totalRooms: number
-}
 
 const defaultStats = {
   roomsByDay: {},

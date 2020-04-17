@@ -5,7 +5,7 @@ import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
 import Celebrations from '~/components/Celebrations'
-import Confetti, { ConfettiType } from '~/components/Confetti'
+import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
@@ -19,43 +19,18 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
+import roomApi from '~/models/room'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
-  const [room] = useRoom()
+  const { room } = useRoom()
   const { player, setPlayer } = usePlayer()
   const { t } = useTranslation()
   const [activeSound, setActiveSound] = useState('')
 
   useEffect(scrollToTop, [])
 
-  const isAdmin = room?.adminId === player?.id
-
-  const onNewNumber = (n: number) => {
-    if (!room) return
-
-    const selectedNumbers = room.selectedNumbers || []
-    let numbers
-
-    if (selectedNumbers.includes(n)) {
-      numbers = selectedNumbers.filter((sn: number) => sn !== n)
-    } else {
-      numbers = [n, ...selectedNumbers]
-    }
-
-    room.ref.update({
-      selectedNumbers: numbers,
-    })
-  }
-
-  const onConfettiChange = (confettiType: ConfettiType | '') => {
-    room.ref.update({ confettiType })
-  }
-
-  const setSoundToPlay = (soundToPlay = '') =>
-    isAdmin && room.ref.update({ soundToPlay })
-
-  if (!room.id) {
+  if (!room) {
     return (
       <Layout>
         <Container>
@@ -65,7 +40,7 @@ export default function Jugar() {
     )
   }
 
-  if (room.id && !room.readyToPlay) {
+  if (!room.readyToPlay) {
     return (
       <Layout>
         <Container>
@@ -85,6 +60,23 @@ export default function Jugar() {
     )
   }
 
+  const isAdmin = room.adminId === player?.id
+
+  const onNewNumber = (n: number) => {
+    const selectedNumbers = room.selectedNumbers || []
+    let numbers
+
+    if (selectedNumbers.includes(n)) {
+      numbers = selectedNumbers.filter((sn: number) => sn !== n)
+    } else {
+      numbers = [n, ...selectedNumbers]
+    }
+
+    roomApi.updateRoom(room.ref, {
+      selectedNumbers: numbers,
+    })
+  }
+
   return (
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
@@ -101,9 +93,7 @@ export default function Jugar() {
                 <div className="lg:w-1/3">
                   <Box>
                     <Heading type="h2">{t('jugar:last-numbers')}</Heading>
-                    <LastNumbers
-                      selectedNumbers={room?.selectedNumbers || []}
-                    />
+                    <LastNumbers selectedNumbers={room.selectedNumbers || []} />
                   </Box>
                   <div className="hidden lg:block mt-4">
                     <Box>
@@ -163,20 +153,22 @@ export default function Jugar() {
                     ></i>
                   </Banner>
                   <div className="mt-8">
-                    <Restart />
+                    <Restart room={room} />
                   </div>
                   <div className="mt-8">
                     <Celebrations
                       confettiType={room.confettiType}
-                      onConfettiChange={onConfettiChange}
+                      onConfettiChange={confettiType => {
+                        roomApi.updateRoom(room.ref, { confettiType })
+                      }}
                     />
                   </div>
                   <div className="mt-8">
                     <Pato
                       activeSound={activeSound}
-                      onClick={sound => {
-                        setSoundToPlay(sound)
-                        setActiveSound(sound)
+                      onClick={soundToPlay => {
+                        isAdmin && roomApi.updateRoom(room.ref, { soundToPlay })
+                        setActiveSound(soundToPlay)
                       }}
                     />
                   </div>
@@ -194,7 +186,9 @@ export default function Jugar() {
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds
-          onAudioPlayed={setSoundToPlay}
+          onAudioPlayed={() => {
+            isAdmin && roomApi.updateRoom(room.ref, { soundToPlay: '' })
+          }}
           onAudioEnd={() => setActiveSound('')}
           soundToPlay={room.soundToPlay}
         />

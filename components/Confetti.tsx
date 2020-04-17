@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
+import { ConfettiType } from '~/interfaces'
 
 const confettiClasses = [
   'confetti-1',
@@ -52,11 +53,10 @@ const confettiType = {
   pallbearers: pallbearersClasses,
 }
 
-export type ConfettiType = 'confetti' | 'pallbearers'
 export const confettiTypes = ['confetti', 'pallbearers']
 
 interface Props {
-  type: ConfettiType | ''
+  type: ConfettiType
 }
 
 class Confetti extends Component<Props> {

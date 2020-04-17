@@ -1,13 +1,9 @@
+import { Locales } from '~/interfaces'
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { readdirSync, readFileSync } = require('fs')
 const { join } = require('path')
 const { allLanguages, defaultLanguage } = require('../i18n.json')
-
-interface Locales {
-  [key: string]: {
-    [key: string]: string
-  }
-}
 
 const localesPath = join(__dirname, '../locales')
 // @ts-ignore

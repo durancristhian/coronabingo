@@ -50,7 +50,7 @@ interface Props {
   className?: string
   color?: 'gray' | 'green' | 'pink' | 'red' | 'yellow'
   disabled?: boolean
-  id?: string
+  id: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   type?: 'submit' | 'button'
 }

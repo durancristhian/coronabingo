@@ -3,11 +3,12 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Heading from '~/components/Heading'
-import { roomsRef, Timestamp } from '~/utils/firebase'
+import { MessageType } from '~/interfaces'
+import roomApi from '~/models/room'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
-import Message, { MessageType } from './Message'
+import Message from './Message'
 
 export default function CreateRoom() {
   const { t } = useTranslation()
@@ -42,14 +43,9 @@ export default function CreateRoom() {
       type: 'information',
     })
 
-    const roomDoc = roomsRef.doc()
-    const roomId = roomDoc.id
-
     try {
-      await roomDoc.set({
-        bingoSpinner: true,
+      const roomId = await roomApi.createRoom({
         name: formData.name,
-        date: Timestamp.fromDate(new Date()),
       })
 
       setMessageProps({
@@ -81,7 +77,12 @@ export default function CreateRoom() {
           value={formData.name}
         />
         <div className="mt-8">
-          <Button className="w-full" disabled={!canSubmit} type="submit">
+          <Button
+            className="w-full"
+            disabled={!canSubmit}
+            type="submit"
+            id="create-room"
+          >
             <FiSmile />
             <span className="ml-4">{t('index:create-room.field-submit')}</span>
           </Button>

@@ -1,20 +1,10 @@
 import { ParsedUrlQuery } from 'querystring'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Player } from '~/components/Players'
+import { FirebaseContextData, Player } from '~/interfaces'
 import { roomsRef } from '~/utils/firebase'
 
-interface Context {
-  currentPlayer?: Player
-  setCurrentPlayer: (array: Player) => void
-  players: Player[]
-  room?: firebase.firestore.DocumentData
-  changeRoom: (data: {}) => void
-  setPlayers: (array: Player[]) => void
-}
-
-const FirebaseContext = createContext<Context>({
+const FirebaseContext = createContext<FirebaseContextData>({
   players: [],
-  changeRoom: () => null,
   setPlayers: () => null,
   setCurrentPlayer: () => null,
 })
@@ -27,31 +17,11 @@ interface Props {
 const FirebaseProvider = ({ children, routerQuery }: Props) => {
   const roomId = routerQuery.roomId?.toString()
   const playerId = routerQuery.playerId?.toString()
-  const [room, setRoom] = useState({})
   const [players, setPlayers] = useState<Player[]>([])
   const [currentPlayer, setCurrentPlayer] = useState<Player>()
 
   const sortAndSet = (array: Player[]) =>
     setPlayers(array.sort((a, b) => a.name.localeCompare(b.name)))
-
-  const changeRoom = (data: {}) => setRoom({ ...room, ...data })
-
-  useEffect(() => {
-    if (!roomId) return
-    const unsubscribe = roomsRef.doc(roomId).onSnapshot(snapshot => {
-      const roomData = snapshot.data()
-      if (roomData) {
-        setRoom({
-          id: snapshot.id,
-          exists: snapshot.exists,
-          ref: snapshot.ref,
-          ...roomData,
-        })
-      }
-    })
-
-    return unsubscribe
-  }, [roomId])
 
   useEffect(() => {
     if (!roomId) return
@@ -85,8 +55,6 @@ const FirebaseProvider = ({ children, routerQuery }: Props) => {
         currentPlayer,
         setCurrentPlayer,
         players,
-        room,
-        changeRoom,
         setPlayers: sortAndSet,
       }}
     >

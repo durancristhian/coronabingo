@@ -1,16 +1,18 @@
-import React, { ReactNode } from 'react'
 import classnames from 'classnames'
+import React, { ReactNode } from 'react'
 
 const HEADER_STYLES = {
   h1: ['text-xl', 'md:text-2xl'],
   h2: ['text-lg', 'md:text-xl', 'mb-4'],
   h3: [],
   h4: [],
+  h5: [],
+  h6: [],
 }
 
 interface Props {
   children: ReactNode
-  type?: 'h1' | 'h2' | 'h3' | 'h4'
+  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   textCenter?: boolean
 }
 

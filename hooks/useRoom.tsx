@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import { FirebaseContext } from '~/contexts/Firebase'
+import { RoomContext } from '~/contexts/RoomContext'
 
-export default function useRoom(): [firebase.firestore.DocumentData, Function] {
-  const { room = {}, changeRoom } = useContext(FirebaseContext)
-  return [room, changeRoom]
+export default function useRoom() {
+  const { room, updateRoom } = useContext(RoomContext)
+
+  return { room, updateRoom }
 }
