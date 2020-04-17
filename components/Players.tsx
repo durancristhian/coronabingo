@@ -98,6 +98,7 @@ export default function Players({
             </div>
             <div className="mb-4 ml-4">
               <Button
+                id="add-player"
                 aria-label={t('admin:players.add-player')}
                 className="w-full"
                 color="green"

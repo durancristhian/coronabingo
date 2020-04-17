@@ -77,7 +77,12 @@ export default function CreateRoom() {
           value={formData.name}
         />
         <div className="mt-8">
-          <Button className="w-full" disabled={!canSubmit} type="submit">
+          <Button
+            className="w-full"
+            disabled={!canSubmit}
+            type="submit"
+            id="create-room"
+          >
             <FiSmile />
             <span className="ml-4">{t('index:create-room.field-submit')}</span>
           </Button>

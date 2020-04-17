@@ -122,7 +122,7 @@ export default function Admin() {
               </div>
               <div className="mt-8">
                 <Button
-                  id="readyToPlay"
+                  id="configure-room"
                   className="w-full"
                   disabled={!room.adminId}
                   onClick={() => readyToPlay(room)}

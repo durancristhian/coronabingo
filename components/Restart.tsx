@@ -20,7 +20,7 @@ export default function Restart({ room }: Props) {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center">
-      <Button onClick={() => setShowModal(true)}>
+      <Button id="reboot-game" onClick={() => setShowModal(true)}>
         <FiRepeat />
         <span className="ml-4">{t('jugar:replay.reboot-game')}</span>
       </Button>
@@ -34,7 +34,7 @@ export default function Restart({ room }: Props) {
       >
         <p>{t('jugar:replay.description')}</p>
         <div className="mt-8 text-center">
-          <Button onClick={replay} color="green">
+          <Button id="confirm" onClick={replay} color="green">
             <FiThumbsUp />
             <span className="ml-4">{t('jugar:replay.confirm')}</span>
           </Button>
