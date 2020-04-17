@@ -11,9 +11,9 @@ import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
-import { Player } from '~/components/Players'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
+import { Player } from '~/interfaces'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Sala() {

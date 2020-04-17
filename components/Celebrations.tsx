@@ -2,13 +2,14 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
+import { ConfettiType } from '~/interfaces'
 import Button from './Button'
-import { ConfettiType, confettiTypes } from './Confetti'
+import { confettiTypes } from './Confetti'
 import Heading from './Heading'
 
 interface Props {
-  confettiType: ConfettiType | ''
-  onConfettiChange: (confettiType: ConfettiType | '') => void
+  confettiType: ConfettiType
+  onConfettiChange: (confettiType: ConfettiType) => void
 }
 
 export default function Celebrations({

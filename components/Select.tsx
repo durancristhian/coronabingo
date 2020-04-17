@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
+import { Option } from '~/interfaces'
 
 interface Props {
   disabled?: boolean
@@ -67,9 +68,4 @@ export default function Select({
       )}
     </Fragment>
   )
-}
-
-interface Option {
-  id: string
-  name: string
 }

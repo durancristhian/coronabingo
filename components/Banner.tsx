@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
+import { BannerType } from '~/interfaces'
 
 interface Props {
   children: ReactNode
@@ -22,5 +23,3 @@ export default function Banner({ children, type = 'information' }: Props) {
     </div>
   )
 }
-
-type BannerType = 'information' | 'emphasis' | 'error'

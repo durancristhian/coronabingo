@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Board } from '~/interfaces'
 import boardsData from '~/public/boards.json'
 
 export default function useBoards(boardNumbers: string): Board[] {
@@ -22,10 +23,3 @@ export default function useBoards(boardNumbers: string): Board[] {
 
   return boards
 }
-
-interface Board {
-  id: number
-  numbers: BoardNumbers
-}
-
-export type BoardNumbers = (number | null)[]

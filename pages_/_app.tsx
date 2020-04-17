@@ -6,6 +6,7 @@ import React, { Fragment } from 'react'
 import { FirebaseProvider } from '~/contexts/Firebase'
 import { RoomContextProvider } from '~/contexts/RoomContext'
 import { allLanguages } from '~/i18n.json'
+import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
 import * as gtag from '~/utils/gtag'
@@ -19,10 +20,6 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 
 if (process.env.GA_TRACKING_ID) {
   Router.events.on('routeChangeComplete', url => gtag.pageview(url))
-}
-
-interface ErrorInfo extends React.ErrorInfo {
-  [key: string]: string
 }
 
 export default class Coronabingo extends App {

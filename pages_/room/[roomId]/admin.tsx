@@ -10,13 +10,12 @@ import Copy from '~/components/Copy'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
-import Message, { MessageType } from '~/components/Message'
+import Message from '~/components/Message'
 import Players from '~/components/Players'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import { Room } from '~/interfaces'
-import Field from '~/interfaces/Field'
+import { MessageType, Room } from '~/interfaces'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch } from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
@@ -36,18 +35,6 @@ export default function Admin() {
 
   useEffect(scrollToTop, [])
 
-  const onFieldChange = (changes: { key: string; value: Field }[]) => {
-    const roomChanges = changes.reduce(
-      (prev, curr) => ({
-        ...prev,
-        ...{ [curr.key]: curr.value },
-      }),
-      {},
-    )
-
-    updateRoom(roomChanges)
-  }
-
   const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
     playerRef.delete()
   }
@@ -63,8 +50,10 @@ export default function Admin() {
     batch.update(room.ref, {
       ...defaultRoomData,
       ...roomApi.excludeExtraFields(room),
+      readyToPlay: true,
     })
 
+    /* TODO: Refactor this to something like 👆🏼 */
     players.map((player, index) => {
       const { name, ref: playerRef } = player
 
@@ -110,26 +99,24 @@ export default function Admin() {
               <InputText
                 id="videoCall"
                 label={t('admin:field-videocall')}
-                onChange={value => onFieldChange([{ key: 'videoCall', value }])}
+                onChange={value => updateRoom({ videoCall: value })}
                 value={room.videoCall}
               />
-              {/* TODO: this should receive the whole room */}
               <Players
                 players={players}
                 setPlayers={setPlayers}
-                adminId={room.adminId}
-                onChange={onFieldChange}
                 removePlayer={removePlayer}
-                roomRef={room.ref}
+                room={room}
+                updateRoom={updateRoom}
               />
               <div className="mt-4">
                 <Checkbox
                   hint={t('admin:field-bingo-spinner-hint')}
                   id="bingoSpinner"
                   label={t('admin:field-bingo-spinner')}
-                  onChange={value =>
-                    onFieldChange([{ key: 'bingoSpinner', value }])
-                  }
+                  onChange={value => {
+                    updateRoom({ bingoSpinner: value })
+                  }}
                   value={room.bingoSpinner}
                 />
               </div>

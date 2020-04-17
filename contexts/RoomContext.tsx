@@ -1,12 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Room } from '~/interfaces'
+import { Room, RoomBase } from '~/interfaces'
+import { RoomContextData } from '~/interfaces/contexts/RoomContext'
 import { roomsRef } from '~/utils/firebase'
-
-interface RoomContextData {
-  room?: Room
-  updateRoom: (data: Partial<Room>) => void
-}
 
 const RoomContext = createContext<RoomContextData>({
   updateRoom: () => void 0,
@@ -21,7 +17,7 @@ const RoomContextProvider = ({ children }: Props) => {
   const roomId = router.query.roomId?.toString()
   const [room, setRoom] = useState<Room>()
 
-  const updateRoom = (data: Partial<Room>) => {
+  const updateRoom = (data: Partial<RoomBase>) => {
     setRoom(Object.assign({}, room, data))
   }
 

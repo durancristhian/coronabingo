@@ -3,11 +3,12 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Heading from '~/components/Heading'
+import { MessageType } from '~/interfaces'
 import roomApi from '~/models/room'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
-import Message, { MessageType } from './Message'
+import Message from './Message'
 
 export default function CreateRoom() {
   const { t } = useTranslation()

@@ -2,9 +2,9 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import useBoards from '~/hooks/useBoards'
+import { Player } from '~/interfaces'
 import Box from './Box'
 import Cells from './Cells'
-import { Player } from './Players'
 
 interface Props {
   player: Player

@@ -5,7 +5,7 @@ import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
 import Celebrations from '~/components/Celebrations'
-import Confetti, { ConfettiType } from '~/components/Confetti'
+import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
@@ -75,15 +75,6 @@ export default function Jugar() {
     roomApi.updateRoom(room.ref, {
       selectedNumbers: numbers,
     })
-  }
-
-  /* TODO: Refactor this 2 methods to just 1 and put the logic inside the corresponding component */
-  const onConfettiChange = (confettiType: ConfettiType | '') => {
-    roomApi.updateRoom(room.ref, { confettiType })
-  }
-
-  const setSoundToPlay = (soundToPlay = '') => {
-    isAdmin && roomApi.updateRoom(room.ref, { soundToPlay })
   }
 
   return (
@@ -167,15 +158,17 @@ export default function Jugar() {
                   <div className="mt-8">
                     <Celebrations
                       confettiType={room.confettiType}
-                      onConfettiChange={onConfettiChange}
+                      onConfettiChange={confettiType => {
+                        roomApi.updateRoom(room.ref, { confettiType })
+                      }}
                     />
                   </div>
                   <div className="mt-8">
                     <Pato
                       activeSound={activeSound}
-                      onClick={sound => {
-                        setSoundToPlay(sound)
-                        setActiveSound(sound)
+                      onClick={soundToPlay => {
+                        isAdmin && roomApi.updateRoom(room.ref, { soundToPlay })
+                        setActiveSound(soundToPlay)
                       }}
                     />
                   </div>
@@ -193,7 +186,9 @@ export default function Jugar() {
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds
-          onAudioPlayed={setSoundToPlay}
+          onAudioPlayed={() => {
+            isAdmin && roomApi.updateRoom(room.ref, { soundToPlay: '' })
+          }}
           onAudioEnd={() => setActiveSound('')}
           soundToPlay={room.soundToPlay}
         />

@@ -1,8 +1,9 @@
+import { ConfettiType } from '~/interfaces'
+
 export interface RoomBase {
   adminId: string
   bingoSpinner: boolean
-  /* TODO: make a type of this */
-  confettiType: 'confetti' | 'pallbearers' | ''
+  confettiType: ConfettiType
   date: firebase.firestore.Timestamp | null
   name: string
   readyToPlay: boolean

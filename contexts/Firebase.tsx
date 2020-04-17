@@ -1,16 +1,9 @@
 import { ParsedUrlQuery } from 'querystring'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Player } from '~/components/Players'
+import { FirebaseContextData, Player } from '~/interfaces'
 import { roomsRef } from '~/utils/firebase'
 
-interface Context {
-  currentPlayer?: Player
-  setCurrentPlayer: (array: Player) => void
-  players: Player[]
-  setPlayers: (array: Player[]) => void
-}
-
-const FirebaseContext = createContext<Context>({
+const FirebaseContext = createContext<FirebaseContextData>({
   players: [],
   setPlayers: () => null,
   setCurrentPlayer: () => null,
