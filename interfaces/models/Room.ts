@@ -1,15 +1,18 @@
-export interface Room {
+export interface RoomBase {
   adminId: string
   bingoSpinner: boolean
   /* TODO: make a type of this */
-  confettiType: 'confetti' | 'pallbearers'
-  date: firebase.firestore.Timestamp
-  exists: boolean
-  id: string
+  confettiType: 'confetti' | 'pallbearers' | ''
+  date: firebase.firestore.Timestamp | null
   name: string
   readyToPlay: boolean
-  ref: firebase.firestore.DocumentReference
   selectedNumbers: number[]
   soundToPlay: string
   videoCall: string
+}
+
+export interface Room extends RoomBase {
+  exists: boolean
+  id: string
+  ref: firebase.firestore.DocumentReference
 }

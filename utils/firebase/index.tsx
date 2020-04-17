@@ -21,8 +21,11 @@ if (firebase.apps.length) {
 }
 
 const db = firebaseApp.firestore()
-const roomsRef = db.collection('rooms')
 const { Timestamp } = firebase.firestore
 
+const roomsRef = db.collection('rooms')
+
+const createBatch = () => db.batch()
+
 export default db
-export { roomsRef, Timestamp }
+export { createBatch, roomsRef, Timestamp }

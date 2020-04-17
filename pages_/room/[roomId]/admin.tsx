@@ -17,7 +17,8 @@ import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Room } from '~/interfaces'
 import Field from '~/interfaces/Field'
-import db from '~/utils/firebase'
+import roomApi, { defaultRoomData } from '~/models/room'
+import { createBatch } from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Admin() {
@@ -57,17 +58,11 @@ export default function Admin() {
       type: 'success',
     })
 
-    const batch = db.batch()
+    const batch = createBatch()
 
-    /* TODO: exclude data coming from firebase.firestore.DocumentReference */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { exists, id, ref: roomRef, ...roomValues } = room
-
-    batch.update(roomRef, {
-      ...roomValues,
-      selectedNumbers: [],
-      confettiType: '',
-      readyToPlay: true,
+    batch.update(room.ref, {
+      ...defaultRoomData,
+      ...roomApi.excludeExtraFields(room),
     })
 
     players.map((player, index) => {
@@ -118,6 +113,7 @@ export default function Admin() {
                 onChange={value => onFieldChange([{ key: 'videoCall', value }])}
                 value={room.videoCall}
               />
+              {/* TODO: this should receive the whole room */}
               <Players
                 players={players}
                 setPlayers={setPlayers}

@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Heading from '~/components/Heading'
-import { roomsRef, Timestamp } from '~/utils/firebase'
+import roomApi from '~/models/room'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
 import Button from './Button'
 import InputText from './InputText'
@@ -42,15 +42,9 @@ export default function CreateRoom() {
       type: 'information',
     })
 
-    const roomDoc = roomsRef.doc()
-    const roomId = roomDoc.id
-
     try {
-      /* TODO: Add default values for all attributes in the room */
-      await roomDoc.set({
-        bingoSpinner: true,
+      const roomId = await roomApi.createRoom({
         name: formData.name,
-        date: Timestamp.fromDate(new Date()),
       })
 
       setMessageProps({

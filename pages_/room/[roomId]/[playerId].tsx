@@ -19,6 +19,7 @@ import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
+import roomApi from '~/models/room'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
@@ -71,17 +72,18 @@ export default function Jugar() {
       numbers = [n, ...selectedNumbers]
     }
 
-    room.ref.update({
+    roomApi.updateRoom(room.ref, {
       selectedNumbers: numbers,
     })
   }
 
+  /* TODO: Refactor this 2 methods to just 1 and put the logic inside the corresponding component */
   const onConfettiChange = (confettiType: ConfettiType | '') => {
-    room.ref.update({ confettiType })
+    roomApi.updateRoom(room.ref, { confettiType })
   }
 
   const setSoundToPlay = (soundToPlay = '') => {
-    isAdmin && room.ref.update({ soundToPlay })
+    isAdmin && roomApi.updateRoom(room.ref, { soundToPlay })
   }
 
   return (
