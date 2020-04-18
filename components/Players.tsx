@@ -112,7 +112,10 @@ export default function Players({
         </fieldset>
       </form>
       {!!players.length && (
-        <div className="border-gray-300 border-t-2 mt-4 -mx-4">
+        <div
+          className="border-gray-300 border-t-2 mt-4 -mx-4"
+          id="players-list"
+        >
           {players.map((player, index) => (
             <div
               key={index}

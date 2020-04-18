@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Create room flow', () => {
+describe('Home', () => {
   beforeEach(() => {
     cy.server()
 
