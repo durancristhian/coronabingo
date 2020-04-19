@@ -4,61 +4,78 @@ const { join } = require('path')
 const pdfParse = require('pdf-parse')
 
 /* TODO: move to ~/interfaces */
-interface PDFData {
-  text: string
+interface RenderOptions {
+  normalizeWhitespace: boolean
+}
+
+interface Cell {
+  str: string
+}
+
+interface TextContent {
+  items: Cell[]
+}
+
+interface PageData {
+  getTextContent: (options: RenderOptions) => Promise<TextContent>
 }
 
 const createEmptyArray = () => new Array(9).fill(null)
 
-const getBoardNumbers = (array: string[], except: string) => {
+const buildBoards = (numbers: number[]) => {
   let boardNumber = 0
   let lineNumber = 0
-  return JSON.stringify(
-    array
-      .reduce((acc: string[][][], item: any) => {
-        if (!acc[boardNumber]) {
-          acc[boardNumber] = [
-            createEmptyArray(),
-            createEmptyArray(),
-            createEmptyArray(),
-          ]
-        }
-        if (item.str !== except) {
-          let index = Math.floor(Number(item.str) / 10)
-          if (index > acc[boardNumber][lineNumber].length - 1) {
-            index--
-          }
-          acc[boardNumber][lineNumber][index] = item.str
-          if (acc[boardNumber][lineNumber].filter(x => x).length === 5) {
-            lineNumber = lineNumber + 1
-            if (lineNumber === 3) {
-              boardNumber = boardNumber + 1
-              lineNumber = 0
-            }
-          }
-        }
-        return acc
-      }, [])
-      .map((m: any) => m.flat()),
-  )
+
+  return numbers.reduce((acc: number[][][], number) => {
+    if (!acc[boardNumber]) {
+      acc[boardNumber] = [
+        createEmptyArray(),
+        createEmptyArray(),
+        createEmptyArray(),
+      ]
+    }
+
+    let index = Math.floor(number / 10)
+
+    if (index > acc[boardNumber][lineNumber].length - 1) {
+      index--
+    }
+
+    acc[boardNumber][lineNumber][index] = number
+
+    if (acc[boardNumber][lineNumber].filter(n => n).length === 5) {
+      lineNumber = lineNumber + 1
+
+      if (lineNumber === 3) {
+        boardNumber = boardNumber + 1
+        lineNumber = 0
+      }
+    }
+
+    return acc
+  }, [])
 }
 
-// @ts-ignore
-const renderPage = pageData => {
-  const render_options = {
+const renderPage = (pageData: PageData) => {
+  const renderOptions = {
     normalizeWhitespace: true,
   }
-  // @ts-ignore
+
+  /* TODO: use await */
   return pageData
-    .getTextContent(render_options)
-    .then((textContent: any) =>
-      getBoardNumbers(textContent.items, 'www.bingo.es'),
-    )
-    .catch(console.log)
+    .getTextContent(renderOptions)
+    .then(textContent => textContent.items)
+    .then(items => items.filter(({ str }) => str !== 'www.bingo.es'))
+    .then(items => items.map(({ str }) => Number(str)))
+    .then(numbers => buildBoards(numbers))
+    .catch((error: Error) => {
+      throw new Error(error.message)
+    })
 }
 
-const pdfNames = [1, 2, 3, 4]
+const pdfNames = ['1', '2', '3', '4']
 
+/* TODO: use await */
 Promise.all(
   pdfNames.map(async pdfName => {
     const pdf = readFileSync(join(__dirname, 'boards', `${pdfName}.pdf`))
@@ -71,18 +88,23 @@ Promise.all(
       return text
         .split('\n')
         .filter((x: string) => x)
-        .map((page: string) => JSON.parse(page))
-        .flat()
-        .filter((x: []) => x.some(n => n))
+        .map((page: string) => {
+          return page.split(',').map(n => (n ? Number(n) : null))
+        })
     } catch (error) {
       throw new Error(error.message)
     }
   }),
 ).then(boards => {
-  writeFileSync(
-    join(__dirname, 'boards', `boards.json`),
-    JSON.stringify(boards.flat()),
-  )
+  try {
+    writeFileSync(
+      /* TODO: update name */
+      join(__dirname, '..', 'public', 'boards2.json'),
+      JSON.stringify(boards, null, 2),
+    )
+  } catch (error) {
+    throw new Error(error.message)
+  }
 })
 
 export {}
