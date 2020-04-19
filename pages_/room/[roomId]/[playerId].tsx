@@ -30,7 +30,7 @@ export default function Jugar() {
 
   useEffect(scrollToTop, [])
 
-  if (!room) {
+  if (!room || !player) {
     return (
       <Layout>
         <Container>
@@ -50,11 +50,11 @@ export default function Jugar() {
     )
   }
 
-  if (!player) {
+  if (!player.exists) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('jugar:out-of-room')}</Message>
+          <Message type="error">{t('jugar:out-of-room')}</Message>
         </Container>
       </Layout>
     )
