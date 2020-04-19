@@ -154,7 +154,7 @@ export const DREAMS_EMOJIS = [
   'em-rat',
   'em-scream',
 ]
-export const MAX_PLAYERS = boardsData.length
+export const MAX_PLAYERS = boardsData.length / 2
 export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',
