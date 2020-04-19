@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { FiRepeat, FiThumbsUp } from 'react-icons/fi'
 import Modal from '~/components/Modal'
 import { Room } from '~/interfaces'
+import roomApi from '~/models/room'
 import Button from './Button'
 
 interface Props {
@@ -15,6 +16,8 @@ export default function Restart({ room }: Props) {
   const { t } = useTranslation()
 
   const replay = async () => {
+    await roomApi.updateRoom(room.ref, { readyToPlay: false })
+
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
