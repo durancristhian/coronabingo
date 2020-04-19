@@ -26,34 +26,35 @@ const buildBoards = (numbers: number[]) => {
   let boardNumber = 0
   let lineNumber = 0
 
-  return numbers.reduce((acc: number[][][], number) => {
-    if (!acc[boardNumber]) {
-      acc[boardNumber] = [
-        createEmptyArray(),
-        createEmptyArray(),
-        createEmptyArray(),
-      ]
-    }
-
-    let index = Math.floor(number / 10)
-
-    if (index > acc[boardNumber][lineNumber].length - 1) {
-      index--
-    }
-
-    acc[boardNumber][lineNumber][index] = number
-
-    if (acc[boardNumber][lineNumber].filter(n => n).length === 5) {
-      lineNumber = lineNumber + 1
-
-      if (lineNumber === 3) {
-        boardNumber = boardNumber + 1
-        lineNumber = 0
+  return JSON.stringify(
+    numbers.reduce((acc: number[][][], number) => {
+      if (!acc[boardNumber]) {
+        acc[boardNumber] = [
+          createEmptyArray(),
+          createEmptyArray(),
+          createEmptyArray(),
+        ]
       }
-    }
 
-    return acc
-  }, [])
+      let index = Math.floor(number / 10)
+      if (index > acc[boardNumber][lineNumber].length - 1) {
+        index--
+      }
+
+      acc[boardNumber][lineNumber][index] = number
+
+      if (acc[boardNumber][lineNumber].filter(n => n).length === 5) {
+        lineNumber = lineNumber + 1
+
+        if (lineNumber === 3) {
+          boardNumber = boardNumber + 1
+          lineNumber = 0
+        }
+      }
+
+      return acc
+    }, []),
+  )
 }
 
 const renderPage = (pageData: PageData) => {
@@ -73,6 +74,9 @@ const renderPage = (pageData: PageData) => {
     })
 }
 
+const flat = (array: [][]) =>
+  array.reduce((acc: [][], curr) => acc.concat(...curr), [])
+
 const pdfNames = ['1', '2', '3', '4']
 
 /* TODO: use await */
@@ -84,23 +88,21 @@ Promise.all(
       const { text } = await pdfParse(pdf, {
         pagerender: renderPage,
       })
-
       return text
         .split('\n')
         .filter((x: string) => x)
-        .map((page: string) => {
-          return page.split(',').map(n => (n ? Number(n) : null))
-        })
+        .map((page: string) => JSON.parse(page).map(flat))
     } catch (error) {
       throw new Error(error.message)
     }
   }),
 ).then(boards => {
   try {
+    const flattedBoards = flat(boards)
     writeFileSync(
       /* TODO: update name */
       join(__dirname, '..', 'public', 'boards2.json'),
-      JSON.stringify(boards, null, 2),
+      JSON.stringify(flattedBoards, null, 2),
     )
   } catch (error) {
     throw new Error(error.message)
