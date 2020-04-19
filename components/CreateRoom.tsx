@@ -19,9 +19,11 @@ export default function CreateRoom() {
   const [messageProps, setMessageProps] = useState<{
     message: string
     type: MessageType
+    visible: boolean
   }>({
     message: '',
     type: 'information',
+    visible: false,
   })
 
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function CreateRoom() {
     setMessageProps({
       message: t('index:create-room.saving'),
       type: 'information',
+      visible: true,
     })
 
     try {
@@ -51,6 +54,7 @@ export default function CreateRoom() {
       setMessageProps({
         message: t('index:create-room.success'),
         type: 'success',
+        visible: true,
       })
 
       setTimeout(() => {
@@ -60,6 +64,7 @@ export default function CreateRoom() {
       setMessageProps({
         message: t('index:create-room.error'),
         type: 'error',
+        visible: true,
       })
     }
   }
@@ -88,7 +93,7 @@ export default function CreateRoom() {
           </Button>
         </div>
       </form>
-      {messageProps.message && (
+      {messageProps.visible && (
         <div className="mt-8">
           <Message type={messageProps.type}>{messageProps.message}</Message>
         </div>
