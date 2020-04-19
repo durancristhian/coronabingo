@@ -1,24 +1,9 @@
+import { PageData } from '~/interfaces'
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { readFileSync, writeFileSync } = require('fs')
 const { join } = require('path')
 const pdfParse = require('pdf-parse')
-
-/* TODO: move to ~/interfaces */
-interface RenderOptions {
-  normalizeWhitespace: boolean
-}
-
-interface Cell {
-  str: string
-}
-
-interface TextContent {
-  items: Cell[]
-}
-
-interface PageData {
-  getTextContent: (options: RenderOptions) => Promise<TextContent>
-}
 
 const createEmptyArray = () => new Array(9).fill(null)
 
@@ -62,7 +47,6 @@ const renderPage = (pageData: PageData) => {
     normalizeWhitespace: true,
   }
 
-  /* TODO: use await */
   return pageData
     .getTextContent(renderOptions)
     .then(textContent => textContent.items)
@@ -79,7 +63,6 @@ const flat = (array: [][]) =>
 
 const pdfNames = ['1', '2', '3', '4']
 
-/* TODO: use await */
 Promise.all(
   pdfNames.map(async pdfName => {
     const pdf = readFileSync(join(__dirname, 'boards', `${pdfName}.pdf`))
@@ -99,9 +82,9 @@ Promise.all(
 ).then(boards => {
   try {
     const flattedBoards = flat(boards)
+
     writeFileSync(
-      /* TODO: update name */
-      join(__dirname, '..', 'public', 'boards2.json'),
+      join(__dirname, '..', 'public', 'boards.json'),
       JSON.stringify(flattedBoards, null, 2),
     )
   } catch (error) {
