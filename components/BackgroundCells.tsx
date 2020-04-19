@@ -19,6 +19,7 @@ export default function BackgroundCells() {
         {BACKGROUND_CELL_VALUES.map(({ key, type, value }, i) => {
           const firstOrDefault = Array.isArray(value) ? value[0] : value
           const isChecked = backgroundCell.value.toString() === value.toString()
+
           return (
             <div className="pb-4 pr-4 w-32" key={value.toString()}>
               <label

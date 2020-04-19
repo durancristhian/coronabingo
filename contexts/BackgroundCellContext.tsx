@@ -35,6 +35,10 @@ const BackgroundCellContextProvider = ({ children, playerId }: Props) => {
     try {
       setBackgroundCell(backgroundCell)
 
+      /*
+        TODO: this is always overwriting the existing value
+        and it changes every game because the playerId changes too
+      */
       localStorage.setItem(
         'backgroundCell',
         JSON.stringify({ [playerId]: backgroundCell }),

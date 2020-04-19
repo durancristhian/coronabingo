@@ -18,14 +18,15 @@ export default function Boards({ player, setPlayerProps }: Props) {
   useEffect(() => {
     if (player.id) {
       try {
-        const roomValues = JSON.parse(
-          localStorage.getItem('roomValues') || '{}',
-        )
+        const values = localStorage.getItem('roomValues') || '{}'
+        const roomValues = JSON.parse(values)
         const playerValues = roomValues?.[player.id] || {}
+
         player.ref.update(playerValues)
+
         localStorage.removeItem('roomValues')
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        console.error(error)
       }
     }
   }, [player.id])
