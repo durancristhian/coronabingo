@@ -140,7 +140,7 @@ export default function Players({
                 <Button
                   aria-label={t('admin:players.remove-player')}
                   color="red"
-                  id="remove-player"
+                  id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
                 >
                   <FiTrash2 />

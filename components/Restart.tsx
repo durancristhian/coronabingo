@@ -25,6 +25,7 @@ export default function Restart({ room }: Props) {
         <span className="ml-4">{t('jugar:replay.reboot-game')}</span>
       </Button>
       <Modal
+        id="modal-restart"
         contentLabel="Reiniciar sala"
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
