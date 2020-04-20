@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
@@ -10,10 +10,9 @@ import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
-import Pato from '~/components/Pato'
+import Options from '~/components/Options'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
-import Tabs from '~/components/Tabs'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
@@ -25,7 +24,6 @@ export default function Jugar() {
   const { room } = useRoom()
   const { player, setPlayer } = usePlayer()
   const { t } = useTranslation()
-  const [activeSound, setActiveSound] = useState('')
 
   useEffect(scrollToTop, [])
 
@@ -59,7 +57,7 @@ export default function Jugar() {
     )
   }
 
-  const isAdmin = room.adminId === player?.id
+  const isAdmin = room.adminId === player.id
 
   const onNewNumber = (n: number) => {
     const selectedNumbers = room.selectedNumbers || []
@@ -140,7 +138,7 @@ export default function Jugar() {
             </div>
           </div>
           <div className="mt-8">
-            <Tabs room={room} />
+            <Options isAdmin={isAdmin} room={room} />
           </div>
           {isAdmin && (
             <div className="mt-8">
@@ -162,28 +160,13 @@ export default function Jugar() {
                       }}
                     />
                   </div>
-                  <div className="mt-8">
-                    <Pato
-                      activeSound={activeSound}
-                      onClick={soundToPlay => {
-                        isAdmin && roomApi.updateRoom(room.ref, { soundToPlay })
-                        setActiveSound(soundToPlay)
-                      }}
-                    />
-                  </div>
                 </Box>
               </Container>
             </div>
           )}
         </Layout>
         <Confetti type={room.confettiType} />
-        <Sounds
-          onAudioPlayed={() => {
-            isAdmin && roomApi.updateRoom(room.ref, { soundToPlay: '' })
-          }}
-          onAudioEnd={() => setActiveSound('')}
-          soundToPlay={room.soundToPlay}
-        />
+        <Sounds isAdmin={isAdmin} room={room} />
       </BackgroundCellContextProvider>
     </EasterEggContextProvider>
   )

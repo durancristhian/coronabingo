@@ -1,31 +1,29 @@
 import { useEffect } from 'react'
+import { Room } from '~/interfaces'
+import roomApi from '~/models/room'
 
 interface Props {
-  onAudioEnd: () => void
-  onAudioPlayed: () => void
-  soundToPlay: string
+  isAdmin: boolean
+  room: Room
 }
 
-export default function Sounds({
-  onAudioEnd,
-  onAudioPlayed,
-  soundToPlay,
-}: Props) {
+export default function Sounds({ isAdmin, room }: Props) {
   useEffect(() => {
-    if (!soundToPlay) return
-    const audio = new Audio(soundToPlay)
+    if (!room.soundToPlay) return
+
+    const audio = new Audio(room.soundToPlay)
     audio.volume = 0.3
     audio
       .play()
       .catch(() => null)
       .finally(() => {
-        onAudioPlayed()
         setTimeout(() => {
-          onAudioEnd()
           audio.remove()
+
+          isAdmin && roomApi.updateRoom(room.ref, { soundToPlay: '' })
         }, audio.duration * 1000)
       })
-  }, [soundToPlay])
+  }, [room.soundToPlay])
 
   return null
 }
