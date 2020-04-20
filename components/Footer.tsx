@@ -59,7 +59,7 @@ export default function Footer() {
       >
         <Container size="large">
           <p>{t('common:donate-copy')}</p>
-          <div className="flex justify-center items-center mt-4">
+          <div className="flex justify-center items-center mt-8">
             <ShareButton
               imageURL="/mercado-pago.png"
               imageAlt="Mercado Pago"
