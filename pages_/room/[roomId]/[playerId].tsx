@@ -1,5 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect } from 'react'
+import AdminOptions from '~/components/AdminOptions'
+import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
@@ -8,9 +10,9 @@ import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
-import Options from '~/components/Options'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
+import UserOptions from '~/components/UserOptions'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
@@ -117,6 +119,9 @@ export default function Jugar() {
                         })
                       }
                     />
+                    <div className="mt-4">
+                      <UserOptions />
+                    </div>
                   </div>
                 )}
               </div>
@@ -135,9 +140,25 @@ export default function Jugar() {
               </Box>
             </div>
           </div>
-          <div className="mt-8">
-            <Options isAdmin={isAdmin} room={room} />
-          </div>
+          {isAdmin && (
+            <div className="mt-4">
+              <Container>
+                <Box>
+                  <Banner>
+                    <span className="mr-1">{t('jugar:admin-title')}</span>
+                    <i
+                      className="em em-sunglasses"
+                      tabIndex={-1}
+                      aria-label="Smiling face with sunglasses"
+                    ></i>
+                  </Banner>
+                  <div className="mt-4">
+                    <AdminOptions room={room} />
+                  </div>
+                </Box>
+              </Container>
+            </div>
+          )}
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds isAdmin={isAdmin} room={room} />

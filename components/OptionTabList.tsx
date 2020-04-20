@@ -5,10 +5,12 @@ interface Props {
   children: ReactNode
 }
 
-export default function OptionTabList({ children }: Props) {
+export default function OptionTabList({ children, ...otherProps }: Props) {
   return (
-    <TabList>
-      <div className="flex justify-center items-center">{children}</div>
+    <TabList {...otherProps}>
+      <div className="flex flex-wrap justify-center items-center">
+        {children}
+      </div>
     </TabList>
   )
 }

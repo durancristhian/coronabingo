@@ -6,6 +6,7 @@
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
   "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
+  "admin-title": "Estás viendo este panel porque sos quien dirige la sala",
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
   "show-pallbearers": "Mostrar ghaneses del ataúd",
@@ -19,6 +20,9 @@
   "empty-cells": {
     "title": "Fondo de las celdas vacías",
     "url": "O bien, pegá el link a una imágen en internet"
+  },
+  "user-options": {
+    "configure-boards": "Configurar cartones"
   },
   "backgrounds": {
     "yellow": "Amarillo",
@@ -36,7 +40,7 @@
   },
   "dreams-link": "¿Qué es esto?",
   "play-sound": "Reproducir {{name}}",
-  "sounds": "Botonera",
+  "sounds": "Sonidos",
   "dreams": {
     "1": "Agua",
     "2": "El niño",

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const CONTAINER_SIZES = {
-  small: 'md:w-2/4',
+  small: 'md:w-3/4',
   large: 'w-full',
 }
 

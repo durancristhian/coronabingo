@@ -31,10 +31,10 @@ export default function ShareButton({
         className={classnames([
           'rounded-full',
           iconBgColor,
-          Icon ? 'p-4' : 'p-3',
+          Icon ? 'p-4' : 'p-2',
         ])}
       >
-        {Icon && <Icon className="m-auto text-2xl md:text-3xl text-white" />}
+        {Icon && <Icon className="m-auto text-2xl text-white" />}
         {imageURL && (
           <img src={imageURL} alt={imageAlt} className="h-10 w-10" />
         )}
