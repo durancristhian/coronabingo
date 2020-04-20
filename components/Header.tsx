@@ -41,7 +41,12 @@ export default function Header() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <Heading type="h1">
-            <a href={href}>Coronabingo</a>
+            <a
+              href={href}
+              className="duration-150 ease-in-out focus:outline-none focus:shadow-outline outline-none transition"
+            >
+              Coronabingo
+            </a>
           </Heading>
           <Select
             id="language"

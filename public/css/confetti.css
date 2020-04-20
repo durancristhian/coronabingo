@@ -205,7 +205,7 @@
   background-color: #f2d74e;
 }
 
-[class*="pallbearer-"] {
+[class*='pallbearer-'] {
   background-size: cover;
   height: 50px;
   width: 50px;

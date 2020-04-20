@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect, useState } from 'react'
-import BackgroundCells from '~/components/BackgroundCells'
 import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
@@ -12,9 +11,9 @@ import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Pato from '~/components/Pato'
-import Restart from '~/components/Restart'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
+import Tabs from '~/components/Tabs'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
@@ -140,6 +139,9 @@ export default function Jugar() {
               </Box>
             </div>
           </div>
+          <div className="mt-8">
+            <Tabs room={room} />
+          </div>
           {isAdmin && (
             <div className="mt-8">
               <Container size="large">
@@ -152,9 +154,6 @@ export default function Jugar() {
                       aria-label="Smiling face with sunglasses"
                     ></i>
                   </Banner>
-                  <div className="mt-8">
-                    <Restart room={room} />
-                  </div>
                   <div className="mt-8">
                     <Celebrations
                       confettiType={room.confettiType}
@@ -176,13 +175,6 @@ export default function Jugar() {
               </Container>
             </div>
           )}
-          <div className="mt-8">
-            <Container size="large">
-              <Box>
-                <BackgroundCells />
-              </Box>
-            </Container>
-          </div>
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds

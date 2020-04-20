@@ -26,25 +26,15 @@
   cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
 
+.text-shadow-white {
+  text-shadow: 1px 1px 0 white;
+}
+
 .toast {
-  @apply fixed;
+  position: fixed;
   left: 16px;
   transition: bottom 0.5s;
   width: 300px;
-}
-
-@media (max-width: 640px) {
-  .cursor-poroto {
-    cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
-  }
-
-  .toast {
-    width: calc(100% - 32px);
-  }
-}
-
-.text-shadow-white {
-  text-shadow: 1px 1px 0 white;
 }
 
 .visually-hidden {
@@ -59,4 +49,14 @@
 
 .w-1\/10 {
   width: calc(100% / 9);
+}
+
+@media (max-width: 640px) {
+  .cursor-poroto {
+    cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
+  }
+
+  .toast {
+    width: calc(100% - 32px);
+  }
 }
