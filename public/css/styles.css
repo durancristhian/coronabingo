@@ -14,6 +14,14 @@
   box-shadow: 0 0 1px red;
 }
 
+.bg-mercado-pago {
+  background-color: #009EE3;
+}
+
+.bg-paypal {
+  background-color: #253B80;
+}
+
 .bg-telegram {
   background-color: #0088cc;
 }

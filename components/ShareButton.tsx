@@ -2,7 +2,9 @@ import classnames from 'classnames'
 import React, { MouseEvent } from 'react'
 
 interface Props {
-  Icon: Function
+  Icon?: Function
+  imageURL?: string
+  imageAlt?: string
   iconBgColor: string
   label: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
@@ -10,6 +12,8 @@ interface Props {
 
 export default function ShareButton({
   Icon,
+  imageURL,
+  imageAlt,
   iconBgColor,
   label,
   onClick,
@@ -23,8 +27,17 @@ export default function ShareButton({
       ])}
       onClick={onClick}
     >
-      <div className={classnames(['p-4 rounded-full', iconBgColor])}>
-        <Icon className="m-auto text-2xl md:text-3xl text-white" />
+      <div
+        className={classnames([
+          'rounded-full',
+          iconBgColor,
+          Icon ? 'p-4' : 'p-3',
+        ])}
+      >
+        {Icon && <Icon className="m-auto text-2xl md:text-3xl text-white" />}
+        {imageURL && (
+          <img src={imageURL} alt={imageAlt} className="h-10 w-10" />
+        )}
       </div>
       <p className="mt-2 text-gray-600 text-xs md:text-sm">{label}</p>
     </button>
