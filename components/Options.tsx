@@ -1,9 +1,10 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
-import { FiPlay, FiRepeat, FiSliders } from 'react-icons/fi'
+import { FiCloudSnow, FiRepeat, FiSliders, FiVolume2 } from 'react-icons/fi'
 import { Tabs } from 'react-tabs'
 import BackgroundCells from '~/components/BackgroundCells'
 import { Room } from '~/interfaces'
+import Celebrations from './Celebrations'
 import OptionTab from './OptionTab'
 import OptionTabList from './OptionTabList'
 import OptionTabPanel from './OptionTabPanel'
@@ -29,7 +30,8 @@ export default function Options({ isAdmin, room }: Props) {
         <OptionTab Icon={FiSliders}></OptionTab>
         {isAdmin && (
           <Fragment>
-            <OptionTab Icon={FiPlay}></OptionTab>
+            <OptionTab Icon={FiCloudSnow}></OptionTab>
+            <OptionTab Icon={FiVolume2}></OptionTab>
             <OptionTab Icon={FiRepeat}></OptionTab>
           </Fragment>
         )}
@@ -43,6 +45,13 @@ export default function Options({ isAdmin, room }: Props) {
       </OptionTabPanel>
       {isAdmin && (
         <Fragment>
+          <OptionTabPanel
+            id="modal-celebrations"
+            title={t('jugar:celebrations')}
+            onRequestClose={resetCurrentTabIndex}
+          >
+            <Celebrations room={room} />
+          </OptionTabPanel>
           <OptionTabPanel
             id="modal-sounds"
             title={t('jugar:sounds')}

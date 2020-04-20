@@ -1,9 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { useEffect } from 'react'
-import Banner from '~/components/Banner'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
-import Celebrations from '~/components/Celebrations'
 import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
@@ -140,30 +138,6 @@ export default function Jugar() {
           <div className="mt-8">
             <Options isAdmin={isAdmin} room={room} />
           </div>
-          {isAdmin && (
-            <div className="mt-8">
-              <Container size="large">
-                <Box>
-                  <Banner>
-                    <span className="mr-1">{t('jugar:admin-title')}</span>
-                    <i
-                      className="em em-sunglasses"
-                      tabIndex={-1}
-                      aria-label="Smiling face with sunglasses"
-                    ></i>
-                  </Banner>
-                  <div className="mt-8">
-                    <Celebrations
-                      confettiType={room.confettiType}
-                      onConfettiChange={confettiType => {
-                        roomApi.updateRoom(room.ref, { confettiType })
-                      }}
-                    />
-                  </div>
-                </Box>
-              </Container>
-            </div>
-          )}
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds isAdmin={isAdmin} room={room} />
