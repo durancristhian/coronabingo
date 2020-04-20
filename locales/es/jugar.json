@@ -13,6 +13,7 @@
   "hide-pallbearers": "Ocultar ghaneses del ataúd",
   "celebrations": "Festejos",
   "replay": {
+    "reboot-game": "Reiniciar partida",
     "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas, cambiar roles y redistribuir los cartones.",
     "confirm": "Confirmar"
   },

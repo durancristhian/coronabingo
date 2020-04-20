@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext } from 'react'
+import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
-import Heading from '~/components/Heading'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 import InputText from './InputText'
@@ -12,55 +12,55 @@ export default function BackgroundCells() {
     BackgroundCellContext,
   )
   const { t } = useTranslation()
+
   return (
     <Fragment>
-      <Heading type="h2">{t('jugar:empty-cells.title')}</Heading>
-      <div className="flex flex-wrap">
+      <div className="mt-4">
         {BACKGROUND_CELL_VALUES.map(({ key, type, value }, i) => {
           const firstOrDefault = Array.isArray(value) ? value[0] : value
-          const isChecked = backgroundCell.value.toString() === value.toString()
+          const isActive = backgroundCell.value.toString() === value.toString()
 
           return (
-            <div className="pb-4 pr-4 w-32" key={value.toString()}>
-              <label
-                htmlFor={i.toString()}
+            <button
+              key={i}
+              className={classnames([
+                'flex items-center justify-between w-full',
+                'focus:outline-none focus:bg-gray-400 hover:bg-gray-400',
+                'duration-150 ease-in-out transition',
+                isActive
+                  ? 'bg-green-200'
+                  : i % 2 === 0
+                  ? 'bg-gray-100'
+                  : 'bg-gray-200',
+              ])}
+              onClick={() =>
+                setBackgroundCell({
+                  type,
+                  value,
+                })
+              }
+            >
+              <div
                 className={classnames([
-                  'bg-gray-100 block border-2 border-gray-300 cursor-pointer px-4 py-2 rounded',
-                  'focus-within:outline-none focus-within:shadow-outline',
-                  'duration-150 ease-in-out transition',
-                  isChecked && 'bg-gray-300 border-gray-600',
+                  'bg-center bg-contain bg-no-repeat h-16 w-16',
+                  type === 'color' && COLORS[firstOrDefault],
                 ])}
-              >
-                <input
-                  type="radio"
-                  name="background"
-                  id={i.toString()}
-                  className="visually-hidden"
-                  onChange={() =>
-                    setBackgroundCell({
-                      type,
-                      value,
-                    })
-                  }
-                  checked={isChecked}
-                />
-                <div
-                  className={classnames([
-                    'bg-center bg-contain bg-no-repeat h-16 mb-2 w-full',
-                    type === 'color' && COLORS[firstOrDefault],
-                  ])}
-                  style={{
-                    ...(type === 'img' && {
-                      backgroundImage: `url(/background-cells/${firstOrDefault})`,
-                    }),
-                    ...(type === 'url' && {
-                      backgroundImage: `url(${firstOrDefault})`,
-                    }),
-                  }}
-                ></div>
-                <p className="italic text-center truncate">{t(key)}</p>
-              </label>
-            </div>
+                style={{
+                  ...(type === 'img' && {
+                    backgroundImage: `url(/background-cells/${firstOrDefault})`,
+                  }),
+                  ...(type === 'url' && {
+                    backgroundImage: `url(${firstOrDefault})`,
+                  }),
+                }}
+              ></div>
+              <div className="flex flex-auto items-center mx-4">
+                <p className="text-center truncate">{t(key)}</p>
+              </div>
+              <div className="mr-4">
+                {isActive && <FiCheck className="text-xl" />}
+              </div>
+            </button>
           )
         })}
       </div>

@@ -45,7 +45,7 @@ export default function Share({ content }: Props) {
       </Toast>
       <Modal
         id="modal-share"
-        contentLabel="Compartir Link"
+        contentLabel={t('common:share-link')}
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         className="modal"

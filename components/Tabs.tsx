@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import React, { useState } from 'react'
 import { FiRepeat, FiSliders } from 'react-icons/fi'
 import BackgroundCells from '~/components/BackgroundCells'
@@ -12,21 +13,47 @@ interface Props {
 }
 
 export default function Tabs({ room }: Props) {
+  const { t } = useTranslation()
+  const defaultModalValue = {
+    config: { id: '', title: '' },
+    content: null,
+    visible: false,
+  }
   const [modal, setModal] = useState<{
+    config: {
+      id: string
+      title: string
+    }
     content: JSX.Element | null
     visible: boolean
-  }>({ content: null, visible: false })
+  }>(defaultModalValue)
 
   const TABS = [
-    { Icon: FiSliders, Component: <BackgroundCells /> },
-    { Icon: FiRepeat, Component: <Restart room={room} /> },
+    {
+      Icon: FiSliders,
+      Component: <BackgroundCells />,
+      config: {
+        id: 'modal-background-cells',
+        title: t('jugar:empty-cells.title'),
+      },
+    },
+    {
+      Icon: FiRepeat,
+      Component: <Restart room={room} />,
+      config: {
+        id: 'modal-restart',
+        title: t('jugar:replay.reboot-game'),
+      },
+    },
   ]
 
   return (
     <div className="flex items-center justify-center">
-      {TABS.map(({ Icon, Component }, index) => (
+      {TABS.map(({ Component, Icon, config }, index) => (
         <button
-          onClick={() => setModal({ content: Component, visible: true })}
+          onClick={() =>
+            setModal({ config, content: Component, visible: true })
+          }
           key={index}
           className={classnames([
             'bg-gray-500 h-16 mx-2 outline-none rounded-full w-16',
@@ -38,16 +65,13 @@ export default function Tabs({ room }: Props) {
         </button>
       ))}
       <Modal
-        /* TODO */
-        id="modal-"
-        /* TODO */
-        contentLabel="contentLabel"
+        id={modal.config.id}
+        contentLabel={modal.config.title}
         isOpen={modal.visible}
-        onRequestClose={() => setModal({ content: null, visible: false })}
+        onRequestClose={() => setModal(defaultModalValue)}
         className="modal"
         overlayClassName="overlay"
-        /* TODO */
-        title="Title"
+        title={modal.config.title}
       >
         <Container size="large">{modal.content}</Container>
       </Modal>
