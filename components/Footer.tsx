@@ -1,9 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import { FaPaypal } from 'react-icons/fa'
-import { FiHeart } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
-import Button from '~/components/Button'
 import Container from '~/components/Container'
 import Modal from '~/components/Modal'
 import ShareButton from '~/components/ShareButton'
@@ -26,23 +24,29 @@ export default function Footer() {
     <Fragment>
       <footer className="bg-white px-4 py-2 shadow">
         <Container size="large">
-          <div className="flex items-center justify-between">
-            <Button
-              id="donate"
-              color="pink"
-              onClick={() => {
-                setShowModal(true)
-              }}
-            >
-              <FiHeart />
-              <span className="ml-4">{t('common:donate')}</span>
-            </Button>
+          <div className="flex h-12 items-center justify-between">
             <p>
               <span>{t('common:made-by')}</span>
               <Anchor href="https://twitter.com/DuranCristhian">
                 Cristhian Duran
               </Anchor>
             </p>
+            <button
+              id="donate"
+              className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
+              onClick={() => {
+                setShowModal(true)
+              }}
+            >
+              <span className="flex items-center">
+                <span className="mr-1">{t('common:donate')}</span>
+                <i
+                  className="em em-coffee"
+                  tabIndex={-1}
+                  aria-label="Coffee"
+                ></i>
+              </span>
+            </button>
           </div>
         </Container>
       </footer>

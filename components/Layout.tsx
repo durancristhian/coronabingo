@@ -32,11 +32,6 @@ export default function Layout({ children }: Props) {
             {t('common:feedback-form.link')}
           </Anchor>
         </span>
-        <i
-          className="em em-star-struck"
-          tabIndex={-1}
-          aria-label="Grinning face with star eyes"
-        ></i>
       </Banner>
       <Footer />
     </main>

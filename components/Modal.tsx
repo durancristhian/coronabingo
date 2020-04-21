@@ -15,7 +15,7 @@ export default function Modal({ children, title, ...rest }: Props) {
   return (
     <ReactModal {...rest}>
       <Box>
-        <div className="flex items-center justify-between mb-4 text-lg md:text-xl">
+        <div className="flex items-start justify-between mb-4 text-lg md:text-xl">
           <h2 className="font-medium">{title}</h2>
           <button
             onClick={rest.onRequestClose}

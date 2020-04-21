@@ -78,6 +78,7 @@ export default function Sala() {
               </div>
               <div className="ml-4">
                 <Button
+                  color="green"
                   id="play"
                   disabled={!room.readyToPlay}
                   onClick={() => {
