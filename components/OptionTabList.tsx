@@ -8,9 +8,7 @@ interface Props {
 export default function OptionTabList({ children, ...otherProps }: Props) {
   return (
     <TabList {...otherProps}>
-      <div className="flex flex-wrap justify-center items-center">
-        {children}
-      </div>
+      <div className="flex justify-center items-center">{children}</div>
     </TabList>
   )
 }

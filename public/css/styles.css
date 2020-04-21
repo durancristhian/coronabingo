@@ -7,19 +7,19 @@
 @import 'background-cell.css';
 @import 'ball.css';
 @import 'confetti.css';
-@import 'modal.css';
 @import 'emojis.css';
+@import 'modal.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
 }
 
 .bg-mercado-pago {
-  background-color: #009EE3;
+  background-color: #009ee3;
 }
 
 .bg-paypal {
-  background-color: #253B80;
+  background-color: #253b80;
 }
 
 .bg-telegram {

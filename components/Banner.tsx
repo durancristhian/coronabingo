@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 import { BannerType } from '~/interfaces'
+import Container from './Container'
 
 interface Props {
   children: ReactNode
@@ -17,9 +18,9 @@ export default function Banner({ children, type = 'information' }: Props) {
         type === 'error' && 'bg-red-200',
       ])}
     >
-      <div className="max-w-4xl mx-auto">
+      <Container size="large">
         <div className="flex items-center justify-center">{children}</div>
-      </div>
+      </Container>
     </div>
   )
 }

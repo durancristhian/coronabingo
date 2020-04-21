@@ -25,7 +25,7 @@ export default function Footer() {
   return (
     <Fragment>
       <footer className="bg-white px-4 py-2 shadow">
-        <div className="max-w-4xl mx-auto">
+        <Container size="large">
           <div className="flex items-center justify-between">
             <Button
               id="donate"
@@ -44,7 +44,7 @@ export default function Footer() {
               </Anchor>
             </p>
           </div>
-        </div>
+        </Container>
       </footer>
       <Modal
         className="modal"

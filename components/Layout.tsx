@@ -1,5 +1,4 @@
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { ReactNode } from 'react'
 import { version } from '~/package.json'
 import Anchor from './Anchor'
@@ -13,8 +12,6 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const { t } = useTranslation()
-  const router = useRouter()
-  const playerId = router.query.playerId?.toString()
   const isStaging = process.env.URL?.toString()
     .split('.')
     .includes('cduran')
@@ -25,9 +22,6 @@ export default function Layout({ children }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      {playerId && (
-        <Banner type="emphasis">{t('common:post-your-photo')}</Banner>
-      )}
       <div className="flex-auto">
         <div className="px-4 py-8">{children}</div>
       </div>

@@ -32,12 +32,12 @@ export default function Celebrations({ room }: Props) {
             {ct === room.confettiType ? (
               <Fragment>
                 <FiFrown />
-                <span className="ml-4">{t(`jugar:hide-${ct}`)}</span>
+                <span className="ml-4 truncate">{t(`jugar:hide-${ct}`)}</span>
               </Fragment>
             ) : (
               <Fragment>
                 <FiSmile />
-                <span className="ml-4">{t(`jugar:show-${ct}`)}</span>
+                <span className="ml-4 truncate">{t(`jugar:show-${ct}`)}</span>
               </Fragment>
             )}
           </Button>

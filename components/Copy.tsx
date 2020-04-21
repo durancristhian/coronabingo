@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
@@ -31,12 +31,8 @@ export default function Share({ content }: Props) {
   }
 
   return (
-    <div>
-      <Button
-        id="open-share-modal"
-        className="mb-4"
-        onClick={() => setShowModal(true)}
-      >
+    <Fragment>
+      <Button id="open-share-modal" onClick={() => setShowModal(true)}>
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
@@ -78,6 +74,6 @@ export default function Share({ content }: Props) {
           />
         </div>
       </Modal>
-    </div>
+    </Fragment>
   )
 }

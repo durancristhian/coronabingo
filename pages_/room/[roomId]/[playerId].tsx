@@ -1,7 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { useEffect } from 'react'
-import AdminOptions from '~/components/AdminOptions'
-import Banner from '~/components/Banner'
+import React, { Fragment, useEffect } from 'react'
 import Boards from '~/components/Boards'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
@@ -10,9 +8,9 @@ import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
+import Options from '~/components/Options'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
-import UserOptions from '~/components/UserOptions'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
@@ -74,6 +72,25 @@ export default function Jugar() {
     })
   }
 
+  const renderBingoSpinnerAndOptions = () => (
+    <Fragment>
+      <Box>
+        <Heading type="h2">{t('common:bingo-spinner')}</Heading>
+        <div className="mt-4">
+          <SelectedNumbers
+            isAdmin={isAdmin}
+            onNewNumber={onNewNumber}
+            selectedNumbers={room.selectedNumbers || []}
+            bingoSpinner={room.bingoSpinner}
+          />
+        </div>
+      </Box>
+      <div className="mt-4">
+        <Options isAdmin={isAdmin} room={room} />
+      </div>
+    </Fragment>
+  )
+
   return (
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
@@ -86,79 +103,31 @@ export default function Jugar() {
           </Heading>
           <div className="max-w-6xl mx-auto">
             <div className="lg:flex mt-4">
-              {room && (
-                <div className="lg:w-1/3">
-                  <Box>
-                    <Heading type="h2">{t('jugar:last-numbers')}</Heading>
-                    <LastNumbers selectedNumbers={room.selectedNumbers || []} />
-                  </Box>
-                  <div className="hidden lg:block mt-4">
-                    <Box>
-                      <Heading type="h2">{t('common:bingo-spinner')}</Heading>
-                      <div className="mt-4">
-                        <SelectedNumbers
-                          isAdmin={isAdmin}
-                          onNewNumber={onNewNumber}
-                          selectedNumbers={room.selectedNumbers || []}
-                          bingoSpinner={room.bingoSpinner}
-                        />
-                      </div>
-                    </Box>
-                  </div>
+              <div className="lg:w-1/3">
+                <Box>
+                  <Heading type="h2">{t('jugar:last-numbers')}</Heading>
+                  <LastNumbers selectedNumbers={room.selectedNumbers || []} />
+                </Box>
+                <div className="hidden lg:block mt-4">
+                  {renderBingoSpinnerAndOptions()}
                 </div>
-              )}
+              </div>
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                {player && (
-                  <div className="lg:flex lg:flex-col lg:justify-between lg:h-full">
-                    <Boards
-                      player={player}
-                      setPlayerProps={newProps =>
-                        setPlayer({
-                          ...player,
-                          ...newProps,
-                        })
-                      }
-                    />
-                    <div className="mt-4">
-                      <UserOptions />
-                    </div>
-                  </div>
-                )}
+                <Boards
+                  player={player}
+                  setPlayerProps={newProps =>
+                    setPlayer({
+                      ...player,
+                      ...newProps,
+                    })
+                  }
+                />
               </div>
             </div>
             <div className="lg:hidden mt-4">
-              <Box>
-                <Heading type="h2">{t('common:bingo-spinner')}</Heading>
-                <div className="mt-4">
-                  <SelectedNumbers
-                    isAdmin={isAdmin}
-                    onNewNumber={onNewNumber}
-                    selectedNumbers={room.selectedNumbers || []}
-                    bingoSpinner={room.bingoSpinner}
-                  />
-                </div>
-              </Box>
+              {renderBingoSpinnerAndOptions()}
             </div>
           </div>
-          {isAdmin && (
-            <div className="mt-4">
-              <Container>
-                <Box>
-                  <Banner>
-                    <span className="mr-1">{t('jugar:admin-title')}</span>
-                    <i
-                      className="em em-sunglasses"
-                      tabIndex={-1}
-                      aria-label="Smiling face with sunglasses"
-                    ></i>
-                  </Banner>
-                  <div className="mt-4">
-                    <AdminOptions room={room} />
-                  </div>
-                </Box>
-              </Container>
-            </div>
-          )}
         </Layout>
         <Confetti type={room.confettiType} />
         <Sounds isAdmin={isAdmin} room={room} />

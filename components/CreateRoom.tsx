@@ -84,6 +84,7 @@ export default function CreateRoom() {
         <div className="mt-8">
           <Button
             className="w-full"
+            color="green"
             disabled={!canSubmit}
             type="submit"
             id="create-room"

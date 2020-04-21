@@ -29,17 +29,14 @@ export default function ShareButton({
     >
       <div
         className={classnames([
-          'rounded-full',
+          'h-16 flex items-center justify-center p-2 rounded-full w-16',
           iconBgColor,
-          Icon ? 'p-4' : 'p-2',
         ])}
       >
-        {Icon && <Icon className="m-auto text-2xl text-white" />}
-        {imageURL && (
-          <img src={imageURL} alt={imageAlt} className="h-10 w-10" />
-        )}
+        {Icon && <Icon className="text-3xl text-white" />}
+        {imageURL && <img src={imageURL} alt={imageAlt} className="block" />}
       </div>
-      <p className="mt-2 text-gray-600 text-xs md:text-sm">{label}</p>
+      <p className="mt-2">{label}</p>
     </button>
   )
 }

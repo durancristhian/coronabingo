@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import Heading from '~/components/Heading'
 import { allLanguages } from '~/i18n.json'
+import Container from './Container'
 import Select from './Select'
 
 export default function Header() {
@@ -38,7 +39,7 @@ export default function Header() {
 
   return (
     <header className="bg-white px-4 py-2 shadow">
-      <div className="max-w-4xl mx-auto">
+      <Container size="large">
         <div className="flex items-center justify-between">
           <Heading type="h1">
             <a
@@ -55,7 +56,7 @@ export default function Header() {
             value={lang}
           />
         </div>
-      </div>
+      </Container>
     </header>
   )
 }
