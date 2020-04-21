@@ -22,12 +22,12 @@ export default function LastNumbers({ selectedNumbers }: Props) {
     <Fragment>
       <div className="flex items-center overflow-hidden">
         <div style={{ flex: '0 0 85px' }}>
-          <Ball animate color="yellow" number={last} size={75} />
+          <Ball animate bgColor="bg-yellow-500" number={last} size={75} />
         </div>
         <div className="flex flex-auto overflow-x-scroll">
           {rest.map(n => (
             <div className="opacity-75" key={n} style={{ flex: '0 0 65px' }}>
-              <Ball color="gray" number={n} size={55} />
+              <Ball bgColor="bg-gray-400" number={n} size={55} />
             </div>
           ))}
         </div>

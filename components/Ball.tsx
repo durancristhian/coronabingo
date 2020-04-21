@@ -3,25 +3,21 @@ import React from 'react'
 
 interface Props {
   animate?: boolean
-  color: 'yellow' | 'gray'
+  bgColor: string
   number: number
   size?: number
 }
 
 export default function Ball({
   animate = false,
-  color,
+  bgColor,
   number,
   size = 90,
 }: Props) {
   return (
     <div className={classnames(['text-center', animate && 'appear'])}>
       <div
-        className={classnames([
-          'ball',
-          color === 'yellow' && 'bg-yellow-500',
-          color === 'gray' && 'bg-gray-400',
-        ])}
+        className={classnames(['ball', bgColor])}
         style={{
           height: `${size}px`,
           width: `${size}px`,

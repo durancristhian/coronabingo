@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
-import { SOUNDS } from '~/utils/constants'
+import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 import Button from './Button'
 
 /* TODO: this should be in constants */
@@ -25,15 +25,18 @@ const emojis: { [key: string]: ReactNode } = {
 }
 
 interface Props {
+  extraSounds: boolean
   room: Room
 }
 
-export default function Pato({ room }: Props) {
+export default function Pato({ extraSounds, room }: Props) {
   const { t } = useTranslation()
+
+  const sounds = extraSounds ? SOUNDS_EXTRAS : SOUNDS
 
   return (
     <div className="border-gray-300 border-t-2 -mx-4">
-      {SOUNDS.map(({ language, name, url }, index) => {
+      {sounds.map(({ language, name, url }, index) => {
         return (
           <div
             key={index}

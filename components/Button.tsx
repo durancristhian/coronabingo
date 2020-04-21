@@ -2,7 +2,6 @@ import classnames from 'classnames'
 import React, { MouseEvent, ReactNode } from 'react'
 
 const BUTTON_COLORS = {
-  gray: ['bg-gray-300', 'focus:bg-gray-500', 'text-gray-800'],
   green: ['bg-green-300', 'focus:bg-green-500', 'text-green-800'],
   pink: ['bg-pink-300', 'focus:bg-pink-500', 'text-pink-800'],
   red: ['bg-red-300', 'focus:bg-red-500', 'text-red-800'],
@@ -13,7 +12,7 @@ interface Props {
   ariaLabel?: string
   children: ReactNode
   className?: string
-  color?: 'gray' | 'green' | 'pink' | 'red' | 'yellow'
+  color?: 'green' | 'pink' | 'red' | 'yellow'
   disabled?: boolean
   id: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void

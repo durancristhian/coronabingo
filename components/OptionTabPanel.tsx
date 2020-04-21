@@ -5,13 +5,15 @@ import Modal from './Modal'
 
 interface Props {
   children: ReactNode
+  contentLabel: string
   id: string
   onRequestClose: Function
-  title: string
+  title: ReactNode
 }
 
 export default function OptionTabPanel({
   children,
+  contentLabel,
   id,
   onRequestClose,
   title,
@@ -21,7 +23,7 @@ export default function OptionTabPanel({
     <TabPanel {...otherProps}>
       <Modal
         className="modal"
-        contentLabel={title}
+        contentLabel={contentLabel}
         id={id}
         isOpen={true}
         onRequestClose={() => {

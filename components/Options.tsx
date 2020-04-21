@@ -1,8 +1,9 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { FiRotateCcw, FiSettings, FiSmile, FiVolume2 } from 'react-icons/fi'
 import { Tabs } from 'react-tabs'
 import BackgroundCells from '~/components/BackgroundCells'
+import { EasterEggContext } from '~/contexts/EasterEggContext'
 import { Room } from '~/interfaces'
 import Celebrations from './Celebrations'
 import OptionTab from './OptionTab'
@@ -19,6 +20,20 @@ interface Props {
 export default function Options({ isAdmin, room }: Props) {
   const { t } = useTranslation()
   const [currentTabIndex, setCurrentTabIndex] = useState(-1)
+  const [times, setTimes] = useState(0)
+  const { isVisible, setVisibility } = useContext(EasterEggContext)
+
+  useEffect(() => {
+    if (times !== 7) return
+
+    setVisibility(true)
+  }, [times])
+
+  const tricks = () => {
+    if (times < 7) {
+      setTimes(t => t + 1)
+    }
+  }
 
   const resetCurrentTabIndex = () => {
     setCurrentTabIndex(-1)
@@ -57,6 +72,7 @@ export default function Options({ isAdmin, room }: Props) {
         )}
       </OptionTabList>
       <OptionTabPanel
+        contentLabel={t('jugar:empty-cells.title')}
         id="modal-background-cells"
         title={t('jugar:empty-cells.title')}
         onRequestClose={resetCurrentTabIndex}
@@ -66,6 +82,7 @@ export default function Options({ isAdmin, room }: Props) {
       {isAdmin && (
         <Fragment>
           <OptionTabPanel
+            contentLabel={t('jugar:celebrations')}
             id="modal-celebrations"
             title={t('jugar:celebrations')}
             onRequestClose={resetCurrentTabIndex}
@@ -73,13 +90,25 @@ export default function Options({ isAdmin, room }: Props) {
             <Celebrations room={room} />
           </OptionTabPanel>
           <OptionTabPanel
+            contentLabel={t('jugar:sounds')}
             id="modal-sounds"
-            title={t('jugar:sounds')}
+            title={
+              <span
+                onClick={tricks}
+                role="button"
+                tabIndex={0}
+                onKeyPress={tricks}
+                className="cursor-text focus:outline-none"
+              >
+                {t('jugar:sounds')}
+              </span>
+            }
             onRequestClose={resetCurrentTabIndex}
           >
-            <Pato room={room} />
+            <Pato extraSounds={isVisible} room={room} />
           </OptionTabPanel>
           <OptionTabPanel
+            contentLabel={t('jugar:replay.reboot-game')}
             id="modal-restart"
             title={t('jugar:replay.reboot-game')}
             onRequestClose={resetCurrentTabIndex}
