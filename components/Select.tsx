@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
+import { Option } from '~/interfaces'
 
 interface Props {
   disabled?: boolean
@@ -31,6 +32,7 @@ export default function Select({
         <div className="relative">
           <select
             id={id}
+            aria-label={id}
             className={classnames([
               'appearance-none bg-white border-2 border-gray-300 h-12 p-2 pr-6 rounded w-full',
               'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
@@ -62,13 +64,8 @@ export default function Select({
         </div>
       </label>
       {hint && (
-        <p className="italic mt-1 text-gray-600 text-xs md:text-sm">{hint}</p>
+        <p className="italic mt-1 text-gray-800 text-xs md:text-sm">{hint}</p>
       )}
     </Fragment>
   )
-}
-
-interface Option {
-  id: string
-  name: string
 }

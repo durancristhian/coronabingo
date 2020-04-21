@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import { BackgrounCell, Cell } from '~/interfaces'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 
 const defaultContextValue = {
@@ -25,6 +26,7 @@ const BackgroundCellContextProvider = ({ children, playerId }: Props) => {
       const backgroundCell = JSON.parse(
         localStorage.getItem('backgroundCell') || '',
       )?.[playerId]
+
       backgroundCell && setBackgroundCell(backgroundCell)
     } catch (e) {}
   }, [])
@@ -32,6 +34,11 @@ const BackgroundCellContextProvider = ({ children, playerId }: Props) => {
   const saveAndSetBackgroundCell = (backgroundCell: Cell) => {
     try {
       setBackgroundCell(backgroundCell)
+
+      /*
+        TODO: this is always overwriting the existing value
+        and it changes every game because the playerId changes too
+      */
       localStorage.setItem(
         'backgroundCell',
         JSON.stringify({ [playerId]: backgroundCell }),
@@ -49,13 +56,3 @@ const BackgroundCellContextProvider = ({ children, playerId }: Props) => {
 }
 
 export { BackgroundCellContext, BackgroundCellContextProvider }
-
-export interface Cell {
-  type: string
-  value: string[] | string
-}
-
-interface BackgrounCell {
-  backgroundCell: Cell
-  setBackgroundCell: (cell: Cell) => void
-}

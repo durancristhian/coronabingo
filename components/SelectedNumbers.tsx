@@ -1,8 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
+import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
+import Button from '~/components/Button'
 import { BOARD_NUMBERS } from '~/utils/constants'
-import Button from './Button'
+
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 interface Props {
@@ -44,7 +46,9 @@ export default function SelectedNumbers({
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
         >
-          {t('jugar:next-number')}
+          <FiChevronsRight />
+          <span className="mx-4">{t('jugar:next-number')}</span>
+          <FiChevronsLeft />
         </Button>
       )}
       <div className="flex flex-wrap">
@@ -53,7 +57,7 @@ export default function SelectedNumbers({
             type="button"
             key={n}
             className={classnames([
-              'cursor-default flex items-center justify-center h-8 text-gray-600',
+              'cursor-default flex items-center justify-center h-8 text-gray-800',
               'focus:outline-none',
               'duration-150 ease-in-out transition',
               selectedNumbers.includes(n) &&

@@ -1,11 +1,7 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 import { FiInfo, FiThumbsDown, FiThumbsUp } from 'react-icons/fi'
-
-export interface Message {
-  children: ReactNode
-  type: MessageType
-}
+import { MessageType } from '~/interfaces'
 
 const ICONS = {
   error: <FiThumbsDown />,
@@ -19,7 +15,12 @@ const COLORS = {
   success: 'bg-green-200 border-green-600',
 }
 
-export default function Message({ children, type }: Message) {
+export interface Props {
+  children: ReactNode
+  type: MessageType
+}
+
+export default function Message({ children, type }: Props) {
   return (
     <div
       className={classnames(['border-l-2 flex items-center p-4', COLORS[type]])}
@@ -29,5 +30,3 @@ export default function Message({ children, type }: Message) {
     </div>
   )
 }
-
-export type MessageType = 'error' | 'information' | 'success'

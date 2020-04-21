@@ -1,40 +1,12 @@
-import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { MouseEvent, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
+import Button from '~/components/Button'
 import Modal from '~/components/Modal'
-import Button from './Button'
-import Toast from './Toast'
-
-interface ShareButtonProps {
-  Icon: Function
-  iconBgColor: string
-  label: string
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
-}
-
-const ShareButton = ({
-  Icon,
-  iconBgColor,
-  label,
-  onClick,
-}: ShareButtonProps) => (
-  <button
-    className={classnames([
-      'flex flex-col items-center justify-center mx-2 p-1 outline-none rounded text-center',
-      'focus:outline-none focus:shadow-outline',
-      'duration-150 ease-in-out transition',
-    ])}
-    onClick={onClick}
-  >
-    <div className={classnames(['p-4 rounded-full', iconBgColor])}>
-      <Icon className={classnames('m-auto text-2xl md:text-3xl text-white')} />
-    </div>
-    <p className="mt-2 text-gray-600 text-xs md:text-sm">{label}</p>
-  </button>
-)
+import ShareButton from '~/components/ShareButton'
+import Toast from '~/components/Toast'
 
 interface Props {
   content: string
@@ -59,8 +31,8 @@ export default function Share({ content }: Props) {
   }
 
   return (
-    <div>
-      <Button className="mb-4" onClick={() => setShowModal(true)}>
+    <Fragment>
+      <Button id="open-share-modal" onClick={() => setShowModal(true)}>
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
@@ -68,7 +40,8 @@ export default function Share({ content }: Props) {
         {t('common:copied')}
       </Toast>
       <Modal
-        contentLabel="Compartir Link"
+        id="modal-share"
+        contentLabel={t('common:share-link')}
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         className="modal"
@@ -101,6 +74,6 @@ export default function Share({ content }: Props) {
           />
         </div>
       </Modal>
-    </div>
+    </Fragment>
   )
 }

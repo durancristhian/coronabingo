@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Message, { Message as IMessage } from './Message'
+import Message, { Props as MessageProps } from '~/components/Message'
 
-interface ToastProps extends IMessage {
+interface Props extends MessageProps {
   onDismiss: Function
   show: boolean
   time?: number
@@ -13,12 +13,13 @@ export default function Toast({
   show,
   time = 2000,
   type,
-}: ToastProps) {
+}: Props) {
   useEffect(() => {
     setTimeout(() => {
       show && onDismiss()
     }, time)
   }, [show])
+
   return (
     <div
       className="toast"

@@ -1,12 +1,13 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
+import Box from '~/components/Box'
+import Cells from '~/components/Cells'
 import useBoards from '~/hooks/useBoards'
-import Box from './Box'
-import Cells from './Cells'
+import { Player } from '~/interfaces'
 
 interface Props {
-  player: firebase.firestore.DocumentData
+  player: Player
   setPlayerProps: (props: {}) => void
 }
 
@@ -17,14 +18,15 @@ export default function Boards({ player, setPlayerProps }: Props) {
   useEffect(() => {
     if (player.id) {
       try {
-        const roomValues = JSON.parse(
-          localStorage.getItem('roomValues') || '{}',
-        )
+        const values = localStorage.getItem('roomValues') || '{}'
+        const roomValues = JSON.parse(values)
         const playerValues = roomValues?.[player.id] || {}
+
         player.ref.update(playerValues)
+
         localStorage.removeItem('roomValues')
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        console.error(error)
       }
     }
   }, [player.id])
@@ -37,7 +39,7 @@ export default function Boards({ player, setPlayerProps }: Props) {
           [player.id]: boards.reduce(
             (acc, board) => ({
               ...acc,
-              [board.id]: player?.[board.id] || [],
+              [board.id]: player[board.id] || [],
             }),
             {},
           ),
@@ -57,7 +59,7 @@ export default function Boards({ player, setPlayerProps }: Props) {
             <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
               <Cells
                 boardNumbers={board.numbers}
-                selectedNumbers={player?.[board.id]}
+                selectedNumbers={player[board.id]}
                 setSelectedNumbers={newSelectedNumbers =>
                   setPlayerProps({
                     [board.id]: newSelectedNumbers,

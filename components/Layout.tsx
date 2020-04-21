@@ -1,11 +1,10 @@
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { ReactNode } from 'react'
+import Anchor from '~/components/Anchor'
+import Banner from '~/components/Banner'
+import Footer from '~/components/Footer'
+import Header from '~/components/Header'
 import { version } from '~/package.json'
-import Anchor from './Anchor'
-import Banner from './Banner'
-import Footer from './Footer'
-import Header from './Header'
 
 interface Props {
   children: ReactNode
@@ -13,8 +12,6 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const { t } = useTranslation()
-  const router = useRouter()
-  const playerId = router.query.playerId?.toString()
   const isStaging = process.env.URL?.toString()
     .split('.')
     .includes('cduran')
@@ -25,22 +22,16 @@ export default function Layout({ children }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      {playerId && (
-        <Banner type="emphasis">{t('common:post-your-photo')}</Banner>
-      )}
       <div className="flex-auto">
         <div className="px-4 py-8">{children}</div>
       </div>
       <Banner>
-        <span className="mr-1">{t('common:feedback-form.intro')}</span>
-        <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
-          <span className="mr-1">{t('common:feedback-form.link')}</span>
-        </Anchor>
-        <i
-          className="em em-star-struck"
-          tabIndex={-1}
-          aria-label="Grinning face with star eyes"
-        ></i>
+        <span className="mr-1">
+          <span className="mr-1">{t('common:feedback-form.intro')}</span>
+          <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
+            {t('common:feedback-form.link')}
+          </Anchor>
+        </span>
       </Banner>
       <Footer />
     </main>

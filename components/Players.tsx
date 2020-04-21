@@ -2,66 +2,52 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
+import Button from '~/components/Button'
+import InputText from '~/components/InputText'
 import Select from '~/components/Select'
-import Field from '~/interfaces/Field'
+import { Player, Room, RoomBase } from '~/interfaces'
 import { MAX_PLAYERS } from '~/utils/constants'
-import Button from './Button'
-import InputText from './InputText'
 
 interface Props {
-  adminId: string
-  onChange: (changes: { key: string; value: Field }[]) => void
   players: Player[]
   removePlayer: Function
-  roomRef: firebase.firestore.DocumentReference
+  room: Room
   setPlayers: Function
+  updateRoom: (data: Partial<RoomBase>) => void
 }
 
 export default function Players({
-  adminId,
-  onChange,
   players,
   removePlayer,
-  roomRef,
+  room,
   setPlayers,
+  updateRoom,
 }: Props) {
   const { t } = useTranslation()
   const [name, setName] = useState('')
 
-  const onFieldChange = (value: string) => {
-    setName(value)
-  }
-
   const onRemovePlayer = (index: number, player: Player) => {
-    const cleanAdmin = adminId === player.id
-    const changes = []
+    const cleanAdmin = room.adminId === player.id
+    const changes: Partial<RoomBase> = {}
 
     if (cleanAdmin) {
-      changes.push({
-        key: 'adminId',
-        value: '',
-      })
-
-      changes.push({
-        key: 'readyToPlay',
-        value: false,
-      })
+      changes.adminId = ''
+      changes.readyToPlay = false
     }
 
-    onChange(changes)
+    updateRoom(changes)
 
     const playersCopy = [...players]
     playersCopy.splice(index, 1)
 
     setPlayers(playersCopy)
-
     removePlayer(player.ref)
   }
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
-    const playerDoc = roomRef.collection('players').doc()
+    const playerDoc = room.ref.collection('players').doc()
 
     setPlayers([
       ...players,
@@ -106,12 +92,14 @@ export default function Players({
               <InputText
                 id="name"
                 label={t('admin:players.field-name')}
-                onChange={onFieldChange}
+                onChange={setName}
                 value={name}
               />
             </div>
             <div className="mb-4 ml-4">
               <Button
+                id="add-player"
+                aria-label={t('admin:players.add-player')}
                 className="w-full"
                 color="green"
                 type="submit"
@@ -124,13 +112,16 @@ export default function Players({
         </fieldset>
       </form>
       {!!players.length && (
-        <div className="border-gray-300 border-t-2 mt-4 -mx-4">
+        <div
+          className="border-gray-300 border-t-2 mt-4 -mx-4"
+          id="players-list"
+        >
           {players.map((player, index) => (
             <div
               key={index}
               className={classnames([
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                player.id === adminId
+                player.id === room.adminId
                   ? 'bg-green-100'
                   : index % 2 === 0
                   ? 'bg-gray-100'
@@ -139,7 +130,7 @@ export default function Players({
             >
               <div className="flex flex-auto items-center">
                 <p>{player.name}</p>
-                {player.id === adminId && (
+                {player.id === room.adminId && (
                   <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                     {t('admin:players.admin')}
                   </span>
@@ -147,8 +138,9 @@ export default function Players({
               </div>
               <div className="ml-4">
                 <Button
+                  aria-label={t('admin:players.remove-player')}
                   color="red"
-                  id="remove-player"
+                  id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
                 >
                   <FiTrash2 />
@@ -165,20 +157,12 @@ export default function Players({
             hint={t('admin:players.field-admin-hint')}
             id="adminId"
             label={t('admin:players.field-admin')}
-            onChange={value => onChange([{ key: 'adminId', value }])}
+            onChange={value => updateRoom({ adminId: value })}
             options={players}
-            value={adminId}
+            value={room.adminId}
           />
         </div>
       </div>
     </div>
   )
-}
-
-export interface Player {
-  boards: string
-  id: string
-  name: string
-  exists: boolean
-  ref: firebase.firestore.DocumentReference
 }

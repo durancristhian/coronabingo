@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React, { Fragment } from 'react'
-import { BoardNumbers } from '~/hooks/useBoards'
-import EmptyCell from './EmptyCell'
+import EmptyCell from '~/components/EmptyCell'
+import { BoardNumbers } from '~/interfaces'
 
 interface Props {
   boardNumbers: BoardNumbers

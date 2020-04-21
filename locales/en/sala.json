@@ -1,5 +1,6 @@
 {
   "title": "Room Lobby",
+  "loading": "Loading...",
   "room-name": "Room name",
   "people": "There are {{count}} player waiting to play",
   "people_plural": "There are {{count}} players waiting to play",

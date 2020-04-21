@@ -4,7 +4,9 @@ import Head from 'next/head'
 import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { FirebaseProvider } from '~/contexts/Firebase'
+import { RoomContextProvider } from '~/contexts/RoomContext'
 import { allLanguages } from '~/i18n.json'
+import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
 import * as gtag from '~/utils/gtag'
@@ -21,8 +23,7 @@ if (process.env.GA_TRACKING_ID) {
 }
 
 export default class Coronabingo extends App {
-  // @ts-ignore
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (process.env.NODE_ENV === 'production') {
       Sentry.withScope(scope => {
         Object.keys(errorInfo).forEach(key => {
@@ -205,21 +206,23 @@ export default class Coronabingo extends App {
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://coronabingo.now.sh/social2.jpg"
+            content="https://coronabingo.now.sh/social.jpg"
           />
           <meta property="twitter:card" content="summary_large_image" />
           <meta
             property="twitter:image"
-            content="https://coronabingo.now.sh/social2.jpg"
+            content="https://coronabingo.now.sh/social.jpg"
           />
           <meta
             name="viewport"
-            content="width=device-width,initial-scale=1,maximum-scale=1"
+            content="width=device-width,initial-scale=1,maximum-scale=5"
           />
         </Head>
-        <FirebaseProvider routerQuery={router.query}>
-          <Component {...pageProps} />
-        </FirebaseProvider>
+        <RoomContextProvider>
+          <FirebaseProvider routerQuery={router.query}>
+            <Component {...pageProps} />
+          </FirebaseProvider>
+        </RoomContextProvider>
       </Fragment>
     )
   }
