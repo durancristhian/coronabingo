@@ -7,11 +7,19 @@
 @import 'background-cell.css';
 @import 'ball.css';
 @import 'confetti.css';
-@import 'modal.css';
 @import 'emojis.css';
+@import 'modal.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
+}
+
+.bg-mercado-pago {
+  background-color: #009ee3;
+}
+
+.bg-paypal {
+  background-color: #253b80;
 }
 
 .bg-telegram {
@@ -26,25 +34,15 @@
   cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
 
+.text-shadow-white {
+  text-shadow: 1px 1px 0 white;
+}
+
 .toast {
-  @apply fixed;
+  position: fixed;
   left: 16px;
   transition: bottom 0.5s;
   width: 300px;
-}
-
-@media (max-width: 640px) {
-  .cursor-poroto {
-    cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
-  }
-
-  .toast {
-    width: calc(100% - 32px);
-  }
-}
-
-.text-shadow-white {
-  text-shadow: 1px 1px 0 white;
 }
 
 .visually-hidden {
@@ -59,4 +57,14 @@
 
 .w-1\/10 {
   width: calc(100% / 9);
+}
+
+@media (max-width: 640px) {
+  .cursor-poroto {
+    cursor: url('/cursor/poroto-sm.png') 9 12, pointer;
+  }
+
+  .toast {
+    width: calc(100% - 32px);
+  }
 }

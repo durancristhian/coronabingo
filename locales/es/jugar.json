@@ -5,16 +5,15 @@
   "out-of-room": "No eres parte de esta sala.",
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
-  "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
-  "admin-title": "Estás viendo este panel porque sos quien dirige la sala",
+  "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",  
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
   "show-pallbearers": "Mostrar ghaneses del ataúd",
   "hide-pallbearers": "Ocultar ghaneses del ataúd",
   "celebrations": "Festejos",
+  "no-numbers": "No salieron números todavía.",
   "replay": {
     "reboot-game": "Reiniciar partida",
-    "reboot-room": "Reiniciar sala",
     "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas, cambiar roles y redistribuir los cartones.",
     "confirm": "Confirmar"
   },
@@ -38,7 +37,7 @@
   },
   "dreams-link": "¿Qué es esto?",
   "play-sound": "Reproducir {{name}}",
-  "sounds": "Botonera",
+  "sounds": "Sonidos",
   "dreams": {
     "1": "Agua",
     "2": "El niño",

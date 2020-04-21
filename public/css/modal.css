@@ -1,7 +1,9 @@
 .modal {
   border-radius: 0.25rem;
+  max-height: 80vh;
   max-width: 480px;
   outline: none;
+  overflow-y: scroll;
   width: 100%;
 }
 
@@ -21,4 +23,8 @@
   right: 0;
   top: 0;
   z-index: 100;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
 }

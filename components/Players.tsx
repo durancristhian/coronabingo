@@ -2,11 +2,11 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
+import Button from '~/components/Button'
+import InputText from '~/components/InputText'
 import Select from '~/components/Select'
 import { Player, Room, RoomBase } from '~/interfaces'
 import { MAX_PLAYERS } from '~/utils/constants'
-import Button from './Button'
-import InputText from './InputText'
 
 interface Props {
   players: Player[]
@@ -112,7 +112,10 @@ export default function Players({
         </fieldset>
       </form>
       {!!players.length && (
-        <div className="border-gray-300 border-t-2 mt-4 -mx-4">
+        <div
+          className="border-gray-300 border-t-2 mt-4 -mx-4"
+          id="players-list"
+        >
           {players.map((player, index) => (
             <div
               key={index}
@@ -137,7 +140,7 @@ export default function Players({
                 <Button
                   aria-label={t('admin:players.remove-player')}
                   color="red"
-                  id="remove-player"
+                  id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
                 >
                   <FiTrash2 />

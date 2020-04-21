@@ -6,19 +6,18 @@
   "last-numbers": "Last numbers",
   "next-number": "Next number",
   "no-bingo-spinner-description": "In the list below, mark the numbers that come out in your bingo spinner.",
-  "admin-title": "You are viewing this panel because you are the one who runs the room",
   "show-confetti": "Show confetti",
   "hide-confetti": "Hide confetti",
   "show-pallbearers": "Show ghana pallbearers",
   "hide-pallbearers": "Hide ghana pallbearers",
   "celebrations": "Celebrations",
+  "no-numbers": "No numbers yet.",
   "empty-cells": {
     "title": "Empty cells background",
     "url": "Or paste here the link of a random image from the internet"
   },
   "replay": {
     "reboot-game": "Reboot game",
-    "reboot-room": "Reboot room",
     "description": "This action will redirect you to the admin so you can update the room information in order to start a new game. You can edit the list of players, change roles and redistribute the boards.",
     "confirm": "Confirm"
   },

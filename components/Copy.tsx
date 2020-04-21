@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
+import Button from '~/components/Button'
 import Modal from '~/components/Modal'
-import Button from './Button'
-import ShareButton from './ShareButton'
-import Toast from './Toast'
+import ShareButton from '~/components/ShareButton'
+import Toast from '~/components/Toast'
 
 interface Props {
   content: string
@@ -31,12 +31,8 @@ export default function Share({ content }: Props) {
   }
 
   return (
-    <div>
-      <Button
-        id="open-share-modal"
-        className="mb-4"
-        onClick={() => setShowModal(true)}
-      >
+    <Fragment>
+      <Button id="open-share-modal" onClick={() => setShowModal(true)}>
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
@@ -44,7 +40,8 @@ export default function Share({ content }: Props) {
         {t('common:copied')}
       </Toast>
       <Modal
-        contentLabel="Compartir Link"
+        id="modal-share"
+        contentLabel={t('common:share-link')}
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         className="modal"
@@ -77,6 +74,6 @@ export default function Share({ content }: Props) {
           />
         </div>
       </Modal>
-    </div>
+    </Fragment>
   )
 }

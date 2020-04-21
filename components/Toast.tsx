@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Message, { Props as MessageProps } from './Message'
+import Message, { Props as MessageProps } from '~/components/Message'
 
 interface Props extends MessageProps {
   onDismiss: Function

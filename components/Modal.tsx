@@ -2,13 +2,13 @@ import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 import { FiX } from 'react-icons/fi'
 import ReactModal from 'react-modal'
-import Box from './Box'
+import Box from '~/components/Box'
 
 ReactModal.setAppElement('#__next')
 
 interface Props extends ReactModal.Props {
   children: ReactNode
-  title: string
+  title: ReactNode
 }
 
 export default function Modal({ children, title, ...rest }: Props) {

@@ -27,9 +27,7 @@ export default function Sala() {
     return (
       <Layout>
         <Container>
-          <Box>
-            <Message type="information">{t('sala:loading')}</Message>
-          </Box>
+          <Message type="information">{t('sala:loading')}</Message>
         </Container>
       </Layout>
     )

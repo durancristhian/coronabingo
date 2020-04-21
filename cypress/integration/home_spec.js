@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 
-describe('Create room flow', () => {
+describe('Home', () => {
   beforeEach(() => {
     cy.server()
 
     cy.visit('http://localhost:3000')
   })
 
-  it('Submit button should be disabled', () => {
+  it('Should have a disabled submit button when loaded', () => {
     cy.get('#create-room').should('be.disabled')
   })
 
@@ -20,13 +20,7 @@ describe('Create room flow', () => {
       .should('be.enabled')
       .click()
 
-    /*
-      TODO: review this
-      We're forced to wait 10 seconds because if we use cy.route Cypress
-      waits also for firebase connections. I couldn't create a proper
-      wildcard
-    */
-    cy.wait(10000)
+    cy.wait(5000)
       .url()
       .should('contain', 'room')
       .should('contain', 'admin')

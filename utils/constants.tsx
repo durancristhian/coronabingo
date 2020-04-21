@@ -1,3 +1,5 @@
+import boardsData from '~/public/boards.json'
+
 export const BACKGROUND_CELL_VALUES = [
   { key: 'jugar:backgrounds.yellow', type: 'color', value: 'yellow' },
   { key: 'jugar:backgrounds.blue', type: 'color', value: 'blue' },
@@ -59,9 +61,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
 ]
-
 export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
-
 export const DREAMS_EMOJIS = [
   'em-sweat_drops',
   'em-boy',
@@ -154,8 +154,7 @@ export const DREAMS_EMOJIS = [
   'em-rat',
   'em-scream',
 ]
-export const MAX_PLAYERS = 60
-/* TODO: Add Patao sounds with an easter egg */
+export const MAX_PLAYERS = boardsData.length / 2
 export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',

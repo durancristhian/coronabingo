@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
+import Box from '~/components/Box'
+import Cells from '~/components/Cells'
 import useBoards from '~/hooks/useBoards'
 import { Player } from '~/interfaces'
-import Box from './Box'
-import Cells from './Cells'
 
 interface Props {
   player: Player
@@ -18,14 +18,15 @@ export default function Boards({ player, setPlayerProps }: Props) {
   useEffect(() => {
     if (player.id) {
       try {
-        const roomValues = JSON.parse(
-          localStorage.getItem('roomValues') || '{}',
-        )
+        const values = localStorage.getItem('roomValues') || '{}'
+        const roomValues = JSON.parse(values)
         const playerValues = roomValues?.[player.id] || {}
+
         player.ref.update(playerValues)
+
         localStorage.removeItem('roomValues')
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        console.error(error)
       }
     }
   }, [player.id])
