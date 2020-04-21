@@ -19,7 +19,7 @@ import scrollToTop from '~/utils/scrollToTop'
 export default function Sala() {
   const { room } = useRoom()
   const { players = [] } = useRoomPlayers()
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
 
   useEffect(scrollToTop, [])
 
@@ -121,7 +121,7 @@ export default function Sala() {
             readonly
             onFocus={event => event.target.select()}
           />
-          <Copy content={`${window.location.host}/room/${room.id}`} />
+          <Copy content={`${window.location.host}/${lang}/room/${room.id}`} />
           {room.videoCall && (
             <InputText
               id="videocall"
