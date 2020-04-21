@@ -1,13 +1,13 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+@import 'emojis.css';
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
 @import 'background-cell.css';
 @import 'ball.css';
 @import 'confetti.css';
-@import 'emojis.css';
 @import 'modal.css';
 
 .debug * {
