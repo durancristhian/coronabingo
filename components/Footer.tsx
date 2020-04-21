@@ -2,11 +2,11 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import { FaPaypal } from 'react-icons/fa'
 import { FiHeart } from 'react-icons/fi'
-import Anchor from './Anchor'
-import Button from './Button'
-import Container from './Container'
-import Modal from './Modal'
-import ShareButton from './ShareButton'
+import Anchor from '~/components/Anchor'
+import Button from '~/components/Button'
+import Container from '~/components/Container'
+import Modal from '~/components/Modal'
+import ShareButton from '~/components/ShareButton'
 
 export default function Footer() {
   const { t } = useTranslation()

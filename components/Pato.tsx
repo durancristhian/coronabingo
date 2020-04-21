@@ -2,10 +2,10 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
+import Button from '~/components/Button'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
-import Button from './Button'
 
 /* TODO: this should be in constants */
 const emojis: { [key: string]: ReactNode } = {

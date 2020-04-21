@@ -2,9 +2,9 @@ import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiThumbsUp } from 'react-icons/fi'
+import Button from '~/components/Button'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
-import Button from './Button'
 
 interface Props {
   room: Room

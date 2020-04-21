@@ -3,10 +3,10 @@ import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
+import Button from '~/components/Button'
 import Modal from '~/components/Modal'
-import Button from './Button'
-import ShareButton from './ShareButton'
-import Toast from './Toast'
+import ShareButton from '~/components/ShareButton'
+import Toast from '~/components/Toast'
 
 interface Props {
   content: string

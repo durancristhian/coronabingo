@@ -3,9 +3,9 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
+import InputText from '~/components/InputText'
 import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
-import InputText from './InputText'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(

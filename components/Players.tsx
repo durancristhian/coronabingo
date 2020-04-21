@@ -2,11 +2,11 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
+import Button from '~/components/Button'
+import InputText from '~/components/InputText'
 import Select from '~/components/Select'
 import { Player, Room, RoomBase } from '~/interfaces'
 import { MAX_PLAYERS } from '~/utils/constants'
-import Button from './Button'
-import InputText from './InputText'
 
 interface Props {
   players: Player[]

@@ -2,10 +2,10 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
+import Button from '~/components/Button'
+import { confettiTypes } from '~/components/Confetti'
 import { ConfettiType, Room } from '~/interfaces'
 import roomApi from '~/models/room'
-import Button from './Button'
-import { confettiTypes } from './Confetti'
 
 interface Props {
   room: Room

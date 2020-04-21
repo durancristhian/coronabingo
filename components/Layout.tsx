@@ -1,10 +1,10 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
+import Anchor from '~/components/Anchor'
+import Banner from '~/components/Banner'
+import Footer from '~/components/Footer'
+import Header from '~/components/Header'
 import { version } from '~/package.json'
-import Anchor from './Anchor'
-import Banner from './Banner'
-import Footer from './Footer'
-import Header from './Header'
 
 interface Props {
   children: ReactNode

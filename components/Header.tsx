@@ -2,10 +2,10 @@ import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React from 'react'
+import Container from '~/components/Container'
 import Heading from '~/components/Heading'
+import Select from '~/components/Select'
 import { allLanguages } from '~/i18n.json'
-import Container from './Container'
-import Select from './Select'
 
 export default function Header() {
   const { t, lang } = useTranslation()

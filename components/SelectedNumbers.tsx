@@ -2,8 +2,8 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
+import Button from '~/components/Button'
 import { BOARD_NUMBERS } from '~/utils/constants'
-import Button from './Button'
 
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 

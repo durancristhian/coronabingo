@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { TabPanel } from 'react-tabs'
-import Container from './Container'
-import Modal from './Modal'
+import Container from '~/components/Container'
+import Modal from '~/components/Modal'
 
 interface Props {
   children: ReactNode

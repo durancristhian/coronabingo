@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
+import Anchor from '~/components/Anchor'
+import Ball from '~/components/Ball'
 import { DREAMS_EMOJIS } from '~/utils/constants'
-import Anchor from './Anchor'
-import Ball from './Ball'
 
 interface Props {
   selectedNumbers: number[]

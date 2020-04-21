@@ -2,13 +2,13 @@ import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
+import Button from '~/components/Button'
 import Heading from '~/components/Heading'
+import InputText from '~/components/InputText'
+import Message from '~/components/Message'
 import { MessageType } from '~/interfaces'
 import roomApi from '~/models/room'
 import isObjectFulfilled from '~/utils/isObjectFulfilled'
-import Button from './Button'
-import InputText from './InputText'
-import Message from './Message'
 
 export default function CreateRoom() {
   const { t } = useTranslation()
