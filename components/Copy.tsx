@@ -18,11 +18,15 @@ export default function Share({ content }: Props) {
   const { t } = useTranslation()
 
   const shareOnWhatsApp = () => {
-    window.open(`https://api.whatsapp.com/send?text=${content}`)
+    window.open(
+      `https://api.whatsapp.com/send?text=${window.location.protocol}${content}`,
+    )
   }
 
   const shareOnTelegram = () => {
-    window.open(`https://t.me/share/url?url=${content}`)
+    window.open(
+      `https://t.me/share/url?url=${window.location.protocol}${content}`,
+    )
   }
 
   const shareAndClose = (callback?: Function) => {
@@ -49,7 +53,7 @@ export default function Share({ content }: Props) {
         title={t('common:share-link')}
       >
         <div className="flex flex-wrap items-center justify-center">
-          <CopyToClipboard text={content}>
+          <CopyToClipboard text={window.location.protocol + content}>
             <ShareButton
               Icon={FiCopy}
               iconBgColor="bg-gray-500"
