@@ -1,8 +1,8 @@
-import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import Anchor from '~/components/Anchor'
 import Ball from '~/components/Ball'
+import Emoji from '~/components/Emoji'
 import { DREAMS_EMOJIS } from '~/utils/constants'
 
 interface Props {
@@ -36,11 +36,7 @@ export default function LastNumbers({ selectedNumbers }: Props) {
         <p className="flex flex-auto font-medium items-center">
           <span className="mr-1">{t(`jugar:dreams.${last}`)}</span>
           <span className="text-xs">
-            <i
-              className={classnames('em', emoji)}
-              tabIndex={-1}
-              aria-label={t(`jugar:dreams.${last}`)}
-            ></i>
+            <Emoji name={emoji} />
           </span>
         </p>
         <p className="text-right md:text-sm w-24">
