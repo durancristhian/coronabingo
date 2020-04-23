@@ -107,7 +107,9 @@ export default function Admin() {
               readonly
               onFocus={event => event.target.select()}
             />
-            <Copy content={`${window.location.host}/${lang}/room/${room.id}`} />
+            <Copy
+              content={`${window.location.protocol}${window.location.host}/${lang}/room/${room.id}`}
+            />
             <InputText
               id="videoCall"
               label={t('admin:field-videocall')}
