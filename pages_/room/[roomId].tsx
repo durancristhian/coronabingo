@@ -27,7 +27,7 @@ export default function Sala() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('sala:loading')}</Message>
+          <Message type="information">{t('roomId:loading')}</Message>
         </Container>
       </Layout>
     )
@@ -35,20 +35,20 @@ export default function Sala() {
 
   const renderPlayers = () => {
     if (!room.readyToPlay) {
-      return <Message type="information">{t('sala:not-ready')}</Message>
+      return <Message type="information">{t('roomId:not-ready')}</Message>
     }
 
     if (!players.length) {
-      return <Message type="information">{t('sala:loading')}</Message>
+      return <Message type="information">{t('roomId:loading')}</Message>
     }
 
     return (
       <Fragment>
         <Heading type="h3" textCenter={false}>
-          {t('sala:people', { count: players.length })}
+          {t('roomId:people', { count: players.length })}
         </Heading>
         <div className="italic -mt-6 text-gray-800 text-xs md:text-sm">
-          <p className="my-8">{t('sala:list-description')}</p>
+          <p className="my-8">{t('roomId:list-description')}</p>
         </div>
         <div className="border-gray-300 border-t-2 mt-4 -mx-4">
           {players.map((player: Player, index: number) => (
@@ -67,7 +67,7 @@ export default function Sala() {
                 <p>{player.name}</p>
                 {player.id === room.adminId && (
                   <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
-                    {t('sala:is-admin')}
+                    {t('roomId:is-admin')}
                   </span>
                 )}
                 <p className="italic mt-2 text-gray-800 text-sm w-full">
@@ -89,7 +89,7 @@ export default function Sala() {
                   }}
                 >
                   <FiLink2 />
-                  <span className="ml-4">{t('sala:play')}</span>
+                  <span className="ml-4">{t('roomId:play')}</span>
                 </Button>
               </div>
             </div>
@@ -104,19 +104,19 @@ export default function Sala() {
       <Container>
         <Box>
           <div className="mb-8">
-            <Heading type="h2">{t('sala:title')}</Heading>
+            <Heading type="h2">{t('roomId:title')}</Heading>
           </div>
           <InputText
             id="room-name"
-            label={t('sala:room-name')}
+            label={t('roomId:room-name')}
             value={room.name || ''}
             readonly
             onFocus={event => event.target.select()}
           />
           <InputText
-            hint={t('sala:field-link-hint')}
+            hint={t('roomId:field-link-hint')}
             id="url"
-            label={t('sala:field-link')}
+            label={t('roomId:field-link')}
             value={`${window.location.host}/room/${room.id}`}
             readonly
             onFocus={event => event.target.select()}
@@ -125,7 +125,7 @@ export default function Sala() {
           {room.videoCall && (
             <InputText
               id="videocall"
-              label={t('sala:call-link')}
+              label={t('roomId:call-link')}
               readonly
               onFocus={event => event.target.select()}
               value={room.videoCall || ''}
