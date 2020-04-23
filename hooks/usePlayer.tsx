@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { FirebaseContext } from '~/contexts/Firebase'
+import { PlayerContext } from '~/contexts/PlayerContext'
 
-export default function usePlayer() {
-  const { currentPlayer, setCurrentPlayer } = useContext(FirebaseContext)
+export default function useRoom() {
+  const { player, updatePlayer } = useContext(PlayerContext)
 
-  return { player: currentPlayer, setPlayer: setCurrentPlayer }
+  return { player, updatePlayer }
 }
