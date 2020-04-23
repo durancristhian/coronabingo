@@ -36,7 +36,7 @@ export default function SelectedNumbers({
     <Fragment>
       {isAdmin && !bingoSpinner && (
         <div className="italic mb-4 text-gray-600 text-xs md:text-sm">
-          <p>{t('jugar:no-bingo-spinner-description')}</p>
+          <p>{t('playerId:no-bingo-spinner-description')}</p>
         </div>
       )}
       {isAdmin && bingoSpinner && (
@@ -47,7 +47,7 @@ export default function SelectedNumbers({
           disabled={roomNumbers.length === 90}
         >
           <FiChevronsRight />
-          <span className="mx-4">{t('jugar:next-number')}</span>
+          <span className="mx-4">{t('playerId:next-number')}</span>
           <FiChevronsLeft />
         </Button>
       )}

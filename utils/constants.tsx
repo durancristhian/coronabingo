@@ -2,22 +2,22 @@ import { Emojis } from '~/interfaces'
 import boardsData from '~/public/boards.json'
 
 export const BACKGROUND_CELL_VALUES = [
-  { key: 'jugar:backgrounds.yellow', type: 'color', value: 'yellow' },
-  { key: 'jugar:backgrounds.blue', type: 'color', value: 'blue' },
-  { key: 'jugar:backgrounds.orange', type: 'color', value: 'orange' },
-  { key: 'jugar:backgrounds.green', type: 'color', value: 'green' },
+  { key: 'playerId:backgrounds.yellow', type: 'color', value: 'yellow' },
+  { key: 'playerId:backgrounds.blue', type: 'color', value: 'blue' },
+  { key: 'playerId:backgrounds.orange', type: 'color', value: 'orange' },
+  { key: 'playerId:backgrounds.green', type: 'color', value: 'green' },
   {
-    key: 'jugar:backgrounds.multicolor',
+    key: 'playerId:backgrounds.multicolor',
     type: 'color',
     value: ['indigo', 'pink', 'purple', 'teal'],
   },
   {
-    key: 'jugar:backgrounds.pikachu',
+    key: 'playerId:backgrounds.pikachu',
     type: 'img',
     value: 'pokemon/025.png',
   },
   {
-    key: 'jugar:backgrounds.pokemon',
+    key: 'playerId:backgrounds.pokemon',
     type: 'img',
     value: [
       'pokemon/001.png',
@@ -27,22 +27,22 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
-    key: 'jugar:backgrounds.cremona',
+    key: 'playerId:backgrounds.cremona',
     type: 'img',
     value: 'cremona.png',
   },
   {
-    key: 'jugar:backgrounds.covid-19',
+    key: 'playerId:backgrounds.covid-19',
     type: 'img',
     value: 'coronavirus.gif',
   },
   {
-    key: 'jugar:backgrounds.clippy',
+    key: 'playerId:backgrounds.clippy',
     type: 'img',
     value: 'clippy.png',
   },
   {
-    key: 'jugar:backgrounds.ghana-pallbearers',
+    key: 'playerId:backgrounds.ghana-pallbearers',
     type: 'img',
     value: [
       'pallbearers/pallbearer-1.png',
@@ -52,7 +52,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
-    key: 'jugar:backgrounds.frameworks',
+    key: 'playerId:backgrounds.frameworks',
     type: 'img',
     value: [
       'frameworks/react.png',

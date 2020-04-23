@@ -29,7 +29,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('jugar:loading')}</Message>
+          <Message type="information">{t('playerId:loading')}</Message>
         </Container>
       </Layout>
     )
@@ -39,7 +39,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('jugar:room-not-ready')}</Message>
+          <Message type="information">{t('playerId:room-not-ready')}</Message>
         </Container>
       </Layout>
     )
@@ -49,7 +49,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('jugar:out-of-room')}</Message>
+          <Message type="error">{t('playerId:out-of-room')}</Message>
         </Container>
       </Layout>
     )
@@ -96,7 +96,7 @@ export default function Jugar() {
       <BackgroundCellContextProvider playerId={player.id}>
         <Layout>
           <Heading type="h2">
-            {t('jugar:title', {
+            {t('playerId:title', {
               playerName: player?.name || '',
               roomName: room.name || '',
             })}
@@ -105,7 +105,7 @@ export default function Jugar() {
             <div className="lg:flex mt-4">
               <div className="lg:w-1/3">
                 <Box>
-                  <Heading type="h2">{t('jugar:last-numbers')}</Heading>
+                  <Heading type="h2">{t('playerId:last-numbers')}</Heading>
                   <LastNumbers selectedNumbers={room.selectedNumbers || []} />
                 </Box>
                 <div className="hidden lg:block mt-4">

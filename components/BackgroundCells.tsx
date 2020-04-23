@@ -67,7 +67,7 @@ export default function BackgroundCells() {
       <div className="-mb-4">
         <InputText
           id="background"
-          label={t('jugar:empty-cells.url')}
+          label={t('playerId:empty-cells.url')}
           onChange={value => {
             setBackgroundCell({
               type: 'url',

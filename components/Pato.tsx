@@ -39,7 +39,7 @@ export default function Pato({ extraSounds, room }: Props) {
             <div className="mr-4">
               <Button
                 id="play-sound"
-                aria-label={t('jugar:play-sound', { name })}
+                aria-label={t('playerId:play-sound', { name })}
                 disabled={!!room.soundToPlay}
                 onClick={() => {
                   roomApi.updateRoom(room.ref, {

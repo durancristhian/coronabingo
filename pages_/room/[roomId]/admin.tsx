@@ -137,7 +137,7 @@ export default function Admin() {
                 color="green"
                 id="configure-room"
                 className="w-full"
-                disabled={!room.adminId}
+                disabled={!room.adminId || players.length < 2}
                 onClick={() => readyToPlay(room)}
               >
                 <FiSmile />

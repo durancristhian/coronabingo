@@ -72,9 +72,9 @@ export default function Options({ isAdmin, room }: Props) {
         )}
       </OptionTabList>
       <OptionTabPanel
-        contentLabel={t('jugar:empty-cells.title')}
+        contentLabel={t('playerId:empty-cells.title')}
         id="modal-background-cells"
-        title={t('jugar:empty-cells.title')}
+        title={t('playerId:empty-cells.title')}
         onRequestClose={resetCurrentTabIndex}
       >
         <BackgroundCells />
@@ -82,15 +82,15 @@ export default function Options({ isAdmin, room }: Props) {
       {isAdmin && (
         <Fragment>
           <OptionTabPanel
-            contentLabel={t('jugar:celebrations')}
+            contentLabel={t('playerId:celebrations')}
             id="modal-celebrations"
-            title={t('jugar:celebrations')}
+            title={t('playerId:celebrations')}
             onRequestClose={resetCurrentTabIndex}
           >
             <Celebrations room={room} />
           </OptionTabPanel>
           <OptionTabPanel
-            contentLabel={t('jugar:sounds')}
+            contentLabel={t('playerId:sounds')}
             id="modal-sounds"
             title={
               <span
@@ -100,7 +100,7 @@ export default function Options({ isAdmin, room }: Props) {
                 onKeyPress={tricks}
                 className="cursor-text focus:outline-none"
               >
-                {t('jugar:sounds')}
+                {t('playerId:sounds')}
               </span>
             }
             onRequestClose={resetCurrentTabIndex}
@@ -108,9 +108,9 @@ export default function Options({ isAdmin, room }: Props) {
             <Pato extraSounds={isVisible} room={room} />
           </OptionTabPanel>
           <OptionTabPanel
-            contentLabel={t('jugar:replay.reboot-game')}
+            contentLabel={t('playerId:replay.reboot-game')}
             id="modal-restart"
-            title={t('jugar:replay.reboot-game')}
+            title={t('playerId:replay.reboot-game')}
             onRequestClose={resetCurrentTabIndex}
           >
             <Restart room={room} />
