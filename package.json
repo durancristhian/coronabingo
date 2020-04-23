@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.10.2",
+    "version": "1.11.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
