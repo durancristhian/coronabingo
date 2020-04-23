@@ -3,25 +3,15 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
+import Emoji from '~/components/Emoji'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 
-/* TODO: this should be in constants */
 const emojis: { [key: string]: ReactNode } = {
-  ar: (
-    <i className="em em-flag-ar" tabIndex={-1} aria-label="Argentina Flag"></i>
-  ),
-  en: (
-    <i className="em em-us" tabIndex={-1} aria-label="United States Flag"></i>
-  ),
-  world: (
-    <i
-      className="em em-earth_americas"
-      tabIndex={-1}
-      aria-label="Earth globe americas"
-    ></i>
-  ),
+  ar: <Emoji name="flag-ar" />,
+  en: <Emoji name="us" />,
+  world: <Emoji name="earth_americas" />,
 }
 
 interface Props {
