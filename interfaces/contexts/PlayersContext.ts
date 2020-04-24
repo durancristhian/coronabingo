@@ -1,6 +1,6 @@
 import { Player } from '~/interfaces'
 
-export interface FirebaseContextData {
+export interface PlayersContextData {
   players: Player[]
   setPlayers: (array: Player[]) => void
 }

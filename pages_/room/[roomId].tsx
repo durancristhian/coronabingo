@@ -18,7 +18,7 @@ import scrollToTop from '~/utils/scrollToTop'
 
 export default function Sala() {
   const { room } = useRoom()
-  const { players = [] } = useRoomPlayers()
+  const { players } = useRoomPlayers()
   const { t, lang } = useTranslation()
 
   useEffect(scrollToTop, [])
@@ -34,12 +34,8 @@ export default function Sala() {
   }
 
   const renderPlayers = () => {
-    if (!room.readyToPlay) {
+    if (!room.readyToPlay || !players.length) {
       return <Message type="information">{t('roomId:not-ready')}</Message>
-    }
-
-    if (!players.length) {
-      return <Message type="information">{t('roomId:loading')}</Message>
     }
 
     return (
@@ -109,7 +105,7 @@ export default function Sala() {
           <InputText
             id="room-name"
             label={t('roomId:room-name')}
-            value={room.name || ''}
+            value={room.name}
             readonly
             onFocus={event => event.target.select()}
           />
@@ -128,7 +124,7 @@ export default function Sala() {
               label={t('roomId:call-link')}
               readonly
               onFocus={event => event.target.select()}
-              value={room.videoCall || ''}
+              value={room.videoCall}
             />
           )}
           <div className="mt-8">{renderPlayers()}</div>

@@ -6,19 +6,18 @@ import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import Select from '~/components/Select'
 import { Player, Room, RoomBase } from '~/interfaces'
+import playerApi from '~/models/player'
 import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
   players: Player[]
-  removePlayer: Function
   room: Room
-  setPlayers: Function
+  setPlayers: (array: Player[]) => void
   updateRoom: (data: Partial<RoomBase>) => void
 }
 
 export default function Players({
   players,
-  removePlayer,
   room,
   setPlayers,
   updateRoom,
@@ -41,23 +40,25 @@ export default function Players({
     playersCopy.splice(index, 1)
 
     setPlayers(playersCopy)
-    removePlayer(player.ref)
+
+    playerApi.removePlayer(player)
   }
 
-  const onSubmit = async (event: FormEvent) => {
+  const onSubmit = (event: FormEvent) => {
     event.preventDefault()
 
-    const playerDoc = room.ref.collection('players').doc()
+    const { playerId, playerRef, playerData } = playerApi.createPlayer(room, {
+      name,
+    })
 
+    /* TODO: review this */
     setPlayers([
       ...players,
       {
-        boards: '',
-        id: playerDoc.id,
-        exists: false,
-        ref: playerDoc,
-        name,
-        selectedNumbers: [],
+        exists: true,
+        id: playerId,
+        ref: playerRef,
+        ...playerData,
       },
     ])
 

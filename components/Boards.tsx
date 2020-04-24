@@ -4,16 +4,25 @@ import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
 import useBoards from '~/hooks/useBoards'
-import { Player } from '~/interfaces'
+import { Player, PlayerBase } from '~/interfaces'
 
 interface Props {
   player: Player
-  setPlayerProps: (props: {}) => void
+  updatePlayer: (data: Partial<PlayerBase>) => void
 }
 
-export default function Boards({ player, setPlayerProps }: Props) {
+export default function Boards({ player, updatePlayer }: Props) {
   const boards = useBoards(player.boards)
   const { t } = useTranslation()
+
+  const setSelectedNumbers = (
+    boardId: number,
+    newSelectedNumbers: number[],
+  ) => {
+    updatePlayer({
+      [boardId]: newSelectedNumbers,
+    })
+  }
 
   useEffect(() => {
     if (player.id) {
@@ -60,11 +69,9 @@ export default function Boards({ player, setPlayerProps }: Props) {
               <Cells
                 boardNumbers={board.numbers}
                 selectedNumbers={player[board.id]}
-                setSelectedNumbers={newSelectedNumbers =>
-                  setPlayerProps({
-                    [board.id]: newSelectedNumbers,
-                  })
-                }
+                onSelectNumber={newSelectedNumbers => {
+                  setSelectedNumbers(board.id, newSelectedNumbers)
+                }}
               />
             </div>
           </Box>

@@ -16,6 +16,7 @@ import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { MessageType, Room } from '~/interfaces'
+import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch } from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
@@ -31,7 +32,7 @@ export default function Admin() {
     type: 'information',
     visible: false,
   })
-  const { players = [], setPlayers } = useRoomPlayers()
+  const { players, setPlayers } = useRoomPlayers()
   const { room, updateRoom } = useRoom()
   const randomBoards = useRandomBoards()
 
@@ -45,10 +46,6 @@ export default function Admin() {
         </Container>
       </Layout>
     )
-  }
-
-  const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
-    playerRef.delete()
   }
 
   const readyToPlay = async (room: Room) => {
@@ -68,12 +65,11 @@ export default function Admin() {
       readyToPlay: true,
     })
 
-    /* TODO: Refactor this to something like 👆🏼 */
     players.map((player, index) => {
-      const { name, ref: playerRef } = player
-
-      batch.set(playerRef, {
-        name,
+      batch.set(player.ref, {
+        ...defaultPlayerData,
+        ...playerApi.excludeExtraFields(player),
+        /* TODO: review this case after improving the one with the room above */
         boards: randomBoards[index],
         selectedNumbers: [],
       })
@@ -116,9 +112,8 @@ export default function Admin() {
             />
             <Players
               players={players}
-              setPlayers={setPlayers}
-              removePlayer={removePlayer}
               room={room}
+              setPlayers={setPlayers}
               updateRoom={updateRoom}
             />
             <div className="mt-4">

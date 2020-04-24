@@ -11,23 +11,20 @@ const defaultPlayerData: PlayerBase = {
 const createPlayer = (
   room: Room,
   player: Partial<PlayerBase>,
-): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const playerDoc = room.ref.collection('players').doc()
-      const playerId = playerDoc.id
-
-      await playerDoc.set(
-        Object.assign({}, defaultPlayerData, player, {
-          date: Timestamp.fromDate(new Date()),
-        }),
-      )
-
-      resolve(playerId)
-    } catch (error) {
-      reject(error)
-    }
+): {
+  playerId: string
+  playerRef: firebase.firestore.DocumentReference<
+    firebase.firestore.DocumentData
+  >
+  playerData: PlayerBase
+} => {
+  const playerRef = room.ref.collection('players').doc()
+  const playerId = playerRef.id
+  const playerData = Object.assign({}, defaultPlayerData, player, {
+    date: Timestamp.fromDate(new Date()),
   })
+
+  return { playerId, playerRef, playerData }
 }
 
 const excludeExtraFields = (player: Player): PlayerBase => {
@@ -35,6 +32,10 @@ const excludeExtraFields = (player: Player): PlayerBase => {
   const { exists, id, ref, ...playerValues } = player
 
   return playerValues
+}
+
+const removePlayer = async (player: Player) => {
+  return await player.ref.delete()
 }
 
 const updatePlayer = (
@@ -47,6 +48,7 @@ const updatePlayer = (
 const playerApi = {
   createPlayer,
   excludeExtraFields,
+  removePlayer,
   updatePlayer,
 }
 
