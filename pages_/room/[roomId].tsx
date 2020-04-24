@@ -121,7 +121,9 @@ export default function Sala() {
             readonly
             onFocus={event => event.target.select()}
           />
-          <Copy content={`${window.location.host}/${lang}/room/${room.id}`} />
+          <Copy
+            content={`${window.location.protocol}${window.location.host}/${lang}/room/${room.id}`}
+          />
           {room.videoCall && (
             <InputText
               id="videocall"
