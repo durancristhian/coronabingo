@@ -52,7 +52,7 @@ export default function SelectedNumbers({
         </Button>
       )}
       <div className="flex flex-wrap">
-        {BOARD_NUMBERS.map((n, i) => (
+        {BOARD_NUMBERS.map(n => (
           <button
             type="button"
             key={n}

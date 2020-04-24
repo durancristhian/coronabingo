@@ -20,7 +20,7 @@ import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
   const { room } = useRoom()
-  const { player, setPlayer } = usePlayer()
+  const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
 
   useEffect(scrollToTop, [])
@@ -97,8 +97,8 @@ export default function Jugar() {
         <Layout>
           <Heading type="h2">
             {t('playerId:title', {
-              playerName: player?.name || '',
-              roomName: room.name || '',
+              playerName: player.name,
+              roomName: room.name,
             })}
           </Heading>
           <div className="max-w-6xl mx-auto">
@@ -106,22 +106,14 @@ export default function Jugar() {
               <div className="lg:w-1/3">
                 <Box>
                   <Heading type="h2">{t('playerId:last-numbers')}</Heading>
-                  <LastNumbers selectedNumbers={room.selectedNumbers || []} />
+                  <LastNumbers selectedNumbers={room.selectedNumbers} />
                 </Box>
                 <div className="hidden lg:block mt-4">
                   {renderBingoSpinnerAndOptions()}
                 </div>
               </div>
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Boards
-                  player={player}
-                  setPlayerProps={newProps =>
-                    setPlayer({
-                      ...player,
-                      ...newProps,
-                    })
-                  }
-                />
+                <Boards player={player} updatePlayer={updatePlayer} />
               </div>
             </div>
             <div className="lg:hidden mt-4">
