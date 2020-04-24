@@ -3,6 +3,7 @@ import App from 'next/app'
 import Head from 'next/head'
 import Router from 'next/router'
 import React, { Fragment } from 'react'
+import { ToastContainer } from 'react-toastify'
 import { PlayerContextProvider } from '~/contexts/PlayerContext'
 import { PlayersContextProvider } from '~/contexts/PlayersContext'
 import { RoomContextProvider } from '~/contexts/RoomContext'
@@ -226,6 +227,7 @@ export default class Coronabingo extends App {
             </PlayerContextProvider>
           </PlayersContextProvider>
         </RoomContextProvider>
+        <ToastContainer />
       </Fragment>
     )
   }

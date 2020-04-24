@@ -9,6 +9,7 @@
 @import 'confetti.css';
 @import 'emojis.css';
 @import 'modal.css';
+@import 'react-toastify.css';
 
 .debug * {
   box-shadow: 0 0 1px red;

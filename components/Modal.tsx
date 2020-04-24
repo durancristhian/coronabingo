@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 import { FiX } from 'react-icons/fi'
 import ReactModal from 'react-modal'
 import Box from '~/components/Box'
+import Heading from '~/components/Heading'
 
 ReactModal.setAppElement('#__next')
 
@@ -16,7 +17,7 @@ export default function Modal({ children, title, ...rest }: Props) {
     <ReactModal {...rest}>
       <Box>
         <div className="flex items-start justify-between mb-4 text-lg md:text-xl">
-          <h2 className="font-medium">{title}</h2>
+          <Heading type="h2">{title}</Heading>
           <button
             onClick={rest.onRequestClose}
             className={classnames([

@@ -86,7 +86,9 @@ export default function Admin() {
     <Layout>
       <Container>
         <Box>
-          <Heading type="h2">{t('admin:title')}</Heading>
+          <div className="mb-4">
+            <Heading type="h2">{t('admin:title')}</Heading>
+          </div>
           <Fragment>
             <InputText
               id="room-name"

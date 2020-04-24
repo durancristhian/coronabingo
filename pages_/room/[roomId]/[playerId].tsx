@@ -95,17 +95,21 @@ export default function Jugar() {
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
         <Layout>
-          <Heading type="h2">
-            {t('playerId:title', {
-              playerName: player.name,
-              roomName: room.name,
-            })}
-          </Heading>
+          <div className="mb-4">
+            <Heading type="h2">
+              {t('playerId:title', {
+                playerName: player.name,
+                roomName: room.name,
+              })}
+            </Heading>
+          </div>
           <div className="max-w-6xl mx-auto">
             <div className="lg:flex mt-4">
               <div className="lg:w-1/3">
                 <Box>
-                  <Heading type="h2">{t('playerId:last-numbers')}</Heading>
+                  <div className="mb-4">
+                    <Heading type="h2">{t('playerId:last-numbers')}</Heading>
+                  </div>
                   <LastNumbers selectedNumbers={room.selectedNumbers} />
                 </Box>
                 <div className="hidden lg:block mt-4">

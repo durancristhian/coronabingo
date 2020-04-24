@@ -17,7 +17,7 @@ export default function Layout({ children }: Props) {
     .includes('cduran')
 
   return (
-    <main className="bg-gray-200 flex flex-col font-sans leading-normal min-h-screen text-gray-900 text-sm md:text-base">
+    <main className="bg-gray-200 flex flex-col min-h-screen">
       {isStaging && (
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
