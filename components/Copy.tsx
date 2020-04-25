@@ -6,7 +6,7 @@ import { FiCopy, FiShare2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Modal from '~/components/Modal'
 import ShareButton from '~/components/ShareButton'
-import Toast from '~/components/Toast'
+import useToast from '~/hooks/useToast'
 
 interface Props {
   content: string
@@ -14,20 +14,26 @@ interface Props {
 
 export default function Share({ content }: Props) {
   const [showModal, setShowModal] = useState(false)
-  const [showToast, setShowToast] = useState(false)
+  const { createToast, dismissToast } = useToast()
   const { t } = useTranslation()
 
   const shareOnWhatsApp = () => {
+    setShowModal(false)
     window.open(`https://api.whatsapp.com/send?text=${content}`)
   }
 
   const shareOnTelegram = () => {
+    setShowModal(false)
     window.open(`https://t.me/share/url?url=${content}`)
   }
 
-  const shareAndClose = (callback?: Function) => {
+  const showToast = () => {
     setShowModal(false)
-    callback?.()
+    const toastId = createToast('common:copied', 'information')
+
+    setTimeout(() => {
+      dismissToast(toastId)
+    }, 2000)
   }
 
   return (
@@ -36,9 +42,6 @@ export default function Share({ content }: Props) {
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
-      <Toast onDismiss={setShowToast} show={showToast} type="success">
-        {t('common:copied')}
-      </Toast>
       <Modal
         id="modal-share"
         contentLabel={t('common:share-link')}
@@ -54,23 +57,20 @@ export default function Share({ content }: Props) {
               Icon={FiCopy}
               iconBgColor="bg-gray-500"
               label={t('common:copy')}
-              onClick={() => {
-                shareAndClose()
-                setShowToast(true)
-              }}
+              onClick={showToast}
             />
           </CopyToClipboard>
           <ShareButton
             Icon={FaWhatsapp}
             iconBgColor="bg-whatsapp"
             label={t('common:whatsapp-share')}
-            onClick={() => shareAndClose(shareOnWhatsApp)}
+            onClick={shareOnWhatsApp}
           />
           <ShareButton
             Icon={FaTelegramPlane}
             iconBgColor="bg-telegram"
             label={t('common:telegram-share')}
-            onClick={() => shareAndClose(shareOnTelegram)}
+            onClick={shareOnTelegram}
           />
         </div>
       </Modal>

@@ -69,3 +69,9 @@
     width: calc(100% - 32px);
   }
 }
+
+@media (min-width: 768px) {
+  .md\:w-80 {
+    width: 20rem;
+  }
+}

@@ -13,8 +13,14 @@ const toastConfig = {
 export default function useToast() {
   const { t } = useTranslation()
 
+  const renderToast = (translationKey: string, messageType: MessageType) => (
+    <div className="w-full md:w-80">
+      <Message type={messageType}>{t(translationKey)}</Message>
+    </div>
+  )
+
   const createToast = (translationKey: string, messageType: MessageType) =>
-    toast(<Message type={messageType}>{t(translationKey)}</Message>, {
+    toast(renderToast(translationKey, messageType), {
       ...toastConfig,
     })
 
@@ -28,7 +34,7 @@ export default function useToast() {
     toastId: ToastId,
   ) => {
     toast.update(toastId, {
-      render: <Message type={messageType}>{t(translationKey)}</Message>,
+      render: renderToast(translationKey, messageType),
     })
   }
 

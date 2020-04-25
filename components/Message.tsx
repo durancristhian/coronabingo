@@ -23,10 +23,7 @@ export interface Props {
 export default function Message({ children, type }: Props) {
   return (
     <div
-      className={classnames([
-        'border-l-2 flex items-center p-4 w-full md:w-64',
-        COLORS[type],
-      ])}
+      className={classnames(['border-l-2 flex items-center p-4', COLORS[type]])}
     >
       <div className="mr-4">{ICONS[type]}</div>
       {children}
