@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.modal.big {
+  max-width: 1280px;
+}
+
 .modal:focus {
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
@@ -27,4 +31,21 @@
 
 .ReactModal__Body--open {
   overflow-y: hidden;
+}
+
+.modal > div .video-iframe {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.modal > div .video-wrapper {
+  display: block;
+  height: 0;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
 }
