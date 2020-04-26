@@ -14,7 +14,12 @@ export default function Restart({ room }: Props) {
   const { t } = useTranslation()
 
   const replay = async () => {
-    await roomApi.updateRoom(room.ref, { readyToPlay: false })
+    await roomApi.updateRoom(room.ref, {
+      readyToPlay: false,
+      selectedNumbers: [],
+      soundToPlay: '',
+      confettiType: '',
+    })
 
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }

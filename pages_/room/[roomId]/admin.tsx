@@ -53,8 +53,6 @@ export default function Admin() {
       batch.update(room.ref, {
         ...defaultRoomData,
         ...roomApi.excludeExtraFields(room),
-        /* HOTFIX */
-        selectedNumbers: [],
         readyToPlay: true,
       })
 
