@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import React, { Fragment } from 'react'
 
 interface Props {
+  disabled?: boolean
   hint?: string
   id: string
   label: string
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function Checkbox({
+  disabled,
   hint = '',
   id,
   label,
@@ -24,11 +26,13 @@ export default function Checkbox({
             'block p-2',
             'focus:outline-none focus:shadow-outline',
             'duration-150 ease-in-out transition',
+            'disabled:opacity-50',
           ])}
           type="checkbox"
           id={id}
           defaultChecked={value}
           onChange={event => onChange && onChange(event.target.checked)}
+          disabled={disabled}
         />
         <span className="flex-auto pl-4 py-2">{label}</span>
       </label>

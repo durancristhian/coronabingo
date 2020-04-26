@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import React, { FocusEvent } from 'react'
 
 interface Props {
+  disabled?: boolean
   hint?: string
   id: string
   label: string
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function InputText({
+  disabled,
   hint = '',
   id,
   label,
@@ -31,11 +33,13 @@ export default function InputText({
             'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
             'duration-150 ease-in-out transition',
             readonly && 'bg-gray-200',
+            'disabled:opacity-50',
           ])}
           id={id}
           value={value}
           onChange={event => onChange && onChange(event.target.value)}
           onFocus={event => onFocus && onFocus(event)}
+          disabled={disabled}
         />
       </label>
       {hint && (

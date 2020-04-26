@@ -4,12 +4,12 @@ import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
-import Select from '~/components/Select'
 import { Player, Room, RoomBase } from '~/interfaces'
 import playerApi from '~/models/player'
 import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
+  isFormDisabled: boolean
   players: Player[]
   room: Room
   setPlayers: (array: Player[]) => void
@@ -17,6 +17,7 @@ interface Props {
 }
 
 export default function Players({
+  isFormDisabled,
   players,
   room,
   setPlayers,
@@ -65,7 +66,7 @@ export default function Players({
     setName('')
   }
 
-  const isNameRepeated =
+  const isCurrentNameRepeated =
     Boolean(players.length) && players.some(p => p.name === name)
 
   return (
@@ -84,10 +85,7 @@ export default function Players({
         </span>
       </p>
       <form onSubmit={onSubmit}>
-        <fieldset
-          className="disabled:opacity-50"
-          disabled={players.length === MAX_PLAYERS}
-        >
+        <fieldset disabled={players.length === MAX_PLAYERS || isFormDisabled}>
           <div className="flex items-end">
             <div className="flex-auto">
               <InputText
@@ -104,7 +102,7 @@ export default function Players({
                 className="w-full"
                 color="green"
                 type="submit"
-                disabled={!name || isNameRepeated}
+                disabled={!name || isCurrentNameRepeated}
               >
                 <FiPlus />
               </Button>
@@ -143,6 +141,7 @@ export default function Players({
                   color="red"
                   id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
+                  disabled={isFormDisabled}
                 >
                   <FiTrash2 />
                 </Button>
@@ -151,19 +150,6 @@ export default function Players({
           ))}
         </div>
       )}
-      <div className="mt-4">
-        <div className="my-4">
-          <Select
-            disabled={!players.length}
-            hint={t('admin:players.field-admin-hint')}
-            id="adminId"
-            label={t('admin:players.field-admin')}
-            onChange={value => updateRoom({ adminId: value })}
-            options={players}
-            value={room.adminId}
-          />
-        </div>
-      </div>
     </div>
   )
 }

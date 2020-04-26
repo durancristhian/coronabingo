@@ -99,7 +99,7 @@ export default function Sala() {
     <Layout>
       <Container>
         <Box>
-          <div className="mb-8">
+          <div className="mb-4">
             <Heading type="h2">{t('roomId:title')}</Heading>
           </div>
           <InputText

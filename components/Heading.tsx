@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 
 const HEADER_STYLES = {
   h1: ['text-xl', 'md:text-2xl'],
-  h2: ['text-lg', 'md:text-xl', 'mb-4'],
+  h2: ['text-lg', 'md:text-xl'],
   h3: [],
   h4: [],
   h5: [],
