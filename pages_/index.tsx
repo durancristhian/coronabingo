@@ -10,10 +10,9 @@ import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
 import Modal from '~/components/Modal'
 
-/* TODO: use real links here */
 const videosByLanguage: { [key: string]: string } = {
-  en: 'AmNOfqeUFLk',
-  es: 'AmNOfqeUFLk',
+  en: 'iP0732WuS5E',
+  es: 'XJpKBegq5GY',
 }
 
 export default function Index() {
