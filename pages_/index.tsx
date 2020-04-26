@@ -1,15 +1,23 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { useState } from 'react'
+import { FiEye } from 'react-icons/fi'
+import YouTube from 'react-youtube'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
+import Button from '~/components/Button'
 import Container from '~/components/Container'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
 import Modal from '~/components/Modal'
-import YouTube from 'react-youtube'
+
+/* TODO: use real links here */
+const videosByLanguage: { [key: string]: string } = {
+  en: 'AmNOfqeUFLk',
+  es: 'AmNOfqeUFLk',
+}
 
 export default function Index() {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -26,31 +34,31 @@ export default function Index() {
           <Anchor href="https://hangouts.google.com/">Google Hangouts</Anchor>
           <span>.</span>
         </p>
-        <div className="my-4">
-          <span>{t('index:how-to-play-text')} </span>
-          <button
-            id="how-to-play"
-            className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
+        <div className="mt-8">
+          <Button
+            id="watch-tutorial"
             onClick={() => {
               setShowModal(true)
             }}
+            className="w-full"
           >
-            {t('index:how-to-play-button')}
-          </button>
-          <span>.</span>
+            <FiEye />
+            <span className="ml-4">{t('index:how-to-play-button')}</span>
+          </Button>
         </div>
         <Modal
-          className="modal big"
           id="modal-how-to-play"
           isOpen={showModal}
           onRequestClose={() => {
             setShowModal(false)
           }}
+          className="modal wide"
           overlayClassName="overlay"
           title={t('index:how-to-play-modal-title')}
+          contentLabel={t('index:how-to-play-modal-title')}
         >
           <YouTube
-            videoId={t('index:how-to-play-youtube-id')}
+            videoId={videosByLanguage[lang]}
             containerClassName="video-wrapper"
             className="video-iframe"
           />
