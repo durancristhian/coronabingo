@@ -1,7 +1,8 @@
 {
   "success": "Sala configurada con éxito. Espere...",
+  "saving": "Configurando sala...",
   "title": "Preparar sala",
-  "error": "Ocurrió un error al cargar la información de la sala. Intenta de nuevo recargando la página.",
+  "error": "Ocurrió un error al guardar la información de la sala. Intenta de nuevo.",
   "loading": "Cargando información de la sala...",
   "field-name": "Nombre",
   "field-link-hint": "Compartí este link a las personas de la videollamada.",

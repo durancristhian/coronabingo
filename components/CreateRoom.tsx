@@ -48,28 +48,25 @@ export default function CreateRoom() {
         </Heading>
       </div>
       <form onSubmit={onSubmit}>
-        <fieldset disabled={inProgress}>
-          <InputText
-            id="name"
-            label={t('index:create-room.field-name')}
-            onChange={setName}
-            value={name}
-          />
-          <div className="mt-8">
-            <Button
-              className="w-full"
-              color="green"
-              disabled={!name}
-              type="submit"
-              id="create-room"
-            >
-              <FiSmile />
-              <span className="ml-4">
-                {t('index:create-room.field-submit')}
-              </span>
-            </Button>
-          </div>
-        </fieldset>
+        <InputText
+          id="name"
+          label={t('index:create-room.field-name')}
+          onChange={setName}
+          value={name}
+          disabled={inProgress}
+        />
+        <div className="mt-8">
+          <Button
+            className="w-full"
+            color="green"
+            disabled={!name || inProgress}
+            type="submit"
+            id="create-room"
+          >
+            <FiSmile />
+            <span className="ml-4">{t('index:create-room.field-submit')}</span>
+          </Button>
+        </div>
       </form>
     </Fragment>
   )
