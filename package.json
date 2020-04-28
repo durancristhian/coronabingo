@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.10.2",
+    "version": "1.11.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
@@ -67,6 +67,8 @@
         "react-icons": "^3.9.0",
         "react-modal": "^3.11.2",
         "react-tabs": "^3.1.0",
+        "react-toastify": "^5.5.0",
+        "react-youtube": "^7.11.2",
         "start-server-and-test": "^1.11.0",
         "swr": "^0.1.18",
         "tailwindcss": "^1.2.0",

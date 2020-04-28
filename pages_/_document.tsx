@@ -47,7 +47,7 @@ export default class extends Document {
           <link rel="preconnect" href="https://www.google-analytics.com" />
           <link rel="preconnect" href="https://firestore.googleapis.com" />
         </Head>
-        <body>
+        <body className="font-sans leading-normal text-gray-900 text-sm md:text-base">
           <Main />
           <NextScript />
         </body>

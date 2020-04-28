@@ -38,6 +38,9 @@
   "dreams-link": "What's this?",
   "sounds": "Sounds",
   "play-sound": "Play {{name}}",
+  "flag-ar": "Argentinian flag",
+  "flag-us": "US flag",
+  "world": "World",
   "dreams": {
     "1": "Water",
     "2": "Child",

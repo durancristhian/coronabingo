@@ -1,8 +1,8 @@
-import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import Anchor from '~/components/Anchor'
 import Ball from '~/components/Ball'
+import Emoji from '~/components/Emoji'
 import { DREAMS_EMOJIS } from '~/utils/constants'
 
 interface Props {
@@ -15,7 +15,9 @@ export default function LastNumbers({ selectedNumbers }: Props) {
   const emoji = DREAMS_EMOJIS[last - 1]
 
   if (!selectedNumbers.length) {
-    return <p className="text-center text-gray-600">{t('jugar:no-numbers')}</p>
+    return (
+      <p className="text-center text-gray-600">{t('playerId:no-numbers')}</p>
+    )
   }
 
   return (
@@ -34,18 +36,14 @@ export default function LastNumbers({ selectedNumbers }: Props) {
       </div>
       <div className="flex items-center justify-between mt-4">
         <p className="flex flex-auto font-medium items-center">
-          <span className="mr-1">{t(`jugar:dreams.${last}`)}</span>
+          <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
           <span className="text-xs">
-            <i
-              className={classnames('em', emoji)}
-              tabIndex={-1}
-              aria-label={t(`jugar:dreams.${last}`)}
-            ></i>
+            <Emoji name={emoji} />
           </span>
         </p>
         <p className="text-right md:text-sm w-24">
           <Anchor href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)">
-            {t('jugar:dreams-link')}
+            {t('playerId:dreams-link')}
           </Anchor>
         </p>
       </div>

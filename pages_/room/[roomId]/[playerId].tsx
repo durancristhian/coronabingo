@@ -20,7 +20,7 @@ import scrollToTop from '~/utils/scrollToTop'
 
 export default function Jugar() {
   const { room } = useRoom()
-  const { player, setPlayer } = usePlayer()
+  const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
 
   useEffect(scrollToTop, [])
@@ -29,7 +29,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('jugar:loading')}</Message>
+          <Message type="information">{t('playerId:loading')}</Message>
         </Container>
       </Layout>
     )
@@ -39,7 +39,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('jugar:room-not-ready')}</Message>
+          <Message type="information">{t('playerId:room-not-ready')}</Message>
         </Container>
       </Layout>
     )
@@ -49,7 +49,7 @@ export default function Jugar() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('jugar:out-of-room')}</Message>
+          <Message type="error">{t('playerId:out-of-room')}</Message>
         </Container>
       </Layout>
     )
@@ -95,33 +95,29 @@ export default function Jugar() {
     <EasterEggContextProvider>
       <BackgroundCellContextProvider playerId={player.id}>
         <Layout>
-          <Heading type="h2">
-            {t('jugar:title', {
-              playerName: player?.name || '',
-              roomName: room.name || '',
-            })}
-          </Heading>
+          <div className="mb-4">
+            <Heading type="h2">
+              {t('playerId:title', {
+                playerName: player.name,
+                roomName: room.name,
+              })}
+            </Heading>
+          </div>
           <div className="max-w-6xl mx-auto">
             <div className="lg:flex mt-4">
               <div className="lg:w-1/3">
                 <Box>
-                  <Heading type="h2">{t('jugar:last-numbers')}</Heading>
-                  <LastNumbers selectedNumbers={room.selectedNumbers || []} />
+                  <div className="mb-4">
+                    <Heading type="h2">{t('playerId:last-numbers')}</Heading>
+                  </div>
+                  <LastNumbers selectedNumbers={room.selectedNumbers} />
                 </Box>
                 <div className="hidden lg:block mt-4">
                   {renderBingoSpinnerAndOptions()}
                 </div>
               </div>
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Boards
-                  player={player}
-                  setPlayerProps={newProps =>
-                    setPlayer({
-                      ...player,
-                      ...newProps,
-                    })
-                  }
-                />
+                <Boards player={player} updatePlayer={updatePlayer} />
               </div>
             </div>
             <div className="lg:hidden mt-4">

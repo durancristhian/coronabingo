@@ -4,21 +4,21 @@ import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
-import Select from '~/components/Select'
 import { Player, Room, RoomBase } from '~/interfaces'
+import playerApi from '~/models/player'
 import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
+  isFormDisabled: boolean
   players: Player[]
-  removePlayer: Function
   room: Room
-  setPlayers: Function
+  setPlayers: (array: Player[]) => void
   updateRoom: (data: Partial<RoomBase>) => void
 }
 
 export default function Players({
+  isFormDisabled,
   players,
-  removePlayer,
   room,
   setPlayers,
   updateRoom,
@@ -41,30 +41,32 @@ export default function Players({
     playersCopy.splice(index, 1)
 
     setPlayers(playersCopy)
-    removePlayer(player.ref)
+
+    playerApi.removePlayer(player)
   }
 
-  const onSubmit = async (event: FormEvent) => {
+  const onSubmit = (event: FormEvent) => {
     event.preventDefault()
 
-    const playerDoc = room.ref.collection('players').doc()
+    const { playerId, playerRef, playerData } = playerApi.createPlayer(room, {
+      name,
+    })
 
+    /* TODO: review this */
     setPlayers([
       ...players,
       {
-        boards: '',
-        id: playerDoc.id,
-        exists: false,
-        ref: playerDoc,
-        name,
-        selectedNumbers: [],
+        exists: true,
+        id: playerId,
+        ref: playerRef,
+        ...playerData,
       },
     ])
 
     setName('')
   }
 
-  const isNameRepeated =
+  const isCurrentNameRepeated =
     Boolean(players.length) && players.some(p => p.name === name)
 
   return (
@@ -83,10 +85,7 @@ export default function Players({
         </span>
       </p>
       <form onSubmit={onSubmit}>
-        <fieldset
-          className="disabled:opacity-50"
-          disabled={players.length === MAX_PLAYERS}
-        >
+        <fieldset disabled={players.length === MAX_PLAYERS || isFormDisabled}>
           <div className="flex items-end">
             <div className="flex-auto">
               <InputText
@@ -103,7 +102,7 @@ export default function Players({
                 className="w-full"
                 color="green"
                 type="submit"
-                disabled={!name || isNameRepeated}
+                disabled={!name || isCurrentNameRepeated}
               >
                 <FiPlus />
               </Button>
@@ -142,6 +141,7 @@ export default function Players({
                   color="red"
                   id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
+                  disabled={isFormDisabled}
                 >
                   <FiTrash2 />
                 </Button>
@@ -150,19 +150,6 @@ export default function Players({
           ))}
         </div>
       )}
-      <div className="mt-4">
-        <div className="my-4">
-          <Select
-            disabled={!players.length}
-            hint={t('admin:players.field-admin-hint')}
-            id="adminId"
-            label={t('admin:players.field-admin')}
-            onChange={value => updateRoom({ adminId: value })}
-            options={players}
-            value={room.adminId}
-          />
-        </div>
-      </div>
     </div>
   )
 }

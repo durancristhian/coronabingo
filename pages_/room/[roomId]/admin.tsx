@@ -12,28 +12,23 @@ import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
+import Select from '~/components/Select'
 import useRandomBoards from '~/hooks/useRandomBoards'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
-import { MessageType, Room } from '~/interfaces'
+import useToast from '~/hooks/useToast'
+import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch } from '~/utils/firebase'
 import scrollToTop from '~/utils/scrollToTop'
 
 export default function Admin() {
   const { t, lang } = useTranslation()
-  const [message, setMessage] = useState<{
-    content: string
-    type: MessageType
-    visible: boolean
-  }>({
-    content: '',
-    type: 'information',
-    visible: false,
-  })
-  const { players = [], setPlayers } = useRoomPlayers()
+  const { players, setPlayers } = useRoomPlayers()
   const { room, updateRoom } = useRoom()
   const randomBoards = useRandomBoards()
+  const [inProgress, setInProgress] = useState(false)
+  const { createToast, dismissToast, updateToast } = useToast()
 
   useEffect(scrollToTop, [])
 
@@ -47,50 +42,53 @@ export default function Admin() {
     )
   }
 
-  const removePlayer = (playerRef: firebase.firestore.DocumentReference) => {
-    playerRef.delete()
-  }
+  const submitRoom = async () => {
+    setInProgress(true)
 
-  const readyToPlay = async (room: Room) => {
-    setMessage({
-      content: t('admin:success'),
-      type: 'success',
-      visible: true,
-    })
+    const toastId = createToast('admin:saving', 'information')
 
-    const batch = createBatch()
+    try {
+      const batch = createBatch()
 
-    batch.update(room.ref, {
-      ...defaultRoomData,
-      ...roomApi.excludeExtraFields(room),
-      /* HOTFIX */
-      selectedNumbers: [],
-      readyToPlay: true,
-    })
-
-    /* TODO: Refactor this to something like 👆🏼 */
-    players.map((player, index) => {
-      const { name, ref: playerRef } = player
-
-      batch.set(playerRef, {
-        name,
-        boards: randomBoards[index],
-        selectedNumbers: [],
+      batch.update(room.ref, {
+        ...defaultRoomData,
+        ...roomApi.excludeExtraFields(room),
+        readyToPlay: true,
       })
-    })
 
-    await batch.commit()
+      players.map((player, index) => {
+        batch.set(player.ref, {
+          ...defaultPlayerData,
+          ...playerApi.excludeExtraFields(player),
+          /* TODO: review this case after improving the one with the room above */
+          boards: randomBoards[index],
+          selectedNumbers: [],
+        })
+      })
 
-    setTimeout(() => {
-      Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
-    }, 1000)
+      await batch.commit()
+
+      updateToast('admin:success', 'success', toastId)
+
+      setTimeout(() => {
+        dismissToast(toastId)
+
+        Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
+      }, 2000)
+    } catch (error) {
+      updateToast('admin:error', 'error', toastId)
+
+      setInProgress(false)
+    }
   }
 
   return (
     <Layout>
       <Container>
         <Box>
-          <Heading type="h2">{t('admin:title')}</Heading>
+          <div className="mb-4">
+            <Heading type="h2">{t('admin:title')}</Heading>
+          </div>
           <Fragment>
             <InputText
               id="room-name"
@@ -107,20 +105,34 @@ export default function Admin() {
               readonly
               onFocus={event => event.target.select()}
             />
-            <Copy content={`${window.location.host}/${lang}/room/${room.id}`} />
+            <Copy
+              content={`${window.location.protocol}${window.location.host}/${lang}/room/${room.id}`}
+            />
             <InputText
               id="videoCall"
               label={t('admin:field-videocall')}
               onChange={value => updateRoom({ videoCall: value })}
               value={room.videoCall}
+              disabled={inProgress}
             />
             <Players
+              isFormDisabled={inProgress}
               players={players}
-              setPlayers={setPlayers}
-              removePlayer={removePlayer}
               room={room}
+              setPlayers={setPlayers}
               updateRoom={updateRoom}
             />
+            <div className="mt-4">
+              <Select
+                disabled={!players.length || inProgress}
+                hint={t('admin:players.field-admin-hint')}
+                id="adminId"
+                label={t('admin:players.field-admin')}
+                onChange={value => updateRoom({ adminId: value })}
+                options={players}
+                value={room.adminId}
+              />
+            </div>
             <div className="mt-4">
               <Checkbox
                 hint={t('admin:field-bingo-spinner-hint')}
@@ -130,6 +142,7 @@ export default function Admin() {
                   updateRoom({ bingoSpinner: value })
                 }}
                 value={room.bingoSpinner}
+                disabled={inProgress}
               />
             </div>
             <div className="mt-8">
@@ -137,19 +150,14 @@ export default function Admin() {
                 color="green"
                 id="configure-room"
                 className="w-full"
-                disabled={!room.adminId}
-                onClick={() => readyToPlay(room)}
+                disabled={!room.adminId || players.length < 2 || inProgress}
+                onClick={submitRoom}
               >
                 <FiSmile />
                 <span className="ml-4">{t('admin:field-submit')}</span>
               </Button>
             </div>
           </Fragment>
-          {message.visible && (
-            <div className="mt-8">
-              <Message type={message.type}>{message.content}</Message>
-            </div>
-          )}
         </Box>
       </Container>
     </Layout>

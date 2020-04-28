@@ -1,0 +1,14 @@
+.video-iframe {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.video-wrapper {
+  display: block;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
+}

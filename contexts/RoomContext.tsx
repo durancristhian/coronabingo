@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Room, RoomBase } from '~/interfaces'
-import { RoomContextData } from '~/interfaces/contexts/RoomContext'
+import { Room, RoomBase, RoomContextData } from '~/interfaces'
 import { roomsRef } from '~/utils/firebase'
 
 const RoomContext = createContext<RoomContextData>({

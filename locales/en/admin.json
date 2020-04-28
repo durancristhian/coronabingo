@@ -1,7 +1,8 @@
 {
   "success": "Successfully configured room. Wait...",
+  "saving": "Configuring room...",
   "title": "Configure room",
-  "error": "An error occurred trying to fetch the room information. Try again by refreshing the page.",
+  "error": "An error occurred trying to configure the room. Try again.",
   "loading": "Loading room information...",
   "field-name": "Name",
   "field-link-hint": "Share this link with the people in the videocall.",

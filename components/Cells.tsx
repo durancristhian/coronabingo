@@ -6,16 +6,16 @@ import { BoardNumbers } from '~/interfaces'
 interface Props {
   boardNumbers: BoardNumbers
   selectedNumbers: number[]
-  setSelectedNumbers: (ns: number[]) => void
+  onSelectNumber: (ns: number[]) => void
 }
 
 export default function Cells({
   boardNumbers = [],
   selectedNumbers = [],
-  setSelectedNumbers,
+  onSelectNumber,
 }: Props) {
   const toggleNumber = (n: number) => {
-    setSelectedNumbers(
+    onSelectNumber(
       selectedNumbers.includes(n)
         ? selectedNumbers.filter(number => number !== n)
         : [...selectedNumbers, n],

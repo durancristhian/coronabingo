@@ -1,10 +1,12 @@
 {
   "intro": "Hola!, en esta página vas a poder jugar al bingo con otras personas.",
   "videocall-suggestion": "Vas a necesitar crear una videollamada con quienes quieras jugar. Te recomiendo",
+  "how-to-play-button": "Ver tutorial",
+  "how-to-play-modal-title": "Como jugar Coronabingo",
   "create-room": {
     "title": "Crear una sala",
     "saving": "Creando sala...",
-    "error": "Ha ocurrido un error. Intente nuevamente.",
+    "error": "Ha ocurrido un error. Intenta nuevamente.",
     "success": "Sala creada con éxito. Espere...",
     "field-name": "Nombre *",
     "field-submit": "Listo"

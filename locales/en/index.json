@@ -1,6 +1,8 @@
 {
   "intro": "Hello!, in this page you'll be able to play bingo with other people.",
   "videocall-suggestion": "You'll need to create a videocall with all the players. I recommend",
+  "how-to-play-button": "Watch tutorial",
+  "how-to-play-modal-title": "How to play Coronabingo",
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",

@@ -1,14 +1,16 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
-@import 'emojis.css';
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
 @import 'background-cell.css';
 @import 'ball.css';
 @import 'confetti.css';
+@import 'emojis.css';
 @import 'modal.css';
+@import 'react-toastify.css';
+@import 'video.css';
 
 .debug * {
   box-shadow: 0 0 1px red;
@@ -66,5 +68,11 @@
 
   .toast {
     width: calc(100% - 32px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:w-80 {
+    width: 20rem;
   }
 }

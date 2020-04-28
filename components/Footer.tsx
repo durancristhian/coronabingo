@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react'
 import { FaPaypal } from 'react-icons/fa'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
+import Emoji from '~/components/Emoji'
 import Modal from '~/components/Modal'
 import ShareButton from '~/components/ShareButton'
 
@@ -40,11 +41,7 @@ export default function Footer() {
             >
               <span className="flex items-center">
                 <span className="mr-1">{t('common:donate')}</span>
-                <i
-                  className="em em-coffee"
-                  tabIndex={-1}
-                  aria-label="Coffee"
-                ></i>
+                <Emoji name="coffee" />
               </span>
             </button>
           </div>

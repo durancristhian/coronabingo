@@ -5,7 +5,7 @@
   "out-of-room": "No eres parte de esta sala.",
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
-  "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",  
+  "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
   "show-confetti": "Activar confetti",
   "hide-confetti": "Desactivar confetti",
   "show-pallbearers": "Mostrar ghaneses del ataúd",
@@ -38,6 +38,9 @@
   "dreams-link": "¿Qué es esto?",
   "play-sound": "Reproducir {{name}}",
   "sounds": "Sonidos",
+  "flag-ar": "Bandera de Argentina",
+  "flag-us": "Bandera de Estados Unidos",
+  "world": "Mundo",
   "dreams": {
     "1": "Agua",
     "2": "El niño",

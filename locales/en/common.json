@@ -19,5 +19,6 @@
   "copied": "Copied to Clipboard.",
   "whatsapp-share": "WhatsApp",
   "telegram-share": "Telegram",
-  "staging": "Staging v{{version}}"
+  "staging": "Staging v{{version}}",
+  "coffee": "Coffee"
 }

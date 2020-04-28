@@ -14,18 +14,23 @@ export default function Restart({ room }: Props) {
   const { t } = useTranslation()
 
   const replay = async () => {
-    await roomApi.updateRoom(room.ref, { readyToPlay: false })
+    await roomApi.updateRoom(room.ref, {
+      readyToPlay: false,
+      selectedNumbers: [],
+      soundToPlay: '',
+      confettiType: '',
+    })
 
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (
     <Fragment>
-      <p>{t('jugar:replay.description')}</p>
+      <p>{t('playerId:replay.description')}</p>
       <div className="mt-8 text-center">
         <Button id="confirm" onClick={replay} color="green">
           <FiThumbsUp />
-          <span className="ml-4">{t('jugar:replay.confirm')}</span>
+          <span className="ml-4">{t('playerId:replay.confirm')}</span>
         </Button>
       </div>
     </Fragment>
