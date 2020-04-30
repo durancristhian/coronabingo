@@ -1,8 +1,5 @@
 declare module 'next-translate/Link' {
-  export default (props: {
-    children: T
-    href: string
-    as?: string
-    passHref?: boolean
-  }) => T
+  type NextLink = import('next/link')
+  declare const _default: NextLink
+  export default _default
 }

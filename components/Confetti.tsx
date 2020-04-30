@@ -59,7 +59,7 @@ interface Props {
   type: ConfettiType
 }
 
-class Confetti extends Component<Props> {
+export default class Confetti extends Component<Props> {
   render() {
     const { type } = this.props
 
@@ -72,5 +72,3 @@ class Confetti extends Component<Props> {
     ))
   }
 }
-
-export default Confetti
