@@ -4,7 +4,10 @@ describe('Admin', () => {
   beforeEach(() => {
     cy.server()
 
-    cy.visit('http://localhost:3000/es/room/7JRgOvrnskGEcaAsUDJd/admin')
+    cy.visit(
+      `http://localhost:3000/es/room/${Cypress.env('roomId') ||
+        '7JRgOvrnskGEcaAsUDJd'}/admin`,
+    )
   })
 
   it('Should have a #configure-room disabled by default', () => {
