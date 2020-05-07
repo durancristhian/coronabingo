@@ -7,7 +7,8 @@ import { ToastContainer } from 'react-toastify'
 import { PlayerContextProvider } from '~/contexts/PlayerContext'
 import { PlayersContextProvider } from '~/contexts/PlayersContext'
 import { RoomContextProvider } from '~/contexts/RoomContext'
-import { allLanguages } from '~/i18n.json'
+import NewsModal from '~/components/NewsModal'
+import { allLanguages, defaultLanguage } from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
@@ -224,6 +225,7 @@ export default class Coronabingo extends App {
           <PlayersContextProvider>
             <PlayerContextProvider>
               <Component {...pageProps} />
+              <NewsModal lang={lang || defaultLanguage} changelog={{}} />
             </PlayerContextProvider>
           </PlayersContextProvider>
         </RoomContextProvider>
