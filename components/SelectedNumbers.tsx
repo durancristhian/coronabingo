@@ -42,6 +42,7 @@ export default function SelectedNumbers({
       {isAdmin && bingoSpinner && (
         <Button
           id="next"
+          data-test-id="next-number"
           className="mb-4 w-full"
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}

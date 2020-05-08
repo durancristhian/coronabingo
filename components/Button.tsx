@@ -27,9 +27,11 @@ export default function Button({
   id,
   onClick,
   type = 'button',
+  ...rest
 }: Props) {
   return (
     <button
+      {...rest}
       aria-label={ariaLabel}
       id={id}
       type={type}
