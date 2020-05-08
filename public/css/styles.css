@@ -1,6 +1,12 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+
+@import 'react-toastify.css';
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
@@ -9,7 +15,6 @@
 @import 'confetti.css';
 @import 'emojis.css';
 @import 'modal.css';
-@import 'react-toastify.css';
 @import 'video.css';
 
 .debug * {
