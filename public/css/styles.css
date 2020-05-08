@@ -1,6 +1,8 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+
+@import 'react-toastify.css';
 /* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
@@ -9,8 +11,13 @@
 @import 'confetti.css';
 @import 'emojis.css';
 @import 'modal.css';
-@import 'react-toastify.css';
 @import 'video.css';
+
+/* purgecss start ignore */
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+/* purgecss end ignore */
 
 .debug * {
   box-shadow: 0 0 1px red;
