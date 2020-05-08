@@ -18,7 +18,7 @@
   },
   "replay": {
     "reboot-game": "Reboot game",
-    "description": "This action will redirect you to the admin so you can update the room information in order to start a new game. You can edit the list of players, change roles and redistribute the boards.",
+    "description": "This action will redirect you to the admin so you can update the room information in order to start a new game. You can edit the list of players, change roles and redistribute the tickets.",
     "confirm": "Confirm"
   },
   "backgrounds": {
