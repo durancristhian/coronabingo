@@ -34,8 +34,8 @@ export default function Tickets({ player, updatePlayer }: Props) {
         player.ref.update(playerValues)
 
         localStorage.removeItem('roomValues')
-      } catch (error) {
-        console.error(error)
+      } catch (e) {
+        console.error(e)
       }
     }
   }, [player.id])

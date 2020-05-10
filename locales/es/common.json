@@ -20,5 +20,6 @@
   "whatsapp-share": "WhatsApp",
   "telegram-share": "Telegram",
   "staging": "Staging v{{version}}",
-  "coffee": "Café"
+  "coffee": "Café",
+  "new-features-modal-title": "Novedades en la versión {{version}}"
 }

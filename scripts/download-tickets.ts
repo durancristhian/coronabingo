@@ -28,8 +28,8 @@ const downloadTickets = async () => {
     )
 
     console.log('✅', ' Tickets downloaded successfully')
-  } catch (error) {
-    throw new Error(error)
+  } catch (e) {
+    throw new Error(e)
   }
 }
 

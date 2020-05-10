@@ -75,7 +75,7 @@ export default function Admin() {
 
         Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
       }, 2000)
-    } catch (error) {
+    } catch (e) {
       updateToast('admin:error', 'error', toastId)
 
       setInProgress(false)

@@ -75,8 +75,8 @@ Promise.all(
         .split('\n')
         .filter((x: string) => x)
         .map((page: string) => JSON.parse(page).map(flat))
-    } catch (error) {
-      throw new Error(error.message)
+    } catch (e) {
+      throw new Error(e.message)
     }
   }),
 ).then(tickets => {
@@ -87,8 +87,8 @@ Promise.all(
       join(__dirname, '..', 'public', 'tickets.json'),
       JSON.stringify(flattedTickets, null, 2),
     )
-  } catch (error) {
-    throw new Error(error.message)
+  } catch (e) {
+    throw new Error(e.message)
   }
 })
 
