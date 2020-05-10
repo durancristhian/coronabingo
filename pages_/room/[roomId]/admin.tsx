@@ -61,7 +61,7 @@ export default function Admin() {
           ...defaultPlayerData,
           ...playerApi.excludeExtraFields(player),
           /* TODO: review this case after improving the one with the room above */
-          boards: randomTickets[index],
+          tickets: randomTickets[index],
           selectedNumbers: [],
         })
       })

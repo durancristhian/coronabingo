@@ -4,13 +4,13 @@ import EmptyCell from '~/components/EmptyCell'
 import { TicketNumbers } from '~/interfaces'
 
 interface Props {
-  boardNumbers: TicketNumbers
+  ticketNumbers: TicketNumbers
   selectedNumbers: number[]
   onSelectNumber: (ns: number[]) => void
 }
 
 export default function Cells({
-  boardNumbers = [],
+  ticketNumbers = [],
   selectedNumbers = [],
   onSelectNumber,
 }: Props) {
@@ -30,18 +30,18 @@ export default function Cells({
 
   return (
     <Fragment>
-      {boardNumbers.map((boardNumber, i) => {
-        if (!boardNumber) return <EmptyCell key={i} index={i} />
+      {ticketNumbers.map((ticketNumber, i) => {
+        if (!ticketNumber) return <EmptyCell key={i} index={i} />
 
         return (
           <div
             key={i}
             className={classnames([
               'bg-white border-b-2 border-r-2 border-gray-900 cursor-poroto flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
-              selectedNumbers.includes(boardNumber) && 'bg-orange-400',
+              selectedNumbers.includes(ticketNumber) && 'bg-orange-400',
             ])}
-            onClick={() => handleClick(boardNumber)}
-            onKeyPress={() => handleClick(boardNumber)}
+            onClick={() => handleClick(ticketNumber)}
+            onKeyPress={() => handleClick(ticketNumber)}
             role="button"
             tabIndex={0}
             data-test-id="cell-number"
@@ -49,14 +49,14 @@ export default function Cells({
             <div
               className={classnames(
                 ['absolute bottom-0 left-0 m-1 sm:m-2 right-0 top-0 z-0'],
-                selectedNumbers.includes(boardNumber) && 'poroto',
+                selectedNumbers.includes(ticketNumber) && 'poroto',
               )}
               style={{
-                transform: `rotate(${boardNumber + i}deg)`,
+                transform: `rotate(${ticketNumber + i}deg)`,
               }}
             ></div>
             <span className="font-medium relative text-lg sm:text-5xl text-shadow-white z-10">
-              {boardNumber}
+              {ticketNumber}
             </span>
           </div>
         )

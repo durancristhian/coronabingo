@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react'
 import { Ticket } from '~/interfaces'
-import boardsData from '~/public/boards.json'
+import ticketsData from '~/public/tickets.json'
 
-export default function useTickets(boardNumbers: string): Ticket[] {
-  const [boards, setTickets] = useState<Ticket[]>([])
+export default function useTickets(ticketNumbers: string): Ticket[] {
+  const [tickets, setTickets] = useState<Ticket[]>([])
 
   const getTicket = (index: number) => ({
     id: index,
-    numbers: boardsData[index - 1],
+    numbers: ticketsData[index - 1],
   })
 
   useEffect(() => {
-    if (!boardNumbers) return
+    if (!ticketNumbers) return
 
     setTickets(
-      boardNumbers
+      ticketNumbers
         .split(',')
         .map(Number)
         .map(getTicket),
     )
-  }, [boardNumbers])
+  }, [ticketNumbers])
 
-  return boards
+  return tickets
 }

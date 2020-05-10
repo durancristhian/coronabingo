@@ -8,13 +8,13 @@ const pdfParse = require('pdf-parse')
 const createEmptyArray = () => new Array(9).fill(null)
 
 const buildTickets = (numbers: number[]) => {
-  let boardNumber = 0
+  let ticketNumber = 0
   let lineNumber = 0
 
   return JSON.stringify(
     numbers.reduce((acc: number[][][], number) => {
-      if (!acc[boardNumber]) {
-        acc[boardNumber] = [
+      if (!acc[ticketNumber]) {
+        acc[ticketNumber] = [
           createEmptyArray(),
           createEmptyArray(),
           createEmptyArray(),
@@ -22,17 +22,17 @@ const buildTickets = (numbers: number[]) => {
       }
 
       let index = Math.floor(number / 10)
-      if (index > acc[boardNumber][lineNumber].length - 1) {
+      if (index > acc[ticketNumber][lineNumber].length - 1) {
         index--
       }
 
-      acc[boardNumber][lineNumber][index] = number
+      acc[ticketNumber][lineNumber][index] = number
 
-      if (acc[boardNumber][lineNumber].filter(n => n).length === 5) {
+      if (acc[ticketNumber][lineNumber].filter(n => n).length === 5) {
         lineNumber = lineNumber + 1
 
         if (lineNumber === 3) {
-          boardNumber = boardNumber + 1
+          ticketNumber = ticketNumber + 1
           lineNumber = 0
         }
       }
@@ -65,7 +65,7 @@ const pdfNames = ['1', '2', '3', '4']
 
 Promise.all(
   pdfNames.map(async pdfName => {
-    const pdf = readFileSync(join(__dirname, 'boards', `${pdfName}.pdf`))
+    const pdf = readFileSync(join(__dirname, 'tickets', `${pdfName}.pdf`))
 
     try {
       const { text } = await pdfParse(pdf, {
@@ -79,12 +79,12 @@ Promise.all(
       throw new Error(error.message)
     }
   }),
-).then(boards => {
+).then(tickets => {
   try {
-    const flattedTickets = flat(boards)
+    const flattedTickets = flat(tickets)
 
     writeFileSync(
-      join(__dirname, '..', 'public', 'boards.json'),
+      join(__dirname, '..', 'public', 'tickets.json'),
       JSON.stringify(flattedTickets, null, 2),
     )
   } catch (error) {

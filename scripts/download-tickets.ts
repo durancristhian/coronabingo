@@ -20,11 +20,11 @@ const downloadTickets = async () => {
       process.env.WOORKSHEET_ID,
       process.env.WORKSHEET_TITLE,
     )
-    const boards = worksheet.data.map(Object.values)
+    const tickets = worksheet.data.map(Object.values)
 
     writeFileSync(
-      join(__dirname, '../public', 'boards.json'),
-      JSON.stringify(boards, null, 2),
+      join(__dirname, '../public', 'tickets.json'),
+      JSON.stringify(tickets, null, 2),
     )
 
     console.log('✅', ' Tickets downloaded successfully')

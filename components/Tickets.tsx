@@ -12,15 +12,15 @@ interface Props {
 }
 
 export default function Tickets({ player, updatePlayer }: Props) {
-  const boards = useTickets(player.boards)
+  const tickets = useTickets(player.tickets)
   const { t } = useTranslation()
 
   const setSelectedNumbers = (
-    boardId: number,
+    ticketId: number,
     newSelectedNumbers: number[],
   ) => {
     updatePlayer({
-      [boardId]: newSelectedNumbers,
+      [ticketId]: newSelectedNumbers,
     })
   }
 
@@ -41,36 +41,36 @@ export default function Tickets({ player, updatePlayer }: Props) {
   }, [player.id])
 
   useEffect(() => {
-    if (player.id && boards) {
+    if (player.id && tickets) {
       localStorage.setItem(
         'roomValues',
         JSON.stringify({
-          [player.id]: boards.reduce(
-            (acc, board) => ({
+          [player.id]: tickets.reduce(
+            (acc, ticket) => ({
               ...acc,
-              [board.id]: player[board.id] || [],
+              [ticket.id]: player[ticket.id] || [],
             }),
             {},
           ),
         }),
       )
     }
-  }, [boards, player])
+  }, [tickets, player])
 
   return (
     <Fragment>
-      {boards.map((board, i) => (
+      {tickets.map((ticket, i) => (
         <div key={i} className={classnames([i !== 0 && 'mt-4'])}>
           <Box>
             <p className="font-semibold uppercase">
-              {t('common:board', { boardId: board.id })}
+              {t('common:ticket', { ticketId: ticket.id })}
             </p>
             <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
               <Cells
-                boardNumbers={board.numbers}
-                selectedNumbers={player[board.id]}
+                ticketNumbers={ticket.numbers}
+                selectedNumbers={player[ticket.id]}
                 onSelectNumber={newSelectedNumbers => {
-                  setSelectedNumbers(board.id, newSelectedNumbers)
+                  setSelectedNumbers(ticket.id, newSelectedNumbers)
                 }}
               />
             </div>

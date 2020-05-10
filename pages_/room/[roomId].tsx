@@ -67,8 +67,8 @@ export default function Sala() {
                   </span>
                 )}
                 <p className="italic mt-2 text-gray-800 text-sm w-full">
-                  {t('common:board_plural', {
-                    boardId: player.boards.split(',').join(' & '),
+                  {t('common:ticket_plural', {
+                    ticketId: player.tickets.split(',').join(' & '),
                   })}
                 </p>
               </div>
