@@ -7,7 +7,7 @@ const pdfParse = require('pdf-parse')
 
 const createEmptyArray = () => new Array(9).fill(null)
 
-const buildBoards = (numbers: number[]) => {
+const buildTickets = (numbers: number[]) => {
   let boardNumber = 0
   let lineNumber = 0
 
@@ -52,7 +52,7 @@ const renderPage = (pageData: PageData) => {
     .then(textContent => textContent.items)
     .then(items => items.filter(({ str }) => str !== 'www.bingo.es'))
     .then(items => items.map(({ str }) => Number(str)))
-    .then(numbers => buildBoards(numbers))
+    .then(numbers => buildTickets(numbers))
     .catch((error: Error) => {
       throw new Error(error.message)
     })
@@ -81,11 +81,11 @@ Promise.all(
   }),
 ).then(boards => {
   try {
-    const flattedBoards = flat(boards)
+    const flattedTickets = flat(boards)
 
     writeFileSync(
       join(__dirname, '..', 'public', 'boards.json'),
-      JSON.stringify(flattedBoards, null, 2),
+      JSON.stringify(flattedTickets, null, 2),
     )
   } catch (error) {
     throw new Error(error.message)

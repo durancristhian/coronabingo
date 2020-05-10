@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
-import useBoards from '~/hooks/useBoards'
+import useTickets from '~/hooks/useTickets'
 import { Player, PlayerBase } from '~/interfaces'
 
 interface Props {
@@ -11,8 +11,8 @@ interface Props {
   updatePlayer: (data: Partial<PlayerBase>) => void
 }
 
-export default function Boards({ player, updatePlayer }: Props) {
-  const boards = useBoards(player.boards)
+export default function Tickets({ player, updatePlayer }: Props) {
+  const boards = useTickets(player.boards)
   const { t } = useTranslation()
 
   const setSelectedNumbers = (

@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import React, { Fragment } from 'react'
 import EmptyCell from '~/components/EmptyCell'
-import { BoardNumbers } from '~/interfaces'
+import { TicketNumbers } from '~/interfaces'
 
 interface Props {
-  boardNumbers: BoardNumbers
+  boardNumbers: TicketNumbers
   selectedNumbers: number[]
   onSelectNumber: (ns: number[]) => void
 }

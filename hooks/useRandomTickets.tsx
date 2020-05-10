@@ -9,12 +9,12 @@ for (let index = 1; index < limit; index += 2) {
   boards.push(`${index},${index + 1}`)
 }
 
-export default function useRandomBoards(): string[] {
-  const [randomBoards, setRandomBoards] = useState([])
+export default function useRandomTickets(): string[] {
+  const [randomTickets, setRandomTickets] = useState([])
 
   useEffect(() => {
-    setRandomBoards(knuthShuffle(boards.slice(0)))
+    setRandomTickets(knuthShuffle(boards.slice(0)))
   }, [])
 
-  return randomBoards
+  return randomTickets
 }

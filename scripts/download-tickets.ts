@@ -14,7 +14,7 @@ if (!process.env.WOORKSHEET_ID || !process.env.WORKSHEET_TITLE) {
   )
 }
 
-const downloadBoards = async () => {
+const downloadTickets = async () => {
   try {
     const worksheet = await getWorksheet(
       process.env.WOORKSHEET_ID,
@@ -27,12 +27,12 @@ const downloadBoards = async () => {
       JSON.stringify(boards, null, 2),
     )
 
-    console.log('✅', ' Boards downloaded successfully')
+    console.log('✅', ' Tickets downloaded successfully')
   } catch (error) {
     throw new Error(error)
   }
 }
 
-downloadBoards()
+downloadTickets()
 
 export {}

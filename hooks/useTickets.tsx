@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Board } from '~/interfaces'
+import { Ticket } from '~/interfaces'
 import boardsData from '~/public/boards.json'
 
-export default function useBoards(boardNumbers: string): Board[] {
-  const [boards, setBoards] = useState<Board[]>([])
+export default function useTickets(boardNumbers: string): Ticket[] {
+  const [boards, setTickets] = useState<Ticket[]>([])
 
-  const getBoard = (index: number) => ({
+  const getTicket = (index: number) => ({
     id: index,
     numbers: boardsData[index - 1],
   })
@@ -13,11 +13,11 @@ export default function useBoards(boardNumbers: string): Board[] {
   useEffect(() => {
     if (!boardNumbers) return
 
-    setBoards(
+    setTickets(
       boardNumbers
         .split(',')
         .map(Number)
-        .map(getBoard),
+        .map(getTicket),
     )
   }, [boardNumbers])
 
