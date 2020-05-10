@@ -113,12 +113,12 @@ export default function Sala() {
             hint={t('roomId:field-link-hint')}
             id="url"
             label={t('roomId:field-link')}
-            value={`${window.location.host}/room/${room.id}`}
+            value={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
             readonly
             onFocus={event => event.target.select()}
           />
           <Copy
-            content={`${window.location.protocol}${window.location.host}/${lang}/room/${room.id}`}
+            content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
           />
           {room.videoCall && (
             <InputText
