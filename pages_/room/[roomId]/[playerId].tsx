@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
-import Boards from '~/components/Boards'
+import Tickets from '~/components/Tickets'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
@@ -117,7 +117,7 @@ export default function Jugar() {
                 </div>
               </div>
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Boards player={player} updatePlayer={updatePlayer} />
+                <Tickets player={player} updatePlayer={updatePlayer} />
               </div>
             </div>
             <div className="lg:hidden mt-4">

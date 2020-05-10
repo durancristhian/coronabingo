@@ -13,7 +13,7 @@ import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
 import Select from '~/components/Select'
-import useRandomBoards from '~/hooks/useRandomBoards'
+import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
@@ -26,7 +26,7 @@ export default function Admin() {
   const { t, lang } = useTranslation()
   const { players, setPlayers } = useRoomPlayers()
   const { room, updateRoom } = useRoom()
-  const randomBoards = useRandomBoards()
+  const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
 
@@ -61,7 +61,7 @@ export default function Admin() {
           ...defaultPlayerData,
           ...playerApi.excludeExtraFields(player),
           /* TODO: review this case after improving the one with the room above */
-          boards: randomBoards[index],
+          tickets: randomTickets[index],
           selectedNumbers: [],
         })
       })
