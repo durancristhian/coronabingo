@@ -29,7 +29,7 @@ export default function NewsModal({ lang }: Props) {
         If there is no coronabingo-version in local storage means that is the first time
         the user gets into the app.
 
-        We show nothing in this case and we just save the value for future updates
+        We show nothing and we save the value for future cases
       */
       if (!currentVersion) {
         localStorage.setItem('coronabingo-version', version)
@@ -37,24 +37,23 @@ export default function NewsModal({ lang }: Props) {
         return
       }
 
-      /*
-        If the version has changed AND there is a corresponding changelog,
-        we show the modal
-      */
-      if (version !== currentVersion) {
-        const modalContentURL = `changelog/${version}/${lang}.md`
+      /* If the version is the same we return, nothing to do */
+      if (version === currentVersion) return
 
-        await fetch(modalContentURL)
-          .then(m => m.text())
-          .then(matter)
-          .then(md => {
-            setModal({
-              visible: true,
-              content: md.content,
-            })
+      await fetch(`changelog/${version}/${lang}.md`)
+        .then(m => m.text())
+        .then(matter)
+        .then(md => {
+          setModal({
+            visible: true,
+            content: md.content,
           })
-          .catch()
-      }
+        })
+        /*
+          The fetch failed or there is no changelog for this version
+          We do nothing
+        */
+        .catch()
     }
 
     asyncCheck()
