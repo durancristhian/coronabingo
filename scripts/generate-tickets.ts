@@ -61,16 +61,21 @@ const renderPage = (pageData: PageData) => {
 const flat = (array: [][]) =>
   array.reduce((acc: [][], curr) => acc.concat(...curr), [])
 
-const pdfNames = ['1', '2', '3', '4']
+const pdfNames = [...Array(24).keys()].map(n => n + 1)
 
 Promise.all(
   pdfNames.map(async pdfName => {
-    const pdf = readFileSync(join(__dirname, 'tickets', `${pdfName}.pdf`))
+    const pdfPath = join(__dirname, 'tickets', `${pdfName}.pdf`)
+
+    console.log(`📄 Generating tickets from ${pdfPath}`)
+
+    const pdf = readFileSync(pdfPath)
 
     try {
       const { text } = await pdfParse(pdf, {
         pagerender: renderPage,
       })
+
       return text
         .split('\n')
         .filter((x: string) => x)
@@ -87,6 +92,8 @@ Promise.all(
       join(__dirname, '..', 'public', 'tickets.json'),
       JSON.stringify(flattedTickets, null, 2),
     )
+
+    console.log(`✅ Tickets generated successfully`)
   } catch (e) {
     throw new Error(e.message)
   }
