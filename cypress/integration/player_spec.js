@@ -4,29 +4,33 @@ describe('Admin', () => {
   before(() => {
     cy.server()
 
-    cy.visit(
-      `http://localhost:3000/es/room/${Cypress.env('roomId') ||
-        '7JRgOvrnskGEcaAsUDJd'}/${Cypress.env('adminPlayerId')}`,
-    )
+    const roomId = Cypress.env('roomId')
+    const adminId = Cypress.env('adminId')
+
+    cy.visit(`http://localhost:3000/es/room/${roomId}/${adminId}`)
   })
 
-  it('display a new number from spinner', () => {
+  it('Should display a new number from bingo spinner', () => {
     cy.get('[data-test-id="next-number"]')
       .eq(1)
       .click()
   })
 
-  it('selected numbers should persist on reload', () => {
+  it('Should persist selected numbers on reload', () => {
     cy.get('[data-test-id="cell-number"]')
       .eq(0)
       .should('not.have.class', 'bg-orange-400')
+
     cy.get('[data-test-id="cell-number"]')
       .eq(0)
       .click()
+
     cy.get('[data-test-id="cell-number"]')
       .eq(0)
       .should('have.class', 'bg-orange-400')
+
     cy.reload()
+
     cy.get('[data-test-id="cell-number"]')
       .eq(0)
       .should('have.class', 'bg-orange-400')
@@ -39,17 +43,21 @@ describe('Admin', () => {
     cy.get('[data-test-id="reboot-game"]')
   })
 
-  it('reboot game', () => {
+  it('Should reboot game', () => {
     cy.get('[data-test-id="reboot-game"]')
       .eq(1)
       .click()
+
     cy.get('#confirm').click()
+
     cy.url().should('contain', 'admin')
+
     cy.get('#configure-room').click()
   })
 
-  it('waiting room', () => {
+  it('Should access to player room', () => {
     cy.url().should('not.contain', 'admin')
+
     cy.get('#play')
       .eq(0)
       .click()

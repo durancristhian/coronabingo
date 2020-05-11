@@ -1,7 +1,6 @@
 {
   "env": {
-    "roomId": "",
-    "adminPlayerId": "",
-    "normalPlayerId": ""
+    "adminId": "",
+    "roomId": ""
   }
 }
