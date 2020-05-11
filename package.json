@@ -18,7 +18,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged"
+            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged",
+            "pre-push": "npm t"
         }
     },
     "lint-staged": {
