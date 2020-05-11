@@ -4,22 +4,23 @@ import Trans from 'next-translate/Trans'
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Modal from '~/components/Modal'
+import { ModalContent } from '~/interfaces'
 import { version } from '~/package.json'
-
-interface Modal {
-  content: string | null
-  visible: boolean
-}
 
 interface Props {
   lang: string
 }
 
 export default function NewsModal({ lang }: Props) {
-  const [modal, setModal] = useState<Modal>({
+  const defaultModalValue = {
     visible: false,
     content: null,
-  })
+  }
+  const [modal, setModal] = useState<ModalContent>(defaultModalValue)
+
+  const updateVersion = () => {
+    localStorage.setItem('coronabingo-version', version)
+  }
 
   useEffect(() => {
     const asyncCheck = async () => {
@@ -32,7 +33,7 @@ export default function NewsModal({ lang }: Props) {
         We show nothing and we save the value for future cases
       */
       if (!currentVersion) {
-        localStorage.setItem('coronabingo-version', version)
+        updateVersion()
 
         return
       }
@@ -40,32 +41,35 @@ export default function NewsModal({ lang }: Props) {
       /* If the version is the same we return, nothing to do */
       if (version === currentVersion) return
 
-      await fetch(`changelog/${version}/${lang}.md`)
-        .then(m => m.text())
-        .then(matter)
-        .then(md => {
-          setModal({
-            visible: true,
-            content: md.content,
-          })
+      try {
+        const res = await fetch(`changelog/${version}/${lang}.md`)
+
+        /* If there is no changelog for this version we do nothing */
+        if (res.status === 404) {
+          return
+        }
+
+        const data = await res.text()
+        const { content } = matter(data)
+
+        setModal({
+          visible: true,
+          content,
         })
-        /*
-          The fetch failed or there is no changelog for this version
-          We do nothing
-        */
-        .catch()
+      } catch (error) {
+        /* The fetch failed. We do nothing */
+      } finally {
+        updateVersion()
+      }
     }
 
     asyncCheck()
   }, [])
 
   const closeNewsModal = () => {
-    localStorage.setItem('coronabingo-version', version)
+    updateVersion()
 
-    setModal({
-      visible: false,
-      content: null,
-    })
+    setModal(defaultModalValue)
   }
 
   if (!modal.visible || !modal.content) {
