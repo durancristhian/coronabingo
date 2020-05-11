@@ -1,24 +1,25 @@
 {
     "name": "coronabingo",
-    "version": "1.11.3",
+    "version": "1.12.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
         "build-start": "npm run build && npm run start",
         "cypress-open": "cypress open",
-        "cypress-run": "cypress run",
+        "cypress-run": "cypress run --config trashAssetsBeforeRuns=false,video=false",
         "dev": "next-translate && next dev",
-        "download-boards": "ts-node scripts/download-boards",
-        "generate-boards": "ts-node scripts/generate-boards",
+        "download-tickets": "ts-node scripts/download-tickets",
+        "generate-tickets": "ts-node scripts/generate-tickets",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
-        "test": "start-server-and-test build-start http://localhost:3000 cypress-run",
+        "test": "NODE_ENV=test start-server-and-test build-start http://localhost:3000 cypress-run",
         "validate-locales": "ts-node scripts/validate-locales"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged"
+            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged",
+            "pre-push": "npm t"
         }
     },
     "lint-staged": {
@@ -49,6 +50,7 @@
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-react": "^7.19.0",
         "firebase": "^7.14.0",
+        "gray-matter": "^4.0.2",
         "gsheets": "^2.0.0",
         "husky": "^4.2.3",
         "isomorphic-unfetch": "^3.0.0",
@@ -61,10 +63,12 @@
         "pdf-parse": "^1.1.1",
         "postcss-import": "^12.0.1",
         "prettier": "^1.19.1",
+        "raw-loader": "^4.0.1",
         "react": "^16.13.0",
         "react-copy-to-clipboard": "^5.0.2",
         "react-dom": "^16.13.0",
         "react-icons": "^3.9.0",
+        "react-markdown": "^4.3.1",
         "react-modal": "^3.11.2",
         "react-tabs": "^3.1.0",
         "react-toastify": "^5.5.0",

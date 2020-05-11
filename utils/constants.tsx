@@ -1,5 +1,5 @@
 import { Emojis } from '~/interfaces'
-import boardsData from '~/public/boards.json'
+import ticketsData from '~/public/tickets.json'
 
 export const BACKGROUND_CELL_VALUES = [
   { key: 'playerId:backgrounds.yellow', type: 'color', value: 'yellow' },
@@ -62,7 +62,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
 ]
-export const BOARD_NUMBERS = [...Array(90).keys()].map(n => n + 1)
+export const TICKET_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'sweat_drops',
   'boy',
@@ -155,7 +155,7 @@ export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'rat',
   'scream',
 ]
-export const MAX_PLAYERS = boardsData.length / 2
+export const MAX_PLAYERS = ticketsData.length / 2
 export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',

@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
-import { BOARD_NUMBERS } from '~/utils/constants'
+import { TICKET_NUMBERS } from '~/utils/constants'
 
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
@@ -24,7 +24,7 @@ export default function SelectedNumbers({
   const roomNumbers = [...selectedNumbers]
 
   const onNextButtonClick = () => {
-    const missingNumbers = BOARD_NUMBERS.filter(n => !roomNumbers.includes(n))
+    const missingNumbers = TICKET_NUMBERS.filter(n => !roomNumbers.includes(n))
     const shuffled = knuthShuffle(missingNumbers.slice(0))
 
     onNewNumber(shuffled[0])
@@ -53,7 +53,7 @@ export default function SelectedNumbers({
         </Button>
       )}
       <div className="flex flex-wrap">
-        {BOARD_NUMBERS.map(n => (
+        {TICKET_NUMBERS.map(n => (
           <button
             type="button"
             key={n}

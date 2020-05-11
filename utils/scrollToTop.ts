@@ -5,11 +5,11 @@ export default function scrollToTop() {
       top: 0,
       left: 0,
     })
-  } catch (err) {
-    if (err instanceof TypeError) {
+  } catch (e) {
+    if (e instanceof TypeError) {
       window.scroll(0, 0)
     } else {
-      console.error(err)
+      console.error(e)
     }
   }
 }

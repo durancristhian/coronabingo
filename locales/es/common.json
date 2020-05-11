@@ -6,8 +6,8 @@
   "language-es": "Español",
   "language-en": "English",
   "bingo-spinner": "Bolillero",
-  "board": "Cartón Nº {{boardId}}",
-  "board_plural": "Cartones Nº {{boardId}}",
+  "ticket": "Cartón Nº {{ticketId}}",
+  "ticket_plural": "Cartones Nº {{ticketId}}",
   "made-by": "Por ",
   "select-empty-option": "--- Selecciona ---",
   "donate": "Doname un café",
@@ -20,5 +20,6 @@
   "whatsapp-share": "WhatsApp",
   "telegram-share": "Telegram",
   "staging": "Staging v{{version}}",
-  "coffee": "Café"
+  "coffee": "Café",
+  "new-features-modal-title": "Novedades en la versión {{version}}"
 }

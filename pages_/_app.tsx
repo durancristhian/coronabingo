@@ -4,10 +4,11 @@ import Head from 'next/head'
 import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
+import NewsModal from '~/components/NewsModal'
 import { PlayerContextProvider } from '~/contexts/PlayerContext'
 import { PlayersContextProvider } from '~/contexts/PlayersContext'
 import { RoomContextProvider } from '~/contexts/RoomContext'
-import { allLanguages } from '~/i18n.json'
+import { allLanguages, defaultLanguage } from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
 import '~/public/css/styles.css'
@@ -79,12 +80,12 @@ export default class Coronabingo extends App {
               <meta name="title" content="Coronabingo | Bingo online" />
               <meta
                 name="description"
-                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta property="og:title" content="Coronabingo | Bingo online" />
               <meta
                 property="og:description"
-                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta
                 property="twitter:url"
@@ -96,7 +97,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:description"
-                content="CoronaBingo, now you can play free bingo with boards and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
               />
               <meta
                 property="og:url"
@@ -228,6 +229,7 @@ export default class Coronabingo extends App {
           </PlayersContextProvider>
         </RoomContextProvider>
         <ToastContainer />
+        <NewsModal lang={lang || defaultLanguage} />
       </Fragment>
     )
   }

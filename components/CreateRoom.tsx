@@ -33,7 +33,7 @@ export default function CreateRoom() {
 
         Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
       }, 2000)
-    } catch (error) {
+    } catch (e) {
       updateToast('index:create-room.error', 'error', toastId)
 
       setInProgress(false)

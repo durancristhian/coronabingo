@@ -26,8 +26,8 @@ const createRoom = (room: Partial<RoomBase>): Promise<string> => {
       )
 
       resolve(roomId)
-    } catch (error) {
-      reject(error)
+    } catch (e) {
+      reject(e)
     }
   })
 }

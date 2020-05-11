@@ -2,7 +2,7 @@ import { Player, PlayerBase, Room } from '~/interfaces'
 import { Timestamp } from '~/utils/firebase'
 
 const defaultPlayerData: PlayerBase = {
-  boards: '',
+  tickets: '',
   date: null,
   name: '',
   selectedNumbers: [],

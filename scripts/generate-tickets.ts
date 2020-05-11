@@ -7,14 +7,14 @@ const pdfParse = require('pdf-parse')
 
 const createEmptyArray = () => new Array(9).fill(null)
 
-const buildBoards = (numbers: number[]) => {
-  let boardNumber = 0
+const buildTickets = (numbers: number[]) => {
+  let ticketNumber = 0
   let lineNumber = 0
 
   return JSON.stringify(
     numbers.reduce((acc: number[][][], number) => {
-      if (!acc[boardNumber]) {
-        acc[boardNumber] = [
+      if (!acc[ticketNumber]) {
+        acc[ticketNumber] = [
           createEmptyArray(),
           createEmptyArray(),
           createEmptyArray(),
@@ -22,17 +22,17 @@ const buildBoards = (numbers: number[]) => {
       }
 
       let index = Math.floor(number / 10)
-      if (index > acc[boardNumber][lineNumber].length - 1) {
+      if (index > acc[ticketNumber][lineNumber].length - 1) {
         index--
       }
 
-      acc[boardNumber][lineNumber][index] = number
+      acc[ticketNumber][lineNumber][index] = number
 
-      if (acc[boardNumber][lineNumber].filter(n => n).length === 5) {
+      if (acc[ticketNumber][lineNumber].filter(n => n).length === 5) {
         lineNumber = lineNumber + 1
 
         if (lineNumber === 3) {
-          boardNumber = boardNumber + 1
+          ticketNumber = ticketNumber + 1
           lineNumber = 0
         }
       }
@@ -52,7 +52,7 @@ const renderPage = (pageData: PageData) => {
     .then(textContent => textContent.items)
     .then(items => items.filter(({ str }) => str !== 'www.bingo.es'))
     .then(items => items.map(({ str }) => Number(str)))
-    .then(numbers => buildBoards(numbers))
+    .then(numbers => buildTickets(numbers))
     .catch((error: Error) => {
       throw new Error(error.message)
     })
@@ -65,7 +65,7 @@ const pdfNames = ['1', '2', '3', '4']
 
 Promise.all(
   pdfNames.map(async pdfName => {
-    const pdf = readFileSync(join(__dirname, 'boards', `${pdfName}.pdf`))
+    const pdf = readFileSync(join(__dirname, 'tickets', `${pdfName}.pdf`))
 
     try {
       const { text } = await pdfParse(pdf, {
@@ -75,20 +75,20 @@ Promise.all(
         .split('\n')
         .filter((x: string) => x)
         .map((page: string) => JSON.parse(page).map(flat))
-    } catch (error) {
-      throw new Error(error.message)
+    } catch (e) {
+      throw new Error(e.message)
     }
   }),
-).then(boards => {
+).then(tickets => {
   try {
-    const flattedBoards = flat(boards)
+    const flattedTickets = flat(tickets)
 
     writeFileSync(
-      join(__dirname, '..', 'public', 'boards.json'),
-      JSON.stringify(flattedBoards, null, 2),
+      join(__dirname, '..', 'public', 'tickets.json'),
+      JSON.stringify(flattedTickets, null, 2),
     )
-  } catch (error) {
-    throw new Error(error.message)
+  } catch (e) {
+    throw new Error(e.message)
   }
 })
 

@@ -14,25 +14,25 @@ if (!process.env.WOORKSHEET_ID || !process.env.WORKSHEET_TITLE) {
   )
 }
 
-const downloadBoards = async () => {
+const downloadTickets = async () => {
   try {
     const worksheet = await getWorksheet(
       process.env.WOORKSHEET_ID,
       process.env.WORKSHEET_TITLE,
     )
-    const boards = worksheet.data.map(Object.values)
+    const tickets = worksheet.data.map(Object.values)
 
     writeFileSync(
-      join(__dirname, '../public', 'boards.json'),
-      JSON.stringify(boards, null, 2),
+      join(__dirname, '../public', 'tickets.json'),
+      JSON.stringify(tickets, null, 2),
     )
 
-    console.log('✅', ' Boards downloaded successfully')
-  } catch (error) {
-    throw new Error(error)
+    console.log('✅', ' Tickets downloaded successfully')
+  } catch (e) {
+    throw new Error(e)
   }
 }
 
-downloadBoards()
+downloadTickets()
 
 export {}
