@@ -7,13 +7,13 @@
         "build": "next-translate && next build",
         "build-start": "npm run build && npm run start",
         "cypress-open": "cypress open",
-        "cypress-run": "cypress run",
+        "cypress-run": "cypress run --config trashAssetsBeforeRuns=false,video=false",
         "dev": "next-translate && next dev",
         "download-tickets": "ts-node scripts/download-tickets",
         "generate-tickets": "ts-node scripts/generate-tickets",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
-        "test": "start-server-and-test build-start http://localhost:3000 cypress-run",
+        "test": "NODE_ENV=test start-server-and-test build-start http://localhost:3000 cypress-run",
         "validate-locales": "ts-node scripts/validate-locales"
     },
     "husky": {
