@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
-import AdminPassword from '~/components/AdminPassword'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
@@ -9,12 +8,13 @@ import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Options from '~/components/Options'
+/* import RoomCode from '~/components/RoomCode' */
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import Tickets from '~/components/Tickets'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
 import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
-import useAdminPassword from '~/hooks/useAdminPassword'
+/* import useAdminPassword from '~/hooks/useAdminPassword' */
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 import roomApi from '~/models/room'
@@ -24,7 +24,7 @@ export default function Jugar() {
   const { room } = useRoom()
   const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
-  const { loggedIn, login } = useAdminPassword()
+  /* const { loggedIn } = useAdminPassword() */
 
   useEffect(scrollToTop, [])
 
@@ -60,15 +60,17 @@ export default function Jugar() {
 
   const isAdmin = room.adminId === player.id
 
-  if (isAdmin && !loggedIn) {
+  /* if (isAdmin && !loggedIn) {
     return (
       <Layout>
         <Container>
-          <AdminPassword login={login} />
+          <Box>
+            <RoomCode roomCode={room.code} />
+          </Box>
         </Container>
       </Layout>
     )
-  }
+  } */
 
   const onNewNumber = (n: number) => {
     const selectedNumbers = room.selectedNumbers || []

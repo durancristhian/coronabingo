@@ -13,8 +13,8 @@ interface Props {
 const AdminContextProvider = ({ children }: Props) => {
   const [loggedIn, setLogin] = useState(false)
 
-  const login = (password: string) => {
-    setLogin(password === 'admin')
+  const login = (roomCode: string, userCode: string) => {
+    setLogin(roomCode === userCode)
   }
 
   return (

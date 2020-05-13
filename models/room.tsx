@@ -4,6 +4,7 @@ import { roomsRef, Timestamp } from '~/utils/firebase'
 const defaultRoomData: RoomBase = {
   adminId: '',
   bingoSpinner: true,
+  code: '',
   confettiType: '',
   date: null,
   name: '',

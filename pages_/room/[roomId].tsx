@@ -74,6 +74,7 @@ export default function Sala() {
               </div>
               <div className="ml-4">
                 <Button
+                  aria-label={t('roomId:play')}
                   color="green"
                   id="play"
                   disabled={!room.readyToPlay}
