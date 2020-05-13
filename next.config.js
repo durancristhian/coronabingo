@@ -24,9 +24,6 @@ module.exports = withPlugins([[withImages]], {
     GA_TRACKING_ID: process.env.GA_TRACKING_ID,
     /* Sentry */
     SENTRY_DSN: process.env.SENTRY_DSN,
-    /* Spreadsheet with tickets */
-    WOORKSHEET_ID: process.env.WOORKSHEET_ID,
-    WORKSHEET_TITLE: process.env.WORKSHEET_TITLE,
     /* Other */
     URL: process.env.URL,
   },
