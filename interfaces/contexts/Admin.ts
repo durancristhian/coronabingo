@@ -1,4 +1,4 @@
 export interface Admin {
   loggedIn: boolean
-  login: (password: string) => void
+  login: (roomCode: string, userCode: string) => void
 }

@@ -3,6 +3,7 @@ import { ConfettiType } from '~/interfaces'
 export interface RoomBase {
   adminId: string
   bingoSpinner: boolean
+  code: string
   confettiType: ConfettiType
   date: firebase.firestore.Timestamp | null
   name: string

@@ -147,6 +147,7 @@ export default function Admin() {
             </div>
             <div className="mt-8">
               <Button
+                aria-label={t('admin:field-submit')}
                 color="green"
                 id="configure-room"
                 className="w-full"

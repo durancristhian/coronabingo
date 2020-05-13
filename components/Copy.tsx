@@ -38,7 +38,11 @@ export default function Share({ content }: Props) {
 
   return (
     <Fragment>
-      <Button id="open-share-modal" onClick={() => setShowModal(true)}>
+      <Button
+        aria-label={t('common:share-link')}
+        id="open-share-modal"
+        onClick={() => setShowModal(true)}
+      >
         <FiShare2 />
         <span className="ml-4">{t('common:share-link')}</span>
       </Button>
