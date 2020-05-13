@@ -54,6 +54,9 @@ export default function Admin() {
         ...defaultRoomData,
         ...roomApi.excludeExtraFields(room),
         readyToPlay: true,
+        selectedNumbers: [],
+        soundToPlay: '',
+        confettiType: '',
       })
 
       players.map((player, index) => {
