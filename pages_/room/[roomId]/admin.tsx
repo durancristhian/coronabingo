@@ -19,10 +19,10 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
-import { createBatch, scrollToTop } from '~/utils'
+import { createBatch, getBaseUrl, scrollToTop } from '~/utils'
 
 export default function Admin() {
-  const { t, lang } = useTranslation()
+  const { t } = useTranslation()
   const { players, setPlayers } = useRoomPlayers()
   const { room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
@@ -103,13 +103,11 @@ export default function Admin() {
               hint={t('admin:field-link-hint')}
               id="url"
               label={t('admin:field-link')}
-              value={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
+              value={`${getBaseUrl()}/room/${room.id}`}
               readonly
               onFocus={event => event.target.select()}
             />
-            <Copy
-              content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
-            />
+            <Copy content={`${getBaseUrl()}/room/${room.id}`} />
             <Players
               isFormDisabled={inProgress}
               players={players}

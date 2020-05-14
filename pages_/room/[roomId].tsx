@@ -15,12 +15,12 @@ import Message from '~/components/Message'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
-import { scrollToTop } from '~/utils'
+import { getBaseUrl, scrollToTop } from '~/utils'
 
 export default function Sala() {
   const { room } = useRoom()
   const { players } = useRoomPlayers()
-  const { t, lang } = useTranslation()
+  const { t } = useTranslation()
   /* TODO: move this to a global state */
   const [times, setTimes] = useState(0)
   const [isVisible, setVisibility] = useState(false)
@@ -140,13 +140,11 @@ export default function Sala() {
             hint={t('roomId:field-link-hint')}
             id="url"
             label={t('roomId:field-link')}
-            value={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
+            value={`${getBaseUrl()}/room/${room.id}`}
             readonly
             onFocus={event => event.target.select()}
           />
-          <Copy
-            content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
-          />
+          <Copy content={`${getBaseUrl()}/room/${room.id}`} />
           {isVisible && (
             <div className="mt-8">
               <DownloadSpreadsheet players={players} room={room} />
