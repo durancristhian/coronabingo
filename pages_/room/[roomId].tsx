@@ -2,12 +2,12 @@ import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect, useState } from 'react'
-import { FiDownload, FiLink2 } from 'react-icons/fi'
-import zipcelx from 'zipcelx'
+import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
+import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
@@ -15,12 +15,12 @@ import Message from '~/components/Message'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
-import scrollToTop from '~/utils/scrollToTop'
+import { getBaseUrl, scrollToTop } from '~/utils'
 
 export default function Sala() {
   const { room } = useRoom()
   const { players } = useRoomPlayers()
-  const { t, lang } = useTranslation()
+  const { t } = useTranslation()
   /* TODO: move this to a global state */
   const [times, setTimes] = useState(0)
   const [isVisible, setVisibility] = useState(false)
@@ -49,33 +49,6 @@ export default function Sala() {
     )
   }
 
-  const downloadSpreadsheet = () => {
-    const config = {
-      /* TODO: translate name */
-      filename: 'coronabingo-players-list',
-      sheet: {
-        data: players.map(p => [
-          {
-            value: p.name,
-            type: 'string',
-          },
-          {
-            value: p.tickets,
-            type: 'string',
-          },
-          {
-            value: `${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}/${p.id}`,
-            type: 'string',
-          },
-        ]),
-      },
-    }
-
-    /* Types are wrong */
-    // @ts-ignore
-    zipcelx(config)
-  }
-
   const renderPlayers = () => {
     if (!room.readyToPlay || !players.length) {
       return <Message type="information">{t('roomId:not-ready')}</Message>
@@ -86,9 +59,9 @@ export default function Sala() {
         <Heading type="h3" textCenter={false}>
           {t('roomId:people', { count: players.length })}
         </Heading>
-        <div className="italic -mt-6 text-gray-800 text-xs md:text-sm">
-          <p className="my-8">{t('roomId:list-description')}</p>
-        </div>
+        <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
+          {t('roomId:list-description')}
+        </p>
         <div className="border-gray-300 border-t-2 mt-4 -mx-4">
           {players.map((player: Player, index: number) => (
             <div
@@ -167,34 +140,14 @@ export default function Sala() {
             hint={t('roomId:field-link-hint')}
             id="url"
             label={t('roomId:field-link')}
-            value={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
+            value={`${getBaseUrl()}/room/${room.id}`}
             readonly
             onFocus={event => event.target.select()}
           />
-          <Copy
-            content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
-          />
-          {room.videoCall && (
-            <InputText
-              id="videocall"
-              label={t('roomId:call-link')}
-              readonly
-              onFocus={event => event.target.select()}
-              value={room.videoCall}
-            />
-          )}
+          <Copy content={`${getBaseUrl()}/room/${room.id}`} />
           {isVisible && (
-            <div className="mt-4">
-              <Button
-                aria-label="Descargar planilla"
-                id="download-spreadsheet"
-                onClick={downloadSpreadsheet}
-                color="green"
-                disabled={!players.length}
-              >
-                <FiDownload />
-                <span className="ml-4">Descargar planilla</span>
-              </Button>
+            <div className="mt-8">
+              <DownloadSpreadsheet players={players} room={room} />
             </div>
           )}
           <div className="mt-8">{renderPlayers()}</div>

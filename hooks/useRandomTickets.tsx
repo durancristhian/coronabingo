@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MAX_PLAYERS } from '~/utils/constants'
+import { MAX_PLAYERS } from '~/utils'
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 
 const tickets: string[] = []

@@ -18,7 +18,7 @@ import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 import roomApi from '~/models/room'
-import scrollToTop from '~/utils/scrollToTop'
+import { scrollToTop } from '~/utils'
 
 export default function Jugar() {
   const { room } = useRoom()

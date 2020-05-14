@@ -4,11 +4,17 @@
   "room-name": "Room name",
   "people": "There are {{count}} player waiting to play",
   "people_plural": "There are {{count}} players waiting to play",
-  "call-link": "Link to call",
   "not-ready": "The room is not ready to play yet. When it is, this page will be updated.",
   "list-description": "Find your name in the list and press the play button to access your tickets.",
   "is-admin": "Admin",
   "play": "Play",
   "field-link-hint": "Share this link with the people in the videocall.",
-  "field-link": "Link to the room"
+  "field-link": "Link to the room",
+  "download-spreadsheet": "{{name}}.xls",
+  "spreadsheet-title": "Export",
+  "spreadsheet-description": "Download a .xls file with the following room information: name, capacity and links for every person who is going to play.",
+  "spreadsheet-room": "Room",
+  "spreadsheet-link": "URL",
+  "spreadsheet-capacity": "Capacity",
+  "spreadsheet-admin": "Admin"
 }

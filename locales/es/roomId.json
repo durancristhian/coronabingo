@@ -4,11 +4,17 @@
   "room-name": "Nombre de la sala",
   "people": "Va a jugar {{count}} persona",
   "people_plural": "Van a jugar {{count}} personas",
-  "call-link": "Link a la videollamada",
   "not-ready": "La sala no está lista para jugar todavía. Cuando lo esté, esta página se actualizará.",
   "list-description": "Buscate en esta lista y presioná el botón jugar para acceder a tus cartones.",
   "is-admin": "Dirige el juego",
   "play": "Jugar",
   "field-link-hint": "Compartí este link a las personas de la videollamada.",
-  "field-link": "Link a la sala"
+  "field-link": "Link a la sala",
+  "download-spreadsheet": "{{name}}.xls",
+  "spreadsheet-title": "Exportar",
+  "spreadsheet-description": "Descargar un archivo .xls con información de la sala: nombre, capacidad y links de cada persona que va a jugar.",
+  "spreadsheet-room": "Sala",
+  "spreadsheet-link": "Link",
+  "spreadsheet-capacity": "Capacidad",
+  "spreadsheet-admin": "Dirige"
 }

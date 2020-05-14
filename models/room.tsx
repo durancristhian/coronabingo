@@ -1,5 +1,5 @@
 import { Room, RoomBase } from '~/interfaces'
-import { roomsRef, Timestamp } from '~/utils/firebase'
+import { roomsRef, Timestamp } from '~/utils'
 
 const defaultRoomData: RoomBase = {
   adminId: '',
@@ -11,7 +11,6 @@ const defaultRoomData: RoomBase = {
   readyToPlay: false,
   selectedNumbers: [],
   soundToPlay: '',
-  videoCall: '',
 }
 
 const createRoom = (room: Partial<RoomBase>): Promise<string> => {

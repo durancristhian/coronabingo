@@ -10,7 +10,6 @@ export interface RoomBase {
   readyToPlay: boolean
   selectedNumbers: number[]
   soundToPlay: string
-  videoCall: string
 }
 
 export interface Room extends RoomBase {

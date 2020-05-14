@@ -6,7 +6,7 @@ import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import { Player, Room, RoomBase } from '~/interfaces'
 import playerApi from '~/models/player'
-import { MAX_PLAYERS } from '~/utils/constants'
+import { MAX_PLAYERS } from '~/utils'
 
 interface Props {
   isFormDisabled: boolean

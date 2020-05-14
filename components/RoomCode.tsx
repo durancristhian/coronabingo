@@ -3,7 +3,7 @@ import RoomCodeCell from '~/components/RoomCodeCell'
 import useAdminPassword from '~/hooks/useAdminPassword'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
-import { CODES } from '~/utils/constants'
+import { CODES } from '~/utils'
 import Button from './Button'
 
 interface Props {

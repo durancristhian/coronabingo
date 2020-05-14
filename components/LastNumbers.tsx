@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import Anchor from '~/components/Anchor'
 import Ball from '~/components/Ball'
 import Emoji from '~/components/Emoji'
-import { DREAMS_EMOJIS } from '~/utils/constants'
+import { DREAMS_EMOJIS } from '~/utils'
 
 interface Props {
   selectedNumbers: number[]
