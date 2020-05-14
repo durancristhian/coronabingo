@@ -13,7 +13,8 @@
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
         "test": "NODE_ENV=test start-server-and-test build-start http://localhost:3000 cypress-run",
-        "validate-locales": "ts-node scripts/validate-locales"
+        "validate-locales": "ts-node scripts/validate-locales",
+        "validate-tickets": "ts-node scripts/validate-tickets"
     },
     "husky": {
         "hooks": {
