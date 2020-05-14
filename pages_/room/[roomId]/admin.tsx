@@ -110,13 +110,6 @@ export default function Admin() {
             <Copy
               content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
             />
-            <InputText
-              id="videoCall"
-              label={t('admin:field-videocall')}
-              onChange={value => updateRoom({ videoCall: value })}
-              value={room.videoCall}
-              disabled={inProgress}
-            />
             <Players
               isFormDisabled={inProgress}
               players={players}

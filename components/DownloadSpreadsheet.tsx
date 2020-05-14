@@ -31,10 +31,6 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
         type: 'string',
       },
     ]
-    const roomVideoCall = [
-      { value: t('roomId:spreadsheet-videocall'), type: 'string' },
-      { value: room.videoCall, type: 'string' },
-    ]
     const roomCapacity = [
       { value: t('roomId:spreadsheet-capacity'), type: 'string' },
       { value: players.length, type: 'number' },
@@ -64,7 +60,6 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
         data: [
           roomName,
           roomLink,
-          room.videoCall ? roomVideoCall : null,
           roomCapacity,
           roomAdmin,
           emptyLine,

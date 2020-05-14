@@ -147,15 +147,6 @@ export default function Sala() {
           <Copy
             content={`${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}`}
           />
-          {room.videoCall && (
-            <InputText
-              id="videocall"
-              label={t('roomId:call-link')}
-              readonly
-              onFocus={event => event.target.select()}
-              value={room.videoCall}
-            />
-          )}
           {isVisible && (
             <div className="mt-8">
               <DownloadSpreadsheet players={players} room={room} />

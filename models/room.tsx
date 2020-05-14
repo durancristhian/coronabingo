@@ -11,7 +11,6 @@ const defaultRoomData: RoomBase = {
   readyToPlay: false,
   selectedNumbers: [],
   soundToPlay: '',
-  videoCall: '',
 }
 
 const createRoom = (room: Partial<RoomBase>): Promise<string> => {
