@@ -28,7 +28,12 @@ export default function Restart({ room }: Props) {
     <Fragment>
       <p>{t('playerId:replay.description')}</p>
       <div className="mt-8 text-center">
-        <Button id="confirm" onClick={replay} color="green">
+        <Button
+          aria-label={t('playerId:replay.confirm')}
+          id="confirm"
+          onClick={replay}
+          color="green"
+        >
           <FiThumbsUp />
           <span className="ml-4">{t('playerId:replay.confirm')}</span>
         </Button>

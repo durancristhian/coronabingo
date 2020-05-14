@@ -1,8 +1,9 @@
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect } from 'react'
-import { FiLink2 } from 'react-icons/fi'
+import React, { Fragment, useEffect, useState } from 'react'
+import { FiDownload, FiLink2 } from 'react-icons/fi'
+import zipcelx from 'zipcelx'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
@@ -20,6 +21,21 @@ export default function Sala() {
   const { room } = useRoom()
   const { players } = useRoomPlayers()
   const { t, lang } = useTranslation()
+  /* TODO: move this to a global state */
+  const [times, setTimes] = useState(0)
+  const [isVisible, setVisibility] = useState(false)
+
+  useEffect(() => {
+    if (times !== 7) return
+
+    setVisibility(true)
+  }, [times])
+
+  const tricks = () => {
+    if (times < 7) {
+      setTimes(t => t + 1)
+    }
+  }
 
   useEffect(scrollToTop, [])
 
@@ -31,6 +47,33 @@ export default function Sala() {
         </Container>
       </Layout>
     )
+  }
+
+  const downloadSpreadsheet = () => {
+    const config = {
+      /* TODO: translate name */
+      filename: 'coronabingo-players-list',
+      sheet: {
+        data: players.map(p => [
+          {
+            value: p.name,
+            type: 'string',
+          },
+          {
+            value: p.tickets,
+            type: 'string',
+          },
+          {
+            value: `${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}/${p.id}`,
+            type: 'string',
+          },
+        ]),
+      },
+    }
+
+    /* Types are wrong */
+    // @ts-ignore
+    zipcelx(config)
   }
 
   const renderPlayers = () => {
@@ -74,6 +117,7 @@ export default function Sala() {
               </div>
               <div className="ml-4">
                 <Button
+                  aria-label={t('roomId:play')}
                   color="green"
                   id="play"
                   disabled={!room.readyToPlay}
@@ -100,7 +144,17 @@ export default function Sala() {
       <Container>
         <Box>
           <div className="mb-4">
-            <Heading type="h2">{t('roomId:title')}</Heading>
+            <Heading type="h2">
+              <span
+                onClick={tricks}
+                role="button"
+                tabIndex={0}
+                onKeyPress={tricks}
+                className="cursor-text focus:outline-none outline-none"
+              >
+                {t('roomId:title')}
+              </span>
+            </Heading>
           </div>
           <InputText
             id="room-name"
@@ -128,6 +182,20 @@ export default function Sala() {
               onFocus={event => event.target.select()}
               value={room.videoCall}
             />
+          )}
+          {isVisible && (
+            <div className="mt-4">
+              <Button
+                aria-label="Descargar planilla"
+                id="download-spreadsheet"
+                onClick={downloadSpreadsheet}
+                color="green"
+                disabled={!players.length}
+              >
+                <FiDownload />
+                <span className="ml-4">Descargar planilla</span>
+              </Button>
+            </div>
           )}
           <div className="mt-8">{renderPlayers()}</div>
         </Box>

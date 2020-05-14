@@ -102,7 +102,7 @@ export default function Options({ isAdmin, room }: Props) {
                 role="button"
                 tabIndex={0}
                 onKeyPress={tricks}
-                className="cursor-text focus:outline-none"
+                className="cursor-text focus:outline-none outline-none"
               >
                 {t('playerId:sounds')}
               </span>

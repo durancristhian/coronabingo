@@ -41,6 +41,7 @@ export default function SelectedNumbers({
       )}
       {isAdmin && bingoSpinner && (
         <Button
+          aria-label={t('playerId:next-number')}
           id="next"
           data-test-id="next-number"
           className="mb-4 w-full"

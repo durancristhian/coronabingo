@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.12.0",
+    "version": "1.13.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
@@ -9,12 +9,12 @@
         "cypress-open": "cypress open",
         "cypress-run": "cypress run --config trashAssetsBeforeRuns=false,video=false",
         "dev": "next-translate && next dev",
-        "download-tickets": "ts-node scripts/download-tickets",
         "generate-tickets": "ts-node scripts/generate-tickets",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
         "test": "NODE_ENV=test start-server-and-test build-start http://localhost:3000 cypress-run",
-        "validate-locales": "ts-node scripts/validate-locales"
+        "validate-locales": "ts-node scripts/validate-locales",
+        "validate-tickets": "ts-node scripts/validate-tickets"
     },
     "husky": {
         "hooks": {
@@ -37,6 +37,7 @@
         "@types/react-copy-to-clipboard": "^4.3.0",
         "@types/react-modal": "^3.10.5",
         "@types/react-tabs": "^2.3.1",
+        "@types/zipcelx": "^1.5.0",
         "@typescript-eslint/eslint-plugin": "^2.27.0",
         "@typescript-eslint/parser": "^2.27.0",
         "autoprefixer": "^9.7.4",
@@ -51,12 +52,10 @@
         "eslint-plugin-react": "^7.19.0",
         "firebase": "^7.14.0",
         "gray-matter": "^4.0.2",
-        "gsheets": "^2.0.0",
         "husky": "^4.2.3",
-        "isomorphic-unfetch": "^3.0.0",
         "knuth-shuffle": "^1.0.8",
         "lint-staged": "^10.1.2",
-        "next": "^9.3.2",
+        "next": "^9.4.0",
         "next-compose-plugins": "^2.2.0",
         "next-images": "^1.3.1",
         "next-translate": "^0.14.2",
@@ -75,9 +74,10 @@
         "react-youtube": "^7.11.2",
         "start-server-and-test": "^1.11.0",
         "swr": "^0.1.18",
-        "tailwindcss": "^1.2.0",
+        "tailwindcss": "^1.4.6",
         "ts-node": "^8.8.2",
         "typescript": "^3.8.3",
-        "url-loader": "^4.0.0"
+        "url-loader": "^4.0.0",
+        "zipcelx": "^1.6.2"
     }
 }

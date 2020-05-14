@@ -62,6 +62,17 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
 ]
+export const CODES: (keyof Emojis)[] = [
+  'cow2',
+  'octopus',
+  'bike',
+  'bus',
+  'airplane',
+  'rainbow',
+  'scooter',
+  'volcano',
+  'banana',
+]
 export const TICKET_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'sweat_drops',

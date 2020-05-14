@@ -32,5 +32,4 @@ now.json
 # next-translate generated pages
 /pages
 
-# cypress env
 cypress.json

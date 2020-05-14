@@ -9,6 +9,15 @@ const emojiCSS: Emojis = {
   'flag-ar': 'em-flag-ar',
   earth_americas: 'em-earth_americas',
   us: 'em-us',
+  cow2: 'em-cow2',
+  octopus: 'em-octopus',
+  bike: 'em-bike',
+  bus: 'em-bus',
+  airplane: 'em-airplane',
+  rainbow: 'em-rainbow',
+  scooter: 'em-scooter',
+  volcano: 'em-volcano',
+  banana: 'em-banana',
   /* in the last numbers section */
   sweat_drops: 'em-sweat_drops',
   boy: 'em-boy',
@@ -102,6 +111,15 @@ const emojiLabel: Emojis = {
   'flag-ar': 'playerId:flag-ar',
   earth_americas: 'playerId:world',
   us: 'playerId:flag-us',
+  cow2: 'playerId:cow2',
+  octopus: 'playerId:octopus',
+  bike: 'playerId:bike',
+  bus: 'playerId:bus',
+  airplane: 'playerId:airplane',
+  rainbow: 'playerId:rainbow',
+  scooter: 'playerId:scooter',
+  volcano: 'playerId:volcano',
+  banana: 'playerId:banana',
   /* in the last numbers section */
   sweat_drops: 'playerId:dreams.1',
   boy: 'playerId:dreams.2',
@@ -198,7 +216,7 @@ export default function Emoji({ name }: Props) {
 
   return (
     <i
-      className={classnames(['em', emojiCSS[name]])}
+      className={classnames(['em outline-none', emojiCSS[name]])}
       tabIndex={-1}
       aria-label={t(emojiLabel[name])}
     ></i>

@@ -5,6 +5,7 @@ import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
 import NewsModal from '~/components/NewsModal'
+/* import { AdminContextProvider } from '~/contexts/AdminContext' */
 import { PlayerContextProvider } from '~/contexts/PlayerContext'
 import { PlayersContextProvider } from '~/contexts/PlayersContext'
 import { RoomContextProvider } from '~/contexts/RoomContext'
@@ -224,7 +225,9 @@ export default class Coronabingo extends App {
         <RoomContextProvider>
           <PlayersContextProvider>
             <PlayerContextProvider>
+              {/* <AdminContextProvider> */}
               <Component {...pageProps} />
+              {/* </AdminContextProvider> */}
             </PlayerContextProvider>
           </PlayersContextProvider>
         </RoomContextProvider>

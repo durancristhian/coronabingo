@@ -35,6 +35,7 @@ export default function Index() {
         </p>
         <div className="mt-8">
           <Button
+            aria-label={t('index:how-to-play-button')}
             id="watch-tutorial"
             onClick={() => {
               setShowModal(true)

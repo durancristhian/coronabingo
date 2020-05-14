@@ -69,6 +69,10 @@
   width: calc(100% / 9);
 }
 
+.w-30\% {
+  width: 30%;
+}
+
 @media (max-width: 640px) {
   .cursor-poroto {
     cursor: url('/cursor/poroto-sm.png') 9 12, pointer;

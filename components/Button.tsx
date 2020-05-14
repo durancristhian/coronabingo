@@ -8,7 +8,7 @@ const BUTTON_COLORS = {
 }
 
 interface Props {
-  ariaLabel?: string
+  'aria-label': string
   children: ReactNode
   className?: string
   color?: 'green' | 'red' | 'yellow'
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function Button({
-  ariaLabel,
+  'aria-label': ariaLabel,
   children,
   className,
   color = 'yellow',

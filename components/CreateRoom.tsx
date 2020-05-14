@@ -7,6 +7,7 @@ import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import useToast from '~/hooks/useToast'
 import roomApi from '~/models/room'
+import generateRoomCode from '~/utils/generateRoomCode'
 
 export default function CreateRoom() {
   const { t } = useTranslation()
@@ -23,6 +24,7 @@ export default function CreateRoom() {
 
     try {
       const roomId = await roomApi.createRoom({
+        code: generateRoomCode(),
         name,
       })
 
@@ -57,6 +59,7 @@ export default function CreateRoom() {
         />
         <div className="mt-8">
           <Button
+            aria-label={t('index:create-room.field-submit')}
             className="w-full"
             color="green"
             disabled={!name || inProgress}

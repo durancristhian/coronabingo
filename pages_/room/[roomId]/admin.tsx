@@ -54,6 +54,9 @@ export default function Admin() {
         ...defaultRoomData,
         ...roomApi.excludeExtraFields(room),
         readyToPlay: true,
+        selectedNumbers: [],
+        soundToPlay: '',
+        confettiType: '',
       })
 
       players.map((player, index) => {
@@ -147,6 +150,7 @@ export default function Admin() {
             </div>
             <div className="mt-8">
               <Button
+                aria-label={t('admin:field-submit')}
                 color="green"
                 id="configure-room"
                 className="w-full"

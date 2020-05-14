@@ -19,6 +19,11 @@ export default function Celebrations({ room }: Props) {
       {confettiTypes.map((ct, i) => (
         <div key={ct} className={classnames([i !== 0 && 'mt-4'])}>
           <Button
+            aria-label={
+              room.confettiType
+                ? t(`playerId:hide-${ct}`)
+                : t(`playerId:show-${ct}`)
+            }
             id={`click-${ct}`}
             color={ct === room.confettiType ? 'red' : 'green'}
             onClick={() =>
