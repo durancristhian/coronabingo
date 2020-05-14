@@ -59,9 +59,9 @@ export default function Sala() {
         <Heading type="h3" textCenter={false}>
           {t('roomId:people', { count: players.length })}
         </Heading>
-        <div className="italic -mt-6 text-gray-800 text-xs md:text-sm">
-          <p className="my-8">{t('roomId:list-description')}</p>
-        </div>
+        <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
+          {t('roomId:list-description')}
+        </p>
         <div className="border-gray-300 border-t-2 mt-4 -mx-4">
           {players.map((player: Player, index: number) => (
             <div
@@ -157,7 +157,7 @@ export default function Sala() {
             />
           )}
           {isVisible && (
-            <div className="mt-4">
+            <div className="mt-8">
               <DownloadSpreadsheet players={players} room={room} />
             </div>
           )}

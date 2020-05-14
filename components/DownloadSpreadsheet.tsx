@@ -1,10 +1,11 @@
 import useTranslation from 'next-translate/useTranslation'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import zipcelx from 'zipcelx'
 import { Player, Room } from '~/interfaces'
 import { getBaseUrl } from '~/utils'
 import Button from './Button'
+import Heading from './Heading'
 
 interface Props {
   players: Player[]
@@ -78,15 +79,27 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
   }
 
   return (
-    <Button
-      aria-label={t('roomId:download-spreadsheet')}
-      id="download-spreadsheet"
-      onClick={downloadSpreadsheet}
-      color="green"
-      disabled={!players.length}
-    >
-      <FiDownload />
-      <span className="ml-4">{t('roomId:download-spreadsheet')}</span>
-    </Button>
+    <Fragment>
+      <Heading type="h3" textCenter={false}>
+        {t('roomId:spreadsheet-title')}
+      </Heading>
+      <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
+        {t('roomId:spreadsheet-description')}
+      </p>
+      <div className="mt-4">
+        <Button
+          aria-label={t('roomId:download-spreadsheet', { name: room.name })}
+          id="download-spreadsheet"
+          onClick={downloadSpreadsheet}
+          color="green"
+          disabled={!players.length}
+        >
+          <FiDownload />
+          <span className="ml-4">
+            {t('roomId:download-spreadsheet', { name: room.name })}
+          </span>
+        </Button>
+      </div>
+    </Fragment>
   )
 }
