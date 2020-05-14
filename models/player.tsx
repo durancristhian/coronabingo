@@ -1,5 +1,5 @@
 import { Player, PlayerBase, Room } from '~/interfaces'
-import { Timestamp } from '~/utils/firebase'
+import { Timestamp } from '~/utils'
 
 const defaultPlayerData: PlayerBase = {
   tickets: '',

@@ -7,7 +7,7 @@ import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import useToast from '~/hooks/useToast'
 import roomApi from '~/models/room'
-import generateRoomCode from '~/utils/generateRoomCode'
+import { generateRoomCode } from '~/utils'
 
 export default function CreateRoom() {
   const { t } = useTranslation()

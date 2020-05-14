@@ -19,8 +19,7 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
-import { createBatch } from '~/utils/firebase'
-import scrollToTop from '~/utils/scrollToTop'
+import { createBatch, scrollToTop } from '~/utils'
 
 export default function Admin() {
   const { t, lang } = useTranslation()

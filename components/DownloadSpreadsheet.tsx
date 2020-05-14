@@ -3,6 +3,7 @@ import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import zipcelx from 'zipcelx'
 import { Player, Room } from '~/interfaces'
+import { getBaseUrl } from '~/utils'
 import Button from './Button'
 
 interface Props {
@@ -11,27 +12,63 @@ interface Props {
 }
 
 export default function DownloadSpreadsheet({ players, room }: Props) {
-  const { lang } = useTranslation()
+  const { t } = useTranslation()
 
   const downloadSpreadsheet = () => {
+    const withoutAdmin = [...players]
+    const adminId = withoutAdmin.findIndex(p => p.id === room.adminId)
+    const [admin] = withoutAdmin.splice(adminId, 1)
+
+    const roomName = [
+      { value: t('roomId:spreadsheet-room'), type: 'string' },
+      { value: room.name, type: 'string' },
+    ]
+    const roomLink = [
+      { value: t('roomId:spreadsheet-link'), type: 'string' },
+      {
+        value: `${getBaseUrl()}/room/${room.id}`,
+        type: 'string',
+      },
+    ]
+    const roomVideoCall = [
+      { value: t('roomId:spreadsheet-videocall'), type: 'string' },
+      { value: room.videoCall, type: 'string' },
+    ]
+    const roomCapacity = [
+      { value: t('roomId:spreadsheet-capacity'), type: 'string' },
+      { value: players.length, type: 'number' },
+    ]
+    const roomAdmin = [
+      { value: t('roomId:spreadsheet-admin'), type: 'string' },
+      { value: admin.name, type: 'string' },
+      { value: admin.tickets, type: 'string' },
+      {
+        value: `${getBaseUrl()}/room/${room.id}/${admin.id}`,
+        type: 'string',
+      },
+    ]
+    const emptyLine = [{ value: '', type: 'string' }]
+    const roomPlayers = withoutAdmin.map(p => [
+      { value: p.name, type: 'string' },
+      { value: p.tickets, type: 'string' },
+      {
+        value: `${getBaseUrl()}/room/${room.id}/${p.id}`,
+        type: 'string',
+      },
+    ])
+
     const config = {
-      /* TODO: translate name */
-      filename: 'coronabingo-players-list',
+      filename: room.name,
       sheet: {
-        data: players.map(p => [
-          {
-            value: p.name,
-            type: 'string',
-          },
-          {
-            value: p.tickets,
-            type: 'string',
-          },
-          {
-            value: `${window.location.protocol}//${window.location.host}/${lang}/room/${room.id}/${p.id}`,
-            type: 'string',
-          },
-        ]),
+        data: [
+          roomName,
+          roomLink,
+          room.videoCall ? roomVideoCall : null,
+          roomCapacity,
+          roomAdmin,
+          emptyLine,
+          ...roomPlayers,
+        ].filter(Boolean),
       },
     }
 
@@ -42,14 +79,14 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
 
   return (
     <Button
-      aria-label="Descargar planilla"
+      aria-label={t('roomId:download-spreadsheet')}
       id="download-spreadsheet"
       onClick={downloadSpreadsheet}
       color="green"
       disabled={!players.length}
     >
       <FiDownload />
-      <span className="ml-4">Descargar planilla</span>
+      <span className="ml-4">{t('roomId:download-spreadsheet')}</span>
     </Button>
   )
 }

@@ -10,5 +10,11 @@
   "is-admin": "Dirige el juego",
   "play": "Jugar",
   "field-link-hint": "Compartí este link a las personas de la videollamada.",
-  "field-link": "Link a la sala"
+  "field-link": "Link a la sala",
+  "download-spreadsheet": "Descargar planilla",
+  "spreadsheet-room": "Sala",
+  "spreadsheet-link": "Link",
+  "spreadsheet-videocall": "Videollamada",
+  "spreadsheet-capacity": "Capacidad",
+  "spreadsheet-admin": "Dirige"
 }

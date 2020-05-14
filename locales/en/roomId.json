@@ -10,5 +10,11 @@
   "is-admin": "Admin",
   "play": "Play",
   "field-link-hint": "Share this link with the people in the videocall.",
-  "field-link": "Link to the room"
+  "field-link": "Link to the room",
+  "download-spreadsheet": "Download spreadsheet",
+  "spreadsheet-room": "Room",
+  "spreadsheet-link": "URL",
+  "spreadsheet-videocall": "Videocall",
+  "spreadsheet-capacity": "Capacity",
+  "spreadsheet-admin": "Admin"
 }

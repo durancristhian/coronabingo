@@ -1,5 +1,5 @@
 import { Room, RoomBase } from '~/interfaces'
-import { roomsRef, Timestamp } from '~/utils/firebase'
+import { roomsRef, Timestamp } from '~/utils'
 
 const defaultRoomData: RoomBase = {
   adminId: '',

@@ -6,7 +6,7 @@ import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
-import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
+import { SOUNDS, SOUNDS_EXTRAS } from '~/utils'
 
 const emojis: { [key: string]: ReactNode } = {
   ar: <Emoji name="flag-ar" />,

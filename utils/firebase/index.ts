@@ -27,5 +27,4 @@ const roomsRef = db.collection('rooms')
 
 const createBatch = () => db.batch()
 
-export default db
 export { createBatch, roomsRef, Timestamp }

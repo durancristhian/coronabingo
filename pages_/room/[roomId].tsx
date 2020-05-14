@@ -15,7 +15,7 @@ import Message from '~/components/Message'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
-import scrollToTop from '~/utils/scrollToTop'
+import { scrollToTop } from '~/utils'
 
 export default function Sala() {
   const { room } = useRoom()

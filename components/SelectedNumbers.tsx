@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
-import { TICKET_NUMBERS } from '~/utils/constants'
+import { TICKET_NUMBERS } from '~/utils'
 
 const knuthShuffle = require('knuth-shuffle').knuthShuffle
 

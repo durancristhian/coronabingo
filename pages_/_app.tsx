@@ -12,9 +12,9 @@ import { RoomContextProvider } from '~/contexts/RoomContext'
 import { allLanguages, defaultLanguage } from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
+import '~/polyfills/promise-finally'
 import '~/public/css/styles.css'
-import * as gtag from '~/utils/gtag'
-import '~/utils/polyfills'
+import { pageview } from '~/utils'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 }
 
 if (process.env.GA_TRACKING_ID) {
-  Router.events.on('routeChangeComplete', url => gtag.pageview(url))
+  Router.events.on('routeChangeComplete', url => pageview(url))
 }
 
 export default class Coronabingo extends App {
