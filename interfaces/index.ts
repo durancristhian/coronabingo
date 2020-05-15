@@ -1,6 +1,4 @@
-export * from './contexts/Admin'
 export * from './contexts/BackgroundCell'
-export * from './contexts/EasterEgg'
 export * from './contexts/PlayerContext'
 export * from './contexts/PlayersContext'
 export * from './contexts/RoomContext'
