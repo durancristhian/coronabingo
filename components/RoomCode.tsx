@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import RoomCodeCell from '~/components/RoomCodeCell'
+import useRoomCode from '~/hooks/useRoomCode'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import { CODES } from '~/utils'
@@ -16,6 +17,7 @@ export default function RoomCode({ roomCode }: Props) {
     null,
   ])
   const { createToast, dismissToast } = useToast()
+  const { login } = useRoomCode()
 
   const onClick = (emoji: keyof Emojis | null) => {
     if (emojiCode.includes(emoji)) {
@@ -50,7 +52,7 @@ export default function RoomCode({ roomCode }: Props) {
       setTimeout(() => {
         dismissToast(toastId)
 
-        /* TODO: allow access */
+        login()
       }, 2000)
     } else {
       const toastId = createToast(
@@ -90,7 +92,7 @@ export default function RoomCode({ roomCode }: Props) {
               emoji={emoji}
               index={index}
               isChecked={false}
-              key={emoji || index}
+              key={index}
               onClick={onClick}
             />
           )

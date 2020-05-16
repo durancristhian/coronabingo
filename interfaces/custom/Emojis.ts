@@ -5,13 +5,13 @@ export interface Emojis {
   earth_americas: string
   us: string
   /* room code */
-  cow2: string
-  octopus: string
-  bike: string
-  bus: string
+  deciduous_tree: string
+  snail: string
+  game_die: string
+  tornado: string
   airplane: string
   rainbow: string
-  scooter: string
+  basketball: string
   volcano: string
   banana: string
   /* in the "Last numbers" section */
