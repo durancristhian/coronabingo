@@ -27,20 +27,12 @@ describe('Admin', () => {
     cy.get('#modal-share').should('not.be.visible')
   })
 
-  it('Should copy room URL to clipboard', () => {
+  it.only('Should copy room URL to clipboard', () => {
     cy.get('#open-share-modal').click()
 
     cy.get('#modal-share').should('be.visible')
 
-    cy.window().then(win => {
-      cy.stub(win, 'prompt')
-        .returns(win.prompt)
-        .as('copyToClipboardPrompt')
-    })
-
     cy.get('#copy-to-clipboard').click()
-
-    cy.get('@copyToClipboardPrompt').should('be.called')
 
     cy.get('#modal-share').should('not.be.visible')
   })
