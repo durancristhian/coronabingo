@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react'
 import RoomCodeCell from '~/components/RoomCodeCell'
-import useAdminPassword from '~/hooks/useAdminPassword'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import { CODES } from '~/utils'
@@ -16,7 +15,6 @@ export default function RoomCode({ roomCode }: Props) {
     null,
     null,
   ])
-  const { login } = useAdminPassword()
   const { createToast, dismissToast } = useToast()
 
   const onClick = (emoji: keyof Emojis | null) => {
@@ -52,7 +50,7 @@ export default function RoomCode({ roomCode }: Props) {
       setTimeout(() => {
         dismissToast(toastId)
 
-        login(roomCode, userCode)
+        /* TODO: allow access */
       }, 2000)
     } else {
       const toastId = createToast(

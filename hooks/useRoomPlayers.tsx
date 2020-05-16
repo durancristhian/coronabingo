@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { PlayersContext } from '~/contexts/PlayersContext'
+import { PlayersContext } from '~/contexts/Players'
 
 export default function useRoomPlayers() {
   const { players, setPlayers } = useContext(PlayersContext)

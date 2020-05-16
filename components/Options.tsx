@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { FiRotateCcw, FiSettings, FiSmile, FiVolume2 } from 'react-icons/fi'
 import { Tabs } from 'react-tabs'
 import BackgroundCells from '~/components/BackgroundCells'
@@ -9,7 +9,7 @@ import OptionTabList from '~/components/OptionTabList'
 import OptionTabPanel from '~/components/OptionTabPanel'
 import Pato from '~/components/Pato'
 import Restart from '~/components/Restart'
-import { EasterEggContext } from '~/contexts/EasterEggContext'
+import useEasterEgg from '~/hooks/useEasterEgg'
 import { Room } from '~/interfaces'
 
 interface Props {
@@ -20,20 +20,7 @@ interface Props {
 export default function Options({ isAdmin, room }: Props) {
   const { t } = useTranslation()
   const [currentTabIndex, setCurrentTabIndex] = useState(-1)
-  const [times, setTimes] = useState(0)
-  const { isVisible, setVisibility } = useContext(EasterEggContext)
-
-  useEffect(() => {
-    if (times !== 7) return
-
-    setVisibility(true)
-  }, [times])
-
-  const tricks = () => {
-    if (times < 7) {
-      setTimes(t => t + 1)
-    }
-  }
+  const { isActive, incrementInteractions } = useEasterEgg('extraSounds')
 
   const resetCurrentTabIndex = () => {
     setCurrentTabIndex(-1)
@@ -98,10 +85,10 @@ export default function Options({ isAdmin, room }: Props) {
             id="modal-sounds"
             title={
               <span
-                onClick={tricks}
+                onClick={incrementInteractions}
                 role="button"
                 tabIndex={0}
-                onKeyPress={tricks}
+                onKeyPress={incrementInteractions}
                 className="cursor-text focus:outline-none outline-none"
               >
                 {t('playerId:sounds')}
@@ -109,7 +96,7 @@ export default function Options({ isAdmin, room }: Props) {
             }
             onRequestClose={resetCurrentTabIndex}
           >
-            <Pato extraSounds={isVisible} room={room} />
+            <Pato extraSounds={isActive} room={room} />
           </OptionTabPanel>
           <OptionTabPanel
             contentLabel={t('playerId:replay.reboot-game')}

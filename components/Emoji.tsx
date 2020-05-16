@@ -9,6 +9,7 @@ const emojiCSS: Emojis = {
   'flag-ar': 'em-flag-ar',
   earth_americas: 'em-earth_americas',
   us: 'em-us',
+  /* room code */
   cow2: 'em-cow2',
   octopus: 'em-octopus',
   bike: 'em-bike',
@@ -111,6 +112,7 @@ const emojiLabel: Emojis = {
   'flag-ar': 'playerId:flag-ar',
   earth_americas: 'playerId:world',
   us: 'playerId:flag-us',
+  /* room code */
   cow2: 'playerId:cow2',
   octopus: 'playerId:octopus',
   bike: 'playerId:bike',

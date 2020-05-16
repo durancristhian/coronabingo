@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { RoomContext } from '~/contexts/RoomContext'
+import { RoomContext } from '~/contexts/Room'
 
 export default function useRoom() {
   const { room, updateRoom } = useContext(RoomContext)

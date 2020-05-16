@@ -4,6 +4,7 @@ export interface Emojis {
   'flag-ar': string
   earth_americas: string
   us: string
+  /* room code */
   cow2: string
   octopus: string
   bike: string
@@ -13,7 +14,7 @@ export interface Emojis {
   scooter: string
   volcano: string
   banana: string
-  /* in the last numbers section */
+  /* in the "Last numbers" section */
   sweat_drops: string
   boy: string
   pray: string

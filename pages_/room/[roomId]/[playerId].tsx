@@ -8,13 +8,10 @@ import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Options from '~/components/Options'
-/* import RoomCode from '~/components/RoomCode' */
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import Tickets from '~/components/Tickets'
-import { BackgroundCellContextProvider } from '~/contexts/BackgroundCellContext'
-import { EasterEggContextProvider } from '~/contexts/EasterEggContext'
-/* import useAdminPassword from '~/hooks/useAdminPassword' */
+import { BackgroundCellContextProvider } from '~/contexts/BackgroundCell'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 import roomApi from '~/models/room'
@@ -24,7 +21,6 @@ export default function Jugar() {
   const { room } = useRoom()
   const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
-  /* const { loggedIn } = useAdminPassword() */
 
   useEffect(scrollToTop, [])
 
@@ -59,18 +55,6 @@ export default function Jugar() {
   }
 
   const isAdmin = room.adminId === player.id
-
-  /* if (isAdmin && !loggedIn) {
-    return (
-      <Layout>
-        <Container>
-          <Box>
-            <RoomCode roomCode={room.code} />
-          </Box>
-        </Container>
-      </Layout>
-    )
-  } */
 
   const onNewNumber = (n: number) => {
     const selectedNumbers = room.selectedNumbers || []
@@ -107,42 +91,38 @@ export default function Jugar() {
   )
 
   return (
-    <EasterEggContextProvider>
-      <BackgroundCellContextProvider playerId={player.id}>
-        <Layout>
-          <div className="mb-4">
-            <Heading type="h2">
-              {t('playerId:title', {
-                playerName: player.name,
-                roomName: room.name,
-              })}
-            </Heading>
-          </div>
-          <div className="max-w-6xl mx-auto">
-            <div className="lg:flex mt-4">
-              <div className="lg:w-1/3">
-                <Box>
-                  <div className="mb-4">
-                    <Heading type="h2">{t('playerId:last-numbers')}</Heading>
-                  </div>
-                  <LastNumbers selectedNumbers={room.selectedNumbers} />
-                </Box>
-                <div className="hidden lg:block mt-4">
-                  {renderBingoSpinnerAndOptions()}
+    <BackgroundCellContextProvider playerId={player.id}>
+      <Layout>
+        <div className="mb-4">
+          <Heading type="h2">
+            {t('playerId:title', {
+              playerName: player.name,
+              roomName: room.name,
+            })}
+          </Heading>
+        </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="lg:flex mt-4">
+            <div className="lg:w-1/3">
+              <Box>
+                <div className="mb-4">
+                  <Heading type="h2">{t('playerId:last-numbers')}</Heading>
                 </div>
-              </div>
-              <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Tickets player={player} updatePlayer={updatePlayer} />
+                <LastNumbers selectedNumbers={room.selectedNumbers} />
+              </Box>
+              <div className="hidden lg:block mt-4">
+                {renderBingoSpinnerAndOptions()}
               </div>
             </div>
-            <div className="lg:hidden mt-4">
-              {renderBingoSpinnerAndOptions()}
+            <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+              <Tickets player={player} updatePlayer={updatePlayer} />
             </div>
           </div>
-        </Layout>
-        <Confetti type={room.confettiType} />
-        <Sounds isAdmin={isAdmin} room={room} />
-      </BackgroundCellContextProvider>
-    </EasterEggContextProvider>
+          <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
+        </div>
+      </Layout>
+      <Confetti type={room.confettiType} />
+      <Sounds isAdmin={isAdmin} room={room} />
+    </BackgroundCellContextProvider>
   )
 }

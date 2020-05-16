@@ -5,10 +5,7 @@ import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
 import NewsModal from '~/components/NewsModal'
-/* import { AdminContextProvider } from '~/contexts/AdminContext' */
-import { PlayerContextProvider } from '~/contexts/PlayerContext'
-import { PlayersContextProvider } from '~/contexts/PlayersContext'
-import { RoomContextProvider } from '~/contexts/RoomContext'
+import Providers from '~/contexts'
 import { allLanguages, defaultLanguage } from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces'
 import { version } from '~/package.json'
@@ -222,15 +219,9 @@ export default class Coronabingo extends App {
             content="width=device-width,initial-scale=1,maximum-scale=5"
           />
         </Head>
-        <RoomContextProvider>
-          <PlayersContextProvider>
-            <PlayerContextProvider>
-              {/* <AdminContextProvider> */}
-              <Component {...pageProps} />
-              {/* </AdminContextProvider> */}
-            </PlayerContextProvider>
-          </PlayersContextProvider>
-        </RoomContextProvider>
+        <Providers>
+          <Component {...pageProps} />
+        </Providers>
         <ToastContainer />
         <NewsModal lang={lang || defaultLanguage} />
       </Fragment>

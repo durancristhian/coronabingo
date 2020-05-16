@@ -4,7 +4,7 @@ import React, { Fragment, useContext } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
 import InputText from '~/components/InputText'
-import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
+import { BackgroundCellContext } from '~/contexts/BackgroundCell'
 import { BACKGROUND_CELL_VALUES } from '~/utils'
 
 export default function BackgroundCells() {
