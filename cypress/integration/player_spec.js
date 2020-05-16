@@ -4,8 +4,9 @@ describe('Admin', () => {
   beforeEach(() => {
     cy.server()
 
-    const roomId = Cypress.env('roomId')
-    const adminId = Cypress.env('adminId')
+    const configuredRoom = Cypress.env('configuredRoom')
+    const roomId = configuredRoom.id
+    const adminId = configuredRoom.adminId
 
     cy.visit(`http://localhost:3000/es/room/${roomId}/${adminId}`)
 

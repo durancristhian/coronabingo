@@ -4,9 +4,9 @@ describe('Admin', () => {
   beforeEach(() => {
     cy.server()
 
-    const roomId = Cypress.env('roomId')
+    const emptyRoom = Cypress.env('emptyRoom')
 
-    cy.visit(`http://localhost:3000/es/room/${roomId}/admin`)
+    cy.visit(`http://localhost:3000/es/room/${emptyRoom.id}/admin`)
   })
 
   it('Should have a #configure-room disabled by default', () => {
@@ -44,6 +44,7 @@ describe('Admin', () => {
 
   it('Should enable submit button if admin is selected', () => {
     cy.get('#name').type('Player 1{enter}')
+    cy.get('#name').type('Player 2{enter}')
 
     cy.get('#adminId').select('Player 1')
 
