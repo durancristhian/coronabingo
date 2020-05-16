@@ -12,13 +12,13 @@ import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
-import RoomCodeCell from '~/components/RoomCodeCell'
+/* import RoomCodeCell from '~/components/RoomCodeCell' */
 import Select from '~/components/Select'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
-import { Emojis } from '~/interfaces'
+/* import { Emojis } from '~/interfaces' */
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch, getBaseUrl, scrollToTop } from '~/utils'
@@ -110,14 +110,13 @@ export default function Admin() {
               onFocus={event => event.target.select()}
             />
             <Copy content={`${getBaseUrl()}/room/${room.id}`} />
-            <div className="my-8">
+            {/* <div className="my-8">
               <p>{t('admin:room-code')}</p>
               <div className="flex flex-wrap justify-between mt-1">
                 {room.code.split(',').map((emoji, index) => {
                   return (
                     <RoomCodeCell
                       highlighted
-                      /* TODO: improve */
                       emoji={emoji as keyof Emojis}
                       index={index}
                       isChecked={false}
@@ -127,7 +126,7 @@ export default function Admin() {
                   )
                 })}
               </div>
-            </div>
+            </div> */}
             <Players
               isFormDisabled={inProgress}
               players={players}

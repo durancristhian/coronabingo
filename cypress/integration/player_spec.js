@@ -10,11 +10,11 @@ describe('Admin', () => {
     cy.visit(`http://localhost:3000/es/room/${roomId}/${adminId}`)
 
     /* TODO: ultra hardcoded */
-    cy.get('[for="banana8"]').click()
+    /* cy.get('[for="banana8"]').click()
     cy.get('[for="basketball6"]').click()
     cy.get('[for="game_die2"]').click()
 
-    cy.get('#submit-code').click()
+    cy.get('#submit-code').click() */
   })
 
   it('Should display a new number from bingo spinner', () => {
