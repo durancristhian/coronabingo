@@ -1,10 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
-import { ActionByStateKey, Flags, FlagsContext } from '~/contexts/Flags'
+import {
+  ActionByStateKey,
+  DispatchContext,
+  StateContext,
+} from '~/contexts/Flags'
+import { Flags } from '~/interfaces'
 
 export default function useEasterEgg(name: keyof Flags) {
   const [interactions, setInteractions] = useState(0)
-  const flags = useContext(FlagsContext.State)
-  const dispatch = useContext(FlagsContext.Dispatch)
+  const flags = useContext(StateContext)
+  const dispatch = useContext(DispatchContext)
 
   useEffect(() => {
     if (interactions !== 7) return

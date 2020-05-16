@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useReducer } from 'react'
+import { FlagAction, FlagActions, Flags, FlagsDispatch } from '~/interfaces'
 
 const defaultState = {
   downloadSpreadsheet: false,
@@ -9,40 +10,22 @@ const defaultDispatch = {
   toggle: () => void 0,
 }
 
-export interface Flags {
-  downloadSpreadsheet: boolean
-  extraSounds: boolean
-}
-
-interface Dispatch {
-  toggle: (action: Action) => void
-}
-
-enum Actions {
-  DOWNLOAD_SPREADSHEET_TOGGLE = 'DOWNLOAD_SPREADSHEET_TOGGLE',
-  EXTRA_SOUNDS_TOGGLE = 'EXTRA_SOUNDS_TOGGLE',
-}
-
-export const ActionByStateKey = {
-  downloadSpreadsheet: { type: Actions.DOWNLOAD_SPREADSHEET_TOGGLE },
-  extraSounds: { type: Actions.EXTRA_SOUNDS_TOGGLE },
-}
-
-interface Action {
-  type: Actions.DOWNLOAD_SPREADSHEET_TOGGLE | Actions.EXTRA_SOUNDS_TOGGLE
+const ActionByStateKey = {
+  downloadSpreadsheet: { type: FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE },
+  extraSounds: { type: FlagActions.EXTRA_SOUNDS_TOGGLE },
 }
 
 const StateContext = createContext<Flags>(defaultState)
-const DispatchContext = createContext<Dispatch>(defaultDispatch)
+const DispatchContext = createContext<FlagsDispatch>(defaultDispatch)
 
-const reducer = (state: Flags, action: Action) => {
+const reducer = (state: Flags, action: FlagAction) => {
   switch (action.type) {
-    case Actions.DOWNLOAD_SPREADSHEET_TOGGLE:
+    case FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE:
       return {
         ...state,
         downloadSpreadsheet: !state.downloadSpreadsheet,
       }
-    case Actions.EXTRA_SOUNDS_TOGGLE:
+    case FlagActions.EXTRA_SOUNDS_TOGGLE:
       return {
         ...state,
         extraSounds: !state.extraSounds,
@@ -56,7 +39,7 @@ interface Props {
   children: ReactNode
 }
 
-const Provider = ({ children }: Props) => {
+const FlagsContextProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(reducer, defaultState)
 
   return (
@@ -72,8 +55,4 @@ const Provider = ({ children }: Props) => {
   )
 }
 
-export const FlagsContext = {
-  Dispatch: DispatchContext,
-  Provider,
-  State: StateContext,
-}
+export { ActionByStateKey, DispatchContext, FlagsContextProvider, StateContext }

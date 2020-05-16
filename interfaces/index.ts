@@ -1,4 +1,5 @@
 export * from './contexts/BackgroundCell'
+export * from './contexts/FlagsContext'
 export * from './contexts/PlayerContext'
 export * from './contexts/PlayersContext'
 export * from './contexts/RoomContext'
