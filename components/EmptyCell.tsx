@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React, { useContext } from 'react'
-import { BackgroundCellContext } from '~/contexts/BackgroundCellContext'
+import { BackgroundCellContext } from '~/contexts/BackgroundCell'
 
 export const COLORS: { [k: string]: string } = {
   blue: 'bg-blue-300',
