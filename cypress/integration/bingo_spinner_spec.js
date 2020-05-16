@@ -10,6 +10,8 @@ describe('Bingo Spinner', () => {
 
     cy.get('#create-room').click()
 
+    cy.wait(5000)
+
     cy.get('#name').type('Player 1{enter}')
     cy.get('#name').type('Player 2{enter}')
 
@@ -19,11 +21,11 @@ describe('Bingo Spinner', () => {
   it('Should use bingo spinner', () => {
     cy.get('#configure-room').click()
 
-    cy.wait(1000)
+    cy.wait(5000)
 
     cy.get('#play1').click()
 
-    cy.wait(1000)
+    cy.wait(5000)
 
     cy.get('#next-number').should('be.enabled')
   })
@@ -33,11 +35,11 @@ describe('Bingo Spinner', () => {
 
     cy.get('#configure-room').click()
 
-    cy.wait(1000)
+    cy.wait(5000)
 
     cy.get('#play1').click()
 
-    cy.wait(1000)
+    cy.wait(5000)
 
     cy.get('#next-number').should('not.be.visible')
   })

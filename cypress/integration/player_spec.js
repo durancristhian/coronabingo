@@ -52,21 +52,21 @@ describe('Admin', () => {
   })
 
   it('Should have admin options visible', () => {
-    cy.get('#configure-empty-cells')
-    cy.get('#celebrations')
-    cy.get('#sounds')
-    cy.get('#reboot-game')
+    cy.get('#configure-empty-cells').should('exist')
+    cy.get('#celebrations').should('exist')
+    cy.get('#sounds').should('exist')
+    cy.get('#reboot-game').should('exist')
   })
 
-  it.only('Should reboot game', () => {
-    cy.get('#reboot-game')
-      .eq(0)
-      .click()
+  it('Should reboot game', () => {
+    cy.get('#reboot-game').click()
 
     cy.get('#confirm').click()
 
     cy.url().should('contain', 'admin')
 
     cy.get('#configure-room').click()
+
+    cy.url().should('not.contain', 'admin')
   })
 })

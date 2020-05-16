@@ -30,30 +30,30 @@ export default function Options({ isAdmin, room }: Props) {
     <Tabs selectedIndex={currentTabIndex} onSelect={setCurrentTabIndex}>
       <OptionTabList>
         <OptionTab
+          buttonId="configure-empty-cells"
           Icon={FiSettings}
           iconBgColor="bg-yellow-300"
           iconColor="text-yellow-800"
-          id="configure-empty-cells"
         ></OptionTab>
         {isAdmin && (
           <Fragment>
             <OptionTab
+              buttonId="celebrations"
               Icon={FiSmile}
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
-              id="celebrations"
             ></OptionTab>
             <OptionTab
+              buttonId="sounds"
               Icon={FiVolume2}
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
-              id="sounds"
             ></OptionTab>
             <OptionTab
+              buttonId="reboot-game"
               Icon={FiRotateCcw}
               iconBgColor="bg-red-300"
               iconColor="text-red-800"
-              id="reboot-game"
             ></OptionTab>
           </Fragment>
         )}
