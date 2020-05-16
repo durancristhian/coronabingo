@@ -5,7 +5,7 @@ import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Modal from '~/components/Modal'
-import ShareButton from '~/components/ShareButton'
+import RoundedButton from '~/components/RoundedButton'
 import useToast from '~/hooks/useToast'
 
 interface Props {
@@ -57,20 +57,23 @@ export default function Share({ content }: Props) {
       >
         <div className="flex flex-wrap items-center justify-center">
           <CopyToClipboard text={content}>
-            <ShareButton
+            <RoundedButton
+              id="copy-to-clipboard"
               Icon={FiCopy}
               iconBgColor="bg-gray-500"
               label={t('common:copy')}
               onClick={showToast}
             />
           </CopyToClipboard>
-          <ShareButton
+          <RoundedButton
+            id="share-whatsapp"
             Icon={FaWhatsapp}
             iconBgColor="bg-whatsapp"
             label={t('common:whatsapp-share')}
             onClick={shareOnWhatsApp}
           />
-          <ShareButton
+          <RoundedButton
+            id="share-telegram"
             Icon={FaTelegramPlane}
             iconBgColor="bg-telegram"
             label={t('common:telegram-share')}

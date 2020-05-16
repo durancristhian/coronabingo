@@ -25,6 +25,7 @@ export default function Modal({ children, title, ...rest }: Props) {
               'focus:outline-none focus:shadow-outline',
               'duration-150 ease-in-out transition',
             ])}
+            id="close-modal"
           >
             <FiX color="gray" />
           </button>

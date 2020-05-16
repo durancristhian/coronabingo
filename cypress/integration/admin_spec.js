@@ -61,7 +61,7 @@ describe('Admin', () => {
     cy.get('#configure-room').should('be.disabled')
   })
 
-  it.only('Should open the share modal', () => {
+  it('Should open the share modal', () => {
     cy.get('#open-share-modal').click()
 
     cy.get('#modal-share').should('be.visible')

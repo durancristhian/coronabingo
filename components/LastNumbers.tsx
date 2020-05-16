@@ -42,7 +42,10 @@ export default function LastNumbers({ selectedNumbers }: Props) {
           </span>
         </p>
         <p className="text-right md:text-sm w-24">
-          <Anchor href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)">
+          <Anchor
+            href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
+            id="quiniela"
+          >
             {t('playerId:dreams-link')}
           </Anchor>
         </p>

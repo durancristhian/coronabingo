@@ -25,4 +25,14 @@ describe('Home', () => {
       .should('contain', 'room')
       .should('contain', 'admin')
   })
+
+  it('should open a modal to show the tutorial', () => {
+    cy.get('#watch-tutorial').click()
+
+    cy.get('#modal-how-to-play').should('have.length', 1)
+
+    cy.get('#close-modal').click()
+
+    cy.get('#modal-how-to-play').should('have.length', 0)
+  })
 })

@@ -2,12 +2,14 @@ import React, { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
-  href?: string
+  href: string
+  id: string
 }
 
-export default function Anchor({ children, href }: Props) {
+export default function Anchor({ children, href, id }: Props) {
   return (
     <a
+      id={id}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
