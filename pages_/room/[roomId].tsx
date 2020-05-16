@@ -81,7 +81,7 @@ export default function Sala() {
                 <Button
                   aria-label={t('roomId:play')}
                   color="green"
-                  id="play"
+                  id={`play${index + 1}`}
                   disabled={!room.readyToPlay}
                   onClick={() => {
                     Router.pushI18n(

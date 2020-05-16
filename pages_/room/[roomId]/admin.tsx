@@ -148,7 +148,7 @@ export default function Admin() {
             <div className="mt-4">
               <Checkbox
                 hint={t('admin:field-bingo-spinner-hint')}
-                id="bingoSpinner"
+                id="bingo-spinner"
                 label={t('admin:field-bingo-spinner')}
                 onChange={value => {
                   updateRoom({ bingoSpinner: value })

@@ -34,7 +34,6 @@ export default function Options({ isAdmin, room }: Props) {
           iconBgColor="bg-yellow-300"
           iconColor="text-yellow-800"
           id="configure-empty-cells"
-          data-test-id="configure-empty-cells"
         ></OptionTab>
         {isAdmin && (
           <Fragment>
@@ -43,21 +42,18 @@ export default function Options({ isAdmin, room }: Props) {
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
               id="celebrations"
-              data-test-id="celebrations"
             ></OptionTab>
             <OptionTab
               Icon={FiVolume2}
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
               id="sounds"
-              data-test-id="sounds"
             ></OptionTab>
             <OptionTab
               Icon={FiRotateCcw}
               iconBgColor="bg-red-300"
               iconColor="text-red-800"
               id="reboot-game"
-              data-test-id="reboot-game"
             ></OptionTab>
           </Fragment>
         )}

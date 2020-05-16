@@ -29,10 +29,10 @@ describe('Home', () => {
   it('should open a modal to show the tutorial', () => {
     cy.get('#watch-tutorial').click()
 
-    cy.get('#modal-how-to-play').should('have.length', 1)
+    cy.get('#modal-how-to-play').should('be.visible')
 
     cy.get('#close-modal').click()
 
-    cy.get('#modal-how-to-play').should('have.length', 0)
+    cy.get('#modal-how-to-play').should('not.be.visible')
   })
 })

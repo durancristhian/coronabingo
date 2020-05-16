@@ -1,11 +1,11 @@
 {
   "env": {
-    "emptyRoom": {
-      "id": "NEZce8klrVtm3bFsDmq1"
-    },
     "configuredRoom": {
       "adminId": "i4zxcbBVzSxabWcuNJ5e",
       "id": "yYjp9alm4m5jQE9OocAY"
+    },
+    "emptyRoom": {
+      "id": "NEZce8klrVtm3bFsDmq1"
     }
   },
   "viewportHeight": 768,
