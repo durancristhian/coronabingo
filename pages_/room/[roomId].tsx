@@ -126,7 +126,6 @@ export default function Sala() {
             onFocus={event => event.target.select()}
           />
           <InputText
-            hint={t('roomId:field-link-hint')}
             id="url"
             label={t('roomId:field-link')}
             value={`${getBaseUrl()}/room/${room.id}`}

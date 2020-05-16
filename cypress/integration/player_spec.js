@@ -1,18 +1,25 @@
 /// <reference types="cypress" />
 
 describe('Admin', () => {
-  before(() => {
+  beforeEach(() => {
     cy.server()
 
     const roomId = Cypress.env('roomId')
     const adminId = Cypress.env('adminId')
 
     cy.visit(`http://localhost:3000/es/room/${roomId}/${adminId}`)
+
+    /* TODO: ultra hardcoded */
+    /* cy.get('[for="banana8"]').click()
+    cy.get('[for="basketball6"]').click()
+    cy.get('[for="game_die2"]').click()
+
+    cy.get('#submit-code').click() */
   })
 
   it('Should display a new number from bingo spinner', () => {
     cy.get('[data-test-id="next-number"]')
-      .eq(1)
+      .eq(0)
       .click()
   })
 
@@ -31,6 +38,13 @@ describe('Admin', () => {
 
     cy.reload()
 
+    /* TODO: ultra hardcoded */
+    cy.get('[for="banana8"]').click()
+    cy.get('[for="basketball6"]').click()
+    cy.get('[for="game_die2"]').click()
+
+    cy.get('#submit-code').click()
+
     cy.get('[data-test-id="cell-number"]')
       .eq(0)
       .should('have.class', 'bg-orange-400')
@@ -43,9 +57,9 @@ describe('Admin', () => {
     cy.get('[data-test-id="reboot-game"]')
   })
 
-  it('Should reboot game', () => {
+  it.only('Should reboot game', () => {
     cy.get('[data-test-id="reboot-game"]')
-      .eq(1)
+      .eq(0)
       .click()
 
     cy.get('#confirm').click()
@@ -53,13 +67,5 @@ describe('Admin', () => {
     cy.url().should('contain', 'admin')
 
     cy.get('#configure-room').click()
-  })
-
-  it('Should access to player room', () => {
-    cy.url().should('not.contain', 'admin')
-
-    cy.get('#play')
-      .eq(0)
-      .click()
   })
 })

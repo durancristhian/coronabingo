@@ -4,6 +4,7 @@ import { FlagAction, FlagActions, Flags, FlagsDispatch } from '~/interfaces'
 const defaultState = {
   downloadSpreadsheet: false,
   extraSounds: false,
+  roomCode: false,
 }
 
 const defaultDispatch = {
@@ -13,6 +14,7 @@ const defaultDispatch = {
 const ActionByStateKey = {
   downloadSpreadsheet: { type: FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE },
   extraSounds: { type: FlagActions.EXTRA_SOUNDS_TOGGLE },
+  roomCode: { type: FlagActions.ROOM_CODE_TOGGLE },
 }
 
 const StateContext = createContext<Flags>(defaultState)
@@ -29,6 +31,11 @@ const reducer = (state: Flags, action: FlagAction) => {
       return {
         ...state,
         extraSounds: !state.extraSounds,
+      }
+    case FlagActions.ROOM_CODE_TOGGLE:
+      return {
+        ...state,
+        roomCode: !state.roomCode,
       }
     default:
       return state
