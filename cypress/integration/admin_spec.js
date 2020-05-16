@@ -138,40 +138,4 @@ describe('Admin', () => {
 
     cy.get('#configure-room').should('be.disabled')
   })
-
-  it('Should use bingo spinner', () => {
-    cy.get('#name').type('Player 1{enter}')
-    cy.get('#name').type('Player 2{enter}')
-
-    cy.get('#adminId').select('Player 1')
-
-    cy.get('#configure-room').click()
-
-    cy.wait(1000)
-
-    cy.get('#play1').click()
-
-    cy.wait(1000)
-
-    cy.get('#next-number').should('be.enabled')
-  })
-
-  it('Should not use bingo spinner', () => {
-    cy.get('#name').type('Player 1{enter}')
-    cy.get('#name').type('Player 2{enter}')
-
-    cy.get('#adminId').select('Player 1')
-
-    cy.get('#bingo-spinner').click()
-
-    cy.get('#configure-room').click()
-
-    cy.wait(1000)
-
-    cy.get('#play1').click()
-
-    cy.wait(1000)
-
-    cy.get('#next-number').should('not.be.visible')
-  })
 })

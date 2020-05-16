@@ -19,21 +19,21 @@ describe('Admin', () => {
   })
 
   it('Should display a new number from bingo spinner', () => {
-    cy.get('[id="next-number"]')
+    cy.get('#next-number')
       .eq(0)
       .click()
   })
 
   it('Should persist selected numbers on reload', () => {
-    cy.get('[id="cell-number"]')
+    cy.get('#cell-number')
       .eq(0)
       .should('not.have.class', 'bg-orange-400')
 
-    cy.get('[id="cell-number"]')
+    cy.get('#cell-number')
       .eq(0)
       .click()
 
-    cy.get('[id="cell-number"]')
+    cy.get('#cell-number')
       .eq(0)
       .should('have.class', 'bg-orange-400')
 
@@ -46,20 +46,20 @@ describe('Admin', () => {
 
     cy.get('#submit-code').click() */
 
-    cy.get('[id="cell-number"]')
+    cy.get('#cell-number')
       .eq(0)
       .should('have.class', 'bg-orange-400')
   })
 
   it('Should have admin options visible', () => {
-    cy.get('[id="configure-empty-cells"]')
-    cy.get('[id="celebrations"]')
-    cy.get('[id="sounds"]')
-    cy.get('[id="reboot-game"]')
+    cy.get('#configure-empty-cells')
+    cy.get('#celebrations')
+    cy.get('#sounds')
+    cy.get('#reboot-game')
   })
 
   it.only('Should reboot game', () => {
-    cy.get('[id="reboot-game"]')
+    cy.get('#reboot-game')
       .eq(0)
       .click()
 
