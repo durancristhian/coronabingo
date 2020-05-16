@@ -141,5 +141,11 @@
     "88": "El Papa",
     "89": "La rata",
     "90": "El miedo"
+  },
+  "room-code": {
+    "success": "Código correcto. Espere...",
+    "error": "Código incorrecto. Intenta nuevamente...",
+    "title": "Ingrese el código de acceso a la sala",
+    "submit": "Ingresar"
   }
 }

@@ -141,5 +141,11 @@
     "88": "Pope",
     "89": "Rat",
     "90": "Fear"
+  },
+  "room-code": {
+    "success": "Code is correct. Wait...",
+    "error": "Code is incorrect. Try again...",
+    "title": "Enter the room code",
+    "submit": "Access"
   }
 }

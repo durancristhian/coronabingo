@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import useRoomCode from '~/hooks/useRoomCode'
@@ -18,6 +19,7 @@ export default function RoomCode({ roomCode }: Props) {
   ])
   const { createToast, dismissToast } = useToast()
   const { login } = useRoomCode()
+  const { t } = useTranslation()
 
   const onClick = (emoji: keyof Emojis | null) => {
     if (emojiCode.includes(emoji)) {
@@ -47,7 +49,7 @@ export default function RoomCode({ roomCode }: Props) {
     const userCode = emojiCode.toString()
 
     if (roomCode === userCode) {
-      const toastId = createToast('Código correcto. Espere...', 'success')
+      const toastId = createToast('playerId:room-code.success', 'success')
 
       setTimeout(() => {
         dismissToast(toastId)
@@ -55,10 +57,7 @@ export default function RoomCode({ roomCode }: Props) {
         login()
       }, 2000)
     } else {
-      const toastId = createToast(
-        'Código incorrecto. Intenta nuevamente...',
-        'error',
-      )
+      const toastId = createToast('playerId:room-code.error', 'error')
 
       setTimeout(() => {
         dismissToast(toastId)
@@ -68,7 +67,7 @@ export default function RoomCode({ roomCode }: Props) {
 
   return (
     <Fragment>
-      <p className="mb-4 text-center">Ingresa el código de grupo</p>
+      <p className="mb-4 text-center">{t('playerId:room-code.title')}</p>
       <div className="flex flex-wrap justify-between">
         {CODES.map((emoji, index) => {
           const isChecked = emojiCode.includes(emoji)
@@ -99,14 +98,13 @@ export default function RoomCode({ roomCode }: Props) {
         })}
       </div>
       <Button
-        /* TODO */
-        aria-label="submit code"
+        aria-label={t('playerId:room-code.submit')}
         id="submit-code"
         disabled={emojiCode.some(e => !Boolean(e))}
         className="w-full"
         onClick={submitCode}
       >
-        Ingresar
+        {t('playerId:room-code.submit')}
       </Button>
     </Fragment>
   )

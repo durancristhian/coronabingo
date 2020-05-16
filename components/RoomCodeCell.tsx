@@ -35,7 +35,6 @@ export default function RoomCodeCell({
         >
           <input
             type="checkbox"
-            name="background"
             id={`${emoji}${index}`}
             className="visually-hidden"
             onChange={() => onClick(emoji)}
