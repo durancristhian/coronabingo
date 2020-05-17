@@ -108,6 +108,7 @@ export default function Sala() {
           <div className="mb-4">
             <Heading type="h2">
               <span
+                id="room-title"
                 onClick={incrementInteractions}
                 role="button"
                 tabIndex={0}
