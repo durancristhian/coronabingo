@@ -16,7 +16,7 @@ import useEasterEgg from '~/hooks/useEasterEgg'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
-import { getBaseUrl, scrollToTop } from '~/utils'
+import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Sala() {
   const { room } = useRoom()
@@ -33,6 +33,16 @@ export default function Sala() {
       <Layout>
         <Container>
           <Message type="information">{t('roomId:loading')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (isRoomOld(room)) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:outdated-room')}</Message>
         </Container>
       </Layout>
     )

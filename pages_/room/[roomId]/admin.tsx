@@ -21,7 +21,7 @@ import useToast from '~/hooks/useToast'
 /* import { Emojis } from '~/interfaces' */
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
-import { createBatch, getBaseUrl, scrollToTop } from '~/utils'
+import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Admin() {
   const { t } = useTranslation()
@@ -38,6 +38,16 @@ export default function Admin() {
       <Layout>
         <Container>
           <Message type="information">{t('admin:loading')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (isRoomOld(room)) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:outdated-room')}</Message>
         </Container>
       </Layout>
     )

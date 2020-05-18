@@ -21,5 +21,6 @@
   "telegram-share": "Telegram",
   "staging": "Staging v{{version}}",
   "coffee": "Coffee",
-  "new-features-modal-title": "New features in version {{version}}"
+  "new-features-modal-title": "New features in version {{version}}",
+  "outdated-room": "This room belongs to an old version of the app. Please, create a new one."
 }
