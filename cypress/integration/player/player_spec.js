@@ -6,23 +6,22 @@ describe('Player without admin access', () => {
   })
 
   it('Should persist selected numbers on reload', () => {
-    cy.get('[data-test-class="cell-number"]').should(
-      'not.have.class',
-      'bg-orange-400',
-    )
+    cy.get('[data-test-class="cell-number"]')
+      .eq(0)
+      .should('not.have.class', 'bg-orange-400')
 
-    cy.get('[data-test-class="cell-number"]').click()
+    cy.get('[data-test-class="cell-number"]')
+      .eq(0)
+      .click()
 
-    cy.get('[data-test-class="cell-number"]').should(
-      'have.class',
-      'bg-orange-400',
-    )
+    cy.get('[data-test-class="cell-number"]')
+      .eq(0)
+      .should('have.class', 'bg-orange-400')
 
     cy.reload()
 
-    cy.get('[data-test-class="cell-number"]').should(
-      'have.class',
-      'bg-orange-400',
-    )
+    cy.get('[data-test-class="cell-number"]')
+      .eq(0)
+      .should('have.class', 'bg-orange-400')
   })
 })

@@ -2,8 +2,6 @@
 
 describe('Footer', () => {
   beforeEach(() => {
-    cy.server()
-
     cy.visit('http://localhost:3000')
   })
 

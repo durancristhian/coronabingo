@@ -52,8 +52,6 @@ Cypress.Commands.add('configureRoom', (isAdmin = false) => {
 })
 
 Cypress.Commands.add('prepareRoom', (isAdmin = false) => {
-  cy.createRoom()
-
   cy.configureRoom(isAdmin)
 
   if (isAdmin) {
