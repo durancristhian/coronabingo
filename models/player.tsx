@@ -38,18 +38,10 @@ const removePlayer = async (player: Player) => {
   return await player.ref.delete()
 }
 
-const updatePlayer = (
-  playerRef: firebase.firestore.DocumentReference,
-  playerData: Partial<PlayerBase>,
-): Promise<void> => {
-  return playerRef.update(playerData)
-}
-
 const playerApi = {
   createPlayer,
   excludeExtraFields,
   removePlayer,
-  updatePlayer,
 }
 
 export default playerApi
