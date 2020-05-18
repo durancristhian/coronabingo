@@ -2,11 +2,7 @@
 
 describe('Admin', () => {
   beforeEach(() => {
-    cy.server()
-
-    const emptyRoom = Cypress.env('emptyRoom')
-
-    cy.visit(`http://localhost:3000/es/room/${emptyRoom.id}/admin`)
+    cy.createRoom()
   })
 
   it('Should have a #configure-room disabled by default', () => {
@@ -78,14 +74,6 @@ describe('Admin', () => {
       .children()
       .should('have.length', 3)
   })
-
-  /* it.only('Should disable add players when reached the limit', () => {
-    for (let index = 1; index <= 720; index++) {
-      cy.get('#name').type(`Player ${index}{enter}`)
-    }
-
-    cy.get('#add-player').should('be.disabled')
-  }) */
 
   it('Should remove a player', () => {
     cy.get('#name').type('Player 1{enter}')

@@ -2,12 +2,7 @@
 
 describe('Room', () => {
   beforeEach(() => {
-    cy.server()
-
-    const configuredRoom = Cypress.env('configuredRoom')
-    const roomId = configuredRoom.id
-
-    cy.visit(`http://localhost:3000/es/room/${roomId}`)
+    cy.configureRoom()
   })
 
   it('Should allow to download the spreadsheet with room information', () => {

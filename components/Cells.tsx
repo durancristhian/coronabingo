@@ -44,7 +44,7 @@ export default function Cells({
             onKeyPress={() => handleClick(ticketNumber)}
             role="button"
             tabIndex={0}
-            id="cell-number"
+            data-test-class="cell-number"
           >
             <div
               className={classnames(

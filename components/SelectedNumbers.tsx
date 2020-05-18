@@ -52,7 +52,7 @@ export default function SelectedNumbers({
           <FiChevronsLeft />
         </Button>
       )}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" id="ticket-numbers">
         {TICKET_NUMBERS.map(n => (
           <button
             type="button"
