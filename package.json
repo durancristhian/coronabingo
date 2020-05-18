@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "private": true,
     "scripts": {
         "prebuild": "npm run validate-locales",
@@ -40,6 +40,7 @@
         "@types/zipcelx": "^1.5.0",
         "@typescript-eslint/eslint-plugin": "^2.27.0",
         "@typescript-eslint/parser": "^2.27.0",
+        "@zeit/next-bundle-analyzer": "^0.1.2",
         "autoprefixer": "^9.7.4",
         "classnames": "^2.2.6",
         "cypress": "^4.4.0",
