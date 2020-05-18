@@ -30,7 +30,9 @@ export default function Index() {
         </div>
         <p>
           <span>{t('index:videocall-suggestion')} </span>
-          <Anchor href="https://hangouts.google.com/">Google Hangouts</Anchor>
+          <Anchor href="https://hangouts.google.com/" id="google-hangouts">
+            Google Hangouts
+          </Anchor>
           <span>.</span>
         </p>
         <div className="mt-8">

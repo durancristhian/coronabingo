@@ -81,7 +81,7 @@ export default function Sala() {
                 <Button
                   aria-label={t('roomId:play')}
                   color="green"
-                  id="play"
+                  id={`play${index + 1}`}
                   disabled={!room.readyToPlay}
                   onClick={() => {
                     Router.pushI18n(
@@ -108,6 +108,7 @@ export default function Sala() {
           <div className="mb-4">
             <Heading type="h2">
               <span
+                id="room-title"
                 onClick={incrementInteractions}
                 role="button"
                 tabIndex={0}
@@ -126,7 +127,6 @@ export default function Sala() {
             onFocus={event => event.target.select()}
           />
           <InputText
-            hint={t('roomId:field-link-hint')}
             id="url"
             label={t('roomId:field-link')}
             value={`${getBaseUrl()}/room/${room.id}`}

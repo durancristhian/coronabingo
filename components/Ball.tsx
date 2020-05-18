@@ -24,7 +24,11 @@ export default function Ball({
         }}
       >
         <div>
-          <span className="font-medium" style={{ fontSize: `${size / 3}px` }}>
+          <span
+            data-test-class="ball"
+            className="font-medium"
+            style={{ fontSize: `${size / 3}px` }}
+          >
             {number}
           </span>
         </div>

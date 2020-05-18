@@ -7,6 +7,7 @@
   "field-name": "Nombre",
   "field-link-hint": "Compartí este link a las personas de la videollamada.",
   "field-link": "Link a la sala",
+  "room-code": "Código de acceso a la sala",
   "field-bingo-spinner-hint": "Si tenés un bolillero y querés usarlo no tildes esta opción.",
   "field-bingo-spinner": "Usar bolillero online",
   "field-submit": "Jugar",

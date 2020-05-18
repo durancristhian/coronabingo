@@ -28,7 +28,7 @@ export default function Layout({ children }: Props) {
       <Banner>
         <span className="mr-1">
           <span className="mr-1">{t('common:feedback-form.intro')}</span>
-          <Anchor href="https://forms.gle/egSBrsKSFnEgabff7">
+          <Anchor href="https://forms.gle/egSBrsKSFnEgabff7" id="feedback-form">
             {t('common:feedback-form.link')}
           </Anchor>
         </span>

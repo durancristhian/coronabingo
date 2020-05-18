@@ -63,13 +63,13 @@ export const BACKGROUND_CELL_VALUES = [
   },
 ]
 export const CODES: (keyof Emojis)[] = [
-  'cow2',
-  'octopus',
-  'bike',
-  'bus',
+  'deciduous_tree',
+  'snail',
+  'game_die',
+  'tornado',
   'airplane',
   'rainbow',
-  'scooter',
+  'basketball',
   'volcano',
   'banana',
 ]

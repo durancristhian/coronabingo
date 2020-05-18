@@ -41,13 +41,13 @@
   "flag-ar": "Bandera de Argentina",
   "flag-us": "Bandera de Estados Unidos",
   "world": "Mundo",
-  "cow2": "Vaca",
-  "octopus": "Pulpo",
-  "bike": "Bicicleta",
-  "bus": "Colectivo",
+  "deciduous_tree": "Árbol",
+  "snail": "Caracol",
+  "game_die": "Dado",
+  "tornado": "Tornado",
   "airplane": "Avión",
   "rainbow": "Arcoiris",
-  "scooter": "Scooter",
+  "basketball": "Pelota de Básquet",
   "volcano": "Volcán",
   "banana": "Banana",
   "dreams": {
@@ -141,5 +141,11 @@
     "88": "El Papa",
     "89": "La rata",
     "90": "El miedo"
+  },
+  "room-code": {
+    "success": "Código correcto. Espere...",
+    "error": "Código incorrecto. Intenta nuevamente...",
+    "title": "Ingrese el código de acceso a la sala",
+    "submit": "Ingresar"
   }
 }

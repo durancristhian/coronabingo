@@ -3,23 +3,23 @@ import React from 'react'
 import { Tab } from 'react-tabs'
 
 interface Props {
+  buttonId: string
   Icon: Function
   iconBgColor: string
   iconColor: string
-  id: string
 }
 
 export default function OptionTab({
+  buttonId,
   Icon,
   iconBgColor,
   iconColor,
-  id,
   ...otherProps
 }: Props) {
   return (
     <Tab {...otherProps} className="mx-2">
       <button
-        id={id}
+        id={buttonId}
         className={classnames([
           'block h-12 mx-1 outline-none rounded-full shadow w-12',
           'focus:outline-none focus:shadow-outline',

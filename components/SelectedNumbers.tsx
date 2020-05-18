@@ -42,8 +42,7 @@ export default function SelectedNumbers({
       {isAdmin && bingoSpinner && (
         <Button
           aria-label={t('playerId:next-number')}
-          id="next"
-          data-test-id="next-number"
+          id="next-number"
           className="mb-4 w-full"
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
@@ -53,7 +52,7 @@ export default function SelectedNumbers({
           <FiChevronsLeft />
         </Button>
       )}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" id="ticket-numbers">
         {TICKET_NUMBERS.map(n => (
           <button
             type="button"

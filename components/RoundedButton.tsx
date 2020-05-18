@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import React, { MouseEvent } from 'react'
 
 interface Props {
+  id: string
   Icon?: Function
   imageURL?: string
   imageAlt?: string
@@ -10,7 +11,8 @@ interface Props {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-export default function ShareButton({
+export default function RoundedButton({
+  id,
   Icon,
   imageURL,
   imageAlt,
@@ -26,6 +28,7 @@ export default function ShareButton({
         'duration-150 ease-in-out transition',
       ])}
       onClick={onClick}
+      id={id}
     >
       <div
         className={classnames([

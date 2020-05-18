@@ -2,8 +2,6 @@
 
 describe('Home', () => {
   beforeEach(() => {
-    cy.server()
-
     cy.visit('http://localhost:3000')
   })
 
@@ -24,5 +22,15 @@ describe('Home', () => {
       .url()
       .should('contain', 'room')
       .should('contain', 'admin')
+  })
+
+  it('Should open a modal to show the tutorial', () => {
+    cy.get('#watch-tutorial').click()
+
+    cy.get('#modal-how-to-play').should('be.visible')
+
+    cy.get('#close-modal').click()
+
+    cy.get('#modal-how-to-play').should('not.be.visible')
   })
 })

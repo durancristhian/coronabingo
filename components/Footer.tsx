@@ -5,7 +5,7 @@ import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import Emoji from '~/components/Emoji'
 import Modal from '~/components/Modal'
-import ShareButton from '~/components/ShareButton'
+import RoundedButton from '~/components/RoundedButton'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="flex h-12 items-center justify-between">
             <p>
               <span>{t('common:made-by')}</span>
-              <Anchor href="https://twitter.com/DuranCristhian">
+              <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
                 Cristhian Duran
               </Anchor>
             </p>
@@ -61,14 +61,16 @@ export default function Footer() {
         <Container size="large">
           <p>{t('common:donate-copy')}</p>
           <div className="flex justify-center items-center mt-8">
-            <ShareButton
+            <RoundedButton
+              id="donate-mercado-pago"
               imageURL="/mercado-pago.png"
               imageAlt="Mercado Pago"
               iconBgColor="bg-mercado-pago"
               label={t('common:donate-mercado-pago')}
               onClick={donateMercadoPago}
             />
-            <ShareButton
+            <RoundedButton
+              id="donate-paypal"
               Icon={FaPaypal}
               iconBgColor="bg-paypal"
               label={t('common:donate-paypal')}
