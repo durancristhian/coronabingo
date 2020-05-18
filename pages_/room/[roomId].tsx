@@ -71,13 +71,11 @@ export default function Sala() {
                     {t('roomId:is-admin')}
                   </span>
                 )}
-                {player.tickets && player.tickets.length && (
-                  <p className="italic mt-2 text-gray-800 text-sm w-full">
-                    {t('common:ticket_plural', {
-                      ticketId: player.tickets.split(',').join(' & '),
-                    })}
-                  </p>
-                )}
+                <p className="italic mt-2 text-gray-800 text-sm w-full">
+                  {t('common:ticket_plural', {
+                    ticketId: player.tickets.split(',').join(' & '),
+                  })}
+                </p>
               </div>
               <div className="ml-4">
                 <Button
