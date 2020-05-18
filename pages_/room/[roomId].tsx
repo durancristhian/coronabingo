@@ -94,6 +94,8 @@ export default function Sala() {
                   id={`play${index + 1}`}
                   disabled={!room.readyToPlay}
                   onClick={() => {
+                    if (!room.id || !player.id) return
+
                     Router.pushI18n(
                       `/room/[roomId]/[playerId]`,
                       `/room/${room.id}/${player.id}`,
