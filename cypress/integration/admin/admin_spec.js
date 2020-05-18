@@ -23,7 +23,7 @@ describe('Admin', () => {
     cy.get('#modal-share').should('not.be.visible')
   })
 
-  it.only('Should copy room URL to clipboard', () => {
+  it('Should copy room URL to clipboard', () => {
     cy.get('#open-share-modal').click()
 
     cy.get('#modal-share').should('be.visible')

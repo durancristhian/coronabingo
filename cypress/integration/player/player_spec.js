@@ -2,7 +2,7 @@
 
 describe('Player without admin access', () => {
   beforeEach(() => {
-    cy.prepareRoomToPlay()
+    cy.prepareRoom()
   })
 
   it('Should persist selected numbers on reload', () => {

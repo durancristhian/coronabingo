@@ -2,7 +2,7 @@
 
 describe('Player with admin access', () => {
   beforeEach(() => {
-    cy.prepareRoomToPlay(true)
+    cy.prepareRoom(true)
   })
 
   it('Should display a new number from bingo spinner', () => {
