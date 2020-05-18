@@ -17,7 +17,7 @@ import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 /* import useRoomCode from '~/hooks/useRoomCode' */
 import roomApi from '~/models/room'
-import { scrollToTop } from '~/utils'
+import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function Jugar() {
   const { room } = useRoom()
@@ -32,6 +32,16 @@ export default function Jugar() {
       <Layout>
         <Container>
           <Message type="information">{t('playerId:loading')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (isRoomOld(room)) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:outdated-room')}</Message>
         </Container>
       </Layout>
     )
