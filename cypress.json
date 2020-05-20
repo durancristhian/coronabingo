@@ -1,5 +1,5 @@
 {
-  "ignoreTestFiles": "*.custom.js",
+  "ignoreTestFiles": "**/*.custom.js",
   "viewportHeight": 768,
   "viewportWidth": 1024
 }
