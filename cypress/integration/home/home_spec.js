@@ -18,7 +18,7 @@ describe('Home', () => {
       .should('be.enabled')
       .click()
 
-    cy.wait(5000)
+    cy.wait(10000)
       .url()
       .should('contain', 'room')
       .should('contain', 'admin')

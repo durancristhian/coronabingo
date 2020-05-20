@@ -24,6 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add('addPlayers', (counterStart, counterTop) => {
+  for (let index = counterStart; index < counterTop; index++) {
+    cy.get('#name').type(`Jugador #${index}`)
+    cy.get('#add-player').click()
+  }
+})
+
 Cypress.Commands.add('createRoom', () => {
   cy.visit('http://localhost:3000')
 
@@ -31,7 +38,7 @@ Cypress.Commands.add('createRoom', () => {
 
   cy.get('#create-room').click()
 
-  cy.wait(5000)
+  cy.wait(10000)
 })
 
 Cypress.Commands.add('configureRoom', (isAdmin = false) => {
@@ -48,7 +55,7 @@ Cypress.Commands.add('configureRoom', (isAdmin = false) => {
 
   cy.get('#configure-room').click()
 
-  cy.wait(5000)
+  cy.wait(10000)
 })
 
 Cypress.Commands.add('prepareRoom', (isAdmin = false) => {
@@ -60,5 +67,5 @@ Cypress.Commands.add('prepareRoom', (isAdmin = false) => {
     cy.get('#play2').click()
   }
 
-  cy.wait(5000)
+  cy.wait(10000)
 })

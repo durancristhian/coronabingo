@@ -8,7 +8,7 @@ describe('Header', () => {
   it('Should change language URL', () => {
     cy.get('#language').select('en')
 
-    cy.wait(5000)
+    cy.wait(10000)
       .url()
       .should('contain', 'en')
   })

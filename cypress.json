@@ -1,4 +1,5 @@
 {
+  "ignoreTestFiles": "custom/*.*",
   "viewportHeight": 768,
   "viewportWidth": 1024
 }
