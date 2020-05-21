@@ -19,7 +19,7 @@ export default function RoomCodeCell({
   onClick,
 }: Props) {
   return (
-    <div className="w-30%" key={index}>
+    <div className="w-30" key={index}>
       <fieldset disabled={!emoji}>
         <label
           htmlFor={`${emoji}${index}`}

@@ -2,11 +2,13 @@ import { Room, RoomBase } from '~/interfaces'
 import { roomsRef, Timestamp } from '~/utils'
 
 const defaultRoomData: RoomBase = {
+  activateAdminCode: false,
   adminId: '',
   bingoSpinner: true,
   code: '',
   confettiType: '',
   date: null,
+  hideNumbersMeaning: false,
   name: '',
   readyToPlay: false,
   selectedNumbers: [],

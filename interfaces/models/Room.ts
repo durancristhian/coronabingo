@@ -1,11 +1,13 @@
 import { ConfettiType } from '~/interfaces'
 
 export interface RoomBase {
+  activateAdminCode: boolean
   adminId: string
   bingoSpinner: boolean
   code: string
   confettiType: ConfettiType
   date: firebase.firestore.Timestamp | null
+  hideNumbersMeaning: boolean
   name: string
   readyToPlay: boolean
   selectedNumbers: number[]

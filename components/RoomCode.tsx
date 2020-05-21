@@ -49,7 +49,7 @@ export default function RoomCode({ roomCode }: Props) {
     const userCode = emojiCode.toString()
 
     if (roomCode === userCode) {
-      const toastId = createToast('playerId:room-code.success', 'success')
+      const toastId = createToast('common:room-code.success', 'success')
 
       setTimeout(() => {
         dismissToast(toastId)
@@ -57,7 +57,7 @@ export default function RoomCode({ roomCode }: Props) {
         login()
       }, 2000)
     } else {
-      const toastId = createToast('playerId:room-code.error', 'error')
+      const toastId = createToast('common:room-code.error', 'error')
 
       setTimeout(() => {
         dismissToast(toastId)
@@ -67,7 +67,7 @@ export default function RoomCode({ roomCode }: Props) {
 
   return (
     <Fragment>
-      <p className="mb-4 text-center">{t('playerId:room-code.title')}</p>
+      <p className="mb-4 text-center">{t('common:room-code.title')}</p>
       <div className="flex flex-wrap justify-between">
         {CODES.map((emoji, index) => {
           const isChecked = emojiCode.includes(emoji)
@@ -98,13 +98,13 @@ export default function RoomCode({ roomCode }: Props) {
         })}
       </div>
       <Button
-        aria-label={t('playerId:room-code.submit')}
+        aria-label={t('common:room-code.submit')}
         id="submit-code"
         disabled={emojiCode.some(e => !Boolean(e))}
         className="w-full"
         onClick={submitCode}
       >
-        {t('playerId:room-code.submit')}
+        {t('common:room-code.submit')}
       </Button>
     </Fragment>
   )

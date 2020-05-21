@@ -22,5 +22,11 @@
   "staging": "Staging v{{version}}",
   "coffee": "Café",
   "new-features-modal-title": "Novedades en la versión {{version}}",
-  "outdated-room": "Esta sala pertenece a una versión desactualizada de la aplicación. Por favor, cree otra."
+  "outdated-room": "Esta sala pertenece a una versión desactualizada de la aplicación. Por favor, cree otra.",
+  "room-code": {
+    "success": "Código correcto. Espere...",
+    "error": "Código incorrecto. Intenta nuevamente...",
+    "title": "Ingrese el código de acceso a la sala",
+    "submit": "Ingresar"
+  }
 }

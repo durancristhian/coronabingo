@@ -3,6 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiThumbsUp } from 'react-icons/fi'
 import Button from '~/components/Button'
+import useRoomCode from '~/hooks/useRoomCode'
 import { Room } from '~/interfaces'
 import roomApi from '~/models/room'
 
@@ -12,6 +13,7 @@ interface Props {
 
 export default function Restart({ room }: Props) {
   const { t } = useTranslation()
+  const { login } = useRoomCode()
 
   const replay = async () => {
     await roomApi.updateRoom(room.ref, {
@@ -20,6 +22,10 @@ export default function Restart({ room }: Props) {
       soundToPlay: '',
       confettiType: '',
     })
+
+    if (room.activateAdminCode) {
+      login()
+    }
 
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }

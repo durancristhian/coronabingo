@@ -6,10 +6,14 @@ import Emoji from '~/components/Emoji'
 import { DREAMS_EMOJIS } from '~/utils'
 
 interface Props {
+  hideNumbersMeaning: boolean
   selectedNumbers: number[]
 }
 
-export default function LastNumbers({ selectedNumbers }: Props) {
+export default function LastNumbers({
+  hideNumbersMeaning,
+  selectedNumbers,
+}: Props) {
   const { t } = useTranslation()
   const [last, ...rest] = selectedNumbers
   const emoji = DREAMS_EMOJIS[last - 1]
@@ -34,22 +38,24 @@ export default function LastNumbers({ selectedNumbers }: Props) {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-between mt-4">
-        <p className="flex flex-auto font-medium items-center">
-          <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
-          <span className="text-xs">
-            <Emoji name={emoji} />
-          </span>
-        </p>
-        <p className="text-right md:text-sm w-24">
-          <Anchor
-            href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
-            id="quiniela"
-          >
-            {t('playerId:dreams-link')}
-          </Anchor>
-        </p>
-      </div>
+      {!hideNumbersMeaning && (
+        <div className="flex items-center justify-between mt-4">
+          <p className="flex flex-auto font-medium items-center">
+            <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
+            <span className="text-xs">
+              <Emoji name={emoji} />
+            </span>
+          </p>
+          <p className="text-right md:text-sm w-24">
+            <Anchor
+              href="https://es.wikipedia.org/wiki/Quiniela_(Argentina)"
+              id="quiniela"
+            >
+              {t('playerId:dreams-link')}
+            </Anchor>
+          </p>
+        </div>
+      )}
     </Fragment>
   )
 }
