@@ -12,14 +12,14 @@ import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
-/* import RoomCodeCell from '~/components/RoomCodeCell' */
+import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
-/* import { Emojis } from '~/interfaces' */
+import { Emojis } from '~/interfaces'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
@@ -133,23 +133,6 @@ export default function Admin() {
               onFocus={event => event.target.select()}
             />
             <Copy content={`${getBaseUrl()}/room/${room.id}`} />
-            {/* <div className="my-8">
-              <p>{t('admin:room-code')}</p>
-              <div className="flex flex-wrap justify-between mt-1">
-                {room.code.split(',').map((emoji, index) => {
-                  return (
-                    <RoomCodeCell
-                      highlighted
-                      emoji={emoji as keyof Emojis}
-                      index={index}
-                      isChecked={false}
-                      key={index}
-                      onClick={() => void 0}
-                    />
-                  )
-                })}
-              </div>
-            </div> */}
             <Players
               isFormDisabled={inProgress}
               players={players}
@@ -181,18 +164,51 @@ export default function Admin() {
               />
             </div>
             {isActive && (
-              <div className="mt-4">
-                <Checkbox
-                  hint="No mostrar el significado de los números según la Quiniela Argentina"
-                  id="hide-numbers-meaning"
-                  label="Ocultar los sueños"
-                  onChange={value => {
-                    updateRoom({ hideNumbersMeaning: value })
-                  }}
-                  value={room.hideNumbersMeaning}
-                  disabled={inProgress}
-                />
-              </div>
+              <Fragment>
+                <div className="mt-4">
+                  <Checkbox
+                    hint="No mostrar el significado de los números según la Quiniela Argentina"
+                    id="hide-numbers-meaning"
+                    label="Ocultar los sueños"
+                    onChange={value => {
+                      updateRoom({ hideNumbersMeaning: value })
+                    }}
+                    value={room.hideNumbersMeaning}
+                    disabled={inProgress}
+                  />
+                </div>
+                <div className="mt-4">
+                  <Checkbox
+                    hint="Pedir el código de sala al ingresar a los cartones de quien dirige la sala"
+                    id="activate-admin-code"
+                    label="Activar código para el admin"
+                    onChange={value => {
+                      updateRoom({ activateAdminCode: value })
+                    }}
+                    value={room.activateAdminCode}
+                    disabled={inProgress}
+                  />
+                </div>
+                {room.activateAdminCode && (
+                  <div className="mt-4">
+                    <p>{t('admin:room-code')}</p>
+                    <div className="flex flex-wrap justify-between mt-1">
+                      {room.code.split(',').map((emoji, index) => {
+                        return (
+                          <RoomCodeCell
+                            highlighted
+                            emoji={emoji as keyof Emojis}
+                            index={index}
+                            isChecked={false}
+                            key={index}
+                            onClick={() => void 0}
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </Fragment>
             )}
             <div className="mt-8">
               <Button

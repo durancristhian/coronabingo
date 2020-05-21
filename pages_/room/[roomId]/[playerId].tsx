@@ -8,14 +8,14 @@ import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Options from '~/components/Options'
-/* import RoomCode from '~/components/RoomCode' */
+import RoomCode from '~/components/RoomCode'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import Tickets from '~/components/Tickets'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCell'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
-/* import useRoomCode from '~/hooks/useRoomCode' */
+import useRoomCode from '~/hooks/useRoomCode'
 import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
@@ -23,7 +23,7 @@ export default function Jugar() {
   const { room } = useRoom()
   const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
-  /* const { loggedIn } = useRoomCode() */
+  const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
@@ -69,7 +69,7 @@ export default function Jugar() {
 
   const isAdmin = room.adminId === player.id
 
-  /* if (isAdmin && !loggedIn) {
+  if (isAdmin && room.activateAdminCode && !loggedIn) {
     return (
       <Layout>
         <Container>
@@ -79,7 +79,7 @@ export default function Jugar() {
         </Container>
       </Layout>
     )
-  } */
+  }
 
   const onNewNumber = (n: number) => {
     const selectedNumbers = room.selectedNumbers || []
