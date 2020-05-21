@@ -12,13 +12,11 @@ import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
-import RoomCode from '~/components/RoomCode'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
-import useRoomCode from '~/hooks/useRoomCode'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
@@ -34,7 +32,6 @@ export default function Admin() {
   const [inProgress, setInProgress] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
   const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
-  const { loggedIn, login } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
@@ -53,18 +50,6 @@ export default function Admin() {
       <Layout>
         <Container>
           <Message type="error">{t('common:outdated-room')}</Message>
-        </Container>
-      </Layout>
-    )
-  }
-
-  if (room.activateAdminCode && !loggedIn) {
-    return (
-      <Layout>
-        <Container>
-          <Box>
-            <RoomCode roomCode={room.code} />
-          </Box>
         </Container>
       </Layout>
     )
@@ -103,8 +88,6 @@ export default function Admin() {
 
       setTimeout(() => {
         dismissToast(toastId)
-
-        login()
 
         Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
       }, 2000)
