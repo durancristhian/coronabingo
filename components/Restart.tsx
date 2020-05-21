@@ -23,7 +23,9 @@ export default function Restart({ room }: Props) {
       confettiType: '',
     })
 
-    login()
+    if (room.activateAdminCode) {
+      login()
+    }
 
     Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
