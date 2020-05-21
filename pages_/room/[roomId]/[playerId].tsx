@@ -133,7 +133,10 @@ export default function Jugar() {
                 <div className="mb-4">
                   <Heading type="h2">{t('playerId:last-numbers')}</Heading>
                 </div>
-                <LastNumbers selectedNumbers={room.selectedNumbers} />
+                <LastNumbers
+                  hideNumbersMeaning={room.hideNumbersMeaning}
+                  selectedNumbers={room.selectedNumbers}
+                />
               </Box>
               <div className="hidden lg:block mt-4">
                 {renderBingoSpinnerAndOptions()}

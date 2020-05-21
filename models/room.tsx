@@ -7,6 +7,7 @@ const defaultRoomData: RoomBase = {
   code: '',
   confettiType: '',
   date: null,
+  hideNumbersMeaning: false,
   name: '',
   readyToPlay: false,
   selectedNumbers: [],

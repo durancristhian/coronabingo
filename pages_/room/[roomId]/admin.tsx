@@ -14,6 +14,7 @@ import Message from '~/components/Message'
 import Players from '~/components/Players'
 /* import RoomCodeCell from '~/components/RoomCodeCell' */
 import Select from '~/components/Select'
+import useEasterEgg from '~/hooks/useEasterEgg'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
@@ -30,6 +31,7 @@ export default function Admin() {
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
+  const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
 
   useEffect(scrollToTop, [])
 
@@ -101,7 +103,18 @@ export default function Admin() {
       <Container>
         <Box>
           <div className="mb-4">
-            <Heading type="h2">{t('admin:title')}</Heading>
+            <Heading type="h2">
+              <span
+                id="room-title"
+                onClick={incrementInteractions}
+                role="button"
+                tabIndex={0}
+                onKeyPress={incrementInteractions}
+                className="cursor-text focus:outline-none outline-none"
+              >
+                {t('admin:title')}
+              </span>
+            </Heading>
           </div>
           <Fragment>
             <InputText
@@ -167,6 +180,20 @@ export default function Admin() {
                 disabled={inProgress}
               />
             </div>
+            {isActive && (
+              <div className="mt-4">
+                <Checkbox
+                  hint="No mostrar el significado de los números según la Quiniela Argentina"
+                  id="hide-numbers-meaning"
+                  label="Ocultar los sueños"
+                  onChange={value => {
+                    updateRoom({ hideNumbersMeaning: value })
+                  }}
+                  value={room.hideNumbersMeaning}
+                  disabled={inProgress}
+                />
+              </div>
+            )}
             <div className="mt-8">
               <Button
                 aria-label={t('admin:field-submit')}

@@ -5,6 +5,7 @@ const defaultState = {
   downloadSpreadsheet: false,
   extraSounds: false,
   roomCode: false,
+  useRoomExperiments: false,
 }
 
 const defaultDispatch = {
@@ -15,6 +16,7 @@ const ActionByStateKey = {
   downloadSpreadsheet: { type: FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE },
   extraSounds: { type: FlagActions.EXTRA_SOUNDS_TOGGLE },
   roomCode: { type: FlagActions.ROOM_CODE_TOGGLE },
+  useRoomExperiments: { type: FlagActions.ROOM_EXPERIMENTS_TOGGLE },
 }
 
 const StateContext = createContext<Flags>(defaultState)
@@ -36,6 +38,11 @@ const reducer = (state: Flags, action: FlagAction) => {
       return {
         ...state,
         roomCode: !state.roomCode,
+      }
+    case FlagActions.ROOM_EXPERIMENTS_TOGGLE:
+      return {
+        ...state,
+        useRoomExperiments: !state.useRoomExperiments,
       }
     default:
       return state
