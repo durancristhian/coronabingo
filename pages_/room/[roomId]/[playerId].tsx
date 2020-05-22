@@ -143,7 +143,11 @@ export default function Jugar() {
               </div>
             </div>
             <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-              <Tickets player={player} updatePlayer={updatePlayer} />
+              <Tickets
+                player={player}
+                room={room}
+                updatePlayer={updatePlayer}
+              />
             </div>
           </div>
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
