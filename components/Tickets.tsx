@@ -4,14 +4,15 @@ import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
 import useTickets from '~/hooks/useTickets'
-import { Player, PlayerBase } from '~/interfaces'
+import { Player, PlayerBase, Room } from '~/interfaces'
 
 interface Props {
   player: Player
+  room: Room
   updatePlayer: (data: Partial<PlayerBase>) => void
 }
 
-export default function Tickets({ player, updatePlayer }: Props) {
+export default function Tickets({ player, room, updatePlayer }: Props) {
   const tickets = useTickets(player.tickets)
   const { t } = useTranslation()
 
@@ -24,12 +25,16 @@ export default function Tickets({ player, updatePlayer }: Props) {
     })
   }
 
+  const getStorageKey = (room: Room, player: Player) => {
+    return `${player.id}-${room.timesPlayed}`
+  }
+
   useEffect(() => {
     if (player.id) {
       try {
         const values = localStorage.getItem('roomValues') || '{}'
         const roomValues = JSON.parse(values)
-        const playerValues = roomValues?.[player.id] || {}
+        const playerValues = roomValues?.[getStorageKey(room, player)] || {}
 
         player.ref.update(playerValues)
 
@@ -45,7 +50,7 @@ export default function Tickets({ player, updatePlayer }: Props) {
       localStorage.setItem(
         'roomValues',
         JSON.stringify({
-          [player.id]: tickets.reduce(
+          [getStorageKey(room, player)]: tickets.reduce(
             (acc, ticket) => ({
               ...acc,
               [ticket.id]: player[ticket.id] || [],

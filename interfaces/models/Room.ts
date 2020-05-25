@@ -12,6 +12,7 @@ export interface RoomBase {
   readyToPlay: boolean
   selectedNumbers: number[]
   soundToPlay: string
+  timesPlayed: number
 }
 
 export interface Room extends RoomBase {

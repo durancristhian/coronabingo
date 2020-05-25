@@ -13,6 +13,7 @@ const defaultRoomData: RoomBase = {
   readyToPlay: false,
   selectedNumbers: [],
   soundToPlay: '',
+  timesPlayed: 1,
 }
 
 const createRoom = (room: Partial<RoomBase>): Promise<string> => {
