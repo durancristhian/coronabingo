@@ -1,8 +1,8 @@
 import { Room, RoomBase } from '~/interfaces'
-import { roomsRef, Timestamp } from '~/utils'
+import { createBatch, roomsRef, Timestamp } from '~/utils'
+import { defaultPlayerData } from './player'
 
 const defaultRoomData: RoomBase = {
-  activateAdminCode: false,
   adminId: '',
   bingoSpinner: true,
   code: '',
@@ -19,16 +19,24 @@ const defaultRoomData: RoomBase = {
 const createRoom = (room: Partial<RoomBase>): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     try {
+      const batch = createBatch()
       const roomDoc = roomsRef.doc()
-      const roomId = roomDoc.id
 
-      await roomDoc.set(
-        Object.assign({}, defaultRoomData, room, {
-          date: Timestamp.fromDate(new Date()),
-        }),
-      )
+      batch.set(roomDoc, {
+        ...defaultRoomData,
+        ...room,
+        date: Timestamp.fromDate(new Date()),
+      })
 
-      resolve(roomId)
+      batch.set(roomDoc.collection('players').doc(), {
+        ...defaultPlayerData,
+        name: 'Admin',
+        date: Timestamp.fromDate(new Date()),
+      })
+
+      await batch.commit()
+
+      resolve(roomDoc.id)
     } catch (e) {
       reject(e)
     }

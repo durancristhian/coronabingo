@@ -1,7 +1,6 @@
 import { ConfettiType } from '~/interfaces'
 
 export interface RoomBase {
-  activateAdminCode: boolean
   adminId: string
   bingoSpinner: boolean
   code: string

@@ -177,37 +177,6 @@ export default function Admin() {
                     disabled={inProgress}
                   />
                 </div>
-                <div className="mt-4">
-                  <Checkbox
-                    hint="Pedir el código de sala al ingresar a los cartones de quien dirige la sala"
-                    id="activate-admin-code"
-                    label="Activar código para el admin"
-                    onChange={value => {
-                      updateRoom({ activateAdminCode: value })
-                    }}
-                    value={room.activateAdminCode}
-                    disabled={inProgress}
-                  />
-                </div>
-                {room.activateAdminCode && (
-                  <div className="mt-4">
-                    <p>{t('admin:room-code')}</p>
-                    <div className="flex flex-wrap justify-between mt-1">
-                      {room.code.split(',').map((emoji, index) => {
-                        return (
-                          <RoomCodeCell
-                            highlighted
-                            emoji={emoji as keyof Emojis}
-                            index={index}
-                            isChecked={false}
-                            key={index}
-                            onClick={() => void 0}
-                          />
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
               </Fragment>
             )}
             <div className="mt-8">

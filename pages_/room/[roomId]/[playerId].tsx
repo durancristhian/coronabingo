@@ -69,7 +69,7 @@ export default function Jugar() {
 
   const isAdmin = room.adminId === player.id
 
-  if (isAdmin && room.activateAdminCode && !loggedIn) {
+  if (isAdmin && !loggedIn) {
     return (
       <Layout>
         <Container>

@@ -1,23 +1,23 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { useState } from 'react'
-import { FiEye } from 'react-icons/fi'
-import YouTube from 'react-youtube'
+import React /* , { useState } */ from 'react'
+/* import { FiEye } from 'react-icons/fi'
+import YouTube from 'react-youtube' */
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
-import Button from '~/components/Button'
+/* import Button from '~/components/Button' */
 import Container from '~/components/Container'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
-import Modal from '~/components/Modal'
+/* import Modal from '~/components/Modal' */
 
-const videosByLanguage: { [key: string]: string } = {
+/* const videosByLanguage: { [key: string]: string } = {
   en: 'iP0732WuS5E',
   es: 'XJpKBegq5GY',
-}
+} */
 
 export default function Index() {
-  const { t, lang } = useTranslation()
-  const [showModal, setShowModal] = useState(false)
+  const { t /* , lang */ } = useTranslation()
+  /* const [showModal, setShowModal] = useState(false) */
 
   return (
     <Layout>
@@ -35,7 +35,7 @@ export default function Index() {
           </Anchor>
           <span>.</span>
         </p>
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <Button
             aria-label={t('index:how-to-play-button')}
             id="watch-tutorial"
@@ -64,7 +64,7 @@ export default function Index() {
             containerClassName="video-wrapper"
             className="video-iframe"
           />
-        </Modal>
+        </Modal> */}
       </Container>
     </Layout>
   )

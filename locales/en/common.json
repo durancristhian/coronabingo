@@ -24,6 +24,8 @@
   "new-features-modal-title": "New features in version {{version}}",
   "outdated-room": "This room belongs to an old version of the app. Please, create a new one.",
   "room-code": {
+    "field": "Room code access",
+    "hint": "This code works as a password. You'll use it to configure the room in order to play. Do not forget it.",
     "success": "Code is correct. Wait...",
     "error": "Code is incorrect. Try again...",
     "title": "Enter the room code",

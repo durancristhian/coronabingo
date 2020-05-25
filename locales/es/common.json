@@ -24,6 +24,8 @@
   "new-features-modal-title": "Novedades en la versión {{version}}",
   "outdated-room": "Esta sala pertenece a una versión desactualizada de la aplicación. Por favor, cree otra.",
   "room-code": {
+    "field": "Código de acceso a la sala",
+    "hint": "Este código funciona como una contraseña. Tendrás que ingresarlo para configurar la sala. No lo olvides.",
     "success": "Código correcto. Espere...",
     "error": "Código incorrecto. Intenta nuevamente...",
     "title": "Ingrese el código de acceso a la sala",

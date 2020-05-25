@@ -1,19 +1,28 @@
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { FormEvent, Fragment, useState } from 'react'
+import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import useToast from '~/hooks/useToast'
+import { Emojis } from '~/interfaces'
 import roomApi from '~/models/room'
 import { generateRoomCode } from '~/utils'
+import RoomCodeCell from './RoomCodeCell'
 
 export default function CreateRoom() {
   const { t } = useTranslation()
   const { createToast, dismissToast, updateToast } = useToast()
   const [name, setName] = useState('')
   const [inProgress, setInProgress] = useState(false)
+  const [code, setCode] = useState(',,')
+
+  useEffect(() => {
+    const roomCode = generateRoomCode()
+
+    setCode(roomCode)
+  }, [])
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -24,7 +33,7 @@ export default function CreateRoom() {
 
     try {
       const roomId = await roomApi.createRoom({
-        code: generateRoomCode(),
+        code,
         name,
       })
 
@@ -33,7 +42,7 @@ export default function CreateRoom() {
       setTimeout(() => {
         dismissToast(toastId)
 
-        Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
+        Router.pushI18n('/room/[roomId]', `/room/${roomId}`)
       }, 2000)
     } catch (e) {
       updateToast('index:create-room.error', 'error', toastId)
@@ -57,6 +66,26 @@ export default function CreateRoom() {
           value={name}
           disabled={inProgress}
         />
+        <div className="mt-4">
+          <p>{t('common:room-code.field')}</p>
+          <div className="flex flex-wrap justify-between mt-1">
+            {code.split(',').map((emoji, index) => {
+              return (
+                <RoomCodeCell
+                  highlighted
+                  emoji={emoji as keyof Emojis}
+                  index={index}
+                  isChecked={false}
+                  key={index}
+                  onClick={() => void 0}
+                />
+              )
+            })}
+          </div>
+          <p className="italic mt-1 text-gray-800 text-xs md:text-sm">
+            {t('common:room-code.hint')}
+          </p>
+        </div>
         <div className="mt-8">
           <Button
             aria-label={t('index:create-room.field-submit')}
