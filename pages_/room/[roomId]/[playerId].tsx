@@ -47,7 +47,8 @@ export default function Jugar() {
     )
   }
 
-  if (!room.readyToPlay) {
+  /* TODO: update */
+  /* if (!room.readyToPlay) {
     return (
       <Layout>
         <Container>
@@ -55,7 +56,7 @@ export default function Jugar() {
         </Container>
       </Layout>
     )
-  }
+  } */
 
   if (!player.exists) {
     return (

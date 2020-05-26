@@ -32,7 +32,8 @@ export default function Players({
 
     if (cleanAdmin) {
       changes.adminId = ''
-      changes.readyToPlay = false
+      /* TODO: update */
+      /* changes.readyToPlay = false */
     }
 
     updateRoom(changes)

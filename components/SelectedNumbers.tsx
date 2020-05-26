@@ -68,7 +68,7 @@ export default function SelectedNumbers({
             style={{ width: '10%' }}
             onClick={() => enableForAdmin && onNewNumber(n)}
           >
-            <span className="uppercase">{n}</span>
+            <span>{n}</span>
           </button>
         ))}
       </div>

@@ -54,9 +54,7 @@ export default function CreateRoom() {
   return (
     <Fragment>
       <div className="mb-4">
-        <Heading type="h2">
-          <span className="uppercase">{t('index:create-room.title')}</span>
-        </Heading>
+        <Heading type="h2">{t('index:create-room.title')}</Heading>
       </div>
       <form onSubmit={onSubmit}>
         <InputText

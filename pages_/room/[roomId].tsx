@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect } from 'react'
-import { FiLink2 } from 'react-icons/fi'
+import React, { FormEvent, Fragment, useEffect, useState } from 'react'
+import { FiLink2, FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
@@ -12,11 +12,13 @@ import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
+import RoomCode from '~/components/RoomCode'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRoom from '~/hooks/useRoom'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
+import useRoomCode from '~/hooks/useRoomCode'
 
 export default function Sala() {
   const { room } = useRoom()
@@ -25,6 +27,9 @@ export default function Sala() {
   const { isActive, incrementInteractions } = useEasterEgg(
     'downloadSpreadsheet',
   )
+  const [name, setName] = useState('')
+  const [inProgress, setInProgress] = useState(false)
+  const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
@@ -49,7 +54,8 @@ export default function Sala() {
   }
 
   const renderPlayers = () => {
-    if (!room.readyToPlay || !players.length) {
+    /* TODO: esto no va a pasar más, siempre al menos habrá un player, el admin */
+    if (!players.length) {
       return <Message type="information">{t('roomId:not-ready')}</Message>
     }
 
@@ -92,7 +98,6 @@ export default function Sala() {
                   aria-label={t('roomId:play')}
                   color="green"
                   id={`play${index + 1}`}
-                  disabled={!room.readyToPlay}
                   onClick={() => {
                     if (!room.id || !player.id) return
 
@@ -113,46 +118,114 @@ export default function Sala() {
     )
   }
 
+  const renderContent = () => {
+    return (
+      <Fragment>
+        <div className="mb-4">
+          <Heading type="h2">
+            <span
+              id="room-title"
+              onClick={incrementInteractions}
+              role="button"
+              tabIndex={0}
+              onKeyPress={incrementInteractions}
+              className="cursor-text focus:outline-none outline-none"
+            >
+              {t('roomId:title')}
+            </span>
+          </Heading>
+        </div>
+        <InputText
+          id="room-name"
+          label={t('roomId:room-name')}
+          value={room.name}
+          readonly
+          onFocus={event => event.target.select()}
+        />
+        <InputText
+          id="url"
+          label={t('roomId:field-link')}
+          value={`${getBaseUrl()}/room/${room.id}`}
+          readonly
+          onFocus={event => event.target.select()}
+        />
+        <Copy content={`${getBaseUrl()}/room/${room.id}`} />
+        {isActive && (
+          <div className="mt-8">
+            <DownloadSpreadsheet players={players} room={room} />
+          </div>
+        )}
+        <div className="mt-8">{renderPlayers()}</div>
+      </Fragment>
+    )
+  }
+
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault()
+  }
+
+  const renderAdmin = () => {
+    return <h1>Admin</h1>
+  }
+
+  console.log(room.code)
+
+  if (loggedIn) {
+    return (
+      <Layout>
+        <Container size="large">
+          <Box>{renderAdmin()}</Box>
+        </Container>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
-      <Container>
-        <Box>
-          <div className="mb-4">
-            <Heading type="h2">
-              <span
-                id="room-title"
-                onClick={incrementInteractions}
-                role="button"
-                tabIndex={0}
-                onKeyPress={incrementInteractions}
-                className="cursor-text focus:outline-none outline-none"
-              >
-                {t('roomId:title')}
-              </span>
-            </Heading>
-          </div>
-          <InputText
-            id="room-name"
-            label={t('roomId:room-name')}
-            value={room.name}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <InputText
-            id="url"
-            label={t('roomId:field-link')}
-            value={`${getBaseUrl()}/room/${room.id}`}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <Copy content={`${getBaseUrl()}/room/${room.id}`} />
-          {isActive && (
-            <div className="mt-8">
-              <DownloadSpreadsheet players={players} room={room} />
+      <Container size="large">
+        <div className="lg:flex">
+          <div className="lg:w-1/2">
+            <div className="lg:pr-2">
+              <Box>
+                <div className="mb-4">
+                  <Heading type="h2">Ingreso admin</Heading>
+                </div>
+                <RoomCode roomCode={room.code} />
+              </Box>
             </div>
-          )}
-          <div className="mt-8">{renderPlayers()}</div>
-        </Box>
+          </div>
+          <div className="lg:w-1/2">
+            <div className="lg:pl-2">
+              <Box>
+                <div className="mb-4">
+                  <Heading type="h2">Ingreso de participantes</Heading>
+                </div>
+                <form onSubmit={onSubmit}>
+                  <InputText
+                    id="player-name"
+                    label="Tu nombre"
+                    onChange={setName}
+                    value={name}
+                    disabled={inProgress}
+                  />
+                  <div className="mt-8">
+                    <Button
+                      aria-label="Unirme"
+                      className="w-full"
+                      color="green"
+                      disabled={!name || inProgress}
+                      type="submit"
+                      id="join-room"
+                    >
+                      <FiSmile />
+                      <span className="ml-4">Unirme</span>
+                    </Button>
+                  </div>
+                </form>
+              </Box>
+            </div>
+          </div>
+        </div>
       </Container>
     </Layout>
   )

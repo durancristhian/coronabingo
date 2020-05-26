@@ -10,9 +10,9 @@ const defaultRoomData: RoomBase = {
   date: null,
   hideNumbersMeaning: false,
   name: '',
-  readyToPlay: false,
   selectedNumbers: [],
   soundToPlay: '',
+  status: 'initialized',
   timesPlayed: 1,
 }
 
@@ -21,11 +21,13 @@ const createRoom = (room: Partial<RoomBase>): Promise<string> => {
     try {
       const batch = createBatch()
       const roomDoc = roomsRef.doc()
+      const adminPlayerDoc = roomDoc.collection('players').doc()
 
       batch.set(roomDoc, {
         ...defaultRoomData,
         ...room,
         date: Timestamp.fromDate(new Date()),
+        adminId: adminPlayerDoc.id,
       })
 
       batch.set(roomDoc.collection('players').doc(), {

@@ -15,7 +15,8 @@ export default function Restart({ room }: Props) {
 
   const replay = async () => {
     await roomApi.updateRoom(room.ref, {
-      readyToPlay: false,
+      /* TODO: update */
+      /* readyToPlay: false, */
       selectedNumbers: [],
       soundToPlay: '',
       confettiType: '',
