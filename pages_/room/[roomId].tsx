@@ -15,10 +15,11 @@ import Message from '~/components/Message'
 import RoomCode from '~/components/RoomCode'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRoom from '~/hooks/useRoom'
+import useRoomCode from '~/hooks/useRoomCode'
 import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
+import playerApi from '~/models/player'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
-import useRoomCode from '~/hooks/useRoomCode'
 
 export default function Sala() {
   const { room } = useRoom()
@@ -28,10 +29,21 @@ export default function Sala() {
     'downloadSpreadsheet',
   )
   const [name, setName] = useState('')
+  const [playerId, setPlayerId] = useState('')
   const [inProgress, setInProgress] = useState(false)
   const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
+
+  useEffect(() => {
+    const data = localStorage.getItem('roomPlayer')
+
+    if (data) {
+      const roomPlayer = JSON.parse(data)
+
+      setPlayerId(roomPlayer.playerId)
+    }
+  }, [])
 
   if (!room) {
     return (
@@ -93,24 +105,28 @@ export default function Sala() {
                   })}
                 </p>
               </div>
-              <div className="ml-4">
-                <Button
-                  aria-label={t('roomId:play')}
-                  color="green"
-                  id={`play${index + 1}`}
-                  onClick={() => {
-                    if (!room.id || !player.id) return
+              {playerId === player.id && (
+                <div className="ml-4">
+                  <Button
+                    aria-label={t('roomId:play')}
+                    color="green"
+                    id={`play${index + 1}`}
+                    /* TODO: check */
+                    disabled={room.status === 'playing'}
+                    onClick={() => {
+                      if (!room.id || !player.id) return
 
-                    Router.pushI18n(
-                      `/room/[roomId]/[playerId]`,
-                      `/room/${room.id}/${player.id}`,
-                    )
-                  }}
-                >
-                  <FiLink2 />
-                  <span className="ml-4">{t('roomId:play')}</span>
-                </Button>
-              </div>
+                      Router.pushI18n(
+                        `/room/[roomId]/[playerId]`,
+                        `/room/${room.id}/${player.id}`,
+                      )
+                    }}
+                  >
+                    <FiLink2 />
+                    <span className="ml-4">{t('roomId:play')}</span>
+                  </Button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -155,6 +171,22 @@ export default function Sala() {
             <DownloadSpreadsheet players={players} room={room} />
           </div>
         )}
+        <div className="mt-8">
+          <Button
+            aria-label="Unirme"
+            color="red"
+            type="button"
+            id="exit-room"
+            onClick={() => {
+              /* TODO: eliminar el player de firebase */
+              localStorage.removeItem('roomPlayer')
+
+              setPlayerId('')
+            }}
+          >
+            Salir
+          </Button>
+        </div>
         <div className="mt-8">{renderPlayers()}</div>
       </Fragment>
     )
@@ -162,13 +194,33 @@ export default function Sala() {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
+
+    setInProgress(true)
+
+    const { playerId, playerRef, playerData } = playerApi.createPlayer(room, {
+      name,
+    })
+
+    playerRef.set(playerData)
+
+    localStorage.setItem(
+      'roomPlayer',
+      JSON.stringify({
+        roomId: room.id,
+        playerId,
+      }),
+    )
+
+    setName('')
+
+    setInProgress(false)
+
+    setPlayerId(playerId)
   }
 
   const renderAdmin = () => {
     return <h1>Admin</h1>
   }
-
-  console.log(room.code)
 
   if (loggedIn) {
     return (
@@ -180,11 +232,21 @@ export default function Sala() {
     )
   }
 
+  if (playerId) {
+    return (
+      <Layout>
+        <Container size="large">
+          <Box>{renderContent()}</Box>
+        </Container>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
       <Container size="large">
-        <div className="lg:flex">
-          <div className="lg:w-1/2">
+        <div className="flex flex-col lg:flex-row">
+          <div className="lg:w-1/2 order-2 lg-order-1">
             <div className="lg:pr-2">
               <Box>
                 <div className="mb-4">
@@ -194,8 +256,8 @@ export default function Sala() {
               </Box>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <div className="lg:pl-2">
+          <div className="lg:w-1/2 order-1 lg:order-2">
+            <div className="pb-4 lg:pl-2 lg:pb-0">
               <Box>
                 <div className="mb-4">
                   <Heading type="h2">Ingreso de participantes</Heading>
