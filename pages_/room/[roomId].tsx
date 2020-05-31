@@ -20,7 +20,11 @@ import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Sala() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
-  const { players } = useRoomPlayers()
+  const {
+    error: playersError,
+    loading: playersLoading,
+    players,
+  } = useRoomPlayers()
   const { t } = useTranslation()
   const { isActive, incrementInteractions } = useEasterEgg(
     'downloadSpreadsheet',
@@ -28,7 +32,7 @@ export default function Sala() {
 
   useEffect(scrollToTop, [])
 
-  if (roomLoading) {
+  if (roomLoading || playersLoading) {
     return (
       <Layout>
         <Container>
@@ -38,7 +42,7 @@ export default function Sala() {
     )
   }
 
-  if (roomError) {
+  if (roomError || playersError) {
     return (
       <Layout>
         <Container>

@@ -26,7 +26,12 @@ import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Admin() {
   const { t } = useTranslation()
-  const { players, setPlayers } = useRoomPlayers()
+  const {
+    error: playersError,
+    loading: playersLoading,
+    players,
+    setPlayers,
+  } = useRoomPlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
@@ -35,7 +40,7 @@ export default function Admin() {
 
   useEffect(scrollToTop, [])
 
-  if (roomLoading) {
+  if (roomLoading || playersLoading) {
     return (
       <Layout>
         <Container>
@@ -45,7 +50,7 @@ export default function Admin() {
     )
   }
 
-  if (roomError) {
+  if (roomError || playersError) {
     return (
       <Layout>
         <Container>
