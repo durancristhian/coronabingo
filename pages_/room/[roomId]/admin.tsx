@@ -27,7 +27,7 @@ import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 export default function Admin() {
   const { t } = useTranslation()
   const { players, setPlayers } = useRoomPlayers()
-  const { room, updateRoom } = useRoom()
+  const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
@@ -35,15 +35,27 @@ export default function Admin() {
 
   useEffect(scrollToTop, [])
 
-  if (!room) {
+  if (roomLoading) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('admin:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:room-does-not-exist')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room) return null
 
   if (isRoomOld(room)) {
     return (

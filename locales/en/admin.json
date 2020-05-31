@@ -3,7 +3,6 @@
   "saving": "Configuring room...",
   "title": "Configure room",
   "error": "An error occurred trying to configure the room. Try again.",
-  "loading": "Loading room information...",
   "field-name": "Name",
   "field-link-hint": "Share this link with the people in the videocall.",
   "field-link": "Link to the room",

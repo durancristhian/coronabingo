@@ -4,6 +4,8 @@ import { Room, RoomBase, RoomContextData } from '~/interfaces'
 import { roomsRef } from '~/utils'
 
 const RoomContext = createContext<RoomContextData>({
+  error: '',
+  loading: false,
   updateRoom: () => void 0,
 })
 
@@ -15,6 +17,8 @@ const RoomContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
   const [room, setRoom] = useState<Room>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
 
   const updateRoom = (data: Partial<RoomBase>) => {
     setRoom(Object.assign({}, room, data))
@@ -22,6 +26,8 @@ const RoomContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!roomId) return
+
+    setLoading(true)
 
     const unsubscribe = roomsRef.doc(roomId).onSnapshot(
       snapshot => {
@@ -39,9 +45,16 @@ const RoomContextProvider = ({ children }: Props) => {
               roomData,
             ),
           )
+        } else {
+          setError('ROOM_DOES_NOT_EXIST')
         }
+
+        setLoading(false)
       },
       error => {
+        setError('COULD_NOT_FETCH_ROOM')
+        setLoading(false)
+
         console.error(error)
       },
     )
@@ -50,7 +63,7 @@ const RoomContextProvider = ({ children }: Props) => {
   }, [roomId])
 
   return (
-    <RoomContext.Provider value={{ room, updateRoom }}>
+    <RoomContext.Provider value={{ error, loading, room, updateRoom }}>
       {children}
     </RoomContext.Provider>
   )

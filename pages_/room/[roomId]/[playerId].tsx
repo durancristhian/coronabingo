@@ -20,22 +20,34 @@ import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function Jugar() {
-  const { room } = useRoom()
+  const { error: roomError, loading: roomLoading, room } = useRoom()
   const { player, updatePlayer } = usePlayer()
   const { t } = useTranslation()
   const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
-  if (!room || !player) {
+  if (roomLoading || !player) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('playerId:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:room-does-not-exist')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room) return null
 
   if (isRoomOld(room)) {
     return (

@@ -28,5 +28,7 @@
     "error": "Code is incorrect. Try again...",
     "title": "Enter the room code",
     "submit": "Access"
-  }
+  },
+  "room-does-not-exist": "La sala no existe.",
+  "loading-room": "Cargando información de la sala..."
 }

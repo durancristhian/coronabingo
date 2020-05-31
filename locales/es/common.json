@@ -28,5 +28,7 @@
     "error": "Código incorrecto. Intenta nuevamente...",
     "title": "Ingrese el código de acceso a la sala",
     "submit": "Ingresar"
-  }
+  },
+  "room-does-not-exist": "The room doesn't exist.",
+  "loading-room": "Loading room information..."
 }

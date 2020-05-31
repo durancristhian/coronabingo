@@ -19,7 +19,7 @@ import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Sala() {
-  const { room } = useRoom()
+  const { error: roomError, loading: roomLoading, room } = useRoom()
   const { players } = useRoomPlayers()
   const { t } = useTranslation()
   const { isActive, incrementInteractions } = useEasterEgg(
@@ -28,15 +28,27 @@ export default function Sala() {
 
   useEffect(scrollToTop, [])
 
-  if (!room) {
+  if (roomLoading) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('roomId:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:room-does-not-exist')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room) return null
 
   if (isRoomOld(room)) {
     return (
