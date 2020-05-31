@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.17.0",
+    "version": "1.17.1",
     "scripts": {
         "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
