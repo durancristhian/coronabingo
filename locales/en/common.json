@@ -29,6 +29,6 @@
     "title": "Enter the room code",
     "submit": "Access"
   },
-  "room-does-not-exist": "La sala no existe.",
-  "loading-room": "Cargando información de la sala..."
+  "error-room": "Error retrieving the room information.",
+  "loading-room": "Loading room information..."
 }

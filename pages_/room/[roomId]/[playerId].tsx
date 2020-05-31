@@ -21,13 +21,18 @@ import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function Jugar() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
-  const { player, updatePlayer } = usePlayer()
+  const {
+    error: playerError,
+    loading: playerLoading,
+    player,
+    updatePlayer,
+  } = usePlayer()
   const { t } = useTranslation()
   const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
-  if (roomLoading || !player) {
+  if (roomLoading || playerLoading) {
     return (
       <Layout>
         <Container>
@@ -37,17 +42,17 @@ export default function Jugar() {
     )
   }
 
-  if (roomError) {
+  if (roomError || playerError) {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:room-does-not-exist')}</Message>
+          <Message type="error">{t('common:error-room')}</Message>
         </Container>
       </Layout>
     )
   }
 
-  if (!room) return null
+  if (!room || !player) return null
 
   if (isRoomOld(room)) {
     return (

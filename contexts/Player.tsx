@@ -4,6 +4,8 @@ import { Player, PlayerBase, PlayerContextData } from '~/interfaces'
 import { roomsRef } from '~/utils'
 
 const PlayerContext = createContext<PlayerContextData>({
+  error: '',
+  loading: false,
   updatePlayer: () => void 0,
 })
 
@@ -16,6 +18,8 @@ const PlayerContextProvider = ({ children }: Props) => {
   const playerId = router.query.playerId?.toString()
   const roomId = router.query.roomId?.toString()
   const [player, setPlayer] = useState<Player>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
 
   const updatePlayer = (data: Partial<PlayerBase>) => {
     setPlayer(Object.assign({}, player, data))
@@ -23,6 +27,8 @@ const PlayerContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!playerId) return
+
+    setLoading(true)
 
     const unsubscribe = roomsRef
       .doc(`${roomId}/players/${playerId}`)
@@ -42,9 +48,16 @@ const PlayerContextProvider = ({ children }: Props) => {
                 playerData,
               ),
             )
+          } else {
+            setError('ROOM_DOES_NOT_EXIST')
           }
+
+          setLoading(false)
         },
         error => {
+          setError('COULD_NOT_FETCH_PLAYER')
+          setLoading(false)
+
           console.error(error)
         },
       )
@@ -53,7 +66,7 @@ const PlayerContextProvider = ({ children }: Props) => {
   }, [playerId])
 
   return (
-    <PlayerContext.Provider value={{ player, updatePlayer }}>
+    <PlayerContext.Provider value={{ error, loading, player, updatePlayer }}>
       {children}
     </PlayerContext.Provider>
   )

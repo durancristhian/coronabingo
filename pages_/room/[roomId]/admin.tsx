@@ -49,7 +49,7 @@ export default function Admin() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:room-does-not-exist')}</Message>
+          <Message type="error">{t('common:error-room')}</Message>
         </Container>
       </Layout>
     )
