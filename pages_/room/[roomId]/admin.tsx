@@ -163,20 +163,20 @@ export default function Admin() {
                 disabled={inProgress}
               />
             </div>
+            <div className="mt-4">
+              <Checkbox
+                hint={t('admin:field-hide-dreams-hint')}
+                id="hide-numbers-meaning"
+                label={t('admin:field-hide-dreams')}
+                onChange={value => {
+                  updateRoom({ hideNumbersMeaning: value })
+                }}
+                value={room.hideNumbersMeaning}
+                disabled={inProgress}
+              />
+            </div>
             {isActive && (
               <Fragment>
-                <div className="mt-4">
-                  <Checkbox
-                    hint="No mostrar el significado de los números según la Quiniela Argentina"
-                    id="hide-numbers-meaning"
-                    label="Ocultar los sueños"
-                    onChange={value => {
-                      updateRoom({ hideNumbersMeaning: value })
-                    }}
-                    value={room.hideNumbersMeaning}
-                    disabled={inProgress}
-                  />
-                </div>
                 <div className="mt-4">
                   <Checkbox
                     hint="Pedir el código de sala al ingresar a los cartones de quien dirige la sala"

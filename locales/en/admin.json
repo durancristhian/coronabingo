@@ -20,5 +20,7 @@
     "remove-player": "Remove player",
     "field-admin-hint": "Choose the person who'll be in charge of selecting the numbers in the bingo spinner so other players get notified.",
     "field-admin": "Admin"
-  }
+  },
+  "field-hide-dreams-hint": "We recommend to check this option if you're playing outside of Argentina due to the meaning of the numbers only have sense in that country.",
+  "field-hide-dreams": "Hide the meaning of numbers"
 }
