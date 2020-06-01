@@ -9,7 +9,7 @@ describe('Footer', () => {
     cy.get('#my-twitter')
       .should('have.attr', 'href')
       .and('include', 'twitter')
-      .and('include', 'durancristhian')
+      .and('include', 'DuranCristhian')
   })
 
   it('Should open the donate modal', () => {
