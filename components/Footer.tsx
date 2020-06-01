@@ -32,7 +32,7 @@ export default function Footer() {
             </p>
             <div className="mt-8 md:mt-0 text-center md:text-left">
               <ul className="md:flex md:items-center md:justify-center">
-                <li>
+                <li className="mb-2 md:mb-0 md:mr-4">
                   <button
                     id="donate"
                     className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
@@ -57,7 +57,7 @@ export default function Footer() {
                     </span>
                   </Anchor>
                 </li>
-                <li className="mb-2 md:mb-0 md:mr-4">
+                <li>
                   <Anchor
                     href="https://twitter.com/corona_bingo"
                     id="coronabingo-twitter"
