@@ -1,19 +1,16 @@
 {
-  "feedback-form": {
-    "intro": "Dejanos tu feedback completando",
-    "link": "esta encuesta"
-  },
+  "feedback-form": "Feedback",
   "language-es": "Español",
   "language-en": "English",
   "bingo-spinner": "Bolillero",
   "ticket": "Cartón Nº {{ticketId}}",
   "ticket_plural": "Cartones Nº {{ticketId}}",
-  "made-by": "Por ",
+  "made-by": "Creado por ",
   "select-empty-option": "--- Selecciona ---",
   "donate": "Doname un café",
-  "donate-mercado-pago": "Mercado Pago",
+  "donate-cafecito": "Cafecito",
   "donate-paypal": "Paypal",
-  "donate-copy": "Desde Argentina me podés hacer una donación por Mercado Pago y desde el resto del mundo por Paypal. Esto me ayuda a poder mantener el sitio activo en internet.",
+  "donate-copy": "Desde Argentina me podés hacer una donación por Mercado Pago, a través de Cafecito, y desde el resto del mundo por Paypal. Esto me ayuda a poder mantener el sitio activo en internet.",
   "share-link": "Compartir link",
   "copy": "Copiar",
   "copied": "Copiado al portapapeles.",
@@ -30,5 +27,6 @@
     "submit": "Ingresar"
   },
   "error-room": "Error al obtener información de la sala.",
-  "loading-room": "Cargando información de la sala..."
+  "loading-room": "Cargando información de la sala...",
+  "coronabingo-twitter": "Twitter"
 }

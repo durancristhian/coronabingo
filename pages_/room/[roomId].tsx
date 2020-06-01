@@ -71,7 +71,7 @@ export default function Sala() {
 
     return (
       <Fragment>
-        <Heading type="h3" textCenter={false}>
+        <Heading type="h3">
           {t('roomId:people', { count: players.length })}
         </Heading>
         <p className="italic mt-2 text-gray-800 text-xs md:text-sm">

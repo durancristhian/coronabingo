@@ -3,18 +3,16 @@ import React, { Fragment, useState } from 'react'
 import { FaPaypal } from 'react-icons/fa'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
-import Emoji from '~/components/Emoji'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
+import { FiCoffee, FiHeart, FiTwitter } from 'react-icons/fi'
 
 export default function Footer() {
   const { t } = useTranslation()
   const [showModal, setShowModal] = useState(false)
 
-  const donateMercadoPago = () => {
-    window.open(
-      'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=82474655-1d35f08f-7cf8-4a0a-9b8e-100b6e87ceab',
-    )
+  const donateCafecito = () => {
+    window.open('https://cafecito.app/durancristhian')
   }
 
   const donatePaypal = () => {
@@ -25,25 +23,55 @@ export default function Footer() {
     <Fragment>
       <footer className="bg-white px-4 py-2 shadow">
         <Container size="large">
-          <div className="flex h-12 items-center justify-between">
-            <p>
+          <div className="md:flex md:items-center md:justify-between">
+            <p className="text-center md:text-left">
               <span>{t('common:made-by')}</span>
               <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
                 Cristhian Duran
               </Anchor>
             </p>
-            <button
-              id="donate"
-              className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
-              onClick={() => {
-                setShowModal(true)
-              }}
-            >
-              <span className="flex items-center">
-                <span className="mr-1">{t('common:donate')}</span>
-                <Emoji name="coffee" />
-              </span>
-            </button>
+            <div className="mt-8 md:mt-0 text-center md:text-left">
+              <ul className="md:flex md:items-center md:justify-center">
+                <li className="mb-2 md:mb-0 md:mr-4">
+                  <Anchor
+                    href="https://twitter.com/DuranCristhian"
+                    id="my-twitter"
+                  >
+                    <span className="flex items-center justify-center">
+                      <FiTwitter />
+                      <span className="ml-1">
+                        {t('common:coronabingo-twitter')}
+                      </span>
+                    </span>
+                  </Anchor>
+                </li>
+                <li className="mb-2 md:mb-0 md:mr-4">
+                  <Anchor
+                    href="https://forms.gle/egSBrsKSFnEgabff7"
+                    id="feedback-form"
+                  >
+                    <span className="flex items-center justify-center">
+                      <FiHeart />
+                      <span className="ml-1">{t('common:feedback-form')}</span>
+                    </span>
+                  </Anchor>
+                </li>
+                <li>
+                  <button
+                    id="donate"
+                    className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
+                    onClick={() => {
+                      setShowModal(true)
+                    }}
+                  >
+                    <span className="flex items-center justify-center">
+                      <FiCoffee />
+                      <span className="ml-1">{t('common:donate')}</span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </Container>
       </footer>
@@ -62,12 +90,12 @@ export default function Footer() {
           <p>{t('common:donate-copy')}</p>
           <div className="flex justify-center items-center mt-8">
             <RoundedButton
-              id="donate-mercado-pago"
-              imageURL="/mercado-pago.png"
-              imageAlt="Mercado Pago"
-              iconBgColor="bg-mercado-pago"
-              label={t('common:donate-mercado-pago')}
-              onClick={donateMercadoPago}
+              id="donate-cafecito"
+              imageURL="/cafecito.png"
+              imageAlt="Cafecito"
+              iconBgColor="bg-cafecito"
+              label={t('common:donate-cafecito')}
+              onClick={donateCafecito}
             />
             <RoundedButton
               id="donate-paypal"

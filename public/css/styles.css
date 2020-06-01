@@ -24,8 +24,8 @@
   box-shadow: 0 0 1px red;
 }
 
-.bg-mercado-pago {
-  background-color: #009ee3;
+.bg-cafecito {
+  background-color: rgba(65, 137, 230, 0.15);
 }
 
 .bg-paypal {

@@ -75,9 +75,7 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
 
   return (
     <Fragment>
-      <Heading type="h3" textCenter={false}>
-        {t('roomId:spreadsheet-title')}
-      </Heading>
+      <Heading type="h3">{t('roomId:spreadsheet-title')}</Heading>
       <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
         {t('roomId:spreadsheet-description')}
       </p>
