@@ -116,7 +116,9 @@ export default function Jugar() {
   const renderBingoSpinnerAndOptions = () => (
     <Fragment>
       <Box>
-        <Heading type="h2">{t('common:bingo-spinner')}</Heading>
+        <div className="text-center">
+          <Heading type="h2">{t('common:bingo-spinner')}</Heading>
+        </div>
         <div className="mt-4">
           <SelectedNumbers
             isAdmin={isAdmin}
@@ -135,7 +137,7 @@ export default function Jugar() {
   return (
     <BackgroundCellContextProvider playerId={player.id}>
       <Layout>
-        <div className="mb-4">
+        <div className="mb-4 text-center">
           <Heading type="h2">
             {t('playerId:title', {
               playerName: player.name,
@@ -147,7 +149,7 @@ export default function Jugar() {
           <div className="lg:flex mt-4">
             <div className="lg:w-1/3">
               <Box>
-                <div className="mb-4">
+                <div className="mb-4 text-center">
                   <Heading type="h2">{t('playerId:last-numbers')}</Heading>
                 </div>
                 <LastNumbers

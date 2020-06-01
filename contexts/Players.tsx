@@ -50,6 +50,8 @@ const PlayersContextProvider = ({ children }: Props) => {
               )
             }),
           )
+
+          setLoading(false)
         },
         error => {
           setError('COULD_NOT_FETCH_PLAYERS')

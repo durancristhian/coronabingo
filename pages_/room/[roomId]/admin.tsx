@@ -119,7 +119,7 @@ export default function Admin() {
     <Layout>
       <Container>
         <Box>
-          <div className="mb-4">
+          <div className="mb-4 text-center">
             <Heading type="h2">
               <span
                 id="room-title"
