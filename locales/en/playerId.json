@@ -1,6 +1,5 @@
 {
   "title": "Hi {{playerName}}, you are in the room {{roomName}}",
-  "loading": "Loading room information...",
   "room-not-ready": "The room is being set up. Please wait...",
   "out-of-room": "You're not part of this room.",
   "last-numbers": "Last numbers",

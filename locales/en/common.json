@@ -1,19 +1,16 @@
 {
-  "feedback-form": {
-    "intro": "Give us your feedback by filling",
-    "link": "this form"
-  },
+  "feedback-form": "Feedback",
   "language-es": "Español",
   "language-en": "English",
   "bingo-spinner": "Bingo spinner",
   "ticket": "Ticket Nº {{ticketId}}",
   "ticket_plural": "Tickets Nº {{ticketId}}",
-  "made-by": "By ",
+  "made-by": "Made by ",
   "select-empty-option": "--- Select ---",
   "donate": "Buy me a coffee",
-  "donate-mercado-pago": "Mercado Pago",
+  "donate-cafecito": "Cafecito",
   "donate-paypal": "Paypal",
-  "donate-copy": "From Argentina you can make a donation through Mercado Pago or Paypal if you're anywhere else in the world. This helps me to keep this website active on internet.",
+  "donate-copy": "From Argentina you can make a donation through Mercado Pago, using Cafecito, or Paypal if you're anywhere else in the world. This helps me to keep this website active on internet.",
   "share-link": "Share link",
   "copy": "Copy",
   "copied": "Copied to Clipboard.",
@@ -28,5 +25,8 @@
     "error": "Code is incorrect. Try again...",
     "title": "Enter the room code",
     "submit": "Access"
-  }
+  },
+  "error-room": "Error retrieving the room information.",
+  "loading-room": "Loading room information...",
+  "coronabingo-twitter": "Twitter"
 }

@@ -1,6 +1,6 @@
 {
     "name": "coronabingo",
-    "version": "1.16.5",
+    "version": "1.17.1",
     "scripts": {
         "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
@@ -17,8 +17,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged",
-            "pre-push": "npm t"
+            "pre-commit": "npm run validate-locales && tsc --noEmit && lint-staged"
         }
     },
     "lint-staged": {

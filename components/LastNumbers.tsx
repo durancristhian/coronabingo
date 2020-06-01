@@ -39,7 +39,10 @@ export default function LastNumbers({
         </div>
       </div>
       {!hideNumbersMeaning && (
-        <div className="flex items-center justify-between mt-4">
+        <div
+          id="number-meaning"
+          className="flex items-center justify-between mt-4"
+        >
           <p className="flex flex-auto font-medium items-center">
             <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
             <span className="text-xs">

@@ -21,6 +21,7 @@ export default function Restart({ room }: Props) {
       selectedNumbers: [],
       soundToPlay: '',
       confettiType: '',
+      timesPlayed: room.timesPlayed + 1,
     })
 
     if (room.activateAdminCode) {

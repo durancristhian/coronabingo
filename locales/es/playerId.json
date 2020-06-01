@@ -1,6 +1,5 @@
 {
   "title": "Hola {{playerName}}, estás en la sala {{roomName}}",
-  "loading": "Cargando información de la sala...",
   "room-not-ready": "La sala se está configurando. Espere...",
   "out-of-room": "No eres parte de esta sala.",
   "last-numbers": "Últimos números",

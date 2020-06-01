@@ -3,7 +3,6 @@
   "saving": "Configurando sala...",
   "title": "Preparar sala",
   "error": "Ocurrió un error al guardar la información de la sala. Intenta de nuevo.",
-  "loading": "Cargando información de la sala...",
   "field-name": "Nombre",
   "field-link-hint": "Compartí este link a las personas de la videollamada.",
   "field-link": "Link a la sala",
@@ -20,5 +19,7 @@
     "remove-player": "Eliminar persona",
     "field-admin-hint": "Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere.",
     "field-admin": "Dirige el juego"
-  }
+  },
+  "field-hide-dreams-hint": "Recomendamos activar esta opción si están jugando fuera de Argentina ya que los significados se corresponden con la Quiniela Argentina.",
+  "field-hide-dreams": "Ocultar los significados de los números"
 }

@@ -20,22 +20,39 @@ import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function Jugar() {
-  const { room } = useRoom()
-  const { player, updatePlayer } = usePlayer()
+  const { error: roomError, loading: roomLoading, room } = useRoom()
+  const {
+    error: playerError,
+    loading: playerLoading,
+    player,
+    updatePlayer,
+  } = usePlayer()
   const { t } = useTranslation()
   const { loggedIn } = useRoomCode()
 
   useEffect(scrollToTop, [])
 
-  if (!room || !player) {
+  if (roomLoading || playerLoading) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('playerId:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError || playerError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:error-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room || !player) return null
 
   if (isRoomOld(room)) {
     return (
@@ -99,7 +116,9 @@ export default function Jugar() {
   const renderBingoSpinnerAndOptions = () => (
     <Fragment>
       <Box>
-        <Heading type="h2">{t('common:bingo-spinner')}</Heading>
+        <div className="text-center">
+          <Heading type="h2">{t('common:bingo-spinner')}</Heading>
+        </div>
         <div className="mt-4">
           <SelectedNumbers
             isAdmin={isAdmin}
@@ -118,7 +137,7 @@ export default function Jugar() {
   return (
     <BackgroundCellContextProvider playerId={player.id}>
       <Layout>
-        <div className="mb-4">
+        <div className="mb-4 text-center">
           <Heading type="h2">
             {t('playerId:title', {
               playerName: player.name,
@@ -130,7 +149,7 @@ export default function Jugar() {
           <div className="lg:flex mt-4">
             <div className="lg:w-1/3">
               <Box>
-                <div className="mb-4">
+                <div className="mb-4 text-center">
                   <Heading type="h2">{t('playerId:last-numbers')}</Heading>
                 </div>
                 <LastNumbers
@@ -143,7 +162,11 @@ export default function Jugar() {
               </div>
             </div>
             <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-              <Tickets player={player} updatePlayer={updatePlayer} />
+              <Tickets
+                player={player}
+                room={room}
+                updatePlayer={updatePlayer}
+              />
             </div>
           </div>
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>

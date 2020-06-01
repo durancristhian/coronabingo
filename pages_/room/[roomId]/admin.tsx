@@ -26,8 +26,13 @@ import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Admin() {
   const { t } = useTranslation()
-  const { players, setPlayers } = useRoomPlayers()
-  const { room, updateRoom } = useRoom()
+  const {
+    error: playersError,
+    loading: playersLoading,
+    players,
+    setPlayers,
+  } = useRoomPlayers()
+  const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
@@ -35,15 +40,27 @@ export default function Admin() {
 
   useEffect(scrollToTop, [])
 
-  if (!room) {
+  if (roomLoading || playersLoading) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('admin:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError || playersError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:error-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room) return null
 
   if (isRoomOld(room)) {
     return (
@@ -102,7 +119,7 @@ export default function Admin() {
     <Layout>
       <Container>
         <Box>
-          <div className="mb-4">
+          <div className="mb-4 text-center">
             <Heading type="h2">
               <span
                 id="room-title"
@@ -163,20 +180,20 @@ export default function Admin() {
                 disabled={inProgress}
               />
             </div>
+            <div className="mt-4">
+              <Checkbox
+                hint={t('admin:field-hide-dreams-hint')}
+                id="hide-numbers-meaning"
+                label={t('admin:field-hide-dreams')}
+                onChange={value => {
+                  updateRoom({ hideNumbersMeaning: value })
+                }}
+                value={room.hideNumbersMeaning}
+                disabled={inProgress}
+              />
+            </div>
             {isActive && (
               <Fragment>
-                <div className="mt-4">
-                  <Checkbox
-                    hint="No mostrar el significado de los números según la Quiniela Argentina"
-                    id="hide-numbers-meaning"
-                    label="Ocultar los sueños"
-                    onChange={value => {
-                      updateRoom({ hideNumbersMeaning: value })
-                    }}
-                    value={room.hideNumbersMeaning}
-                    disabled={inProgress}
-                  />
-                </div>
                 <div className="mt-4">
                   <Checkbox
                     hint="Pedir el código de sala al ingresar a los cartones de quien dirige la sala"

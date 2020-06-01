@@ -19,8 +19,12 @@ import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
 export default function Sala() {
-  const { room } = useRoom()
-  const { players } = useRoomPlayers()
+  const { error: roomError, loading: roomLoading, room } = useRoom()
+  const {
+    error: playersError,
+    loading: playersLoading,
+    players,
+  } = useRoomPlayers()
   const { t } = useTranslation()
   const { isActive, incrementInteractions } = useEasterEgg(
     'downloadSpreadsheet',
@@ -28,15 +32,27 @@ export default function Sala() {
 
   useEffect(scrollToTop, [])
 
-  if (!room) {
+  if (roomLoading || playersLoading) {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('roomId:loading')}</Message>
+          <Message type="information">{t('common:loading-room')}</Message>
         </Container>
       </Layout>
     )
   }
+
+  if (roomError || playersError) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:error-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!room) return null
 
   if (isRoomOld(room)) {
     return (
@@ -55,7 +71,7 @@ export default function Sala() {
 
     return (
       <Fragment>
-        <Heading type="h3" textCenter={false}>
+        <Heading type="h3">
           {t('roomId:people', { count: players.length })}
         </Heading>
         <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
@@ -117,7 +133,7 @@ export default function Sala() {
     <Layout>
       <Container>
         <Box>
-          <div className="mb-4">
+          <div className="mb-4 text-center">
             <Heading type="h2">
               <span
                 id="room-title"
