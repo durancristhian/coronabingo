@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import { FaPaypal } from 'react-icons/fa'
+import { FiCoffee, FiHeart, FiTwitter } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
-import { FiCoffee, FiHeart, FiTwitter } from 'react-icons/fi'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -32,30 +32,6 @@ export default function Footer() {
             </p>
             <div className="mt-8 md:mt-0 text-center md:text-left">
               <ul className="md:flex md:items-center md:justify-center">
-                <li className="mb-2 md:mb-0 md:mr-4">
-                  <Anchor
-                    href="https://twitter.com/DuranCristhian"
-                    id="my-twitter"
-                  >
-                    <span className="flex items-center justify-center">
-                      <FiTwitter />
-                      <span className="ml-1">
-                        {t('common:coronabingo-twitter')}
-                      </span>
-                    </span>
-                  </Anchor>
-                </li>
-                <li className="mb-2 md:mb-0 md:mr-4">
-                  <Anchor
-                    href="https://forms.gle/egSBrsKSFnEgabff7"
-                    id="feedback-form"
-                  >
-                    <span className="flex items-center justify-center">
-                      <FiHeart />
-                      <span className="ml-1">{t('common:feedback-form')}</span>
-                    </span>
-                  </Anchor>
-                </li>
                 <li>
                   <button
                     id="donate"
@@ -69,6 +45,30 @@ export default function Footer() {
                       <span className="ml-1">{t('common:donate')}</span>
                     </span>
                   </button>
+                </li>
+                <li className="mb-2 md:mb-0 md:mr-4">
+                  <Anchor
+                    href="https://forms.gle/egSBrsKSFnEgabff7"
+                    id="feedback-form"
+                  >
+                    <span className="flex items-center justify-center">
+                      <FiHeart />
+                      <span className="ml-1">{t('common:feedback-form')}</span>
+                    </span>
+                  </Anchor>
+                </li>
+                <li className="mb-2 md:mb-0 md:mr-4">
+                  <Anchor
+                    href="https://twitter.com/corona_bingo"
+                    id="coronabingo-twitter"
+                  >
+                    <span className="flex items-center justify-center">
+                      <FiTwitter />
+                      <span className="ml-1">
+                        {t('common:coronabingo-twitter')}
+                      </span>
+                    </span>
+                  </Anchor>
                 </li>
               </ul>
             </div>

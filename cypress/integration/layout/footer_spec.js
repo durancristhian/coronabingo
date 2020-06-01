@@ -5,16 +5,11 @@ describe('Footer', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('Should have a link to google forms', () => {
-    cy.get('#feedback-form')
-      .should('have.attr', 'href')
-      .and('include', 'forms')
-  })
-
   it('Should have a link to my twitter account', () => {
     cy.get('#my-twitter')
       .should('have.attr', 'href')
       .and('include', 'twitter')
+      .and('include', 'durancristhian')
   })
 
   it('Should open the donate modal', () => {
@@ -59,5 +54,18 @@ describe('Footer', () => {
       .click()
 
     cy.get('@windowOpen').should('be.calledWithMatch', 'paypal')
+  })
+
+  it('Should have a link to google forms', () => {
+    cy.get('#feedback-form')
+      .should('have.attr', 'href')
+      .and('include', 'forms')
+  })
+
+  it(`Should have a link to Coronabingo's twitter account`, () => {
+    cy.get('#coronabingo-twitter')
+      .should('have.attr', 'href')
+      .and('include', 'twitter')
+      .and('include', 'corona_bingo')
   })
 })

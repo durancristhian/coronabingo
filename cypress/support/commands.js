@@ -41,31 +41,41 @@ Cypress.Commands.add('createRoom', () => {
   cy.wait(10000)
 })
 
-Cypress.Commands.add('configureRoom', (isAdmin = false) => {
-  cy.createRoom()
+Cypress.Commands.add(
+  'configureRoom',
+  (isAdmin = false, hideNumbersMeaning = false) => {
+    cy.createRoom()
 
-  cy.get('#name').type('Admin{enter}')
-  cy.get('#name').type('No admin #1{enter}')
+    cy.get('#name').type('Admin{enter}')
+    cy.get('#name').type('No admin #1{enter}')
 
-  if (isAdmin) {
-    cy.get('#adminId').select('Admin')
-  } else {
-    cy.get('#adminId').select('No admin #1')
-  }
+    if (isAdmin) {
+      cy.get('#adminId').select('Admin')
+    } else {
+      cy.get('#adminId').select('No admin #1')
+    }
 
-  cy.get('#configure-room').click()
+    if (hideNumbersMeaning) {
+      cy.get('#hide-numbers-meaning').click()
+    }
 
-  cy.wait(10000)
-})
+    cy.get('#configure-room').click()
 
-Cypress.Commands.add('prepareRoom', (isAdmin = false) => {
-  cy.configureRoom(isAdmin)
+    cy.wait(10000)
+  },
+)
 
-  if (isAdmin) {
-    cy.get('#play1').click()
-  } else {
-    cy.get('#play2').click()
-  }
+Cypress.Commands.add(
+  'prepareRoom',
+  (isAdmin = false, hideNumbersMeaning = false) => {
+    cy.configureRoom(isAdmin, hideNumbersMeaning)
 
-  cy.wait(10000)
-})
+    if (isAdmin) {
+      cy.get('#play1').click()
+    } else {
+      cy.get('#play2').click()
+    }
+
+    cy.wait(10000)
+  },
+)
