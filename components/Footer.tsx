@@ -5,6 +5,7 @@ import { FiCoffee, FiHeart, FiTwitter } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import Modal from '~/components/Modal'
+import News from '~/components/News'
 import RoundedButton from '~/components/RoundedButton'
 
 export default function Footer() {
@@ -21,8 +22,9 @@ export default function Footer() {
 
   return (
     <Fragment>
-      <footer className="bg-white px-4 py-2 shadow">
+      <footer className="bg-white p-4 shadow">
         <Container size="large">
+          <News />
           <div className="md:flex md:items-center md:justify-between">
             <p className="text-center md:text-left">
               <span>{t('common:made-by')}</span>
