@@ -71,6 +71,7 @@
         "react-modal": "^3.11.2",
         "react-tabs": "^3.1.0",
         "react-toastify": "^5.5.0",
+        "react-tweet-embed": "^1.2.2",
         "react-youtube": "^7.11.2",
         "start-server-and-test": "^1.11.0",
         "swr": "^0.1.18",

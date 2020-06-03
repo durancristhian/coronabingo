@@ -21,7 +21,7 @@ export default function Layout({ children }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      <div className="flex-auto">
+      <div className="flex-auto min-h-screen-50">
         <div className="px-4 py-8">{children}</div>
       </div>
       <Footer />
