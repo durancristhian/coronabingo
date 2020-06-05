@@ -19,7 +19,7 @@ import useRoomCode from '~/hooks/useRoomCode'
 import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
-export default function Jugar() {
+export default function RoomPlayer() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
   const {
     error: playerError,

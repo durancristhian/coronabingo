@@ -18,7 +18,7 @@ import useRoomPlayers from '~/hooks/useRoomPlayers'
 import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
-export default function Sala() {
+export default function RoomId() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
   const {
     error: playersError,

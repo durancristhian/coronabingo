@@ -24,7 +24,7 @@ import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
-export default function Admin() {
+export default function RoomAdmin() {
   const { t } = useTranslation()
   const {
     error: playersError,
