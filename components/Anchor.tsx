@@ -1,19 +1,29 @@
+import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
+  display?: 'block' | 'inline-block'
   href: string
   id: string
 }
 
-export default function Anchor({ children, href, id }: Props) {
+export default function Anchor({
+  children,
+  display = 'inline-block',
+  href,
+  id,
+}: Props) {
   return (
     <a
       id={id}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="focus:outline-none focus:shadow-outline font-medium inline-block text-blue-800 underline"
+      className={classnames([
+        'focus:outline-none focus:shadow-outline font-medium text-blue-800 underline',
+        display,
+      ])}
     >
       {children}
     </a>
