@@ -21,7 +21,7 @@ export default function EventId() {
           <div className="my-8">
             <p>Esta es la descripción del evento.</p>
           </div>
-          <div className="mt-8 text-center">
+          <div className="text-center">
             <Button
               aria-label="Registrarme"
               id="register-me"

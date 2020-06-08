@@ -17,7 +17,7 @@ import Select from '~/components/Select'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
-import useRoomPlayers from '~/hooks/useRoomPlayers'
+import usePlayers from '~/hooks/usePlayers'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import playerApi, { defaultPlayerData } from '~/models/player'
@@ -31,7 +31,7 @@ export default function RoomAdmin() {
     loading: playersLoading,
     players,
     setPlayers,
-  } = useRoomPlayers()
+  } = usePlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)

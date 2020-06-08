@@ -55,7 +55,6 @@
         "gray-matter": "^4.0.2",
         "gsheets": "^2.0.0",
         "husky": "^4.2.3",
-        "isomorphic-fetch": "^2.2.1",
         "knuth-shuffle": "^1.0.8",
         "lint-staged": "^10.1.2",
         "next": "^9.4.0",
