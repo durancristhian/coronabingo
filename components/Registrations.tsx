@@ -9,22 +9,23 @@ import {
 } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
+import Button from '~/components/Button'
+import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
-import { Registration } from '~/pages_/eventos/[eventId]/admin'
+import { Event, Registration } from '~/interfaces'
 import { createBatch, roomsRef, Timestamp } from '~/utils'
-import Button from './Button'
-import Heading from './Heading'
 
 interface Props {
+  event: Event
   registrations: Registration[]
   roomId: string
 }
 
-export default function Registrations({ registrations, roomId }: Props) {
+export default function Registrations({ event, registrations, roomId }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
 
   const onProvideAccessClick = async (r: Registration) => {
-    const toastId = createToast('Guardando', 'information')
+    const toastId = createToast('Otorgando acceso...', 'information')
 
     try {
       const batch = createBatch()
@@ -45,7 +46,7 @@ export default function Registrations({ registrations, roomId }: Props) {
     } catch (error) {
       console.error(error)
 
-      updateToast('Ups!', 'error', toastId)
+      updateToast('Ups! Hubo un error.', 'error', toastId)
     } finally {
       setTimeout(() => {
         dismissToast(toastId)
@@ -59,13 +60,13 @@ export default function Registrations({ registrations, roomId }: Props) {
   const sendEmail = async (r: Registration) => {
     if (!r.player) return
 
-    const toastId = createToast('Mandando mail', 'information')
+    const toastId = createToast('Enviando mail...', 'information')
 
     const link = getRoomPlayerLink(roomId, r.player.id)
     const body = `email=${r.email}&link=${link}`
 
     try {
-      await fetch('https://hooks.palabra.io/js?id=96', {
+      await fetch(event.endpoints.email, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -77,7 +78,7 @@ export default function Registrations({ registrations, roomId }: Props) {
     } catch (error) {
       console.error(error)
 
-      updateToast('Ups!', 'error', toastId)
+      updateToast('Ups! Hubo un error', 'error', toastId)
     } finally {
       setTimeout(() => {
         dismissToast(toastId)
@@ -116,8 +117,8 @@ export default function Registrations({ registrations, roomId }: Props) {
                       <FaWhatsapp />
                       <span className="ml-2">
                         <Anchor
-                          href={`https://api.whatsapp.com/send?phone=+549${r.tel}&text=Hola, ${r.name}, `}
-                          id="payment"
+                          href={`https://api.whatsapp.com/send?phone=+549${r.tel}&text=Hola ${r.name}, `}
+                          id="whatsapp"
                         >
                           {r.tel}
                         </Anchor>
@@ -139,7 +140,7 @@ export default function Registrations({ registrations, roomId }: Props) {
               <div className="text-right w-1/5">
                 {!r.player && (
                   <Button
-                    aria-label="Dar acceso"
+                    aria-label="Aprobar"
                     id="provide-access"
                     onClick={() => onProvideAccessClick(r)}
                   >

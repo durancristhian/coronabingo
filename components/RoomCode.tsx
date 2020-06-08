@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
+import Button from '~/components/Button'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import useRoomCode from '~/hooks/useRoomCode'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import { CODES } from '~/utils'
-import Button from './Button'
 
 interface Props {
   roomCode: string
