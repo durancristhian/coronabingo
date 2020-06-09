@@ -2,6 +2,7 @@ import { getWorksheet } from 'gsheets'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Container from '~/components/Container'
+import EventGenerator from '~/components/EventGenerator'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
@@ -118,6 +119,9 @@ export default function EventAdmin() {
           />
         </Container>
       )}
+      <Container size="large">
+        <EventGenerator />
+      </Container>
     </Layout>
   )
 }
