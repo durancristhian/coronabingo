@@ -21,10 +21,11 @@ export default function EventGenerator() {
 
       batch.set(roomRef, {
         ...defaultRoomData,
+        activateAdminCode: true,
         bingoSpinner: false,
         code: generateRoomCode(),
         date: Timestamp.fromDate(new Date()),
-        name: 'Evento de prueba',
+        name: 'C3 - Jueves 11/06/2020',
         hideNumbersMeaning: true,
         readyToPlay: true,
       })
@@ -34,7 +35,7 @@ export default function EventGenerator() {
 
       batch.set(adminRef, {
         date: Timestamp.fromDate(new Date()),
-        name: 'Admin',
+        name: 'Cristhian',
         selectedNumbers: [],
         tickets: randomTickets[0],
       })
@@ -45,7 +46,7 @@ export default function EventGenerator() {
       })
 
       /* Se agrega el resto de personas */
-      for (let index = 1; index < 500; index++) {
+      for (let index = 1; index < 350; index++) {
         const playerRef = roomRef.collection('players').doc()
 
         batch.set(playerRef, {
