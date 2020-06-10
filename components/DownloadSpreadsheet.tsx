@@ -2,10 +2,10 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import zipcelx from 'zipcelx'
+import Button from '~/components/Button'
+import Heading from '~/components/Heading'
 import { Player, Room } from '~/interfaces'
 import { getBaseUrl } from '~/utils'
-import Button from './Button'
-import Heading from './Heading'
 
 interface Props {
   players: Player[]

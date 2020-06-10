@@ -7,7 +7,7 @@ interface Props {
   imageURL?: string
   imageAlt?: string
   iconBgColor: string
-  label: string
+  label?: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -39,7 +39,7 @@ export default function RoundedButton({
         {Icon && <Icon className="text-3xl text-white" />}
         {imageURL && <img src={imageURL} alt={imageAlt} className="block" />}
       </div>
-      <p className="mt-2">{label}</p>
+      {label && <p className="mt-2">{label}</p>}
     </button>
   )
 }
