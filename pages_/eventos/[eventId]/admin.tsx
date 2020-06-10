@@ -1,4 +1,5 @@
 import { getWorksheet } from 'gsheets'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Container from '~/components/Container'
@@ -8,10 +9,13 @@ import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import { Player, Registration } from '~/interfaces'
-import { EVENTS } from '~/pages_/eventos/[eventId]'
-import { excelDateToJSDate, roomsRef } from '~/utils'
+import { EVENTS, excelDateToJSDate, roomsRef } from '~/utils'
 
-export default function EventAdmin() {
+interface Props {
+  hidden: boolean
+}
+
+export default function EventAdmin({ hidden }: Props) {
   const router = useRouter()
   const eventId = router.query.eventId?.toString()
   const [registrations, setRegistrations] = useState<Registration[]>([])
@@ -98,6 +102,10 @@ export default function EventAdmin() {
     player: players.find(p => p.name === r.name),
   }))
 
+  if (hidden) {
+    return <Error statusCode={404} />
+  }
+
   return (
     <Layout>
       {!registrations.length && (
@@ -124,4 +132,23 @@ export default function EventAdmin() {
       </Container>
     </Layout>
   )
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: Object.keys(EVENTS).map(k => ({
+      params: {
+        eventId: k,
+      },
+    })),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      hidden: process.env.NODE_ENV === 'production',
+    },
+  }
 }

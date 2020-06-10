@@ -1,3 +1,4 @@
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
@@ -7,21 +8,13 @@ import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
-import { Events } from '~/interfaces'
+import { EVENTS } from '~/utils'
 
-export const EVENTS: Events = {
-  'coronabingo-solidario': {
-    endpoints: {
-      email: 'https://hooks.palabra.io/js?id=96',
-    },
-    roomId: 'm50h7KntwdkFdIdcNyUF',
-    spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
-    spreadsheetURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
-    worksheetTitle: 'Respuestas de formulario 1',
-  },
+interface Props {
+  hidden: boolean
 }
 
-export default function EventId() {
+export default function EventId({ hidden }: Props) {
   const router = useRouter()
   const eventId = router.query.eventId?.toString()
 
@@ -41,6 +34,10 @@ export default function EventId() {
 
   const registerMe = () => {
     window.open(event.spreadsheetURL)
+  }
+
+  if (hidden) {
+    return <Error statusCode={404} />
   }
 
   return (
@@ -69,4 +66,23 @@ export default function EventId() {
       </Container>
     </Layout>
   )
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: Object.keys(EVENTS).map(k => ({
+      params: {
+        eventId: k,
+      },
+    })),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      hidden: process.env.NODE_ENV === 'production',
+    },
+  }
 }
