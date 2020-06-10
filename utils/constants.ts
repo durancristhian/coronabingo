@@ -61,6 +61,11 @@ export const BACKGROUND_CELL_VALUES = [
       'frameworks/svelte.png',
     ],
   },
+  {
+    key: 'playerId:backgrounds.kun-aguero',
+    type: 'img',
+    value: 'kun-aguero.jpg',
+  },
 ]
 export const CODES: (keyof Emojis)[] = [
   'deciduous_tree',
@@ -208,6 +213,11 @@ export const SOUNDS = [
     name: 'Guido Kaczka - Preparado, listo, ya',
     language: 'ar',
     url: '/sounds/guido/preparado-listo-ya.mp3',
+  },
+  {
+    name: 'Kun Agüero - Ojo al tejo',
+    language: 'ar',
+    url: '/sounds/kun-aguero/ojo-al-tejo.mp3',
   },
   {
     name: 'Los Simpsons - Hundiste mi acorazado',
