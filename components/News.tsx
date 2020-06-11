@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import TweetEmbed from 'react-tweet-embed'
-import Heading from './Heading'
+import Heading from '~/components/Heading'
 
 export default function News() {
   const { t } = useTranslation()

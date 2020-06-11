@@ -3,11 +3,12 @@ import React, { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
-  size?: 'small' | 'large'
+  size?: 'small' | 'medium' | 'large'
 }
 
 const CONTAINER_SIZES = {
   small: 'md:w-2/5',
+  medium: 'md:w-3/5',
   large: 'w-full',
 }
 

@@ -1,4 +1,4 @@
-import { Emojis } from '~/interfaces'
+import { Emojis, Events } from '~/interfaces'
 import ticketsData from '~/public/tickets.json'
 
 export const BACKGROUND_CELL_VALUES = [
@@ -61,6 +61,11 @@ export const BACKGROUND_CELL_VALUES = [
       'frameworks/svelte.png',
     ],
   },
+  {
+    key: 'playerId:backgrounds.kun-aguero',
+    type: 'img',
+    value: 'kun-aguero.jpg',
+  },
 ]
 export const CODES: (keyof Emojis)[] = [
   'deciduous_tree',
@@ -73,6 +78,17 @@ export const CODES: (keyof Emojis)[] = [
   'volcano',
   'banana',
 ]
+export const EVENTS: Events = {
+  'coronabingo-solidario': {
+    endpoints: {
+      email: 'https://hooks.palabra.io/js?id=96',
+    },
+    roomId: 'm50h7KntwdkFdIdcNyUF',
+    spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
+    spreadsheetURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
+    worksheetTitle: 'Respuestas de formulario 1',
+  },
+}
 export const TICKET_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'sweat_drops',
@@ -197,6 +213,11 @@ export const SOUNDS = [
     name: 'Guido Kaczka - Preparado, listo, ya',
     language: 'ar',
     url: '/sounds/guido/preparado-listo-ya.mp3',
+  },
+  {
+    name: 'Kun Agüero - Ojo al tejo',
+    language: 'ar',
+    url: '/sounds/kun-aguero/ojo-al-tejo.mp3',
   },
   {
     name: 'Los Simpsons - Hundiste mi acorazado',

@@ -14,17 +14,13 @@ import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import useRoom from '~/hooks/useRoom'
-import useRoomPlayers from '~/hooks/useRoomPlayers'
+import usePlayers from '~/hooks/usePlayers'
 import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
-export default function Sala() {
+export default function RoomId() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
-  const {
-    error: playersError,
-    loading: playersLoading,
-    players,
-  } = useRoomPlayers()
+  const { error: playersError, loading: playersLoading, players } = usePlayers()
   const { t } = useTranslation()
   const { isActive, incrementInteractions } = useEasterEgg(
     'downloadSpreadsheet',

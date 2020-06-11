@@ -29,6 +29,7 @@ export default function Share({ content }: Props) {
 
   const showToast = () => {
     setShowModal(false)
+
     const toastId = createToast('common:copied', 'information')
 
     setTimeout(() => {

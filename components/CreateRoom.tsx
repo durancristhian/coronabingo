@@ -32,9 +32,9 @@ export default function CreateRoom() {
 
       setTimeout(() => {
         dismissToast(toastId)
-
-        Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
       }, 2000)
+
+      Router.pushI18n('/room/[roomId]/admin', `/room/${roomId}/admin`)
     } catch (e) {
       updateToast('index:create-room.error', 'error', toastId)
 

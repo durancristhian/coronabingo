@@ -15,23 +15,23 @@ import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
 import useEasterEgg from '~/hooks/useEasterEgg'
+import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
-import useRoomPlayers from '~/hooks/useRoomPlayers'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
 import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
-export default function Admin() {
+export default function RoomAdmin() {
   const { t } = useTranslation()
   const {
     error: playersError,
     loading: playersLoading,
     players,
     setPlayers,
-  } = useRoomPlayers()
+  } = usePlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
@@ -72,6 +72,18 @@ export default function Admin() {
     )
   }
 
+  if (room.locked) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">
+            <Message type="error">{t('common:locked-room')}</Message>
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
   const submitRoom = async () => {
     setInProgress(true)
 
@@ -105,9 +117,9 @@ export default function Admin() {
 
       setTimeout(() => {
         dismissToast(toastId)
-
-        Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
       }, 2000)
+
+      Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {
       updateToast('admin:error', 'error', toastId)
 
