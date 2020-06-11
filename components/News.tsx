@@ -12,9 +12,9 @@ export default function News() {
 
   return (
     <Fragment>
-      <div className="text-center">
-        <Heading type="h2">{t('common:news')}</Heading>
-      </div>
+      <Heading textAlign="center" type="h2">
+        {t('common:news')}
+      </Heading>
       <div className="sm:flex sm:flex-wrap sm:justify-center my-4 -mx-2">
         <div className="mx-2">{renderTweet('1266490485650198528')}</div>
         <div className="mx-2">{renderTweet('1267934678784389121')}</div>

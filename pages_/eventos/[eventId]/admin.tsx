@@ -115,11 +115,9 @@ export default function EventAdmin({ hidden }: Props) {
       )}
       {!!registrations.length && (
         <Container size="large">
-          <div className="text-center">
-            <Heading type="h1">
-              <span>Inscripciones ({list.length})</span>
-            </Heading>
-          </div>
+          <Heading textAlign="center" type="h1">
+            <span>Inscripciones ({list.length})</span>
+          </Heading>
           <Registrations
             event={event}
             registrations={list}

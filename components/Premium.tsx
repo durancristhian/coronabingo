@@ -26,9 +26,9 @@ export default function Premium() {
 
   return (
     <Box>
-      <div className="text-center">
-        <Heading type="h1">Welcome</Heading>
-      </div>
+      <Heading textAlign="center" type="h1">
+        Welcome
+      </Heading>
       <div className="flex justify-center mt-8">
         <Button aria-label="signout" id="signout" onClick={logout}>
           Logout

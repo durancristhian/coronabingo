@@ -129,8 +129,8 @@ export default function RoomId() {
     <Layout>
       <Container>
         <Box>
-          <div className="mb-4 text-center">
-            <Heading type="h2">
+          <div className="mb-4">
+            <Heading textAlign="center" type="h2">
               <span
                 id="room-title"
                 onClick={incrementInteractions}

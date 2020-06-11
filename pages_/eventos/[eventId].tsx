@@ -44,9 +44,9 @@ export default function EventId({ hidden }: Props) {
     <Layout>
       <Container size="medium">
         <Box>
-          <div className="text-center">
-            <Heading type="h1">Coronabingo Solidario</Heading>
-          </div>
+          <Heading textAlign="center" type="h1">
+            Coronabingo Solidario
+          </Heading>
           <div className="my-8">
             <p>Esta es la descripción del evento.</p>
           </div>

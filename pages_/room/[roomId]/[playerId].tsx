@@ -116,9 +116,9 @@ export default function RoomPlayer() {
   const renderBingoSpinnerAndOptions = () => (
     <Fragment>
       <Box>
-        <div className="text-center">
-          <Heading type="h2">{t('common:bingo-spinner')}</Heading>
-        </div>
+        <Heading textAlign="center" type="h2">
+          {t('common:bingo-spinner')}
+        </Heading>
         <div className="mt-4">
           <SelectedNumbers
             isAdmin={isAdmin}
@@ -137,8 +137,8 @@ export default function RoomPlayer() {
   return (
     <BackgroundCellContextProvider playerId={player.id}>
       <Layout>
-        <div className="mb-4 text-center">
-          <Heading type="h2">
+        <div className="mb-4">
+          <Heading textAlign="center" type="h2">
             {t('playerId:title', {
               playerName: player.name,
               roomName: room.name,
@@ -149,8 +149,10 @@ export default function RoomPlayer() {
           <div className="lg:flex mt-4">
             <div className="lg:w-1/3">
               <Box>
-                <div className="mb-4 text-center">
-                  <Heading type="h2">{t('playerId:last-numbers')}</Heading>
+                <div className="mb-4">
+                  <Heading textAlign="center" type="h2">
+                    {t('playerId:last-numbers')}
+                  </Heading>
                 </div>
                 <LastNumbers
                   hideNumbersMeaning={room.hideNumbersMeaning}

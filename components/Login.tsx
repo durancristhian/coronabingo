@@ -39,9 +39,9 @@ export default function Login() {
 
   return (
     <Box>
-      <div className="text-center">
-        <Heading type="h1">¿Te conocemos?</Heading>
-      </div>
+      <Heading textAlign="center" type="h1">
+        ¿Te conocemos?
+      </Heading>
       <div className="flex justify-center mt-8">
         <Button aria-label="Login" id="login" onClick={login}>
           <FiLogIn />
