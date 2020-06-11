@@ -15,9 +15,9 @@ import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
 import useEasterEgg from '~/hooks/useEasterEgg'
+import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
-import usePlayers from '~/hooks/usePlayers'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces'
 import playerApi, { defaultPlayerData } from '~/models/player'
@@ -72,6 +72,18 @@ export default function RoomAdmin() {
     )
   }
 
+  if (room.locked) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">
+            <Message type="error">{t('common:locked-room')}</Message>
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
   const submitRoom = async () => {
     setInProgress(true)
 
@@ -105,9 +117,9 @@ export default function RoomAdmin() {
 
       setTimeout(() => {
         dismissToast(toastId)
-
-        Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
       }, 2000)
+
+      Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {
       updateToast('admin:error', 'error', toastId)
 

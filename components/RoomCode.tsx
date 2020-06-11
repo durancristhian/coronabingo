@@ -53,9 +53,9 @@ export default function RoomCode({ roomCode }: Props) {
 
       setTimeout(() => {
         dismissToast(toastId)
-
-        login()
       }, 2000)
+
+      login()
     } else {
       const toastId = createToast('common:room-code.error', 'error')
 

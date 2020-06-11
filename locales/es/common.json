@@ -20,6 +20,7 @@
   "coffee": "Café",
   "new-features-modal-title": "Novedades en la versión {{version}}",
   "outdated-room": "Esta sala pertenece a una versión desactualizada de la aplicación. Por favor, cree otra.",
+  "locked-room": "Sala bloqueada.",
   "room-code": {
     "success": "Código correcto. Espere...",
     "error": "Código incorrecto. Intenta nuevamente...",

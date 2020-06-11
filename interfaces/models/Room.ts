@@ -8,6 +8,7 @@ export interface RoomBase {
   confettiType: ConfettiType
   date: firebase.firestore.Timestamp | null
   hideNumbersMeaning: boolean
+  locked: boolean
   name: string
   readyToPlay: boolean
   selectedNumbers: number[]
