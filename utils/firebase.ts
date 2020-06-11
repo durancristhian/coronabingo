@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/auth'
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -20,6 +21,7 @@ if (firebase.apps.length) {
   firebaseApp = firebase.initializeApp(firebaseConfig)
 }
 
+const auth = firebase.auth()
 const db = firebaseApp.firestore()
 const { Timestamp } = firebase.firestore
 
@@ -27,4 +29,4 @@ const roomsRef = db.collection('rooms')
 
 const createBatch = () => db.batch()
 
-export { createBatch, roomsRef, Timestamp }
+export { auth, createBatch, roomsRef, Timestamp }
