@@ -1,10 +1,12 @@
 import React, { cloneElement } from 'react'
+import { ProvideAuth } from '~/contexts/Auth'
 import { FlagsContextProvider } from '~/contexts/Flags'
 import { PlayerContextProvider } from '~/contexts/Player'
 import { PlayersContextProvider } from '~/contexts/Players'
 import { RoomContextProvider } from '~/contexts/Room'
 
 const providers = [
+  ProvideAuth,
   FlagsContextProvider,
   RoomContextProvider,
   PlayersContextProvider,
