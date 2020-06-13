@@ -27,16 +27,9 @@ export default function LastNumbers({
   return (
     <Fragment>
       <div className="flex items-center overflow-hidden">
-        <div className="flex flex-auto items-center overflow-x-scroll">
+        <div className="flex overflow-x-scroll w-full">
           {selectedNumbers.map((n, i) => (
-            <div key={n} className="mr-4">
-              <Ball
-                bgColor={i === 0 ? 'bg-yellow-500' : 'bg-gray-400'}
-                number={n}
-                size={i === 0 ? 75 : 55}
-                index={i}
-              />
-            </div>
+            <Ball key={n} number={n} index={i} />
           ))}
         </div>
       </div>

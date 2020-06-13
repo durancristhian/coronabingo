@@ -1,21 +1,15 @@
 .ball {
-  border-radius: 50%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  height: 75px;
   position: relative;
+  width: 75px;
 }
 
-.ball > div {
-  border-radius: 50%;
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-.ball > div > span {
+.ball > span {
   background: #fff;
   border-radius: 50%;
+  font-size: 25px;
+  font-weight: 500;
   height: 60%;
   left: 50%;
   line-height: 175%;
