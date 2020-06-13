@@ -1,14 +1,16 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import TweetEmbed from 'react-tweet-embed'
 import Heading from '~/components/Heading'
 
 export default function News() {
   const { t } = useTranslation()
 
-  const renderTweet = (id: string) => (
-    <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />
-  )
+  const renderTweet = (id: string) =>
+    useMemo(
+      () => <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />,
+      [id],
+    )
 
   return (
     <Fragment>

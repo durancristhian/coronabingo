@@ -24,6 +24,25 @@
   box-shadow: 0 0 1px red;
 }
 
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.appear-after {
+  animation: opacity;
+  animation-duration: 2s;
+}
+
 .bg-cafecito {
   background-color: rgba(65, 137, 230, 0.15);
 }
@@ -88,7 +107,7 @@
 }
 
 @media (min-width: 768px) {
-  .md\:w-80 {
+  .md:w-80 {
     width: 20rem;
   }
 }

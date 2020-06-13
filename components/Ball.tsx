@@ -1,24 +1,17 @@
 import classnames from 'classnames'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Pelotita from './Pelotita'
 
 interface Props {
-  animate?: boolean
   bgColor: string
+  index: number
   number: number
   size?: number
 }
 
-export default function Ball({
-  animate = false,
-  bgColor,
-  number,
-  size = 90,
-}: Props) {
-  const Wrapper = animate ? Pelotita : Fragment
-
+export default function Ball({ bgColor, index, number, size = 90 }: Props) {
   return (
-    <Wrapper>
+    <Pelotita index={index}>
       <div className={classnames(['text-center'])}>
         <div
           className={classnames(['ball', bgColor])}
@@ -38,6 +31,6 @@ export default function Ball({
           </div>
         </div>
       </div>
-    </Wrapper>
+    </Pelotita>
   )
 }
