@@ -1,5 +1,5 @@
 .markdown-body > *:not(:first-child):not(:last-child) {
-  @apply my-2;
+  @apply my-4;
 }
 
 .markdown-body h1,
@@ -8,12 +8,12 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  @apply font-bold;
+  @apply font-medium;
 }
 
 .markdown-body ol,
 .markdown-body ul {
-  @apply ml-4;
+  @apply ml-8;
 }
 
 .markdown-body ol {

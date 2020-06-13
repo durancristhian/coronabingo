@@ -15,7 +15,7 @@ export default function LastNumbers({
   selectedNumbers,
 }: Props) {
   const { t } = useTranslation()
-  const [last, ...rest] = selectedNumbers
+  const [last] = selectedNumbers
   const emoji = DREAMS_EMOJIS[last - 1]
 
   if (!selectedNumbers.length) {
@@ -27,13 +27,15 @@ export default function LastNumbers({
   return (
     <Fragment>
       <div className="flex items-center overflow-hidden">
-        <div style={{ flex: '0 0 85px' }}>
-          <Ball animate bgColor="bg-yellow-500" number={last} size={75} />
-        </div>
-        <div className="flex flex-auto overflow-x-scroll">
-          {rest.map(n => (
-            <div className="opacity-75" key={n} style={{ flex: '0 0 65px' }}>
-              <Ball bgColor="bg-gray-400" number={n} size={55} />
+        <div className="flex flex-auto items-center overflow-x-scroll">
+          {selectedNumbers.map((n, i) => (
+            <div key={n} className="mr-4">
+              <Ball
+                bgColor={i === 0 ? 'bg-yellow-500' : 'bg-gray-400'}
+                number={n}
+                size={i === 0 ? 75 : 55}
+                index={i}
+              />
             </div>
           ))}
         </div>
@@ -43,7 +45,10 @@ export default function LastNumbers({
           id="number-meaning"
           className="flex items-center justify-between mt-4"
         >
-          <p className="flex flex-auto font-medium items-center">
+          <p
+            className="appear-after flex flex-auto font-medium items-center"
+            key={last}
+          >
             <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
             <span className="text-xs">
               <Emoji name={emoji} />

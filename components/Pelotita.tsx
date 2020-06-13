@@ -3,18 +3,18 @@ import { useFriction } from 'renature'
 
 interface Props {
   children: ReactNode
+  index: number
 }
 
-export default function Pelotita({ children }: Props) {
+export default function Pelotita({ children, index }: Props) {
   const [props] = useFriction({
     from: {
-      opacity: 0,
-      /* 360 * 3 = 1080 */
-      transform: 'rotate(1080deg) scale(0)',
+      opacity: index === 0 ? 0 : 1,
+      transform: `translateX(-50px) rotate(${index === 0 ? '-360deg' : '0'})`,
     },
     to: {
       opacity: 1,
-      transform: 'rotate(0deg) scale(1)',
+      transform: 'translateX(0) rotate(0deg)',
     },
     config: {
       mu: 0.2,
