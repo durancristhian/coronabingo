@@ -86,7 +86,8 @@ export default function EventId({ hidden }: Props) {
             </p>
             <p>
               Luego de verificar la información, te enviaremos por mail o
-              WhatsApp el link a tus cartones y el link para la videollamada.
+              WhatsApp el link a tus cartones y el link para unirte a la
+              videollamada.
             </p>
             <Message type="information">
               Es requisito indispensable incluir en el formulario el comprobante
@@ -103,25 +104,67 @@ export default function EventId({ hidden }: Props) {
                 <Anchor href="https://zoom.us/" id="zoom">
                   Zoom
                 </Anchor>
-                &nbsp;que se encuentra en todas las tiendas de aplicaciones.
+                &nbsp;que se encuentra en todas las tiendas de aplicaciones y
+                sistemas operativos.
               </li>
             </ul>
             <Heading type="h2">¿Hay premios?</Heading>
             <p>¡Obvio!, jugar al bingo sin premios sería muy aburrido.</p>
-            <ul>
-              <li>
-                <span>Línea: </span>
-                <strong>A definir</strong>
-              </li>
-              <li>
-                <span>Cartón lleno: </span>
-                <strong>A definir</strong>
-              </li>
-              <li>
-                <span>Coronabingo (Los 2 cartones llenos): </span>
-                <strong>A definir</strong>
-              </li>
-            </ul>
+            <table className="table-fixed w-full">
+              <thead>
+                <tr className="bg-gray-200 text-left">
+                  <th className="border font-medium px-4 py-2 w-1/3">Jugada</th>
+                  <th className="border font-medium px-4 py-2 w-2/3">Premio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="align-top border break-words px-4 py-2">
+                    Línea
+                  </td>
+                  <td className="align-top border break-words px-4 py-2">
+                    <ul>
+                      <li>
+                        <span>A definir</span>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="align-top border break-words px-4 py-2">
+                    Cartón lleno
+                  </td>
+                  <td className="align-top border break-words px-4 py-2">
+                    <ul>
+                      <li>
+                        <span>A definir</span>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="align-top border break-words px-4 py-2">
+                    <span>Coronabingo</span>
+                    <br />
+                    <span className="text-gray-600 text-xs md:text-sm">
+                      (2 cartones llenos)
+                    </span>
+                  </td>
+                  <td className="align-top border break-words px-4 py-2">
+                    <ul>
+                      <li>
+                        <span>A definir</span>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <Message type="information">
+              En el caso de haber más de 1 persona ganadora de una misma jugada,
+              los premios se mantienen para cada una.
+            </Message>
+            <p>¡No dudes en anotarte a jugar y ayudar! Te esperamos.</p>
           </div>
           <div className="text-center">
             <Button
