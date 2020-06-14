@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Pelotita from './Pelotita'
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   number: number
 }
 
-export default function Ball({ index, number }: Props) {
+export default memo(function Ball({ index, number }: Props) {
   return (
     <Pelotita index={index}>
       <div className="ball">
@@ -14,4 +14,4 @@ export default function Ball({ index, number }: Props) {
       </div>
     </Pelotita>
   )
-}
+})
