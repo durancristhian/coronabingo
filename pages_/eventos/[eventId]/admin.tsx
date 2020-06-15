@@ -3,12 +3,11 @@ import Error from 'next/error'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Container from '~/components/Container'
-import EventGenerator from '~/components/EventGenerator'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
-import { Player, Registration } from '~/interfaces'
+import { EventTicket, Player, Registration } from '~/interfaces'
 import { EVENTS, excelDateToJSDate, roomsRef } from '~/utils'
 
 interface Props {
@@ -20,6 +19,7 @@ export default function EventAdmin({ hidden }: Props) {
   const eventId = router.query.eventId?.toString()
   const [registrations, setRegistrations] = useState<Registration[]>([])
   const [players, setPlayers] = useState<Player[]>([])
+  const [tickets, setTickets] = useState<EventTicket[]>([])
 
   const event = EVENTS[eventId || '']
 
@@ -58,23 +58,42 @@ export default function EventAdmin({ hidden }: Props) {
   useEffect(() => {
     if (!event) return
 
-    return roomsRef
+    const unsubscribeFromPlayers = roomsRef
       .doc(event.roomId)
       .collection('players')
+      .onSnapshot(snapshot => {
+        setPlayers(
+          snapshot.docs.map(p => {
+            const playerData = p.data() as Player
+
+            return Object.assign(
+              {},
+              {
+                id: p.id,
+                exists: p.exists,
+                ref: p.ref,
+              },
+              playerData,
+            )
+          }),
+        )
+      })
+
+    const unsubscribeFromTickets = roomsRef
+      .doc(event.roomId)
+      .collection('tickets')
       .onSnapshot(
         snapshot => {
-          setPlayers(
-            snapshot.docs.map(p => {
-              const playerData = p.data() as Player
+          setTickets(
+            snapshot.docs.map(t => {
+              const ticketData = t.data() as EventTicket
 
               return Object.assign(
                 {},
                 {
-                  id: p.id,
-                  exists: p.exists,
-                  ref: p.ref,
+                  id: t.id,
                 },
-                playerData,
+                ticketData,
               )
             }),
           )
@@ -83,6 +102,11 @@ export default function EventAdmin({ hidden }: Props) {
           console.error(error)
         },
       )
+
+    return () => {
+      unsubscribeFromPlayers()
+      unsubscribeFromTickets()
+    }
   }, [])
 
   if (!eventId || !Object.keys(EVENTS).includes(eventId || '')) {
@@ -97,14 +121,14 @@ export default function EventAdmin({ hidden }: Props) {
     )
   }
 
+  if (hidden) {
+    return <Error statusCode={404} />
+  }
+
   const list = registrations.map(r => ({
     ...r,
     player: players.find(p => p.name === r.name),
   }))
-
-  if (hidden) {
-    return <Error statusCode={404} />
-  }
 
   return (
     <Layout>
@@ -115,19 +139,17 @@ export default function EventAdmin({ hidden }: Props) {
       )}
       {!!registrations.length && (
         <Container size="large">
-          <Heading textAlign="center" type="h1">
+          <Heading type="h1">
             <span>Inscripciones ({list.length})</span>
           </Heading>
           <Registrations
             event={event}
             registrations={list}
             roomId={event.roomId}
+            tickets={tickets}
           />
         </Container>
       )}
-      <Container size="large">
-        <EventGenerator />
-      </Container>
     </Layout>
   )
 }

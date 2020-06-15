@@ -83,7 +83,7 @@ export const EVENTS: Events = {
     endpoints: {
       email: 'https://hooks.palabra.io/js?id=96',
     },
-    roomId: 'm50h7KntwdkFdIdcNyUF',
+    roomId: 'PbE5z53GbmWVzKAOUayn',
     spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
     spreadsheetURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
     worksheetTitle: 'Respuestas de formulario 1',

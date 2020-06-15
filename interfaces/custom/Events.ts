@@ -10,6 +10,11 @@ export interface Event {
   worksheetTitle: string
 }
 
+export interface EventTicket {
+  id: string
+  tickets: string
+}
+
 export interface Events {
   [key: string]: Event
 }

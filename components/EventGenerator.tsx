@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import Button from '~/components/Button'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useToast from '~/hooks/useToast'
 import { defaultRoomData } from '~/models/room'
 import { createBatch, generateRoomCode, roomsRef, Timestamp } from '~/utils'
+import Message from './Message'
 
 export default function EventGenerator() {
   const { createToast, dismissToast, updateToast } = useToast()
+  const [id, setId] = useState<string>()
   const randomTickets = useRandomTickets()
 
   const generateSpreadsheet = async () => {
@@ -25,7 +27,7 @@ export default function EventGenerator() {
         bingoSpinner: false,
         code: generateRoomCode(),
         date: Timestamp.fromDate(new Date()),
-        name: 'C3 - Jueves 11/06/2020',
+        name: 'Evento de prueba',
         hideNumbersMeaning: true,
         readyToPlay: true,
       })
@@ -35,29 +37,27 @@ export default function EventGenerator() {
 
       batch.set(adminRef, {
         date: Timestamp.fromDate(new Date()),
-        name: 'Cristhian',
+        name: 'Admin',
         selectedNumbers: [],
         tickets: randomTickets[0],
       })
 
-      /* Se actualiza la sala con el admin id */
       batch.update(roomRef, {
         adminId: adminRef.id,
       })
 
-      /* Se agrega el resto de personas */
+      /* Se generan los tickets aleatorios para la sala */
       for (let index = 1; index < 350; index++) {
-        const playerRef = roomRef.collection('players').doc()
+        const ticketRef = roomRef.collection('tickets').doc()
 
-        batch.set(playerRef, {
-          date: Timestamp.fromDate(new Date()),
-          name: `Jugador #${index + 1}`,
-          selectedNumbers: [],
+        batch.set(ticketRef, {
           tickets: randomTickets[index],
         })
       }
 
       await batch.commit()
+
+      setId(roomRef.id)
 
       updateToast('Operación exitosa', 'success', toastId)
     } catch (error) {
@@ -72,15 +72,22 @@ export default function EventGenerator() {
   }
 
   return (
-    <div className="mt-8">
-      <Button
-        aria-label="Generar planilla"
-        id="generate-spreadsheet"
-        onClick={generateSpreadsheet}
-      >
-        <FiCheck />
-        <span className="ml-2">Generar planilla</span>
-      </Button>
-    </div>
+    <Fragment>
+      <div className="text-center">
+        <Button
+          aria-label="Generar planilla"
+          id="generate-spreadsheet"
+          onClick={generateSpreadsheet}
+        >
+          <FiCheck />
+          <span className="ml-2">Crear evento</span>
+        </Button>
+      </div>
+      {id && (
+        <div className="mt-8">
+          <Message type="success">El id de la sala que creaste es {id}</Message>
+        </div>
+      )}
+    </Fragment>
   )
 }

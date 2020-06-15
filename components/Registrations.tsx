@@ -12,16 +12,22 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
-import { Event, Registration } from '~/interfaces'
+import { Event, EventTicket, Registration } from '~/interfaces'
 import { createBatch, roomsRef, Timestamp } from '~/utils'
 
 interface Props {
   event: Event
   registrations: Registration[]
   roomId: string
+  tickets: EventTicket[]
 }
 
-export default function Registrations({ event, registrations, roomId }: Props) {
+export default function Registrations({
+  event,
+  registrations,
+  roomId,
+  tickets,
+}: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
 
   const onProvideAccessClick = async (r: Registration) => {
@@ -31,14 +37,17 @@ export default function Registrations({ event, registrations, roomId }: Props) {
       const batch = createBatch()
       const room = roomsRef.doc(roomId)
       const playerRef = room.collection('players').doc()
+      const ticket = tickets[0]
+      const ticketsRef = room.collection('tickets').doc(ticket.id)
 
       batch.set(playerRef, {
         date: Timestamp.fromDate(new Date()),
         name: r.name,
         selectedNumbers: [],
-        /* TODO: */
-        tickets: '1,2',
+        tickets: ticket.tickets,
       })
+
+      batch.delete(ticketsRef)
 
       await batch.commit()
 
