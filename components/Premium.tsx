@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { FiLogOut } from 'react-icons/fi'
 import useAuth from '~/hooks/useAuth'
 import useToast from '~/hooks/useToast'
 import Box from './Box'
@@ -24,18 +25,28 @@ export default function Premium() {
   }
 
   return (
-    <Box>
-      <Heading textAlign="center" type="h1">
-        Welcome
-      </Heading>
-      <div className="mt-8">
-        <EventGenerator />
+    <Fragment>
+      <Box>
+        <Heading textAlign="center" type="h1">
+          Welcome, {user.email}
+        </Heading>
+        <div className="mt-4 text-center">
+          <Button aria-label="signout" id="signout" onClick={logout}>
+            <FiLogOut />
+            <span className="ml-4">Logout</span>
+          </Button>
+        </div>
+      </Box>
+      <div className="mt-4">
+        <Box>
+          <Heading textAlign="center" type="h2">
+            Crear una evento
+          </Heading>
+          <div className="mt-4">
+            <EventGenerator />
+          </div>
+        </Box>
       </div>
-      <div className="mt-8 text-center">
-        <Button aria-label="signout" id="signout" onClick={logout}>
-          Logout
-        </Button>
-      </div>
-    </Box>
+    </Fragment>
   )
 }

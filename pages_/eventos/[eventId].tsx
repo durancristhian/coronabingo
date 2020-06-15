@@ -34,7 +34,7 @@ export default function EventId({ hidden }: Props) {
   const event = EVENTS[eventId]
 
   const registerMe = () => {
-    window.open(event.spreadsheetURL)
+    window.open(event.formURL)
   }
 
   if (hidden) {

@@ -5,17 +5,29 @@ import useRandomTickets from '~/hooks/useRandomTickets'
 import useToast from '~/hooks/useToast'
 import { defaultRoomData } from '~/models/room'
 import { createBatch, generateRoomCode, roomsRef, Timestamp } from '~/utils'
+import InputText from './InputText'
 import Message from './Message'
 
 export default function EventGenerator() {
   const { createToast, dismissToast, updateToast } = useToast()
   const [id, setId] = useState<string>()
+  const [inProgress, setInProgress] = useState(false)
+  const [formData, setFormData] = useState({
+    emailEndpoint: '',
+    eventRoomAdminName: '',
+    eventRoomName: '',
+    formURL: '',
+    spreadsheetId: '',
+    worksheetTitle: '',
+  })
   const randomTickets = useRandomTickets()
 
-  const generateSpreadsheet = async () => {
-    const toastId = createToast('Generando spreadsheet...', 'information')
+  const onCreateEventSubmit = async () => {
+    const toastId = createToast('Creando evento...', 'information')
 
     try {
+      setInProgress(true)
+
       const batch = createBatch()
 
       /* Se crea la sala */
@@ -27,7 +39,7 @@ export default function EventGenerator() {
         bingoSpinner: false,
         code: generateRoomCode(),
         date: Timestamp.fromDate(new Date()),
-        name: 'Evento de prueba',
+        name: formData.eventRoomName,
         hideNumbersMeaning: true,
         readyToPlay: true,
       })
@@ -37,7 +49,7 @@ export default function EventGenerator() {
 
       batch.set(adminRef, {
         date: Timestamp.fromDate(new Date()),
-        name: 'Admin',
+        name: formData.eventRoomAdminName,
         selectedNumbers: [],
         tickets: randomTickets[0],
       })
@@ -65,6 +77,8 @@ export default function EventGenerator() {
 
       updateToast('Ups! Hubo un error', 'error', toastId)
     } finally {
+      setInProgress(false)
+
       setTimeout(() => {
         dismissToast(toastId)
       }, 2000)
@@ -73,16 +87,68 @@ export default function EventGenerator() {
 
   return (
     <Fragment>
-      <div className="text-center">
-        <Button
-          aria-label="Generar planilla"
-          id="generate-spreadsheet"
-          onClick={generateSpreadsheet}
-        >
-          <FiCheck />
-          <span className="ml-2">Crear evento</span>
-        </Button>
-      </div>
+      <form onSubmit={onCreateEventSubmit}>
+        <fieldset disabled={inProgress}>
+          <InputText
+            id="event-name"
+            label="Nombre de la sala del evento"
+            value={formData.eventRoomName}
+            onChange={eventRoomName => {
+              setFormData({ ...formData, eventRoomName })
+            }}
+          />
+          <InputText
+            id="event-admin-name"
+            label="Nombre del admin de la sala del evento"
+            value={formData.eventRoomAdminName}
+            onChange={eventRoomAdminName => {
+              setFormData({ ...formData, eventRoomAdminName })
+            }}
+          />
+          <InputText
+            id="form-url"
+            label="Link al formulario de inscripciones"
+            value={formData.formURL}
+            onChange={formURL => {
+              setFormData({ ...formData, formURL })
+            }}
+          />
+          <InputText
+            id="spreadsheet-id"
+            label="Id de la planilla donde el formulario guarda de inscripciones"
+            value={formData.spreadsheetId}
+            onChange={spreadsheetId => {
+              setFormData({ ...formData, spreadsheetId })
+            }}
+          />
+          <InputText
+            id="spreadsheet-url"
+            label="Título de la hoja de la planilla donde el formulario guarda de inscripciones"
+            value={formData.worksheetTitle}
+            onChange={worksheetTitle => {
+              setFormData({ ...formData, worksheetTitle })
+            }}
+          />
+          <InputText
+            id="email-endpoint"
+            label="Endpoint de palabra.io para mandar mails"
+            value={formData.emailEndpoint}
+            onChange={emailEndpoint => {
+              setFormData({ ...formData, emailEndpoint })
+            }}
+          />
+          <div className="mt-8 text-center">
+            <Button
+              aria-label="Generar planilla"
+              id="generate-spreadsheet"
+              color="green"
+            >
+              <FiCheck />
+              <span className="ml-4">Crear evento</span>
+            </Button>
+          </div>
+        </fieldset>
+      </form>
       {id && (
         <div className="mt-8">
           <Message type="success">El id de la sala que creaste es {id}</Message>

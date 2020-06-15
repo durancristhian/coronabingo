@@ -4,9 +4,9 @@ export interface Event {
   endpoints: {
     email: string
   }
+  formURL: string
   roomId: string
   spreadsheetId: string
-  spreadsheetURL: string
   worksheetTitle: string
 }
 
