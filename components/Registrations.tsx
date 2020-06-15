@@ -174,7 +174,6 @@ export default function Registrations({
                       <Button
                         aria-label="Mandar mail"
                         id="send-email"
-                        color="green"
                         onClick={() => sendEmail(r)}
                       >
                         <FiMail />
