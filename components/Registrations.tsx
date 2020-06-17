@@ -18,14 +18,12 @@ import { createBatch, roomsRef, Timestamp } from '~/utils'
 interface Props {
   event: Event
   registrations: Registration[]
-  roomId: string
   tickets: EventTicket[]
 }
 
 export default function Registrations({
   event,
   registrations,
-  roomId,
   tickets,
 }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
@@ -35,7 +33,7 @@ export default function Registrations({
 
     try {
       const batch = createBatch()
-      const room = roomsRef.doc(roomId)
+      const room = roomsRef.doc(event.roomId)
       const playerRef = room.collection('players').doc()
       const ticket = tickets[0]
       const ticketsRef = room.collection('tickets').doc(ticket.id)
@@ -71,11 +69,11 @@ export default function Registrations({
 
     const toastId = createToast('Enviando mail...', 'information')
 
-    const link = getRoomPlayerLink(roomId, r.player.id)
+    const link = getRoomPlayerLink(event.roomId, r.player.id)
     const body = `email=${r.email}&link=${link}`
 
     try {
-      await fetch(event.endpoints.email, {
+      await fetch(event.emailEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -160,7 +158,7 @@ export default function Registrations({
                 {r.player && (
                   <div>
                     <Anchor
-                      href={getRoomPlayerLink(roomId, r.player.id)}
+                      href={getRoomPlayerLink(event.roomId, r.player.id)}
                       id="player-link"
                     >
                       <span className="flex items-center">

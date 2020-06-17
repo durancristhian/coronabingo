@@ -26,7 +26,8 @@ const db = firebaseApp.firestore()
 const { Timestamp } = firebase.firestore
 
 const roomsRef = db.collection('rooms')
+const eventsRef = db.collection('events')
 
 const createBatch = () => db.batch()
 
-export { auth, createBatch, roomsRef, Timestamp }
+export { auth, createBatch, roomsRef, eventsRef, Timestamp }

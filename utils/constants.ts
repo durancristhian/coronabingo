@@ -1,4 +1,4 @@
-import { Emojis, Events } from '~/interfaces'
+import { Emojis } from '~/interfaces'
 import ticketsData from '~/public/tickets.json'
 
 export const BACKGROUND_CELL_VALUES = [
@@ -78,17 +78,6 @@ export const CODES: (keyof Emojis)[] = [
   'volcano',
   'banana',
 ]
-export const EVENTS: Events = {
-  'coronabingo-solidario': {
-    endpoints: {
-      email: 'https://hooks.palabra.io/js?id=96',
-    },
-    formURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
-    roomId: 'PbE5z53GbmWVzKAOUayn',
-    spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
-    worksheetTitle: 'Respuestas de formulario 1',
-  },
-}
 export const TICKET_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'sweat_drops',

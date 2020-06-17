@@ -7,12 +7,13 @@ import Button from './Button'
 import EventGenerator from './EventGenerator'
 import Heading from './Heading'
 
-export default function Premium() {
-  const { user, signout } = useAuth()
-  const { createToast, dismissToast } = useToast()
+interface Props {
+  user: firebase.User
+}
 
-  /* TODO: this should never happen */
-  if (!user) return null
+export default function Premium({ user }: Props) {
+  const { signout } = useAuth()
+  const { createToast, dismissToast } = useToast()
 
   const logout = () => {
     signout()
@@ -43,7 +44,7 @@ export default function Premium() {
             Crear una evento
           </Heading>
           <div className="mt-4">
-            <EventGenerator />
+            <EventGenerator user={user} />
           </div>
         </Box>
       </div>

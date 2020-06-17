@@ -19,10 +19,8 @@ export default function Admin({ hidden }: Props) {
 
   return (
     <Layout>
-      <Container>
-        {user && <Premium />}
-        {!user && <Login />}
-      </Container>
+      <Container>{!user && <Login />}</Container>
+      <Container size="medium">{user && <Premium user={user} />}</Container>
     </Layout>
   )
 }

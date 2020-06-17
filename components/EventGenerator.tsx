@@ -1,28 +1,46 @@
-import React, { Fragment, useState } from 'react'
+import React, { FormEvent, Fragment, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import Button from '~/components/Button'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useToast from '~/hooks/useToast'
 import { defaultRoomData } from '~/models/room'
-import { createBatch, generateRoomCode, roomsRef, Timestamp } from '~/utils'
+import {
+  createBatch,
+  eventsRef,
+  generateRoomCode,
+  roomsRef,
+  Timestamp,
+} from '~/utils'
+import InputMarkdown from './InputMarkdown'
 import InputText from './InputText'
 import Message from './Message'
 
-export default function EventGenerator() {
+interface Props {
+  user: firebase.User
+}
+
+export default function EventGenerator({ user }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
   const [id, setId] = useState<string>()
   const [inProgress, setInProgress] = useState(false)
   const [formData, setFormData] = useState({
-    emailEndpoint: '',
-    eventRoomAdminName: '',
-    eventRoomName: '',
-    formURL: '',
-    spreadsheetId: '',
-    worksheetTitle: '',
+    content: {
+      html: '<p>Hola!</p>',
+      text: 'Hola!',
+    },
+    emailEndpoint: 'https://hooks.palabra.io/js?id=96',
+    eventName: 'Coronabingo Solidario - Junio 2020',
+    eventRoomAdminName: 'Cristhian',
+    eventRoomName: 'Evento de prueba',
+    formURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
+    spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
+    worksheetTitle: 'Respuestas de formulario 1',
   })
   const randomTickets = useRandomTickets()
 
-  const onCreateEventSubmit = async () => {
+  const onCreateEventSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+
     const toastId = createToast('Creando evento...', 'information')
 
     try {
@@ -67,9 +85,24 @@ export default function EventGenerator() {
         })
       }
 
+      /* Se crea el evento */
+      const eventRef = eventsRef.doc()
+
+      batch.set(eventRef, {
+        date: Timestamp.fromDate(new Date()),
+        roomId: roomRef.id,
+        eventName: formData.eventName,
+        content: formData.content,
+        emailEndpoint: formData.emailEndpoint,
+        formURL: formData.formURL,
+        spreadsheetId: formData.spreadsheetId,
+        worksheetTitle: formData.worksheetTitle,
+        userId: user.uid,
+      })
+
       await batch.commit()
 
-      setId(roomRef.id)
+      setId(eventRef.id)
 
       updateToast('Operación exitosa', 'success', toastId)
     } catch (error) {
@@ -91,7 +124,15 @@ export default function EventGenerator() {
         <fieldset disabled={inProgress}>
           <InputText
             id="event-name"
-            label="Nombre de la sala del evento"
+            label="Nombre del evento"
+            value={formData.eventName}
+            onChange={eventName => {
+              setFormData({ ...formData, eventName })
+            }}
+          />
+          <InputText
+            id="event-room-name"
+            label="Nombre de la sala"
             value={formData.eventRoomName}
             onChange={eventRoomName => {
               setFormData({ ...formData, eventRoomName })
@@ -99,10 +140,17 @@ export default function EventGenerator() {
           />
           <InputText
             id="event-admin-name"
-            label="Nombre del admin de la sala del evento"
+            label="Nombre del admin de la sala"
             value={formData.eventRoomAdminName}
             onChange={eventRoomAdminName => {
               setFormData({ ...formData, eventRoomAdminName })
+            }}
+          />
+          <InputMarkdown
+            content={formData.content.text}
+            label="Contenido de la página de inscripción"
+            onChange={content => {
+              setFormData({ ...formData, content })
             }}
           />
           <InputText
@@ -131,7 +179,7 @@ export default function EventGenerator() {
           />
           <InputText
             id="email-endpoint"
-            label="Endpoint de palabra.io para mandar mails"
+            label="Endpoint de palabra.io para mandar los mails"
             value={formData.emailEndpoint}
             onChange={emailEndpoint => {
               setFormData({ ...formData, emailEndpoint })
@@ -142,6 +190,7 @@ export default function EventGenerator() {
               aria-label="Generar planilla"
               id="generate-spreadsheet"
               color="green"
+              type="submit"
             >
               <FiCheck />
               <span className="ml-4">Crear evento</span>
