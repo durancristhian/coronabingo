@@ -13,6 +13,7 @@
 @import 'markdown-body.css';
 @import 'modal.css';
 @import 'video.css';
+@import 'react-markdown-editor-lite/lib/index.css';
 
 /* purgecss start ignore */
 .ReactModal__Body--open {

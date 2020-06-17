@@ -1,31 +1,52 @@
 import { getWorksheet } from 'gsheets'
 import Error from 'next/error'
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Container from '~/components/Container'
-import EventGenerator from '~/components/EventGenerator'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
-import { Player, Registration } from '~/interfaces'
-import { EVENTS, excelDateToJSDate, roomsRef } from '~/utils'
+import useEvent from '~/hooks/useEvent'
+import { EventTicket, Player, Registration } from '~/interfaces'
+import { excelDateToJSDate, roomsRef } from '~/utils'
 
 interface Props {
   hidden: boolean
 }
 
 export default function EventAdmin({ hidden }: Props) {
-  const router = useRouter()
-  const eventId = router.query.eventId?.toString()
+  const { error, loading, event } = useEvent()
   const [registrations, setRegistrations] = useState<Registration[]>([])
   const [players, setPlayers] = useState<Player[]>([])
+  const [tickets, setTickets] = useState<EventTicket[]>([])
 
-  const event = EVENTS[eventId || '']
+  if (loading) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="information">
+            Cargando información del evento...
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">
+            El evento que estás buscando no existe.
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!event) return null
 
   useEffect(() => {
-    if (!event) return
-
     getWorksheet(event.spreadsheetId, event.worksheetTitle).then(
       res => {
         if (!res.data) return
@@ -56,25 +77,42 @@ export default function EventAdmin({ hidden }: Props) {
   }, [])
 
   useEffect(() => {
-    if (!event) return
-
-    return roomsRef
+    const unsubscribeFromPlayers = roomsRef
       .doc(event.roomId)
       .collection('players')
+      .onSnapshot(snapshot => {
+        setPlayers(
+          snapshot.docs.map(p => {
+            const playerData = p.data() as Player
+
+            return Object.assign(
+              {},
+              {
+                id: p.id,
+                exists: p.exists,
+                ref: p.ref,
+              },
+              playerData,
+            )
+          }),
+        )
+      })
+
+    const unsubscribeFromTickets = roomsRef
+      .doc(event.roomId)
+      .collection('tickets')
       .onSnapshot(
         snapshot => {
-          setPlayers(
-            snapshot.docs.map(p => {
-              const playerData = p.data() as Player
+          setTickets(
+            snapshot.docs.map(t => {
+              const ticketData = t.data() as EventTicket
 
               return Object.assign(
                 {},
                 {
-                  id: p.id,
-                  exists: p.exists,
-                  ref: p.ref,
+                  id: t.id,
                 },
-                playerData,
+                ticketData,
               )
             }),
           )
@@ -83,28 +121,21 @@ export default function EventAdmin({ hidden }: Props) {
           console.error(error)
         },
       )
+
+    return () => {
+      unsubscribeFromPlayers()
+      unsubscribeFromTickets()
+    }
   }, [])
 
-  if (!eventId || !Object.keys(EVENTS).includes(eventId || '')) {
-    return (
-      <Layout>
-        <Container>
-          <Message type="error">
-            El evento que estás buscando no existe.
-          </Message>
-        </Container>
-      </Layout>
-    )
+  if (hidden) {
+    return <Error statusCode={404} />
   }
 
   const list = registrations.map(r => ({
     ...r,
     player: players.find(p => p.name === r.name),
   }))
-
-  if (hidden) {
-    return <Error statusCode={404} />
-  }
 
   return (
     <Layout>
@@ -115,31 +146,20 @@ export default function EventAdmin({ hidden }: Props) {
       )}
       {!!registrations.length && (
         <Container size="large">
-          <Heading textAlign="center" type="h1">
+          <Heading type="h1">
             <span>Inscripciones ({list.length})</span>
           </Heading>
-          <Registrations
-            event={event}
-            registrations={list}
-            roomId={event.roomId}
-          />
+          <Registrations event={event} registrations={list} tickets={tickets} />
         </Container>
       )}
-      <Container size="large">
-        <EventGenerator />
-      </Container>
     </Layout>
   )
 }
 
 export async function getStaticPaths() {
   return {
-    paths: Object.keys(EVENTS).map(k => ({
-      params: {
-        eventId: k,
-      },
-    })),
-    fallback: false,
+    paths: [],
+    fallback: true,
   }
 }
 

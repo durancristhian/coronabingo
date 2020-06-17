@@ -12,16 +12,20 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
-import { Event, Registration } from '~/interfaces'
+import { Event, EventTicket, Registration } from '~/interfaces'
 import { createBatch, roomsRef, Timestamp } from '~/utils'
 
 interface Props {
   event: Event
   registrations: Registration[]
-  roomId: string
+  tickets: EventTicket[]
 }
 
-export default function Registrations({ event, registrations, roomId }: Props) {
+export default function Registrations({
+  event,
+  registrations,
+  tickets,
+}: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
 
   const onProvideAccessClick = async (r: Registration) => {
@@ -29,16 +33,19 @@ export default function Registrations({ event, registrations, roomId }: Props) {
 
     try {
       const batch = createBatch()
-      const room = roomsRef.doc(roomId)
+      const room = roomsRef.doc(event.roomId)
       const playerRef = room.collection('players').doc()
+      const ticket = tickets[0]
+      const ticketsRef = room.collection('tickets').doc(ticket.id)
 
       batch.set(playerRef, {
         date: Timestamp.fromDate(new Date()),
         name: r.name,
         selectedNumbers: [],
-        /* TODO: */
-        tickets: '1,2',
+        tickets: ticket.tickets,
       })
+
+      batch.delete(ticketsRef)
 
       await batch.commit()
 
@@ -62,11 +69,11 @@ export default function Registrations({ event, registrations, roomId }: Props) {
 
     const toastId = createToast('Enviando mail...', 'information')
 
-    const link = getRoomPlayerLink(roomId, r.player.id)
-    const body = `email=${r.email}&link=${link}`
+    const link = getRoomPlayerLink(event.roomId, r.player.id)
+    const body = `email=${r.email}&tickets=${link}&videocall=youtube.com`
 
     try {
-      await fetch(event.endpoints.email, {
+      await fetch(event.emailEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -151,7 +158,7 @@ export default function Registrations({ event, registrations, roomId }: Props) {
                 {r.player && (
                   <div>
                     <Anchor
-                      href={getRoomPlayerLink(roomId, r.player.id)}
+                      href={getRoomPlayerLink(event.roomId, r.player.id)}
                       id="player-link"
                     >
                       <span className="flex items-center">
@@ -165,7 +172,6 @@ export default function Registrations({ event, registrations, roomId }: Props) {
                       <Button
                         aria-label="Mandar mail"
                         id="send-email"
-                        color="green"
                         onClick={() => sendEmail(r)}
                       >
                         <FiMail />
