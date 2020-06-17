@@ -70,7 +70,7 @@ export default function Registrations({
     const toastId = createToast('Enviando mail...', 'information')
 
     const link = getRoomPlayerLink(event.roomId, r.player.id)
-    const body = `email=${r.email}&link=${link}`
+    const body = `email=${r.email}&tickets=${link}&videocall=youtube.com`
 
     try {
       await fetch(event.emailEndpoint, {

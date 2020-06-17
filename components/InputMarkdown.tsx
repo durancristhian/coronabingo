@@ -23,6 +23,9 @@ export default function InputMarkdown({ content, label, onChange }: Props) {
       <div className="mt-1">
         <MdEditor
           id="markdown-editor"
+          config={{
+            htmlClass: 'markdown-body',
+          }}
           name="markdown"
           style={{ height: '450px' }}
           value={content}

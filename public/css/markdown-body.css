@@ -2,6 +2,26 @@
   @apply my-4;
 }
 
+.markdown-body a {
+  @apply font-medium;
+  @apply text-blue-800;
+  @apply underline;
+}
+
+.markdown-body a:focus {
+  @apply outline-none;
+  @apply shadow-outline;
+}
+
+.markdown-body blockquote {
+  @apply bg-orange-200;
+  @apply border-l-2;
+  @apply border-orange-600;
+  @apply flex;
+  @apply items-center;
+  @apply p-4;
+}
+
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3,
@@ -9,6 +29,21 @@
 .markdown-body h5,
 .markdown-body h6 {
   @apply font-medium;
+}
+
+.markdown-body table {
+  @apply w-full;
+}
+
+.markdown-body td, th {
+  @apply border;
+  @apply px-4;
+  @apply py-2;
+  @apply text-left;
+}
+
+.markdown-body th {
+  @apply bg-gray-100;
 }
 
 .markdown-body ol,

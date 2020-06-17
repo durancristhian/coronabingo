@@ -200,7 +200,7 @@ export default function EventGenerator({ user }: Props) {
       </form>
       {id && (
         <div className="mt-8">
-          <Message type="success">El id de la sala que creaste es {id}</Message>
+          <Message type="success">El id del evento que creaste es {id}</Message>
         </div>
       )}
     </Fragment>
