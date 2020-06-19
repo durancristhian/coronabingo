@@ -12,7 +12,7 @@ import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
 import useToast from '~/hooks/useToast'
-import { createBatch } from '~/utils'
+import { createBatch, Timestamp } from '~/utils'
 
 const defaultFormData = {
   name: '',
@@ -75,7 +75,10 @@ export default function EventId({ hidden }: Props) {
       const batch = createBatch()
       const registrationRef = event.ref.collection('registrations').doc()
 
-      batch.set(registrationRef, formData)
+      batch.set(registrationRef, {
+        ...formData,
+        date: Timestamp.fromDate(new Date()),
+      })
 
       batch.commit()
 

@@ -1,4 +1,3 @@
-import { getWorksheet } from 'gsheets'
 import Error from 'next/error'
 import React, { useEffect, useState } from 'react'
 import Container from '~/components/Container'
@@ -8,11 +7,13 @@ import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import useEvent from '~/hooks/useEvent'
 import { EventTicket, Player, Registration } from '~/interfaces'
-import { excelDateToJSDate, roomsRef } from '~/utils'
+import { eventsRef, roomsRef } from '~/utils'
 
 interface Props {
   hidden: boolean
 }
+
+// TODO: REMOVE excelDateToJSDate
 
 export default function EventAdmin({ hidden }: Props) {
   const { error, loading, event } = useEvent()
@@ -20,33 +21,7 @@ export default function EventAdmin({ hidden }: Props) {
   const [players, setPlayers] = useState<Player[]>([])
   const [tickets, setTickets] = useState<EventTicket[]>([])
 
-  if (loading) {
-    return (
-      <Layout>
-        <Container>
-          <Message type="information">
-            Cargando información del evento...
-          </Message>
-        </Container>
-      </Layout>
-    )
-  }
-
-  if (error) {
-    return (
-      <Layout>
-        <Container>
-          <Message type="error">
-            El evento que estás buscando no existe.
-          </Message>
-        </Container>
-      </Layout>
-    )
-  }
-
-  if (!event) return null
-
-  useEffect(() => {
+  /* useEffect(() => {
     getWorksheet(event.spreadsheetId, event.worksheetTitle).then(
       res => {
         if (!res.data) return
@@ -74,9 +49,11 @@ export default function EventAdmin({ hidden }: Props) {
       },
       err => console.error(err),
     )
-  }, [])
+  }, []) */
 
   useEffect(() => {
+    if (!event) return
+
     const unsubscribeFromPlayers = roomsRef
       .doc(event.roomId)
       .collection('players')
@@ -111,8 +88,40 @@ export default function EventAdmin({ hidden }: Props) {
                 {},
                 {
                   id: t.id,
+                  exists: t.exists,
+                  ref: t.ref,
                 },
                 ticketData,
+              )
+            }),
+          )
+        },
+        error => {
+          console.error(error)
+        },
+      )
+
+    const unsubscribeFromEventRegistrations = eventsRef
+      .doc(event.id)
+      .collection('registrations')
+      .onSnapshot(
+        snapshot => {
+          setRegistrations(
+            snapshot.docs.map(e => {
+              const registrationData = e.data()
+
+              return Object.assign(
+                {},
+                {
+                  comment: registrationData.comment,
+                  email: registrationData.email,
+                  name: registrationData.email,
+                  paymentURL: registrationData.payment,
+                  paymentImage: registrationData.payment,
+                  player: undefined,
+                  tel: registrationData.tel,
+                  timestamp: registrationData.date,
+                },
               )
             }),
           )
@@ -125,8 +134,35 @@ export default function EventAdmin({ hidden }: Props) {
     return () => {
       unsubscribeFromPlayers()
       unsubscribeFromTickets()
+      unsubscribeFromEventRegistrations()
     }
   }, [])
+
+  if (loading) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="information">
+            Cargando información del evento...
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">
+            El evento que estás buscando no existe.
+          </Message>
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!event) return null
 
   if (hidden) {
     return <Error statusCode={404} />

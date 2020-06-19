@@ -102,7 +102,7 @@ export default function Registrations({
               <div className="w-1/5">
                 <Anchor href={r.paymentURL} id="payment" display="block">
                   <img
-                    src={`https://drive.google.com/uc?export=view&id=${r.paymentImage}`}
+                    src={r.paymentImage}
                     alt={`Comprobante de pago de ${r.name}`}
                     className="block rounded w-full"
                   />
@@ -115,9 +115,9 @@ export default function Registrations({
                     <p className="flex items-center">
                       <FiClock />
                       <span className="ml-2">
-                        {r.timestamp.toLocaleDateString('es-ar')}
+                        {/* {r.timestamp.toLocaleDateString('es-ar')}
                         <span>, </span>
-                        {r.timestamp.toLocaleTimeString('es-ar')}
+                        {r.timestamp.toLocaleTimeString('es-ar')} */}
                       </span>
                     </p>
                     <p className="flex items-center">
