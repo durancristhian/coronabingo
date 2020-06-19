@@ -41,6 +41,8 @@ export default function EventGenerator({ user }: Props) {
   const onCreateEventSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
+    /* TODO: validar */
+
     const toastId = createToast('Creando evento...', 'information')
 
     try {
