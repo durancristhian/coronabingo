@@ -1,144 +1,42 @@
 import Error from 'next/error'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import useEvent from '~/hooks/useEvent'
-import { EventTicket, Player, Registration } from '~/interfaces'
-import { eventsRef, roomsRef } from '~/utils'
+import useSubCollection from '~/hooks/useSubCollection'
+import { Player, Registration, RoomTicket } from '~/interfaces'
 
 interface Props {
   hidden: boolean
 }
 
-// TODO: REMOVE excelDateToJSDate
-
 export default function EventAdmin({ hidden }: Props) {
-  const { error, loading, event } = useEvent()
-  const [registrations, setRegistrations] = useState<Registration[]>([])
-  const [players, setPlayers] = useState<Player[]>([])
-  const [tickets, setTickets] = useState<EventTicket[]>([])
+  const { error: eventError, loading: eventLoading, event } = useEvent()
+  const {
+    data: registrations,
+    error: registrationsError,
+    loading: registrationsLoading,
+  } = useSubCollection('events', event?.id, 'registrations')
+  const {
+    data: players,
+    error: playersError,
+    loading: playersLoading,
+  } = useSubCollection('rooms', event?.roomId, 'players')
+  const {
+    data: tickets,
+    error: ticketsError,
+    loading: ticketsLoading,
+  } = useSubCollection('rooms', event?.roomId, 'tickets')
 
-  /* useEffect(() => {
-    getWorksheet(event.spreadsheetId, event.worksheetTitle).then(
-      res => {
-        if (!res.data) return
-
-        const data = res.data
-          .map(
-            d =>
-              ({
-                comment: d['Comentario'],
-                email: d['Dirección de correo electrónico'],
-                name: d['Nombre completo'],
-                paymentURL: d['Comprobante de pago'],
-                paymentImage: d['Comprobante de pago']
-                  ?.toString()
-                  .split('?id=')[1],
-                tel: d['Teléfono'],
-                timestamp: excelDateToJSDate(
-                  Number(d['Marca temporal']?.toString()),
-                ),
-              } as Registration),
-          )
-          .reverse()
-
-        setRegistrations(data)
-      },
-      err => console.error(err),
-    )
-  }, []) */
-
-  useEffect(() => {
-    if (!event) return
-
-    const unsubscribeFromPlayers = roomsRef
-      .doc(event.roomId)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        setPlayers(
-          snapshot.docs.map(p => {
-            const playerData = p.data() as Player
-
-            return Object.assign(
-              {},
-              {
-                id: p.id,
-                exists: p.exists,
-                ref: p.ref,
-              },
-              playerData,
-            )
-          }),
-        )
-      })
-
-    const unsubscribeFromTickets = roomsRef
-      .doc(event.roomId)
-      .collection('tickets')
-      .onSnapshot(
-        snapshot => {
-          setTickets(
-            snapshot.docs.map(t => {
-              const ticketData = t.data() as EventTicket
-
-              return Object.assign(
-                {},
-                {
-                  id: t.id,
-                  exists: t.exists,
-                  ref: t.ref,
-                },
-                ticketData,
-              )
-            }),
-          )
-        },
-        error => {
-          console.error(error)
-        },
-      )
-
-    const unsubscribeFromEventRegistrations = eventsRef
-      .doc(event.id)
-      .collection('registrations')
-      .onSnapshot(
-        snapshot => {
-          setRegistrations(
-            snapshot.docs.map(e => {
-              const registrationData = e.data()
-
-              return Object.assign(
-                {},
-                {
-                  comment: registrationData.comment,
-                  email: registrationData.email,
-                  name: registrationData.email,
-                  paymentURL: registrationData.payment,
-                  paymentImage: registrationData.payment,
-                  player: undefined,
-                  tel: registrationData.tel,
-                  timestamp: registrationData.date,
-                },
-              )
-            }),
-          )
-        },
-        error => {
-          console.error(error)
-        },
-      )
-
-    return () => {
-      unsubscribeFromPlayers()
-      unsubscribeFromTickets()
-      unsubscribeFromEventRegistrations()
-    }
-  }, [])
-
-  if (loading) {
+  if (
+    eventLoading ||
+    registrationsLoading ||
+    playersLoading ||
+    ticketsLoading
+  ) {
     return (
       <Layout>
         <Container>
@@ -150,7 +48,7 @@ export default function EventAdmin({ hidden }: Props) {
     )
   }
 
-  if (error) {
+  if (eventError || registrationsError || playersError || ticketsError) {
     return (
       <Layout>
         <Container>
@@ -162,16 +60,11 @@ export default function EventAdmin({ hidden }: Props) {
     )
   }
 
-  if (!event) return null
+  if (!event || !registrations || !players || !tickets) return null
 
   if (hidden) {
     return <Error statusCode={404} />
   }
-
-  const list = registrations.map(r => ({
-    ...r,
-    player: players.find(p => p.name === r.name),
-  }))
 
   return (
     <Layout>
@@ -183,9 +76,14 @@ export default function EventAdmin({ hidden }: Props) {
       {!!registrations.length && (
         <Container size="large">
           <Heading type="h1">
-            <span>Inscripciones ({list.length})</span>
+            <span>Inscripciones ({registrations.length})</span>
           </Heading>
-          <Registrations event={event} registrations={list} tickets={tickets} />
+          <Registrations
+            event={event}
+            players={players as Player[]}
+            registrations={registrations as Registration[]}
+            tickets={tickets as RoomTicket[]}
+          />
         </Container>
       )}
     </Layout>

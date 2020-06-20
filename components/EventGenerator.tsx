@@ -15,6 +15,17 @@ import InputMarkdown from './InputMarkdown'
 import InputText from './InputText'
 import Message from './Message'
 
+const defaultEventData = {
+  content: {
+    html: '',
+    text: '',
+  },
+  emailEndpoint: '',
+  name: '',
+  roomAdminName: '',
+  roomName: '',
+}
+
 interface Props {
   user: firebase.User
 }
@@ -23,25 +34,13 @@ export default function EventGenerator({ user }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
   const [id, setId] = useState<string>()
   const [inProgress, setInProgress] = useState(false)
-  const [formData, setFormData] = useState({
-    content: {
-      html: '<p>Hola!</p>',
-      text: 'Hola!',
-    },
-    emailEndpoint: 'https://hooks.palabra.io/js?id=96',
-    eventName: 'Coronabingo Solidario - Junio 2020',
-    eventRoomAdminName: 'Cristhian',
-    eventRoomName: 'Evento de prueba',
-    formURL: 'https://forms.gle/FMxzniFaYw6jWLsW8',
-    spreadsheetId: '1gwJIIPX2gs696_fq3HQQntXhg-mFwREVVyd831GWF8c',
-    worksheetTitle: 'Respuestas de formulario 1',
-  })
+  const [event, setEvent] = useState(defaultEventData)
   const randomTickets = useRandomTickets()
 
-  const onCreateEventSubmit = async (event: FormEvent) => {
-    event.preventDefault()
+  const onCreateEventSubmit = async (e: FormEvent) => {
+    e.preventDefault()
 
-    /* TODO: validar */
+    /* TODO: validate */
 
     const toastId = createToast('Creando evento...', 'information')
 
@@ -50,7 +49,6 @@ export default function EventGenerator({ user }: Props) {
 
       const batch = createBatch()
 
-      /* Se crea la sala */
       const roomRef = roomsRef.doc()
 
       batch.set(roomRef, {
@@ -59,17 +57,16 @@ export default function EventGenerator({ user }: Props) {
         bingoSpinner: false,
         code: generateRoomCode(),
         date: Timestamp.fromDate(new Date()),
-        name: formData.eventRoomName,
+        name: event.roomName,
         hideNumbersMeaning: true,
         readyToPlay: true,
       })
 
-      /* Se crea el admin */
       const adminRef = roomRef.collection('players').doc()
 
       batch.set(adminRef, {
         date: Timestamp.fromDate(new Date()),
-        name: formData.eventRoomAdminName,
+        name: event.roomAdminName,
         selectedNumbers: [],
         tickets: randomTickets[0],
       })
@@ -78,7 +75,6 @@ export default function EventGenerator({ user }: Props) {
         adminId: adminRef.id,
       })
 
-      /* Se generan los tickets aleatorios para la sala */
       for (let index = 1; index < 350; index++) {
         const ticketRef = roomRef.collection('tickets').doc()
 
@@ -87,18 +83,14 @@ export default function EventGenerator({ user }: Props) {
         })
       }
 
-      /* Se crea el evento */
       const eventRef = eventsRef.doc()
 
       batch.set(eventRef, {
+        content: event.content,
         date: Timestamp.fromDate(new Date()),
+        emailEndpoint: event.emailEndpoint,
+        eventName: event.name,
         roomId: roomRef.id,
-        eventName: formData.eventName,
-        content: formData.content,
-        emailEndpoint: formData.emailEndpoint,
-        formURL: formData.formURL,
-        spreadsheetId: formData.spreadsheetId,
-        worksheetTitle: formData.worksheetTitle,
         userId: user.uid,
       })
 
@@ -112,6 +104,8 @@ export default function EventGenerator({ user }: Props) {
 
       updateToast('Ups! Hubo un error', 'error', toastId)
     } finally {
+      setEvent(defaultEventData)
+
       setInProgress(false)
 
       setTimeout(() => {
@@ -126,65 +120,41 @@ export default function EventGenerator({ user }: Props) {
         <fieldset disabled={inProgress}>
           <InputText
             id="event-name"
-            label="Nombre del evento"
-            value={formData.eventName}
-            onChange={eventName => {
-              setFormData({ ...formData, eventName })
+            label="Nombre"
+            value={event.name}
+            onChange={name => {
+              setEvent({ ...event, name })
+            }}
+          />
+          <InputMarkdown
+            content={event.content.text}
+            label="Descripción"
+            onChange={content => {
+              setEvent({ ...event, content })
             }}
           />
           <InputText
             id="event-room-name"
             label="Nombre de la sala"
-            value={formData.eventRoomName}
-            onChange={eventRoomName => {
-              setFormData({ ...formData, eventRoomName })
+            value={event.roomName}
+            onChange={roomName => {
+              setEvent({ ...event, roomName })
             }}
           />
           <InputText
             id="event-admin-name"
             label="Nombre del admin de la sala"
-            value={formData.eventRoomAdminName}
-            onChange={eventRoomAdminName => {
-              setFormData({ ...formData, eventRoomAdminName })
-            }}
-          />
-          <InputMarkdown
-            content={formData.content.text}
-            label="Contenido de la página de inscripción"
-            onChange={content => {
-              setFormData({ ...formData, content })
-            }}
-          />
-          <InputText
-            id="form-url"
-            label="Link al formulario de inscripciones"
-            value={formData.formURL}
-            onChange={formURL => {
-              setFormData({ ...formData, formURL })
-            }}
-          />
-          <InputText
-            id="spreadsheet-id"
-            label="Id de la planilla donde el formulario guarda de inscripciones"
-            value={formData.spreadsheetId}
-            onChange={spreadsheetId => {
-              setFormData({ ...formData, spreadsheetId })
-            }}
-          />
-          <InputText
-            id="spreadsheet-url"
-            label="Título de la hoja de la planilla donde el formulario guarda de inscripciones"
-            value={formData.worksheetTitle}
-            onChange={worksheetTitle => {
-              setFormData({ ...formData, worksheetTitle })
+            value={event.roomAdminName}
+            onChange={roomAdminName => {
+              setEvent({ ...event, roomAdminName })
             }}
           />
           <InputText
             id="email-endpoint"
             label="Endpoint de palabra.io para mandar los mails"
-            value={formData.emailEndpoint}
+            value={event.emailEndpoint}
             onChange={emailEndpoint => {
-              setFormData({ ...formData, emailEndpoint })
+              setEvent({ ...event, emailEndpoint })
             }}
           />
           <div className="mt-8 text-center">

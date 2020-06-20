@@ -12,23 +12,36 @@ import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
-import { Event, EventTicket, Registration } from '~/interfaces'
+import { Event, Player, Registration, RoomTicket } from '~/interfaces'
 import { createBatch, roomsRef, Timestamp } from '~/utils'
+
+interface EventRegistration extends Registration {
+  player: Player | undefined
+}
 
 interface Props {
   event: Event
+  players: Player[]
   registrations: Registration[]
-  tickets: EventTicket[]
+  tickets: RoomTicket[]
 }
 
 export default function Registrations({
   event,
+  players,
   registrations,
   tickets,
 }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
 
-  const onProvideAccessClick = async (r: Registration) => {
+  const registrationList: EventRegistration[] = registrations.map(
+    registration => ({
+      ...registration,
+      player: players.find(p => p.name === registration.name),
+    }),
+  )
+
+  const onProvideAccessClick = async (registration: EventRegistration) => {
     const toastId = createToast('Otorgando acceso...', 'information')
 
     try {
@@ -40,7 +53,7 @@ export default function Registrations({
 
       batch.set(playerRef, {
         date: Timestamp.fromDate(new Date()),
-        name: r.name,
+        name: registration.name,
         selectedNumbers: [],
         tickets: ticket.tickets,
       })
@@ -64,13 +77,13 @@ export default function Registrations({
   const getRoomPlayerLink = (rid: string, pid: string) =>
     `https://coronabingo.now.sh/room/${rid}/${pid}`
 
-  const sendEmail = async (r: Registration) => {
-    if (!r.player) return
+  const sendEmail = async (registration: EventRegistration) => {
+    if (!registration.player) return
 
     const toastId = createToast('Enviando mail...', 'information')
 
-    const link = getRoomPlayerLink(event.roomId, r.player.id)
-    const body = `email=${r.email}&tickets=${link}&videocall=youtube.com`
+    const link = getRoomPlayerLink(event.roomId, registration.player.id)
+    const body = `email=${registration.email}&tickets=${link}&videocall=youtube.com`
 
     try {
       await fetch(event.emailEndpoint, {
@@ -95,76 +108,93 @@ export default function Registrations({
 
   return (
     <Fragment>
-      {registrations.map((r, i) => (
+      {registrationList.map((registration, i) => (
         <div key={i} className="mt-4">
           <Box>
             <div className="flex">
               <div className="w-1/5">
-                <Anchor href={r.paymentURL} id="payment" display="block">
-                  <img
-                    src={r.paymentImage}
-                    alt={`Comprobante de pago de ${r.name}`}
-                    className="block rounded w-full"
-                  />
-                </Anchor>
+                <img
+                  src={registration.attachment}
+                  alt={`Comprobante de pago de ${registration.name}`}
+                  className="block rounded w-full"
+                />
               </div>
               <div className="w-3/5">
                 <div className="mx-4">
-                  <Heading type="h4">{r.name}</Heading>
+                  <Heading type="h4">{registration.name}</Heading>
                   <div className="break-all mt-4 text-gray-700 whitespace-pre-wrap">
-                    <p className="flex items-center">
-                      <FiClock />
+                    <div className="flex">
+                      <div className="mt-1">
+                        <FiClock />
+                      </div>
                       <span className="ml-2">
-                        {/* {r.timestamp.toLocaleDateString('es-ar')}
-                        <span>, </span>
-                        {r.timestamp.toLocaleTimeString('es-ar')} */}
+                        {registration.date && (
+                          <Fragment>
+                            {registration.date
+                              ?.toDate()
+                              .toLocaleDateString('es-ar')}
+                            <span>, </span>
+                            {registration.date
+                              ?.toDate()
+                              .toLocaleTimeString('es-ar')}
+                          </Fragment>
+                        )}
                       </span>
-                    </p>
-                    <p className="flex items-center">
-                      <FaWhatsapp />
+                    </div>
+                    <div className="flex">
+                      <div className="mt-1">
+                        <FaWhatsapp />
+                      </div>
                       <span className="ml-2">
                         <Anchor
-                          href={`https://api.whatsapp.com/send?phone=+549${r.tel}&text=Hola ${r.name}, `}
+                          href={`https://api.whatsapp.com/send?phone=+549${registration.tel}&text=Hola ${registration.name}, `}
                           id="whatsapp"
                         >
-                          {r.tel}
+                          {registration.tel}
                         </Anchor>
                       </span>
-                    </p>
-                    <p className="flex items-center">
-                      <FiMail />
-                      <span className="ml-2">{r.email}</span>
-                    </p>
-                    {r.comment && (
-                      <p className="flex items-center">
-                        <FiMessageSquare />
-                        <span className="ml-2">{r.comment}</span>
-                      </p>
+                    </div>
+                    <div className="flex">
+                      <div className="mt-1">
+                        <FiMail />
+                      </div>
+                      <span className="ml-2">{registration.email}</span>
+                    </div>
+                    {registration.comment && (
+                      <div className="flex">
+                        <div className="mt-1">
+                          <FiMessageSquare />
+                        </div>
+                        <span className="ml-2">{registration.comment}</span>
+                      </div>
                     )}
                   </div>
                 </div>
               </div>
               <div className="text-right w-1/5">
-                {!r.player && (
+                {!registration.player && (
                   <Button
                     aria-label="Aprobar"
                     id="provide-access"
-                    onClick={() => onProvideAccessClick(r)}
+                    onClick={() => onProvideAccessClick(registration)}
                   >
                     <FiCheck />
                     <span className="ml-2">Aprobar</span>
                   </Button>
                 )}
-                {r.player && (
+                {registration.player && (
                   <div>
                     <Anchor
-                      href={getRoomPlayerLink(event.roomId, r.player.id)}
+                      href={getRoomPlayerLink(
+                        event.roomId,
+                        registration.player.id,
+                      )}
                       id="player-link"
                     >
                       <span className="flex items-center">
                         <FiLink />
                         <span className="ml-2">
-                          Cartones ({r.player.tickets})
+                          Cartones ({registration.player.tickets})
                         </span>
                       </span>
                     </Anchor>
@@ -172,7 +202,7 @@ export default function Registrations({
                       <Button
                         aria-label="Mandar mail"
                         id="send-email"
-                        onClick={() => sendEmail(r)}
+                        onClick={() => sendEmail(registration)}
                       >
                         <FiMail />
                         <span className="ml-2">Mandar mail</span>

@@ -12,14 +12,16 @@ import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
 import useToast from '~/hooks/useToast'
+import { RegistrationBase } from '~/interfaces'
 import { createBatch, Timestamp } from '~/utils'
 
 const defaultFormData = {
-  name: '',
-  email: '',
-  tel: '',
-  payment: '',
+  attachment: '',
   comment: '',
+  date: null,
+  email: '',
+  name: '',
+  tel: '',
 }
 
 interface Props {
@@ -30,7 +32,7 @@ export default function EventId({ hidden }: Props) {
   const { error, loading, event } = useEvent()
   const { createToast, dismissToast, updateToast } = useToast()
   const [inProgress, setInProgress] = useState(false)
-  const [formData, setFormData] = useState(defaultFormData)
+  const [formData, setFormData] = useState<RegistrationBase>(defaultFormData)
 
   if (loading) {
     return (
@@ -65,7 +67,7 @@ export default function EventId({ hidden }: Props) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    /* TODO: validar */
+    /* TODO: validate */
 
     const toastId = createToast('Enviando...', 'information')
 
@@ -103,7 +105,7 @@ export default function EventId({ hidden }: Props) {
       <Container size="medium">
         <Box>
           <Heading textAlign="center" type="h1">
-            {event.eventName}
+            {event.name}
           </Heading>
           <div
             className="markdown-body my-8"
@@ -145,13 +147,13 @@ export default function EventId({ hidden }: Props) {
                 }}
               />
               <InputImage
-                id="payment"
+                id="attachment"
                 label="Comprobante de la donación"
-                image={formData.payment}
-                onChange={payment => {
-                  setFormData({ ...formData, payment })
+                image={formData.attachment}
+                onChange={attachment => {
+                  setFormData({ ...formData, attachment })
                 }}
-              ></InputImage>
+              />
               <div className="mt-8 text-center">
                 <Button
                   aria-label="Quiero jugar"

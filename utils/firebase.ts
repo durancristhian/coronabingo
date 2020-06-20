@@ -30,4 +30,4 @@ const eventsRef = db.collection('events')
 
 const createBatch = () => db.batch()
 
-export { auth, createBatch, roomsRef, eventsRef, Timestamp }
+export { db, auth, createBatch, roomsRef, eventsRef, Timestamp }

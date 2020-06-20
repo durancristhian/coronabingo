@@ -1,5 +1,4 @@
 export * from './constants'
-export * from './excelDateToJSDate'
 export * from './firebase'
 export * from './generateRoomCode'
 export * from './getBaseUrl'
