@@ -77,13 +77,22 @@ export default function Registrations({
   const getRoomPlayerLink = (rid: string, pid: string) =>
     `https://coronabingo.now.sh/room/${rid}/${pid}`
 
+  const getEventDate = (registration: EventRegistration) => {
+    const day = registration.date?.toDate().toLocaleDateString('es-ar')
+    const hour = registration.date?.toDate().toLocaleTimeString('es-ar')
+
+    return `${day}, ${hour}`
+  }
+
   const sendEmail = async (registration: EventRegistration) => {
     if (!registration.player) return
 
     const toastId = createToast('Enviando mail...', 'information')
 
+    const date = getEventDate(registration)
     const link = getRoomPlayerLink(event.roomId, registration.player.id)
-    const body = `email=${registration.email}&tickets=${link}&videocall=youtube.com`
+    const videocall = '-- PONER LINK A LA VIDEOLLAMADA --'
+    const body = `email=${registration.email}&date=${date}&tickets=${link}&videocall=${videocall}`
 
     try {
       await fetch(event.emailEndpoint, {
@@ -104,6 +113,34 @@ export default function Registrations({
         dismissToast(toastId)
       }, 2000)
     }
+  }
+
+  const getMessage = (registration: EventRegistration) => {
+    if (!registration.player) return
+
+    const date = getEventDate(registration)
+    const tickets = getRoomPlayerLink(event.roomId, registration.player.id)
+    const videocall = '-- PONER LINK A LA VIDEOLLAMADA --'
+
+    return `Hola ${registration.player.name},
+
+Gracias por haberte sumado a jugar este Coronabingo solidario. 
+
+Te recordamos que vamos a jugar el día ${date}. Ese día vamos a hacer una videollamada por la aplicación Zoom.
+
+Tu link a los cartones para jugar es ${tickets}
+
+El link a la videollamada de Zoom es ${videocall}
+
+Saludos, Cris.`
+  }
+
+  const sendWhatsApp = (registration: EventRegistration) => {
+    window.open(
+      `https://api.whatsapp.com/send?phone=+549${
+        registration.tel
+      }&text=${getMessage(registration)}`,
+    )
   }
 
   return (
@@ -128,17 +165,7 @@ export default function Registrations({
                         <FiClock />
                       </div>
                       <span className="ml-2">
-                        {registration.date && (
-                          <Fragment>
-                            {registration.date
-                              ?.toDate()
-                              .toLocaleDateString('es-ar')}
-                            <span>, </span>
-                            {registration.date
-                              ?.toDate()
-                              .toLocaleTimeString('es-ar')}
-                          </Fragment>
-                        )}
+                        {registration.date && getEventDate(registration)}
                       </span>
                     </div>
                     <div className="flex">
@@ -205,7 +232,18 @@ export default function Registrations({
                         onClick={() => sendEmail(registration)}
                       >
                         <FiMail />
-                        <span className="ml-2">Mandar mail</span>
+                        <span className="ml-2">Email</span>
+                      </Button>
+                    </div>
+                    <div className="mt-4">
+                      <Button
+                        aria-label="Mandar WhatsApp"
+                        id="send-whatsapp"
+                        color="green"
+                        onClick={() => sendWhatsApp(registration)}
+                      >
+                        <FaWhatsapp />
+                        <span className="ml-2">WhatsApp</span>
                       </Button>
                     </div>
                   </div>

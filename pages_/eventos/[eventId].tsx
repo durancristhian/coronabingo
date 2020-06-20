@@ -4,7 +4,6 @@ import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Container from '~/components/Container'
-import Counter from '~/components/Counter'
 import Heading from '~/components/Heading'
 import InputImage from '~/components/InputImage'
 import InputText from '~/components/InputText'
@@ -12,7 +11,6 @@ import InputTextarea from '~/components/InputTextarea'
 import Layout from '~/components/Layout'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
-import useSubCollection from '~/hooks/useSubCollection'
 import useToast from '~/hooks/useToast'
 import { RegistrationBase } from '~/interfaces'
 import { createBatch, Timestamp } from '~/utils'
@@ -32,11 +30,6 @@ interface Props {
 
 export default function EventId({ hidden }: Props) {
   const { error, loading, event } = useEvent()
-  const {
-    data: players,
-    error: playersError,
-    loading: playersLoading,
-  } = useSubCollection('rooms', event?.roomId, 'players')
   const { createToast, dismissToast, updateToast } = useToast()
   const [inProgress, setInProgress] = useState(false)
   const [formData, setFormData] = useState<RegistrationBase>(defaultFormData)
@@ -118,11 +111,6 @@ export default function EventId({ hidden }: Props) {
             className="markdown-body my-8"
             dangerouslySetInnerHTML={{ __html: event.content.html }}
           />
-          {!playersLoading && !playersError && players && players.length > 1 && (
-            <div className="my-8">
-              <Counter amount={players.length} />
-            </div>
-          )}
           <Heading type="h2">Inscripción</Heading>
           <form onSubmit={onSubmit}>
             <fieldset disabled={inProgress}>
