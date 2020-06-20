@@ -7,7 +7,6 @@ export interface PlayerBase {
 }
 
 export interface Player extends PlayerBase {
-  exists: boolean
   id: string
   ref: firebase.firestore.DocumentReference
 }

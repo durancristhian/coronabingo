@@ -22,7 +22,7 @@ const PlayerContextProvider = ({ children }: Props) => {
   const [error, setError] = useState<string>('')
 
   const updatePlayer = (data: Partial<PlayerBase>) => {
-    setPlayer(Object.assign({}, player, data))
+    setPlayer(prev => Object.assign({}, prev, data))
   }
 
   useEffect(() => {
@@ -34,23 +34,13 @@ const PlayerContextProvider = ({ children }: Props) => {
       .doc(`${roomId}/players/${playerId}`)
       .onSnapshot(
         snapshot => {
-          if (snapshot.exists) {
-            const playerData = snapshot.data() as Player
+          const playerData = snapshot.data() as Player
 
-            setPlayer(
-              Object.assign(
-                {},
-                {
-                  id: snapshot.id,
-                  exists: snapshot.exists,
-                  ref: snapshot.ref,
-                },
-                playerData,
-              ),
-            )
-          } else {
-            setError('ROOM_DOES_NOT_EXIST')
-          }
+          setPlayer({
+            ...playerData,
+            id: snapshot.id,
+            ref: snapshot.ref,
+          })
 
           setLoading(false)
         },

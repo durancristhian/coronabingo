@@ -74,7 +74,7 @@ export default function RoomPlayer() {
     )
   }
 
-  if (!player.exists) {
+  if (!player) {
     return (
       <Layout>
         <Container>

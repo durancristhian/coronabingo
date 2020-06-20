@@ -56,7 +56,6 @@ export default function Players({
     setPlayers([
       ...players,
       {
-        exists: true,
         id: playerId,
         ref: playerRef,
         ...playerData,

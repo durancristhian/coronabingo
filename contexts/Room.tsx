@@ -21,7 +21,7 @@ const RoomContextProvider = ({ children }: Props) => {
   const [error, setError] = useState<string>('')
 
   const updateRoom = (data: Partial<RoomBase>) => {
-    setRoom(Object.assign({}, room, data))
+    setRoom(prev => Object.assign({}, prev, data))
   }
 
   useEffect(() => {
@@ -31,23 +31,13 @@ const RoomContextProvider = ({ children }: Props) => {
 
     const unsubscribe = roomsRef.doc(roomId).onSnapshot(
       snapshot => {
-        if (snapshot.exists) {
-          const roomData = snapshot.data() as Room
+        const roomData = snapshot.data() as Room
 
-          setRoom(
-            Object.assign(
-              {},
-              {
-                id: snapshot.id,
-                exists: snapshot.exists,
-                ref: snapshot.ref,
-              },
-              roomData,
-            ),
-          )
-        } else {
-          setError('ROOM_DOES_NOT_EXIST')
-        }
+        setRoom({
+          ...roomData,
+          id: snapshot.id,
+          ref: snapshot.ref,
+        })
 
         setLoading(false)
       },

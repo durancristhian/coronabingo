@@ -17,7 +17,6 @@ export interface RoomBase {
 }
 
 export interface Room extends RoomBase {
-  exists: boolean
   id: string
   ref: firebase.firestore.DocumentReference
 }

@@ -39,15 +39,11 @@ const PlayersContextProvider = ({ children }: Props) => {
             snapshot.docs.map(p => {
               const playerData = p.data() as Player
 
-              return Object.assign(
-                {},
-                {
-                  id: p.id,
-                  exists: p.exists,
-                  ref: p.ref,
-                },
-                playerData,
-              )
+              return {
+                ...playerData,
+                id: p.id,
+                ref: p.ref,
+              }
             }),
           )
 
