@@ -12,8 +12,13 @@ interface Props {
 
 export default function InputImage({ label, id, image, onChange }: Props) {
   const labelRef = React.createRef<HTMLLabelElement>()
+  const inputRef = React.createRef<HTMLInputElement>()
   const clearImage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event?.preventDefault()
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
 
     onChange('')
   }
@@ -78,6 +83,7 @@ export default function InputImage({ label, id, image, onChange }: Props) {
         onChange={handleOnChange}
         tabIndex={-1}
         type="file"
+        ref={inputRef}
       />
     </Fragment>
   )
