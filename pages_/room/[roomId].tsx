@@ -64,7 +64,7 @@ export default function RoomId() {
 
   const renderPlayers = () => {
     if (!room.readyToPlay || !players.length) {
-      return <Message type="information">{t('roomId:not-ready')}</Message>
+      return <Loading message={t('roomId:not-ready')} />
     }
 
     return (
