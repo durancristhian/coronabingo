@@ -35,7 +35,8 @@
   @apply w-full;
 }
 
-.markdown-body td, th {
+.markdown-body td,
+.markdown-body th {
   @apply border;
   @apply px-4;
   @apply py-2;

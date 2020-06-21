@@ -1,7 +1,7 @@
 export interface RegistrationBase {
   attachment: string
   comment: string
-  date: firebase.firestore.Timestamp | null
+  date: firebase.firestore.Timestamp
   email: string
   name: string
   tel: string

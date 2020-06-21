@@ -1,19 +1,28 @@
+import classnames from 'classnames'
 import React, { Fragment } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import {
+  FiCalendar,
   FiCheck,
-  FiClock,
+  FiChevronDown,
   FiLink,
   FiMail,
   FiMessageSquare,
 } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
-import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
 import { Event, Player, Registration, RoomTicket } from '~/interfaces'
-import { createBatch, roomsRef, Timestamp } from '~/utils'
+import {
+  createBatch,
+  getBaseUrl,
+  roomsRef,
+  sendWhatsApp,
+  Timestamp,
+} from '~/utils'
+import Accordion from './Accordion'
+import Tag from './Tag'
 
 interface EventRegistration extends Registration {
   player: Player | undefined
@@ -74,17 +83,32 @@ export default function Registrations({
     }
   }
 
-  const getRoomPlayerLink = (rid: string, pid: string) =>
-    `https://coronabingo.now.sh/room/${rid}/${pid}`
+  const getRoomPlayerLink = (roomId: string, playerId: string) =>
+    `${getBaseUrl()}/room/${roomId}/${playerId}`
 
   const getEventDate = (registration: EventRegistration) => {
-    const day = registration.date?.toDate().toLocaleDateString('es-ar')
-    const hour = registration.date?.toDate().toLocaleTimeString('es-ar')
+    const registrationDate = registration.date.toDate()
+
+    const day = registrationDate.toLocaleDateString('es-ar')
+    const hour = registrationDate.toLocaleTimeString('es-ar')
 
     return `${day}, ${hour}`
   }
 
+  const getMessageData = (registration: EventRegistration) => {
+    return {
+      name: registration.name,
+      date: getEventDate(registration),
+      tickets: getRoomPlayerLink(
+        event.roomId,
+        registration.player?.id || 'THIS SHOULD NOT HAPPEN',
+      ),
+      videocall: '-- PONER LINK A LA VIDEOLLAMADA --',
+    }
+  }
+
   const sendEmail = async (registration: EventRegistration) => {
+    /* This shouldn't happen */
     if (!registration.player) return
 
     const toastId = createToast('Enviando mail...', 'information')
@@ -116,13 +140,12 @@ export default function Registrations({
   }
 
   const getMessage = (registration: EventRegistration) => {
-    if (!registration.player) return
+    /* This shouldn't happen */
+    if (!registration.player) return ''
 
-    const date = getEventDate(registration)
-    const tickets = getRoomPlayerLink(event.roomId, registration.player.id)
-    const videocall = '-- PONER LINK A LA VIDEOLLAMADA --'
+    const { name, date, tickets, videocall } = getMessageData(registration)
 
-    return `Hola ${registration.player.name},
+    return `Hola ${name},
 
 Gracias por haberte sumado a jugar este Coronabingo solidario. 
 
@@ -135,71 +158,102 @@ El link a la videollamada de Zoom es ${videocall}
 Saludos, Cris.`
   }
 
-  const sendWhatsApp = (registration: EventRegistration) => {
-    window.open(
-      `https://api.whatsapp.com/send?phone=+549${
-        registration.tel
-      }&text=${getMessage(registration)}`,
+  const renderRow = (registration: EventRegistration) => {
+    const ticketsUrl = getRoomPlayerLink(
+      // eslint-disable-next-line react/prop-types
+      event.roomId,
+      registration.player?.id || 'THIS SHOULD NOT HAPPEN',
     )
-  }
 
-  return (
-    <Fragment>
-      {registrationList.map((registration, i) => (
-        <div key={i} className="mt-4">
-          <Box>
-            <div className="flex">
-              <div className="w-1/5">
-                <img
-                  src={registration.attachment}
-                  alt={`Comprobante de pago de ${registration.name}`}
-                  className="block rounded w-full"
-                />
+    return (
+      <div className="mb-2">
+        <Accordion
+          id={registration.id}
+          label={
+            <div
+              className={classnames([
+                'bg-white cursor-pointer flex items-center shadow',
+                'focus:outline-none focus:shadow-outline',
+                'duration-150 ease-in-out transition',
+              ])}
+            >
+              <div className="p-4 w-3/5">
+                <span className="font-medium">{registration.name}</span>
               </div>
-              <div className="w-3/5">
-                <div className="mx-4">
-                  <Heading type="h4">{registration.name}</Heading>
-                  <div className="break-all mt-4 text-gray-700 whitespace-pre-wrap">
-                    <div className="flex">
-                      <div className="mt-1">
-                        <FiClock />
-                      </div>
-                      <span className="ml-2">
-                        {registration.date && getEventDate(registration)}
-                      </span>
-                    </div>
-                    <div className="flex">
-                      <div className="mt-1">
-                        <FaWhatsapp />
-                      </div>
-                      <span className="ml-2">
-                        <Anchor
-                          href={`https://api.whatsapp.com/send?phone=+549${registration.tel}&text=Hola ${registration.name}, `}
-                          id="whatsapp"
-                        >
-                          {registration.tel}
-                        </Anchor>
-                      </span>
-                    </div>
-                    <div className="flex">
-                      <div className="mt-1">
-                        <FiMail />
-                      </div>
-                      <span className="ml-2">{registration.email}</span>
-                    </div>
-                    {registration.comment && (
-                      <div className="flex">
-                        <div className="mt-1">
-                          <FiMessageSquare />
-                        </div>
-                        <span className="ml-2">{registration.comment}</span>
-                      </div>
-                    )}
-                  </div>
+              <div className="p-4 w-1/5">
+                {registration.player ? (
+                  <Tag color="green">Confirmado</Tag>
+                ) : (
+                  <Tag color="yellow">A confirmar</Tag>
+                )}
+              </div>
+              <div className="p-4 w-1/5">
+                <div className="flex justify-end">
+                  <FiChevronDown />
                 </div>
               </div>
-              <div className="text-right w-1/5">
-                {!registration.player && (
+            </div>
+          }
+        >
+          <div className="bg-gray-100 flex flex-wrap mb-2 shadow">
+            <div className="p-4 w-1/5">
+              <img
+                src={registration.attachment}
+                alt={`Comprobante de pago de ${registration.name}`}
+                className="block rounded w-full"
+              />
+            </div>
+            <div className="p-4 w-2/5">
+              <div className="mb-4">
+                <Heading type="h4">Detalles</Heading>
+              </div>
+              <div className="flex">
+                <div className="mt-1">
+                  <FiCalendar color="#718096" />
+                </div>
+                <span className="ml-2">
+                  {registration.date && getEventDate(registration)}
+                </span>
+              </div>
+              <div className="flex mt-2">
+                <div className="mt-1">
+                  <FaWhatsapp color="#718096" />
+                </div>
+                <span className="ml-2">
+                  <button
+                    onClick={() => {
+                      sendWhatsApp(registration.tel, getMessage(registration))
+                    }}
+                    id="whatsapp"
+                    className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
+                  >
+                    {registration.tel}
+                  </button>
+                </span>
+              </div>
+              <div className="flex mt-2">
+                <div className="mt-1">
+                  <FiMail color="#718096" />
+                </div>
+                <span className="ml-2">{registration.email}</span>
+              </div>
+              {registration.comment && (
+                <div className="flex mt-2">
+                  <div className="mt-1">
+                    <FiMessageSquare color="#718096" />
+                  </div>
+                  <pre className="font-sans italic ml-2">
+                    {registration.comment}
+                  </pre>
+                </div>
+              )}
+            </div>
+            <div className="p-4 w-2/5">
+              {!registration.player && (
+                <Fragment>
+                  <div className="mb-4">
+                    <Heading type="h4">Acciones</Heading>
+                  </div>
                   <Button
                     aria-label="Aprobar"
                     id="provide-access"
@@ -208,51 +262,55 @@ Saludos, Cris.`
                     <FiCheck />
                     <span className="ml-2">Aprobar</span>
                   </Button>
-                )}
-                {registration.player && (
-                  <div>
-                    <Anchor
-                      href={getRoomPlayerLink(
-                        event.roomId,
-                        registration.player.id,
-                      )}
-                      id="player-link"
-                    >
-                      <span className="flex items-center">
-                        <FiLink />
-                        <span className="ml-2">
-                          Cartones ({registration.player.tickets})
-                        </span>
-                      </span>
-                    </Anchor>
-                    <div className="mt-4">
-                      <Button
-                        aria-label="Mandar mail"
-                        id="send-email"
-                        onClick={() => sendEmail(registration)}
-                      >
-                        <FiMail />
-                        <span className="ml-2">Email</span>
-                      </Button>
-                    </div>
-                    <div className="mt-4">
-                      <Button
-                        aria-label="Mandar WhatsApp"
-                        id="send-whatsapp"
-                        color="green"
-                        onClick={() => sendWhatsApp(registration)}
-                      >
-                        <FaWhatsapp />
-                        <span className="ml-2">WhatsApp</span>
-                      </Button>
-                    </div>
+                </Fragment>
+              )}
+              {registration.player && (
+                <Fragment>
+                  <div className="mb-4">
+                    <Heading type="h4">Cartones</Heading>
                   </div>
-                )}
-              </div>
+                  <Anchor href={ticketsUrl} id="player-link">
+                    <span className="flex items-center">
+                      <FiLink />
+                      <span className="ml-2">
+                        {registration.player.tickets}
+                      </span>
+                    </span>
+                  </Anchor>
+                  <div className="my-4">
+                    <Heading type="h4">Acciones</Heading>
+                  </div>
+                  <div className="flex flex-wrap">
+                    <Button
+                      aria-label="Enviar mail"
+                      id="send-email"
+                      onClick={() => sendEmail(registration)}
+                      className="mb-4 mr-4"
+                    >
+                      <FiMail />
+                      <span className="ml-2">Enviar mail</span>
+                    </Button>
+                    <Button
+                      aria-label="Mandar WhatsApp"
+                      id="send-whatsapp"
+                      color="green"
+                      onClick={() =>
+                        sendWhatsApp(registration.tel, getMessage(registration))
+                      }
+                      className="mb-4 mr-4"
+                    >
+                      <FaWhatsapp />
+                      <span className="ml-2">WhatsApp</span>
+                    </Button>
+                  </div>
+                </Fragment>
+              )}
             </div>
-          </Box>
-        </div>
-      ))}
-    </Fragment>
-  )
+          </div>
+        </Accordion>
+      </div>
+    )
+  }
+
+  return <Fragment>{registrationList.map(renderRow)}</Fragment>
 }

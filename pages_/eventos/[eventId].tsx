@@ -18,7 +18,7 @@ import { createBatch, Timestamp } from '~/utils'
 const defaultFormData = {
   attachment: '',
   comment: '',
-  date: null,
+  date: Timestamp.now(),
   email: '',
   name: '',
   tel: '',

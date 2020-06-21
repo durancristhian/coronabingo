@@ -75,9 +75,11 @@ export default function EventAdmin({ hidden }: Props) {
       )}
       {!!registrations.length && (
         <Container size="large">
-          <Heading type="h1">
-            <span>Inscripciones ({registrations.length})</span>
-          </Heading>
+          <div className="mb-4">
+            <Heading type="h1">
+              <span>Inscripciones ({registrations.length})</span>
+            </Heading>
+          </div>
           <Registrations
             event={event}
             players={players as Player[]}

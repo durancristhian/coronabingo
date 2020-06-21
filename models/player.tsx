@@ -3,7 +3,7 @@ import { Timestamp } from '~/utils'
 
 const defaultPlayerData: PlayerBase = {
   tickets: '',
-  date: null,
+  date: Timestamp.now(),
   name: '',
   selectedNumbers: [],
 }

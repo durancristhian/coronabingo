@@ -1,7 +1,7 @@
 export interface PlayerBase {
   [key: number]: number[]
   tickets: string
-  date: firebase.firestore.Timestamp | null
+  date: firebase.firestore.Timestamp
   name: string
   selectedNumbers: number[]
 }

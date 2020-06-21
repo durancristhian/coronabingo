@@ -7,7 +7,7 @@ const defaultRoomData: RoomBase = {
   bingoSpinner: true,
   code: '',
   confettiType: '',
-  date: null,
+  date: Timestamp.now(),
   hideNumbersMeaning: false,
   locked: false,
   name: '',
