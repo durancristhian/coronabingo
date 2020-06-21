@@ -20,7 +20,6 @@
   "coffee": "Coffee",
   "new-features-modal-title": "New features in version {{version}}",
   "outdated-room": "This room belongs to an old version of the app. Please, create a new one.",
-  "locked-room": "Locked room.",
   "room-code": {
     "success": "Code is correct. Wait...",
     "error": "Code is incorrect. Try again...",
