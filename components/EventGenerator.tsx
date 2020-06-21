@@ -24,6 +24,7 @@ const defaultEventData = {
   name: '',
   roomAdminName: '',
   roomName: '',
+  videocall: '',
 }
 
 interface Props {
@@ -92,6 +93,7 @@ export default function EventGenerator({ user }: Props) {
         eventName: event.name,
         roomId: roomRef.id,
         userId: user.uid,
+        videocall: event.videocall,
       })
 
       await batch.commit()
@@ -147,6 +149,14 @@ export default function EventGenerator({ user }: Props) {
             value={event.roomAdminName}
             onChange={roomAdminName => {
               setEvent({ ...event, roomAdminName })
+            }}
+          />
+          <InputText
+            id="videocall"
+            label="Link a la videollamada"
+            value={event.videocall}
+            onChange={videocall => {
+              setEvent({ ...event, videocall })
             }}
           />
           <InputText

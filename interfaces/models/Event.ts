@@ -8,6 +8,7 @@ export interface EventBase {
   name: string
   roomId: string
   userId: string
+  videocall: string
 }
 
 export interface Event extends EventBase {

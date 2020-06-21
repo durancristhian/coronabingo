@@ -103,7 +103,7 @@ export default function Registrations({
         event.roomId,
         registration.player?.id || 'THIS SHOULD NOT HAPPEN',
       ),
-      videocall: '-- PONER LINK A LA VIDEOLLAMADA --',
+      videocall: event.videocall,
     }
   }
 
@@ -115,8 +115,7 @@ export default function Registrations({
 
     const date = getEventDate(registration)
     const link = getRoomPlayerLink(event.roomId, registration.player.id)
-    const videocall = '-- PONER LINK A LA VIDEOLLAMADA --'
-    const body = `email=${registration.email}&date=${date}&tickets=${link}&videocall=${videocall}`
+    const body = `email=${registration.email}&date=${date}&tickets=${link}&videocall=${event.videocall}`
 
     try {
       await fetch(event.emailEndpoint, {
