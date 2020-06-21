@@ -70,7 +70,7 @@ export default function RoomPlayer() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('playerId:room-not-ready')}</Message>
+          <Loading message={t('playerId:room-not-ready')} />
         </Container>
       </Layout>
     )

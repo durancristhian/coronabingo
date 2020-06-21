@@ -1,6 +1,7 @@
-import Error from 'next/error'
+import { default as NextError } from 'next/error'
 import React from 'react'
 import Container from '~/components/Container'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
@@ -62,14 +63,14 @@ export default function EventAdmin({ hidden }: Props) {
   if (!event || !registrations || !players || !tickets) return null
 
   if (hidden) {
-    return <Error statusCode={404} />
+    return <NextError statusCode={404} />
   }
 
   return (
     <Layout>
       {!registrations.length && (
         <Container>
-          <Message type="information">No hay inscripciones.</Message>
+          <Error message="No hay inscripciones." />
         </Container>
       )}
       {!!registrations.length && (
