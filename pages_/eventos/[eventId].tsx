@@ -9,6 +9,7 @@ import InputImage from '~/components/InputImage'
 import InputText from '~/components/InputText'
 import InputTextarea from '~/components/InputTextarea'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
 import useToast from '~/hooks/useToast'
@@ -38,9 +39,7 @@ export default function EventId({ hidden }: Props) {
     return (
       <Layout>
         <Container>
-          <Message type="information">
-            Cargando información del evento...
-          </Message>
+          <Loading />
         </Container>
       </Layout>
     )

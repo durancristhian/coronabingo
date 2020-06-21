@@ -14,7 +14,7 @@ export default function useToast() {
   const { t } = useTranslation()
 
   const renderToast = (translationKey: string, messageType: MessageType) => (
-    <div className="w-full md:w-80">
+    <div className="w-full">
       <Message type={messageType}>{t(translationKey)}</Message>
     </div>
   )

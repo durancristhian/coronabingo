@@ -6,6 +6,7 @@ import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Options from '~/components/Options'
 import RoomCode from '~/components/RoomCode'
@@ -36,7 +37,7 @@ export default function RoomPlayer() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('common:loading-room')}</Message>
+          <Loading />
         </Container>
       </Layout>
     )

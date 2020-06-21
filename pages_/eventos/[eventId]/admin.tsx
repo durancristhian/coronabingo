@@ -3,6 +3,7 @@ import React from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import useEvent from '~/hooks/useEvent'
@@ -40,9 +41,7 @@ export default function EventAdmin({ hidden }: Props) {
     return (
       <Layout>
         <Container>
-          <Message type="information">
-            Cargando información del evento...
-          </Message>
+          <Loading />
         </Container>
       </Layout>
     )

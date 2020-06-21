@@ -10,6 +10,7 @@ import Copy from '~/components/Copy'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
@@ -44,7 +45,7 @@ export default function RoomAdmin() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('common:loading-room')}</Message>
+          <Loading />
         </Container>
       </Layout>
     )

@@ -11,10 +11,11 @@ import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import useEasterEgg from '~/hooks/useEasterEgg'
-import useRoom from '~/hooks/useRoom'
 import usePlayers from '~/hooks/usePlayers'
+import useRoom from '~/hooks/useRoom'
 import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
@@ -32,7 +33,7 @@ export default function RoomId() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('common:loading-room')}</Message>
+          <Loading />
         </Container>
       </Layout>
     )

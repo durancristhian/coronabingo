@@ -28,7 +28,7 @@
     "submit": "Ingresar"
   },
   "error-room": "Error al obtener información de la sala.",
-  "loading-room": "Cargando información de la sala...",
   "coronabingo-twitter": "Twitter",
-  "news": "Coronabingo y las noticias"
+  "news": "Coronabingo y las noticias",
+  "loading": "Cargando..."
 }

@@ -28,7 +28,7 @@
     "submit": "Access"
   },
   "error-room": "Error retrieving the room information.",
-  "loading-room": "Loading room information...",
   "coronabingo-twitter": "Twitter",
-  "news": "Coronabingo and the news"
+  "news": "Coronabingo and the news",
+  "loading": "Loading..."
 }
