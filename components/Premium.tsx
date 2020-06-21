@@ -32,9 +32,13 @@ export default function Premium({ user }: Props) {
           Welcome, {user.email}
         </Heading>
         <div className="mt-4 text-center">
-          <Button aria-label="signout" id="signout" onClick={logout}>
-            <FiLogOut />
-            <span className="ml-4">Logout</span>
+          <Button
+            aria-label="signout"
+            id="signout"
+            onClick={logout}
+            iconLeft={<FiLogOut />}
+          >
+            Logout
           </Button>
         </div>
       </Box>

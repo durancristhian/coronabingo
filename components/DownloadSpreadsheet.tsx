@@ -86,11 +86,9 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
           onClick={downloadSpreadsheet}
           color="green"
           disabled={!players.length}
+          iconLeft={<FiDownload />}
         >
-          <FiDownload />
-          <span className="ml-4">
-            {t('roomId:download-spreadsheet', { name: room.name })}
-          </span>
+          {t('roomId:download-spreadsheet', { name: room.name })}
         </Button>
       </div>
     </Fragment>

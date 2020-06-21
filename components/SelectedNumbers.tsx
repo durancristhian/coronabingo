@@ -46,10 +46,10 @@ export default function SelectedNumbers({
           className="mb-4 w-full"
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
+          iconLeft={<FiChevronsRight />}
+          iconRight={<FiChevronsLeft />}
         >
-          <FiChevronsRight />
-          <span className="mx-4">{t('playerId:next-number')}</span>
-          <FiChevronsLeft />
+          {t('playerId:next-number')}
         </Button>
       )}
       <div className="flex flex-wrap" id="ticket-numbers">

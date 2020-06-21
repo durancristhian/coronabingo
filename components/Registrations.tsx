@@ -255,9 +255,9 @@ Saludos, Cris.`
                     aria-label="Aprobar"
                     id="provide-access"
                     onClick={() => onProvideAccessClick(registration)}
+                    iconLeft={<FiCheck />}
                   >
-                    <FiCheck />
-                    <span className="ml-2">Aprobar</span>
+                    Aprobar
                   </Button>
                 </Fragment>
               )}
@@ -290,9 +290,9 @@ Saludos, Cris.`
                       id="send-email"
                       onClick={() => sendEmail(registration)}
                       className="mb-4 mr-4"
+                      iconLeft={<FiMail />}
                     >
-                      <FiMail />
-                      <span className="ml-2">Enviar mail</span>
+                      Enviar mail
                     </Button>
                     <Button
                       aria-label="Mandar WhatsApp"
@@ -305,9 +305,9 @@ Saludos, Cris.`
                         )
                       }
                       className="mb-4 mr-4"
+                      iconLeft={<FaWhatsapp />}
                     >
-                      <FaWhatsapp />
-                      <span className="ml-2">WhatsApp</span>
+                      WhatsApp
                     </Button>
                   </div>
                 </Fragment>

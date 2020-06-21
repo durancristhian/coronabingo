@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
+import { FiLogIn } from 'react-icons/fi'
 import Button from '~/components/Button'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import useRoomCode from '~/hooks/useRoomCode'
@@ -103,6 +104,7 @@ export default function RoomCode({ roomCode }: Props) {
         disabled={emojiCode.some(e => !Boolean(e))}
         className="w-full"
         onClick={submitCode}
+        iconLeft={<FiLogIn />}
       >
         {t('common:room-code.submit')}
       </Button>

@@ -159,10 +159,10 @@ export default function EventId({ hidden }: Props) {
                   id="register-me"
                   type="submit"
                   color="green"
+                  iconLeft={<FiChevronsRight />}
+                  iconRight={<FiChevronsLeft />}
                 >
-                  <FiChevronsRight />
-                  <span className="mx-4">Enviar</span>
-                  <FiChevronsLeft />
+                  Enviar
                 </Button>
               </div>
             </fieldset>

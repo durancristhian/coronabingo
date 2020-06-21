@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, Fragment } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
@@ -46,8 +46,9 @@ export default function Pato({ extraSounds, room }: Props) {
                     soundToPlay: url,
                   })
                 }}
+                iconLeft={<FiPlayCircle />}
               >
-                <FiPlayCircle />
+                <Fragment />
               </Button>
             </div>
             <div className="flex flex-auto items-center">

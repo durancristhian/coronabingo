@@ -46,9 +46,9 @@ export default function Share({ content }: Props) {
         aria-label={t('common:share-link')}
         id="open-share-modal"
         onClick={() => setShowModal(true)}
+        iconLeft={<FiShare2 />}
       >
-        <FiShare2 />
-        <span className="ml-4">{t('common:share-link')}</span>
+        {t('common:share-link')}
       </Button>
       <Modal
         id="modal-share"

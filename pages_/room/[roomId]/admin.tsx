@@ -7,6 +7,7 @@ import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
@@ -55,7 +56,7 @@ export default function RoomAdmin() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:error-room')}</Message>
+          <Error />
         </Container>
       </Layout>
     )
@@ -246,9 +247,9 @@ export default function RoomAdmin() {
                 className="w-full"
                 disabled={!room.adminId || players.length < 2 || inProgress}
                 onClick={submitRoom}
+                iconLeft={<FiSmile />}
               >
-                <FiSmile />
-                <span className="ml-4">{t('admin:field-submit')}</span>
+                {t('admin:field-submit')}
               </Button>
             </div>
           </Fragment>

@@ -27,8 +27,9 @@
     "title": "Enter the room code",
     "submit": "Access"
   },
-  "error-room": "Error retrieving the room information.",
   "coronabingo-twitter": "Twitter",
   "news": "Coronabingo and the news",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "error": "An error ocurred.",
+  "reload": "Reload"
 }

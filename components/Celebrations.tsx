@@ -33,21 +33,12 @@ export default function Celebrations({ room }: Props) {
               })
             }
             className="w-full"
+            iconLeft={ct === room.confettiType ? <FiFrown /> : <FiSmile />}
           >
             {ct === room.confettiType ? (
-              <Fragment>
-                <FiFrown />
-                <span className="ml-4 truncate">
-                  {t(`playerId:hide-${ct}`)}
-                </span>
-              </Fragment>
+              <span className="truncate">{t(`playerId:hide-${ct}`)}</span>
             ) : (
-              <Fragment>
-                <FiSmile />
-                <span className="ml-4 truncate">
-                  {t(`playerId:show-${ct}`)}
-                </span>
-              </Fragment>
+              <span className="truncate">{t(`playerId:show-${ct}`)}</span>
             )}
           </Button>
         </div>

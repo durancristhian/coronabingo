@@ -49,9 +49,9 @@ export default function InputImage({ label, id, image, onChange }: Props) {
               aria-label="Agregar imágen"
               id="add-image"
               onClick={() => labelRef.current?.click()}
+              iconLeft={<FiUpload />}
             >
-              <FiUpload />
-              <span className="ml-4">Agregar imágen</span>
+              Agregar imágen
             </Button>
           </div>
         )}

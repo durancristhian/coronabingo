@@ -8,6 +8,7 @@ import Button from '~/components/Button'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
 import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
@@ -43,7 +44,7 @@ export default function RoomId() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:error-room')}</Message>
+          <Error />
         </Container>
       </Layout>
     )
@@ -114,9 +115,9 @@ export default function RoomId() {
                       `/room/${room.id}/${player.id}`,
                     )
                   }}
+                  iconLeft={<FiLink2 />}
                 >
-                  <FiLink2 />
-                  <span className="ml-4">{t('roomId:play')}</span>
+                  {t('roomId:play')}
                 </Button>
               </div>
             </div>

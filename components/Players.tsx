@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, Fragment, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
@@ -102,8 +102,9 @@ export default function Players({
                 color="green"
                 type="submit"
                 disabled={!name || isCurrentNameRepeated}
+                iconLeft={<FiPlus />}
               >
-                <FiPlus />
+                <Fragment />
               </Button>
             </div>
           </div>
@@ -141,8 +142,9 @@ export default function Players({
                   id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
                   disabled={isFormDisabled}
+                  iconLeft={<FiTrash2 />}
                 >
-                  <FiTrash2 />
+                  <Fragment />
                 </Button>
               </div>
             </div>

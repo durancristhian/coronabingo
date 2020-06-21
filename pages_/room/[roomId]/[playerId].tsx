@@ -3,6 +3,7 @@ import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Container from '~/components/Container'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
 import Layout from '~/components/Layout'
@@ -47,7 +48,7 @@ export default function RoomPlayer() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:error-room')}</Message>
+          <Error />
         </Container>
       </Layout>
     )

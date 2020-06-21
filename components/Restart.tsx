@@ -40,9 +40,9 @@ export default function Restart({ room }: Props) {
           id="confirm"
           onClick={replay}
           color="green"
+          iconLeft={<FiThumbsUp />}
         >
-          <FiThumbsUp />
-          <span className="ml-4">{t('playerId:replay.confirm')}</span>
+          {t('playerId:replay.confirm')}
         </Button>
       </div>
     </Fragment>

@@ -13,6 +13,8 @@ interface Props {
   className?: string
   color?: 'green' | 'red' | 'yellow'
   disabled?: boolean
+  iconLeft: ReactNode
+  iconRight?: ReactNode
   id: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   type?: 'submit' | 'button'
@@ -24,6 +26,8 @@ export default function Button({
   className,
   color = 'yellow',
   disabled,
+  iconLeft,
+  iconRight = null,
   id,
   onClick,
   type = 'button',
@@ -47,7 +51,11 @@ export default function Button({
       onClick={onClick}
     >
       <span className="flex items-center justify-center w-full">
-        {children}
+        {iconLeft}
+        <span className={classnames(['ml-4', iconRight && 'mr-4'])}>
+          {children}
+        </span>
+        {iconRight}
       </span>
     </button>
   )

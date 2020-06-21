@@ -43,9 +43,13 @@ export default function Login() {
         ¿Te conocemos?
       </Heading>
       <div className="flex justify-center mt-8">
-        <Button aria-label="Login" id="login" onClick={login}>
-          <FiLogIn />
-          <span className="ml-4">Login</span>
+        <Button
+          aria-label="Login"
+          id="login"
+          onClick={login}
+          iconLeft={<FiLogIn />}
+        >
+          Login
         </Button>
       </div>
     </Box>

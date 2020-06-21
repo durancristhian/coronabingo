@@ -163,9 +163,9 @@ export default function EventGenerator({ user }: Props) {
               id="generate-spreadsheet"
               color="green"
               type="submit"
+              iconLeft={<FiCheck />}
             >
-              <FiCheck />
-              <span className="ml-4">Crear evento</span>
+              Crear evento
             </Button>
           </div>
         </fieldset>

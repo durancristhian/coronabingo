@@ -27,8 +27,9 @@
     "title": "Ingrese el código de acceso a la sala",
     "submit": "Ingresar"
   },
-  "error-room": "Error al obtener información de la sala.",
   "coronabingo-twitter": "Twitter",
   "news": "Coronabingo y las noticias",
-  "loading": "Cargando..."
+  "loading": "Cargando...",
+  "error": "Ocurrió un error.",
+  "reload": "Recargar"
 }
