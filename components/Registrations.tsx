@@ -18,7 +18,7 @@ import {
   createBatch,
   getBaseUrl,
   roomsRef,
-  sendWhatsApp,
+  sendWhatsAppTo,
   Timestamp,
 } from '~/utils'
 import Accordion from './Accordion'
@@ -216,7 +216,7 @@ Saludos, Cris.`
                 <span className="ml-2">
                   <button
                     onClick={() => {
-                      sendWhatsApp(
+                      sendWhatsAppTo(
                         registration.tel,
                         `Hola ${registration.name}, `,
                       )
@@ -299,7 +299,10 @@ Saludos, Cris.`
                       id="send-whatsapp"
                       color="green"
                       onClick={() =>
-                        sendWhatsApp(registration.tel, getMessage(registration))
+                        sendWhatsAppTo(
+                          registration.tel,
+                          getMessage(registration),
+                        )
                       }
                       className="mb-4 mr-4"
                     >
