@@ -103,9 +103,7 @@ export default function Players({
                 type="submit"
                 disabled={!name || isCurrentNameRepeated}
                 iconLeft={<FiPlus />}
-              >
-                <Fragment />
-              </Button>
+              />
             </div>
           </div>
         </fieldset>
@@ -143,9 +141,7 @@ export default function Players({
                   onClick={() => onRemovePlayer(index, player)}
                   disabled={isFormDisabled}
                   iconLeft={<FiTrash2 />}
-                >
-                  <Fragment />
-                </Button>
+                />
               </div>
             </div>
           ))}

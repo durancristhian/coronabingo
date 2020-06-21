@@ -9,7 +9,7 @@ const BUTTON_COLORS = {
 
 interface Props {
   'aria-label': string
-  children: ReactNode
+  children?: ReactNode
   className?: string
   color?: 'green' | 'red' | 'yellow'
   disabled?: boolean
@@ -52,9 +52,11 @@ export default function Button({
     >
       <span className="flex items-center justify-center w-full">
         {iconLeft}
-        <span className={classnames(['ml-4', iconRight && 'mr-4'])}>
-          {children}
-        </span>
+        {children && (
+          <span className={classnames(['ml-4', iconRight && 'mr-4'])}>
+            {children}
+          </span>
+        )}
         {iconRight}
       </span>
     </button>

@@ -47,9 +47,7 @@ export default function Pato({ extraSounds, room }: Props) {
                   })
                 }}
                 iconLeft={<FiPlayCircle />}
-              >
-                <Fragment />
-              </Button>
+              />
             </div>
             <div className="flex flex-auto items-center">
               <p className="flex items-center">
