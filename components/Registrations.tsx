@@ -147,7 +147,7 @@ export default function Registrations({
 
     return `Hola ${name},
 
-Gracias por haberte sumado a jugar este Coronabingo solidario. 
+Gracias por haberte sumado a jugar este Coronabingo solidario.
 
 Te recordamos que vamos a jugar el día ${date}. Ese día vamos a hacer una videollamada por la aplicación Zoom.
 
@@ -159,14 +159,8 @@ Saludos, Cris.`
   }
 
   const renderRow = (registration: EventRegistration) => {
-    const ticketsUrl = getRoomPlayerLink(
-      // eslint-disable-next-line react/prop-types
-      event.roomId,
-      registration.player?.id || 'THIS SHOULD NOT HAPPEN',
-    )
-
     return (
-      <div className="mb-2">
+      <div className="mb-2" key={registration.id}>
         <Accordion
           id={registration.id}
           label={
@@ -222,7 +216,10 @@ Saludos, Cris.`
                 <span className="ml-2">
                   <button
                     onClick={() => {
-                      sendWhatsApp(registration.tel, getMessage(registration))
+                      sendWhatsApp(
+                        registration.tel,
+                        `Hola ${registration.name}, `,
+                      )
                     }}
                     id="whatsapp"
                     className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
@@ -269,7 +266,14 @@ Saludos, Cris.`
                   <div className="mb-4">
                     <Heading type="h4">Cartones</Heading>
                   </div>
-                  <Anchor href={ticketsUrl} id="player-link">
+                  <Anchor
+                    href={getRoomPlayerLink(
+                      // eslint-disable-next-line react/prop-types
+                      event.roomId,
+                      registration.player?.id || 'THIS SHOULD NOT HAPPEN',
+                    )}
+                    id="player-link"
+                  >
                     <span className="flex items-center">
                       <FiLink />
                       <span className="ml-2">
