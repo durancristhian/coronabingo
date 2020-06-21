@@ -1,16 +1,14 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useMemo } from 'react'
+import React, { Fragment, memo } from 'react'
 import TweetEmbed from 'react-tweet-embed'
 import Heading from '~/components/Heading'
 
-export default function News() {
-  const { t } = useTranslation()
+interface Props {
+  tweetIds: string[]
+}
 
-  const renderTweet = (id: string) =>
-    useMemo(
-      () => <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />,
-      [id],
-    )
+export default memo(function News({ tweetIds }: Props) {
+  const { t } = useTranslation()
 
   return (
     <Fragment>
@@ -18,10 +16,12 @@ export default function News() {
         {t('common:news')}
       </Heading>
       <div className="sm:flex sm:flex-wrap sm:justify-center my-4 -mx-2">
-        <div className="mx-2">{renderTweet('1266490485650198528')}</div>
-        <div className="mx-2">{renderTweet('1267934678784389121')}</div>
-        <div className="mx-2">{renderTweet('1246110709005660163')}</div>
+        {tweetIds.map(id => (
+          <div key={id} className="mx-2">
+            <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />
+          </div>
+        ))}
       </div>
     </Fragment>
   )
-}
+})
