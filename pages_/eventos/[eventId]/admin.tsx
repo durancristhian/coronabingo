@@ -1,38 +1,54 @@
-import { getWorksheet } from 'gsheets'
-import Error from 'next/error'
-import React, { useEffect, useState } from 'react'
+import { default as NextError } from 'next/error'
+import React from 'react'
 import Container from '~/components/Container'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import useEvent from '~/hooks/useEvent'
-import { EventTicket, Player, Registration } from '~/interfaces'
-import { excelDateToJSDate, roomsRef } from '~/utils'
+import useSubCollection from '~/hooks/useSubCollection'
+import { Player, Registration, RoomTicket } from '~/interfaces'
 
 interface Props {
   hidden: boolean
 }
 
 export default function EventAdmin({ hidden }: Props) {
-  const { error, loading, event } = useEvent()
-  const [registrations, setRegistrations] = useState<Registration[]>([])
-  const [players, setPlayers] = useState<Player[]>([])
-  const [tickets, setTickets] = useState<EventTicket[]>([])
+  const { error: eventError, loading: eventLoading, event } = useEvent()
+  const {
+    data: registrations,
+    error: registrationsError,
+    loading: registrationsLoading,
+  } = useSubCollection('events', event?.id, 'registrations')
+  const {
+    data: players,
+    error: playersError,
+    loading: playersLoading,
+  } = useSubCollection('rooms', event?.roomId, 'players')
+  const {
+    data: tickets,
+    error: ticketsError,
+    loading: ticketsLoading,
+  } = useSubCollection('rooms', event?.roomId, 'tickets')
 
-  if (loading) {
+  if (
+    eventLoading ||
+    registrationsLoading ||
+    playersLoading ||
+    ticketsLoading
+  ) {
     return (
       <Layout>
         <Container>
-          <Message type="information">
-            Cargando información del evento...
-          </Message>
+          <Loading />
         </Container>
       </Layout>
     )
   }
 
-  if (error) {
+  if (eventError || registrationsError || playersError || ticketsError) {
     return (
       <Layout>
         <Container>
@@ -44,112 +60,32 @@ export default function EventAdmin({ hidden }: Props) {
     )
   }
 
-  if (!event) return null
-
-  useEffect(() => {
-    getWorksheet(event.spreadsheetId, event.worksheetTitle).then(
-      res => {
-        if (!res.data) return
-
-        const data = res.data
-          .map(
-            d =>
-              ({
-                comment: d['Comentario'],
-                email: d['Dirección de correo electrónico'],
-                name: d['Nombre completo'],
-                paymentURL: d['Comprobante de pago'],
-                paymentImage: d['Comprobante de pago']
-                  ?.toString()
-                  .split('?id=')[1],
-                tel: d['Teléfono'],
-                timestamp: excelDateToJSDate(
-                  Number(d['Marca temporal']?.toString()),
-                ),
-              } as Registration),
-          )
-          .reverse()
-
-        setRegistrations(data)
-      },
-      err => console.error(err),
-    )
-  }, [])
-
-  useEffect(() => {
-    const unsubscribeFromPlayers = roomsRef
-      .doc(event.roomId)
-      .collection('players')
-      .onSnapshot(snapshot => {
-        setPlayers(
-          snapshot.docs.map(p => {
-            const playerData = p.data() as Player
-
-            return Object.assign(
-              {},
-              {
-                id: p.id,
-                exists: p.exists,
-                ref: p.ref,
-              },
-              playerData,
-            )
-          }),
-        )
-      })
-
-    const unsubscribeFromTickets = roomsRef
-      .doc(event.roomId)
-      .collection('tickets')
-      .onSnapshot(
-        snapshot => {
-          setTickets(
-            snapshot.docs.map(t => {
-              const ticketData = t.data() as EventTicket
-
-              return Object.assign(
-                {},
-                {
-                  id: t.id,
-                },
-                ticketData,
-              )
-            }),
-          )
-        },
-        error => {
-          console.error(error)
-        },
-      )
-
-    return () => {
-      unsubscribeFromPlayers()
-      unsubscribeFromTickets()
-    }
-  }, [])
+  if (!event || !registrations || !players || !tickets) return null
 
   if (hidden) {
-    return <Error statusCode={404} />
+    return <NextError statusCode={404} />
   }
-
-  const list = registrations.map(r => ({
-    ...r,
-    player: players.find(p => p.name === r.name),
-  }))
 
   return (
     <Layout>
       {!registrations.length && (
         <Container>
-          <Message type="information">No hay inscripciones.</Message>
+          <Error message="No hay inscripciones." />
         </Container>
       )}
       {!!registrations.length && (
         <Container size="large">
-          <Heading type="h1">
-            <span>Inscripciones ({list.length})</span>
-          </Heading>
-          <Registrations event={event} registrations={list} tickets={tickets} />
+          <div className="mb-4">
+            <Heading type="h1" textAlign="center">
+              <span>Inscripciones ({registrations.length})</span>
+            </Heading>
+          </div>
+          <Registrations
+            event={event}
+            players={players as Player[]}
+            registrations={registrations as Registration[]}
+            tickets={tickets as RoomTicket[]}
+          />
         </Container>
       )}
     </Layout>

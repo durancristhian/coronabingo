@@ -21,5 +21,6 @@
     "field-admin": "Admin"
   },
   "field-hide-dreams-hint": "We recommend to check this option if you're playing outside of Argentina due to the meaning of the numbers only have sense in that country.",
-  "field-hide-dreams": "Hide the meaning of numbers"
+  "field-hide-dreams": "Hide the meaning of numbers",
+  "locked-room": "Sala bloqueada."
 }

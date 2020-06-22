@@ -14,6 +14,7 @@
 @import 'modal.css';
 @import 'video.css';
 @import 'react-markdown-editor-lite/lib/index.css';
+@import 'spinner.css';
 
 /* purgecss start ignore */
 .ReactModal__Body--open {
@@ -104,11 +105,5 @@
 
   .toast {
     width: calc(100% - 32px);
-  }
-}
-
-@media (min-width: 768px) {
-  .md:w-80 {
-    width: 20rem;
   }
 }

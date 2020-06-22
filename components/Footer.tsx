@@ -24,7 +24,13 @@ export default function Footer() {
     <Fragment>
       <footer className="bg-white p-4 shadow">
         <Container size="large">
-          <News />
+          <News
+            tweetIds={[
+              '1266490485650198528',
+              '1267934678784389121',
+              '1246110709005660163',
+            ]}
+          />
           <div className="md:flex md:items-center md:justify-between">
             <p className="text-center md:text-left">
               <span>{t('common:made-by')}</span>

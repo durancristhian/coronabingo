@@ -7,7 +7,7 @@ const defaultRoomData: RoomBase = {
   bingoSpinner: true,
   code: '',
   confettiType: '',
-  date: null,
+  date: Timestamp.now(),
   hideNumbersMeaning: false,
   locked: false,
   name: '',
@@ -38,7 +38,7 @@ const createRoom = (room: Partial<RoomBase>): Promise<string> => {
 
 const excludeExtraFields = (room: Room): RoomBase => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { exists, id, ref, ...roomValues } = room
+  const { id, ref, ...roomValues } = room
 
   return roomValues
 }

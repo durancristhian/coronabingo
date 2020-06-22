@@ -3,7 +3,7 @@ import { Timestamp } from '~/utils'
 
 const defaultPlayerData: PlayerBase = {
   tickets: '',
-  date: null,
+  date: Timestamp.now(),
   name: '',
   selectedNumbers: [],
 }
@@ -29,7 +29,7 @@ const createPlayer = (
 
 const excludeExtraFields = (player: Player): PlayerBase => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { exists, id, ref, ...playerValues } = player
+  const { id, ref, ...playerValues } = player
 
   return playerValues
 }

@@ -43,9 +43,9 @@ export default function Index() {
               setShowModal(true)
             }}
             className="w-full"
+            iconLeft={<FiEye />}
           >
-            <FiEye />
-            <span className="ml-4">{t('index:how-to-play-button')}</span>
+            {t('index:how-to-play-button')}
           </Button>
         </div>
         <Modal

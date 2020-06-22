@@ -8,13 +8,15 @@ import Button from '~/components/Button'
 import Container from '~/components/Container'
 import Copy from '~/components/Copy'
 import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
+import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import useEasterEgg from '~/hooks/useEasterEgg'
-import useRoom from '~/hooks/useRoom'
 import usePlayers from '~/hooks/usePlayers'
+import useRoom from '~/hooks/useRoom'
 import { Player } from '~/interfaces'
 import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
 
@@ -32,7 +34,7 @@ export default function RoomId() {
     return (
       <Layout>
         <Container>
-          <Message type="information">{t('common:loading-room')}</Message>
+          <Loading />
         </Container>
       </Layout>
     )
@@ -42,7 +44,7 @@ export default function RoomId() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('common:error-room')}</Message>
+          <Error />
         </Container>
       </Layout>
     )
@@ -62,7 +64,7 @@ export default function RoomId() {
 
   const renderPlayers = () => {
     if (!room.readyToPlay || !players.length) {
-      return <Message type="information">{t('roomId:not-ready')}</Message>
+      return <Loading message={t('roomId:not-ready')} />
     }
 
     return (
@@ -113,9 +115,9 @@ export default function RoomId() {
                       `/room/${room.id}/${player.id}`,
                     )
                   }}
+                  iconLeft={<FiLink2 />}
                 >
-                  <FiLink2 />
-                  <span className="ml-4">{t('roomId:play')}</span>
+                  {t('roomId:play')}
                 </Button>
               </div>
             </div>

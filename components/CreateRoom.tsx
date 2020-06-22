@@ -65,9 +65,9 @@ export default function CreateRoom() {
             disabled={!name || inProgress}
             type="submit"
             id="create-room"
+            iconLeft={<FiSmile />}
           >
-            <FiSmile />
-            <span className="ml-4">{t('index:create-room.field-submit')}</span>
+            {t('index:create-room.field-submit')}
           </Button>
         </div>
       </form>

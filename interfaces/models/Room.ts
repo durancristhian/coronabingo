@@ -6,7 +6,7 @@ export interface RoomBase {
   bingoSpinner: boolean
   code: string
   confettiType: ConfettiType
-  date: firebase.firestore.Timestamp | null
+  date: firebase.firestore.Timestamp
   hideNumbersMeaning: boolean
   locked: boolean
   name: string
@@ -17,7 +17,6 @@ export interface RoomBase {
 }
 
 export interface Room extends RoomBase {
-  exists: boolean
   id: string
   ref: firebase.firestore.DocumentReference
 }

@@ -21,5 +21,6 @@
     "field-admin": "Dirige el juego"
   },
   "field-hide-dreams-hint": "Recomendamos activar esta opción si están jugando fuera de Argentina ya que los significados se corresponden con la Quiniela Argentina.",
-  "field-hide-dreams": "Ocultar los significados de los números"
+  "field-hide-dreams": "Ocultar los significados de los números",
+  "locked-room": "Sala bloqueada."
 }

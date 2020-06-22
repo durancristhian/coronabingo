@@ -27,23 +27,13 @@ const EventContextProvider = ({ children }: Props) => {
 
     const unsubscribe = eventsRef.doc(eventId).onSnapshot(
       snapshot => {
-        if (snapshot.exists) {
-          const eventData = snapshot.data() as Event
+        const eventData = snapshot.data() as Event
 
-          setEvent(
-            Object.assign(
-              {},
-              {
-                id: snapshot.id,
-                exists: snapshot.exists,
-                ref: snapshot.ref,
-              },
-              eventData,
-            ),
-          )
-        } else {
-          setError('EVENT_DOES_NOT_EXIST')
-        }
+        setEvent({
+          ...eventData,
+          id: snapshot.id,
+          ref: snapshot.ref,
+        })
 
         setLoading(false)
       },

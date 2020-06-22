@@ -38,7 +38,6 @@ export const useProvideAuth = () => {
       setUser(user)
     })
 
-    // Cleanup subscription on unmount
     return () => unsubscribe()
   }, [])
 
