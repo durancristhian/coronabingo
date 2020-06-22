@@ -30,6 +30,8 @@ jobs:
 
       URL: ${{ secrets.URL }}
 
+      CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
+
     strategy:
       matrix:
         node-version: [12.x]
