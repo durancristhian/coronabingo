@@ -1,17 +1,17 @@
 {
     "name": "coronabingo",
-    "version": "1.20.4",
+    "version": "1.20.6",
     "scripts": {
         "prebuild": "npm run validate-locales",
         "build": "next-translate && next build",
         "build-start": "npm run build && npm run start",
         "cypress-open": "cypress open",
-        "cypress-run": "cypress run --record --key $CYPRESS_PROJECT_KEY --group e2e-staging-specs",
+        "cypress-run": "cypress run --record --key $CYPRESS_PROJECT_KEY",
         "dev": "next-translate && next dev",
         "generate-tickets": "ts-node scripts/generate-tickets",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
-        "test": "NODE_ENV=test start-server-and-test build-start http://localhost:3000 cypress-run",
+        "test": "start-server-and-test build-start http://localhost:3000 cypress-run",
         "validate-locales": "ts-node scripts/validate-locales",
         "validate-tickets": "ts-node scripts/validate-tickets"
     },

@@ -41,9 +41,10 @@ jobs:
             > **${{ steps.memer.outputs.title }}**
             ![meme](${{ steps.memer.outputs.meme }})
             <sub>ℹ️ <a href="${{ steps.memer.outputs.source }}">Source</a> [Powered By <a href="https://github.com/Bhupesh-V/memer-action">Memer Action</a>]</sub>
-  build:
 
-    runs-on: ubuntu-latest
+  e2e:
+
+    runs-on: ${{ matrix.os }}
 
     env:
       API_KEY: ${{ secrets.API_KEY }}
@@ -65,22 +66,22 @@ jobs:
 
     strategy:
       matrix:
+        os: ['ubuntu-latest', 'macos-latest']
         node-version: [12.x]
 
     steps:
+      - uses: actions/cache@v1
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
 
-    - uses: actions/cache@v1
-      with:
-        path: ${{ github.workspace }}/.next/cache
-        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - run: npm ci
 
-    - run: npm ci
-
-    - run: npm test
+      - run: npm test
