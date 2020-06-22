@@ -6,7 +6,7 @@
         "build": "next-translate && next build",
         "build-start": "npm run build && npm run start",
         "cypress-open": "cypress open",
-        "cypress-run": "cypress run --record --key 5234d331-4291-413c-acdf-1f6ac1888c24 --parallel",
+        "cypress-run": "cypress run --record --key 5234d331-4291-413c-acdf-1f6ac1888c24 --group e2e-staging-specs",
         "dev": "next-translate && next dev",
         "generate-tickets": "ts-node scripts/generate-tickets",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
