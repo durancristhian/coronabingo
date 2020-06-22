@@ -41,6 +41,7 @@ jobs:
             > **${{ steps.memer.outputs.title }}**
             ![meme](${{ steps.memer.outputs.meme }})
             <sub>ℹ️ <a href="${{ steps.memer.outputs.source }}">Source</a> [Powered By <a href="https://github.com/Bhupesh-V/memer-action">Memer Action</a>]</sub>
+
   build:
 
     runs-on: ubuntu-latest
@@ -60,8 +61,6 @@ jobs:
       SENTRY_DSN: ''
 
       URL: ${{ secrets.URL }}
-
-      CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
 
     strategy:
       matrix:
@@ -83,4 +82,35 @@ jobs:
 
     - run: npm ci
 
-    - run: npm test
+    - run: npm run build
+
+  parallel-runs-across-platforms:
+
+    name: every OS
+
+    strategy:
+      matrix:
+        # run 2 copies of the current job in parallel
+        # and they will load balance all specs
+        os: ['ubuntu-latest', 'macos-latest']
+        machines: [1, 2]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      # because of "record" and "parallel" parameters
+      # these containers will load balance all found tests among themselves
+      - name: run tests
+        uses: cypress-io/github-action@v1
+        timeout-minutes: 10
+        with:
+          record: true
+          parallel: true
+          group: Parallel 2x on ${{ matrix.os }}
+          start: npm run build-start
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
