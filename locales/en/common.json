@@ -30,5 +30,6 @@
   "news": "Coronabingo and the news",
   "loading": "Loading...",
   "error": "An error ocurred.",
-  "reload": "Reload"
+  "reload": "Reload",
+  "locked-room": "Locked room."
 }

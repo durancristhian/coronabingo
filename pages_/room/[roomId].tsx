@@ -62,6 +62,16 @@ export default function RoomId() {
     )
   }
 
+  if (room.locked) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:locked-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
+
   const renderPlayers = () => {
     if (!room.readyToPlay || !players.length) {
       return <Loading message={t('roomId:not-ready')} />

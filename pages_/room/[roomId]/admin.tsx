@@ -78,7 +78,7 @@ export default function RoomAdmin() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('admin:locked-room')}</Message>
+          <Message type="error">{t('common:locked-room')}</Message>
         </Container>
       </Layout>
     )
