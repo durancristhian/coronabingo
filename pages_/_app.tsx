@@ -64,16 +64,16 @@ export default class Coronabingo extends App {
           {lang === 'en' && (
             <Fragment>
               <title>Coronabingo | Bingo online</title>
-              <link rel="canonical" href="https://coronabingo.now.sh/en/" />
+              <link rel="canonical" href="https://coronabingo.com.ar/en/" />
               <link
                 rel="alternate"
                 hrefLang="x-default"
-                href="https://coronabingo.now.sh/"
+                href="https://coronabingo.com.ar/"
               />
               <link
                 rel="alternate"
                 hrefLang="en-ES"
-                href="https://coronabingo.now.sh/es/"
+                href="https://coronabingo.com.ar/es/"
               />
               <meta name="title" content="Coronabingo | Bingo online" />
               <meta
@@ -87,7 +87,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:url"
-                content="https://coronabingo.now.sh/en/"
+                content="https://coronabingo.com.ar/en/"
               />
               <meta
                 property="twitter:title"
@@ -99,7 +99,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="og:url"
-                content="https://coronabingo.now.sh/en/"
+                content="https://coronabingo.com.ar/en/"
               />
             </Fragment>
           )}
@@ -107,16 +107,16 @@ export default class Coronabingo extends App {
           {lang === 'es' && (
             <Fragment>
               <title>Coronabingo | Tu juego de Bingo Online</title>
-              <link rel="canonical" href="https://coronabingo.now.sh/es/" />
+              <link rel="canonical" href="https://coronabingo.com.ar/es/" />
               <link
                 rel="alternate"
                 hrefLang="x-default"
-                href="https://coronabingo.now.sh/"
+                href="https://coronabingo.com.ar/"
               />
               <link
                 rel="alternate"
                 hrefLang="en-US"
-                href="https://coronabingo.now.sh/en/"
+                href="https://coronabingo.com.ar/en/"
               />
               <meta
                 name="title"
@@ -136,7 +136,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:url"
-                content="https://coronabingo.now.sh/es/"
+                content="https://coronabingo.com.ar/es/"
               />
               <meta
                 property="twitter:title"
@@ -148,7 +148,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="og:url"
-                content="https://coronabingo.now.sh/es/"
+                content="https://coronabingo.com.ar/es/"
               />
             </Fragment>
           )}
@@ -156,21 +156,21 @@ export default class Coronabingo extends App {
           {!lang && (
             <Fragment>
               <title>Coronabingo | Tu juego de Bingo Online</title>
-              <link rel="canonical" href="https://coronabingo.now.sh/" />
+              <link rel="canonical" href="https://coronabingo.com.ar/" />
               <link
                 rel="alternate"
                 hrefLang="x-default"
-                href="https://coronabingo.now.sh/"
+                href="https://coronabingo.com.ar/"
               />
               <link
                 rel="alternate"
                 hrefLang="en-US"
-                href="https://coronabingo.now.sh/en/"
+                href="https://coronabingo.com.ar/en/"
               />
               <link
                 rel="alternate"
                 hrefLang="es-ES"
-                href="https://coronabingo.now.sh/es/"
+                href="https://coronabingo.com.ar/es/"
               />
               <meta
                 name="title"
@@ -190,7 +190,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:url"
-                content="https://coronabingo.now.sh/"
+                content="https://coronabingo.com.ar/"
               />
               <meta
                 property="twitter:title"
@@ -200,19 +200,19 @@ export default class Coronabingo extends App {
                 property="twitter:description"
                 content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
               />
-              <meta property="og:url" content="https://coronabingo.now.sh/" />
+              <meta property="og:url" content="https://coronabingo.com.ar/" />
             </Fragment>
           )}
 
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://coronabingo.now.sh/social.jpg"
+            content="https://coronabingo.com.ar/social.jpg"
           />
           <meta property="twitter:card" content="summary_large_image" />
           <meta
             property="twitter:image"
-            content="https://coronabingo.now.sh/social.jpg"
+            content="https://coronabingo.com.ar/social.jpg"
           />
           <meta
             name="viewport"

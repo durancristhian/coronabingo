@@ -2,7 +2,7 @@
 
 describe('Custom', () => {
   const ADMIN_NAME = 'Cristhian'
-  const BASE_URL = 'https://coronabingo.now.sh' // 'http://localhost:3000'
+  const BASE_URL = 'https://coronabingo.com.ar' // 'http://localhost:3000'
   const ROOM_NAME = 'C3 - Jueves 21/05/2020'
   const ROOM_URL = ''
 
