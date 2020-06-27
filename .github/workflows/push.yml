@@ -35,4 +35,4 @@ jobs:
 
           PT_PROJECT_TOKEN: ${{ secrets.PACKTRACKER_PROJECT_ID }}
 
-        run: npm ci && npm run build
+        run: npm ci && npm run build && printenv CI && printenv PT_PROJECT_TOKEN
