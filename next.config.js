@@ -5,6 +5,7 @@ require('dotenv').config()
 const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
 const { join } = require('path')
+const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSourceMaps = require('@zeit/next-source-maps')()
 
@@ -53,12 +54,12 @@ module.exports = withPlugins(
     },
     webpack(config) {
       /*
-      Convert tsconfig path
-      { '@components/*': [ './src/components/*' ] }
+        Convert tsconfig path
+        { '@components/*': [ './src/components/*' ] }
 
-      To webpack aliases
-      { config.resolve.alias['@components'] = path.join(__dirname, './src/components') }
-    */
+        To webpack aliases
+        { config.resolve.alias['@components'] = path.join(__dirname, './src/components') }
+      */
       Object.keys(tsPaths).forEach(key => {
         const newKey = key.replace('/*', '')
         const value = tsPaths[key][0].replace('/*', '')
@@ -75,6 +76,29 @@ module.exports = withPlugins(
         test: /\.md$/,
         use: 'raw-loader',
       })
+
+      /*
+        packtracker.io implementation
+      */
+      if (process.env.CI) {
+        const event = require(process.env.GITHUB_EVENT_PATH)
+
+        config.plugins.push(
+          new PacktrackerPlugin({
+            project_token: process.env.PACKTRACKER_PROJECT_ID,
+            upload: true,
+            fail_build: true,
+            branch: event.ref.replace('refs/heads/', ''),
+            author: event.head_commit.author.email,
+            message: event.head_commit.message,
+            commit: process.env.GITHUB_SHA,
+            committed_at: parseInt(
+              +new Date(event.head_commit.timestamp) / 1000,
+            ),
+            prior_commit: event.before,
+          }),
+        )
+      }
 
       return config
     },
