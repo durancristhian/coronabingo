@@ -35,4 +35,6 @@ jobs:
 
       - name: Run next.js build
 
-      - run: npm ci && npm run build
+      run: |
+        npm ci
+        npm run build
