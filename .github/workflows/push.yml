@@ -1,12 +1,14 @@
-name: Node.js CI
+name: Report to packtracker.io
 
-on: [pull_request]
+on: [push]
 
 jobs:
 
-  e2e:
+  build:
 
-    runs-on: ${{ matrix.os }}
+    name: report
+
+    runs-on: ubuntu-latest
 
     env:
       API_KEY: ${{ secrets.API_KEY }}
@@ -26,24 +28,13 @@ jobs:
 
       CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
 
-    strategy:
-      matrix:
-        os: ['ubuntu-latest', 'macos-latest']
-        node-version: [12.x]
+      PT_PROJECT_TOKEN: ${{ secrets.PACKTRACKER_PROJECT_ID }}
 
     steps:
-      - uses: actions/cache@v1
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/checkout@master
 
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Run next.js build
 
       - run: npm ci
 
-      - run: npm test
+      - run: npm run build
