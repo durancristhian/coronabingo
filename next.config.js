@@ -52,7 +52,7 @@ module.exports = withPlugins(
       /* Other */
       URL: process.env.URL,
     },
-    webpack(config) {
+    webpack: config => {
       /*
         Convert tsconfig path
         { '@components/*': [ './src/components/*' ] }
