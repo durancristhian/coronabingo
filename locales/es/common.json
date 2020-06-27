@@ -31,5 +31,6 @@
   "loading": "Cargando...",
   "error": "Ocurrió un error.",
   "reload": "Recargar",
-  "locked-room": "Sala bloqueada."
+  "locked-room": "Sala bloqueada.",
+  "unexisting-room": "La sala no existe."
 }

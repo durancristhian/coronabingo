@@ -36,15 +36,17 @@ const PlayersContextProvider = ({ children }: Props) => {
       .onSnapshot(
         snapshot => {
           sortAndSet(
-            snapshot.docs.map(p => {
-              const playerData = p.data() as Player
+            snapshot.docs
+              .filter(p => p.exists)
+              .map(p => {
+                const playerData = p.data() as Player
 
-              return {
-                ...playerData,
-                id: p.id,
-                ref: p.ref,
-              }
-            }),
+                return {
+                  ...playerData,
+                  id: p.id,
+                  ref: p.ref,
+                }
+              }),
           )
 
           setLoading(false)

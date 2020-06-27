@@ -31,14 +31,19 @@ const RoomContextProvider = ({ children }: Props) => {
 
     const unsubscribe = roomsRef.doc(roomId).onSnapshot(
       snapshot => {
-        const roomData = snapshot.data() as Room
+        let roomData
 
-        setRoom({
-          ...roomData,
-          id: snapshot.id,
-          ref: snapshot.ref,
-        })
+        if (snapshot.exists) {
+          const data = snapshot.data() as Room
 
+          roomData = {
+            ...data,
+            id: snapshot.id,
+            ref: snapshot.ref,
+          }
+        }
+
+        setRoom(roomData)
         setLoading(false)
       },
       error => {

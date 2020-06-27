@@ -1,7 +1,7 @@
 {
   "title": "Hola {{playerName}}, estás en la sala {{roomName}}",
   "room-not-ready": "La sala se está configurando. Espere...",
-  "out-of-room": "No eres parte de esta sala.",
+  "unexisting-player": "No eres parte de la sala.",
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
   "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",

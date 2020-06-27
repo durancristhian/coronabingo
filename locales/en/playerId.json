@@ -1,7 +1,7 @@
 {
   "title": "Hi {{playerName}}, you are in the room {{roomName}}",
   "room-not-ready": "The room is being set up. Please wait...",
-  "out-of-room": "You're not part of this room.",
+  "unexisting-player": "Player doesn't exist.",
   "last-numbers": "Last numbers",
   "next-number": "Next number",
   "no-bingo-spinner-description": "In the list below, mark the numbers that come out in your bingo spinner.",

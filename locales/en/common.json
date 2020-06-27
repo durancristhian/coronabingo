@@ -31,5 +31,6 @@
   "loading": "Loading...",
   "error": "An error ocurred.",
   "reload": "Reload",
-  "locked-room": "Locked room."
+  "locked-room": "Locked room.",
+  "unexisting-room": "Room doesn't exist."
 }
