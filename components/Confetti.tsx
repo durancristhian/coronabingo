@@ -49,21 +49,56 @@ const pallbearersClasses = [
 ]
 
 const confettiType = {
+  balloons: [],
   confetti: confettiClasses,
   pallbearers: pallbearersClasses,
 }
 
-export const confettiTypes = ['confetti', 'pallbearers']
+export const confettiTypes = ['confetti', 'pallbearers', 'balloons']
 
 interface Props {
   type: ConfettiType
 }
 
 export default class Confetti extends Component<Props> {
+  randomInteger = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  renderBalloons = () => {
+    const balloons = [...Array(50).keys()]
+
+    return (
+      <div className="balloons-container">
+        {balloons.map(b => (
+          <div
+            key={b}
+            className="balloon"
+            style={
+              {
+                '--x': this.randomInteger(0, 100),
+                '--h': this.randomInteger(0, 360),
+                '--s': this.randomInteger(15, 50),
+                '--d': this.randomInteger(1, 10),
+                '--delay': this.randomInteger(0, 10),
+              } as React.CSSProperties
+            }
+          >
+            <div className="balloon__handle"></div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   render() {
     const { type } = this.props
 
     if (!type) return null
+
+    if (type === 'balloons') {
+      return this.renderBalloons()
+    }
 
     const classes = confettiType[type]
 

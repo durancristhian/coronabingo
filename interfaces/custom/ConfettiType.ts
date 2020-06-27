@@ -1,1 +1,1 @@
-export type ConfettiType = 'confetti' | 'pallbearers' | ''
+export type ConfettiType = 'confetti' | 'pallbearers' | 'balloons' | ''

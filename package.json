@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@fullhuman/postcss-purgecss": "^2.1.0",
+        "@packtracker/webpack-plugin": "^2.3.0",
         "@sentry/browser": "^5.15.0",
         "@svgr/webpack": "^5.2.0",
         "@types/classnames": "^2.2.10",
