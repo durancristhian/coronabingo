@@ -54,7 +54,15 @@ export default function RoomPlayer() {
     )
   }
 
-  if (!room || !player) return null
+  if (!room) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:unexisting-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
 
   if (isRoomOld(room)) {
     return (
@@ -80,7 +88,7 @@ export default function RoomPlayer() {
     return (
       <Layout>
         <Container>
-          <Message type="error">{t('playerId:out-of-room')}</Message>
+          <Message type="error">{t('playerId:unexisting-player')}</Message>
         </Container>
       </Layout>
     )
@@ -176,7 +184,7 @@ export default function RoomPlayer() {
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
         </div>
       </Layout>
-      <Confetti type={room.confettiType} />
+      {room.confettiType && <Confetti type={room.confettiType} />}
       <Sounds isAdmin={isAdmin} room={room} />
     </BackgroundCellContextProvider>
   )

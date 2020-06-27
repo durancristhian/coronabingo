@@ -62,7 +62,15 @@ export default function RoomAdmin() {
     )
   }
 
-  if (!room) return null
+  if (!room) {
+    return (
+      <Layout>
+        <Container>
+          <Message type="error">{t('common:unexisting-room')}</Message>
+        </Container>
+      </Layout>
+    )
+  }
 
   if (isRoomOld(room)) {
     return (

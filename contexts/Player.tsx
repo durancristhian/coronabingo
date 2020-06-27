@@ -34,14 +34,19 @@ const PlayerContextProvider = ({ children }: Props) => {
       .doc(`${roomId}/players/${playerId}`)
       .onSnapshot(
         snapshot => {
-          const playerData = snapshot.data() as Player
+          let playerData
 
-          setPlayer({
-            ...playerData,
-            id: snapshot.id,
-            ref: snapshot.ref,
-          })
+          if (snapshot.exists) {
+            const data = snapshot.data() as Player
 
+            playerData = {
+              ...data,
+              id: snapshot.id,
+              ref: snapshot.ref,
+            }
+          }
+
+          setPlayer(playerData)
           setLoading(false)
         },
         error => {
