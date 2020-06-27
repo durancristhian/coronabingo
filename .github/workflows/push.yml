@@ -15,7 +15,7 @@ jobs:
 
       - name: Run next.js build
 
-      env:
+      - env:
         API_KEY: ${{ secrets.API_KEY }}
         AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -35,4 +35,4 @@ jobs:
 
         PT_PROJECT_TOKEN: ${{ secrets.PACKTRACKER_PROJECT_ID }}
 
-      run: npm ci && npm run build
+      - run: npm ci && npm run build
