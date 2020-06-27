@@ -78,14 +78,13 @@ module.exports = withPlugins(
       })
 
       /*
-        packtracker.io implementation
+        packtracker.io
       */
       if (process.env.CI) {
         const event = require(process.env.GITHUB_EVENT_PATH)
 
         config.plugins.push(
           new PacktrackerPlugin({
-            project_token: process.env.PACKTRACKER_PROJECT_ID,
             upload: true,
             fail_build: true,
             branch: event.ref.replace('refs/heads/', ''),

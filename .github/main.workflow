@@ -5,5 +5,5 @@ workflow "packtracker.io" {
 
 action "report webpack stats" {
   uses = "packtracker/report@2.2.0"
-  secrets = [${{ secrets.PACKTRACKER_PROJECT_ID }}]
+  secrets = ["ee605b70-f381-462e-8c9b-1e88ef52dab3"]
 }
