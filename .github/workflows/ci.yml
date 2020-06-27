@@ -26,6 +26,8 @@ jobs:
 
       CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
 
+      PT_PROJECT_TOKEN: ${{ secrets.PACKTRACKER_PROJECT_ID }}
+
     strategy:
       matrix:
         os: ['ubuntu-latest']
