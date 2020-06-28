@@ -26,7 +26,7 @@ jobs:
 
       CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
 
-      PT_PROJECT_TOKEN: ${{ secrets.PACKTRACKER_PROJECT_ID }}
+      PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
 
     strategy:
       matrix:
