@@ -6,8 +6,8 @@ const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
 const { join } = require('path')
 const PacktrackerPlugin = require('@packtracker/webpack-plugin')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withSourceMaps = require('@zeit/next-source-maps')()
+/* const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+const withSourceMaps = require('@zeit/next-source-maps')() */
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
@@ -79,7 +79,7 @@ const nextConfig = {
 module.exports = withPlugins(
   [
     [withImages],
-    [withSourceMaps],
+    /* [withSourceMaps],
     [
       withBundleAnalyzer,
       {
@@ -96,7 +96,7 @@ module.exports = withPlugins(
           },
         },
       },
-    ],
+    ], */
   ],
   nextConfig,
 )
