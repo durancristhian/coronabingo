@@ -2,15 +2,26 @@
 
 require('dotenv').config()
 
-const withPlugins = require('next-compose-plugins')
-const withImages = require('next-images')
 const { join } = require('path')
 const PacktrackerPlugin = require('@packtracker/webpack-plugin')
-/* const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withSourceMaps = require('@zeit/next-source-maps')() */
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
+
+const compose = plugins => {
+  let cfg = {}
+
+  return plugins.reduceRight(
+    (prevFn, plugin) => {
+      if (plugin[1]) cfg = { ...cfg, ...plugin[1] }
+
+      return (...args) => plugin[0](prevFn(...args))
+    },
+    value => {
+      return { ...cfg, ...value }
+    },
+  )
+}
 
 const nextConfig = {
   env: {
@@ -30,7 +41,7 @@ const nextConfig = {
     /* Other */
     URL: process.env.URL,
   },
-  webpack: config => {
+  webpack: (config, { isServer }) => {
     /*
       Convert tsconfig path
       { '@components/*': [ './src/components/*' ] }
@@ -55,7 +66,7 @@ const nextConfig = {
       use: 'raw-loader',
     })
 
-    if (process.env.GITHUB_EVENT_PATH) {
+    if (!isServer && process.env.GITHUB_EVENT_PATH) {
       const event = require(process.env.GITHUB_EVENT_PATH)
 
       config.plugins.push(
@@ -76,27 +87,26 @@ const nextConfig = {
   },
 }
 
-module.exports = withPlugins(
+const plugins = [
+  [require('next-images'), {}],
+  [require('@zeit/next-source-maps'), {}],
   [
-    [withImages],
-    /* [withSourceMaps],
-    [
-      withBundleAnalyzer,
-      {
-        analyzeBrowser: process.env.ANALYZE_BUNDLE,
-        analyzeServer: process.env.ANALYZE_BUNDLE,
-        bundleAnalyzerConfig: {
-          browser: {
-            analyzerMode: 'static',
-            reportFilename: 'bundle-analyzer/client.html',
-          },
-          server: {
-            analyzerMode: 'static',
-            reportFilename: 'bundle-analyzer/server.html',
-          },
+    require('@zeit/next-bundle-analyzer'),
+    {
+      analyzeBrowser: process.env.ANALYZE_BUNDLE,
+      analyzeServer: process.env.ANALYZE_BUNDLE,
+      bundleAnalyzerConfig: {
+        browser: {
+          analyzerMode: 'static',
+          reportFilename: 'bundle-analyzer/client.html',
+        },
+        server: {
+          analyzerMode: 'static',
+          reportFilename: 'bundle-analyzer/server.html',
         },
       },
-    ], */
+    },
   ],
-  nextConfig,
-)
+]
+
+module.exports = compose(plugins)(nextConfig)

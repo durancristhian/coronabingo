@@ -3,76 +3,49 @@ name: CI
 on: [push]
 
 jobs:
+  e2e:
+    runs-on: ${{ matrix.os }}
 
-  build:
-    name: report
-    runs-on: ubuntu-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+      MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
+      APP_ID: ${{ secrets.APP_ID }}
+      MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
+
+      GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+
+      SENTRY_DSN: ''
+
+      URL: ${{ secrets.URL }}
+
+      CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
+
+      PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
+
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        node-version: [12.x]
+
     steps:
-      - uses: actions/checkout@master
-      - name: Run next.js build
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
-          MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
-          APP_ID: ${{ secrets.APP_ID }}
-          MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
+      - uses: actions/cache@v1
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
 
-          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+      - uses: actions/checkout@v2
 
-          SENTRY_DSN: ''
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-          URL: ${{ secrets.URL }}
+      - run: npm ci
 
-          CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
+      # - run: npm t
 
-          PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
-        run: npm ci && npm run build
-
-#   e2e:
-# 
-#     runs-on: ${{ matrix.os }}
-# 
-#     env:
-#       API_KEY: ${{ secrets.API_KEY }}
-#       AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
-#       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-#       PROJECT_ID: ${{ secrets.PROJECT_ID }}
-#       STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
-#       MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
-#       APP_ID: ${{ secrets.APP_ID }}
-#       MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
-# 
-#       GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
-# 
-#       SENTRY_DSN: ''
-# 
-#       URL: ${{ secrets.URL }}
-# 
-#       CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
-# 
-#       PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
-# 
-#     strategy:
-#       matrix:
-#         os: ['ubuntu-latest']
-#         node-version: [12.x]
-# 
-#     steps:
-#       - uses: actions/cache@v1
-#         with:
-#           path: ${{ github.workspace }}/.next/cache
-#           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
-# 
-#       - uses: actions/checkout@v2
-# 
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
-# 
-#       - run: npm ci
-# 
-#       - run: npm test
+      - run: npm run build
