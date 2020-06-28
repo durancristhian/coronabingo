@@ -30,7 +30,7 @@ const nextConfig = {
     /* Other */
     URL: process.env.URL,
   },
-  webpack: config => {
+  webpack: (config, { isServer }) => {
     /*
       Convert tsconfig path
       { '@components/*': [ './src/components/*' ] }
@@ -55,7 +55,7 @@ const nextConfig = {
       use: 'raw-loader',
     })
 
-    if (process.env.GITHUB_EVENT_PATH) {
+    if (!isServer && process.env.GITHUB_EVENT_PATH) {
       const event = require(process.env.GITHUB_EVENT_PATH)
 
       config.plugins.push(
@@ -79,8 +79,8 @@ const nextConfig = {
 module.exports = withPlugins(
   [
     [withImages],
-    /* [withSourceMaps],
-    [
+    [withSourceMaps],
+    /* [
       withBundleAnalyzer,
       {
         analyzeBrowser: process.env.ANALYZE_BUNDLE,
