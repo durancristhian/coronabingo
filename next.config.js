@@ -2,11 +2,8 @@
 
 require('dotenv').config()
 
-const withImages = require('next-images')
 const { join } = require('path')
 const PacktrackerPlugin = require('@packtracker/webpack-plugin')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withSourceMaps = require('@zeit/next-source-maps')()
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
@@ -91,10 +88,10 @@ const nextConfig = {
 }
 
 const plugins = [
-  [withImages, {}],
-  [withSourceMaps, {}],
+  [require('next-images'), {}],
+  [require('@zeit/next-source-maps'), {}],
   [
-    withBundleAnalyzer,
+    require('@zeit/next-bundle-analyzer'),
     {
       analyzeBrowser: process.env.ANALYZE_BUNDLE,
       analyzeServer: process.env.ANALYZE_BUNDLE,
@@ -112,4 +109,4 @@ const plugins = [
   ],
 ]
 
-module.export = compose(plugins)(nextConfig)
+module.exports = compose(plugins)(nextConfig)
