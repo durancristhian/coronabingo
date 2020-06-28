@@ -77,6 +77,8 @@ module.exports = withPlugins(
         use: 'raw-loader',
       })
 
+      
+      console.log('*************', isServer, process.env.GITHUB_EVENT_PATH);
       /*
         packtracker.io
       */
