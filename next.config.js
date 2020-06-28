@@ -12,6 +12,8 @@ const withSourceMaps = require('@zeit/next-source-maps')()
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
 
+console.log('************* 1', process.env.GITHUB_EVENT_PATH)
+
 module.exports = withPlugins(
   [
     [withImages],
@@ -77,13 +79,19 @@ module.exports = withPlugins(
         use: 'raw-loader',
       })
 
-      
-      console.log('*************', isServer, process.env.GITHUB_EVENT_PATH);
+      console.log('************* 2', process.env.GITHUB_EVENT_PATH)
+
       /*
         packtracker.io
       */
       if (!isServer && process.env.GITHUB_EVENT_PATH) {
         const event = require(process.env.GITHUB_EVENT_PATH)
+
+        console.log(
+          '************* 3',
+          process.env.GITHUB_EVENT_PATH,
+          config.plugins.length,
+        )
 
         config.plugins.push(
           new PacktrackerPlugin({
