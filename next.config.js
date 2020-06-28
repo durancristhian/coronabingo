@@ -2,15 +2,29 @@
 
 require('dotenv').config()
 
-const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
 const { join } = require('path')
 const PacktrackerPlugin = require('@packtracker/webpack-plugin')
-/* const withBundleAnalyzer = require('@zeit/next-bundle-analyzer') */
+const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSourceMaps = require('@zeit/next-source-maps')()
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
+
+const compose = plugins => {
+  let cfg = {}
+
+  return plugins.reduceRight(
+    (prevFn, plugin) => {
+      if (plugin[1]) cfg = { ...cfg, ...plugin[1] }
+
+      return (...args) => plugin[0](prevFn(...args))
+    },
+    value => {
+      return { ...cfg, ...value }
+    },
+  )
+}
 
 const nextConfig = {
   env: {
@@ -76,27 +90,26 @@ const nextConfig = {
   },
 }
 
-module.exports = withPlugins(
+const plugins = [
+  [withImages, {}],
+  [withSourceMaps, {}],
   [
-    [withImages],
-    [withSourceMaps],
-    /* [
-      withBundleAnalyzer,
-      {
-        analyzeBrowser: process.env.ANALYZE_BUNDLE,
-        analyzeServer: process.env.ANALYZE_BUNDLE,
-        bundleAnalyzerConfig: {
-          browser: {
-            analyzerMode: 'static',
-            reportFilename: 'bundle-analyzer/client.html',
-          },
-          server: {
-            analyzerMode: 'static',
-            reportFilename: 'bundle-analyzer/server.html',
-          },
+    withBundleAnalyzer,
+    {
+      analyzeBrowser: process.env.ANALYZE_BUNDLE,
+      analyzeServer: process.env.ANALYZE_BUNDLE,
+      bundleAnalyzerConfig: {
+        browser: {
+          analyzerMode: 'static',
+          reportFilename: 'bundle-analyzer/client.html',
+        },
+        server: {
+          analyzerMode: 'static',
+          reportFilename: 'bundle-analyzer/server.html',
         },
       },
-    ], */
+    },
   ],
-  nextConfig,
-)
+]
+
+module.export = compose(plugins)(nextConfig)
