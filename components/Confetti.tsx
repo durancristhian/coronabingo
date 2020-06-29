@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { Component } from 'react'
+import React, { Fragment, memo } from 'react'
 import { ConfettiType } from '~/interfaces'
 
 const confettiClasses = [
@@ -60,13 +60,27 @@ interface Props {
   type: ConfettiType
 }
 
-export default class Confetti extends Component<Props> {
-  randomInteger = (min: number, max: number) => {
+export default memo(function Confetti({ type }: Props) {
+  if (!type) return null
+
+  if (type !== 'balloons') {
+    const classes = confettiType[type]
+
+    return (
+      <Fragment>
+        {classes.map((c, i) => (
+          <div className={classnames(['confetti-base', c])} key={i} />
+        ))}
+      </Fragment>
+    )
+  }
+
+  const randomInteger = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  renderBalloons = () => {
-    const balloons = [...Array(50).keys()]
+  const renderBalloons = () => {
+    const balloons = [...Array(25).keys()]
 
     return (
       <div className="balloons-container">
@@ -76,11 +90,11 @@ export default class Confetti extends Component<Props> {
             className="balloon"
             style={
               {
-                '--x': this.randomInteger(0, 100),
-                '--h': this.randomInteger(0, 360),
-                '--s': this.randomInteger(15, 50),
-                '--d': this.randomInteger(1, 10),
-                '--delay': this.randomInteger(0, 10),
+                '--x': randomInteger(0, 100),
+                '--h': randomInteger(0, 360),
+                '--s': randomInteger(15, 50),
+                '--d': randomInteger(1, 10),
+                '--delay': randomInteger(0, 10),
               } as React.CSSProperties
             }
           >
@@ -91,19 +105,5 @@ export default class Confetti extends Component<Props> {
     )
   }
 
-  render() {
-    const { type } = this.props
-
-    if (!type) return null
-
-    if (type === 'balloons') {
-      return this.renderBalloons()
-    }
-
-    const classes = confettiType[type]
-
-    return classes.map((c, i) => (
-      <div className={classnames(['confetti-base', c])} key={i} />
-    ))
-  }
-}
+  return renderBalloons()
+})

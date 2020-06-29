@@ -184,7 +184,7 @@ export default function RoomPlayer() {
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
         </div>
       </Layout>
-      {room.confettiType && <Confetti type={room.confettiType} />}
+      <Confetti type={room.confettiType} />
       <Sounds isAdmin={isAdmin} room={room} />
     </BackgroundCellContextProvider>
   )
