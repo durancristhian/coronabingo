@@ -98,11 +98,19 @@ const plugins = [
       bundleAnalyzerConfig: {
         browser: {
           analyzerMode: 'static',
-          reportFilename: '../bundle-analyzer/client.html',
+          reportFilename: join(
+            __dirname,
+            'public',
+            'bundle-analyzer/client.html',
+          ),
         },
         server: {
           analyzerMode: 'static',
-          reportFilename: '../../bundle-analyzer/server.html',
+          reportFilename: join(
+            __dirname,
+            'public',
+            'bundle-analyzer/server.html',
+          ),
         },
       },
     },
