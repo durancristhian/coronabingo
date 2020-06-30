@@ -3,8 +3,8 @@ import React, { ReactNode } from 'react'
 import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
-import useLocalStorageSupport from '~/hooks/useLocalStorageSupport'
 import { version } from '~/package.json'
+import { isThereLocalStorageSupport } from '~/utils'
 import Box from './Box'
 import Container from './Container'
 
@@ -13,14 +13,14 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  const isThereLocalStorageSupport = useLocalStorageSupport()
+  const localStorageSupport = isThereLocalStorageSupport()
   const { t } = useTranslation()
   const isStaging = process.env.URL?.toString()
     .split('.')
     .includes('cduran')
 
   const renderContent = () => {
-    if (isThereLocalStorageSupport) return children
+    if (localStorageSupport) return children
 
     return (
       <Container>
