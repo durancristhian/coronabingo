@@ -98,11 +98,11 @@ const plugins = [
       bundleAnalyzerConfig: {
         browser: {
           analyzerMode: 'static',
-          reportFilename: 'bundle-analyzer/client.html',
+          reportFilename: '../bundle-analyzer/client.html',
         },
         server: {
           analyzerMode: 'static',
-          reportFilename: 'bundle-analyzer/server.html',
+          reportFilename: '../../bundle-analyzer/server.html',
         },
       },
     },
