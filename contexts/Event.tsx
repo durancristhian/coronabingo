@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Event } from '~/interfaces'
-import { EventContextData } from '~/interfaces/contexts/Event'
+import { Event, EventContextData } from '~/interfaces'
 import { eventsRef } from '~/utils'
 
 const EventContext = createContext<EventContextData>({

@@ -1,8 +1,9 @@
 import useTranslation from 'next-translate/useTranslation'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
+import { useAnalytics } from '~/hooks/useAnalytics'
 import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
 import Box from './Box'
@@ -13,14 +14,27 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  const localStorageSupport = isThereLocalStorageSupport()
+  const log = useAnalytics()
+  const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
   const isStaging = process.env.URL?.toString()
     .split('.')
     .includes('cduran')
 
+  useEffect(() => {
+    if (!isThereLocalStorageSupport()) {
+      setLocalStorageSupport(false)
+    }
+  }, [])
+
   const renderContent = () => {
-    if (localStorageSupport) return children
+    if (localStorageSupport) {
+      return children
+    }
+
+    log('no_local_storage_support', {
+      description: `${localStorageSupport}`,
+    })
 
     return (
       <Container>

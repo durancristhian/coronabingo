@@ -1,3 +1,4 @@
+import 'firebase/analytics'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -21,6 +22,12 @@ if (firebase.apps.length) {
   firebaseApp = firebase.initializeApp(firebaseConfig)
 }
 
+let analytics: firebase.analytics.Analytics
+
+if (typeof window !== 'undefined') {
+  analytics = firebaseApp.analytics()
+}
+
 const auth = firebase.auth()
 const db = firebaseApp.firestore()
 const { Timestamp } = firebase.firestore
@@ -30,4 +37,13 @@ const eventsRef = db.collection('events')
 
 const createBatch = () => db.batch()
 
-export { db, auth, createBatch, roomsRef, eventsRef, Timestamp }
+export {
+  analytics,
+  auth,
+  createBatch,
+  db,
+  firebaseApp,
+  roomsRef,
+  eventsRef,
+  Timestamp,
+}
