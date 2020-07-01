@@ -32,5 +32,6 @@
   "error": "Ocurrió un error.",
   "reload": "Recargar",
   "locked-room": "Sala bloqueada.",
-  "unexisting-room": "La sala no existe."
+  "unexisting-room": "La sala no existe.",
+  "no-local-storage-support": "Tu dispositivo no soporta algunas características necesarias para usar este sitio."
 }

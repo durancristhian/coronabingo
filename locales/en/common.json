@@ -32,5 +32,6 @@
   "error": "An error ocurred.",
   "reload": "Reload",
   "locked-room": "Locked room.",
-  "unexisting-room": "Room doesn't exist."
+  "unexisting-room": "Room doesn't exist.",
+  "no-local-storage-support": "Your device doesn't have some capabilities needed to use this website."
 }

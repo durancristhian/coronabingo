@@ -1,4 +1,6 @@
+export * from './contexts/Analytics'
 export * from './contexts/BackgroundCell'
+export * from './contexts/Event'
 export * from './contexts/Flags'
 export * from './contexts/Player'
 export * from './contexts/Players'
