@@ -5,13 +5,11 @@ import { FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import useToast from '~/hooks/useToast'
 import roomApi from '~/models/room'
 import { generateRoomCode } from '~/utils'
 
 export default function CreateRoom() {
-  const log = useAnalytics()
   const { t } = useTranslation()
   const { createToast, dismissToast, updateToast } = useToast()
   const [name, setName] = useState('')
@@ -31,10 +29,6 @@ export default function CreateRoom() {
       })
 
       updateToast('index:create-room.success', 'success', toastId)
-
-      log('room_created', {
-        description: name,
-      })
 
       setTimeout(() => {
         dismissToast(toastId)
