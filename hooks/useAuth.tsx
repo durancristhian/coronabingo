@@ -7,7 +7,10 @@ const useAuth = () => {
 }
 
 export const useProvideAuth = () => {
-  const [user, setUser] = useState<firebase.User | null>(null)
+  /* TODO: improve this */
+  const [user, setUser] = useState<firebase.User | null | 'not asked'>(
+    'not asked',
+  )
 
   const signin = (email: string, password: string) => {
     return auth.signInWithEmailAndPassword(email, password).then(response => {

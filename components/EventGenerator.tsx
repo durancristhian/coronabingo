@@ -20,11 +20,9 @@ const defaultEventData = {
     html: '',
     text: '',
   },
-  emailEndpoint: '',
   name: '',
   roomAdminName: '',
   roomName: '',
-  videocall: '',
 }
 
 interface Props {
@@ -89,11 +87,10 @@ export default function EventGenerator({ user }: Props) {
       batch.set(eventRef, {
         content: event.content,
         date: Timestamp.fromDate(new Date()),
-        emailEndpoint: event.emailEndpoint,
-        eventName: event.name,
+        emailEndpoint: process.env.EMAIL_ENDPOINT,
+        name: event.name,
         roomId: roomRef.id,
         userId: user.uid,
-        videocall: event.videocall,
       })
 
       await batch.commit()
@@ -149,22 +146,6 @@ export default function EventGenerator({ user }: Props) {
             value={event.roomAdminName}
             onChange={roomAdminName => {
               setEvent({ ...event, roomAdminName })
-            }}
-          />
-          <InputText
-            id="videocall"
-            label="Link a la videollamada"
-            value={event.videocall}
-            onChange={videocall => {
-              setEvent({ ...event, videocall })
-            }}
-          />
-          <InputText
-            id="email-endpoint"
-            label="Endpoint de palabra.io para mandar los mails"
-            value={event.emailEndpoint}
-            onChange={emailEndpoint => {
-              setEvent({ ...event, emailEndpoint })
             }}
           />
           <div className="mt-8 text-center">

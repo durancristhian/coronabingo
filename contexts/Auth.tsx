@@ -9,7 +9,8 @@ const defaultContextValue = {
 }
 
 const AuthContext = createContext<{
-  user: firebase.User | null
+  /* TODO: improve this */
+  user: firebase.User | null | 'not asked'
   signin: (email: string, password: string) => Promise<firebase.User | null>
   signout: () => void
   signup: (email: string, password: string) => Promise<firebase.User | null>

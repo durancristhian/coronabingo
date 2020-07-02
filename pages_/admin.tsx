@@ -2,6 +2,7 @@ import Error from 'next/error'
 import React from 'react'
 import Container from '~/components/Container'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Login from '~/components/Login'
 import Premium from '~/components/Premium'
 import useAuth from '~/hooks/useAuth'
@@ -17,9 +18,28 @@ export default function Admin({ hidden }: Props) {
     return <Error statusCode={404} />
   }
 
+  if (user === 'not asked') {
+    return (
+      <Layout>
+        <Container>
+          <Loading />
+        </Container>
+      </Layout>
+    )
+  }
+
+  if (!user) {
+    return (
+      <Layout>
+        <Container>
+          <Login />
+        </Container>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
-      <Container>{!user && <Login />}</Container>
       <Container size="medium">{user && <Premium user={user} />}</Container>
     </Layout>
   )

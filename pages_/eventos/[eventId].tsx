@@ -115,7 +115,7 @@ export default function EventId({ hidden }: Props) {
             <fieldset disabled={inProgress}>
               <InputText
                 id="name"
-                label="Nombre completo"
+                label="Nombre"
                 value={formData.name}
                 onChange={name => {
                   setFormData({ ...formData, name })
