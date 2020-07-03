@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Button from '~/components/Button'
+import FirebaseImage from '~/components/FirebaseImage'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
 import { Event, Player, Registration, RoomTicket } from '~/interfaces'
@@ -164,11 +165,15 @@ export default function Registrations({
         >
           <div className="bg-gray-100 flex flex-wrap mb-2 shadow">
             <div className="p-4 w-1/5">
-              <img
-                src={registration.attachment}
-                alt={`Comprobante de pago de ${registration.name}`}
-                className="block rounded w-full"
-              />
+              <FirebaseImage path={registration.attachment}>
+                {(url: string) => (
+                  <img
+                    src={url}
+                    alt={`Comprobante de pago de ${registration.name}`}
+                    className="block rounded w-full"
+                  />
+                )}
+              </FirebaseImage>
             </div>
             <div className="p-4 w-2/5">
               <div className="mb-4">

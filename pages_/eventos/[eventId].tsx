@@ -13,14 +13,14 @@ import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
 import useToast from '~/hooks/useToast'
-import { RegistrationBase } from '~/interfaces'
-import { createBatch, Timestamp } from '~/utils'
+import { createBatch, storage, Timestamp } from '~/utils'
 
 const defaultFormData = {
   attachment: '',
   comment: '',
   date: Timestamp.now(),
   email: '',
+  extension: '',
   name: '',
   tel: '',
 }
@@ -33,7 +33,7 @@ export default function EventId({ hidden }: Props) {
   const { error, loading, event } = useEvent()
   const { createToast, dismissToast, updateToast } = useToast()
   const [inProgress, setInProgress] = useState(false)
-  const [formData, setFormData] = useState<RegistrationBase>(defaultFormData)
+  const [formData, setFormData] = useState(defaultFormData)
 
   if (loading) {
     return (
@@ -63,7 +63,7 @@ export default function EventId({ hidden }: Props) {
     return <Error statusCode={404} />
   }
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     /* TODO: validate */
@@ -76,12 +76,23 @@ export default function EventId({ hidden }: Props) {
       const batch = createBatch()
       const registrationRef = event.ref.collection('registrations').doc()
 
+      const { attachment, extension, ...registrationData } = formData
+
+      const attachmentRef = storage.child(
+        `${event.id}/${registrationRef.id}/attachment.${extension}`,
+      )
+      const attachmentSnapshot = await attachmentRef.putString(
+        attachment,
+        'data_url',
+      )
+
       batch.set(registrationRef, {
-        ...formData,
+        ...registrationData,
+        attachment: attachmentSnapshot.metadata.fullPath,
         date: Timestamp.fromDate(new Date()),
       })
 
-      batch.commit()
+      await batch.commit()
 
       updateToast('Operación exitosa', 'success', toastId)
     } catch (error) {
@@ -149,8 +160,8 @@ export default function EventId({ hidden }: Props) {
                 id="attachment"
                 label="Comprobante de la donación"
                 image={formData.attachment}
-                onChange={attachment => {
-                  setFormData({ ...formData, attachment })
+                onChange={(attachment, extension) => {
+                  setFormData({ ...formData, attachment, extension })
                 }}
               />
               <div className="mt-8 text-center">
