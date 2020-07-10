@@ -1,6 +1,5 @@
 import { default as NextError } from 'next/error'
-import React from 'react'
-import Container from '~/components/Container'
+import React, { Fragment } from 'react'
 import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
@@ -41,9 +40,7 @@ export default function EventAdmin({ hidden }: Props) {
   ) {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -51,11 +48,7 @@ export default function EventAdmin({ hidden }: Props) {
   if (eventError || registrationsError || playersError || ticketsError) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">
-            El evento que estás buscando no existe.
-          </Message>
-        </Container>
+        <Message type="error">El evento que estás buscando no existe.</Message>
       </Layout>
     )
   }
@@ -68,13 +61,9 @@ export default function EventAdmin({ hidden }: Props) {
 
   return (
     <Layout>
-      {!registrations.length && (
-        <Container>
-          <Error message="No hay inscripciones." />
-        </Container>
-      )}
+      {!registrations.length && <Error message="No hay inscripciones." />}
       {!!registrations.length && (
-        <Container size="large">
+        <Fragment>
           <div className="mb-4">
             <Heading type="h1" textAlign="center">
               <span>Inscripciones ({registrations.length})</span>
@@ -86,7 +75,7 @@ export default function EventAdmin({ hidden }: Props) {
             registrations={registrations as Registration[]}
             tickets={tickets as RoomTicket[]}
           />
-        </Container>
+        </Fragment>
       )}
     </Layout>
   )

@@ -21,9 +21,7 @@ export default function Admin({ hidden }: Props) {
   if (user === 'not asked') {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -31,7 +29,7 @@ export default function Admin({ hidden }: Props) {
   if (!user) {
     return (
       <Layout>
-        <Container>
+        <Container size="medium">
           <Login />
         </Container>
       </Layout>

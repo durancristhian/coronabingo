@@ -58,6 +58,7 @@ export default function Footer() {
                   <Anchor
                     href="https://forms.gle/egSBrsKSFnEgabff7"
                     id="feedback-form"
+                    display="block"
                   >
                     <span className="flex items-center justify-center">
                       <FiHeart />
@@ -69,6 +70,7 @@ export default function Footer() {
                   <Anchor
                     href="https://twitter.com/corona_bingo"
                     id="coronabingo-twitter"
+                    display="block"
                   >
                     <span className="flex items-center justify-center">
                       <FiTwitter />

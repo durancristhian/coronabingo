@@ -38,9 +38,7 @@ export default function EventId({ hidden }: Props) {
   if (loading) {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -48,11 +46,7 @@ export default function EventId({ hidden }: Props) {
   if (error) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">
-            El evento que estás buscando no existe.
-          </Message>
-        </Container>
+        <Message type="error">El evento que estás buscando no existe.</Message>
       </Layout>
     )
   }

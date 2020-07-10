@@ -45,9 +45,7 @@ export default function RoomAdmin() {
   if (roomLoading || playersLoading) {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -55,9 +53,7 @@ export default function RoomAdmin() {
   if (roomError || playersError) {
     return (
       <Layout>
-        <Container>
-          <Error />
-        </Container>
+        <Error />
       </Layout>
     )
   }
@@ -65,9 +61,7 @@ export default function RoomAdmin() {
   if (!room) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:unexisting-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:unexisting-room')}</Message>
       </Layout>
     )
   }
@@ -75,9 +69,7 @@ export default function RoomAdmin() {
   if (isRoomOld(room)) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:outdated-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:outdated-room')}</Message>
       </Layout>
     )
   }
@@ -85,9 +77,7 @@ export default function RoomAdmin() {
   if (room.locked) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:locked-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:locked-room')}</Message>
       </Layout>
     )
   }
@@ -137,7 +127,7 @@ export default function RoomAdmin() {
 
   return (
     <Layout>
-      <Container>
+      <Container size="medium">
         <Box>
           <div className="mb-4">
             <Heading textAlign="center" type="h2">
