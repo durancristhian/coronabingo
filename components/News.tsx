@@ -18,7 +18,7 @@ export default memo(function News({ tweetIds }: Props) {
       <div className="sm:flex my-4 -mx-2">
         {tweetIds.map(id => (
           <div key={id} className="flex-1 mx-2">
-            <TweetEmbed id={id} />
+            <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />
           </div>
         ))}
       </div>
