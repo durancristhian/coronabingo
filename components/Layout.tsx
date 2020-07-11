@@ -4,7 +4,6 @@ import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
-import useEventBanner from '~/hooks/useEventBanner'
 import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
 import Box from './Box'
@@ -15,7 +14,6 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  const showEventBanner = useEventBanner()
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -46,27 +44,14 @@ export default function Layout({ children }: Props) {
   }
 
   return (
-    <main className="bg-gray-200 flex flex-col min-h-screen debug">
+    <main className="bg-gray-200 flex flex-col min-h-screen">
       {isStaging && (
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
       <div className="flex-auto min-h-screen-50">
         <div className="px-4 py-8">
-          <Container size="large">
-            <div className="flex flex-col md:flex-row justify-center">
-              {showEventBanner && (
-                <div className="order-1 md:flex-none md:w-1/3">
-                  <div className="pt-8 md:pr-4">
-                    <h1>Hola soy un banner piola</h1>
-                  </div>
-                </div>
-              )}
-              <div className="flex-auto order-0 md:order-2">
-                {renderContent()}
-              </div>
-            </div>
-          </Container>
+          <Container size="large">{renderContent()}</Container>
         </div>
       </div>
       <Footer />

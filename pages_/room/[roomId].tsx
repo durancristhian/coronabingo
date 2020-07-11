@@ -147,7 +147,7 @@ export default function RoomId() {
 
   return (
     <Layout>
-      <Container size="large">
+      <Container>
         <Box>
           <div className="mb-4">
             <Heading textAlign="center" type="h2">

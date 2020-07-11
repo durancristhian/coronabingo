@@ -127,7 +127,7 @@ export default function RoomAdmin() {
 
   return (
     <Layout>
-      <Container size="medium">
+      <Container>
         <Box>
           <div className="mb-4">
             <Heading textAlign="center" type="h2">

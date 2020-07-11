@@ -78,6 +78,10 @@ export const CODES: (keyof Emojis)[] = [
   'volcano',
   'banana',
 ]
+export const CONTAINER_SIZES = {
+  medium: ['md:w-8/12', 'lg:w-3/5'],
+  large: ['w-full'],
+}
 export const TICKET_NUMBERS = [...Array(90).keys()].map(n => n + 1)
 export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'sweat_drops',

@@ -106,7 +106,7 @@ export default function EventId({ hidden }: Props) {
 
   return (
     <Layout>
-      <Container size="medium">
+      <Container>
         <Box>
           <Heading textAlign="center" type="h1">
             {event.name}

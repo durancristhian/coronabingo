@@ -15,7 +15,7 @@ export default memo(function News({ tweetIds }: Props) {
       <Heading textAlign="center" type="h2">
         {t('common:news')}
       </Heading>
-      <div className="sm:flex my-4">
+      <div className="sm:flex my-4 -mx-2">
         {tweetIds.map(id => (
           <div key={id} className="flex-1 mx-2">
             <TweetEmbed id={id} />

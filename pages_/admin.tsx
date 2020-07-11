@@ -29,7 +29,7 @@ export default function Admin({ hidden }: Props) {
   if (!user) {
     return (
       <Layout>
-        <Container size="medium">
+        <Container>
           <Login />
         </Container>
       </Layout>
@@ -38,7 +38,7 @@ export default function Admin({ hidden }: Props) {
 
   return (
     <Layout>
-      <Container size="medium">{user && <Premium user={user} />}</Container>
+      <Container>{user && <Premium user={user} />}</Container>
     </Layout>
   )
 }

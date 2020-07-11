@@ -73,6 +73,7 @@ export default function Login() {
                 password,
               })
             }
+            type="password"
             value={formData.password}
           />
           <div className="flex justify-center mt-8">
