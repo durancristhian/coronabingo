@@ -1,6 +1,10 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
-import { CONTAINER_SIZES } from '~/utils'
+
+const CONTAINER_SIZES = {
+  medium: ['md:w-8/12', 'lg:w-3/5'],
+  large: ['w-full'],
+}
 
 interface Props {
   children: ReactNode
