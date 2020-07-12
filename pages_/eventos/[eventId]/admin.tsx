@@ -60,7 +60,7 @@ export default function EventAdmin({ hidden }: Props) {
   }
 
   return (
-    <Layout>
+    <Layout type="large">
       {!registrations.length && <Error message="No hay inscripciones." />}
       {!!registrations.length && (
         <Fragment>
