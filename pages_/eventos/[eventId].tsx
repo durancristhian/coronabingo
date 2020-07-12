@@ -3,7 +3,6 @@ import React, { FormEvent, useState } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
-import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import InputImage from '~/components/InputImage'
 import InputText from '~/components/InputText'
@@ -106,74 +105,72 @@ export default function EventId({ hidden }: Props) {
 
   return (
     <Layout>
-      <Container>
-        <Box>
-          <Heading textAlign="center" type="h1">
-            {event.name}
-          </Heading>
-          <div
-            className="markdown-body my-8"
-            dangerouslySetInnerHTML={{ __html: event.content.html }}
-          />
-          <Heading type="h2">Inscripción</Heading>
-          <form onSubmit={onSubmit}>
-            <fieldset disabled={inProgress}>
-              <InputText
-                id="name"
-                label="Nombre"
-                value={formData.name}
-                onChange={name => {
-                  setFormData({ ...formData, name })
-                }}
-              />
-              <InputText
-                id="tel"
-                label="Teléfono"
-                value={formData.tel}
-                onChange={tel => {
-                  setFormData({ ...formData, tel })
-                }}
-              />
-              <InputText
-                id="email"
-                label="Email"
-                value={formData.email}
-                onChange={email => {
-                  setFormData({ ...formData, email })
-                }}
-              />
-              <InputTextarea
-                id="comment"
-                label="Comentario"
-                value={formData.comment}
-                onChange={comment => {
-                  setFormData({ ...formData, comment })
-                }}
-              />
-              <InputImage
-                id="attachment"
-                label="Comprobante de la donación"
-                image={formData.attachment}
-                onChange={(attachment, extension) => {
-                  setFormData({ ...formData, attachment, extension })
-                }}
-              />
-              <div className="mt-8 text-center">
-                <Button
-                  aria-label="Quiero jugar"
-                  id="register-me"
-                  type="submit"
-                  color="green"
-                  iconLeft={<FiChevronsRight />}
-                  iconRight={<FiChevronsLeft />}
-                >
-                  Enviar
-                </Button>
-              </div>
-            </fieldset>
-          </form>
-        </Box>
-      </Container>
+      <Box>
+        <Heading textAlign="center" type="h1">
+          {event.name}
+        </Heading>
+        <div
+          className="markdown-body my-8"
+          dangerouslySetInnerHTML={{ __html: event.content.html }}
+        />
+        <Heading type="h2">Inscripción</Heading>
+        <form onSubmit={onSubmit}>
+          <fieldset disabled={inProgress}>
+            <InputText
+              id="name"
+              label="Nombre"
+              value={formData.name}
+              onChange={name => {
+                setFormData({ ...formData, name })
+              }}
+            />
+            <InputText
+              id="tel"
+              label="Teléfono"
+              value={formData.tel}
+              onChange={tel => {
+                setFormData({ ...formData, tel })
+              }}
+            />
+            <InputText
+              id="email"
+              label="Email"
+              value={formData.email}
+              onChange={email => {
+                setFormData({ ...formData, email })
+              }}
+            />
+            <InputTextarea
+              id="comment"
+              label="Comentario"
+              value={formData.comment}
+              onChange={comment => {
+                setFormData({ ...formData, comment })
+              }}
+            />
+            <InputImage
+              id="attachment"
+              label="Comprobante de la donación"
+              image={formData.attachment}
+              onChange={(attachment, extension) => {
+                setFormData({ ...formData, attachment, extension })
+              }}
+            />
+            <div className="mt-8 text-center">
+              <Button
+                aria-label="Quiero jugar"
+                id="register-me"
+                type="submit"
+                color="green"
+                iconLeft={<FiChevronsRight />}
+                iconRight={<FiChevronsLeft />}
+              >
+                Enviar
+              </Button>
+            </div>
+          </fieldset>
+        </form>
+      </Box>
     </Layout>
   )
 }

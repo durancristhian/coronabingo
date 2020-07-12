@@ -85,7 +85,7 @@ export default function RoomPlayer() {
 
   if (isAdmin && room.activateAdminCode && !loggedIn) {
     return (
-      <Layout>
+      <Layout type="medium">
         <Box>
           <RoomCode roomCode={room.code} />
         </Box>

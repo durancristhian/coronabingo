@@ -11,9 +11,10 @@ import Container from './Container'
 
 interface Props {
   children: ReactNode
+  type?: 'medium' | 'large'
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children, type = 'medium' }: Props) {
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -51,7 +52,7 @@ export default function Layout({ children }: Props) {
       <Header />
       <div className="flex-auto min-h-screen-50">
         <div className="px-4 py-8">
-          <Container size="large">{renderContent()}</Container>
+          <Container size={type}>{renderContent()}</Container>
         </div>
       </div>
       <Footer />

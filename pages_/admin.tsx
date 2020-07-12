@@ -1,6 +1,5 @@
 import Error from 'next/error'
 import React from 'react'
-import Container from '~/components/Container'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Login from '~/components/Login'
@@ -29,18 +28,12 @@ export default function Admin({ hidden }: Props) {
   if (!user) {
     return (
       <Layout>
-        <Container>
-          <Login />
-        </Container>
+        <Login />
       </Layout>
     )
   }
 
-  return (
-    <Layout>
-      <Container>{user && <Premium user={user} />}</Container>
-    </Layout>
-  )
+  return <Layout>{user && <Premium user={user} />}</Layout>
 }
 
 export async function getStaticProps() {
