@@ -1,8 +1,6 @@
-import { Player, PlayerBase } from '~/interfaces'
+import { Player, PlayerBase, RemoteData } from '~/interfaces'
 
 export interface PlayerContextData {
-  error: string
-  loading: boolean
-  player?: Player
+  state: RemoteData<Error, Player>
   updatePlayer: (data: Partial<PlayerBase>) => void
 }

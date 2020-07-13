@@ -50,7 +50,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      <div className="flex-auto min-h-screen-50">
+      <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">
           <Container size={type}>{renderContent()}</Container>
         </div>

@@ -1,8 +1,6 @@
-import { Player } from '~/interfaces'
+import { Player, RemoteData } from '~/interfaces'
 
 export interface PlayersContextData {
-  error: string
-  loading: boolean
-  players: Player[]
+  state: RemoteData<Error, Player[]>
   setPlayers: (array: Player[]) => void
 }

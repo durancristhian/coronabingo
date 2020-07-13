@@ -70,7 +70,7 @@ export default function RoomId() {
   }
 
   const renderPlayers = () => {
-    if (!room.readyToPlay || !players.length) {
+    if (!room.readyToPlay || !players) {
       return <Loading message={t('roomId:not-ready')} />
     }
 

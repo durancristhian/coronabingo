@@ -65,8 +65,8 @@
   cursor: url('/cursor/poroto-md.png') 20 25, pointer;
 }
 
-.min-h-screen-50 {
-  min-height: 50vh;
+.min-h-650px {
+  min-height: 650px;
 }
 
 .text-shadow-white {

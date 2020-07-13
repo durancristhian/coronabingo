@@ -1,13 +1,17 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Player, PlayersContextData } from '~/interfaces'
+import {
+  Player,
+  PlayerBase,
+  PlayersContextData,
+  RemoteData,
+  REMOTE_DATA,
+} from '~/interfaces'
 import { roomsRef } from '~/utils'
 
 const PlayersContext = createContext<PlayersContextData>({
-  error: '',
-  loading: false,
-  players: [],
-  setPlayers: () => null,
+  state: { type: REMOTE_DATA.NOT_ASKED },
+  setPlayers: () => void 0,
 })
 
 interface Props {
@@ -17,43 +21,50 @@ interface Props {
 const PlayersContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
-  const [players, setPlayers] = useState<Player[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
+  const [state, setState] = useState<RemoteData<Error, Player[]>>({
+    type: REMOTE_DATA.NOT_ASKED,
+  })
 
   const sortAndSet = (players: Player[]) => {
-    setPlayers(players.sort((a, b) => a.name.localeCompare(b.name)))
+    setState(prevState => {
+      if (prevState.type !== REMOTE_DATA.SUCCESS) {
+        return prevState
+      }
+
+      return {
+        type: REMOTE_DATA.SUCCESS,
+        data: players.sort((a, b) => a.name.localeCompare(b.name)),
+      }
+    })
   }
 
   useEffect(() => {
     if (!roomId) return
 
-    setLoading(true)
+    setState({ type: REMOTE_DATA.LOADING })
 
     return roomsRef
       .doc(roomId)
       .collection('players')
       .onSnapshot(
         snapshot => {
-          sortAndSet(
-            snapshot.docs
-              .filter(p => p.exists)
-              .map(p => {
-                const playerData = p.data() as Player
+          const players = snapshot.docs
+            .filter(p => p.exists)
+            .map(p => {
+              const playerData = p.data() as PlayerBase
 
-                return {
-                  ...playerData,
-                  id: p.id,
-                  ref: p.ref,
-                }
-              }),
-          )
+              return {
+                ...playerData,
+                id: p.id,
+                ref: p.ref,
+              }
+            })
+            .sort((a, b) => a.name.localeCompare(b.name))
 
-          setLoading(false)
+          setState({ type: REMOTE_DATA.SUCCESS, data: players })
         },
         error => {
-          setError('COULD_NOT_FETCH_PLAYERS')
-          setLoading(false)
+          setState({ type: REMOTE_DATA.FAILURE, error })
 
           console.error(error)
         },
@@ -63,9 +74,7 @@ const PlayersContextProvider = ({ children }: Props) => {
   return (
     <PlayersContext.Provider
       value={{
-        error,
-        loading,
-        players,
+        state,
         setPlayers: sortAndSet,
       }}
     >
