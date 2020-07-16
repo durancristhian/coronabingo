@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  e2e:
+  build:
     runs-on: ${{ matrix.os }}
 
     env:

@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import React, { FocusEvent } from 'react'
 
 interface Props {
+  autoComplete?: string
   disabled?: boolean
   hint?: string
   id: string
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function InputText({
+  autoComplete,
   disabled,
   hint = '',
   id,
@@ -42,6 +44,7 @@ export default function InputText({
           onChange={event => onChange && onChange(event.target.value)}
           onFocus={event => onFocus && onFocus(event)}
           disabled={disabled}
+          autoComplete={autoComplete || 'off'}
         />
       </label>
       {hint && (

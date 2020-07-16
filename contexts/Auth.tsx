@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ProvideAuth = ({ children }: Props) => {
-  const [state, setState] = useState<RemoteData<Error, firebase.User>>({
+  const [state, setState] = useState<RemoteData<Error, firebase.User | null>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
 
@@ -49,14 +49,6 @@ const ProvideAuth = ({ children }: Props) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-      if (!user) {
-        setState({
-          type: REMOTE_DATA.NOT_ASKED,
-        })
-
-        return
-      }
-
       setState({
         type: REMOTE_DATA.SUCCESS,
         data: user,

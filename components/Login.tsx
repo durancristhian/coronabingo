@@ -75,6 +75,7 @@ export default function Login() {
             }
             type="password"
             value={formData.password}
+            autoComplete="current-password"
           />
           <div className="flex justify-center mt-8">
             <Button

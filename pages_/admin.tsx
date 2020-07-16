@@ -18,18 +18,10 @@ export default function Admin({ hidden }: Props) {
     return <Error statusCode={404} />
   }
 
-  if (loading) {
+  if (notAsked || loading) {
     return (
       <Layout>
         <Loading />
-      </Layout>
-    )
-  }
-
-  if (notAsked) {
-    return (
-      <Layout>
-        <Login />
       </Layout>
     )
   }
@@ -42,7 +34,13 @@ export default function Admin({ hidden }: Props) {
     )
   }
 
-  if (!user) return null
+  if (!user) {
+    return (
+      <Layout>
+        <Login />
+      </Layout>
+    )
+  }
 
   return (
     <Layout>
