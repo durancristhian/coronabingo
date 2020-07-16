@@ -1,29 +1,84 @@
-import React, { createContext, ReactNode } from 'react'
-import { useProvideAuth } from '~/hooks/useAuth'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import { AuthContextData, RemoteData, REMOTE_DATA } from '~/interfaces'
+import { auth } from '~/utils'
 
-const defaultContextValue = {
-  user: null,
+const AuthContext = createContext<AuthContextData>({
+  state: {
+    type: REMOTE_DATA.NOT_ASKED,
+  },
   signin: () => Promise.resolve(null),
   signout: () => void 0,
-  signup: () => Promise.resolve(null),
-}
-
-const AuthContext = createContext<{
-  /* TODO: improve this */
-  user: firebase.User | null | 'not asked'
-  signin: (email: string, password: string) => Promise<firebase.User | null>
-  signout: () => void
-  signup: (email: string, password: string) => Promise<firebase.User | null>
-}>(defaultContextValue)
+})
 
 interface Props {
   children: ReactNode
 }
 
 const ProvideAuth = ({ children }: Props) => {
-  const auth = useProvideAuth()
+  const [state, setState] = useState<RemoteData<Error, firebase.User>>({
+    type: REMOTE_DATA.NOT_ASKED,
+  })
 
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
+  const signin = (email: string, password: string) => {
+    return auth.signInWithEmailAndPassword(email, password).then(response => {
+      if (!response.user) {
+        setState({
+          type: REMOTE_DATA.FAILURE,
+          error: new Error('User does not exist'),
+        })
+
+        return null
+      }
+
+      setState({
+        type: REMOTE_DATA.SUCCESS,
+        data: response.user,
+      })
+
+      return response.user
+    })
+  }
+
+  const signout = () => {
+    auth.signOut().then(() => {
+      setState({
+        type: REMOTE_DATA.NOT_ASKED,
+      })
+    })
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (!user) {
+        setState({
+          type: REMOTE_DATA.NOT_ASKED,
+        })
+
+        return
+      }
+
+      setState({
+        type: REMOTE_DATA.SUCCESS,
+        data: user,
+      })
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
+  return (
+    <AuthContext.Provider
+      value={{
+        state,
+        signin,
+        signout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export { AuthContext, ProvideAuth }
