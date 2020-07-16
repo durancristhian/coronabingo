@@ -1,8 +1,9 @@
 import Error from 'next/error'
 import React from 'react'
-import Container from '~/components/Container'
 import Layout from '~/components/Layout'
+import Loading from '~/components/Loading'
 import Login from '~/components/Login'
+import Message from '~/components/Message'
 import Premium from '~/components/Premium'
 import useAuth from '~/hooks/useAuth'
 
@@ -11,16 +12,41 @@ interface Props {
 }
 
 export default function Admin({ hidden }: Props) {
-  const { user } = useAuth()
+  const { error, loading, notAsked, user } = useAuth()
 
   if (hidden) {
     return <Error statusCode={404} />
   }
 
+  if (loading) {
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    )
+  }
+
+  if (notAsked) {
+    return (
+      <Layout>
+        <Login />
+      </Layout>
+    )
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Message type="error">El evento que estás buscando no existe.</Message>
+      </Layout>
+    )
+  }
+
+  if (!user) return null
+
   return (
     <Layout>
-      <Container>{!user && <Login />}</Container>
-      <Container size="medium">{user && <Premium user={user} />}</Container>
+      <Premium user={user} />
     </Layout>
   )
 }

@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Button from '~/components/Button'
+import FirebaseImage from '~/components/FirebaseImage'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
 import { Event, Player, Registration, RoomTicket } from '~/interfaces'
@@ -95,27 +96,20 @@ export default function Registrations({
     return `${day}, ${hour}`
   }
 
-  const getMessageData = (registration: EventRegistration) => {
-    return {
-      name: registration.name,
-      date: getEventDate(registration),
-      tickets: getRoomPlayerLink(
-        event.roomId,
-        registration.player?.id || 'THIS SHOULD NOT HAPPEN',
-      ),
-      videocall: event.videocall,
-    }
-  }
-
   const sendEmail = async (registration: EventRegistration) => {
     /* This shouldn't happen */
     if (!registration.player) return
 
     const toastId = createToast('Enviando mail...', 'information')
 
-    const date = getEventDate(registration)
     const link = getRoomPlayerLink(event.roomId, registration.player.id)
-    const body = `email=${registration.email}&date=${date}&tickets=${link}&videocall=${event.videocall}`
+    const body = [
+      `email=${registration.email}`,
+      `&eventId=${event.id}`,
+      `&name=${registration.name}`,
+      `&tickets=${link}`,
+      `&registrationId=${registration.id}`,
+    ].join('')
 
     try {
       await fetch(event.emailEndpoint, {
@@ -136,25 +130,6 @@ export default function Registrations({
         dismissToast(toastId)
       }, 2000)
     }
-  }
-
-  const getMessage = (registration: EventRegistration) => {
-    /* This shouldn't happen */
-    if (!registration.player) return ''
-
-    const { name, date, tickets, videocall } = getMessageData(registration)
-
-    return `Hola ${name},
-
-Gracias por haberte sumado a jugar este Coronabingo solidario.
-
-Te recordamos que vamos a jugar el día ${date}. Ese día vamos a hacer una videollamada por la aplicación Zoom.
-
-Tu link a los cartones para jugar es ${tickets}
-
-El link a la videollamada de Zoom es ${videocall}
-
-Saludos, Cris.`
   }
 
   const renderRow = (registration: EventRegistration) => {
@@ -190,11 +165,15 @@ Saludos, Cris.`
         >
           <div className="bg-gray-100 flex flex-wrap mb-2 shadow">
             <div className="p-4 w-1/5">
-              <img
-                src={registration.attachment}
-                alt={`Comprobante de pago de ${registration.name}`}
-                className="block rounded w-full"
-              />
+              <FirebaseImage path={registration.attachment}>
+                {(url: string) => (
+                  <img
+                    src={url}
+                    alt={`Comprobante de pago de ${registration.name}`}
+                    className="block rounded w-full"
+                  />
+                )}
+              </FirebaseImage>
             </div>
             <div className="p-4 w-2/5">
               <div className="mb-4">
@@ -204,9 +183,7 @@ Saludos, Cris.`
                 <div className="mt-1">
                   <FiCalendar color="#718096" />
                 </div>
-                <span className="ml-2">
-                  {registration.date && getEventDate(registration)}
-                </span>
+                <span className="ml-2">{getEventDate(registration)}</span>
               </div>
               <div className="flex mt-2">
                 <div className="mt-1">
@@ -292,21 +269,6 @@ Saludos, Cris.`
                       iconLeft={<FiMail />}
                     >
                       Enviar mail
-                    </Button>
-                    <Button
-                      aria-label="Mandar WhatsApp"
-                      id="send-whatsapp"
-                      color="green"
-                      onClick={() =>
-                        sendWhatsAppTo(
-                          registration.tel,
-                          getMessage(registration),
-                        )
-                      }
-                      className="mb-4 mr-4"
-                      iconLeft={<FaWhatsapp />}
-                    >
-                      WhatsApp
                     </Button>
                   </div>
                 </Fragment>

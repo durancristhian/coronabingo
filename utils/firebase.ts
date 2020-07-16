@@ -2,6 +2,7 @@ import 'firebase/analytics'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -28,8 +29,10 @@ if (typeof window !== 'undefined') {
   analytics = firebaseApp.analytics()
 }
 
-const auth = firebase.auth()
+const auth = firebaseApp.auth()
 const db = firebaseApp.firestore()
+const storage = firebaseApp.storage().ref()
+
 const { Timestamp } = firebase.firestore
 
 const roomsRef = db.collection('rooms')
@@ -42,8 +45,9 @@ export {
   auth,
   createBatch,
   db,
+  eventsRef,
   firebaseApp,
   roomsRef,
-  eventsRef,
+  storage,
   Timestamp,
 }

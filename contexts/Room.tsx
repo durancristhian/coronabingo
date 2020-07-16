@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Room, RoomBase, RoomContextData } from '~/interfaces'
+import {
+  RemoteData,
+  REMOTE_DATA,
+  Room,
+  RoomBase,
+  RoomContextData,
+} from '~/interfaces'
 import { roomsRef } from '~/utils'
 
 const RoomContext = createContext<RoomContextData>({
-  error: '',
-  loading: false,
+  state: { type: REMOTE_DATA.NOT_ASKED },
   updateRoom: () => void 0,
 })
 
@@ -16,39 +21,50 @@ interface Props {
 const RoomContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
-  const [room, setRoom] = useState<Room>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
+  const [state, setState] = useState<RemoteData<Error, Room>>({
+    type: REMOTE_DATA.NOT_ASKED,
+  })
 
-  const updateRoom = (data: Partial<RoomBase>) => {
-    setRoom(prev => Object.assign({}, prev, data))
+  const updateRoom = (partialRoom: Partial<RoomBase>) => {
+    setState(prevState => {
+      if (prevState.type !== REMOTE_DATA.SUCCESS) {
+        return prevState
+      }
+
+      return {
+        type: REMOTE_DATA.SUCCESS,
+        data: Object.assign({}, prevState.data, partialRoom),
+      }
+    })
   }
 
   useEffect(() => {
     if (!roomId) return
 
-    setLoading(true)
+    setState({ type: REMOTE_DATA.LOADING })
 
     const unsubscribe = roomsRef.doc(roomId).onSnapshot(
       snapshot => {
-        let roomData
+        if (!snapshot.exists) {
+          setState({
+            type: REMOTE_DATA.FAILURE,
+            error: new Error('Deleted room'),
+          })
 
-        if (snapshot.exists) {
-          const data = snapshot.data() as Room
-
-          roomData = {
-            ...data,
-            id: snapshot.id,
-            ref: snapshot.ref,
-          }
+          return
         }
 
-        setRoom(roomData)
-        setLoading(false)
+        const roomData = snapshot.data() as RoomBase
+        const room = {
+          ...roomData,
+          id: snapshot.id,
+          ref: snapshot.ref,
+        }
+
+        setState({ type: REMOTE_DATA.SUCCESS, data: room })
       },
       error => {
-        setError('COULD_NOT_FETCH_ROOM')
-        setLoading(false)
+        setState({ type: REMOTE_DATA.FAILURE, error })
 
         console.error(error)
       },
@@ -58,7 +74,7 @@ const RoomContextProvider = ({ children }: Props) => {
   }, [roomId])
 
   return (
-    <RoomContext.Provider value={{ error, loading, room, updateRoom }}>
+    <RoomContext.Provider value={{ state, updateRoom }}>
       {children}
     </RoomContext.Provider>
   )

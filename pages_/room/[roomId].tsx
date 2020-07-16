@@ -5,7 +5,6 @@ import React, { Fragment, useEffect } from 'react'
 import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
-import Container from '~/components/Container'
 import Copy from '~/components/Copy'
 import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
 import Error from '~/components/Error'
@@ -33,9 +32,7 @@ export default function RoomId() {
   if (roomLoading || playersLoading) {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -43,9 +40,7 @@ export default function RoomId() {
   if (roomError || playersError) {
     return (
       <Layout>
-        <Container>
-          <Error />
-        </Container>
+        <Error />
       </Layout>
     )
   }
@@ -53,9 +48,7 @@ export default function RoomId() {
   if (!room) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:unexisting-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:unexisting-room')}</Message>
       </Layout>
     )
   }
@@ -63,9 +56,7 @@ export default function RoomId() {
   if (isRoomOld(room)) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:outdated-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:outdated-room')}</Message>
       </Layout>
     )
   }
@@ -73,15 +64,13 @@ export default function RoomId() {
   if (room.locked) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:locked-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:locked-room')}</Message>
       </Layout>
     )
   }
 
   const renderPlayers = () => {
-    if (!room.readyToPlay || !players.length) {
+    if (!room.readyToPlay || !players) {
       return <Loading message={t('roomId:not-ready')} />
     }
 
@@ -147,45 +136,43 @@ export default function RoomId() {
 
   return (
     <Layout>
-      <Container>
-        <Box>
-          <div className="mb-4">
-            <Heading textAlign="center" type="h2">
-              <span
-                id="room-title"
-                onClick={incrementInteractions}
-                role="button"
-                tabIndex={0}
-                onKeyPress={incrementInteractions}
-                className="cursor-text focus:outline-none outline-none"
-              >
-                {t('roomId:title')}
-              </span>
-            </Heading>
+      <Box>
+        <div className="mb-4">
+          <Heading textAlign="center" type="h2">
+            <span
+              id="room-title"
+              onClick={incrementInteractions}
+              role="button"
+              tabIndex={0}
+              onKeyPress={incrementInteractions}
+              className="cursor-text focus:outline-none outline-none"
+            >
+              {t('roomId:title')}
+            </span>
+          </Heading>
+        </div>
+        <InputText
+          id="room-name"
+          label={t('roomId:room-name')}
+          value={room.name}
+          readonly
+          onFocus={event => event.target.select()}
+        />
+        <InputText
+          id="url"
+          label={t('roomId:field-link')}
+          value={`${getBaseUrl()}/room/${room.id}`}
+          readonly
+          onFocus={event => event.target.select()}
+        />
+        <Copy content={`${getBaseUrl()}/room/${room.id}`} />
+        {isActive && (
+          <div className="mt-8">
+            <DownloadSpreadsheet players={players} room={room} />
           </div>
-          <InputText
-            id="room-name"
-            label={t('roomId:room-name')}
-            value={room.name}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <InputText
-            id="url"
-            label={t('roomId:field-link')}
-            value={`${getBaseUrl()}/room/${room.id}`}
-            readonly
-            onFocus={event => event.target.select()}
-          />
-          <Copy content={`${getBaseUrl()}/room/${room.id}`} />
-          {isActive && (
-            <div className="mt-8">
-              <DownloadSpreadsheet players={players} room={room} />
-            </div>
-          )}
-          <div className="mt-8">{renderPlayers()}</div>
-        </Box>
-      </Container>
+        )}
+        <div className="mt-8">{renderPlayers()}</div>
+      </Box>
     </Layout>
   )
 }

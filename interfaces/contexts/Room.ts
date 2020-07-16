@@ -1,8 +1,6 @@
-import { Room, RoomBase } from '~/interfaces'
+import { RemoteData, Room, RoomBase } from '~/interfaces'
 
 export interface RoomContextData {
-  error: string
-  loading: boolean
-  room?: Room
+  state: RemoteData<Error, Room>
   updateRoom: (data: Partial<RoomBase>) => void
 }

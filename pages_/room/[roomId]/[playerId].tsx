@@ -2,7 +2,6 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
-import Container from '~/components/Container'
 import Error from '~/components/Error'
 import Heading from '~/components/Heading'
 import LastNumbers from '~/components/LastNumbers'
@@ -37,9 +36,7 @@ export default function RoomPlayer() {
   if (roomLoading || playerLoading) {
     return (
       <Layout>
-        <Container>
-          <Loading />
-        </Container>
+        <Loading />
       </Layout>
     )
   }
@@ -47,9 +44,7 @@ export default function RoomPlayer() {
   if (roomError || playerError) {
     return (
       <Layout>
-        <Container>
-          <Error />
-        </Container>
+        <Error />
       </Layout>
     )
   }
@@ -57,9 +52,7 @@ export default function RoomPlayer() {
   if (!room) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:unexisting-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:unexisting-room')}</Message>
       </Layout>
     )
   }
@@ -67,9 +60,7 @@ export default function RoomPlayer() {
   if (isRoomOld(room)) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('common:outdated-room')}</Message>
-        </Container>
+        <Message type="error">{t('common:outdated-room')}</Message>
       </Layout>
     )
   }
@@ -77,9 +68,7 @@ export default function RoomPlayer() {
   if (!room.readyToPlay) {
     return (
       <Layout>
-        <Container>
-          <Loading message={t('playerId:room-not-ready')} />
-        </Container>
+        <Loading message={t('playerId:room-not-ready')} />
       </Layout>
     )
   }
@@ -87,9 +76,7 @@ export default function RoomPlayer() {
   if (!player) {
     return (
       <Layout>
-        <Container>
-          <Message type="error">{t('playerId:unexisting-player')}</Message>
-        </Container>
+        <Message type="error">{t('playerId:unexisting-player')}</Message>
       </Layout>
     )
   }
@@ -98,12 +85,10 @@ export default function RoomPlayer() {
 
   if (isAdmin && room.activateAdminCode && !loggedIn) {
     return (
-      <Layout>
-        <Container>
-          <Box>
-            <RoomCode roomCode={room.code} />
-          </Box>
-        </Container>
+      <Layout type="medium">
+        <Box>
+          <RoomCode roomCode={room.code} />
+        </Box>
       </Layout>
     )
   }
@@ -146,7 +131,7 @@ export default function RoomPlayer() {
 
   return (
     <BackgroundCellContextProvider playerId={player.id}>
-      <Layout>
+      <Layout type="large">
         <div className="mb-4">
           <Heading textAlign="center" type="h2">
             {t('playerId:title', {

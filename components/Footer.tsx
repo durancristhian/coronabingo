@@ -8,6 +8,13 @@ import Modal from '~/components/Modal'
 import News from '~/components/News'
 import RoundedButton from '~/components/RoundedButton'
 
+const TWEETS = [
+  '1266490485650198528',
+  '1267934678784389121',
+  '1246110709005660163',
+  '1279431298990379012',
+]
+
 export default function Footer() {
   const { t } = useTranslation()
   const [showModal, setShowModal] = useState(false)
@@ -24,13 +31,7 @@ export default function Footer() {
     <Fragment>
       <footer className="bg-white p-4 shadow">
         <Container size="large">
-          <News
-            tweetIds={[
-              '1266490485650198528',
-              '1267934678784389121',
-              '1246110709005660163',
-            ]}
-          />
+          <News tweetIds={TWEETS} />
           <div className="md:flex md:items-center md:justify-between">
             <p className="text-center md:text-left">
               <span>{t('common:made-by')}</span>
@@ -58,6 +59,7 @@ export default function Footer() {
                   <Anchor
                     href="https://forms.gle/egSBrsKSFnEgabff7"
                     id="feedback-form"
+                    display="block"
                   >
                     <span className="flex items-center justify-center">
                       <FiHeart />
@@ -69,6 +71,7 @@ export default function Footer() {
                   <Anchor
                     href="https://twitter.com/corona_bingo"
                     id="coronabingo-twitter"
+                    display="block"
                   >
                     <span className="flex items-center justify-center">
                       <FiTwitter />

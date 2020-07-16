@@ -9,6 +9,7 @@ interface Props {
   onFocus?: (ev: FocusEvent<HTMLInputElement>) => void
   onChange?: (value: string) => void
   readonly?: boolean
+  type?: string
   value: string
 }
 
@@ -20,6 +21,7 @@ export default function InputText({
   onFocus,
   onChange,
   readonly,
+  type = 'text',
   value,
 }: Props) {
   return (
@@ -27,7 +29,7 @@ export default function InputText({
       <label htmlFor={id} className="flex flex-col">
         <span>{label}</span>
         <input
-          type="text"
+          type={type}
           className={classnames([
             'border-2 border-gray-300 h-12 mt-1 p-2 rounded',
             'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',

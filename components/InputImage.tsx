@@ -7,7 +7,7 @@ interface Props {
   id: string
   image: string
   label: string
-  onChange: (value: string) => void
+  onChange: (content: string, extension: string) => void
 }
 
 export default function InputImage({ label, id, image, onChange }: Props) {
@@ -20,18 +20,19 @@ export default function InputImage({ label, id, image, onChange }: Props) {
       inputRef.current.value = ''
     }
 
-    onChange('')
+    onChange('', '')
   }
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement
     const file = target.files ? target.files[0] : undefined
 
     if (file) {
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
       const reader = new FileReader()
 
       reader.onloadend = () => {
         if (reader.result) {
-          onChange(reader.result.toString())
+          onChange(reader.result.toString(), fileExtension)
         }
       }
 

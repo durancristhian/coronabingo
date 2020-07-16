@@ -5,7 +5,6 @@ import YouTube from 'react-youtube'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
-import Container from '~/components/Container'
 import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
 import Modal from '~/components/Modal'
@@ -21,51 +20,49 @@ export default function Index() {
 
   return (
     <Layout>
-      <Container>
-        <p>{t('index:intro')}</p>
-        <div className="my-8">
-          <Box>
-            <CreateRoom />
-          </Box>
-        </div>
-        <p>
-          <span>{t('index:videocall-suggestion')} </span>
-          <Anchor href="https://hangouts.google.com/" id="google-hangouts">
-            Google Hangouts
-          </Anchor>
-          <span>.</span>
-        </p>
-        <div className="mt-8">
-          <Button
-            aria-label={t('index:how-to-play-button')}
-            id="watch-tutorial"
-            onClick={() => {
-              setShowModal(true)
-            }}
-            className="w-full"
-            iconLeft={<FiEye />}
-          >
-            {t('index:how-to-play-button')}
-          </Button>
-        </div>
-        <Modal
-          id="modal-how-to-play"
-          isOpen={showModal}
-          onRequestClose={() => {
-            setShowModal(false)
+      <p>{t('index:intro')}</p>
+      <div className="my-8">
+        <Box>
+          <CreateRoom />
+        </Box>
+      </div>
+      <p>
+        <span>{t('index:videocall-suggestion')} </span>
+        <Anchor href="https://hangouts.google.com/" id="google-hangouts">
+          Google Hangouts
+        </Anchor>
+        <span>.</span>
+      </p>
+      <div className="mt-8">
+        <Button
+          aria-label={t('index:how-to-play-button')}
+          id="watch-tutorial"
+          onClick={() => {
+            setShowModal(true)
           }}
-          className="modal wide"
-          overlayClassName="overlay"
-          title={t('index:how-to-play-modal-title')}
-          contentLabel={t('index:how-to-play-modal-title')}
+          className="w-full"
+          iconLeft={<FiEye />}
         >
-          <YouTube
-            videoId={videosByLanguage[lang]}
-            containerClassName="video-wrapper"
-            className="video-iframe"
-          />
-        </Modal>
-      </Container>
+          {t('index:how-to-play-button')}
+        </Button>
+      </div>
+      <Modal
+        id="modal-how-to-play"
+        isOpen={showModal}
+        onRequestClose={() => {
+          setShowModal(false)
+        }}
+        className="modal wide"
+        overlayClassName="overlay"
+        title={t('index:how-to-play-modal-title')}
+        contentLabel={t('index:how-to-play-modal-title')}
+      >
+        <YouTube
+          videoId={videosByLanguage[lang]}
+          containerClassName="video-wrapper"
+          className="video-iframe"
+        />
+      </Modal>
     </Layout>
   )
 }

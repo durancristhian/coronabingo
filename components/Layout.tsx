@@ -11,9 +11,10 @@ import Container from './Container'
 
 interface Props {
   children: ReactNode
+  type?: 'medium' | 'large'
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children, type = 'medium' }: Props) {
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -37,11 +38,9 @@ export default function Layout({ children }: Props) {
     })
 
     return (
-      <Container>
-        <Box>
-          <p className="text-center">{t('common:no-local-storage-support')}</p>
-        </Box>
-      </Container>
+      <Box>
+        <p className="text-center">{t('common:no-local-storage-support')}</p>
+      </Box>
     )
   }
 
@@ -51,8 +50,10 @@ export default function Layout({ children }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      <div className="flex-auto min-h-screen-50">
-        <div className="px-4 py-8">{renderContent()}</div>
+      <div className="flex-auto min-h-650px">
+        <div className="px-4 py-8">
+          <Container size={type}>{renderContent()}</Container>
+        </div>
       </div>
       <Footer />
     </main>

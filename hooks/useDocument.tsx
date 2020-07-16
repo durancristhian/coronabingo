@@ -1,41 +1,52 @@
 import { useEffect, useState } from 'react'
-import { FirebaseData } from '~/interfaces'
+import { RemoteData, REMOTE_DATA } from '~/interfaces'
 import { db } from '~/utils'
 
-export default function useDocument(
+export default function useDocument<T>(
   collection: string,
   documentId: string | undefined,
 ) {
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<FirebaseData>()
+  const [state, setState] = useState<RemoteData<Error, T>>({
+    type: REMOTE_DATA.NOT_ASKED,
+  })
 
   useEffect(() => {
     if (!collection || !documentId) return
 
-    setLoading(true)
+    setState({
+      type: REMOTE_DATA.LOADING,
+    })
 
     const unsubscribe = db
       .collection(collection)
       .doc(documentId)
       .onSnapshot(
         snapshot => {
-          const docData = snapshot.data()
+          if (!snapshot.exists) {
+            setState({
+              type: REMOTE_DATA.FAILURE,
+              error: new Error(
+                `Deleted document ${documentId} in ${collection}`,
+              ),
+            })
 
-          setData({
+            return
+          }
+
+          /* TODO: review this `as T` */
+          const docData = snapshot.data() as T
+          const doc = {
+            ...docData,
             id: snapshot.id,
             ref: snapshot.ref,
-            ...docData,
-          })
+          }
 
-          setLoading(false)
+          setState({ type: REMOTE_DATA.SUCCESS, data: doc })
         },
         error => {
+          setState({ type: REMOTE_DATA.FAILURE, error })
+
           console.error(error)
-
-          setError(`Error getting document (${documentId}) in ${collection}`)
-
-          setLoading(false)
         },
       )
 
@@ -45,8 +56,10 @@ export default function useDocument(
   }, [collection, documentId])
 
   return {
-    data,
-    error,
-    loading,
+    error: state.type === REMOTE_DATA.FAILURE,
+    loading:
+      state.type === REMOTE_DATA.NOT_ASKED ||
+      state.type === REMOTE_DATA.LOADING,
+    data: state.type === REMOTE_DATA.SUCCESS ? state.data : null,
   }
 }

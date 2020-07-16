@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { Event, EventContextData } from '~/interfaces'
+import {
+  Event,
+  EventBase,
+  EventContextData,
+  RemoteData,
+  REMOTE_DATA,
+} from '~/interfaces'
 import { eventsRef } from '~/utils'
 
 const EventContext = createContext<EventContextData>({
-  error: '',
-  loading: false,
+  state: { type: REMOTE_DATA.NOT_ASKED },
 })
 
 interface Props {
@@ -15,30 +20,37 @@ interface Props {
 const EventContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const eventId = router.query.eventId?.toString()
-  const [event, setEvent] = useState<Event>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
+  const [state, setState] = useState<RemoteData<Error, Event>>({
+    type: REMOTE_DATA.NOT_ASKED,
+  })
 
   useEffect(() => {
     if (!eventId) return
 
-    setLoading(true)
+    setState({ type: REMOTE_DATA.LOADING })
 
     const unsubscribe = eventsRef.doc(eventId).onSnapshot(
       snapshot => {
-        const eventData = snapshot.data() as Event
+        if (!snapshot.exists) {
+          setState({
+            type: REMOTE_DATA.FAILURE,
+            error: new Error('Deleted event'),
+          })
 
-        setEvent({
+          return
+        }
+
+        const eventData = snapshot.data() as EventBase
+        const event = {
           ...eventData,
           id: snapshot.id,
           ref: snapshot.ref,
-        })
+        }
 
-        setLoading(false)
+        setState({ type: REMOTE_DATA.SUCCESS, data: event })
       },
       error => {
-        setError('COULD_NOT_FETCH_EVENT')
-        setLoading(false)
+        setState({ type: REMOTE_DATA.FAILURE, error })
 
         console.error(error)
       },
@@ -48,9 +60,7 @@ const EventContextProvider = ({ children }: Props) => {
   }, [eventId])
 
   return (
-    <EventContext.Provider value={{ error, loading, event }}>
-      {children}
-    </EventContext.Provider>
+    <EventContext.Provider value={{ state }}>{children}</EventContext.Provider>
   )
 }
 

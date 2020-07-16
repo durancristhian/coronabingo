@@ -15,10 +15,10 @@ export default memo(function News({ tweetIds }: Props) {
       <Heading textAlign="center" type="h2">
         {t('common:news')}
       </Heading>
-      <div className="sm:flex sm:flex-wrap sm:justify-center my-4 -mx-2">
+      <div className="sm:flex sm:flex-wrap my-4 -mx-2">
         {tweetIds.map(id => (
           <div key={id} className="mx-2">
-            <TweetEmbed id={id} options={{ align: 'center', width: 300 }} />
+            <TweetEmbed id={id} options={{ align: 'center', width: 275 }} />
           </div>
         ))}
       </div>
