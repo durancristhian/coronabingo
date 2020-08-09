@@ -11,6 +11,7 @@ import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Message from '~/components/Message'
 import useEvent from '~/hooks/useEvent'
+import useSubCollection from '~/hooks/useSubCollection'
 import useToast from '~/hooks/useToast'
 import { createBatch, storage, Timestamp } from '~/utils'
 
@@ -18,7 +19,6 @@ const defaultFormData = {
   attachment: '',
   comment: '',
   date: Timestamp.now(),
-  email: '',
   extension: '',
   name: '',
   tel: '',
@@ -29,12 +29,21 @@ interface Props {
 }
 
 export default function EventId({ hidden }: Props) {
+  if (hidden) {
+    return <Error statusCode={404} />
+  }
+
   const { error, loading, event } = useEvent()
+  const {
+    data: registrations,
+    error: registrationsError,
+    loading: registrationsLoading,
+  } = useSubCollection('events', event?.id, 'registrations')
   const { createToast, dismissToast, updateToast } = useToast()
   const [inProgress, setInProgress] = useState(false)
   const [formData, setFormData] = useState(defaultFormData)
 
-  if (loading) {
+  if (loading || registrationsLoading) {
     return (
       <Layout>
         <Loading />
@@ -42,19 +51,17 @@ export default function EventId({ hidden }: Props) {
     )
   }
 
-  if (error) {
+  if (error || registrationsError) {
     return (
       <Layout>
-        <Message type="error">El evento que estás buscando no existe.</Message>
+        <Message type="error">
+          Ocurrió un error al cargar la página. Intenta cargala de nuevo.
+        </Message>
       </Layout>
     )
   }
 
-  if (!event) return null
-
-  if (hidden) {
-    return <Error statusCode={404} />
-  }
+  if (!event || !registrations) return null
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -103,16 +110,9 @@ export default function EventId({ hidden }: Props) {
     }
   }
 
-  return (
-    <Layout>
-      <Box>
-        <Heading textAlign="center" type="h1">
-          {event.name}
-        </Heading>
-        <div
-          className="markdown-body my-8"
-          dangerouslySetInnerHTML={{ __html: event.content.html }}
-        />
+  const form = () => {
+    return (
+      <>
         <Heading type="h2">Inscripción</Heading>
         <form onSubmit={onSubmit}>
           <fieldset disabled={inProgress}>
@@ -132,12 +132,12 @@ export default function EventId({ hidden }: Props) {
                 setFormData({ ...formData, tel })
               }}
             />
-            <InputText
-              id="email"
-              label="Email"
-              value={formData.email}
-              onChange={email => {
-                setFormData({ ...formData, email })
+            <InputImage
+              id="attachment"
+              label="Comprobante de la donación"
+              image={formData.attachment}
+              onChange={(attachment, extension) => {
+                setFormData({ ...formData, attachment, extension })
               }}
             />
             <InputTextarea
@@ -146,14 +146,6 @@ export default function EventId({ hidden }: Props) {
               value={formData.comment}
               onChange={comment => {
                 setFormData({ ...formData, comment })
-              }}
-            />
-            <InputImage
-              id="attachment"
-              label="Comprobante de la donación"
-              image={formData.attachment}
-              onChange={(attachment, extension) => {
-                setFormData({ ...formData, attachment, extension })
               }}
             />
             <div className="mt-8 text-center">
@@ -170,6 +162,29 @@ export default function EventId({ hidden }: Props) {
             </div>
           </fieldset>
         </form>
+      </>
+    )
+  }
+
+  const fullRoom = () => {
+    return (
+      <Message type="information">
+        Se completó el cupo de 650 personas inscriptas para el evento.
+      </Message>
+    )
+  }
+
+  return (
+    <Layout>
+      <Box>
+        <Heading textAlign="center" type="h1">
+          {event.name}
+        </Heading>
+        <div
+          className="markdown-body my-8"
+          dangerouslySetInnerHTML={{ __html: event.content.html }}
+        />
+        {registrations.length < 650 ? form() : fullRoom()}
       </Box>
     </Layout>
   )

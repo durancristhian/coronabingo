@@ -6,7 +6,6 @@ import {
   FiCheck,
   FiChevronDown,
   FiLink,
-  FiMail,
   FiMessageSquare,
 } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
@@ -96,42 +95,6 @@ export default function Registrations({
     return `${day}, ${hour}`
   }
 
-  const sendEmail = async (registration: EventRegistration) => {
-    /* This shouldn't happen */
-    if (!registration.player) return
-
-    const toastId = createToast('Enviando mail...', 'information')
-
-    const link = getRoomPlayerLink(event.roomId, registration.player.id)
-    const body = [
-      `email=${registration.email}`,
-      `&eventId=${event.id}`,
-      `&name=${registration.name}`,
-      `&tickets=${link}`,
-      `&registrationId=${registration.id}`,
-    ].join('')
-
-    try {
-      await fetch(event.emailEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body,
-      })
-
-      updateToast('Operación exitosa', 'success', toastId)
-    } catch (error) {
-      console.error(error)
-
-      updateToast('Ups! Hubo un error', 'error', toastId)
-    } finally {
-      setTimeout(() => {
-        dismissToast(toastId)
-      }, 2000)
-    }
-  }
-
   const renderRow = (registration: EventRegistration) => {
     return (
       <div className="mb-2" key={registration.id}>
@@ -150,7 +113,7 @@ export default function Registrations({
               </div>
               <div className="p-4 w-1/5">
                 {registration.player ? (
-                  <Tag color="green">Confirmado</Tag>
+                  <Tag color="green">Confirmade</Tag>
                 ) : (
                   <Tag color="yellow">A confirmar</Tag>
                 )}
@@ -170,7 +133,7 @@ export default function Registrations({
                   <img
                     src={url}
                     alt={`Comprobante de pago de ${registration.name}`}
-                    className="block rounded w-full"
+                    className="block shadow rounded w-full"
                   />
                 )}
               </FirebaseImage>
@@ -203,12 +166,6 @@ export default function Registrations({
                     {registration.tel}
                   </button>
                 </span>
-              </div>
-              <div className="flex mt-2">
-                <div className="mt-1">
-                  <FiMail color="#718096" />
-                </div>
-                <span className="ml-2">{registration.email}</span>
               </div>
               {registration.comment && (
                 <div className="flex mt-2">
@@ -257,20 +214,6 @@ export default function Registrations({
                       </span>
                     </span>
                   </Anchor>
-                  <div className="my-4">
-                    <Heading type="h4">Acciones</Heading>
-                  </div>
-                  <div className="flex flex-wrap">
-                    <Button
-                      aria-label="Enviar mail"
-                      id="send-email"
-                      onClick={() => sendEmail(registration)}
-                      className="mb-4 mr-4"
-                      iconLeft={<FiMail />}
-                    >
-                      Enviar mail
-                    </Button>
-                  </div>
                 </Fragment>
               )}
             </div>

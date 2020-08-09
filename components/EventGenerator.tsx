@@ -74,7 +74,7 @@ export default function EventGenerator({ user }: Props) {
         adminId: adminRef.id,
       })
 
-      for (let index = 1; index < 350; index++) {
+      for (let index = 1; index < 650; index++) {
         const ticketRef = roomRef.collection('tickets').doc()
 
         batch.set(ticketRef, {
@@ -87,7 +87,6 @@ export default function EventGenerator({ user }: Props) {
       batch.set(eventRef, {
         content: event.content,
         date: Timestamp.fromDate(new Date()),
-        emailEndpoint: process.env.EMAIL_ENDPOINT,
         name: event.name,
         roomId: roomRef.id,
         userId: user.uid,

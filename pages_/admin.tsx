@@ -12,11 +12,11 @@ interface Props {
 }
 
 export default function Admin({ hidden }: Props) {
-  const { error, loading, notAsked, user } = useAuth()
-
   if (hidden) {
     return <Error statusCode={404} />
   }
+
+  const { error, loading, notAsked, user } = useAuth()
 
   if (notAsked || loading) {
     return (
