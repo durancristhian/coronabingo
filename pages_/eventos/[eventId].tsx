@@ -43,7 +43,7 @@ export default function EventId({ hidden }: Props) {
   const [inProgress, setInProgress] = useState(false)
   const [formData, setFormData] = useState(defaultFormData)
 
-  if (loading || registrationsLoading) {
+  if (loading) {
     return (
       <Layout>
         <Loading />
@@ -51,7 +51,25 @@ export default function EventId({ hidden }: Props) {
     )
   }
 
-  if (error || registrationsError) {
+  if (error) {
+    return (
+      <Layout>
+        <Message type="error">
+          Ocurrió un error al cargar la página. Intenta cargala de nuevo.
+        </Message>
+      </Layout>
+    )
+  }
+
+  if (registrationsLoading) {
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    )
+  }
+
+  if (registrationsError) {
     return (
       <Layout>
         <Message type="error">

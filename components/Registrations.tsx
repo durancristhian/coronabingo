@@ -223,5 +223,17 @@ export default function Registrations({
     )
   }
 
-  return <Fragment>{registrationList.map(renderRow)}</Fragment>
+  return (
+    <Fragment>
+      <Heading type="h1" textAlign="center">
+        Inscripciones
+      </Heading>
+      <div className="my-4">
+        <p>Total de inscripciones: {registrations.length}</p>
+        <p>Confirmades: {registrationList.length}</p>
+        <p>Faltan revisar: {registrations.length - registrationList.length}</p>
+      </div>
+      {registrationList.map(renderRow)}
+    </Fragment>
+  )
 }
