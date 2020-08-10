@@ -40,8 +40,6 @@ const nextConfig = {
     SENTRY_DSN: process.env.SENTRY_DSN,
     /* Other */
     URL: process.env.URL,
-    /* Palabra.io */
-    EMAIL_ENDPOINT: process.env.EMAIL_ENDPOINT,
   },
   webpack: (config, { isServer }) => {
     /*

@@ -1,7 +1,6 @@
-import { default as NextError } from 'next/error'
-import React, { Fragment } from 'react'
+import React from 'react'
+import EnsureLogin from '~/components/EnsureLogin'
 import Error from '~/components/Error'
-import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Message from '~/components/Message'
@@ -10,11 +9,17 @@ import useEvent from '~/hooks/useEvent'
 import useSubCollection from '~/hooks/useSubCollection'
 import { Player, Registration, RoomTicket } from '~/interfaces'
 
-interface Props {
-  hidden: boolean
+export default function EventAdmin() {
+  return (
+    <Layout type="large">
+      <EnsureLogin>
+        <Content />
+      </EnsureLogin>
+    </Layout>
+  )
 }
 
-export default function EventAdmin({ hidden }: Props) {
+function Content() {
   const { error: eventError, loading: eventLoading, event } = useEvent()
   const {
     data: registrations,
@@ -38,60 +43,28 @@ export default function EventAdmin({ hidden }: Props) {
     playersLoading ||
     ticketsLoading
   ) {
-    return (
-      <Layout>
-        <Loading />
-      </Layout>
-    )
+    return <Loading />
   }
 
   if (eventError || registrationsError || playersError || ticketsError) {
     return (
-      <Layout>
-        <Message type="error">El evento que estás buscando no existe.</Message>
-      </Layout>
+      <Message type="error">El evento que estás buscando no existe.</Message>
     )
   }
 
   if (!event || !registrations || !players || !tickets) return null
 
-  if (hidden) {
-    return <NextError statusCode={404} />
-  }
-
   return (
-    <Layout type="large">
+    <>
       {!registrations.length && <Error message="No hay inscripciones." />}
       {!!registrations.length && (
-        <Fragment>
-          <div className="mb-4">
-            <Heading type="h1" textAlign="center">
-              <span>Inscripciones ({registrations.length})</span>
-            </Heading>
-          </div>
-          <Registrations
-            event={event}
-            players={players as Player[]}
-            registrations={registrations as Registration[]}
-            tickets={tickets as RoomTicket[]}
-          />
-        </Fragment>
+        <Registrations
+          event={event}
+          players={players as Player[]}
+          registrations={registrations as Registration[]}
+          tickets={tickets as RoomTicket[]}
+        />
       )}
-    </Layout>
+    </>
   )
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  }
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      hidden: process.env.NODE_ENV === 'production',
-    },
-  }
 }

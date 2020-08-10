@@ -4,7 +4,6 @@ export interface EventBase {
     text: string
   }
   date: firebase.firestore.Timestamp
-  emailEndpoint: string
   name: string
   roomId: string
   userId: string

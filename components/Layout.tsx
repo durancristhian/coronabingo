@@ -8,6 +8,7 @@ import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
 import Box from './Box'
 import Container from './Container'
+import EventBanner from './EventBanner'
 
 interface Props {
   children: ReactNode
@@ -55,6 +56,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
           <Container size={type}>{renderContent()}</Container>
         </div>
       </div>
+      <EventBanner />
       <Footer />
     </main>
   )
