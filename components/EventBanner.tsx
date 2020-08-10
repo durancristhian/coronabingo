@@ -20,7 +20,7 @@ const EventBanner = () => {
 
     Router.pushI18n(
       '/eventos/[eventId]',
-      '/eventos/coronabingo-solidario-minka',
+      '/eventos/coronabingo-solidario-por-minka',
     )
   }
 
@@ -38,8 +38,9 @@ const EventBanner = () => {
             </Heading>
             <div className="mt-4">
               <p>
-                El sábado 15 de Agosto jugaremos un Coronabingo para ayudar al
-                Centro Comunitario Minka. ¿Te gustaría participar?
+                El sábado <strong>15 de Agosto</strong> jugaremos un Coronabingo
+                para ayudar al <strong>Centro Comunitario Minka</strong>. ¿Te
+                gustaría participar?
               </p>
             </div>
             <div className="mt-8">
@@ -56,7 +57,7 @@ const EventBanner = () => {
               </Button>
             </div>
             <p className="mt-4 text-center text-sm">
-              * Sólo disponible para Argentina
+              * Sólo válido para Argentina
             </p>
           </div>
         </Container>

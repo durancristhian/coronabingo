@@ -8,18 +8,14 @@ import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
 import Box from './Box'
 import Container from './Container'
+import EventBanner from './EventBanner'
 
 interface Props {
   children: ReactNode
-  eventBanner?: ReactNode
   type?: 'medium' | 'large'
 }
 
-export default function Layout({
-  children,
-  eventBanner,
-  type = 'medium',
-}: Props) {
+export default function Layout({ children, type = 'medium' }: Props) {
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -60,7 +56,7 @@ export default function Layout({
           <Container size={type}>{renderContent()}</Container>
         </div>
       </div>
-      <>{eventBanner}</>
+      <EventBanner />
       <Footer />
     </main>
   )

@@ -6,7 +6,6 @@ import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import CreateRoom from '~/components/CreateRoom'
-import EventBanner from '~/components/EventBanner'
 import Layout from '~/components/Layout'
 import Modal from '~/components/Modal'
 
@@ -20,7 +19,7 @@ export default function Index() {
   const [showModal, setShowModal] = useState(false)
 
   return (
-    <Layout eventBanner={<EventBanner />}>
+    <Layout>
       <p>{t('index:intro')}</p>
       <div className="my-8">
         <Box>

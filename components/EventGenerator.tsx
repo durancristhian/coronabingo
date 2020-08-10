@@ -105,7 +105,7 @@ export default function EventGenerator({ user }: Props) {
         lower: true,
       })
       const eventUrl = `${window.location.host}/eventos/${parsedEventName}`
-      const eventRef = eventsRef.doc(event.id)
+      const eventRef = eventsRef.doc(parsedEventName)
 
       batch.set(eventRef, {
         content: event.content,
@@ -168,16 +168,6 @@ export default function EventGenerator({ user }: Props) {
             id="event-name"
             label="Nombre"
             value={event.name}
-            hint={
-              event.name && (
-                <span className="block break-all">
-                  coronabingo.com.ar/eventos/
-                  {slugify(event.name, {
-                    lower: true,
-                  })}
-                </span>
-              )
-            }
             onChange={name => {
               setEvent({ ...event, name })
             }}

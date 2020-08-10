@@ -1,5 +1,5 @@
 import { isAfter } from 'date-fns'
-import Error from 'next/error'
+import { default as ErrorCmp } from 'next/error'
 import React, { FormEvent, useState } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Box from '~/components/Box'
@@ -11,6 +11,7 @@ import InputTextarea from '~/components/InputTextarea'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Message from '~/components/Message'
+import { useAnalytics } from '~/hooks/useAnalytics'
 import useEvent from '~/hooks/useEvent'
 import useSubCollection from '~/hooks/useSubCollection'
 import useToast from '~/hooks/useToast'
@@ -31,7 +32,7 @@ interface Props {
 
 export default function EventId({ hidden }: Props) {
   if (hidden) {
-    return <Error statusCode={404} />
+    return <ErrorCmp statusCode={404} />
   }
 
   const { error, loading, event } = useEvent()
@@ -43,6 +44,7 @@ export default function EventId({ hidden }: Props) {
   const { createToast, dismissToast, updateToast } = useToast()
   const [inProgress, setInProgress] = useState(false)
   const [formData, setFormData] = useState(defaultFormData)
+  const log = useAnalytics()
 
   if (loading) {
     return (
@@ -116,6 +118,11 @@ export default function EventId({ hidden }: Props) {
       updateToast('Operación exitosa', 'success', toastId)
     } catch (error) {
       console.error(error)
+
+      log('event_registration_error', {
+        description: error.message,
+        fatal: true,
+      })
 
       updateToast('Ups! Hubo un error', 'error', toastId)
     } finally {
