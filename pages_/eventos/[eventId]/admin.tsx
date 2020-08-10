@@ -1,4 +1,3 @@
-import { default as NextError } from 'next/error'
 import React from 'react'
 import EnsureLogin from '~/components/EnsureLogin'
 import Error from '~/components/Error'
@@ -10,15 +9,7 @@ import useEvent from '~/hooks/useEvent'
 import useSubCollection from '~/hooks/useSubCollection'
 import { Player, Registration, RoomTicket } from '~/interfaces'
 
-interface Props {
-  hidden: boolean
-}
-
-export default function EventAdmin({ hidden }: Props) {
-  if (hidden) {
-    return <NextError statusCode={404} />
-  }
-
+export default function EventAdmin() {
   return (
     <Layout type="large">
       <EnsureLogin>
@@ -76,19 +67,4 @@ function Content() {
       )}
     </>
   )
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  }
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      hidden: process.env.NODE_ENV === 'production',
-    },
-  }
 }

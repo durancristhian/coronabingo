@@ -1,5 +1,4 @@
 import { isAfter } from 'date-fns'
-import { default as ErrorCmp } from 'next/error'
 import React, { FormEvent, useState } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Box from '~/components/Box'
@@ -26,15 +25,7 @@ const defaultFormData = {
   tel: '',
 }
 
-interface Props {
-  hidden: boolean
-}
-
-export default function EventId({ hidden }: Props) {
-  if (hidden) {
-    return <ErrorCmp statusCode={404} />
-  }
-
+export default function EventId() {
   const { error, loading, event } = useEvent()
   const {
     data: registrations,
@@ -225,19 +216,4 @@ export default function EventId({ hidden }: Props) {
       </Box>
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  }
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      hidden: process.env.NODE_ENV === 'production',
-    },
-  }
 }
