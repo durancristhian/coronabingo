@@ -1,3 +1,4 @@
+import { isAfter } from 'date-fns'
 import Error from 'next/error'
 import React, { FormEvent, useState } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
@@ -129,6 +130,17 @@ export default function EventId({ hidden }: Props) {
   }
 
   const form = () => {
+    const today = new Date()
+    const end = new Date(2020, 7, 14, 17)
+
+    if (isAfter(today, end)) {
+      return (
+        <Message type="information">
+          Las inscripciones ya no están disponibles.
+        </Message>
+      )
+    }
+
     return (
       <>
         <Heading type="h2">Inscripción</Heading>
@@ -187,7 +199,7 @@ export default function EventId({ hidden }: Props) {
   const fullRoom = () => {
     return (
       <Message type="information">
-        Se completó el cupo de 650 personas inscriptas para el evento.
+        Se completó el cupo de 450 personas inscriptas para el evento.
       </Message>
     )
   }
@@ -202,7 +214,7 @@ export default function EventId({ hidden }: Props) {
           className="markdown-body my-8"
           dangerouslySetInnerHTML={{ __html: event.content.html }}
         />
-        {registrations.length < 650 ? form() : fullRoom()}
+        {registrations.length < 450 ? form() : fullRoom()}
       </Box>
     </Layout>
   )

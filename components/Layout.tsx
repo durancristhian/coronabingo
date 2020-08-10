@@ -11,10 +11,15 @@ import Container from './Container'
 
 interface Props {
   children: ReactNode
+  eventBanner?: ReactNode
   type?: 'medium' | 'large'
 }
 
-export default function Layout({ children, type = 'medium' }: Props) {
+export default function Layout({
+  children,
+  eventBanner,
+  type = 'medium',
+}: Props) {
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -55,6 +60,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
           <Container size={type}>{renderContent()}</Container>
         </div>
       </div>
+      <>{eventBanner}</>
       <Footer />
     </main>
   )

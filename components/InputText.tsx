@@ -1,10 +1,10 @@
 import classnames from 'classnames'
-import React, { FocusEvent } from 'react'
+import React, { FocusEvent, ReactNode } from 'react'
 
 interface Props {
   autoComplete?: string
   disabled?: boolean
-  hint?: string
+  hint?: string | ReactNode
   id: string
   label: string
   onFocus?: (ev: FocusEvent<HTMLInputElement>) => void
