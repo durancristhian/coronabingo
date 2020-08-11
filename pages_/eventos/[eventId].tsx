@@ -78,8 +78,6 @@ export default function EventId() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    /* TODO: validate */
-
     const toastId = createToast('Enviando...', 'information')
 
     try {
@@ -181,6 +179,9 @@ export default function EventId() {
                 aria-label="Quiero jugar"
                 id="register-me"
                 type="submit"
+                disabled={
+                  !formData.name || !formData.attachment || !formData.tel
+                }
                 color="green"
                 iconLeft={<FiChevronsRight />}
                 iconRight={<FiChevronsLeft />}
