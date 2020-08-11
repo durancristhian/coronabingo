@@ -121,7 +121,7 @@ export default function EventId() {
 
       setTimeout(() => {
         dismissToast(toastId)
-      }, 2000)
+      }, 10000)
     }
   }
 
