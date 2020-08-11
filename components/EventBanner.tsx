@@ -25,7 +25,7 @@ const EventBanner = () => {
   }
 
   const today = new Date()
-  const start = new Date(2020, 7, 11, 11, 30)
+  const start = new Date(2020, 7, 11, 12, 30)
   const end = new Date(2020, 7, 14, 23)
 
   if (isAfter(today, start) && isBefore(today, end)) {
