@@ -5,6 +5,7 @@ import Message from '~/components/Message'
 import { MessageType } from '~/interfaces'
 
 const toastConfig = {
+  autoClose: 10000,
   closeButton: false,
   hideProgressBar: true,
   position: toast.POSITION.BOTTOM_LEFT,
