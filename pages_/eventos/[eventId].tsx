@@ -191,6 +191,15 @@ export default function EventId() {
             </div>
           </fieldset>
         </form>
+        <div className="mt-4">
+          <Message type="information">
+            <p>
+              Si tenés algún problema con el formulario contactanos a este
+              mail:&nbsp;
+              <strong>durancristhian@gmail.com</strong>
+            </p>
+          </Message>
+        </div>
       </>
     )
   }
