@@ -14,6 +14,7 @@ const defaultRoomData: RoomBase = {
   readyToPlay: false,
   selectedNumbers: [],
   soundToPlay: '',
+  streamerView: false,
   timesPlayed: 1,
 }
 
