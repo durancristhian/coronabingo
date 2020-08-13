@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
@@ -129,6 +130,8 @@ export default function RoomPlayer() {
     </Fragment>
   )
 
+  const enableStreamerView = room.adminId === player.id && room.streamerView
+
   return (
     <BackgroundCellContextProvider playerId={player.id}>
       <Layout type="large">
@@ -141,8 +144,12 @@ export default function RoomPlayer() {
           </Heading>
         </div>
         <div className="max-w-6xl mx-auto">
-          <div className="lg:flex mt-4">
-            <div className="lg:w-1/3">
+          <div className="lg:flex lg:justify-center mt-4">
+            <div
+              className={classnames(
+                enableStreamerView ? 'lg:w-2/3' : 'lg:w-1/3',
+              )}
+            >
               <Box>
                 <div className="mb-4">
                   <Heading textAlign="center" type="h2">
@@ -158,13 +165,15 @@ export default function RoomPlayer() {
                 {renderBingoSpinnerAndOptions()}
               </div>
             </div>
-            <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-              <Tickets
-                player={player}
-                room={room}
-                updatePlayer={updatePlayer}
-              />
-            </div>
+            {enableStreamerView ? null : (
+              <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
+                <Tickets
+                  player={player}
+                  room={room}
+                  updatePlayer={updatePlayer}
+                />
+              </div>
+            )}
           </div>
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
         </div>

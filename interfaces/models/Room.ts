@@ -14,6 +14,7 @@ export interface RoomBase {
   selectedNumbers: number[]
   soundToPlay: string
   timesPlayed: number
+  streamerView: boolean
 }
 
 export interface Room extends RoomBase {
