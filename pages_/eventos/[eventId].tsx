@@ -127,7 +127,7 @@ export default function EventId() {
 
   const form = () => {
     const today = new Date()
-    const end = new Date(2020, 7, 15, 14)
+    const end = new Date(2020, 7, 15, 15, 30)
 
     if (isAfter(today, end)) {
       return (
