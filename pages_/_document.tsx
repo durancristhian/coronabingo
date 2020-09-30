@@ -23,6 +23,11 @@ export default class extends Document {
     return (
       <Html lang={lang}>
         <Head>
+          <script
+            data-ad-client="ca-pub-6231280485856921"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          />
           {process.env.GA_TRACKING_ID && (
             <Fragment>
               <script
