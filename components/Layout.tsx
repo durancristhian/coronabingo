@@ -66,7 +66,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
           data-ad-format="auto"
           data-full-width-responsive="true"
         />
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({})</script>
       </div>
       <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">
