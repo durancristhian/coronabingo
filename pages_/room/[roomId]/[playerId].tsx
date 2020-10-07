@@ -1,6 +1,8 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
+import { useRouter } from 'next/router'
 import React, { Fragment, useEffect } from 'react'
+import Ads from '~/components/Ads'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Error from '~/components/Error'
@@ -22,6 +24,7 @@ import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function RoomPlayer() {
+  const router = useRouter()
   const { error: roomError, loading: roomLoading, room } = useRoom()
   const {
     error: playerError,
@@ -134,6 +137,9 @@ export default function RoomPlayer() {
 
   return (
     <BackgroundCellContextProvider playerId={player.id}>
+      <div className="flex justify-center py-4">
+        <Ads url={router.asPath} />
+      </div>
       <Layout type="large">
         <div className="mb-4">
           <Heading textAlign="center" type="h2">

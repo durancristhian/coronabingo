@@ -1,5 +1,4 @@
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { ReactNode, useEffect, useState } from 'react'
 import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
@@ -7,7 +6,6 @@ import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
-import Ads from './Ads'
 import Box from './Box'
 import Container from './Container'
 import EventBanner from './EventBanner'
@@ -18,7 +16,6 @@ interface Props {
 }
 
 export default function Layout({ children, type = 'medium' }: Props) {
-  const router = useRouter()
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -54,9 +51,6 @@ export default function Layout({ children, type = 'medium' }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      <div className="flex justify-center py-4">
-        <Ads url={router.pathname} />
-      </div>
       <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">
           <Container size={type}>{renderContent()}</Container>
