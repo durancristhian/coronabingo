@@ -11,7 +11,7 @@ export default function Ads({ url }: Props) {
 
     // @ts-ignore
     window.adsbygoogle.push({})
-  }, [url])
+  }, [])
 
   return (
     <ins
@@ -19,6 +19,8 @@ export default function Ads({ url }: Props) {
       className="adsbygoogle"
       style={{
         display: 'block',
+        width: 728,
+        height: 90,
       }}
       data-ad-client="ca-pub-6231280485856921"
       data-ad-slot="1185318534"
