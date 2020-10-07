@@ -54,7 +54,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
-      <div className="flex justify-center">
+      <div className="flex justify-center py-4">
         <Ads url={router.pathname} />
       </div>
       <div className="flex-auto min-h-650px">
