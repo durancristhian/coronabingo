@@ -137,10 +137,10 @@ export default function RoomPlayer() {
 
   return (
     <BackgroundCellContextProvider playerId={player.id}>
-      <div className="flex justify-center py-4">
-        <Ads url={router.asPath} />
-      </div>
       <Layout type="large">
+        <div className="flex justify-center my-4">
+          <Ads url={router.asPath} />
+        </div>
         <div className="mb-4">
           <Heading textAlign="center" type="h2">
             {t('playerId:title', {
