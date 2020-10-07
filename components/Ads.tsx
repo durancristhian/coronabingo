@@ -8,7 +8,7 @@ export default function Ads({ url }: Props) {
   useEffect(() => {
     // @ts-ignore
     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-  }, [])
+  }, [url])
 
   return (
     <ins
