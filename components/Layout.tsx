@@ -51,6 +51,23 @@ export default function Layout({ children, type = 'medium' }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
+      <div className="flex justify-center">
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        />
+        <ins
+          className="adsbygoogle"
+          style={{
+            display: 'block',
+          }}
+          data-ad-client="ca-pub-6231280485856921"
+          data-ad-slot="1185318534"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
       <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">
           <Container size={type}>{renderContent()}</Container>
