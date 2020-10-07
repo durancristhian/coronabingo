@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import AdSense from 'react-adsense'
 
 export default function Ads() {
-  useEffect(() => {
-    // @ts-ignore
-    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-  }, [])
-
   return (
     <AdSense.Google
       client="ca-pub-6231280485856921"
