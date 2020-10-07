@@ -6,6 +6,8 @@ interface Props {
 
 export default function Ads({ url }: Props) {
   useEffect(() => {
+    console.log(url)
+
     // @ts-ignore
     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }, [])
