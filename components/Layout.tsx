@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
+import { useRouter } from 'next/router'
 import React, { ReactNode, useEffect, useState } from 'react'
 import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
@@ -6,6 +7,7 @@ import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import { version } from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils'
+import Ads from './Ads'
 import Box from './Box'
 import Container from './Container'
 import EventBanner from './EventBanner'
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export default function Layout({ children, type = 'medium' }: Props) {
+  const router = useRouter()
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
   const { t } = useTranslation()
@@ -52,21 +55,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
       )}
       <Header />
       <div className="flex justify-center">
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        />
-        <ins
-          className="adsbygoogle"
-          style={{
-            display: 'block',
-          }}
-          data-ad-client="ca-pub-6231280485856921"
-          data-ad-slot="1185318534"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script>(adsbygoogle = window.adsbygoogle || []).push({})</script>
+        <Ads url={router.pathname} />
       </div>
       <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">

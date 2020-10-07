@@ -28,6 +28,10 @@ export default class extends Document {
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           />
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          />
           {process.env.GA_TRACKING_ID && (
             <Fragment>
               <script
