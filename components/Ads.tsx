@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import AdSense from 'react-adsense'
 
 export default function Ads() {
   useEffect(() => {
@@ -7,17 +8,12 @@ export default function Ads() {
   }, [])
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{
-        display: 'block',
-        height: '90px',
-        width: '728px',
-      }}
-      data-ad-client="ca-pub-6231280485856921"
-      data-ad-slot="1185318534"
-      data-ad-format="auto"
-      data-full-width-responsive="true"
+    <AdSense.Google
+      client="ca-pub-6231280485856921"
+      slot="1185318534"
+      style={{ display: 'block' }}
+      format="auto"
+      responsive="true"
     />
   )
 }
