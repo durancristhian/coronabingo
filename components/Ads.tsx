@@ -7,10 +7,7 @@ interface Props {
 export default function Ads({ url }: Props) {
   useEffect(() => {
     // @ts-ignore
-    window.adsbygoogle = window.adsbygoogle || []
-
-    // @ts-ignore
-    window.adsbygoogle.push({})
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }, [])
 
   return (
@@ -19,8 +16,8 @@ export default function Ads({ url }: Props) {
       className="adsbygoogle"
       style={{
         display: 'block',
-        width: 728,
-        height: 90,
+        width: '728px',
+        height: '90px',
       }}
       data-ad-client="ca-pub-6231280485856921"
       data-ad-slot="1185318534"
