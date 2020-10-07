@@ -1,14 +1,27 @@
-import React from 'react'
-import AdSense from 'react-adsense'
+import React, { useEffect } from 'react'
 
-export default function Ads() {
+interface Props {
+  url: string
+}
+
+export default function Ads({ url }: Props) {
+  useEffect(() => {
+    // @ts-ignore
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+  }, [url])
+
   return (
-    <AdSense.Google
-      client="ca-pub-6231280485856921"
-      slot="1185318534"
-      style={{ display: 'block', width: 768, height: 90 }}
-      format="auto"
-      responsive="true"
+    <ins
+      className="adsbygoogle"
+      style={{
+        display: 'block',
+        height: '90px',
+        width: '728px',
+      }}
+      data-ad-client="ca-pub-6231280485856921"
+      data-ad-slot="1185318534"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
     />
   )
 }

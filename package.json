@@ -69,7 +69,6 @@
         "prettier": "^1.19.1",
         "raw-loader": "^4.0.1",
         "react": "^16.13.1",
-        "react-adsense": "^0.1.0",
         "react-copy-to-clipboard": "^5.0.2",
         "react-dom": "^16.13.0",
         "react-icons": "^3.9.0",
