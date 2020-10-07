@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react'
 
-interface Props {
-  url: string
-}
-
-export default function Ads({ url }: Props) {
+export default function Ads() {
   useEffect(() => {
     // @ts-ignore
     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
@@ -12,7 +8,6 @@ export default function Ads({ url }: Props) {
 
   return (
     <ins
-      key={url}
       className="adsbygoogle"
       style={{
         display: 'block',
