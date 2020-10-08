@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
 import React, { Fragment, useEffect } from 'react'
 import Ads from '~/components/Ads'
 import Box from '~/components/Box'
@@ -24,7 +23,6 @@ import roomApi from '~/models/room'
 import { isRoomOld, scrollToTop } from '~/utils'
 
 export default function RoomPlayer() {
-  const router = useRouter()
   const { error: roomError, loading: roomLoading, room } = useRoom()
   const {
     error: playerError,
@@ -136,11 +134,11 @@ export default function RoomPlayer() {
   const enableStreamerView = room.adminId === player.id && room.streamerView
 
   return (
-    <BackgroundCellContextProvider playerId={player.id}>
-      <Layout type="large">
-        <div className="flex justify-center my-4">
-          <Ads url={router.asPath} />
-        </div>
+    <Layout type="large">
+      <div className="flex justify-center mb-4">
+        <Ads />
+      </div>
+      <BackgroundCellContextProvider playerId={player.id}>
         <div className="mb-4">
           <Heading textAlign="center" type="h2">
             {t('playerId:title', {
@@ -183,9 +181,9 @@ export default function RoomPlayer() {
           </div>
           <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
         </div>
-      </Layout>
-      <Confetti type={room.confettiType} />
-      <Sounds isAdmin={isAdmin} room={room} />
-    </BackgroundCellContextProvider>
+        <Confetti type={room.confettiType} />
+        <Sounds isAdmin={isAdmin} room={room} />
+      </BackgroundCellContextProvider>
+    </Layout>
   )
 }

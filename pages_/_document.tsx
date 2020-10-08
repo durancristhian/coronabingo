@@ -23,15 +23,22 @@ export default class extends Document {
     return (
       <Html lang={lang}>
         <Head>
-          <script
-            data-ad-client="ca-pub-6231280485856921"
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          />
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          />
+          {/* Google Search Console */}
+          {process.env.NODE_ENV === 'production' && (
+            <meta
+              name="google-site-verification"
+              content="EmqI8hufGnrAf3Liky84ItzkmjJejzCk382djGct8HA"
+            />
+          )}
+          {/** Google AdSense */}
+          {process.env.NODE_ENV === 'production' && (
+            <script
+              data-ad-client="ca-pub-6231280485856921"
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            />
+          )}
+          {/** Google Tag Manager / Google Analytics */}
           {process.env.GA_TRACKING_ID && (
             <Fragment>
               <script
@@ -52,9 +59,6 @@ export default class extends Document {
               />
             </Fragment>
           )}
-          <link rel="preconnect" href="https://twemoji.maxcdn.com" />
-          <link rel="preconnect" href="https://www.google-analytics.com" />
-          <link rel="preconnect" href="https://firestore.googleapis.com" />
         </Head>
         <body className="font-sans leading-normal text-gray-900 text-sm md:text-base">
           <Main />

@@ -26,6 +26,7 @@
         ]
     },
     "dependencies": {
+        "@ctrl/react-adsense": "^1.1.3",
         "@fullhuman/postcss-purgecss": "^2.1.0",
         "@packtracker/webpack-plugin": "^2.3.0",
         "@sentry/browser": "^5.15.0",

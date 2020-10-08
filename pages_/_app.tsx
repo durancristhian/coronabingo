@@ -52,15 +52,6 @@ export default class Coronabingo extends App {
       <Fragment>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-
-          {/* Google Search Console */}
-          {process.env.NODE_ENV === 'production' && (
-            <meta
-              name="google-site-verification"
-              content="EmqI8hufGnrAf3Liky84ItzkmjJejzCk382djGct8HA"
-            />
-          )}
-
           {lang === 'en' && (
             <Fragment>
               <title>Coronabingo | Bingo online</title>
@@ -203,7 +194,6 @@ export default class Coronabingo extends App {
               <meta property="og:url" content="https://coronabingo.com.ar/" />
             </Fragment>
           )}
-
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
