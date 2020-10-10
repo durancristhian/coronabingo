@@ -7,7 +7,7 @@ export default function Ads() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setVisibility(true)
-    }, 3000)
+    }, 1000)
 
     return () => clearTimeout(timeoutId)
   }, [])
