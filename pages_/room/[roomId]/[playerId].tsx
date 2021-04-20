@@ -135,7 +135,7 @@ export default function RoomPlayer() {
 
   return (
     <Layout type="large">
-      <Ads />
+      {/* <Ads /> */}
       <BackgroundCellContextProvider playerId={player.id}>
         <div className="mb-4">
           <Heading textAlign="center" type="h2">
