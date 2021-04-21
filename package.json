@@ -90,5 +90,8 @@
         "url-loader": "^4.0.0",
         "zipcelx": "^1.6.2"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "webpack": "^4.44.2"
+    }
 }
