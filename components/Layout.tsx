@@ -4,11 +4,13 @@ import Banner from '~/components/Banner'
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
-import { version } from '~/package.json'
+import pkg from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils/isThereLocalStorageSupport'
 import Box from './Box'
 import Container from './Container'
 import EventBanner from './EventBanner'
+
+const version = pkg.version
 
 interface Props {
   children: ReactNode

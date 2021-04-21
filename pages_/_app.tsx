@@ -6,12 +6,16 @@ import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
 import NewsModal from '~/components/NewsModal'
 import Providers from '~/contexts'
-import { allLanguages, defaultLanguage } from '~/i18n.json'
+import i18n from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces/custom/ErrorInfo'
-import { version } from '~/package.json'
+import pkg from '~/package.json'
 import '~/polyfills/promise-finally'
 import '~/public/css/styles.css'
 import { pageview } from '~/utils/gtag'
+
+const version = pkg.version
+const allLanguages = i18n.allLanguages
+const defaultLanguage = i18n.defaultLanguage
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({

@@ -5,7 +5,9 @@ import React from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Select from '~/components/Select'
-import { allLanguages } from '~/i18n.json'
+import i18n from '~/i18n.json'
+
+const allLanguages = i18n.allLanguages
 
 export default function Header() {
   const { t, lang } = useTranslation()

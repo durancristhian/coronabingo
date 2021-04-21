@@ -1,7 +1,10 @@
 import * as Sentry from '@sentry/browser'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React, { Fragment } from 'react'
-import { allLanguages, defaultLanguage } from '~/i18n.json'
+import i18n from '~/i18n.json'
+
+const allLanguages = i18n.allLanguages
+const defaultLanguage = i18n.defaultLanguage
 
 if (process.env.NODE_ENV === 'production') {
   process.on('unhandledRejection', err => {

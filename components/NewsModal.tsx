@@ -5,7 +5,9 @@ import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Modal from '~/components/Modal'
 import { ModalContent } from '~/interfaces/custom/NewsModal'
-import { version } from '~/package.json'
+import pkg from '~/package.json'
+
+const version = pkg.version
 
 interface Props {
   lang: string

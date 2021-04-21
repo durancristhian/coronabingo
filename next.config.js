@@ -24,6 +24,9 @@ const compose = plugins => {
 }
 
 const nextConfig = {
+  future: {
+    webpack5: true,
+  },
   env: {
     /* FIREBASE */
     API_KEY: process.env.API_KEY,
