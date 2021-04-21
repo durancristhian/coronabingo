@@ -13,14 +13,13 @@ import Button from '~/components/Button'
 import FirebaseImage from '~/components/FirebaseImage'
 import Heading from '~/components/Heading'
 import useToast from '~/hooks/useToast'
-import { Event, Player, Registration, RoomTicket } from '~/interfaces'
-import {
-  createBatch,
-  getBaseUrl,
-  roomsRef,
-  sendWhatsAppTo,
-  Timestamp,
-} from '~/utils'
+import { Event } from '~/interfaces/models/Event'
+import { Player } from '~/interfaces/models/Player'
+import { Registration } from '~/interfaces/models/Registration'
+import { RoomTicket } from '~/interfaces/models/RoomTicket'
+import { createBatch, roomsRef, Timestamp } from '~/utils/firebase'
+import { getBaseUrl } from '~/utils/getBaseUrl'
+import { sendWhatsAppTo } from '~/utils/sendWhatsapp'
 import Accordion from './Accordion'
 import Tag from './Tag'
 

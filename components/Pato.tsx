@@ -1,12 +1,12 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { ReactNode, Fragment } from 'react'
+import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
-import { Room } from '~/interfaces'
+import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
-import { SOUNDS, SOUNDS_EXTRAS } from '~/utils'
+import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
 
 const emojis: { [key: string]: ReactNode } = {
   ar: <Emoji name="flag-ar" />,

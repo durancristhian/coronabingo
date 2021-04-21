@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Ticket } from '~/interfaces'
+import { Ticket } from '~/interfaces/custom/Ticket'
 import ticketsData from '~/public/tickets.json'
 
 export default function useTickets(ticketNumbers: string): Ticket[] {

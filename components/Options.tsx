@@ -10,7 +10,7 @@ import OptionTabPanel from '~/components/OptionTabPanel'
 import Pato from '~/components/Pato'
 import Restart from '~/components/Restart'
 import useEasterEgg from '~/hooks/useEasterEgg'
-import { Room } from '~/interfaces'
+import { Room } from '~/interfaces/models/Room'
 
 interface Props {
   isAdmin: boolean

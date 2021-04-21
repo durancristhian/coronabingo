@@ -5,7 +5,7 @@ import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
 import InputText from '~/components/InputText'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
-import { BACKGROUND_CELL_VALUES } from '~/utils'
+import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(

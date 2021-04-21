@@ -4,7 +4,7 @@ import Trans from 'next-translate/Trans'
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Modal from '~/components/Modal'
-import { ModalContent } from '~/interfaces'
+import { ModalContent } from '~/interfaces/custom/NewsModal'
 import { version } from '~/package.json'
 
 interface Props {

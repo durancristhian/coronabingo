@@ -7,11 +7,11 @@ import { ToastContainer } from 'react-toastify'
 import NewsModal from '~/components/NewsModal'
 import Providers from '~/contexts'
 import { allLanguages, defaultLanguage } from '~/i18n.json'
-import { ErrorInfo } from '~/interfaces'
+import { ErrorInfo } from '~/interfaces/custom/ErrorInfo'
 import { version } from '~/package.json'
 import '~/polyfills/promise-finally'
 import '~/public/css/styles.css'
-import { pageview } from '~/utils'
+import { pageview } from '~/utils/gtag'
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({

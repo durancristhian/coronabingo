@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { storage } from '~/utils'
+import { storage } from '~/utils/firebase'
 import Loading from './Loading'
 
 interface Props {

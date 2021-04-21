@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
-import Ads from '~/components/Ads'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Error from '~/components/Error'
@@ -20,7 +19,8 @@ import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 import useRoomCode from '~/hooks/useRoomCode'
 import roomApi from '~/models/room'
-import { isRoomOld, scrollToTop } from '~/utils'
+import { isRoomOld } from '~/utils/isRoomOld'
+import { scrollToTop } from '~/utils/scrollToTop'
 
 export default function RoomPlayer() {
   const { error: roomError, loading: roomLoading, room } = useRoom()

@@ -1,4 +1,4 @@
-import { Locales } from '~/interfaces'
+import { Locales } from '~/interfaces/custom/Locales'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { readdirSync, readFileSync } = require('fs')

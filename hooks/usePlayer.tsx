@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { PlayerContext } from '~/contexts/Player'
-import { REMOTE_DATA } from '~/interfaces'
+import { REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 
 export default function usePlayer() {
   const { state, updatePlayer } = useContext(PlayerContext)

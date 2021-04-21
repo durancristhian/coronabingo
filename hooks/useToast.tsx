@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
 import { toast, ToastId } from 'react-toastify'
 import Message from '~/components/Message'
-import { MessageType } from '~/interfaces'
+import { MessageType } from '~/interfaces/custom/Message'
 
 const toastConfig = {
   autoClose: 10000,

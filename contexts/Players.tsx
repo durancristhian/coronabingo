@@ -1,13 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import {
-  Player,
-  PlayerBase,
-  PlayersContextData,
-  RemoteData,
-  REMOTE_DATA,
-} from '~/interfaces'
-import { roomsRef } from '~/utils'
+import { PlayersContextData } from '~/interfaces/contexts/Players'
+import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
+import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { roomsRef } from '~/utils/firebase'
 
 const PlayersContext = createContext<PlayersContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },

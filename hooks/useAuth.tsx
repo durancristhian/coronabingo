@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { AuthContext } from '~/contexts/Auth'
-import { REMOTE_DATA } from '~/interfaces'
+import { REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 
 export default function useAuth() {
   const { state, signin, signout } = useContext(AuthContext)

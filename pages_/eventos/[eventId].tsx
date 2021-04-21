@@ -14,7 +14,7 @@ import { useAnalytics } from '~/hooks/useAnalytics'
 import useEvent from '~/hooks/useEvent'
 import useSubCollection from '~/hooks/useSubCollection'
 import useToast from '~/hooks/useToast'
-import { createBatch, storage, Timestamp } from '~/utils'
+import { createBatch, storage, Timestamp } from '~/utils/firebase'
 
 const defaultFormData = {
   attachment: '',

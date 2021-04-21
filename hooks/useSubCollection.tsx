@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { RemoteData, REMOTE_DATA } from '~/interfaces'
-import { db } from '~/utils'
+import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
+import { db } from '~/utils/firebase'
 
 export default function useSubCollection<T>(
   collection: string,

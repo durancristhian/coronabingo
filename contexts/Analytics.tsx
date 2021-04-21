@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { AnalyticsContextData } from '~/interfaces'
-import { analytics } from '~/utils'
+import { AnalyticsContextData } from '~/interfaces/contexts/Analytics'
+import { analytics } from '~/utils/firebase'
 
 interface Props {
   children: ReactNode

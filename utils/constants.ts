@@ -1,4 +1,4 @@
-import { Emojis } from '~/interfaces'
+import { Emojis } from '~/interfaces/custom/Emojis'
 import ticketsData from '~/public/tickets.json'
 
 export const BACKGROUND_CELL_VALUES = [

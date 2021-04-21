@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React, { Fragment, memo } from 'react'
-import { ConfettiType } from '~/interfaces'
+import { ConfettiType } from '~/interfaces/custom/ConfettiType'
 
 const confettiClasses = [
   'confetti-1',
@@ -60,6 +60,7 @@ interface Props {
   type: ConfettiType
 }
 
+// eslint-disable-next-line react/prop-types
 export default memo(function Confetti({ type }: Props) {
   if (!type) return null
 

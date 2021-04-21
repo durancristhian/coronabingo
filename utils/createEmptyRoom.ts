@@ -1,5 +1,6 @@
 import { defaultRoomData } from '~/models/room'
-import { createBatch, generateRoomCode, roomsRef, Timestamp } from '~/utils'
+import { createBatch, roomsRef, Timestamp } from '~/utils/firebase'
+import { generateRoomCode } from '~/utils/generateRoomCode'
 
 export async function createEmptyRoom(
   roomName: string,

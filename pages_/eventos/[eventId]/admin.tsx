@@ -7,7 +7,9 @@ import Message from '~/components/Message'
 import Registrations from '~/components/Registrations'
 import useEvent from '~/hooks/useEvent'
 import useSubCollection from '~/hooks/useSubCollection'
-import { Player, Registration, RoomTicket } from '~/interfaces'
+import { Player } from '~/interfaces/models/Player'
+import { Registration } from '~/interfaces/models/Registration'
+import { RoomTicket } from '~/interfaces/models/RoomTicket'
 
 export default function EventAdmin() {
   return (

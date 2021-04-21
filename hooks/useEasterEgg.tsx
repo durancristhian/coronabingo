@@ -4,7 +4,7 @@ import {
   DispatchContext,
   StateContext,
 } from '~/contexts/Flags'
-import { Flags } from '~/interfaces'
+import { Flags } from '~/interfaces/contexts/Flags'
 
 export default function useEasterEgg(name: keyof Flags) {
   const [interactions, setInteractions] = useState(0)

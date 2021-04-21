@@ -4,8 +4,9 @@ import { FiDownload } from 'react-icons/fi'
 import zipcelx from 'zipcelx'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
-import { Player, Room } from '~/interfaces'
-import { getBaseUrl } from '~/utils'
+import { Player } from '~/interfaces/models/Player'
+import { Room } from '~/interfaces/models/Room'
+import { getBaseUrl } from '~/utils/getBaseUrl'
 
 interface Props {
   players: Player[]

@@ -1,4 +1,5 @@
-import { Player, RemoteData } from '~/interfaces'
+import { RemoteData } from '~/interfaces/custom/RemoteData'
+import { Player } from '~/interfaces/models/Player'
 
 export interface PlayersContextData {
   state: RemoteData<Error, Player[]>

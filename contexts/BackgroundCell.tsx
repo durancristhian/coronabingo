@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { BackgrounCell, Cell } from '~/interfaces'
-import { BACKGROUND_CELL_VALUES } from '~/utils'
+import { BackgrounCell, Cell } from '~/interfaces/contexts/BackgroundCell'
+import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 
 const defaultContextValue = {
   type: BACKGROUND_CELL_VALUES[0].type,

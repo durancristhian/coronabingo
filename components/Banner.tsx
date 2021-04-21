@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 import Container from '~/components/Container'
-import { BannerType } from '~/interfaces'
+import { BannerType } from '~/interfaces/custom/BannerType'
 
 interface Props {
   children: ReactNode

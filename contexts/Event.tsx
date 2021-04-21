@@ -1,13 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import {
-  Event,
-  EventBase,
-  EventContextData,
-  RemoteData,
-  REMOTE_DATA,
-} from '~/interfaces'
-import { eventsRef } from '~/utils'
+import { EventContextData } from '~/interfaces/contexts/Event'
+import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
+import { Event, EventBase } from '~/interfaces/models/Event'
+import { eventsRef } from '~/utils/firebase'
 
 const EventContext = createContext<EventContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },

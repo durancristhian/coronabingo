@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { AuthContextData, RemoteData, REMOTE_DATA } from '~/interfaces'
-import { auth } from '~/utils'
+import { AuthContextData } from '~/interfaces/contexts/Auth'
+import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
+import { auth } from '~/utils/firebase'
 
 const AuthContext = createContext<AuthContextData>({
   state: {

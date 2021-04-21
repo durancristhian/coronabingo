@@ -16,8 +16,10 @@ import Message from '~/components/Message'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import usePlayers from '~/hooks/usePlayers'
 import useRoom from '~/hooks/useRoom'
-import { Player } from '~/interfaces'
-import { getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
+import { Player } from '~/interfaces/models/Player'
+import { getBaseUrl } from '~/utils/getBaseUrl'
+import { isRoomOld } from '~/utils/isRoomOld'
+import { scrollToTop } from '~/utils/scrollToTop'
 
 export default function RoomId() {
   const { error: roomError, loading: roomLoading, room } = useRoom()

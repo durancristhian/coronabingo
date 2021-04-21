@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { RoomContext } from '~/contexts/Room'
-import { REMOTE_DATA } from '~/interfaces'
+import { REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 
 export default function useRoom() {
   const { state, updateRoom } = useContext(RoomContext)

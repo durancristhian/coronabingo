@@ -1,4 +1,4 @@
-import { PageData } from '~/interfaces'
+import { PageData } from '~/interfaces/custom/GenerateTickets'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { readFileSync, writeFileSync } = require('fs')

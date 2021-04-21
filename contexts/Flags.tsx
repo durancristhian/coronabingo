@@ -1,5 +1,10 @@
 import React, { createContext, ReactNode, useReducer } from 'react'
-import { FlagAction, FlagActions, Flags, FlagsDispatch } from '~/interfaces'
+import {
+  FlagAction,
+  FlagActions,
+  Flags,
+  FlagsDispatch,
+} from '~/interfaces/contexts/Flags'
 
 const defaultState = {
   downloadSpreadsheet: false,

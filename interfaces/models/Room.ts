@@ -1,4 +1,4 @@
-import { ConfettiType } from '~/interfaces'
+import { ConfettiType } from '~/interfaces/custom/ConfettiType'
 
 export interface RoomBase {
   activateAdminCode: boolean

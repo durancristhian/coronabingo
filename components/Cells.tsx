@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React, { Fragment } from 'react'
 import EmptyCell from '~/components/EmptyCell'
-import { TicketNumbers } from '~/interfaces'
+import { TicketNumbers } from '~/interfaces/custom/Ticket'
 
 interface Props {
   ticketNumbers: TicketNumbers

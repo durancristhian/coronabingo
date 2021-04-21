@@ -4,7 +4,8 @@ import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
 import useTickets from '~/hooks/useTickets'
-import { Player, PlayerBase, Room } from '~/interfaces'
+import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { Room } from '~/interfaces/models/Room'
 
 interface Props {
   player: Player

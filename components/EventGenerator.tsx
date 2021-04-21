@@ -6,13 +6,8 @@ import Button from '~/components/Button'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useToast from '~/hooks/useToast'
 import { defaultRoomData } from '~/models/room'
-import {
-  createBatch,
-  eventsRef,
-  generateRoomCode,
-  roomsRef,
-  Timestamp,
-} from '~/utils'
+import { createBatch, eventsRef, roomsRef, Timestamp } from '~/utils/firebase'
+import { generateRoomCode } from '~/utils/generateRoomCode'
 import InputMarkdown from './InputMarkdown'
 import InputText from './InputText'
 import Message from './Message'

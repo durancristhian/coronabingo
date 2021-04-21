@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { Emojis } from '~/interfaces'
+import { Emojis } from '~/interfaces/custom/Emojis'
 
 const emojiCSS: Emojis = {
   /* anywhere out there */

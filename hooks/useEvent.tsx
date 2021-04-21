@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { EventContext } from '~/contexts/Event'
-import { REMOTE_DATA } from '~/interfaces'
+import { REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 
 export default function useEvent() {
   const { state } = useContext(EventContext)

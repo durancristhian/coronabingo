@@ -5,8 +5,8 @@ import Button from '~/components/Button'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import useRoomCode from '~/hooks/useRoomCode'
 import useToast from '~/hooks/useToast'
-import { Emojis } from '~/interfaces'
-import { CODES } from '~/utils'
+import { Emojis } from '~/interfaces/custom/Emojis'
+import { CODES } from '~/utils/constants'
 
 interface Props {
   roomCode: string

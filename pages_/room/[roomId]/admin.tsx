@@ -20,10 +20,13 @@ import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useToast from '~/hooks/useToast'
-import { Emojis } from '~/interfaces'
+import { Emojis } from '~/interfaces/custom/Emojis'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
-import { createBatch, getBaseUrl, isRoomOld, scrollToTop } from '~/utils'
+import { createBatch } from '~/utils/firebase'
+import { getBaseUrl } from '~/utils/getBaseUrl'
+import { isRoomOld } from '~/utils/isRoomOld'
+import { scrollToTop } from '~/utils/scrollToTop'
 
 export default function RoomAdmin() {
   const { t } = useTranslation()

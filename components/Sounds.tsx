@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Room } from '~/interfaces'
+import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 
 interface Props {

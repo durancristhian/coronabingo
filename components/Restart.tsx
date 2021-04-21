@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 import { FiThumbsUp } from 'react-icons/fi'
 import Button from '~/components/Button'
 import useRoomCode from '~/hooks/useRoomCode'
-import { Room } from '~/interfaces'
+import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 
 interface Props {

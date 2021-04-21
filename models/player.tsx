@@ -1,5 +1,6 @@
-import { Player, PlayerBase, Room } from '~/interfaces'
-import { Timestamp } from '~/utils'
+import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { Room } from '~/interfaces/models/Room'
+import { Timestamp } from '~/utils/firebase'
 
 const defaultPlayerData: PlayerBase = {
   tickets: '',

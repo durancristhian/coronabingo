@@ -8,7 +8,7 @@ import InputText from '~/components/InputText'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import useToast from '~/hooks/useToast'
 import roomApi from '~/models/room'
-import { generateRoomCode } from '~/utils'
+import { generateRoomCode } from '~/utils/generateRoomCode'
 
 export default function CreateRoom() {
   const log = useAnalytics()

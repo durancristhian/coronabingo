@@ -7,7 +7,7 @@ import Button from '~/components/Button'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
 import useToast from '~/hooks/useToast'
-import { sendWhatsApp } from '~/utils'
+import { sendWhatsApp } from '~/utils/sendWhatsapp'
 
 interface Props {
   content: string

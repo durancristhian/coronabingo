@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
 import { FiInfo, FiThumbsDown, FiThumbsUp } from 'react-icons/fi'
-import { MessageType } from '~/interfaces'
+import { MessageType } from '~/interfaces/custom/Message'
 
 const ICONS = {
   error: <FiThumbsDown />,

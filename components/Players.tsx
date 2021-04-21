@@ -1,12 +1,13 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { FormEvent, Fragment, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
-import { Player, Room, RoomBase } from '~/interfaces'
+import { Player } from '~/interfaces/models/Player'
+import { Room, RoomBase } from '~/interfaces/models/Room'
 import playerApi from '~/models/player'
-import { MAX_PLAYERS } from '~/utils'
+import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
   isFormDisabled: boolean

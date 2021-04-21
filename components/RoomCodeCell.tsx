@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import Emoji from '~/components/Emoji'
-import { Emojis } from '~/interfaces'
+import { Emojis } from '~/interfaces/custom/Emojis'
 
 interface Props {
   emoji: keyof Emojis | null

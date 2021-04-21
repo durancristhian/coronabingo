@@ -4,7 +4,8 @@ import React, { Fragment } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { confettiTypes } from '~/components/Confetti'
-import { ConfettiType, Room } from '~/interfaces'
+import { ConfettiType } from '~/interfaces/custom/ConfettiType'
+import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 
 interface Props {
