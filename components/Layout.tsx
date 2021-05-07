@@ -6,6 +6,7 @@ import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import pkg from '~/package.json'
 import { isThereLocalStorageSupport } from '~/utils/isThereLocalStorageSupport'
+import Ads from './Ads'
 import Box from './Box'
 import Container from './Container'
 import EventBanner from './EventBanner'
@@ -53,6 +54,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
+      <Ads />
       <div className="flex-auto min-h-650px">
         <div className="px-4 py-8">
           <Container size={type}>{renderContent()}</Container>
