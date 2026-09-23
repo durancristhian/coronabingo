@@ -1,0 +1,652 @@
+{
+  "captured": "2026-09-23",
+  "period": "2026-06-25/2026-09-22",
+  "annualPeriod": "2025-09-01/2026-09-22",
+  "timezoneGA": "America/Argentina/Buenos_Aires",
+  "sources": {
+    "ga": "https://analytics.google.com/analytics/web/#/a161408428p385744187/reports/intelligenthome",
+    "ads": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/reporting/"
+  },
+  "tables": {
+    "ga28countries": "    - generic: 26 ago-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático País Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Tasa de evento clave de usuarios Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 1.210 100 % respecto al total 1.092 100 % respecto al total 870 100 % respecto al total 41,49 % Media 0 % 0,72 Media 0 % 4 min y 10 s Media 0 % 7.870 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Tasa de evento clave de usuarios 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 Spain 307 (25,37 %) 308 (28,21 %) 276 (31,72 %) 42,99 % 0,90 4 min y 27 s 2.502 (31,79 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 Colombia 209 (17,27 %) 181 (16,58 %) 136 (15,63 %) 39,77 % 0,65 2 min y 59 s 1.205 (15,31 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 Peru 171 (14,13 %) 128 (11,72 %) 153 (17,59 %) 49,51 % 0,89 7 min y 36 s 1.139 (14,47 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 Argentina 153 (12,64 %) 132 (12,09 %) 101 (11,61 %) 38,7 % 0,66 4 min y 07 s 974 (12,38 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 Chile 107 (8,84 %) 98 (8,97 %) 78 (8,97 %) 42,16 % 0,73 5 min y 12 s 752 (9,56 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 United States 64 (5,29 %) 62 (5,68 %) 24 (2,76 %) 33,8 % 0,38 8 s 236 (3 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 7 7 Venezuela 60 (4,96 %) 53 (4,85 %) 16 (1,84 %) 19,51 % 0,27 1 min y 21 s 255 (3,24 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 Mexico 50 (4,13 %) 47 (4,3 %) 21 (2,41 %) 29,58 % 0,42 44 s 238 (3,02 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 Ecuador 20 (1,65 %) 16 (1,47 %) 28 (3,22 %) 59,57 % 1,40 12 min y 37 s 242 (3,07 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 10 10 Bolivia 12 (0,99 %) 12 (1,1 %) 5 (0,57 %) 29,41 % 0,42 1 min y 16 s 64 (0,81 %) 0,00 (–) 0 % 0,00 $ (–)\":",
+    "ga90countries": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático País Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Tasa de evento clave de usuarios Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Tasa de evento clave de usuarios 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 Spain 827 (23,35 %) 817 (24,11 %) 694 (24,64 %) 39,75 % 0,84 4 min y 16 s 6.376 (25,04 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 Colombia 607 (17,14 %) 577 (17,03 %) 428 (15,2 %) 38,15 % 0,71 3 min y 57 s 3.993 (15,68 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 Argentina 515 (14,54 %) 485 (14,31 %) 447 (15,87 %) 42,86 % 0,87 5 min y 52 s 4.311 (16,93 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 Peru 474 (13,38 %) 425 (12,54 %) 528 (18,75 %) 40,18 % 1,11 8 min y 42 s 4.312 (16,94 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 Chile 362 (10,22 %) 354 (10,45 %) 244 (8,66 %) 37,95 % 0,67 4 min y 41 s 2.532 (9,95 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 United States 325 (9,18 %) 320 (9,44 %) 200 (7,1 %) 57,47 % 0,62 38 s 1.278 (5,02 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 7 7 Mexico 93 (2,63 %) 86 (2,54 %) 65 (2,31 %) 41,4 % 0,70 2 min y 28 s 597 (2,34 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 Venezuela 91 (2,57 %) 80 (2,36 %) 55 (1,95 %) 29,89 % 0,60 2 min y 10 s 611 (2,4 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 Ecuador 58 (1,64 %) 54 (1,59 %) 58 (2,06 %) 54,21 % 1,00 6 min y 41 s 467 (1,83 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 10 10 Bolivia 18 (0,51 %) 18 (0,53 %) 9 (0,32 %) 28,13 % 0,50 1 min y 14 s 106 (0,42 %) 0,00 (–) 0 % 0,00 $ (–)\":",
+    "ga90acquisition": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Grupo de canales principal de la sesión (Grupo de canales predeterminado) Sesiones Sesiones con interacción Porcentaje de interacciones Tiempo de interacción medio por sesión Eventos por sesión Número de eventos Todos los eventos Eventos clave Todos los eventos Tasa de evento clave de sesión Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 6.988 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 2 min y 18 s Media 0 % 3,64 Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Tasa de evento clave de sesión 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 Direct 4.455 (63,75 %) 1.830 (64,99 %) 41,08 % 2 min y 31 s 3,76 16.772 (65,88 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 Organic Search 1.938 (27,73 %) 829 (29,44 %) 42,78 % 1 min y 55 s 3,54 6.865 (26,96 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 Referral 536 (7,67 %) 156 (5,54 %) 29,1 % 2 min y 16 s 3,19 1.709 (6,71 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 Unassigned 24 (0,34 %) 0 (0 %) 0 % 44 s 2,88 69 (0,27 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 Organic Social 11 (0,16 %) 4 (0,14 %) 36,36 % 4 s 3,36 37 (0,15 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 AI Assistant 2 (0,03 %) 0 (0 %) 0 % 2 s 3,50 7 (0,03 %) 0,00 (–) 0 % 0,00 $ (–)\":",
+    "ga90sources": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Fuente/medio de la sesión Sesiones Sesiones con interacción Porcentaje de interacciones Tiempo de interacción medio por sesión Eventos por sesión Número de eventos Todos los eventos Eventos clave Todos los eventos Tasa de evento clave de sesión Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 6.988 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 2 min y 18 s Media 0 % 3,64 Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Tasa de evento clave de sesión 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 (direct) / (none) 4.455 (63,75 %) 1.830 (64,99 %) 41,08 % 2 min y 31 s 3,76 16.772 (65,88 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 google / organic 1.895 (27,12 %) 813 (28,87 %) 42,9 % 1 min y 55 s 3,53 6.689 (26,27 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 students.educa.city / referral 310 (4,44 %) 89 (3,16 %) 28,71 % 2 min y 01 s 3,25 1.006 (3,95 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 teams.public.onecdn.static.microsoft / referral 104 (1,49 %) 27 (0,96 %) 25,96 % 2 min y 05 s 3,00 312 (1,23 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 qr1.me-qr.com / referral 71 (1,02 %) 16 (0,57 %) 22,54 % 55 s 2,80 199 (0,78 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 bing / organic 38 (0,54 %) 13 (0,46 %) 34,21 % 2 min y 00 s 3,87 147 (0,58 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"7 (not set) Advertencia. Obtén más información sobre este valor. 24 (0,34 %) 0 (0 %) 0 % 44 s 2,88 69 (0,27 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 classroom.google.com / referral 16 (0,23 %) 11 (0,39 %) 68,75 % 15 min y 46 s 3,94 63 (0,25 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 statics.teams.cdn.office.net / referral 9 (0,13 %) 5 (0,18 %) 55,56 % 3 min y 47 s 4,56 41 (0,16 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 10 10 google.com / referral 6 (0,09 %) 4 (0,14 %) 66,67 % 2 min y 49 s 3,50 21 (0,08 %) 0,00 (–) 0 % 0,00 $ (–)\":",
+    "ga90queries": "    - generic: 25 jun-22 sept 2026\n      - row \"Índice temático Consulta de la Búsqueda de Google orgánica Clics de la Búsqueda de Google orgánica Impresiones de la Búsqueda de Google orgánica Porcentaje de clics de la Búsqueda de Google orgánica Posición media en la Búsqueda de Google orgánica\":\n      - row \"Celda vacía para el total en la columna Índice Total Celda vacía para el total del resumen en la columna Clics de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Impresiones de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Porcentaje de clics de la Búsqueda de Google orgánica 0 % Celda vacía para el total del resumen en la columna Posición media en la Búsqueda de Google orgánica 0,00\":",
+    "ga90events": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Nombre del evento Número de eventos Total de usuarios Número de eventos por usuario activo Total de ingresos Acciones\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 25.459 100 % respecto al total 3.623 100 % respecto al total 7,19 Media 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $ Celda vacía para el total en la columna Acciones\":\n      - row \"Casilla para seleccionar la fila 1 1 page_view 9.806 (38,52 %) 3.620 (99,92 %) 2,77 0,00 $ (–) Menú de acciones entre líneas\":\n      - row \"Casilla para seleccionar la fila 2 2 session_start 6.907 (27,13 %) 3.615 (99,78 %) 1,96 0,00 $ (–) Menú de acciones entre líneas\":\n      - row \"Casilla para seleccionar la fila 3 3 user_engagement 5.357 (21,04 %) 2.395 (66,11 %) 2,30 0,00 $ (–) Menú de acciones entre líneas\":\n      - row \"Casilla para seleccionar la fila 4 4 first_visit 3.389 (13,31 %) 3.361 (92,77 %) 1,01 0,00 $ (–) Menú de acciones entre líneas\":",
+    "ga90pages": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Ruta de página y clase de pantalla Vistas Usuarios activos Vistas por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 9.806 100 % respecto al total 3.542 100 % respecto al total 2,77 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 / 1.141 (11,64 %) 856 (24,17 %) 1,33 1 min y 40 s 3.723 (14,62 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 /es 482 (4,92 %) 376 (10,62 %) 1,28 1 min y 23 s 1.519 (5,97 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 /es/room/YebIt1pEk9XRHjwRNe2y 137 (1,4 %) 45 (1,27 %) 3,04 6 min y 18 s 420 (1,65 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 /es/room/hClUx89hd7lP6Iqu3fLb 115 (1,17 %) 49 (1,38 %) 2,35 4 min y 33 s 258 (1,01 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 /es/room/QBwjLaOdCsPq9p6J9i5q 98 (1 %) 15 (0,42 %) 6,53 22 min y 29 s 188 (0,74 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 /es/room/1Rm4ivv3V0zxcRRgKlBz 94 (0,96 %) 35 (0,99 %) 2,69 5 min y 42 s 202 (0,79 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 7 7 /es/room/vA1vzxjce4H0OAJ1IQT2 92 (0,94 %) 24 (0,68 %) 3,83 7 min y 51 s 194 (0,76 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 /es/room/00q2JcJxdpB183He2cK3 85 (0,87 %) 47 (1,33 %) 1,81 1 min y 13 s 229 (0,9 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 /es/room/SMS7IFd8vtk0M64K9faT/ARxicLHi8kvitR71ICCF 82 (0,84 %) 1 (0,03 %) 82,00 1 h y 25 min 258 (1,01 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 10 10 /es/room/dQjYc6lem6agUVwv6kGO 77 (0,79 %) 12 (0,34 %) 6,42 14 min y 08 s 133 (0,52 %) 0,00 (–) 0,00 $ (–)\":",
+    "ads90peaks": "    - 'radio \"Personalizado: 25 de jun - 22 de sept de 2026\" [checked]':\n    - row \"Fecha Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"Todos USD5.35 9,379 USD0.57 24,046 USD0.22 70.08% 318\":\n    - row \"Promedio USD0.06 104 — 267 — — 3\":\n    - row \"dom, 2 ago 2026 USD0.25 330 USD0.75 1,134 USD0.22 66.00% 8\":\n        - generic: dom, 2 ago 2026\n    - row \"vie, 31 jul 2026 USD0.14 281 USD0.51 788 USD0.18 71.19% 5\":\n        - generic: vie, 31 jul 2026\n    - row \"jue, 9 jul 2026 USD0.07 262 USD0.27 455 USD0.16 66.36% 6\":\n        - generic: jue, 9 jul 2026\n    - row \"mar, 15 sept 2026 USD0.12 247 USD0.50 816 USD0.15 69.48% 3\":\n        - generic: mar, 15 sept 2026\n    - row \"dom, 20 sept 2026 USD0.22 239 USD0.93 675 USD0.33 74.78% 24\":\n        - generic: dom, 20 sept 2026\n    - row \"lun, 17 ago 2026 USD0.08 236 USD0.33 433 USD0.18 66.74% 6\":\n        - generic: lun, 17 ago 2026\n    - row \"lun, 20 jul 2026 USD0.11 229 USD0.48 478 USD0.23 67.67% 14\":\n        - generic: lun, 20 jul 2026\n    - row \"vie, 18 sept 2026 USD0.25 211 USD1.19 592 USD0.42 67.83% 6\":\n        - generic: vie, 18 sept 2026\n    - row \"sáb, 12 sept 2026 USD0.18 198 USD0.91 760 USD0.24 66.13% 9\":\n        - generic: sáb, 12 sept 2026\n    - row \"vie, 7 ago 2026 USD0.11 196 USD0.54 512 USD0.21 68.65% 4\":\n        - generic: vie, 7 ago 2026\n    - row \"sáb, 15 ago 2026 USD0.15 195 USD0.77 621 USD0.24 74.14% 19\":\n        - generic: sáb, 15 ago 2026",
+    "ads90countries": "    - 'radio \"Personalizado: 25 de jun - 22 de sept de 2026\" [checked]':\n    - row \"País Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Todos USD5.35 9,379 USD0.57 24,046 USD0.22 70.08% 318\":\n    - row \"Promedio USD0.11 195 — 500 — — 6\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. España USD1.84 2,433 USD0.76 9,041 USD0.20 66.55% 57\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Colombia USD0.77 1,364 USD0.57 3,120 USD0.25 74.53% 73\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Argentina USD0.75 1,878 USD0.40 4,433 USD0.17 72.44% 85\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Chile USD0.74 985 USD0.75 2,972 USD0.25 69.74% 35\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Perú USD0.61 1,369 USD0.45 2,606 USD0.24 75.44% 28\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Estados Unidos USD0.23 334 USD0.67 244 USD0.92 58.55% 2\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. México USD0.15 207 USD0.70 518 USD0.28 66.26% 5\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Ecuador USD0.08 185 USD0.43 341 USD0.24 71.29% 4\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Brasil USD0.03 24 USD1.18 73 USD0.39 66.10% 2\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Venezuela USD0.02 229 USD0.10 158 USD0.15 66.45% 12\":\n    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Italia USD0.02 29 USD0.58 89 USD0.19 67.82% 1\":",
+    "ga90browsers": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Navegador Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 Chrome 2.324 (65,61 %) 2.216 (65,39 %) 2.048 (72,73 %) 41,69 % 0,88 5 min y 08 s 17.770 (69,8 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 Safari 690 (19,48 %) 675 (19,92 %) 375 (13,32 %) 34,95 % 0,54 2 min y 28 s 3.814 (14,98 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 Edge 260 (7,34 %) 236 (6,96 %) 208 (7,39 %) 41,35 % 0,80 5 min y 30 s 1.831 (7,19 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 Samsung Internet 98 (2,77 %) 100 (2,95 %) 80 (2,84 %) 36,87 % 0,82 3 min y 51 s 844 (3,32 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 Opera 78 (2,2 %) 70 (2,07 %) 81 (2,88 %) 32,02 % 1,04 7 min y 34 s 841 (3,3 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 Safari (in-app) 45 (1,27 %) 45 (1,33 %) 0 (0 %) 0 % 0,00 0 s 135 (0,53 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 7 7 Firefox 43 (1,21 %) 43 (1,27 %) 26 (0,92 %) 50 % 0,60 3 min y 11 s 210 (0,82 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 Mozilla Compatible Agent 3 (0,08 %) 2 (0,06 %) 0 (0 %) 0 % 0,00 1 s 7 (0,03 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 Android Webview 2 (0,06 %) 2 (0,06 %) 1 (0,04 %) 50 % 0,50 0 s 7 (0,03 %) 0,00 (–) 0,00 $ (–)\":",
+    "ga90devices": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Categoría de dispositivo Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"Casilla para seleccionar la fila 1 1 mobile 1.821 (51,41 %) 1.773 (52,32 %) 1.289 (45,77 %) 39,26 % 0,71 3 min y 43 s 13.053 (51,27 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 desktop 1.694 (47,83 %) 1.587 (46,83 %) 1.514 (53,76 %) 41,77 % 0,89 5 min y 31 s 12.259 (48,15 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 tablet 30 (0,85 %) 29 (0,86 %) 17 (0,6 %) 42,5 % 0,57 1 min y 43 s 147 (0,58 %) 0,00 (–) 0,00 $ (–)\":",
+    "ads13months": "    - 'radio \"Personalizado: 1 sept 2025 – 22 sept 2026\" [checked]':\n    - row \"Mes Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"Todos USD33.64 49,967 USD0.67 126,408 USD0.27 68.58% 2,169\":\n    - row \"Promedio USD2.59 3,843 — 9,723 — — 166\":\n    - row \"1 - 30 de sept de 2025 USD2.82 4,503 USD0.63 11,857 USD0.24 69.45% 215\":\n    - row \"1 - 31 de oct de 2025 USD3.29 5,353 USD0.62 13,453 USD0.24 66.22% 298\":\n    - row \"1 - 30 de nov de 2025 USD2.12 3,687 USD0.57 9,024 USD0.23 65.71% 136\":\n    - row \"1 - 31 de dic de 2025 USD8.81 8,662 USD1.02 23,569 USD0.37 68.83% 525\":\n    - row \"1 - 31 de ene de 2026 USD2.69 4,689 USD0.57 11,249 USD0.24 66.46% 174\":\n        - generic: 1 - 31 de ene de 2026\n    - row \"1 - 28 de feb de 2026 USD1.81 2,457 USD0.74 6,804 USD0.27 68.18% 105\":\n        - generic: 1 - 28 de feb de 2026\n    - row \"1 - 31 de mar de 2026 USD1.76 2,534 USD0.70 6,520 USD0.27 69.64% 108\":\n        - generic: 1 - 31 de mar de 2026\n    - row \"1 - 30 de abr de 2026 USD2.30 3,242 USD0.71 7,927 USD0.29 68.95% 111\":\n        - generic: 1 - 30 de abr de 2026\n    - row \"1 - 31 de may de 2026 USD1.55 3,267 USD0.47 6,877 USD0.23 69.88% 102\":\n        - generic: 1 - 31 de may de 2026\n    - row \"1 - 30 de jun de 2026 USD1.44 2,613 USD0.55 6,263 USD0.23 71.31% 96\":\n        - generic: 1 - 30 de jun de 2026\n    - row \"1 - 31 de jul de 2026 USD1.66 2,993 USD0.55 6,961 USD0.24 68.74% 81\":\n        - generic: 1 - 31 de jul de 2026",
+    "ads13monthsTail": "    - 'radio \"Personalizado: 1 sept 2025 – 22 sept 2026\" [checked]':\n    - row \"Mes Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"Todos USD33.64 49,967 USD0.67 126,408 USD0.27 68.58% 2,169\":\n    - row \"Promedio USD2.59 3,843 — 9,723 — — 166\":\n    - row \"1 - 30 de sept de 2025 USD2.82 4,503 USD0.63 11,857 USD0.24 69.45% 215\":\n    - row \"1 - 31 de oct de 2025 USD3.29 5,353 USD0.62 13,453 USD0.24 66.22% 298\":\n    - row \"1 - 30 de nov de 2025 USD2.12 3,687 USD0.57 9,024 USD0.23 65.71% 136\":\n    - row \"1 - 31 de dic de 2025 USD8.81 8,662 USD1.02 23,569 USD0.37 68.83% 525\":\n    - row \"1 - 31 de ene de 2026 USD2.69 4,689 USD0.57 11,249 USD0.24 66.46% 174\":\n        - generic: 1 - 31 de ene de 2026\n    - row \"1 - 28 de feb de 2026 USD1.81 2,457 USD0.74 6,804 USD0.27 68.18% 105\":\n        - generic: 1 - 28 de feb de 2026\n    - row \"1 - 31 de mar de 2026 USD1.76 2,534 USD0.70 6,520 USD0.27 69.64% 108\":\n        - generic: 1 - 31 de mar de 2026\n    - row \"1 - 30 de abr de 2026 USD2.30 3,242 USD0.71 7,927 USD0.29 68.95% 111\":\n        - generic: 1 - 30 de abr de 2026\n    - row \"1 - 31 de may de 2026 USD1.55 3,267 USD0.47 6,877 USD0.23 69.88% 102\":\n        - generic: 1 - 31 de may de 2026\n    - row \"1 - 30 de jun de 2026 USD1.44 2,613 USD0.55 6,263 USD0.23 71.31% 96\":\n        - generic: 1 - 30 de jun de 2026\n    - row \"1 - 31 de jul de 2026 USD1.66 2,993 USD0.55 6,961 USD0.24 68.74% 81\":\n        - generic: 1 - 31 de jul de 2026\n    - row \"1 - 31 de ago de 2026 USD1.74 3,603 USD0.48 9,173 USD0.19 70.47% 107\":\n        - generic: 1 - 31 de ago de 2026\n    - row \"1 - 22 de sept de 2026 USD1.64 2,364 USD0.69 6,731 USD0.24 70.67% 111\":\n        - generic: 1 - 22 de sept de 2026",
+    "ga90cities": "    - generic: 25 jun-22 sept 2026\n      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Ciudad Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Tasa de evento clave de usuarios Todos los eventos Total de ingresos\":\n      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Tasa de evento clave de usuarios 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"1 (not set) 671 (18,94 %) 584 (17,23 %) 585 (20,77 %) 39,61 % 0,87 5 min y 39 s 4.859 (19,09 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 2 2 Santiago 248 (7 %) 240 (7,08 %) 153 (5,43 %) 36,69 % 0,62 3 min y 50 s 1.630 (6,4 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 3 3 Bogota 168 (4,74 %) 148 (4,37 %) 110 (3,91 %) 35,26 % 0,65 3 min y 21 s 1.090 (4,28 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 4 4 Madrid 162 (4,57 %) 136 (4,01 %) 101 (3,59 %) 45,09 % 0,62 2 min y 36 s 799 (3,14 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 5 5 Guaduas 144 (4,07 %) 142 (4,19 %) 95 (3,37 %) 30,74 % 0,66 4 min y 11 s 1.006 (3,95 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 6 6 Ashburn 139 (3,92 %) 137 (4,04 %) 87 (3,09 %) 61,7 % 0,63 26 s 528 (2,07 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 7 7 Buenos Aires 130 (3,67 %) 112 (3,3 %) 94 (3,34 %) 45,19 % 0,72 3 min y 50 s 815 (3,2 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 8 8 Valencia 98 (2,77 %) 79 (2,33 %) 64 (2,27 %) 46,04 % 0,65 2 min y 01 s 467 (1,83 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 9 9 Barcelona 89 (2,51 %) 74 (2,18 %) 62 (2,2 %) 42,76 % 0,70 5 min y 10 s 539 (2,12 %) 0,00 (–) 0 % 0,00 $ (–)\":\n      - row \"Casilla para seleccionar la fila 10 10 Seville 55 (1,55 %) 52 (1,53 %) 36 (1,28 %) 52,94 % 0,65 4 min y 03 s 286 (1,12 %) 0,00 (–) 0 % 0,00 $ (–)\":",
+    "adsYearPeaks": "    - 'radio \"Personalizado: 1 sept 2025 – 22 sept 2026\" [checked]':\n    - row \"Fecha Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"Todos USD33.64 49,967 USD0.67 126,408 USD0.27 68.58% 2,169\":\n    - row \"Promedio USD0.09 129 — 326 — — 5\":\n    - row \"vie, 19 dic 2025 USD2.20 1,130 USD1.95 3,647 USD0.60 73.80% 94\":\n    - row \"jue, 25 dic 2025 USD0.98 941 USD1.05 2,639 USD0.37 68.96% 64\":\n    - row \"dom, 24 may 2026 USD0.33 673 USD0.49 1,123 USD0.30 67.37% 30\":\n        - generic: dom, 24 may 2026\n    - row \"vie, 12 sept 2025 USD0.41 635 USD0.64 1,887 USD0.21 73.26% 35\":\n    - row \"mar, 16 dic 2025 USD0.38 464 USD0.81 926 USD0.41 71.61% 14\":\n    - row \"vie, 26 dic 2025 USD0.50 444 USD1.12 1,339 USD0.37 60.91% 27\":\n    - row \"dom, 28 dic 2025 USD0.28 432 USD0.64 998 USD0.28 66.58% 25\":\n    - row \"jue, 30 abr 2026 USD0.24 430 USD0.56 942 USD0.26 74.20% 14\":\n        - generic: jue, 30 abr 2026\n    - row \"mié, 17 dic 2025 USD0.42 419 USD1.01 1,175 USD0.36 68.16% 38\":\n    - row \"vie, 2 ene 2026 USD0.23 401 USD0.58 1,112 USD0.21 62.27% 16\":\n        - generic: vie, 2 ene 2026\n    - row \"dom, 4 ene 2026 USD0.19 400 USD0.47 785 USD0.24 69.69% 33\":\n        - generic: dom, 4 ene 2026",
+    "ga90hours": "    - generic: 25 jun-22 sept 2026\n      - row \"Índice temático Plataforma Hora Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":\n      - row \"Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"1 web 19 466 (13,16 %) 346 (10,21 %) 240 (8,52 %) 42,93 % 0,52 2 min y 18 s 1.931 (7,58 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"2 web 13 365 (10,3 %) 246 (7,26 %) 273 (9,69 %) 43,61 % 0,75 5 min y 37 s 2.077 (8,16 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"3 web 18 359 (10,14 %) 263 (7,76 %) 208 (7,39 %) 46,64 % 0,58 2 min y 19 s 1.532 (6,02 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"4 web 20 356 (10,05 %) 206 (6,08 %) 206 (7,32 %) 47,8 % 0,58 2 min y 38 s 1.550 (6,09 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"5 web 22 318 (8,98 %) 219 (6,46 %) 305 (10,83 %) 57,98 % 0,96 4 min y 52 s 2.141 (8,41 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"6 web 17 294 (8,3 %) 209 (6,17 %) 205 (7,28 %) 47,9 % 0,70 3 min y 01 s 1.422 (5,59 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"7 web 12 290 (8,19 %) 200 (5,9 %) 171 (6,07 %) 43,85 % 0,59 3 min y 01 s 1.307 (5,13 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"8 web 23 270 (7,62 %) 115 (3,39 %) 202 (7,17 %) 53,87 % 0,75 4 min y 58 s 1.194 (4,69 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"9 web 14 265 (7,48 %) 169 (4,99 %) 170 (6,04 %) 41,87 % 0,64 2 min y 39 s 1.321 (5,19 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"10 web 16 241 (6,8 %) 161 (4,75 %) 151 (5,36 %) 46,6 % 0,63 1 min y 54 s 1.161 (4,56 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"11 web 21 235 (6,63 %) 108 (3,19 %) 152 (5,4 %) 47,65 % 0,65 3 min y 53 s 1.238 (4,86 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"12 web 1 211 (5,96 %) 163 (4,81 %) 165 (5,86 %) 40,84 % 0,78 2 min y 54 s 1.279 (5,02 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"13 web 10 198 (5,59 %) 131 (3,87 %) 137 (4,87 %) 48,24 % 0,69 4 min y 02 s 1.013 (3,98 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"14 web 11 198 (5,59 %) 140 (4,13 %) 126 (4,47 %) 46,15 % 0,64 2 min y 39 s 958 (3,76 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"15 web 9 159 (4,49 %) 102 (3,01 %) 112 (3,98 %) 39,44 % 0,70 2 min y 19 s 851 (3,34 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"16 web 15 158 (4,46 %) 91 (2,69 %) 104 (3,69 %) 44,64 % 0,66 2 min y 18 s 761 (2,99 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"17 web 0 150 (4,23 %) 119 (3,51 %) 92 (3,27 %) 40 % 0,61 1 min y 34 s 780 (3,06 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"18 web 8 127 (3,59 %) 109 (3,22 %) 91 (3,23 %) 53,85 % 0,72 3 min y 58 s 746 (2,93 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"19 web 2 120 (3,39 %) 66 (1,95 %) 82 (2,91 %) 34,02 % 0,68 4 min y 55 s 690 (2,71 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"20 web 6 80 (2,26 %) 61 (1,8 %) 45 (1,6 %) 34,62 % 0,56 45 s 388 (1,52 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"21 web 5 67 (1,89 %) 51 (1,5 %) 34 (1,21 %) 30,63 % 0,51 1 min y 49 s 323 (1,27 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"22 web 7 65 (1,84 %) 52 (1,53 %) 36 (1,28 %) 31,03 % 0,55 1 min y 19 s 341 (1,34 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"23 web 3 55 (1,55 %) 29 (0,86 %) 36 (1,28 %) 39,56 % 0,65 3 min y 54 s 270 (1,06 %) 0,00 (–) 0,00 $ (–)\":\n      - row \"24 web 4 45 (1,27 %) 33 (0,97 %) 23 (0,82 %) 35,94 % 0,51 1 min y 10 s 185 (0,73 %) 0,00 (–) 0,00 $ (–)\":",
+    "ads90platforms": "    - 'radio \"Personalizado: 25 de jun - 22 de sept de 2026\" [checked]':\n    - row \"Plataforma Ingresos estimados Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"Todos USD5.35 9,379 USD0.57 24,046 USD0.22 70.08% 318\":\n    - row \"Promedio USD1.78 3,126 — 8,015 — — 106\":\n    - row \"Dispositivos móviles de alta gama USD3.37 5,725 USD0.59 14,308 USD0.24 67.99% 255\":\n    - row \"Computadoras de escritorio USD1.93 3,574 USD0.54 9,588 USD0.20 73.10% 58\":\n    - row \"Tablets USD0.05 80 USD0.63 150 USD0.34 67.94% 5\":",
+    "ads90units": "    - 'radio \"Personalizado: 25 de jun - 22 de sept de 2026\" [checked]':\n    - row \"Unidad de anuncios Ingresos estimados Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Todos USD0.99 10,353 USD0.10 67.42% 34\":\n    - row \"Promedio USD0.99 10,353 — — 34\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Layout USD0.99 10,353 USD0.10 67.42% 34\":",
+    "adsEurope": "          - row \"Nombre Ordenar por Nombre Idioma Sitio Última modificación Ordenar por Última modificación Estado Publicar\":\n          - row \"Mensaje conforme al RGPD español (es) coronabingo.com.ar 26 sept 2022 Borrador Publish message Más opciones\":",
+    "ads90sites": "    - 'radio \"Personalizado: 25 de jun - 22 de sept de 2026\" [checked]':\n    - row \"Sitio Ingresos estimados * Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Todos USD5.35 9,379 USD0.57 24,046 USD0.22 70.08% 318\":\n    - row \"Promedio USD5.35 9,379 — 24,046 — — 318\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. coronabingo.com.ar USD5.35 9,379 USD0.57 24,046 USD0.22 70.08% 318\":",
+    "ga90daily": "    - generic: 25 jun-22 sept 2026\n      - row \"Índice temático Plataforma Fecha Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":\n      - row \"Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":\n      - row \"1 web 20260731 159 (4,49 %) 134 (3,95 %) 88 (3,13 %) 33,98 % 0,55 4 min y 16 s 897 (3,52 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260731\"\n      - row \"2 web 20260918 131 (3,7 %) 116 (3,42 %) 56 (1,99 %) 29,47 % 0,43 3 min y 15 s 648 (2,55 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260918\"\n      - row \"3 web 20260814 110 (3,11 %) 100 (2,95 %) 55 (1,95 %) 38,73 % 0,50 4 min y 31 s 516 (2,03 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260814\"\n      - row \"4 web 20260802 105 (2,96 %) 101 (2,98 %) 79 (2,81 %) 48,47 % 0,75 4 min y 09 s 707 (2,78 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260802\"\n      - row \"5 web 20260804 91 (2,57 %) 85 (2,51 %) 46 (1,63 %) 30,87 % 0,51 1 min y 33 s 486 (1,91 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260804\"\n      - row \"6 web 20260902 88 (2,48 %) 85 (2,51 %) 34 (1,21 %) 25,19 % 0,39 1 min y 29 s 427 (1,68 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260902\"\n      - row \"7 web 20260920 85 (2,4 %) 70 (2,07 %) 70 (2,49 %) 49,3 % 0,82 2 min y 30 s 567 (2,23 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260920\"\n      - row \"8 web 20260720 83 (2,34 %) 61 (1,8 %) 64 (2,27 %) 55,65 % 0,77 5 min y 37 s 569 (2,23 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260720\"\n      - row \"9 web 20260727 81 (2,29 %) 53 (1,56 %) 61 (2,17 %) 46,56 % 0,75 6 min y 48 s 499 (1,96 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260727\"\n      - row \"10 web 20260813 80 (2,26 %) 75 (2,21 %) 59 (2,1 %) 50,86 % 0,74 3 min y 16 s 438 (1,72 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260813\"\n      - row \"11 web 20260817 79 (2,23 %) 56 (1,65 %) 62 (2,2 %) 58,49 % 0,78 3 min y 22 s 507 (1,99 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260817\"\n      - row \"12 web 20260730 73 (2,06 %) 50 (1,48 %) 62 (2,2 %) 57,41 % 0,85 4 min y 03 s 380 (1,49 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260730\"\n      - row \"13 web 20260726 69 (1,95 %) 60 (1,77 %) 40 (1,42 %) 40 % 0,58 1 min y 14 s 372 (1,46 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260726\"\n      - row \"14 web 20260827 67 (1,89 %) 42 (1,24 %) 46 (1,63 %) 40,35 % 0,69 5 min y 56 s 394 (1,55 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260827\"\n      - row \"15 web 20260815 63 (1,78 %) 50 (1,48 %) 49 (1,74 %) 47,57 % 0,78 7 min y 06 s 454 (1,78 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260815\"\n      - row \"16 web 20260915 63 (1,78 %) 45 (1,33 %) 59 (2,1 %) 49,17 % 0,94 6 min y 27 s 561 (2,2 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260915\"\n      - row \"17 web 20260921 63 (1,78 %) 55 (1,62 %) 42 (1,49 %) 47,73 % 0,67 4 min y 16 s 406 (1,59 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260921\"\n      - row \"18 web 20260824 62 (1,75 %) 39 (1,15 %) 45 (1,6 %) 48,39 % 0,73 6 min y 36 s 424 (1,67 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260824\"\n      - row \"19 web 20260911 61 (1,72 %) 61 (1,8 %) 30 (1,07 %) 39,47 % 0,49 4 min y 48 s 272 (1,07 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260911\"\n      - row \"20 web 20260826 59 (1,67 %) 49 (1,45 %) 62 (2,2 %) 65,96 % 1,05 7 min y 03 s 421 (1,65 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260826\"\n      - row \"21 web 20260728 57 (1,61 %) 48 (1,42 %) 38 (1,35 %) 52,05 % 0,67 5 min y 01 s 332 (1,3 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260728\"\n      - row \"22 web 20260625 56 (1,58 %) 43 (1,27 %) 40 (1,42 %) 40,4 % 0,71 5 min y 58 s 327 (1,28 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260625\"\n      - row \"23 web 20260709 56 (1,58 %) 44 (1,3 %) 54 (1,92 %) 54 % 0,96 8 min y 23 s 571 (2,24 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260709\"\n      - row \"24 web 20260807 56 (1,58 %) 45 (1,33 %) 42 (1,49 %) 40,38 % 0,75 3 min y 02 s 424 (1,67 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260807\"\n      - row \"25 web 20260922 56 (1,58 %) 34 (1 %) 34 (1,21 %) 37,36 % 0,61 4 min y 11 s 288 (1,13 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260922\"\n      - row \"26 web 20260706 54 (1,52 %) 44 (1,3 %) 41 (1,46 %) 51,25 % 0,76 5 min y 18 s 343 (1,35 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260706\"\n      - row \"27 web 20260821 54 (1,52 %) 37 (1,09 %) 38 (1,35 %) 30,16 % 0,70 3 min y 15 s 368 (1,45 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260821\"\n      - row \"28 web 20260912 54 (1,52 %) 48 (1,42 %) 38 (1,35 %) 43,68 % 0,70 5 min y 27 s 433 (1,7 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260912\"\n      - row \"29 web 20260704 51 (1,44 %) 50 (1,48 %) 22 (0,78 %) 35,48 % 0,43 1 min y 42 s 219 (0,86 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260704\"\n      - row \"30 web 20260808 50 (1,41 %) 46 (1,36 %) 39 (1,38 %) 42,39 % 0,78 7 min y 33 s 357 (1,4 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260808\"\n      - row \"31 web 20260905 50 (1,41 %) 41 (1,21 %) 30 (1,07 %) 40,54 % 0,60 5 min y 27 s 281 (1,1 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260905\"\n      - row \"32 web 20260715 49 (1,38 %) 36 (1,06 %) 34 (1,21 %) 36,56 % 0,69 4 min y 21 s 292 (1,15 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260715\"\n      - row \"33 web 20260801 48 (1,36 %) 40 (1,18 %) 36 (1,28 %) 39,56 % 0,75 2 min y 45 s 306 (1,2 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260801\"\n      - row \"34 web 20260904 48 (1,36 %) 28 (0,83 %) 32 (1,14 %) 40,51 % 0,67 1 min y 51 s 267 (1,05 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260904\"\n      - row \"35 web 20260721 47 (1,33 %) 31 (0,91 %) 32 (1,14 %) 37,21 % 0,68 2 min y 29 s 264 (1,04 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260721\"\n      - row \"36 web 20260724 47 (1,33 %) 31 (0,91 %) 32 (1,14 %) 45,07 % 0,68 3 min y 03 s 234 (0,92 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260724\"\n      - row \"37 web 20260916 47 (1,33 %) 32 (0,94 %) 37 (1,31 %) 48,05 % 0,79 5 min y 43 s 315 (1,24 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260916\"\n      - row \"38 web 20260901 46 (1,3 %) 31 (0,91 %) 28 (0,99 %) 38,36 % 0,61 2 min y 17 s 250 (0,98 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260901\"\n      - row \"39 web 20260722 44 (1,24 %) 31 (0,91 %) 24 (0,85 %) 30,77 % 0,55 2 min y 40 s 224 (0,88 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260722\"\n      - row \"40 web 20260809 44 (1,24 %) 41 (1,21 %) 42 (1,49 %) 54,55 % 0,95 7 min y 18 s 385 (1,51 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260809\"\n      - row \"41 web 20260818 44 (1,24 %) 27 (0,8 %) 33 (1,17 %) 41,25 % 0,75 2 min y 30 s 281 (1,1 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260818\"\n      - row \"42 web 20260626 43 (1,21 %) 35 (1,03 %) 26 (0,92 %) 23,85 % 0,60 49 s 314 (1,23 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260626\"\n      - row \"43 web 20260828 43 (1,21 %) 39 (1,15 %) 30 (1,07 %) 46,88 % 0,70 3 min y 32 s 255 (1 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260828\"\n      - row \"44 web 20260803 42 (1,19 %) 27 (0,8 %) 35 (1,24 %) 55,56 % 0,83 3 min y 40 s 215 (0,84 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260803\"\n      - row \"45 web 20260810 42 (1,19 %) 22 (0,65 %) 30 (1,07 %) 41,1 % 0,71 3 min y 31 s 270 (1,06 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260810\"\n      - row \"46 web 20260812 42 (1,19 %) 35 (1,03 %) 28 (0,99 %) 48,28 % 0,67 5 min y 46 s 246 (0,97 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260812\"\n      - row \"47 web 20260919 42 (1,19 %) 37 (1,09 %) 26 (0,92 %) 37,68 % 0,62 3 min y 21 s 259 (1,02 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260919\"\n      - row \"48 web 20260711 41 (1,16 %) 37 (1,09 %) 24 (0,85 %) 32,43 % 0,59 1 min y 31 s 251 (0,99 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260711\"\n      - row \"49 web 20260729 41 (1,16 %) 35 (1,03 %) 31 (1,1 %) 36,47 % 0,76 4 min y 35 s 266 (1,04 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260729\"\n      - row \"50 web 20260701 39 (1,1 %) 23 (0,68 %) 30 (1,07 %) 51,72 % 0,77 6 min y 28 s 279 (1,1 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260701\"\n      - row \"51 web 20260806 39 (1,1 %) 37 (1,09 %) 17 (0,6 %) 28,33 % 0,44 1 min y 58 s 187 (0,73 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260806\"\n      - row \"52 web 20260708 38 (1,07 %) 31 (0,91 %) 26 (0,92 %) 34,21 % 0,68 4 min y 20 s 262 (1,03 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260708\"\n      - row \"53 web 20260707 37 (1,04 %) 27 (0,8 %) 27 (0,96 %) 35,53 % 0,73 1 min y 54 s 240 (0,94 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260707\"\n      - row \"54 web 20260714 37 (1,04 %) 28 (0,83 %) 20 (0,71 %) 26,67 % 0,54 1 min y 38 s 213 (0,84 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260714\"\n      - row \"55 web 20260811 37 (1,04 %) 34 (1 %) 24 (0,85 %) 38,1 % 0,65 3 min y 25 s 200 (0,79 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260811\"\n      - row \"56 web 20260819 37 (1,04 %) 28 (0,83 %) 27 (0,96 %) 49,09 % 0,73 2 min y 47 s 188 (0,74 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260819\"\n      - row \"57 web 20260820 36 (1,02 %) 33 (0,97 %) 26 (0,92 %) 48,15 % 0,72 5 min y 08 s 225 (0,88 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260820\"\n      - row \"58 web 20260909 36 (1,02 %) 34 (1 %) 19 (0,67 %) 39,58 % 0,53 2 min y 22 s 171 (0,67 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260909\"\n      - row \"59 web 20260914 35 (0,99 %) 31 (0,91 %) 21 (0,75 %) 39,62 % 0,60 1 min y 30 s 183 (0,72 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260914\"\n      - row \"60 web 20260629 34 (0,96 %) 28 (0,83 %) 16 (0,57 %) 31,37 % 0,47 2 min y 54 s 161 (0,63 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260629\"\n      - row \"61 web 20260725 34 (0,96 %) 30 (0,89 %) 19 (0,67 %) 38,78 % 0,56 4 min y 19 s 206 (0,81 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260725\"\n      - row \"62 web 20260917 34 (0,96 %) 29 (0,86 %) 18 (0,64 %) 40,91 % 0,53 1 min y 51 s 158 (0,62 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260917\"\n      - row \"63 web 20260705 33 (0,93 %) 31 (0,91 %) 22 (0,78 %) 42,31 % 0,67 2 min y 29 s 229 (0,9 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260705\"\n      - row \"64 web 20260913 33 (0,93 %) 22 (0,65 %) 23 (0,82 %) 41,07 % 0,70 6 min y 33 s 235 (0,92 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260913\"\n      - row \"65 web 20260630 32 (0,9 %) 23 (0,68 %) 18 (0,64 %) 40,91 % 0,56 2 min y 44 s 142 (0,56 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260630\"\n      - row \"66 web 20260716 32 (0,9 %) 19 (0,56 %) 18 (0,64 %) 28,13 % 0,56 2 min y 14 s 181 (0,71 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260716\"\n      - row \"67 web 20260816 32 (0,9 %) 25 (0,74 %) 18 (0,64 %) 30,51 % 0,56 1 min y 36 s 179 (0,7 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260816\"\n      - row \"68 web 20260703 31 (0,88 %) 20 (0,59 %) 19 (0,67 %) 25,33 % 0,61 1 min y 20 s 207 (0,81 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260703\"\n      - row \"69 web 20260822 30 (0,85 %) 21 (0,62 %) 20 (0,71 %) 40,82 % 0,67 2 min y 43 s 166 (0,65 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260822\"\n      - row \"70 web 20260906 30 (0,85 %) 27 (0,8 %) 21 (0,75 %) 42,86 % 0,70 2 min y 59 s 172 (0,68 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260906\"\n      - row \"71 web 20260627 29 (0,82 %) 16 (0,47 %) 21 (0,75 %) 31,82 % 0,72 3 min y 33 s 209 (0,82 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260627\"\n      - row \"72 web 20260718 29 (0,82 %) 27 (0,8 %) 18 (0,64 %) 35,29 % 0,62 2 min y 47 s 165 (0,65 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260718\"\n      - row \"73 web 20260825 29 (0,82 %) 17 (0,5 %) 18 (0,64 %) 41,86 % 0,62 3 min y 01 s 143 (0,56 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260825\"\n      - row \"74 web 20260829 29 (0,82 %) 21 (0,62 %) 23 (0,82 %) 45,1 % 0,79 2 min y 07 s 195 (0,77 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260829\"\n      - row \"75 web 20260908 29 (0,82 %) 28 (0,83 %) 19 (0,67 %) 54,29 % 0,66 1 min y 54 s 139 (0,55 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260908\"\n      - row \"76 web 20260805 27 (0,76 %) 21 (0,62 %) 24 (0,85 %) 48 % 0,89 2 min y 22 s 162 (0,64 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260805\"\n      - row \"77 web 20260710 26 (0,73 %) 25 (0,74 %) 12 (0,43 %) 28,57 % 0,46 2 min y 38 s 131 (0,51 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260710\"\n      - row \"78 web 20260702 25 (0,71 %) 13 (0,38 %) 19 (0,67 %) 38 % 0,76 4 min y 45 s 154 (0,6 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260702\"\n      - row \"79 web 20260717 25 (0,71 %) 18 (0,53 %) 16 (0,57 %) 37,21 % 0,64 2 min y 14 s 142 (0,56 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260717\"\n      - row \"80 web 20260910 24 (0,68 %) 23 (0,68 %) 12 (0,43 %) 35,29 % 0,50 1 min y 52 s 112 (0,44 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260910\"\n      - row \"81 web 20260831 23 (0,65 %) 12 (0,35 %) 21 (0,75 %) 39,62 % 0,91 5 min y 59 s 144 (0,57 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260831\"\n      - row \"82 web 20260903 23 (0,65 %) 19 (0,56 %) 11 (0,39 %) 31,43 % 0,48 42 s 113 (0,44 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260903\"\n      - row \"83 web 20260723 20 (0,56 %) 14 (0,41 %) 11 (0,39 %) 28,21 % 0,55 2 min y 27 s 127 (0,5 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260723\"\n      - row \"84 web 20260830 20 (0,56 %) 14 (0,41 %) 15 (0,53 %) 39,47 % 0,75 3 min y 48 s 120 (0,47 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260830\"\n      - row \"85 web 20260907 19 (0,54 %) 19 (0,56 %) 12 (0,43 %) 50 % 0,63 2 min y 24 s 84 (0,33 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260907\"\n      - row \"86 web 20260823 17 (0,48 %) 14 (0,41 %) 9 (0,32 %) 34,62 % 0,53 48 s 89 (0,35 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260823\"\n      - row \"87 web 20260628 15 (0,42 %) 14 (0,41 %) 6 (0,21 %) 27,27 % 0,40 32 s 74 (0,29 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260628\"\n      - row \"88 web 20260719 15 (0,42 %) 12 (0,35 %) 7 (0,25 %) 35 % 0,47 1 min y 16 s 67 (0,26 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260719\"\n      - row \"89 web 20260712 11 (0,31 %) 10 (0,3 %) 4 (0,14 %) 19,05 % 0,36 2 min y 05 s 57 (0,22 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260712\"\n      - row \"90 web 20260713 11 (0,31 %) 9 (0,27 %) 8 (0,28 %) 38,1 % 0,73 34 s 66 (0,26 %) 0,00 (–) 0,00 $ (–)\":\n          - generic: \"20260713\"",
+    "adsYearSites": "    - 'radio \"Personalizado: 1 sept 2025 – 22 sept 2026\" [checked]':\n    - row \"Sitio Ingresos estimados * Vistas de página RPM de pág. Impresiones RPM de impresiones Visibilidad de Vista activa Clics\":\n    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Todos USD33.64 49,967 USD0.67 126,408 USD0.27 68.58% 2,169\":\n    - row \"Promedio USD16.82 24,983 — 63,204 — — 1,084\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. coronabingo.com.ar USD33.64 49,966 USD0.67 126,408 USD0.27 68.58% 2,169\":\n    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. www.coronabingo.com.ar USD0.00 1 USD0.00 0 — — 0\":"
+  },
+  "gaDays": [
+    {
+      "date": "20260731",
+      "users": 159,
+      "row": "1 web 20260731 159 (4,49 %) 134 (3,95 %) 88 (3,13 %) 33,98 % 0,55 4 min y 16 s 897 (3,52 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260918",
+      "users": 131,
+      "row": "2 web 20260918 131 (3,7 %) 116 (3,42 %) 56 (1,99 %) 29,47 % 0,43 3 min y 15 s 648 (2,55 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260814",
+      "users": 110,
+      "row": "3 web 20260814 110 (3,11 %) 100 (2,95 %) 55 (1,95 %) 38,73 % 0,50 4 min y 31 s 516 (2,03 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260802",
+      "users": 105,
+      "row": "4 web 20260802 105 (2,96 %) 101 (2,98 %) 79 (2,81 %) 48,47 % 0,75 4 min y 09 s 707 (2,78 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260804",
+      "users": 91,
+      "row": "5 web 20260804 91 (2,57 %) 85 (2,51 %) 46 (1,63 %) 30,87 % 0,51 1 min y 33 s 486 (1,91 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260902",
+      "users": 88,
+      "row": "6 web 20260902 88 (2,48 %) 85 (2,51 %) 34 (1,21 %) 25,19 % 0,39 1 min y 29 s 427 (1,68 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260920",
+      "users": 85,
+      "row": "7 web 20260920 85 (2,4 %) 70 (2,07 %) 70 (2,49 %) 49,3 % 0,82 2 min y 30 s 567 (2,23 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260720",
+      "users": 83,
+      "row": "8 web 20260720 83 (2,34 %) 61 (1,8 %) 64 (2,27 %) 55,65 % 0,77 5 min y 37 s 569 (2,23 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260727",
+      "users": 81,
+      "row": "9 web 20260727 81 (2,29 %) 53 (1,56 %) 61 (2,17 %) 46,56 % 0,75 6 min y 48 s 499 (1,96 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260813",
+      "users": 80,
+      "row": "10 web 20260813 80 (2,26 %) 75 (2,21 %) 59 (2,1 %) 50,86 % 0,74 3 min y 16 s 438 (1,72 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260817",
+      "users": 79,
+      "row": "11 web 20260817 79 (2,23 %) 56 (1,65 %) 62 (2,2 %) 58,49 % 0,78 3 min y 22 s 507 (1,99 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260730",
+      "users": 73,
+      "row": "12 web 20260730 73 (2,06 %) 50 (1,48 %) 62 (2,2 %) 57,41 % 0,85 4 min y 03 s 380 (1,49 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260726",
+      "users": 69,
+      "row": "13 web 20260726 69 (1,95 %) 60 (1,77 %) 40 (1,42 %) 40 % 0,58 1 min y 14 s 372 (1,46 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260827",
+      "users": 67,
+      "row": "14 web 20260827 67 (1,89 %) 42 (1,24 %) 46 (1,63 %) 40,35 % 0,69 5 min y 56 s 394 (1,55 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260815",
+      "users": 63,
+      "row": "15 web 20260815 63 (1,78 %) 50 (1,48 %) 49 (1,74 %) 47,57 % 0,78 7 min y 06 s 454 (1,78 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260915",
+      "users": 63,
+      "row": "16 web 20260915 63 (1,78 %) 45 (1,33 %) 59 (2,1 %) 49,17 % 0,94 6 min y 27 s 561 (2,2 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260921",
+      "users": 63,
+      "row": "17 web 20260921 63 (1,78 %) 55 (1,62 %) 42 (1,49 %) 47,73 % 0,67 4 min y 16 s 406 (1,59 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260824",
+      "users": 62,
+      "row": "18 web 20260824 62 (1,75 %) 39 (1,15 %) 45 (1,6 %) 48,39 % 0,73 6 min y 36 s 424 (1,67 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260911",
+      "users": 61,
+      "row": "19 web 20260911 61 (1,72 %) 61 (1,8 %) 30 (1,07 %) 39,47 % 0,49 4 min y 48 s 272 (1,07 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260826",
+      "users": 59,
+      "row": "20 web 20260826 59 (1,67 %) 49 (1,45 %) 62 (2,2 %) 65,96 % 1,05 7 min y 03 s 421 (1,65 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260728",
+      "users": 57,
+      "row": "21 web 20260728 57 (1,61 %) 48 (1,42 %) 38 (1,35 %) 52,05 % 0,67 5 min y 01 s 332 (1,3 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260625",
+      "users": 56,
+      "row": "22 web 20260625 56 (1,58 %) 43 (1,27 %) 40 (1,42 %) 40,4 % 0,71 5 min y 58 s 327 (1,28 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260709",
+      "users": 56,
+      "row": "23 web 20260709 56 (1,58 %) 44 (1,3 %) 54 (1,92 %) 54 % 0,96 8 min y 23 s 571 (2,24 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260807",
+      "users": 56,
+      "row": "24 web 20260807 56 (1,58 %) 45 (1,33 %) 42 (1,49 %) 40,38 % 0,75 3 min y 02 s 424 (1,67 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260922",
+      "users": 56,
+      "row": "25 web 20260922 56 (1,58 %) 34 (1 %) 34 (1,21 %) 37,36 % 0,61 4 min y 11 s 288 (1,13 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260706",
+      "users": 54,
+      "row": "26 web 20260706 54 (1,52 %) 44 (1,3 %) 41 (1,46 %) 51,25 % 0,76 5 min y 18 s 343 (1,35 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260821",
+      "users": 54,
+      "row": "27 web 20260821 54 (1,52 %) 37 (1,09 %) 38 (1,35 %) 30,16 % 0,70 3 min y 15 s 368 (1,45 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260912",
+      "users": 54,
+      "row": "28 web 20260912 54 (1,52 %) 48 (1,42 %) 38 (1,35 %) 43,68 % 0,70 5 min y 27 s 433 (1,7 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260704",
+      "users": 51,
+      "row": "29 web 20260704 51 (1,44 %) 50 (1,48 %) 22 (0,78 %) 35,48 % 0,43 1 min y 42 s 219 (0,86 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260808",
+      "users": 50,
+      "row": "30 web 20260808 50 (1,41 %) 46 (1,36 %) 39 (1,38 %) 42,39 % 0,78 7 min y 33 s 357 (1,4 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260905",
+      "users": 50,
+      "row": "31 web 20260905 50 (1,41 %) 41 (1,21 %) 30 (1,07 %) 40,54 % 0,60 5 min y 27 s 281 (1,1 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260715",
+      "users": 49,
+      "row": "32 web 20260715 49 (1,38 %) 36 (1,06 %) 34 (1,21 %) 36,56 % 0,69 4 min y 21 s 292 (1,15 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260801",
+      "users": 48,
+      "row": "33 web 20260801 48 (1,36 %) 40 (1,18 %) 36 (1,28 %) 39,56 % 0,75 2 min y 45 s 306 (1,2 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260904",
+      "users": 48,
+      "row": "34 web 20260904 48 (1,36 %) 28 (0,83 %) 32 (1,14 %) 40,51 % 0,67 1 min y 51 s 267 (1,05 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260721",
+      "users": 47,
+      "row": "35 web 20260721 47 (1,33 %) 31 (0,91 %) 32 (1,14 %) 37,21 % 0,68 2 min y 29 s 264 (1,04 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260724",
+      "users": 47,
+      "row": "36 web 20260724 47 (1,33 %) 31 (0,91 %) 32 (1,14 %) 45,07 % 0,68 3 min y 03 s 234 (0,92 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260916",
+      "users": 47,
+      "row": "37 web 20260916 47 (1,33 %) 32 (0,94 %) 37 (1,31 %) 48,05 % 0,79 5 min y 43 s 315 (1,24 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260901",
+      "users": 46,
+      "row": "38 web 20260901 46 (1,3 %) 31 (0,91 %) 28 (0,99 %) 38,36 % 0,61 2 min y 17 s 250 (0,98 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260722",
+      "users": 44,
+      "row": "39 web 20260722 44 (1,24 %) 31 (0,91 %) 24 (0,85 %) 30,77 % 0,55 2 min y 40 s 224 (0,88 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260809",
+      "users": 44,
+      "row": "40 web 20260809 44 (1,24 %) 41 (1,21 %) 42 (1,49 %) 54,55 % 0,95 7 min y 18 s 385 (1,51 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260818",
+      "users": 44,
+      "row": "41 web 20260818 44 (1,24 %) 27 (0,8 %) 33 (1,17 %) 41,25 % 0,75 2 min y 30 s 281 (1,1 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260626",
+      "users": 43,
+      "row": "42 web 20260626 43 (1,21 %) 35 (1,03 %) 26 (0,92 %) 23,85 % 0,60 49 s 314 (1,23 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260828",
+      "users": 43,
+      "row": "43 web 20260828 43 (1,21 %) 39 (1,15 %) 30 (1,07 %) 46,88 % 0,70 3 min y 32 s 255 (1 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260803",
+      "users": 42,
+      "row": "44 web 20260803 42 (1,19 %) 27 (0,8 %) 35 (1,24 %) 55,56 % 0,83 3 min y 40 s 215 (0,84 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260810",
+      "users": 42,
+      "row": "45 web 20260810 42 (1,19 %) 22 (0,65 %) 30 (1,07 %) 41,1 % 0,71 3 min y 31 s 270 (1,06 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260812",
+      "users": 42,
+      "row": "46 web 20260812 42 (1,19 %) 35 (1,03 %) 28 (0,99 %) 48,28 % 0,67 5 min y 46 s 246 (0,97 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260919",
+      "users": 42,
+      "row": "47 web 20260919 42 (1,19 %) 37 (1,09 %) 26 (0,92 %) 37,68 % 0,62 3 min y 21 s 259 (1,02 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260711",
+      "users": 41,
+      "row": "48 web 20260711 41 (1,16 %) 37 (1,09 %) 24 (0,85 %) 32,43 % 0,59 1 min y 31 s 251 (0,99 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260729",
+      "users": 41,
+      "row": "49 web 20260729 41 (1,16 %) 35 (1,03 %) 31 (1,1 %) 36,47 % 0,76 4 min y 35 s 266 (1,04 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260701",
+      "users": 39,
+      "row": "50 web 20260701 39 (1,1 %) 23 (0,68 %) 30 (1,07 %) 51,72 % 0,77 6 min y 28 s 279 (1,1 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260806",
+      "users": 39,
+      "row": "51 web 20260806 39 (1,1 %) 37 (1,09 %) 17 (0,6 %) 28,33 % 0,44 1 min y 58 s 187 (0,73 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260708",
+      "users": 38,
+      "row": "52 web 20260708 38 (1,07 %) 31 (0,91 %) 26 (0,92 %) 34,21 % 0,68 4 min y 20 s 262 (1,03 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260707",
+      "users": 37,
+      "row": "53 web 20260707 37 (1,04 %) 27 (0,8 %) 27 (0,96 %) 35,53 % 0,73 1 min y 54 s 240 (0,94 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260714",
+      "users": 37,
+      "row": "54 web 20260714 37 (1,04 %) 28 (0,83 %) 20 (0,71 %) 26,67 % 0,54 1 min y 38 s 213 (0,84 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260811",
+      "users": 37,
+      "row": "55 web 20260811 37 (1,04 %) 34 (1 %) 24 (0,85 %) 38,1 % 0,65 3 min y 25 s 200 (0,79 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260819",
+      "users": 37,
+      "row": "56 web 20260819 37 (1,04 %) 28 (0,83 %) 27 (0,96 %) 49,09 % 0,73 2 min y 47 s 188 (0,74 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260820",
+      "users": 36,
+      "row": "57 web 20260820 36 (1,02 %) 33 (0,97 %) 26 (0,92 %) 48,15 % 0,72 5 min y 08 s 225 (0,88 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260909",
+      "users": 36,
+      "row": "58 web 20260909 36 (1,02 %) 34 (1 %) 19 (0,67 %) 39,58 % 0,53 2 min y 22 s 171 (0,67 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260914",
+      "users": 35,
+      "row": "59 web 20260914 35 (0,99 %) 31 (0,91 %) 21 (0,75 %) 39,62 % 0,60 1 min y 30 s 183 (0,72 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260629",
+      "users": 34,
+      "row": "60 web 20260629 34 (0,96 %) 28 (0,83 %) 16 (0,57 %) 31,37 % 0,47 2 min y 54 s 161 (0,63 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260725",
+      "users": 34,
+      "row": "61 web 20260725 34 (0,96 %) 30 (0,89 %) 19 (0,67 %) 38,78 % 0,56 4 min y 19 s 206 (0,81 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260917",
+      "users": 34,
+      "row": "62 web 20260917 34 (0,96 %) 29 (0,86 %) 18 (0,64 %) 40,91 % 0,53 1 min y 51 s 158 (0,62 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260705",
+      "users": 33,
+      "row": "63 web 20260705 33 (0,93 %) 31 (0,91 %) 22 (0,78 %) 42,31 % 0,67 2 min y 29 s 229 (0,9 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260913",
+      "users": 33,
+      "row": "64 web 20260913 33 (0,93 %) 22 (0,65 %) 23 (0,82 %) 41,07 % 0,70 6 min y 33 s 235 (0,92 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260630",
+      "users": 32,
+      "row": "65 web 20260630 32 (0,9 %) 23 (0,68 %) 18 (0,64 %) 40,91 % 0,56 2 min y 44 s 142 (0,56 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260716",
+      "users": 32,
+      "row": "66 web 20260716 32 (0,9 %) 19 (0,56 %) 18 (0,64 %) 28,13 % 0,56 2 min y 14 s 181 (0,71 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260816",
+      "users": 32,
+      "row": "67 web 20260816 32 (0,9 %) 25 (0,74 %) 18 (0,64 %) 30,51 % 0,56 1 min y 36 s 179 (0,7 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260703",
+      "users": 31,
+      "row": "68 web 20260703 31 (0,88 %) 20 (0,59 %) 19 (0,67 %) 25,33 % 0,61 1 min y 20 s 207 (0,81 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260822",
+      "users": 30,
+      "row": "69 web 20260822 30 (0,85 %) 21 (0,62 %) 20 (0,71 %) 40,82 % 0,67 2 min y 43 s 166 (0,65 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260906",
+      "users": 30,
+      "row": "70 web 20260906 30 (0,85 %) 27 (0,8 %) 21 (0,75 %) 42,86 % 0,70 2 min y 59 s 172 (0,68 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260627",
+      "users": 29,
+      "row": "71 web 20260627 29 (0,82 %) 16 (0,47 %) 21 (0,75 %) 31,82 % 0,72 3 min y 33 s 209 (0,82 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260718",
+      "users": 29,
+      "row": "72 web 20260718 29 (0,82 %) 27 (0,8 %) 18 (0,64 %) 35,29 % 0,62 2 min y 47 s 165 (0,65 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260825",
+      "users": 29,
+      "row": "73 web 20260825 29 (0,82 %) 17 (0,5 %) 18 (0,64 %) 41,86 % 0,62 3 min y 01 s 143 (0,56 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260829",
+      "users": 29,
+      "row": "74 web 20260829 29 (0,82 %) 21 (0,62 %) 23 (0,82 %) 45,1 % 0,79 2 min y 07 s 195 (0,77 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260908",
+      "users": 29,
+      "row": "75 web 20260908 29 (0,82 %) 28 (0,83 %) 19 (0,67 %) 54,29 % 0,66 1 min y 54 s 139 (0,55 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260805",
+      "users": 27,
+      "row": "76 web 20260805 27 (0,76 %) 21 (0,62 %) 24 (0,85 %) 48 % 0,89 2 min y 22 s 162 (0,64 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260710",
+      "users": 26,
+      "row": "77 web 20260710 26 (0,73 %) 25 (0,74 %) 12 (0,43 %) 28,57 % 0,46 2 min y 38 s 131 (0,51 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260702",
+      "users": 25,
+      "row": "78 web 20260702 25 (0,71 %) 13 (0,38 %) 19 (0,67 %) 38 % 0,76 4 min y 45 s 154 (0,6 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260717",
+      "users": 25,
+      "row": "79 web 20260717 25 (0,71 %) 18 (0,53 %) 16 (0,57 %) 37,21 % 0,64 2 min y 14 s 142 (0,56 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260910",
+      "users": 24,
+      "row": "80 web 20260910 24 (0,68 %) 23 (0,68 %) 12 (0,43 %) 35,29 % 0,50 1 min y 52 s 112 (0,44 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260831",
+      "users": 23,
+      "row": "81 web 20260831 23 (0,65 %) 12 (0,35 %) 21 (0,75 %) 39,62 % 0,91 5 min y 59 s 144 (0,57 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260903",
+      "users": 23,
+      "row": "82 web 20260903 23 (0,65 %) 19 (0,56 %) 11 (0,39 %) 31,43 % 0,48 42 s 113 (0,44 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260723",
+      "users": 20,
+      "row": "83 web 20260723 20 (0,56 %) 14 (0,41 %) 11 (0,39 %) 28,21 % 0,55 2 min y 27 s 127 (0,5 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260830",
+      "users": 20,
+      "row": "84 web 20260830 20 (0,56 %) 14 (0,41 %) 15 (0,53 %) 39,47 % 0,75 3 min y 48 s 120 (0,47 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260907",
+      "users": 19,
+      "row": "85 web 20260907 19 (0,54 %) 19 (0,56 %) 12 (0,43 %) 50 % 0,63 2 min y 24 s 84 (0,33 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260823",
+      "users": 17,
+      "row": "86 web 20260823 17 (0,48 %) 14 (0,41 %) 9 (0,32 %) 34,62 % 0,53 48 s 89 (0,35 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260628",
+      "users": 15,
+      "row": "87 web 20260628 15 (0,42 %) 14 (0,41 %) 6 (0,21 %) 27,27 % 0,40 32 s 74 (0,29 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260719",
+      "users": 15,
+      "row": "88 web 20260719 15 (0,42 %) 12 (0,35 %) 7 (0,25 %) 35 % 0,47 1 min y 16 s 67 (0,26 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260712",
+      "users": 11,
+      "row": "89 web 20260712 11 (0,31 %) 10 (0,3 %) 4 (0,14 %) 19,05 % 0,36 2 min y 05 s 57 (0,22 %) 0,00 (–) 0,00 $ (–)"
+    },
+    {
+      "date": "20260713",
+      "users": 11,
+      "row": "90 web 20260713 11 (0,31 %) 9 (0,27 %) 8 (0,28 %) 38,1 % 0,73 34 s 66 (0,26 %) 0,00 (–) 0,00 $ (–)"
+    }
+  ],
+  "adsDays": [
+    "dom, 2 ago 2026 USD0.25 330 USD0.75 1,134 USD0.22 66.00% 8",
+    "vie, 31 jul 2026 USD0.14 281 USD0.51 788 USD0.18 71.19% 5",
+    "jue, 9 jul 2026 USD0.07 262 USD0.27 455 USD0.16 66.36% 6",
+    "mar, 15 sept 2026 USD0.12 247 USD0.50 816 USD0.15 69.48% 3",
+    "dom, 20 sept 2026 USD0.22 239 USD0.93 675 USD0.33 74.78% 24",
+    "lun, 17 ago 2026 USD0.08 236 USD0.33 433 USD0.18 66.74% 6",
+    "lun, 20 jul 2026 USD0.11 229 USD0.48 478 USD0.23 67.67% 14",
+    "vie, 18 sept 2026 USD0.25 211 USD1.19 592 USD0.42 67.83% 6",
+    "sáb, 12 sept 2026 USD0.18 198 USD0.91 760 USD0.24 66.13% 9",
+    "vie, 7 ago 2026 USD0.11 196 USD0.54 512 USD0.21 68.65% 4",
+    "sáb, 15 ago 2026 USD0.15 195 USD0.77 621 USD0.24 74.14% 19",
+    "lun, 24 ago 2026 USD0.08 194 USD0.41 374 USD0.21 72.60% 9",
+    "mié, 26 ago 2026 USD0.10 181 USD0.58 411 USD0.26 71.05% 0",
+    "lun, 27 jul 2026 USD0.07 176 USD0.39 354 USD0.19 68.05% 4",
+    "vie, 14 ago 2026 USD0.12 172 USD0.68 545 USD0.21 73.38% 4",
+    "mié, 2 sept 2026 USD0.07 155 USD0.42 384 USD0.17 74.73% 9",
+    "sáb, 8 ago 2026 USD0.04 154 USD0.29 312 USD0.14 74.42% 11",
+    "dom, 9 ago 2026 USD0.08 152 USD0.53 497 USD0.16 65.71% 0",
+    "dom, 26 jul 2026 USD0.20 150 USD1.34 390 USD0.52 69.50% 18",
+    "jue, 13 ago 2026 USD0.06 136 USD0.41 302 USD0.18 72.67% 0",
+    "lun, 21 sept 2026 USD0.09 134 USD0.68 372 USD0.25 70.27% 4",
+    "mar, 4 ago 2026 USD0.08 133 USD0.57 427 USD0.18 76.53% 5",
+    "lun, 6 jul 2026 USD0.06 128 USD0.46 269 USD0.22 65.73% 0",
+    "jue, 25 jun 2026 USD0.09 124 USD0.75 372 USD0.25 70.73% 9",
+    "vie, 21 ago 2026 USD0.07 124 USD0.57 344 USD0.21 70.97% 6",
+    "sáb, 5 sept 2026 USD0.06 123 USD0.47 381 USD0.15 76.49% 12",
+    "jue, 27 ago 2026 USD0.05 122 USD0.37 288 USD0.16 70.32% 2",
+    "mar, 28 jul 2026 USD0.03 117 USD0.25 216 USD0.14 68.78% 2",
+    "mié, 1 jul 2026 USD0.04 114 USD0.38 201 USD0.21 72.31% 2",
+    "jue, 30 jul 2026 USD0.03 110 USD0.30 261 USD0.12 68.46% 3",
+    "dom, 13 sept 2026 USD0.05 106 USD0.51 316 USD0.17 68.08% 7",
+    "jue, 20 ago 2026 USD0.04 105 USD0.39 229 USD0.18 69.96% 6",
+    "lun, 10 ago 2026 USD0.04 100 USD0.40 179 USD0.22 68.02% 2",
+    "mar, 22 sept 2026 USD0.09 100 USD0.87 312 USD0.28 66.88% 1",
+    "vie, 26 jun 2026 USD0.11 99 USD1.11 361 USD0.30 72.52% 6",
+    "mar, 18 ago 2026 USD0.04 99 USD0.38 202 USD0.19 72.82% 1",
+    "mar, 1 sept 2026 USD0.04 99 USD0.36 222 USD0.16 61.32% 1",
+    "mié, 16 sept 2026 USD0.04 96 USD0.45 254 USD0.17 75.10% 0",
+    "sáb, 19 sept 2026 USD0.09 96 USD0.94 277 USD0.32 70.07% 2",
+    "dom, 5 jul 2026 USD0.06 95 USD0.60 238 USD0.24 68.26% 1",
+    "mié, 15 jul 2026 USD0.03 95 USD0.27 173 USD0.15 72.19% 0",
+    "vie, 4 sept 2026 USD0.07 94 USD0.72 215 USD0.31 84.04% 6",
+    "sáb, 1 ago 2026 USD0.03 92 USD0.29 253 USD0.11 75.40% 2",
+    "sáb, 4 jul 2026 USD0.08 91 USD0.83 322 USD0.23 66.24% 3",
+    "sáb, 25 jul 2026 USD0.05 89 USD0.55 280 USD0.17 72.83% 1",
+    "mié, 12 ago 2026 USD0.04 89 USD0.42 248 USD0.15 75.52% 2",
+    "vie, 28 ago 2026 USD0.03 88 USD0.36 320 USD0.10 71.06% 2",
+    "sáb, 11 jul 2026 USD0.07 87 USD0.79 219 USD0.31 66.67% 2",
+    "mié, 8 jul 2026 USD0.13 84 USD1.60 213 USD0.63 79.89% 4",
+    "mar, 21 jul 2026 USD0.02 84 USD0.26 156 USD0.14 65.81% 1",
+    "sáb, 27 jun 2026 USD0.04 82 USD0.44 206 USD0.18 70.92% 2",
+    "lun, 3 ago 2026 USD0.03 81 USD0.42 155 USD0.22 59.09% 2",
+    "mié, 22 jul 2026 USD0.04 78 USD0.48 224 USD0.17 67.12% 1",
+    "mié, 29 jul 2026 USD0.03 78 USD0.39 190 USD0.16 69.73% 2",
+    "vie, 24 jul 2026 USD0.05 77 USD0.60 231 USD0.20 67.86% 2",
+    "vie, 11 sept 2026 USD0.06 76 USD0.81 205 USD0.30 77.84% 9",
+    "sáb, 29 ago 2026 USD0.03 75 USD0.45 272 USD0.12 69.78% 0",
+    "mar, 7 jul 2026 USD0.04 73 USD0.48 114 USD0.31 66.96% 1",
+    "mar, 11 ago 2026 USD0.03 73 USD0.35 116 USD0.22 71.56% 0",
+    "dom, 6 sept 2026 USD0.04 72 USD0.51 174 USD0.21 65.66% 4",
+    "sáb, 22 ago 2026 USD0.03 68 USD0.41 193 USD0.15 79.03% 3",
+    "vie, 17 jul 2026 USD0.04 62 USD0.62 154 USD0.25 58.17% 2",
+    "dom, 16 ago 2026 USD0.03 61 USD0.57 152 USD0.23 60.00% 2",
+    "vie, 3 jul 2026 USD0.04 58 USD0.73 126 USD0.34 75.00% 2",
+    "mar, 14 jul 2026 USD0.05 58 USD0.81 149 USD0.32 73.05% 3",
+    "mié, 9 sept 2026 USD0.05 58 USD0.92 155 USD0.34 73.03% 1",
+    "lun, 14 sept 2026 USD0.03 58 USD0.58 162 USD0.21 68.18% 2",
+    "jue, 6 ago 2026 USD0.03 57 USD0.54 122 USD0.25 71.79% 6",
+    "mié, 19 ago 2026 USD0.02 57 USD0.43 136 USD0.18 72.18% 1",
+    "sáb, 18 jul 2026 USD0.06 56 USD1.08 169 USD0.36 61.54% 1",
+    "jue, 17 sept 2026 USD0.03 56 USD0.46 127 USD0.20 66.10% 5",
+    "jue, 16 jul 2026 USD0.01 54 USD0.24 86 USD0.15 70.73% 0",
+    "jue, 2 jul 2026 USD0.03 53 USD0.66 113 USD0.31 73.79% 1",
+    "mié, 5 ago 2026 USD0.02 53 USD0.30 94 USD0.17 67.74% 2",
+    "mar, 25 ago 2026 USD0.01 52 USD0.14 35 USD0.20 66.67% 1",
+    "lun, 31 ago 2026 USD0.01 49 USD0.24 70 USD0.17 69.70% 0",
+    "lun, 29 jun 2026 USD0.03 48 USD0.62 115 USD0.26 67.26% 2",
+    "jue, 23 jul 2026 USD0.02 48 USD0.49 140 USD0.17 66.19% 0",
+    "mar, 8 sept 2026 USD0.02 48 USD0.37 122 USD0.15 73.33% 0",
+    "vie, 10 jul 2026 USD0.02 41 USD0.45 81 USD0.23 83.54% 0",
+    "mar, 30 jun 2026 USD0.01 40 USD0.34 90 USD0.15 71.11% 0",
+    "dom, 30 ago 2026 USD0.02 40 USD0.42 103 USD0.16 67.00% 1",
+    "jue, 10 sept 2026 USD0.02 40 USD0.54 74 USD0.29 66.67% 1",
+    "dom, 23 ago 2026 USD0.01 39 USD0.35 94 USD0.14 73.03% 0",
+    "jue, 3 sept 2026 USD0.01 31 USD0.21 46 USD0.14 71.74% 1",
+    "lun, 7 sept 2026 USD0.02 27 USD0.64 90 USD0.19 67.42% 4",
+    "dom, 28 jun 2026 USD0.02 26 USD0.79 37 USD0.56 88.24% 0",
+    "lun, 13 jul 2026 USD0.01 25 USD0.36 38 USD0.23 55.56% 0",
+    "dom, 19 jul 2026 USD0.02 24 USD0.95 88 USD0.26 57.65% 0",
+    "dom, 12 jul 2026 USD0.01 16 USD0.59 45 USD0.21 56.10% 0"
+  ],
+  "gaWeek": {
+    "0": {
+      "n": 13,
+      "users": 509
+    },
+    "1": {
+      "n": 13,
+      "users": 628
+    },
+    "2": {
+      "n": 13,
+      "users": 605
+    },
+    "3": {
+      "n": 12,
+      "users": 547
+    },
+    "4": {
+      "n": 13,
+      "users": 565
+    },
+    "5": {
+      "n": 13,
+      "users": 834
+    },
+    "6": {
+      "n": 13,
+      "users": 550
+    }
+  },
+  "adsWeek": {
+    "dom": {
+      "n": 13,
+      "views": 1350,
+      "revenue": 1.0100000000000002
+    },
+    "vie": {
+      "n": 13,
+      "views": 1579,
+      "revenue": 1.11
+    },
+    "jue": {
+      "n": 13,
+      "views": 1198,
+      "revenue": 0.4900000000000001
+    },
+    "mar": {
+      "n": 13,
+      "views": 1223,
+      "revenue": 0.5800000000000001
+    },
+    "lun": {
+      "n": 13,
+      "views": 1485,
+      "revenue": 0.6600000000000001
+    },
+    "sáb": {
+      "n": 13,
+      "views": 1406,
+      "revenue": 0.9100000000000001
+    },
+    "mié": {
+      "n": 12,
+      "views": 1138,
+      "revenue": 0.6100000000000001
+    }
+  },
+  "configuration": {
+    "adsenseLinked": false,
+    "searchConsoleProperty": "https://coronabingo.now.sh/",
+    "europeMessageStatus": "Borrador",
+    "europeMessageLastModified": "2022-09-26",
+    "europeMessagesShown": 0
+  }
+}
