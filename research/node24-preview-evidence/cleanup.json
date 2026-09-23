@@ -1,0 +1,12 @@
+{
+  "project": "coronabingo-dev",
+  "status": "blocked",
+  "attempt": "Atomic deletion of only the two test rooms and four test players, with updateTime preconditions",
+  "httpStatus": 403,
+  "deletedDocuments": 0,
+  "remainingRoomIds": [
+    "0nniKao4wiFc0Od3D61z",
+    "rcqdGZtqPYnPMlgIdqS6"
+  ],
+  "note": "Firestore rejected the atomic commit. No permissions or rules were changed. Test records remain for owner cleanup."
+}

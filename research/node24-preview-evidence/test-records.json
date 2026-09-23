@@ -1,0 +1,58 @@
+[
+  {
+    "roomId": "0nniKao4wiFc0Od3D61z",
+    "roomName": "Node24 preview QA 20260923 A",
+    "timesPlayed": {
+      "integerValue": "2"
+    },
+    "selectedNumbers": {
+      "arrayValue": {
+        "values": [
+          {
+            "integerValue": "49"
+          }
+        ]
+      }
+    },
+    "players": [
+      {
+        "id": "DSOdgdA3lAbyxEfhfAgR",
+        "name": "QA Player",
+        "tickets": "207,208"
+      },
+      {
+        "id": "ToU4ifpe3d5IFyoVd8c8",
+        "name": "QA Host",
+        "tickets": "653,654"
+      }
+    ]
+  },
+  {
+    "roomId": "rcqdGZtqPYnPMlgIdqS6",
+    "roomName": "Node24 preview QA 20260923 B",
+    "timesPlayed": {
+      "integerValue": "1"
+    },
+    "selectedNumbers": {
+      "arrayValue": {
+        "values": [
+          {
+            "integerValue": "60"
+          }
+        ]
+      }
+    },
+    "players": [
+      {
+        "id": "YsccPNMOHJVRO6b6VLOh",
+        "name": "QA Isolated Guest",
+        "tickets": "1011,1012"
+      },
+      {
+        "id": "ow9nRQwxt4xJSMl2UI7j",
+        "name": "QA Isolated",
+        "tickets": "249,250"
+      }
+    ]
+  }
+]

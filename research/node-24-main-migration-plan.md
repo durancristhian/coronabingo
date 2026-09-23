@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Application commit `c93bc83` is on `migrate/node24` in `../coronabingo-node24`. Part three (GitHub Actions and actual CI/Packtracker verification) is next. No remote branch change or deployment has occurred. Legacy production rollback eligibility remains an unresolved release gate.
+Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is complete on `migrate/node24-ci` in `../coronabingo-node24-ci`: commit `47918fc` passed hosted Node 24 CI, including bundle-report uploads replacing the failing Packtracker integration. See [CI verification](node-24-ci.md). Part four is complete for the user-requested main game flow on the same application commit; see [preview acceptance](node-24-preview.md). The user excluded standalone admin/event checks. Two synthetic development rooms remain after Firestore rejected cleanup with HTTP 403. The GitHub default branch remains `master`. Legacy production rollback eligibility remains an unresolved release gate.
 
 ## Agreed outcome
 
@@ -75,17 +75,21 @@ Completed locally; [part two evidence](node-24-implementation.md) records clean 
 
 ### 3. Restore the required development and CI checks
 
+Completed on 2026-09-23. The first hosted run passed installation and lint, then failed on Packtracker's unavailable API. Packtracker also reported bundle parser errors. The replacement preserves per-build inspection through the existing Next bundle analyzer and GitHub HTML artifacts. Hosted run `35893873513` passed all steps on commit `47918fc`; all three uploaded reports were downloaded and inspected. Packtracker history/comparisons/budgets are not replaced. See [part three evidence](node-24-ci.md).
+
 - Update the obsolete GitHub Actions and application runtime declaration.
 - Run the acceptance commands below. The existing lint command uses `--fix`; use its equivalent without `--fix` for verification to avoid unrelated changes.
-- Verify the actual CI build, including the Packtracker path enabled by `GITHUB_EVENT_PATH`. A local build does not exercise that integration.
+- Verify the actual CI build and bundle-report upload. The original Packtracker path was exercised and replaced after its demonstrated failure, as recorded above.
 - Leave the Cypress CI step disabled. Record unrelated lint/test-tool maintenance separately unless it blocks required checks.
 
 ### 4. Verify a Vercel preview
 
+Completed on 2026-09-23 for the main game flow. The existing preview uses `coronabingo-dev` and deployed `nodejs24.x` functions. Creation, host/player joins, realtime draws, restart, room isolation, ticket persistence, locale links and spreadsheet export passed. The user explicitly excluded `/admin` and `/eventos`; room configuration remains in scope. See [evidence and limits](node-24-preview.md).
+
 - Deploy the implementation branch as a preview when implementation and preview deployment are authorized. Set `engines.node` so the candidate uses Node 24 while production remains unchanged.
 - Verify the Node version in build/runtime evidence, the candidate commit, and the application's behavior. A READY status alone is insufficient.
 - Determine whether preview configuration points to production Firebase before any write tests. Use an existing nonproduction project or isolated test records under an agreed test-data arrangement. A preview URL does not isolate its database.
-- Complete browser acceptance and record results, defects, and any unavailable proof. Do not claim completion when critical gameplay or authentication checks remain untested.
+- Complete browser acceptance and record results, defects, and any unavailable proof. Do not claim completion when critical in-scope gameplay checks remain untested. Authentication/event checks were excluded by the user on 2026-09-23.
 
 ### 5. Coordinate main and production cutover
 
@@ -107,11 +111,12 @@ This is a release step after the candidate passes acceptance and release is auth
 - [x] TypeScript passes with `tsc --noEmit`; required lint/hook checks work without broad source rewrites.
 - [x] `npm run validate-locales` passes. `npm run validate-tickets` runs and its output is inspected: the current script catches assertion failures and may still exit successfully.
 - [x] `npm run build` and `npm run start` succeed, with no migration-related serving or hydration errors.
-- [ ] Full locale/shared-room acceptance (partial local proof complete): both Spanish and English load correctly. Direct visits, refreshes, switching languages, plural text, and existing shared-room URLs retain their behavior.
-- [ ] Host and player sessions can create/join a room, receive realtime number updates, and restart a game without cross-room effects.
-- [ ] Authentication and existing event/admin paths work with the agreed test accounts and data.
-- [ ] Production CSS, images, SVGs, animations, audio, Markdown content, and spreadsheet downloads retain their behavior. No UI redesign is introduced.
-- [ ] GitHub Actions passes and a Vercel preview verifies the same candidate under Node 24.
+- [x] Main-game locale/shared-room preview acceptance: Spanish and English direct visits, refreshes, switching languages, plural text, and locale-prefixed room/player URL patterns pass. Query strings and fragments survive switching. Tests used synthetic development rooms.
+- [x] Host and player clients create/join a room, receive realtime number updates, and restart without cross-room effects. Verified in separate Chrome tabs using two development rooms.
+- Excluded by user instruction on 2026-09-23: standalone authentication/admin and event acceptance; those pages are scheduled for deletion.
+- [ ] Broader visual/media acceptance remains unclaimed. Main-game desktop layout, ball rendering, sound controls/asset delivery and spreadsheet export passed; exact animation frames, audible output, full responsive coverage and event Markdown checks were not part of the requested main-game-only pass.
+- [x] GitHub Actions passes under Node 24, including bundle-report upload and cache saves.
+- [x] The Vercel preview verifies the CI-tested candidate with deployed Node 24 function metadata and live main-game behavior; see the preview report for proof boundaries.
 - [ ] After release, GitHub default, local primary tracking, and Vercel production branch all use `main`; PR bases are correct.
 - [ ] Production runs the expected migration commit on Node 24 and passes smoke checks; rollback evidence is recorded.
 
