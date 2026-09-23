@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Application commit `c93bc83` is on `migrate/node24` in `../coronabingo-node24`. Part three (GitHub Actions and actual CI/Packtracker verification) is next. No remote branch change or deployment has occurred. Legacy production rollback eligibility remains an unresolved release gate.
+Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is implemented and locally verified on `migrate/node24-ci` in `../coronabingo-node24-ci`; actual GitHub Actions/Packtracker verification is pending. See [CI verification](node-24-ci.md). The GitHub default branch remains `master`. Legacy production rollback eligibility remains an unresolved release gate.
 
 ## Agreed outcome
 
@@ -74,6 +74,8 @@ Completed locally; [part two evidence](node-24-implementation.md) records clean 
 - Run focused checks as each affected area is completed; then test installation from a clean checkout with the final lockfile.
 
 ### 3. Restore the required development and CI checks
+
+Workflow updated and local acceptance passed on 2026-09-23. The hosted run and Packtracker upload remain pending; see [part three evidence](node-24-ci.md).
 
 - Update the obsolete GitHub Actions and application runtime declaration.
 - Run the acceptance commands below. The existing lint command uses `--fix`; use its equivalent without `--fix` for verification to avoid unrelated changes.

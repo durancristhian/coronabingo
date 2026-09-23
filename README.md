@@ -43,6 +43,8 @@ Cypress remains disabled in CI and its old suite has not been restored. On a mac
 
 ## Migration status
 
-Implementation is on `migrate/node24`. The primary and production branch remains `master`; the planned rename to `main`, Actions update and Vercel cutover are separate steps. See the [migration plan](research/node-24-main-migration-plan.md) and [implementation evidence](research/node-24-implementation.md).
+The application migration is present on local `master` and `migrate/node24`. The Actions update is on `migrate/node24-ci`: CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with locale validation and Packtracker enabled. See [CI verification](research/node-24-ci.md) for results and remaining checks.
+
+The GitHub default and production branch remain `master`; the planned rename to `main` and Vercel cutover are separate steps. See the [migration plan](research/node-24-main-migration-plan.md) and [implementation evidence](research/node-24-implementation.md).
 
 ESLint 9 is retained temporarily by agreement because the current React and accessibility plugins do not declare ESLint 10 compatibility. Replace or upgrade those plugins and move to a supported ESLint release in a follow-up. Other legacy dependency maintenance is outside this migration.
