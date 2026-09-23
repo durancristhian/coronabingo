@@ -1,0 +1,31 @@
+{
+  "hostUrl": "https://coronabingo-1qhexaw4o-cristhian-durans-projects-3ace6550.vercel.app/en/room/0nniKao4wiFc0Od3D61z/ToU4ifpe3d5IFyoVd8c8",
+  "playerUrl": "https://coronabingo-1qhexaw4o-cristhian-durans-projects-3ace6550.vercel.app/room/0nniKao4wiFc0Od3D61z/DSOdgdA3lAbyxEfhfAgR",
+  "roomBUrl": "https://coronabingo-1qhexaw4o-cristhian-durans-projects-3ace6550.vercel.app/en/room/rcqdGZtqPYnPMlgIdqS6",
+  "sharedUrlAfterLocaleSwitch": "https://coronabingo-1qhexaw4o-cristhian-durans-projects-3ace6550.vercel.app/en/room/0nniKao4wiFc0Od3D61z?proof=node24-preview#details",
+  "host": "Staging v1.23.1\nCoronabingo\nEspañol\nEnglish\nHi QA Host, you are in the room Node24 preview QA 20260923 A\nLast numbers\n49\n\nMeat\n\nWhat's this?\n\nBingo spinner\nNEXT NUMBER\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n2",
+  "player": "Staging v1.23.1\nCoronabingo\nEspañol\nEnglish\nHola QA Player, estás en la sala Node24 preview QA 20260923 A\nÚltimos números\n49\n\nLa carne\n\n¿Qué es esto?\n\nBolillero\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+  "isolatedRoom": "Staging v1.23.1\nCoronabingo\nEspañol\nEnglish\nHi QA Isolated, you are in the room Node24 preview QA 20260923 B\nLast numbers\n60\n\nVirgin\n\nWhat's this?\n\nBingo spinner\nNEXT NUMBER\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n1",
+  "ticket9": [
+    {
+      "selected": false,
+      "tag": "BUTTON"
+    },
+    {
+      "selected": true,
+      "tag": "DIV"
+    }
+  ],
+  "errors": {
+    "host": [
+      {
+        "level": "error",
+        "message": "TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.\n    at e.value (https://platform.twitter.com/embed/embed.5332.340f0930f4dd862af95f.js:1:106242)\n    at https://platform.twitter.com/embed/embed.5332.340f0930f4dd862af95f.js:1:108053",
+        "timestamp": "2026-09-23T17:22:13.713Z",
+        "url": "https://platform.twitter.com/embed/embed.5332.340f0930f4dd862af95f.js"
+      }
+    ],
+    "player": [],
+    "isolated": []
+  }
+}
