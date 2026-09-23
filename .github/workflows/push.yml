@@ -25,8 +25,6 @@ jobs:
 
       URL: ${{ secrets.URL }}
 
-      CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
-
     steps:
       - uses: actions/checkout@v7.0.1
 
@@ -53,9 +51,6 @@ jobs:
       - run: npm ci
 
       - run: npm run lint:check
-
-      # Cypress restoration is outside the Node 24 migration.
-      # - run: npm t
 
       # prebuild validates locales; the analyzer writes downloadable bundle reports.
       - run: npm run build

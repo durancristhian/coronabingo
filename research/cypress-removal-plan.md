@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: scope agreed; documentation only. Implementation requires a later execution request. No Cypress files, dependencies, scripts, or configuration have been removed.
+Status: removal implemented on 2026-09-23 after the owner requested execution and a commit after verification. See the execution record below.
 
 Evidence baseline: local source at `6905b4d`, inspected on 2026-09-23. Recheck references and working-tree changes before execution.
 
@@ -10,13 +10,13 @@ Evidence baseline: local source at `6905b4d`, inspected on 2026-09-23. Recheck r
 
 Remove Cypress and its associated tests and tooling from Coronabingo. Do not replace it with another runner, migrate its tests, or introduce another automated browser suite.
 
-The owner accepted leaving the app without automated browser tests and clarified that this session should produce only the removal document. Existing TypeScript, lint, locale validation, ticket validation, build, and pre-commit checks remain in scope to preserve. Removing other automation is not part of this request.
+The owner accepted leaving the app without automated browser tests. The original planning session produced only this document; a later request authorized implementation. Existing TypeScript, lint, locale validation, ticket validation, build, and pre-commit checks remain in scope to preserve. Removing other automation is not part of this request.
 
 This is a reversible tooling cleanup. Record the decision here; no separate ADR or domain-glossary change is needed.
 
-## Current state and coverage being retired
+## Planning baseline and retired coverage
 
-Cypress is a direct dependency, declared as `^4.4.0`. The suite has eight spec files with 28 test cases. CI already comments out its test command, and the README describes the suite as deferred. The suite was not run during this investigation, so these are source-level assertions, not verified current coverage.
+At planning time, Cypress was a direct dependency, declared as `^4.4.0`. The suite had eight spec files with 28 test cases. CI already commented out its test command, and the README described the suite as deferred. The suite was not run during this investigation, so these are source-level assertions, not verified current coverage.
 
 | Spec under `cypress/integration/` | Cases | Intended coverage |
 | --- | ---: | --- |
@@ -59,7 +59,7 @@ After removal, `npm test` will no longer be defined. Do not replace it with a co
 - The [unused-features pruning plan](unused-features-pruning-plan.md) is separate. Coordinate overlapping README and dependency edits if both plans are implemented; this plan does not authorize feature retirement.
 - The broader [Node 24 migration plan](node-24-main-migration-plan.md) has separate CI and deployment work. Cypress removal does not establish that those migration steps are complete.
 
-## Later execution sequence
+## Execution sequence
 
 1. Read `AGENTS.md`, this plan, the README, and relevant installed Next.js guides. Record the current commit and preserve unrelated working-tree changes.
 2. Recheck Cypress references, script consumers, and the two HTML attributes. Confirm no new runner integrations or shared helpers have appeared since this inventory.
@@ -79,7 +79,31 @@ After removal, `npm test` will no longer be defined. Do not replace it with a co
 - Record pre-existing failures separately instead of expanding this cleanup into unrelated fixes.
 - Current documentation accurately states that automated browser coverage is absent. Static checks and a successful build do not establish working gameplay.
 
-These are future execution checks. They have not been run for this documentation-only task, and no new test automation is proposed.
+Execution results are recorded below. No new test automation was introduced.
+
+## Execution record, 2026-09-23
+
+Implemented from `c335e3acebdd50da5261f56107fbad3e20ddc2c5` using Node 24.21.0 and npm 11.19.0. Removed the eight specs and their support files, configuration, two dependencies, four scripts, CI secret mapping and disabled step, and the two test-only HTML attributes. Updated the README and the migration-plan supersession note.
+
+The regenerated lockfile removes 184 package entries. Comparing parsed package records found no new entries and no changes to retained entries, including their versions, resolved URLs and integrity hashes. The component diff removes only the two attributes; element structure, handlers and styling are unchanged.
+
+Verification ran sequentially in an isolated detached checkout with a fresh dependency installation:
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| `npm ci` | Passed, exit 0 | [Install log](cypress-removal-evidence/01-install.log) |
+| `npm run lint:check` | Passed, including TypeScript | [Lint log](cypress-removal-evidence/02-lint.log) |
+| `npm run validate-locales` | Passed for both locales | [Locale log](cypress-removal-evidence/03-locales.log) |
+| `npm run validate-tickets` | Passed; output contained the success message and no caught assertion failures | [Ticket log](cypress-removal-evidence/04-tickets.log) |
+| `npm run build` | Passed, including locale prebuild, TypeScript, page generation and tracing | [Build log](cypress-removal-evidence/05-build.log) |
+| Removal audit | Suite and config absent; no runner, script, secret or test-attribute references in active source/configuration | Tracked-file search and manifest/lockfile inspection |
+| `git diff --check` | Passed | Local diff review |
+
+Remaining Cypress references are documentation explaining removal or historical research, including candidate manifests and lockfiles. Those historical files were preserved. No browser gameplay verification was performed; there is no replacement automated browser suite, and `npm test` is undefined.
+
+Installation reported deprecations, lifecycle-policy warnings and 66 dependency vulnerabilities. The build reported the existing Tailwind purge-configuration warning. No check failed, and this removal does not address the remaining dependency or styling maintenance.
+
+The unrelated traffic/revenue research files, hosted secrets, private environment configuration and machine-wide Cypress cache were left unchanged.
 
 ## Recovery
 

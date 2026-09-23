@@ -10,7 +10,7 @@ export default memo(function Ball({ index, number }: Props) {
   return (
     <Pelotita index={index}>
       <div className="ball">
-        <span data-test-class="ball">{number}</span>
+        <span>{number}</span>
       </div>
     </Pelotita>
   )

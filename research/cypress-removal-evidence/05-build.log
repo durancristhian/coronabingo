@@ -1,0 +1,69 @@
+
+> coronabingo@1.23.1 prebuild
+> npm run validate-locales
+
+
+> coronabingo@1.23.1 validate-locales
+> ts-node --project tsconfig.scripts.json scripts/validate-locales
+
+🗂  Directory <isolated-checkout>/locales/es
+----  📄 File <isolated-checkout>/locales/es/admin.json
+----  📄 File <isolated-checkout>/locales/es/common.json
+----  📄 File <isolated-checkout>/locales/es/index.json
+----  📄 File <isolated-checkout>/locales/es/playerId.json
+----  📄 File <isolated-checkout>/locales/es/roomId.json
+🗂  Directory <isolated-checkout>/locales/en
+----  📄 File <isolated-checkout>/locales/en/admin.json
+----  📄 File <isolated-checkout>/locales/en/common.json
+----  📄 File <isolated-checkout>/locales/en/index.json
+----  📄 File <isolated-checkout>/locales/en/playerId.json
+----  📄 File <isolated-checkout>/locales/en/roomId.json
+✅ es en
+✅ es en admin.json
+✅ es en common.json
+✅ es en index.json
+✅ es en playerId.json
+✅ es en roomId.json
+
+> coronabingo@1.23.1 build
+> next build --webpack
+
+▲ Next.js 16.3.6 (webpack)
+- Environments: .env
+✓ Running next.config.js took 70ms
+
+  Running TypeScript ...
+  Finished TypeScript in 874ms ...
+  Creating an optimized production build ...
+
+warn - Tailwind is not purging unused styles because no template paths have been provided.
+warn - If you have manually configured PurgeCSS outside of Tailwind or are deliberately not removing unused styles, set `purge: false` in your Tailwind config file to silence this warning.
+warn - https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+✓ Compiled successfully in 2.9s
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/8) ...
+next-translate - compiled page: /admin - locale: es - namespaces: common - used loader: getStaticProps
+next-translate - compiled page: /admin - locale: en - namespaces: common - used loader: getStaticProps
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+next-translate - compiled page: / - locale: en - namespaces: common, index - used loader: getStaticProps
+  Generating static pages using 11 workers (2/8)
+  Generating static pages using 11 workers (4/8)
+  Generating static pages using 11 workers (6/8)
+✓ Generating static pages using 11 workers (8/8) in 249ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (pages)
+┌ ● /
+├   /_app
+├ ○ /404
+├ ● /admin
+├ ƒ /eventos/[eventId]
+├ ƒ /eventos/[eventId]/admin
+├ ƒ /room/[roomId]
+├ ƒ /room/[roomId]/[playerId]
+└ ƒ /room/[roomId]/admin
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand

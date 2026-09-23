@@ -39,7 +39,7 @@ Run build and start sequentially. Do not run an install, a development server an
 
 Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. CI enables this and uploads the HTML reports as the `bundle-reports` artifact, retained for 14 days. These replace the failing Packtracker upload; they provide per-build inspection without Packtracker's historical comparisons or budgets.
 
-Cypress remains disabled in CI and its old suite has not been restored. On a machine inheriting `ELECTRON_RUN_AS_NODE=1`, unset that variable before launching Cypress.
+Cypress and its legacy suite have been removed. No automated browser suite remains, and `npm test` is no longer defined. Use the explicit checks above; they do not verify gameplay in a browser. See the [removal record](research/cypress-removal-plan.md).
 
 ## Migration status
 

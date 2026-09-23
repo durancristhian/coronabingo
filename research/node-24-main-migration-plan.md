@@ -4,6 +4,8 @@ Date: 2026-09-23
 
 Status: migration released on 2026-09-23. Production serves commit `0e8e1dc` with Node 24; release CI and main-game production smoke checks passed. GitHub default, local primary tracking and Vercel production branch all use `main`. See [release evidence](node-24-release.md), [preview acceptance](node-24-preview.md), [CI verification](node-24-ci.md) and [local implementation](node-24-implementation.md). The user excluded standalone admin/event testing, waived test-room cleanup and rollback verification, and will handle rollback in Vercel if needed.
 
+Update, 2026-09-23: the separately authorized [Cypress removal](cypress-removal-plan.md) supersedes this plan's earlier requirement to preserve the deferred Cypress sources and disabled CI step. The suite, runner tooling, scripts, and CI reference are removed without a replacement browser suite. Husky and the remaining checks stay in place.
+
 ## Agreed outcome
 
 Run Coronabingo on Node 24 in local development, GitHub Actions, and Vercel production. Use Next.js 16 with React 18, Pages Router, and Webpack. Make `main` the GitHub default branch, local primary branch, and Vercel production branch.
