@@ -1,0 +1,217 @@
+- banner:
+  - generic: Analytics
+  - button "Abrir el selector universal.":
+    - generic: Todas las cuentas
+    - img: chevron_right
+    - generic: coronabingo
+    - generic: Coronabingo - GA4
+    - img: arrow_drop_down
+  - search:
+    - img: search
+    - textbox "Buscar":
+      - /placeholder: Pruebe a buscar "Resumen del sitio web"
+  - button "Cambiar de producto":
+  - button "Menú de ayuda":
+    - img: help
+  - button "Abrir el panel del selector de cuentas de usuario."
+- navigation "Páginas principales":
+  - link "Página principal":
+    - generic: Página principal
+  - link "Informes":
+    - img: insert_chart_filled
+    - generic: Informes
+  - link "Explorar":
+    - img: data_exploration
+    - generic: Explorar
+  - link "Publicidad":
+    - img: ads_click
+    - generic: Publicidad
+- navigation "Páginas de configuración":
+  - link "Tareas":
+    - img: task_alt
+    - generic: Tareas
+  - link "Administrar":
+    - img: settings_filled
+    - generic: Administrar
+- navigation "Navegación secundaria":
+  - navigation "Páginas secundarias":
+    - button "Crear":
+      - text: Crear
+      - img: arrow_drop_down
+  - tree:
+    - treeitem "Informe panorámico" [level=1]:
+      - button "Informe panorámico":
+        - generic: Informe panorámico
+    - treeitem "Resumen en tiempo real" [level=1]:
+      - button "Resumen en tiempo real":
+        - generic: Resumen en tiempo real
+    - treeitem "Páginas en tiempo real" [level=1]:
+      - button "Páginas en tiempo real":
+        - generic: Páginas en tiempo real
+    - treeitem "Ciclo de vida" [expanded] [level=1]:
+      - separator
+      - button "Ciclo de vida":
+        - generic: Ciclo de vida
+        - img: keyboard_arrow_up
+    - treeitem "Adquisición" [level=2]:
+      - button "Adquisición":
+        - img: arrow_right
+        - generic: Adquisición
+    - treeitem "Interacción" [level=2]:
+      - button "Interacción":
+        - img: arrow_right
+        - generic: Interacción
+    - treeitem "Monetización" [level=2]:
+      - button "Monetización":
+        - img: arrow_right
+        - generic: Monetización
+    - treeitem "Retención" [level=2]:
+      - button "Retención":
+        - generic: Retención
+    - treeitem "Importación de datos" [expanded] [level=1]:
+      - separator
+      - button "Importación de datos":
+        - generic: Importación de datos
+        - img: keyboard_arrow_up
+    - treeitem "Validación de la importación de datos de campañas" [level=2]:
+      - button "Validación de la importación de datos de campañas":
+        - generic: Validación de la importación de datos de campañas
+    - treeitem "Search Console" [expanded] [level=1]:
+      - separator
+      - button "Search Console":
+        - generic: Search Console
+        - img: keyboard_arrow_up
+    - treeitem "Search Console" [expanded] [level=2]:
+      - button "Search Console":
+        - img: arrow_drop_down
+        - generic: Search Console
+    - treeitem "Consultas" [level=3]:
+      - button "Consultas":
+        - generic: Consultas
+    - treeitem "Tráfico de búsqueda orgánica de Google" [level=3]:
+      - button "Tráfico de búsqueda orgánica de Google":
+        - generic: Tráfico de búsqueda orgánica de Google
+    - treeitem "Usuario" [expanded] [level=1]:
+      - separator
+      - button "Usuario":
+        - generic: Usuario
+        - img: keyboard_arrow_up
+    - treeitem "Atributos de usuario" [level=2]:
+      - button "Atributos de usuario":
+        - img: arrow_right
+        - generic: Atributos de usuario
+    - treeitem "Tecnología" [level=2]:
+      - button "Tecnología":
+        - img: arrow_right
+        - generic: Tecnología
+  - navigation "Otras páginas":
+    - button "Biblioteca":
+      - img: folder
+      - generic: Biblioteca
+  - separator
+- button "Interruptor de navegación" [expanded]:
+  - img: keyboard_arrow_left
+- main:
+  - button "Todos los usuarios":
+    - generic: T
+    - generic: Todos los usuarios
+  - button "Añadir comparación":
+    - generic: Añadir comparación
+    - img: add
+  - combobox "Abrir selector de periodos":
+    - generic: los últimos 28 días
+    - generic: 26 ago-22 sept 2026
+    - img: arrow_drop_down
+  - separator
+  - 'heading "Consultas: Consulta de la Búsqueda de Google orgánica" [active] [level=1]'
+  - button "informe usa el 100 % de los datos disponibles. Haz clic para ver más información.":
+    - img: check_circle
+    - generic: informe usa el 100 % de los datos disponibles. Haz clic para ver más información.
+    - img: arrow_drop_down
+  - img: filter_alt
+  - button "ID del flujo coincide exactamente con 'Coronabingo - GA4'":
+    - generic: ID del flujo coincide exactamente con 'Coronabingo - GA4'
+    - button "eliminar":
+      - img: close
+  - generic "Ver anotaciones":
+    - button "Ver anotaciones":
+  - generic "Editar comparaciones":
+    - button "Editar comparaciones":
+  - generic "Abrir este informe como exploración":
+    - button "Abrir este informe como exploración":
+      - img: data_exploration
+  - generic "Compartir este informe":
+    - button "Compartir este informe":
+      - img: share
+  - generic "Estadísticas":
+    - button "Estadísticas":
+  - generic "Personalizar el informe":
+    - button "Personalizar el informe":
+      - img: edit
+  - text: add check_circle arrow_drop_down filter_alt close arrow_drop_down data_exploration share edit
+  - heading "Clics de la Búsqueda de Google orgánica a lo largo del tiempo" [level=2]
+  - generic "Selector de granularidad de fecha":
+    - combobox "Selector de granularidad de fecha":
+      - generic: Día
+  - img: search
+  - textbox "Buscar":
+    - /placeholder: Buscar…
+  - grid "Datos registrados.":
+    - rowgroup:
+      - row "Índice temático Consulta de la Búsqueda de Google orgánica Clics de la Búsqueda de Google orgánica Impresiones de la Búsqueda de Google orgánica Porcentaje de clics de la Búsqueda de Google orgánica Posición media en la Búsqueda de Google orgánica":
+        - columnheader "Índice temático":
+          - generic: Índice temático
+        - columnheader "Consulta de la Búsqueda de Google orgánica":
+          - button "Consulta de la Búsqueda de Google orgánica abrir selector de dimensiones":
+            - button "Consulta de la Búsqueda de Google orgánica":
+              - generic: Consulta de la Búsqueda de Google orgánica
+              - text: Consulta de la …oogle orgánica
+              - img: arrow_drop_down
+            - button "abrir selector de dimensiones":
+              - img: add
+        - columnheader "Clics de la Búsqueda de Google orgánica":
+          - button "Clics de la Búsqueda de Google orgánica":
+            - button "Clics de la Búsqueda de Google orgánica"
+        - columnheader "Impresiones de la Búsqueda de Google orgánica":
+          - button "Impresiones de la Búsqueda de Google orgánica":
+            - button "Impresiones de la Búsqueda de Google orgánica"
+        - columnheader "Porcentaje de clics de la Búsqueda de Google orgánica":
+          - button "Porcentaje de clics de la Búsqueda de Google orgánica":
+            - button "Porcentaje de clics de la Búsqueda de Google orgánica"
+        - columnheader "Posición media en la Búsqueda de Google orgánica":
+          - button "Posición media en la Búsqueda de Google orgánica":
+            - button "Posición media en la Búsqueda de Google orgánica"
+      - row "Celda vacía para el total en la columna Índice Total Celda vacía para el total del resumen en la columna Clics de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Impresiones de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Porcentaje de clics de la Búsqueda de Google orgánica 0 % Celda vacía para el total del resumen en la columna Posición media en la Búsqueda de Google orgánica 0,00":
+        - columnheader "Celda vacía para el total en la columna Índice":
+          - generic: Celda vacía para el total en la columna Índice
+        - columnheader "Total":
+          - generic: Total
+        - columnheader "Celda vacía para el total del resumen en la columna Clics de la Búsqueda de Google orgánica 0":
+          - generic: Celda vacía para el total del resumen en la columna Clics de la Búsqueda de Google orgánica
+          - generic: "0"
+        - columnheader "Celda vacía para el total del resumen en la columna Impresiones de la Búsqueda de Google orgánica 0":
+          - generic: Celda vacía para el total del resumen en la columna Impresiones de la Búsqueda de Google orgánica
+          - generic: "0"
+        - columnheader "Celda vacía para el total del resumen en la columna Porcentaje de clics de la Búsqueda de Google orgánica 0 %":
+          - generic: Celda vacía para el total del resumen en la columna Porcentaje de clics de la Búsqueda de Google orgánica
+          - generic: 0 %
+        - columnheader "Celda vacía para el total del resumen en la columna Posición media en la Búsqueda de Google orgánica 0,00":
+          - generic: Celda vacía para el total del resumen en la columna Posición media en la Búsqueda de Google orgánica
+          - generic: 0,00
+    - rowgroup
+  - generic: No hay datos disponibles
+  - text: ©2026 Google |
+  - link "Página principal de Analytics":
+    - /url: https://www.google.com/analytics/?hl=es
+  - text: "|"
+  - link "Términos del Servicio":
+    - /url: https://www.google.com/analytics/tos.html?hl=es
+  - text: "|"
+  - link "Política de Privacidad":
+    - /url: https://www.google.com/policies/privacy/?hl=es
+  - text: "|"
+  - button "Enviar comentarios":
+    - img: feedback
+    - generic: Enviar comentarios
+- complementary
+- button "Abrir el menú contextual"

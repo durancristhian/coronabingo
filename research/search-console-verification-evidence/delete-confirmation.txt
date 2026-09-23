@@ -1,0 +1,223 @@
+- banner:
+  - generic: Analytics
+  - button:
+    - generic: Todas las cuentas
+    - img: chevron_right
+    - generic: coronabingo
+    - generic: Coronabingo - GA4
+    - img: arrow_drop_down
+  - search:
+    - img: search
+    - textbox:
+      - /placeholder: Pruebe a buscar "usuarios de España la semana pasada"
+  - button:
+  - button:
+    - img: help
+  - button
+- navigation:
+  - link:
+    - generic: Página principal
+  - link:
+    - img: insert_chart_filled
+    - generic: Informes
+  - link:
+    - img: data_exploration
+    - generic: Explorar
+  - link:
+    - img: ads_click
+    - generic: Publicidad
+- navigation:
+  - link:
+    - img: task_alt
+    - generic: Tareas
+  - link:
+    - img: settings_filled
+    - generic: Administrar
+- navigation:
+  - navigation:
+    - button:
+      - img: add
+      - text: Crear
+      - img: arrow_drop_down
+  - tree:
+    - treeitem [level=1]:
+      - button:
+        - generic: Administrar
+    - treeitem [level=1]:
+      - button:
+        - generic: Mis preferencias
+    - treeitem [expanded] [level=1]:
+      - separator
+      - button:
+        - generic: Configuración de la cuenta
+        - img: keyboard_arrow_up
+    - treeitem [level=2]:
+      - button:
+        - img: arrow_right
+        - generic: Cuenta
+    - treeitem [expanded] [level=1]:
+      - separator
+      - button:
+        - generic: Configuración de la propiedad
+        - img: keyboard_arrow_up
+    - treeitem [level=2]:
+      - button:
+        - img: arrow_right
+        - generic: Propiedad
+    - treeitem [level=2]:
+      - button:
+        - img: arrow_right
+        - generic: Recogida y modificación de datos
+    - treeitem [level=2]:
+      - button:
+        - img: arrow_right
+        - generic: Visualización de datos
+    - treeitem [expanded] [level=2]:
+      - button:
+        - img: arrow_drop_down
+        - generic: Vinculaciones con otros productos
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Google AdMob
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Google AdSense
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Google Ads
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Ad Manager
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con BigQuery
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Display & Video 360
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Floodlight
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Perfil de Empresa en Google
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Merchant Center
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Google Play
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Search Ads 360
+    - treeitem [level=3]:
+      - button:
+        - generic: Vinculaciones con Search Console
+    - treeitem [level=3]:
+      - button:
+        - generic: Enlaces de Meta
+    - treeitem [level=3]:
+      - button:
+        - generic: Enlaces de Pinterest
+    - treeitem [level=3]:
+      - button:
+        - generic: Enlaces de Reddit
+    - treeitem [level=3]:
+      - button:
+        - generic: Enlaces de Snap
+    - treeitem [level=3]:
+      - button:
+        - generic: Enlaces de TikTok
+  - separator
+- button [expanded]:
+  - img: keyboard_arrow_left
+- main:
+  - heading [level=1]: Vinculaciones con Search Console
+  - img: search
+  - searchbox
+  - button [disabled]:
+    - generic: Vincular
+  - table:
+    - row:
+      - columnheader:
+        - button:
+          - generic: Nombre de propiedad de Search Console
+      - columnheader:
+        - button:
+          - generic: Tipo de propiedad de Search Console
+      - columnheader:
+        - button:
+          - generic: Flujo web
+      - columnheader:
+        - button:
+          - generic: ID de flujo
+      - columnheader:
+        - button:
+          - generic: Responsable de la vinculación
+      - columnheader:
+        - button:
+          - generic: Fecha de vinculación
+      - columnheader:
+        - generic: Datos de fila
+    - row:
+      - cell:
+        - generic: https://coronabingo.now.sh/
+      - cell:
+        - generic: Prefijo de la URL
+      - cell:
+        - generic: Coronabingo - GA4
+      - cell:
+        - generic: "5469366293"
+      - cell:
+        - generic: durancristhian@gmail.com
+      - cell: 13 ago 2026
+      - cell:
+        - button:
+          - img: keyboard_arrow_right
+- contentinfo:
+  - text: ©2026 Google |
+  - link:
+    - /url: https://www.google.com/analytics/?hl=es
+    - text: Página principal de Analytics
+  - text: "|"
+  - link:
+    - /url: https://www.google.com/analytics/tos.html?hl=es
+    - text: Términos del Servicio
+  - text: "|"
+  - link:
+    - /url: https://www.google.com/policies/privacy/?hl=es
+    - text: Política de Privacidad
+  - text: "|"
+  - button:
+    - img: feedback
+    - generic: Enviar comentarios
+- dialog "Vinculación con Search Console":
+  - button "Cerrar la ventana del control deslizante":
+    - img: close
+  - heading "Vinculación con Search Console" [level=2]:
+    - generic: Vinculación con Search Console
+  - button "Mostrar más opciones":
+    - img: more_vert
+  - heading "Detalles de enlace completado" [level=3]
+  - term: Nombre de propiedad de Search Console
+  - definition: https://coronabingo.now.sh/
+  - term: Tipo de propiedad de Search Console
+  - definition: Prefijo de la URL
+  - term: Flujo web
+  - definition: Coronabingo - GA4
+  - term: ID de flujo
+  - definition: "5469366293"
+  - term: Responsable de la vinculación
+  - definition: durancristhian@gmail.com
+  - term: Fecha de vinculación
+  - definition: 13 ago 2026, 18:24:56
+  - term: Modificada por última vez por
+  - definition: durancristhian@gmail.com
+  - term: Fecha de la última modificación
+  - definition: 13 ago 2026, 18:24:56
+- dialog "¿Seguro que quieres eliminar esta vinculación?":
+  - heading "¿Seguro que quieres eliminar esta vinculación?" [level=1]
+  - generic: Si eliminas esta vinculación, se dejarán de compartir datos entre la propiedad de Search Console y este flujo de Analytics.
+  - button "Cancelar" [active]:
+    - generic: Cancelar
+  - button "Eliminar":
+    - generic: Eliminar

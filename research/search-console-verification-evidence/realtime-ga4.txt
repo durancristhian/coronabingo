@@ -1,0 +1,308 @@
+Captured 2026-09-23T22:33:03.019Z
+Property 385744187, stream 5469366293
+Room identifiers redacted.
+- banner:
+  - generic: Analytics
+  - button "Abrir el selector universal.":
+    - generic: Todas las cuentas
+    - img: chevron_right
+    - generic: coronabingo
+    - generic: Coronabingo - GA4
+    - img: arrow_drop_down
+  - search:
+    - img: search
+    - textbox "Buscar":
+      - /placeholder: Pruebe a buscar "de dónde proceden mis usuarios"
+  - button "Cambiar de producto":
+  - button "Menú de ayuda":
+    - img: help
+  - button "Abrir el panel del selector de cuentas de usuario."
+- navigation "Páginas principales":
+  - link "Página principal":
+    - generic: Página principal
+  - link "Informes":
+    - img: insert_chart_filled
+    - generic: Informes
+  - link "Explorar":
+    - img: data_exploration
+    - generic: Explorar
+  - link "Publicidad":
+    - img: ads_click
+    - generic: Publicidad
+- navigation "Páginas de configuración":
+  - link "Tareas":
+    - img: task_alt
+    - generic: Tareas
+  - link "Administrar":
+    - img: settings_filled
+    - generic: Administrar
+- navigation "Navegación secundaria":
+  - navigation "Páginas secundarias":
+    - button "Crear":
+      - text: Crear
+      - img: arrow_drop_down
+  - tree:
+    - treeitem "Informe panorámico" [level=1]:
+      - button "Informe panorámico":
+        - generic: Informe panorámico
+    - treeitem "Resumen en tiempo real" [level=1]:
+      - button "Resumen en tiempo real":
+        - generic: Resumen en tiempo real
+    - treeitem "Páginas en tiempo real" [level=1]:
+      - button "Páginas en tiempo real":
+        - generic: Páginas en tiempo real
+    - treeitem "Ciclo de vida" [expanded] [level=1]:
+      - separator
+      - button "Ciclo de vida":
+        - generic: Ciclo de vida
+        - img: keyboard_arrow_up
+    - treeitem "Adquisición" [level=2]:
+      - button "Adquisición":
+        - img: arrow_right
+        - generic: Adquisición
+    - treeitem "Interacción" [level=2]:
+      - button "Interacción":
+        - img: arrow_right
+        - generic: Interacción
+    - treeitem "Monetización" [level=2]:
+      - button "Monetización":
+        - img: arrow_right
+        - generic: Monetización
+    - treeitem "Retención" [level=2]:
+      - button "Retención":
+        - generic: Retención
+    - treeitem "Importación de datos" [expanded] [level=1]:
+      - separator
+      - button "Importación de datos":
+        - generic: Importación de datos
+        - img: keyboard_arrow_up
+    - treeitem "Validación de la importación de datos de campañas" [level=2]:
+      - button "Validación de la importación de datos de campañas":
+        - generic: Validación de la importación de datos de campañas
+    - treeitem "Search Console" [expanded] [level=1]:
+      - separator
+      - button "Search Console":
+        - generic: Search Console
+        - img: keyboard_arrow_up
+    - treeitem "Search Console" [expanded] [level=2]:
+      - button "Search Console":
+        - img: arrow_drop_down
+        - generic: Search Console
+    - treeitem "Consultas" [level=3]:
+      - button "Consultas":
+        - generic: Consultas
+    - treeitem "Tráfico de búsqueda orgánica de Google" [level=3]:
+      - button "Tráfico de búsqueda orgánica de Google":
+        - generic: Tráfico de búsqueda orgánica de Google
+    - treeitem "Usuario" [expanded] [level=1]:
+      - separator
+      - button "Usuario":
+        - generic: Usuario
+        - img: keyboard_arrow_up
+    - treeitem "Atributos de usuario" [level=2]:
+      - button "Atributos de usuario":
+        - img: arrow_right
+        - generic: Atributos de usuario
+    - treeitem "Tecnología" [level=2]:
+      - button "Tecnología":
+        - img: arrow_right
+        - generic: Tecnología
+  - navigation "Otras páginas":
+    - button "Biblioteca":
+      - img: folder
+      - generic: Biblioteca
+  - separator
+- button "Interruptor de navegación" [expanded]:
+  - img: keyboard_arrow_left
+- main:
+  - button "Todos los usuarios":
+    - generic: T
+    - generic: Todos los usuarios
+  - button "Añadir comparación":
+    - generic: Añadir comparación
+    - img: add
+  - separator
+  - heading "Resumen en tiempo real" [level=1]:
+    - button "Resumen en tiempo real"
+  - button "informe usa el 100 % de los datos disponibles. Haz clic para ver más información.":
+    - img: check_circle
+    - generic: informe usa el 100 % de los datos disponibles. Haz clic para ver más información.
+    - img: arrow_drop_down
+  - button "Acceder a la vista general de usuario":
+    - generic: Acceder a la vista general de usuario
+  - generic "Pantalla completa":
+    - button "Pantalla completa":
+      - img: fullscreen
+  - generic "Editar comparaciones":
+    - button "Editar comparaciones":
+  - generic "Compartir este informe":
+    - button "Compartir este informe":
+      - img: share
+  - button "Usuarios activos durante los últimos 30 minutos"
+  - generic: "2"
+  - button "Usuarios activos en los últimos 5 minutos"
+  - generic: "2"
+  - generic: Usuarios activos por minuto
+  - button "Keyboard shortcuts"
+  - region "Map"
+  - iframe
+  - button "Zoom in"
+  - button "Zoom out" [disabled]
+  - button "Keyboard shortcuts"
+  - generic: Map data ©2026
+  - link "Terms (opens in new tab)":
+    - /url: https://www.google.com/intl/en-US_US/help/terms_maps.html
+    - text: Terms
+  - generic "Usuarios activos":
+    - button "Usuarios activos"
+  - text: por
+  - generic "Primera fuente del usuario":
+    - combobox "Dimensiones":
+      - generic: Primera fuente del usuario
+  - generic: N.º 1
+  - generic: "-"
+  - generic: "-"
+  - table:
+    - row "Primera fuente del usuario Usuarios activos":
+      - columnheader "Primera fuente del usuario":
+        - button "Primera fuente del usuario"
+      - columnheader "Usuarios activos":
+        - button "Usuarios activos"
+  - generic: No hay datos disponibles.
+  - table:
+    - row
+  - generic "Usuarios activos":
+    - combobox "Métricas":
+      - generic: Usuarios activos
+  - text: por
+  - generic "Audiencia":
+    - button "Audiencia"
+  - generic: N.º 1
+  - generic: All Users
+  - generic: All Users
+  - generic: "2"
+  - generic: 100 %
+  - table:
+    - row "Audiencia Usuarios activos":
+      - columnheader "Audiencia":
+        - button "Audiencia"
+      - columnheader "Usuarios activos":
+        - button "Usuarios activos"
+    - row "All Users 2":
+      - cell "All Users"
+      - cell "2"
+  - status: 1–1 de 1
+  - button "Página anterior" [disabled]:
+  - button "Página siguiente" [disabled]:
+  - table:
+    - row:
+      - columnheader
+    - row:
+      - cell
+  - generic "Vistas":
+    - button "Vistas"
+  - text: por
+  - generic "Título de página y nombre de pantalla":
+    - button "Título de página y nombre de pantalla"
+  - generic: N.º 1
+  - generic: Coronabingo | Tu juego de Bingo Online
+  - generic: Coronabingo | Tu juego de Bingo Online
+  - generic: "3"
+  - generic: 100 %
+  - table:
+    - row "Título de página y nombre de pantalla Vistas":
+      - columnheader "Título de página y nombre de pantalla":
+        - button "Título de página y nombre de pantalla"
+      - columnheader "Vistas":
+        - button "Vistas"
+    - row "Coronabingo | Tu juego de Bingo Online 3":
+      - cell "Coronabingo | Tu juego de Bingo Online"
+      - cell "3"
+  - status: 1–1 de 1
+  - button "Página anterior" [disabled]:
+  - button "Página siguiente" [disabled]:
+  - table:
+    - row:
+      - columnheader
+    - row:
+      - cell
+  - generic "Número de eventos":
+    - button "Número de eventos"
+  - text: por
+  - generic "Nombre del evento":
+    - button "Nombre del evento"
+  - button "Volver":
+    - img: keyboard_backspace
+  - generic: page_location
+  - generic: "3"
+  - table:
+    - row "Valor del parámetro de evento Número de eventos":
+      - columnheader "Valor del parámetro de evento":
+        - generic: Valor del parámetro de evento
+      - columnheader "Número de eventos":
+        - button "Número de eventos"
+    - row "https://coronabingo.com.ar/ 2":
+      - cell "https://coronabingo.com.ar/"
+      - cell "2"
+    - row "https://coronabingo.com.ar/es/room/[omitido] 1":
+      - cell "https://coronabingo.com.ar/es/room/[omitido]"
+      - cell "1"
+  - status: 1–2 de 2
+  - button "Página anterior" [disabled]:
+  - button "Página siguiente" [disabled]:
+  - table:
+    - row:
+      - columnheader
+    - row:
+      - cell
+    - row:
+      - cell
+  - generic "Eventos clave":
+    - button "Eventos clave"
+  - text: por
+  - generic "Nombre del evento":
+    - button "Nombre del evento"
+  - generic: N.º 1
+  - generic: "-"
+  - generic: "-"
+  - table:
+    - row "Nombre del evento Eventos clave":
+      - columnheader "Nombre del evento":
+        - button "Nombre del evento"
+      - columnheader "Eventos clave":
+        - button "Eventos clave"
+  - generic: No hay datos disponibles.
+  - table:
+    - row
+  - generic "Usuarios activos":
+    - button "Usuarios activos"
+  - text: por
+  - generic "Propiedad de usuario":
+    - button "Propiedad de usuario"
+  - generic: N.º 1
+  - generic: "-"
+  - generic: "-"
+  - table:
+    - row "Propiedad de usuario Usuarios activos":
+      - columnheader "Propiedad de usuario":
+        - button "Propiedad de usuario"
+      - columnheader "Usuarios activos":
+        - button "Usuarios activos"
+  - generic: No hay datos disponibles.
+  - table:
+    - row
+  - text: ©2026 Google |
+  - link "Página principal de Analytics":
+    - /url: https://www.google.com/analytics/?hl=es
+  - text: "|"
+  - link "Términos del Servicio":
+    - /url: https://www.google.com/analytics/tos.html?hl=es
+  - text: "|"
+  - link "Política de Privacidad":
+    - /url: https://www.google.com/policies/privacy/?hl=es
+  - text: "|"
+  - button "Enviar comentarios":
+    - img: feedback
+    - generic: Enviar comentarios
+- complementary
+- button "Abrir el menú contextual"

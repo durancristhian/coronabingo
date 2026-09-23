@@ -1,0 +1,142 @@
+- banner:
+  - button "Menú principal":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+  - search:
+    - textbox [disabled]: Inspeccionar las URL de "https://coronabingo.com.ar/"
+    - combobox "Inspeccionar cualquier URL en"
+    - button "Búsqueda":
+  - button "Ayuda":
+    - generic: help_outline
+  - tooltip: Ayuda
+  - button "Configuración de usuario":
+    - generic: manage_accounts
+  - tooltip: Configuración de usuario
+  - 'button "Mensajes sin leer: 51"':
+    - generic: notifications
+  - tooltip: Mensajes
+  - generic: "51"
+  - button "Aplicaciones de Google":
+  - 'button "Cuenta de Google: Cristhian Duran (durancristhian@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Principal":
+    - button "Buscar una propiedad":
+      - img "icono de página"
+      - combobox "https://coronabingo.com.ar/"
+      - generic: 
+    - link "Descripción general":
+      - /url: ./search-console?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: home
+      - generic: Descripción general
+    - link "Estadísticas":
+      - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: lightbulb_2
+      - generic: Estadísticas
+    - link "Rendimiento":
+      - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: trending_up
+      - generic: Rendimiento
+    - button "Sección de informe Rendimiento":
+      - generic: keyboard_arrow_down
+    - button "Inspección de URLs":
+      - generic: search
+      - generic: Inspección de URLs
+    - generic: Indexación
+    - button "Sección de informe Indexación" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Páginas":
+      - /url: ./search-console/index?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: file_copy
+      - generic: Páginas
+    - link "Sitemaps":
+      - /url: ./search-console/sitemaps?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: account_tree
+      - generic: Sitemaps
+    - link "Retirada de URLs":
+      - /url: ./search-console/removals?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: visibility_off
+      - generic: Retirada de URLs
+    - generic: Experiencia
+    - button "Sección de informe Experiencia" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Core Web Vitals":
+      - /url: ./search-console/core-web-vitals?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: speed
+      - generic: Core Web Vitals
+    - generic: Seguridad y Acciones manuales
+    - button "Sección de informe Seguridad y Acciones manuales":
+      - generic: keyboard_arrow_down
+    - link "Informe \"Enlaces\"":
+      - /url: ./search-console/links?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: link_2
+      - generic: Enlaces
+    - link "Logros":
+      - /url: ./search-console/achievements?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: trophy
+      - generic: Logros
+    - link "Ajustes" [active]:
+      - /url: ./search-console/settings?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: settings
+      - generic: Ajustes
+    - button "Enviar comentarios":
+      - generic: feedback
+      - generic: Enviar comentarios
+    - button "Acerca de Search Console":
+      - generic: info
+      - generic: Acerca de Search Console
+    - link "Privacidad":
+      - /url: https://myaccount.google.com/privacypolicy?hl=es
+    - link "Términos":
+      - /url: https://myaccount.google.com/termsofservice?hl=es
+- navigation "Rutas de exploración":
+  - heading "Ajustes" [level=1]
+- main:
+  - generic: Configuración general
+  - link "Verificación de la propiedad Propietario verificado":
+    - /url: ./search-console/ownership?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: Verificación de la propiedad
+    - generic: 
+    - generic: Propietario verificado
+    - generic: 
+  - link "Usuarios y permisos Cristhian Duran":
+    - /url: ./search-console/users?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: Usuarios y permisos
+    - generic: Cristhian Duran
+    - generic: 
+  - link "Asociaciones Asocia un servicio a esta propiedad":
+    - /url: ./search-console/settings/associations?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: Asociaciones
+    - generic: Asocia un servicio a esta propiedad
+    - generic: 
+  - link "Cambio de dirección Avisa a Google cuando traslades tu sitio web a otra dirección":
+    - /url: ./search-console/settings/change-address?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: Cambio de dirección
+    - generic: Avisa a Google cuando traslades tu sitio web a otra dirección
+    - generic: 
+  - link "Exportación de datos en bloque Exportación diaria de datos de rendimiento a BigQuery":
+    - /url: ./search-console/settings/bulk-data-export?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: Exportación de datos en bloque
+    - generic: Exportación diaria de datos de rendimiento a BigQuery
+    - generic: 
+  - generic: AI controls
+  - link "IA generativa en la Búsqueda Hereda de coronabingo.com.ar":
+    - /url: ./search-console/settings/search-gen-ai?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+    - generic: IA generativa en la Búsqueda
+    - generic: subdirectory_arrow_right
+    - generic: Hereda de coronabingo.com.ar
+    - generic: 
+  - generic: Rastreo
+  - generic: robots.txt
+  - generic: No hay ningún archivo robots.txt
+  - button "Abrir informe" [disabled]:
+    - generic: Abrir informe
+  - generic: Estadísticas de rastreo
+  - generic: Aún no hay datos disponibles
+  - button "Abrir informe" [disabled]:
+    - generic: Abrir informe
+  - generic: Acerca de
+  - generic: Fecha en la que se añadió la propiedad a la cuenta
+  - generic: 23 de septiembre de 2026
+  - button "Quitar propiedad":
+    - generic: Quitar propiedad
+- generic: Ajustes

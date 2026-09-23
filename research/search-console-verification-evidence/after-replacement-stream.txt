@@ -1,0 +1,254 @@
+- banner:
+  - generic: Analytics
+  - button "Abrir el selector universal.":
+    - generic: Todas las cuentas
+    - img: chevron_right
+    - generic: coronabingo
+    - generic: Coronabingo - GA4
+    - img: arrow_drop_down
+  - search:
+    - img: search
+    - textbox "Buscar":
+      - /placeholder: Pruebe a buscar "tendencia de conversiones orgánicas el mes pasado"
+  - button "Cambiar de producto":
+  - button "Menú de ayuda":
+    - img: help
+  - button "Abrir el panel del selector de cuentas de usuario."
+- navigation "Páginas principales":
+  - link "Página principal":
+    - generic: Página principal
+  - link "Informes":
+    - img: insert_chart_filled
+    - generic: Informes
+  - link "Explorar":
+    - img: data_exploration
+    - generic: Explorar
+  - link "Publicidad":
+    - img: ads_click
+    - generic: Publicidad
+- navigation "Páginas de configuración":
+  - link "Tareas":
+    - img: task_alt
+    - generic: Tareas
+  - link "Administrar":
+    - img: settings_filled
+    - generic: Administrar
+- navigation "Navegación secundaria":
+  - navigation "Páginas secundarias":
+    - button "Crear":
+      - img: add
+      - text: Crear
+      - img: arrow_drop_down
+  - tree:
+    - treeitem "Administrar" [level=1]:
+      - button "Administrar":
+        - generic: Administrar
+    - treeitem "Mis preferencias" [level=1]:
+      - button "Mis preferencias":
+        - generic: Mis preferencias
+    - treeitem "Configuración de la cuenta" [expanded] [level=1]:
+      - separator
+      - button "Configuración de la cuenta":
+        - generic: Configuración de la cuenta
+        - img: keyboard_arrow_up
+    - treeitem "Cuenta" [level=2]:
+      - button "Cuenta":
+        - img: arrow_right
+        - generic: Cuenta
+    - treeitem "Configuración de la propiedad" [expanded] [level=1]:
+      - separator
+      - button "Configuración de la propiedad":
+        - generic: Configuración de la propiedad
+        - img: keyboard_arrow_up
+    - treeitem "Propiedad" [level=2]:
+      - button "Propiedad":
+        - img: arrow_right
+        - generic: Propiedad
+    - treeitem "Recogida y modificación de datos" [expanded] [level=2]:
+      - button "Recogida y modificación de datos":
+        - img: arrow_drop_down
+        - generic: Recogida y modificación de datos
+    - treeitem "Flujos de datos" [level=3]:
+      - button "Flujos de datos":
+        - generic: Flujos de datos
+    - treeitem "Recogida de datos" [level=3]:
+      - button "Recogida de datos":
+        - generic: Recogida de datos
+    - treeitem "Importación de datos" [level=3]:
+      - button "Importación de datos":
+        - generic: Importación de datos
+    - treeitem "Conservación de datos" [level=3]:
+      - button "Conservación de datos":
+        - generic: Conservación de datos
+    - treeitem "Filtros de datos" [level=3]:
+      - button "Filtros de datos":
+        - generic: Filtros de datos
+    - treeitem "Solicitudes de eliminación de datos" [level=3]:
+      - button "Solicitudes de eliminación de datos":
+        - generic: Solicitudes de eliminación de datos
+    - treeitem "Configuración del consentimiento" [level=3]:
+      - button "Configuración del consentimiento":
+        - generic: Configuración del consentimiento
+    - treeitem "Visualización de datos" [level=2]:
+      - button "Visualización de datos":
+        - img: arrow_right
+        - generic: Visualización de datos
+    - treeitem "Vinculaciones con otros productos" [level=2]:
+      - button "Vinculaciones con otros productos":
+        - img: arrow_right
+        - generic: Vinculaciones con otros productos
+  - separator
+- button "Interruptor de navegación" [expanded]:
+  - img: keyboard_arrow_left
+- main:
+  - heading "Flujos de datos" [level=1]
+  - img: search
+  - searchbox "Escribe para filtrar"
+  - button "Añadir flujo":
+    - img: arrow_drop_down
+    - generic: Añadir flujo
+  - tablist:
+    - tab "Todos" [selected]:
+      - generic: Todos
+    - tab "iOS":
+      - generic: iOS
+    - tab "Android":
+      - generic: Android
+    - tab "Web":
+      - generic: Web
+  - tabpanel "Todos"
+  - table:
+    - row "Coronabingo - GA4 https://coronabingo.com.ar/ 5469366293 Ha recibido tráfico durante las últimas 48 horas. Seleccionar flujo":
+      - cell:
+      - cell "Coronabingo - GA4 https://coronabingo.com.ar/":
+        - generic: Coronabingo - GA4
+        - generic: https://coronabingo.com.ar/
+      - cell "5469366293":
+        - generic: "5469366293"
+      - cell "Ha recibido tráfico durante las últimas 48 horas.":
+        - generic: Ha recibido tráfico durante las últimas 48 horas.
+      - cell "Seleccionar flujo":
+        - button "Seleccionar flujo":
+          - img: keyboard_arrow_right
+- contentinfo:
+  - text: ©2026 Google |
+  - link "Página principal de Analytics":
+    - /url: https://www.google.com/analytics/?hl=es
+  - text: "|"
+  - link "Términos del Servicio":
+    - /url: https://www.google.com/analytics/tos.html?hl=es
+  - text: "|"
+  - link "Política de Privacidad":
+    - /url: https://www.google.com/policies/privacy/?hl=es
+  - text: "|"
+  - button "Enviar comentarios":
+    - img: feedback
+    - generic: Enviar comentarios
+- button "Abrir el menú contextual"
+- dialog "Detalles del flujo web":
+  - button "Cerrar detalles del flujo web":
+    - img: close
+  - heading "Detalles del flujo web" [level=1]
+  - button "Más acciones":
+    - img: more_vert
+  - separator
+  - img: check_circle
+  - generic: Confirmación
+  - generic: La recogida de datos ha estado activada en las últimas 48 horas.
+  - heading "Detalles del flujo" [level=2]
+  - button "Editar configuración de flujo web" [active]:
+    - img: edit
+  - generic: Nombre del flujo
+  - generic: Coronabingo - GA4
+  - generic: URL del flujo
+  - generic: https://coronabingo.com.ar/
+  - generic: ID del flujo
+  - generic: "5469366293"
+  - generic: ID de medición
+  - text: G-WYG7FMEWEF
+  - button "Copiar ID de medición":
+    - img: content_copy
+  - heading "Eventos" [level=2]
+  - img "Icono de medición mejorada"
+  - generic: Medición mejorada
+  - generic: Mide las interacciones y el contenido de tus sitios web automáticamente, además de las vistas de página.
+  - text: Puede que se recojan datos de los elementos de las páginas, como enlaces y vídeos insertados, con los eventos correspondientes. Debe asegurarse de que no se envíe información de identificación personal a Google.
+  - link "Más información sobre la medición mejorada":
+    - /url: https://support.google.com/analytics/answer/9216061?hl=es&utm_id=ad
+    - text: Más información
+  - switch "Habilitar medición mejorada" [checked]:
+  - separator
+  - generic: "Midiendo:"
+  - list "Activar mediciones mejoradas":
+    - img: remove_red_eye
+    - text: Vistas de página
+  - button "Configurar medición mejorada":
+    - img: settings
+  - button "Modificar eventos Modifique eventos y parámetros entrantes. Consulta más información sobre cómo modificar eventos ya creados. Abrir":
+    - img: touch_app
+    - generic: Modificar eventos
+    - text: Modifique eventos y parámetros entrantes.
+    - link "Consulta más información sobre cómo modificar eventos ya creados.":
+      - /url: https://support.google.com/analytics/answer/10085872?hl=es&utm_id=ad
+      - text: Más información
+    - button "Abrir":
+      - img: keyboard_arrow_right
+  - button "Crear eventos personalizados Crea eventos a partir de otros disponibles. Consulta más información acerca de la creación de nuevos eventos a partir de otros disponibles. Abrir":
+    - img: web_traffic
+    - generic: Crear eventos personalizados
+    - text: Crea eventos a partir de otros disponibles.
+    - link "Consulta más información acerca de la creación de nuevos eventos a partir de otros disponibles.":
+      - /url: https://support.google.com/analytics/answer/10085872?hl=es&utm_id=ad
+      - text: Más información
+    - button "Abrir":
+      - img: keyboard_arrow_right
+  - button "Secretos de la API de Measurement Protocol Crea un secreto de API para permitir que se envíen eventos adicionales a este flujo a través de Measurement Protocol. Más información sobre Protocolo de medición en Google Analytics 4 Abrir":
+    - img: vpn_key
+    - generic: Secretos de la API de Measurement Protocol
+    - text: Crea un secreto de API para permitir que se envíen eventos adicionales a este flujo a través de Measurement Protocol.
+    - link "Más información sobre Protocolo de medición en Google Analytics 4":
+      - /url: https://support.google.com/analytics/answer/9900444?hl=es&utm_id=ad
+      - text: Más información
+    - button "Abrir":
+      - img: keyboard_arrow_right
+  - button "Ocultar datos Evita que se envíen datos específicos a Google Analytics. Más información sobre la ocultación de datos Correo inactivo Claves de parámetro de consulta de URL inactivas Abrir panel de ocultación de datos":
+    - generic: Ocultar datos
+    - text: Evita que se envíen datos específicos a Google Analytics.
+    - link "Más información sobre la ocultación de datos":
+      - /url: https://support.google.com/analytics/answer/13544947?hl=es&utm_id=ad
+      - text: Más información
+    - generic: Correo inactivo
+    - generic: Claves de parámetro de consulta de URL inactivas
+    - button "Abrir panel de ocultación de datos":
+      - img: keyboard_arrow_right
+  - heading "Etiqueta de Google" [level=2]
+  - button "Configurar ajustes de etiquetas Configura el comportamiento de tu etiqueta de Google, así como los enlaces multidominio y el tráfico interno.Consulta más información sobre la configuración de etiquetas. Abrir":
+    - img: gtag
+    - generic: Configurar ajustes de etiquetas
+    - text: Configura el comportamiento de tu etiqueta de Google, así como los enlaces multidominio y el tráfico interno.
+    - link "Consulta más información sobre la configuración de etiquetas.":
+      - /url: https://support.google.com/analytics/answer/12131703?hl=es&utm_id=ad
+      - text: Más información
+    - button "Abrir":
+      - img: keyboard_arrow_right
+  - 'button "Gestionar etiquetas de sitio conectadas Para cargar etiquetas en más propiedades o productos, utiliza la etiqueta de Google en la página de este flujo. Más información sobre cómo el fragmento gtag.js asigna Universal Analytics a Google Analytics 4 Conectadas: 0 Abrir"':
+    - img: settings_ethernet
+    - generic: Gestionar etiquetas de sitio conectadas
+    - text: Para cargar etiquetas en más propiedades o productos, utiliza la etiqueta de Google en la página de este flujo.
+    - link "Más información sobre cómo el fragmento gtag.js asigna Universal Analytics a Google Analytics 4":
+      - /url: https://support.google.com/analytics/answer/9973999?hl=es&utm_id=ad
+      - text: Más información
+    - generic: "Conectadas: 0"
+    - button "Abrir":
+      - img: keyboard_arrow_right
+  - button "Ver instrucciones de etiquetas Obtén instrucciones sobre cómo implementar tu etiqueta de Google en este flujo de datos.Más información sobre cómo configurar la etiqueta de Google Flujos de datos Abrir":
+    - img: integration_instructions
+    - generic: Ver instrucciones de etiquetas
+    - text: Obtén instrucciones sobre cómo implementar tu etiqueta de Google en este flujo de datos.
+    - link "Más información sobre cómo configurar la etiqueta de Google":
+      - /url: https://support.google.com/analytics/answer/12002338?hl=es&utm_id=ad
+      - text: Más información
+    - img: done
+    - generic: Flujos de datos
+    - button "Abrir":
+      - img: keyboard_arrow_right

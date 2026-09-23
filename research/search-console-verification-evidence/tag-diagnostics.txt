@@ -1,0 +1,73 @@
+- iframe [active]:
+  - link "Skip to main content":
+    - /url: "#sheetContent1"
+  - button "Cerrar pantalla"
+  - heading "Etiqueta de Google" [level=1]
+  - generic: Coronabingo - GA4
+  - generic: G-WYG7FMEWEF
+  - button "Enviar comentarios":
+    - generic "Enviar comentarios"
+  - navigation:
+    - tablist "Navegación de nivel superior":
+      - tab "Configuración" [selected]
+      - tab "Historial"
+      - tab "Administrador"
+  - heading "Le damos la bienvenida a la etiqueta de Google" [level=2]
+  - text: La etiqueta global de sitio web (gtag.js) ahora es la etiqueta de Google. Con este cambio, las instalaciones de gtag.js tanto nuevas como existentes obtendrán nuevas funciones que le ayudarán a hacer más cosas, mejorar la calidad de los datos y adoptar nuevas funciones, todo ello sin necesidad de código adicional.
+  - link "Más información":
+    - /url: https://support.google.com/tagmanager/answer/11994839
+  - button "Cerrar"
+  - heading "Su etiqueta de Google" [level=2]
+  - button "Instrucciones de instalación"
+  - region "Diagram that shows the relationship between the Google tag and its destinations. Click to manage the Google tag.":
+    - text: Etiqueta de Google
+    - button "Más información sobre la etiqueta de Google"
+    - generic "Coronabingo - GA4"
+    - generic: "IDs:"
+    - generic: G-WYG7FMEWEF,
+    - generic: GT-W6J4R92
+    - text: Destinos
+    - button "Más información sobre los destinos"
+    - img "Google Analytics"
+    - generic: Coronabingo - GA4
+  - generic: "Calidad de Etiqueta: Requiere atención"
+  - generic: Se han detectado algunos problemas que puede que requieran su atención.
+  - button "Ver 2 issues"
+  - heading "Ajustes Algunos ajustes solo se aplican a destinos concretos. Más información sobre la configuración de destinos" [level=2]:
+    - generic: Ajustes
+    - text: Algunos ajustes solo se aplican a destinos concretos.
+    - link "Más información sobre la configuración de destinos":
+      - /url: https://support.google.com/google-ads/answer/12131703#Configure
+  - list:
+    - button "Gestionar detección automática de eventos Indique qué tipos de evento se deben detectar automáticamente para medirlos en los destinos de Google asociados":
+      - generic: Gestionar detección automática de eventos
+      - generic: Indique qué tipos de evento se deben detectar automáticamente para medirlos en los destinos de Google asociados
+    - button "Configurar sus dominios Especifica una lista de dominios para hacer una medición multidominio":
+      - generic: Configurar sus dominios
+      - generic: Especifica una lista de dominios para hacer una medición multidominio
+    - button "Permitir funciones de datos proporcionados por los usuarios Indique si quiere permitir que los datos proporcionados por los usuarios se incluyan en la medición de los productos de destino que aceptan esos datos.":
+      - generic: Permitir funciones de datos proporcionados por los usuarios
+      - generic: Indique si quiere permitir que los datos proporcionados por los usuarios se incluyan en la medición de los productos de destino que aceptan esos datos.
+  - button "Mostrar más ajustes": Mostrar más
+  - button "Cerrar pantalla"
+  - heading "Diagnóstico de Etiqueta" [level=1]
+  - generic: Dominios monitorizados
+  - generic: Gestione los dominios que se monitorizan con diagnósticos
+  - button "Gestionar"
+  - generic: Calidad de Etiqueta
+  - generic: Requiere atención
+  - text: Se han detectado algunos problemas que puede que requieran su atención.
+  - link "Más información":
+    - /url: https://support.google.com/tagmanager/answer/14681508
+  - generic: Tareas
+  - generic: 2 elementos
+  - generic: Algunas de sus páginas no están etiquetadas
+  - generic: Es importante que la etiqueta esté instalada en todas las páginas de su sitio para que la medición sea exhaustiva. Las páginas sin etiquetar pueden provocar lagunas en los datos y una medición de menos calidad.
+  - link "Ver páginas sin etiquetar":
+    - /url: https://tagmanager.google.com/#/view_issue?issueType=7&accountId=6115935894&containerId=125056152
+  - generic: Está usando etiquetas Universal Analytics antiguas
+  - text: Las etiquetas de UA antiguas con etiquetas de sitio conectadas pueden hacer que aparezcan datos incoherentes en los informes y pueden impedir el acceso a funciones de etiquetas de Google, como eventos de medición mejorada y comandos de API limitados. Para aprovechar todas las funciones de la etiqueta de Google, instale la etiqueta de Google directamente en su sitio o use Google Tag Manager.
+  - link "Más información":
+    - /url: https://support.google.com/analytics/answer/11583528
+  - link "Ver páginas":
+    - /url: https://tagmanager.google.com/#/view_issue?issueType=18&accountId=6115935894&containerId=125056152

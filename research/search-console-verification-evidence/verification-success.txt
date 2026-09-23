@@ -1,0 +1,54 @@
+- banner:
+  - button:
+  - link:
+    - /url: ./search-console
+  - button:
+    - generic: help_outline
+  - tooltip: Ayuda
+  - button:
+    - generic: manage_accounts
+  - tooltip: Configuración de usuario
+  - button:
+  - button:
+- dialog:
+  - navigation:
+    - button:
+      - combobox
+      - generic: Buscar una propiedad
+      - generic: 
+    - button:
+      - generic: feedback
+      - generic: Enviar comentarios
+    - button:
+      - generic: info
+      - generic: Acerca de Search Console
+    - link:
+      - /url: https://myaccount.google.com/privacypolicy?hl=es
+      - text: Privacidad
+    - link:
+      - /url: https://myaccount.google.com/termsofservice?hl=es
+      - text: Términos
+- generic: 
+- generic: Vaya, no puedes acceder a esta propiedad
+- text: Has iniciado sesión como
+- generic: durancristhian@gmail.com
+- text: "Propiedad:"
+- generic: https://coronabingo.com.ar/
+- generic: Inicia sesión con una cuenta que pueda acceder a esta propiedad o solicita acceso a un propietario.
+- generic: También puedes hacer lo siguiente
+- button:
+  - generic: Verificar la propiedad
+- dialog "Propiedad verificada automáticamente":
+  - heading "Propiedad verificada automáticamente Propiedad verificada automáticamente" [level=1]:
+    - generic: 
+    - generic: Propiedad verificada automáticamente
+    - generic: Propiedad verificada automáticamente
+  - text: "Métodos de verificación:"
+  - generic: Archivo HTML, Google Analytics
+  - text: Para mantener la verificación, no elimines el archivo. Para no perder la verificación, te recomendamos que añadas varios métodos de verificación en
+  - generic: Ajustes > Verificación de la propiedad
+  - text: .
+  - button "Hecho":
+    - generic: Hecho
+  - button "Ir a la propiedad" [active]:
+    - generic: Ir a la propiedad

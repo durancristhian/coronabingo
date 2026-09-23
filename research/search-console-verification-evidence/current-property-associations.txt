@@ -1,0 +1,127 @@
+- banner:
+  - button "Menú principal":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+  - search:
+    - textbox [disabled]: Inspeccionar las URL de "https://coronabingo.com.ar/"
+    - combobox "Inspeccionar cualquier URL en"
+    - button "Búsqueda":
+  - button "Ayuda":
+    - generic: help_outline
+  - tooltip: Ayuda
+  - button "Configuración de usuario":
+    - generic: manage_accounts
+  - tooltip: Configuración de usuario
+  - 'button "Mensajes sin leer: 51"':
+    - generic: notifications
+  - tooltip: Mensajes
+  - generic: "51"
+  - button "Aplicaciones de Google":
+  - 'button "Cuenta de Google: Cristhian Duran (durancristhian@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Principal":
+    - button "Buscar una propiedad":
+      - img "icono de página"
+      - combobox "https://coronabingo.com.ar/"
+      - generic: 
+    - link "Descripción general":
+      - /url: ./search-console?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: home
+      - generic: Descripción general
+    - link "Estadísticas":
+      - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: lightbulb_2
+      - generic: Estadísticas
+    - link "Rendimiento":
+      - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: trending_up
+      - generic: Rendimiento
+    - button "Sección de informe Rendimiento":
+      - generic: keyboard_arrow_down
+    - button "Inspección de URLs":
+      - generic: search
+      - generic: Inspección de URLs
+    - generic: Indexación
+    - button "Sección de informe Indexación" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Páginas":
+      - /url: ./search-console/index?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: file_copy
+      - generic: Páginas
+    - link "Sitemaps":
+      - /url: ./search-console/sitemaps?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: account_tree
+      - generic: Sitemaps
+    - link "Retirada de URLs":
+      - /url: ./search-console/removals?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: visibility_off
+      - generic: Retirada de URLs
+    - generic: Experiencia
+    - button "Sección de informe Experiencia" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Core Web Vitals":
+      - /url: ./search-console/core-web-vitals?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: speed
+      - generic: Core Web Vitals
+    - generic: Seguridad y Acciones manuales
+    - button "Sección de informe Seguridad y Acciones manuales":
+      - generic: keyboard_arrow_down
+    - link "Informe \"Enlaces\"":
+      - /url: ./search-console/links?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: link_2
+      - generic: Enlaces
+    - link "Logros":
+      - /url: ./search-console/achievements?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: trophy
+      - generic: Logros
+    - link "Ajustes":
+      - /url: ./search-console/settings?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+      - generic: settings
+      - generic: Ajustes
+    - button "Enviar comentarios":
+      - generic: feedback
+      - generic: Enviar comentarios
+    - button "Acerca de Search Console":
+      - generic: info
+      - generic: Acerca de Search Console
+    - link "Privacidad":
+      - /url: https://myaccount.google.com/privacypolicy?hl=es
+    - link "Términos":
+      - /url: https://myaccount.google.com/termsofservice?hl=es
+- navigation "Rutas de exploración":
+  - link "Ajustes":
+    - /url: ./search-console/settings?resource_id=https%3A%2F%2Fcoronabingo.com.ar%2F
+  - generic: 
+  - heading "Asociaciones" [level=1]
+- main:
+  - generic: Servicios asociados
+  - generic: Los servicios asociados pueden acceder a la información o indicar que están relacionados con tu propiedad.
+  - link "Más información":
+    - /url: https://support.google.com/webmasters/answer/9419894?hl=es
+  - table:
+    - rowgroup:
+      - row "Servicio Cuenta URL":
+        - columnheader "Servicio"
+        - columnheader "Cuenta"
+        - columnheader "URL"
+        - columnheader
+    - rowgroup
+  - generic: No hay ningún servicio asociado
+  - generic: Google Analytics
+  - link "Más información":
+    - /url: https://support.google.com/webmasters/answer/9419894?hl=es#zippy=request-an-association,request-a-google-analytics-association
+  - button "Asociar":
+    - generic: Asociar
+  - text: Solicitudes pendientes
+  - generic: Solicitudes pendientes de asociar a una de tus propiedades
+  - table:
+    - rowgroup:
+      - row "Servicio Asociación Solicitud enviada por Fecha de solicitud":
+        - columnheader "Servicio"
+        - columnheader "Asociación"
+        - columnheader "Solicitud enviada por"
+        - columnheader "Fecha de solicitud"
+        - columnheader
+    - rowgroup
+  - generic: No hay ninguna solicitud pendiente
+- generic: Asociaciones

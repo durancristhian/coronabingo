@@ -1,0 +1,215 @@
+- banner:
+  - generic: Analytics
+  - button "Abrir el selector universal.":
+    - generic: Todas las cuentas
+    - img: chevron_right
+    - generic: coronabingo
+    - generic: Coronabingo - GA4
+    - img: arrow_drop_down
+  - search:
+    - img: search
+    - textbox "Buscar":
+      - /placeholder: Pruebe a buscar "usuarios de España la semana pasada"
+  - button "Cambiar de producto":
+  - button "Menú de ayuda":
+    - img: help
+  - button "Abrir el panel del selector de cuentas de usuario."
+- navigation "Páginas principales":
+  - link "Página principal":
+    - generic: Página principal
+  - link "Informes":
+    - img: insert_chart_filled
+    - generic: Informes
+  - link "Explorar":
+    - img: data_exploration
+    - generic: Explorar
+  - link "Publicidad":
+    - img: ads_click
+    - generic: Publicidad
+- navigation "Páginas de configuración":
+  - link "Tareas":
+    - img: task_alt
+    - generic: Tareas
+  - link "Administrar":
+    - img: settings_filled
+    - generic: Administrar
+- navigation "Navegación secundaria":
+  - navigation "Páginas secundarias":
+    - button "Crear":
+      - img: add
+      - text: Crear
+      - img: arrow_drop_down
+  - tree:
+    - treeitem "Administrar" [level=1]:
+      - button "Administrar":
+        - generic: Administrar
+    - treeitem "Mis preferencias" [level=1]:
+      - button "Mis preferencias":
+        - generic: Mis preferencias
+    - treeitem "Configuración de la cuenta" [expanded] [level=1]:
+      - separator
+      - button "Configuración de la cuenta":
+        - generic: Configuración de la cuenta
+        - img: keyboard_arrow_up
+    - treeitem "Cuenta" [level=2]:
+      - button "Cuenta":
+        - img: arrow_right
+        - generic: Cuenta
+    - treeitem "Configuración de la propiedad" [expanded] [level=1]:
+      - separator
+      - button "Configuración de la propiedad":
+        - generic: Configuración de la propiedad
+        - img: keyboard_arrow_up
+    - treeitem "Propiedad" [level=2]:
+      - button "Propiedad":
+        - img: arrow_right
+        - generic: Propiedad
+    - treeitem "Recogida y modificación de datos" [level=2]:
+      - button "Recogida y modificación de datos":
+        - img: arrow_right
+        - generic: Recogida y modificación de datos
+    - treeitem "Visualización de datos" [level=2]:
+      - button "Visualización de datos":
+        - img: arrow_right
+        - generic: Visualización de datos
+    - treeitem "Vinculaciones con otros productos" [expanded] [level=2]:
+      - button "Vinculaciones con otros productos":
+        - img: arrow_drop_down
+        - generic: Vinculaciones con otros productos
+    - treeitem "Vinculaciones con Google AdMob" [level=3]:
+      - button "Vinculaciones con Google AdMob":
+        - generic: Vinculaciones con Google AdMob
+    - treeitem "Vinculaciones con Google AdSense" [level=3]:
+      - button "Vinculaciones con Google AdSense":
+        - generic: Vinculaciones con Google AdSense
+    - treeitem "Vinculaciones con Google Ads" [level=3]:
+      - button "Vinculaciones con Google Ads":
+        - generic: Vinculaciones con Google Ads
+    - treeitem "Vinculaciones con Ad Manager" [level=3]:
+      - button "Vinculaciones con Ad Manager":
+        - generic: Vinculaciones con Ad Manager
+    - treeitem "Vinculaciones con BigQuery" [level=3]:
+      - button "Vinculaciones con BigQuery":
+        - generic: Vinculaciones con BigQuery
+    - treeitem "Vinculaciones con Display & Video 360" [level=3]:
+      - button "Vinculaciones con Display & Video 360":
+        - generic: Vinculaciones con Display & Video 360
+    - treeitem "Vinculaciones con Floodlight" [level=3]:
+      - button "Vinculaciones con Floodlight":
+        - generic: Vinculaciones con Floodlight
+    - treeitem "Vinculaciones con Perfil de Empresa en Google" [level=3]:
+      - button "Vinculaciones con Perfil de Empresa en Google":
+        - generic: Vinculaciones con Perfil de Empresa en Google
+    - treeitem "Vinculaciones con Merchant Center" [level=3]:
+      - button "Vinculaciones con Merchant Center":
+        - generic: Vinculaciones con Merchant Center
+    - treeitem "Vinculaciones con Google Play" [level=3]:
+      - button "Vinculaciones con Google Play":
+        - generic: Vinculaciones con Google Play
+    - treeitem "Vinculaciones con Search Ads 360" [level=3]:
+      - button "Vinculaciones con Search Ads 360":
+        - generic: Vinculaciones con Search Ads 360
+    - treeitem "Vinculaciones con Search Console" [level=3]:
+      - button "Vinculaciones con Search Console":
+        - generic: Vinculaciones con Search Console
+    - treeitem "Enlaces de Meta" [level=3]:
+      - button "Enlaces de Meta":
+        - generic: Enlaces de Meta
+    - treeitem "Enlaces de Pinterest" [level=3]:
+      - button "Enlaces de Pinterest":
+        - generic: Enlaces de Pinterest
+    - treeitem "Enlaces de Reddit" [level=3]:
+      - button "Enlaces de Reddit":
+        - generic: Enlaces de Reddit
+    - treeitem "Enlaces de Snap" [level=3]:
+      - button "Enlaces de Snap":
+        - generic: Enlaces de Snap
+    - treeitem "Enlaces de TikTok" [level=3]:
+      - button "Enlaces de TikTok":
+        - generic: Enlaces de TikTok
+  - separator
+- button "Interruptor de navegación" [expanded]:
+  - img: keyboard_arrow_left
+- main:
+  - heading "Vinculaciones con Search Console" [level=1]
+  - img: search
+  - searchbox "Escribe para filtrar"
+  - button "Crear una nueva vinculación de integración con GA." [disabled]:
+    - generic: Vincular
+  - table "Vinculaciones con Search Console":
+    - row "Nombre de propiedad de Search Console Tipo de propiedad de Search Console Flujo web ID de flujo Responsable de la vinculación Fecha de vinculación Datos de fila":
+      - columnheader "Nombre de propiedad de Search Console":
+        - button "Nombre de propiedad de Search Console":
+          - generic: Nombre de propiedad de Search Console
+      - columnheader "Tipo de propiedad de Search Console":
+        - button "Tipo de propiedad de Search Console":
+          - generic: Tipo de propiedad de Search Console
+      - columnheader "Flujo web":
+        - button "Flujo web":
+          - generic: Flujo web
+      - columnheader "ID de flujo":
+        - button "ID de flujo":
+          - generic: ID de flujo
+      - columnheader "Responsable de la vinculación":
+        - button "Responsable de la vinculación":
+          - generic: Responsable de la vinculación
+      - columnheader "Fecha de vinculación":
+        - button "Fecha de vinculación":
+          - generic: Fecha de vinculación
+      - columnheader "Datos de fila":
+        - generic: Datos de fila
+    - row "https://coronabingo.com.ar/ Prefijo de la URL Coronabingo - GA4 5469366293 durancristhian@gmail.com 23 sept 2026 Mostrar detalles de vinculación":
+      - cell "https://coronabingo.com.ar/":
+        - generic: https://coronabingo.com.ar/
+      - cell "Prefijo de la URL":
+        - generic: Prefijo de la URL
+      - cell "Coronabingo - GA4":
+        - generic: Coronabingo - GA4
+      - cell "5469366293":
+        - generic: "5469366293"
+      - cell "durancristhian@gmail.com":
+        - generic: durancristhian@gmail.com
+      - cell "23 sept 2026"
+      - cell "Mostrar detalles de vinculación":
+        - button "Mostrar detalles de vinculación":
+          - img: keyboard_arrow_right
+- contentinfo:
+  - text: ©2026 Google |
+  - link "Página principal de Analytics":
+    - /url: https://www.google.com/analytics/?hl=es
+  - text: "|"
+  - link "Términos del Servicio":
+    - /url: https://www.google.com/analytics/tos.html?hl=es
+  - text: "|"
+  - link "Política de Privacidad":
+    - /url: https://www.google.com/policies/privacy/?hl=es
+  - text: "|"
+  - button "Enviar comentarios":
+    - img: feedback
+    - generic: Enviar comentarios
+- button "Abrir el menú contextual"
+- generic: La vinculación se ha eliminado.
+- dialog "Vinculación con Search Console":
+  - button "Cerrar la ventana del control deslizante" [active]:
+    - img: close
+  - heading "Vinculación con Search Console" [level=2]:
+    - generic: Vinculación con Search Console
+  - button "Mostrar más opciones":
+    - img: more_vert
+  - heading "Detalles de enlace completado" [level=3]
+  - term: Nombre de propiedad de Search Console
+  - definition: https://coronabingo.com.ar/
+  - term: Tipo de propiedad de Search Console
+  - definition: Prefijo de la URL
+  - term: Flujo web
+  - definition: Coronabingo - GA4
+  - term: ID de flujo
+  - definition: "5469366293"
+  - term: Responsable de la vinculación
+  - definition: durancristhian@gmail.com
+  - term: Fecha de vinculación
+  - definition: 23 sept 2026, 19:43:03
+  - term: Modificada por última vez por
+  - definition: durancristhian@gmail.com
+  - term: Fecha de la última modificación
+  - definition: 23 sept 2026, 19:43:03
