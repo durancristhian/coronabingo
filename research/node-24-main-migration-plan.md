@@ -75,7 +75,7 @@ Completed locally; [part two evidence](node-24-implementation.md) records clean 
 
 ### 3. Restore the required development and CI checks
 
-Workflow updated and local acceptance passed on 2026-09-23. The hosted run and Packtracker upload remain pending; see [part three evidence](node-24-ci.md).
+Workflow updated and local acceptance passed on 2026-09-23. The first hosted run passed installation and lint, then failed on Packtracker's unavailable API. Packtracker also reported bundle parser errors. The replacement preserves bundle inspection through the existing Next bundle analyzer and GitHub HTML artifacts; hosted re-verification is pending. See [part three evidence](node-24-ci.md).
 
 - Update the obsolete GitHub Actions and application runtime declaration.
 - Run the acceptance commands below. The existing lint command uses `--fix`; use its equivalent without `--fix` for verification to avoid unrelated changes.

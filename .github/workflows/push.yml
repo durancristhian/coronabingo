@@ -27,8 +27,6 @@ jobs:
 
       CYPRESS_PROJECT_KEY: ${{ secrets.CYPRESS_PROJECT_KEY }}
 
-      PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
-
     steps:
       - uses: actions/checkout@v7.0.1
 
@@ -59,5 +57,16 @@ jobs:
       # Cypress restoration is outside the Node 24 migration.
       # - run: npm t
 
-      # prebuild validates locales; GITHUB_EVENT_PATH enables Packtracker uploads.
+      # prebuild validates locales; the analyzer writes downloadable bundle reports.
       - run: npm run build
+        env:
+          ANALYZE_BUNDLE: '1'
+
+      - name: Upload bundle reports
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: bundle-reports
+          path: .next/analyze/*.html
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

@@ -3,7 +3,6 @@
 require('dotenv').config()
 
 const { join } = require('path')
-const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
@@ -36,7 +35,7 @@ const nextConfig = {
     /* Other */
     URL: process.env.URL,
   },
-  webpack: (config, { isServer }) => {
+  webpack: config => {
     /*
       Convert tsconfig path
       { '@components/*': [ './src/components/*' ] }
@@ -60,23 +59,6 @@ const nextConfig = {
       },
       { test: /\.md$/, type: 'asset/source' },
     )
-
-    if (!isServer && process.env.GITHUB_EVENT_PATH) {
-      const event = require(process.env.GITHUB_EVENT_PATH)
-
-      config.plugins.push(
-        new PacktrackerPlugin({
-          upload: true,
-          fail_build: true,
-          branch: event.ref.replace('refs/heads/', ''),
-          author: event.head_commit.author.email,
-          message: event.head_commit.message,
-          commit: process.env.GITHUB_SHA,
-          committed_at: parseInt(+new Date(event.head_commit.timestamp) / 1000),
-          prior_commit: event.before,
-        }),
-      )
-    }
 
     return config
   },

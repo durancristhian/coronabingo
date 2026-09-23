@@ -37,13 +37,13 @@ npm run start
 
 Run build and start sequentially. Do not run an install, a development server and a production build against the same checkout concurrently.
 
-Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. Packtracker runs only in GitHub Actions when `GITHUB_EVENT_PATH` is present; a normal local build does not verify its upload.
+Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. CI enables this and uploads the HTML reports as the `bundle-reports` artifact, retained for 14 days. These replace the failing Packtracker upload; they provide per-build inspection without Packtracker's historical comparisons or budgets.
 
 Cypress remains disabled in CI and its old suite has not been restored. On a machine inheriting `ELECTRON_RUN_AS_NODE=1`, unset that variable before launching Cypress.
 
 ## Migration status
 
-The application migration is present on local `master` and `migrate/node24`. The Actions update is on `migrate/node24-ci`: CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with locale validation and Packtracker enabled. See [CI verification](research/node-24-ci.md) for results and remaining checks.
+The application migration is present on local `master` and `migrate/node24`. The Actions update is on `migrate/node24-ci`: CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with locale validation and uploads bundle reports. See [CI verification](research/node-24-ci.md) for results and remaining checks.
 
 The GitHub default and production branch remain `master`; the planned rename to `main` and Vercel cutover are separate steps. See the [migration plan](research/node-24-main-migration-plan.md) and [implementation evidence](research/node-24-implementation.md).
 
