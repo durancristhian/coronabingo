@@ -1,0 +1,44 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 12981,
+    "language": "es"
+  },
+  {
+    "path": "/es",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 12981,
+    "language": "es"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 12698,
+    "language": "en"
+  },
+  {
+    "path": "/es/room/X3rfWwSBtvwL71jzpTTl",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 10956,
+    "language": "es"
+  },
+  {
+    "path": "/en/room/X3rfWwSBtvwL71jzpTTl",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 10758,
+    "language": "en"
+  },
+  {
+    "path": "/sounds/windows/windows-error.mp3",
+    "status": 200,
+    "contentType": "audio/mpeg",
+    "bytes": 15846,
+    "language": null
+  }
+]

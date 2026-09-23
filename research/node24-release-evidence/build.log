@@ -1,0 +1,114 @@
+Vercel CLI 56.4.1 (Node.js 24.21.0)
+Fetching deployment "dpl_8j8S9eynofmksrCJgTVc99MZpK27" in cristhian-durans-projects-3ace6550
+2026-09-23T17:35:54.110Z  Running build in Washington, D.C., USA (East) – iad1
+2026-09-23T17:35:54.111Z  Build machine configuration: 2 cores, 8 GB
+2026-09-23T17:35:54.305Z  Cloning github.com/durancristhian/coronabingo (Branch: main, Commit: 0e8e1dc)
+2026-09-23T17:35:54.306Z  Previous build caches not available.
+2026-09-23T17:35:54.969Z  Cloning completed: 664.000ms
+2026-09-23T17:35:56.039Z  Running "vercel build"
+2026-09-23T17:35:56.476Z  Installing dependencies...
+2026-09-23T17:36:05.305Z  npm warn deprecated har-validator@5.1.5: this library is no longer supported
+2026-09-23T17:36:07.303Z  npm warn deprecated @types/classnames@2.3.1: This is a stub types definition. classnames provides its own type definitions, so you do not need this installed.
+2026-09-23T17:36:10.414Z  npm warn deprecated axios@0.5.4: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
+2026-09-23T17:36:12.604Z  npm warn deprecated highlight.js@9.18.5: Support has ended for 9.x series. Upgrade to @latest
+2026-09-23T17:36:13.285Z  npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-09-23T17:36:36.013Z  
+2026-09-23T17:36:36.014Z  added 1131 packages in 39s
+2026-09-23T17:36:36.014Z  
+2026-09-23T17:36:36.014Z  224 packages are looking for funding
+2026-09-23T17:36:36.014Z  run `npm fund` for details
+2026-09-23T17:36:36.017Z  npm warn allow-scripts 6 packages have install scripts not yet covered by allowScripts:
+2026-09-23T17:36:36.017Z  npm warn allow-scripts   core-js@3.6.5 (postinstall: node -e "try{require('./postinstall')}catch(e){}")
+2026-09-23T17:36:36.017Z  npm warn allow-scripts   cypress@4.12.1 (postinstall: node index.js --exec install)
+2026-09-23T17:36:36.018Z  npm warn allow-scripts   highlight.js@9.18.5 (postinstall: node deprecated.js)
+2026-09-23T17:36:36.018Z  npm warn allow-scripts   husky@4.3.8 (install: node husky install; postinstall: opencollective-postinstall || exit 0)
+2026-09-23T17:36:36.019Z  npm warn allow-scripts   next-translate-plugin@3.0.0 (postinstall: node ./postinstall-message.js)
+2026-09-23T17:36:36.019Z  npm warn allow-scripts   protobufjs@6.10.2 (postinstall: node scripts/postinstall)
+2026-09-23T17:36:36.019Z  npm warn allow-scripts
+2026-09-23T17:36:36.019Z  npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+2026-09-23T17:36:36.107Z  Detected Next.js version: 16.3.6
+2026-09-23T17:36:36.109Z  Running "npm run build"
+2026-09-23T17:36:36.294Z  
+2026-09-23T17:36:36.295Z  > coronabingo@1.23.1 prebuild
+2026-09-23T17:36:36.295Z  > npm run validate-locales
+2026-09-23T17:36:36.295Z  
+2026-09-23T17:36:36.445Z  
+2026-09-23T17:36:36.445Z  > coronabingo@1.23.1 validate-locales
+2026-09-23T17:36:36.445Z  > ts-node --project tsconfig.scripts.json scripts/validate-locales
+2026-09-23T17:36:36.445Z  
+2026-09-23T17:36:38.851Z  🗂  Directory /vercel/path0/locales/es
+2026-09-23T17:36:38.852Z  ----  📄 File /vercel/path0/locales/es/admin.json
+2026-09-23T17:36:38.855Z  ----  📄 File /vercel/path0/locales/es/common.json
+2026-09-23T17:36:38.855Z  ----  📄 File /vercel/path0/locales/es/index.json
+2026-09-23T17:36:38.856Z  ----  📄 File /vercel/path0/locales/es/playerId.json
+2026-09-23T17:36:38.856Z  ----  📄 File /vercel/path0/locales/es/roomId.json
+2026-09-23T17:36:38.856Z  🗂  Directory /vercel/path0/locales/en
+2026-09-23T17:36:38.857Z  ----  📄 File /vercel/path0/locales/en/admin.json
+2026-09-23T17:36:38.857Z  ----  📄 File /vercel/path0/locales/en/common.json
+2026-09-23T17:36:38.857Z  ----  📄 File /vercel/path0/locales/en/index.json
+2026-09-23T17:36:38.857Z  ----  📄 File /vercel/path0/locales/en/playerId.json
+2026-09-23T17:36:38.858Z  ----  📄 File /vercel/path0/locales/en/roomId.json
+2026-09-23T17:36:38.858Z  ✅ es en
+2026-09-23T17:36:38.858Z  ✅ es en admin.json
+2026-09-23T17:36:38.859Z  ✅ es en common.json
+2026-09-23T17:36:38.859Z  ✅ es en index.json
+2026-09-23T17:36:38.859Z  ✅ es en playerId.json
+2026-09-23T17:36:38.859Z  ✅ es en roomId.json
+2026-09-23T17:36:39.197Z  
+2026-09-23T17:36:39.197Z  > coronabingo@1.23.1 build
+2026-09-23T17:36:39.198Z  > next build --webpack
+2026-09-23T17:36:39.198Z  
+2026-09-23T17:36:39.855Z  ▲ Next.js 16.3.6 (webpack)
+2026-09-23T17:36:40.486Z  Applying modifyConfig from Vercel
+2026-09-23T17:36:40.490Z  ✓ Running next.config.js took 638ms
+2026-09-23T17:36:40.837Z  Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-09-23T17:36:40.837Z  This information is used to shape Next.js' roadmap and prioritize features.
+2026-09-23T17:36:40.837Z  You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-09-23T17:36:40.837Z  https://nextjs.org/telemetry
+2026-09-23T17:36:40.837Z  
+2026-09-23T17:36:40.877Z  
+2026-09-23T17:36:40.928Z  Running TypeScript ...
+2026-09-23T17:36:47.108Z  Finished TypeScript in 6.2s ...
+2026-09-23T17:36:47.110Z  Creating an optimized production build ...
+2026-09-23T17:36:58.858Z  
+2026-09-23T17:36:58.864Z  warn - Tailwind is not purging unused styles because no template paths have been provided.
+2026-09-23T17:36:58.865Z  warn - If you have manually configured PurgeCSS outside of Tailwind or are deliberately not removing unused styles, set `purge: false` in your Tailwind config file to silence this warning.
+2026-09-23T17:36:58.865Z  warn - https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+2026-09-23T17:37:06.800Z  ✓ Compiled successfully in 19.0s
+2026-09-23T17:37:06.804Z  Collecting page data using 1 worker ...
+2026-09-23T17:37:08.687Z  Generating static pages using 1 worker (0/8) ...
+2026-09-23T17:37:08.784Z  next-translate - compiled page: /admin - locale: es - namespaces: common - used loader: getStaticProps
+2026-09-23T17:37:08.848Z  next-translate - compiled page: /admin - locale: en - namespaces: common - used loader: getStaticProps
+2026-09-23T17:37:08.849Z  next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+2026-09-23T17:37:08.849Z  next-translate - compiled page: / - locale: en - namespaces: common, index - used loader: getStaticProps
+2026-09-23T17:37:08.861Z  Generating static pages using 1 worker (2/8)
+2026-09-23T17:37:08.862Z  Generating static pages using 1 worker (4/8)
+2026-09-23T17:37:08.862Z  Generating static pages using 1 worker (6/8)
+2026-09-23T17:37:08.862Z  ✓ Generating static pages using 1 worker (8/8) in 177ms
+2026-09-23T17:37:09.093Z  Finalizing page optimization ...
+2026-09-23T17:37:09.094Z  Collecting build traces ...
+2026-09-23T17:37:26.958Z  Running onBuildComplete from Vercel
+2026-09-23T17:37:27.470Z  
+2026-09-23T17:37:27.473Z  Route (pages)
+2026-09-23T17:37:27.474Z  ┌ ● /
+2026-09-23T17:37:27.474Z  ├   /_app
+2026-09-23T17:37:27.474Z  ├ ○ /404
+2026-09-23T17:37:27.474Z  ├ ● /admin
+2026-09-23T17:37:27.474Z  ├ ƒ /eventos/[eventId]
+2026-09-23T17:37:27.474Z  ├ ƒ /eventos/[eventId]/admin
+2026-09-23T17:37:27.474Z  ├ ƒ /room/[roomId]
+2026-09-23T17:37:27.474Z  ├ ƒ /room/[roomId]/[playerId]
+2026-09-23T17:37:27.475Z  └ ƒ /room/[roomId]/admin
+2026-09-23T17:37:27.475Z  
+2026-09-23T17:37:27.475Z  ○  (Static)   prerendered as static content
+2026-09-23T17:37:27.475Z  ●  (SSG)      prerendered as static HTML (uses getStaticProps)
+2026-09-23T17:37:27.476Z  ƒ  (Dynamic)  server-rendered on demand
+2026-09-23T17:37:27.479Z  
+2026-09-23T17:37:27.879Z  Build Completed in /vercel/output [2m]
+2026-09-23T17:37:27.918Z  Deploying outputs...
+2026-09-23T17:37:35.761Z  Deployment completed
+2026-09-23T17:37:35.765Z  Creating build cache...
+2026-09-23T17:37:55.917Z  Created build cache: 20s
+2026-09-23T17:37:55.918Z  Uploading build cache [190.27 MB]
+2026-09-23T17:37:58.961Z  Build cache uploaded: 3.043s
+status	● Ready

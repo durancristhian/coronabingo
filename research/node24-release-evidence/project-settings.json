@@ -1,0 +1,7 @@
+{
+  "name": "coronabingo",
+  "nodeVersion": "24.x",
+  "productionBranch": "main",
+  "productionDeployment": "dpl_8j8S9eynofmksrCJgTVc99MZpK27",
+  "productionCommit": "0e8e1dc6c2c1f13cebc1e3a16eb40a9685ac79b5"
+}

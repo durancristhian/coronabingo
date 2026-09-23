@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is complete on `migrate/node24-ci` in `../coronabingo-node24-ci`: commit `47918fc` passed hosted Node 24 CI, including bundle-report uploads replacing the failing Packtracker integration. See [CI verification](node-24-ci.md). Part four is complete for the user-requested main game flow on the same application commit; see [preview acceptance](node-24-preview.md). The user excluded standalone admin/event checks. Development test-room cleanup was explicitly waived by the user. GitHub default, local primary tracking and Vercel production branch now use `main`; production release verification is in progress. The user explicitly waived rollback verification and will handle rollback in Vercel if needed.
+Status: migration released on 2026-09-23. Production serves commit `0e8e1dc` with Node 24; release CI and main-game production smoke checks passed. GitHub default, local primary tracking and Vercel production branch all use `main`. See [release evidence](node-24-release.md), [preview acceptance](node-24-preview.md), [CI verification](node-24-ci.md) and [local implementation](node-24-implementation.md). The user excluded standalone admin/event testing, waived test-room cleanup and rollback verification, and will handle rollback in Vercel if needed.
 
 ## Agreed outcome
 
@@ -28,7 +28,7 @@ The repository inspection and read-only provider checks during this planning ses
 | Production metadata | The inspected READY production deployment dates from 2021-05-07 and identifies commit `002046108df164389ea8b446de495c7913c500fe`, matching inspected local `master`. This is deployment metadata, not proof of current gameplay behavior. |
 | Branches | GitHub default and local primary branch are `master`; no `main` exists. Eleven open Dependabot PRs target `master`. No branch rules, environment branch restrictions, or Vercel deploy hooks were found. Recheck before cutover. |
 
-At planning time, no clean install, migration build, or browser acceptance run had been performed. Parts one and two now record baseline investigation, clean installation, full local builds and focused browser checks. End-to-end gameplay, authenticated, preview and production acceptance remain open; see the linked reports for proof boundaries.
+At planning time, no clean install, migration build, or browser acceptance run had been performed. Parts one and two now record baseline investigation, clean installation, full local builds and focused browser checks. Preview and production main-game checks are now complete; standalone authentication/admin/event testing was excluded by the user. See the linked reports for proof boundaries.
 
 Next 9 is outside support. Next 16 supports React 18 for this Pages Router application, requires TypeScript 5.1 or newer, and permits explicit Webpack use. Select the latest patched Next 16 release at implementation time and record exact resolved versions. React 18 compatibility does not imply that every existing React package supports it.
 
@@ -93,6 +93,8 @@ Completed on 2026-09-23 for the main game flow. The existing preview uses `coron
 
 ### 5. Coordinate main and production cutover
 
+Completed on 2026-09-23. Native branch rename, local tracking, Vercel branch/runtime settings, production deployment, release CI and main-game smoke checks passed. See [release evidence](node-24-release.md).
+
 Release authorized on 2026-09-23 after main-game preview acceptance. The user explicitly waived test-room cleanup and rollback verification, and will handle rollback in Vercel if needed. These decisions supersede earlier rollback prerequisites in this plan and the historical reports.
 
 1. Recheck GitHub default branch, rules, PR targets, Actions configuration, Vercel production branch, deployment settings. Rollback verification was waived. Record the current production deployment identifier.
@@ -118,7 +120,7 @@ Release authorized on 2026-09-23 after main-game preview acceptance. The user ex
 - [x] GitHub Actions passes under Node 24, including bundle-report upload and cache saves.
 - [x] The Vercel preview verifies the CI-tested candidate with deployed Node 24 function metadata and live main-game behavior; see the preview report for proof boundaries.
 - [x] GitHub default, local primary tracking, and Vercel production branch all use `main`. There were no open PRs at cutover.
-- [ ] Production runs the expected migration commit on Node 24 and passes smoke checks; owner-managed rollback waiver is recorded.
+- [x] Production runs release commit `0e8e1dc` on Node 24 and passes main-game smoke checks; owner-managed rollback waiver is recorded.
 
 No new automated test suite is required for this task. Use targeted regression checks where compatibility edits affect behavior; do not expand this into a testing-platform migration.
 

@@ -1,0 +1,19 @@
+{
+  "roomUrl": "https://coronabingo.com.ar/en/room/X3rfWwSBtvwL71jzpTTl",
+  "hostUrl": "https://coronabingo.com.ar/en/room/X3rfWwSBtvwL71jzpTTl/vzm38BTIk08BkXSCAnES",
+  "playerUrl": "https://coronabingo.com.ar/room/X3rfWwSBtvwL71jzpTTl/dxSx5lswPIpumhxUxHHs",
+  "draw": {
+    "host": "Coronabingo\nEspañol\nEnglish\nHi Release QA Host, you are in the room Node24 release verification 20260923\nLast numbers\n28\n\nHill\n\nWhat's this?\n\nBingo spinner\nNEXT NUMBER\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n2",
+    "player": "Coronabingo\nEspañol\nEnglish\nHola Release QA Player, estás en la sala Node24 release verification 20260923\nÚltimos números\n28\n\nEl cerro\n\n¿Qué es esto?\n\nBolillero\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23"
+  },
+  "playerAfterRefresh": "Coronabingo\nEspañol\nEnglish\nHola Release QA Player, estás en la sala Node24 release verification 20260923\nÚltimos números\n28\n\nEl cerro\n\n¿Qué es esto?\n\nBolillero\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+  "restart": {
+    "host": "Coronabingo\nEspañol\nEnglish\nConfigure room\nName\nLink to the room\n\nShare this link with the people in the videocall.\n\nSHARE LINK\n\nPeople who is going to play:\n2 of 720\n\nName *\n\nRelease QA Host\n\nAdmin\n\nRelease QA Player\n\nAdmin\nRelease QA Host\nRelease Q",
+    "player": "Coronabingo\nEspañol\nEnglish\n\nLa sala se está configurando. Espere...\n\nCoronabingo y las noticias\n\nCreado por Cristhian Duran\n\nDoname un café\nFeedback\nTwitter"
+  },
+  "playerAfterReplay": "Coronabingo\nEspañol\nEnglish\nHola Release QA Player, estás en la sala Node24 release verification 20260923\nÚltimos números\n\nNo salieron números todavía.\n\nBolillero\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n2",
+  "errors": {
+    "host": [],
+    "player": []
+  }
+}
