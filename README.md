@@ -43,8 +43,10 @@ Cypress remains disabled in CI and its old suite has not been restored. On a mac
 
 ## Migration status
 
-The application migration is present on local `master` and `migrate/node24`. The Actions update is on `migrate/node24-ci`: CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with locale validation and uploads bundle reports. See [CI verification](research/node-24-ci.md) for results. [Vercel preview acceptance](research/node-24-preview.md) passed the main game flow on the CI-tested application commit using `coronabingo-dev`; standalone admin/event checks were excluded by request.
+The primary branch is `main`, tracking `origin/main`. GitHub's default branch and Vercel's production branch use `main`; the Vercel project runtime is Node 24.
 
-The GitHub default and production branch remain `master`; the planned rename to `main` and Vercel cutover are separate steps. See the [migration plan](research/node-24-main-migration-plan.md) and [implementation evidence](research/node-24-implementation.md).
+CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with locale validation and uploads bundle reports. [CI verification](research/node-24-ci.md) and [Vercel preview acceptance](research/node-24-preview.md) cover the verified application. Standalone admin/event checks were excluded by request.
+
+See the [migration plan](research/node-24-main-migration-plan.md) and [release record](research/node-24-release.md) for production verification. The user waived development test-room cleanup and pre-release rollback verification, and will handle rollback in Vercel if needed.
 
 ESLint 9 is retained temporarily by agreement because the current React and accessibility plugins do not declare ESLint 10 compatibility. Replace or upgrade those plugins and move to a supported ESLint release in a follow-up. Other legacy dependency maintenance is outside this migration.

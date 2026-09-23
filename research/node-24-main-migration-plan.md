@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is complete on `migrate/node24-ci` in `../coronabingo-node24-ci`: commit `47918fc` passed hosted Node 24 CI, including bundle-report uploads replacing the failing Packtracker integration. See [CI verification](node-24-ci.md). Part four is complete for the user-requested main game flow on the same application commit; see [preview acceptance](node-24-preview.md). The user excluded standalone admin/event checks. Two synthetic development rooms remain after Firestore rejected cleanup with HTTP 403. The GitHub default branch remains `master`. Legacy production rollback eligibility remains an unresolved release gate.
+Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is complete on `migrate/node24-ci` in `../coronabingo-node24-ci`: commit `47918fc` passed hosted Node 24 CI, including bundle-report uploads replacing the failing Packtracker integration. See [CI verification](node-24-ci.md). Part four is complete for the user-requested main game flow on the same application commit; see [preview acceptance](node-24-preview.md). The user excluded standalone admin/event checks. Development test-room cleanup was explicitly waived by the user. GitHub default, local primary tracking and Vercel production branch now use `main`; production release verification is in progress. The user explicitly waived rollback verification and will handle rollback in Vercel if needed.
 
 ## Agreed outcome
 
@@ -93,16 +93,16 @@ Completed on 2026-09-23 for the main game flow. The existing preview uses `coron
 
 ### 5. Coordinate main and production cutover
 
-This is a release step after the candidate passes acceptance and release is authorized.
+Release authorized on 2026-09-23 after main-game preview acceptance. The user explicitly waived test-room cleanup and rollback verification, and will handle rollback in Vercel if needed. These decisions supersede earlier rollback prerequisites in this plan and the historical reports.
 
-1. Recheck GitHub default branch, rules, PR targets, Actions configuration, Vercel production branch, deployment settings, and rollback availability. Record the current production deployment identifier.
+1. Recheck GitHub default branch, rules, PR targets, Actions configuration, Vercel production branch, deployment settings. Rollback verification was waived. Record the current production deployment identifier.
 2. Coordinate the rename before the merge that should trigger production. Keep the existing deployment serving during the short configuration change.
 3. Use GitHub's native branch rename from `master` to `main`, preserving history and allowing GitHub to retarget PR bases. Do not substitute deleting `master` and creating an unrelated branch.
 4. Explicitly set Vercel's production branch to `main` and its project Node version to 24. Verify both settings; do not assume GitHub rename updates Vercel.
 5. Update the local primary branch, upstream, and remote HEAD. For an existing local primary checkout, the normal sequence is `git branch -m master main`, `git fetch origin`, `git branch --set-upstream-to=origin/main main`, and `git remote set-head origin -a`. Adjust for the actual branch/worktree state and never force over local work.
 6. Verify GitHub's default branch is `main`, open PR bases were retargeted, and any newly discovered branch restrictions are correct. The inspected workflow triggers on every push, so it currently has no `master` filter to replace.
 7. Merge the verified migration into `main` through the chosen review process, and verify the resulting production deployment's commit and Node 24 runtime. Repeat production smoke checks using the agreed test-data arrangement.
-8. If release verification fails, use the previously verified rollback procedure and keep the migration open. Avoid reverting to an unbuildable Node 12 source as the only rollback strategy. A runtime rollback does not require undoing the successful branch rename.
+8. If release verification fails, report the evidence and keep the migration open. The user will handle rollback in Vercel if needed; rollback verification was explicitly waived.
 
 ## Acceptance checklist
 
@@ -117,8 +117,8 @@ This is a release step after the candidate passes acceptance and release is auth
 - [ ] Broader visual/media acceptance remains unclaimed. Main-game desktop layout, ball rendering, sound controls/asset delivery and spreadsheet export passed; exact animation frames, audible output, full responsive coverage and event Markdown checks were not part of the requested main-game-only pass.
 - [x] GitHub Actions passes under Node 24, including bundle-report upload and cache saves.
 - [x] The Vercel preview verifies the CI-tested candidate with deployed Node 24 function metadata and live main-game behavior; see the preview report for proof boundaries.
-- [ ] After release, GitHub default, local primary tracking, and Vercel production branch all use `main`; PR bases are correct.
-- [ ] Production runs the expected migration commit on Node 24 and passes smoke checks; rollback evidence is recorded.
+- [x] GitHub default, local primary tracking, and Vercel production branch all use `main`. There were no open PRs at cutover.
+- [ ] Production runs the expected migration commit on Node 24 and passes smoke checks; owner-managed rollback waiver is recorded.
 
 No new automated test suite is required for this task. Use targeted regression checks where compatibility edits affect behavior; do not expand this into a testing-platform migration.
 
