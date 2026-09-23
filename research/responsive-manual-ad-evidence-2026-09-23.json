@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-09-23T18:46:08.941Z",
+  "mode": "read-only research; no account settings saved; no implementation executed",
+  "sources": {
+    "ads": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/myads/sites",
+    "unitReport": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/reporting/?d=last30days&ag=adunit%2Cplatform&dd=1YadunitY1Yca-pub-6231280485856921%3A1185318534YLayout&gm=earnings&m=monetizableImpressions%2Cclicks%2CmonetizableImpressionsRpm%2CactiveViewViewability%2Cearnings&oc=earnings&oo=descending&ct=td",
+    "gaProperty": "385744187",
+    "firebase": "https://console.firebase.google.com/u/0/project/coronabingo-bf16f/settings/integrations"
+  },
+  "unitCode": [
+    "  - textbox \"Fragmento\":",
+    "    - code: \"<script async src=\\\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231280485856921\\\" crossorigin=\\\"anonymous\\\"></script> <!-- Layout --> <ins class=\\\"adsbygoogle\\\" style=\\\"display:inline-block;width:728px;height:90px\\\" data-ad-client=\\\"ca-pub-6231280485856921\\\" data-ad-slot=\\\"1185318534\\\"></ins> <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>\""
+  ],
+  "fixedSettings": [
+    "  - textbox \"Nombre de la unidad de anuncios*\": Layout",
+    "  - button \"Fijo\":",
+    "  - textbox \"Ancho\": \"728\"",
+    "  - textbox \"Altura\": \"90\""
+  ],
+  "sizeOptions": [
+    "  - option \"Responsivo\":",
+    "  - option \"Fijo\" [selected]:"
+  ],
+  "siteSettings": [
+    "    - row \"Nombre Optimización automática Anuncios automáticos Exclusiones de páginas Acciones\":",
+    "    - row \"coronabingo.com.ar ●Desactivada ●Activado 0 Ver informe Editar\":"
+  ],
+  "mobileOptimizationEnabled": false,
+  "unitPlatformsLast30Days": [
+    "  - radiogroup:",
+    "    - radio \"Hoy\":",
+    "    - radio \"Últimos 7 días\":",
+    "    - radio \"Últimos 30 días\" [checked]:",
+    "    - radio \"Este mes\":",
+    "    - radio \"El mes pasado\":",
+    "    - radio \"Personalizado\":",
+    "    - 'row \"Unidad de anuncios: Layout Borrar\"':",
+    "    - row \"Unidad de anuncios Plataforma Impresiones Clics RPM de impresiones Visibilidad de Vista activa Ingresos estimados\":",
+    "    - row \"El botón de ojo no está seleccionado. Presiónelo o haga clic en él para mostrar los datos de esta fila en el gráfico. Todos Todos 3,919 13 USD0.09 68.65% USD0.37\":",
+    "    - row \"Promedio Promedio 1,306 4 — — USD0.12\":",
+    "    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Layout Computadoras de escritorio 1,472 11 USD0.16 60.37% USD0.24\":",
+    "    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Layout Dispositivos móviles de alta gama 2,412 2 USD0.05 73.83% USD0.13\":",
+    "    - row \"El botón de ojo está seleccionado. Puede presionarlo o hacer clic en él para mostrar solo los datos de esta fila en el gráfico. Layout Tablets 35 0 USD0.13 74.07% USD0.00\":"
+  ],
+  "ga90Devices": [
+    "    - generic: 25 jun-22 sept 2026",
+    "      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Categoría de dispositivo Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":",
+    "      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 3.542 100 % respecto al total 3.389 100 % respecto al total 2.816 100 % respecto al total 40,3 % Media 0 % 0,80 Media 0 % 4 min y 34 s Media 0 % 25.459 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":",
+    "      - row \"Casilla para seleccionar la fila 1 1 mobile 1.821 (51,41 %) 1.773 (52,32 %) 1.289 (45,77 %) 39,26 % 0,71 3 min y 43 s 13.053 (51,27 %) 0,00 (–) 0,00 $ (–)\":",
+    "      - row \"Casilla para seleccionar la fila 2 2 desktop 1.694 (47,83 %) 1.587 (46,83 %) 1.514 (53,76 %) 41,77 % 0,89 5 min y 31 s 12.259 (48,15 %) 0,00 (–) 0,00 $ (–)\":",
+    "      - row \"Casilla para seleccionar la fila 3 3 tablet 30 (0,85 %) 29 (0,86 %) 17 (0,6 %) 42,5 % 0,57 1 min y 43 s 147 (0,58 %) 0,00 (–) 0,00 $ (–)\":"
+  ],
+  "ga90Events": [
+    "    - generic: 25 jun-22 sept 2026",
+    "  - generic: 1–4 de 4",
+    "      - row \"columna de selección Casilla para desmarcar todas las filas Índice temático Nombre del evento Número de eventos Total de usuarios Número de eventos por usuario activo Total de ingresos Acciones\":",
+    "      - row \"Casilla de la fila Total Celda vacía para el total del resumen en Celda vacía para el total en la columna Índice Total 25.459 100 % respecto al total 3.623 100 % respecto al total 7,19 Media 0 % Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $ Celda vacía para el total en la columna Acciones\":",
+    "      - row \"Casilla para seleccionar la fila 1 1 page_view 9.806 (38,52 %) 3.620 (99,92 %) 2,77 0,00 $ (–) Menú de acciones entre líneas\":",
+    "      - row \"Casilla para seleccionar la fila 2 2 session_start 6.907 (27,13 %) 3.615 (99,78 %) 1,96 0,00 $ (–) Menú de acciones entre líneas\":",
+    "      - row \"Casilla para seleccionar la fila 3 3 user_engagement 5.357 (21,04 %) 2.395 (66,11 %) 2,30 0,00 $ (–) Menú de acciones entre líneas\":",
+    "      - row \"Casilla para seleccionar la fila 4 4 first_visit 3.389 (13,31 %) 3.361 (92,77 %) 1,01 0,00 $ (–) Menú de acciones entre líneas\":"
+  ],
+  "gaAdsenseLinks": "Property385744187: Aún no hay vinculaciones. 0 de 0.",
+  "firebaseAnalytics": {
+    "project": "coronabingo-bf16f",
+    "property": "226709381",
+    "stream": "1861645851"
+  },
+  "currentSiteMobile": {
+    "ads": [
+      {
+        "iframeCount": 0,
+        "parent": {
+          "height": 90,
+          "width": 313
+        },
+        "rect": {
+          "height": 90,
+          "width": 313,
+          "x": 16,
+          "y": 64
+        },
+        "slot": "1185318534",
+        "status": null,
+        "style": "display: inline-block; height: 90px; width: 728px;"
+      }
+    ],
+    "documentWidth": 345,
+    "viewport": {
+      "h": 800,
+      "w": 360
+    }
+  },
+  "currentSiteDesktop": {
+    "adScripts": [
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ],
+    "ads": [
+      {
+        "iframeCount": 0,
+        "parent": {
+          "height": 90,
+          "width": 1152
+        },
+        "rect": {
+          "height": 90,
+          "width": 728,
+          "x": 268.5,
+          "y": 64
+        },
+        "slot": "1185318534",
+        "status": null,
+        "style": "display: inline-block; height: 90px; width: 728px;"
+      }
+    ],
+    "documentWidth": 1265,
+    "viewport": {
+      "h": 900,
+      "w": 1280
+    }
+  },
+  "proofLimits": [
+    "Same page resized after initial desktop load. No separate cold mobile load.",
+    "No ad iframe or data-ad-status present. No served creative validated.",
+    "No ad clicks, gameplay writes, settings saves or deployment.",
+    "Viewport restored after inspection."
+  ]
+}

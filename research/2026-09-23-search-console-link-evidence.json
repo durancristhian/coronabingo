@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-09-23T18:45:07.962Z",
+  "mode": "read-only planning; no account settings saved",
+  "accountId": "161408428",
+  "primary": {
+    "propertyId": "385744187",
+    "streamId": "5469366293",
+    "measurementId": "G-WYG7FMEWEF",
+    "configuredUrl": "https://coronabingo.now.sh",
+    "searchConsolePrefix": "https://coronabingo.now.sh/",
+    "linkDate": "2026-08-13",
+    "currentUserRole": "Administrador",
+    "receivedWithin48h": true,
+    "hostnameReport": {
+      "dateFrom": "2026-06-25",
+      "dateTo": "2026-09-22",
+      "hostname": "coronabingo.com.ar",
+      "activeUsers": 3542,
+      "events": 25459,
+      "url": "https://analytics.google.com/analytics/web/#/a161408428p385744187/reports/explorer?params=_u.dateOption%3Dlast90Days%26_u..nav%3Dmaui%26_r.explorerCard..seldim%3D%5B%22platform%22,%22hostname%22%5D%26_r.explorerCard..startRow%3D0%26_r.explorerCard..rowsPerPage%3D100&collectionId=user&r=user-technology-detail&ruid=user-technology-detail,user,technology"
+    }
+  },
+  "firebase": {
+    "projectId": "coronabingo-bf16f",
+    "appId": "1:1027913644180:web:bc983450f1f3d795079c81",
+    "propertyId": "226709381",
+    "streamId": "1861645851",
+    "measurementId": "G-PR7XZB4T8W",
+    "searchConsoleLinked": false,
+    "receivedWithin48h": true,
+    "hostnameReport": {
+      "dateFrom": "2026-06-25",
+      "dateTo": "2026-09-22",
+      "hostname": "coronabingo.com.ar",
+      "activeUsers": 3493,
+      "events": 25584,
+      "url": "https://analytics.google.com/analytics/web/#/a161408428p226709381/reports/explorer?params=_u.dateOption%3Dlast90Days%26_u..nav%3Dmaui%26_r.explorerCard..seldim%3D%5B%22platform%22,%22hostname%22%5D%26_r.explorerCard..startRow%3D0%26_r.explorerCard..rowsPerPage%3D100&collectionId=user&r=user-technology-detail&ruid=user-technology-detail,user,technology"
+    },
+    "integrationUrl": "https://console.firebase.google.com/u/0/project/coronabingo-bf16f/settings/integrations/analytics"
+  },
+  "searchConsole": {
+    "visibleProperties": [
+      "https://coronabingo.now.sh/"
+    ],
+    "currentDomainPropertyAccessible": false,
+    "globalExistenceUnknown": true,
+    "oldPropertyVerifiedOwner": true,
+    "verificationMethods": [
+      "HTML tag",
+      "Google Analytics"
+    ],
+    "oldPropertyAdded": "2020-03-30"
+  },
+  "production": {
+    "url": "https://coronabingo.com.ar/",
+    "canonical": "https://coronabingo.com.ar/",
+    "htmlVerificationMetaPresent": true,
+    "explicitGtagId": "UA-161408428-1",
+    "appBundleMeasurementId": "G-PR7XZB4T8W",
+    "firebaseWebConfigMeasurementId": "G-PR7XZB4T8W",
+    "networkCollectObserved": false,
+    "networkLimitation": "gtag.js response in this Chrome session was a 1204-character replacement with empty functions; compatible with local blocking; extension attribution not verified"
+  },
+  "excerpts": {
+    "queries": [
+      "    - generic: 25 jun-22 sept 2026",
+      "  - 'heading \"Consultas: Consulta de la Búsqueda de Google orgánica\" [active] [level=1]'",
+      "  - heading \"Clics de la Búsqueda de Google orgánica a lo largo del tiempo\" [level=2]",
+      "      - row \"Índice temático Consulta de la Búsqueda de Google orgánica Clics de la Búsqueda de Google orgánica Impresiones de la Búsqueda de Google orgánica Porcentaje de clics de la Búsqueda de Google orgánica Posición media en la Búsqueda de Google orgánica\":",
+      "      - row \"Celda vacía para el total en la columna Índice Total Celda vacía para el total del resumen en la columna Clics de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Impresiones de la Búsqueda de Google orgánica 0 Celda vacía para el total del resumen en la columna Porcentaje de clics de la Búsqueda de Google orgánica 0 % Celda vacía para el total del resumen en la columna Posición media en la Búsqueda de Google orgánica 0,00\":",
+      "  - generic: No hay datos disponibles"
+    ],
+    "firebaseHostname": [
+      "  - 'heading \"Detalles de la tecnología: Plataforma\" [level=1]':",
+      "    - generic: 25 jun-22 sept 2026",
+      "  - heading \"Usuarios activos por Plataforma a lo largo del tiempo\" [level=2]",
+      "      - row \"Índice temático Plataforma Nombre de host Usuarios activos Usuarios nuevos Sesiones con interacción Porcentaje de interacciones Sesiones con interacción por usuario activo Tiempo de interacción medio por usuario activo Número de eventos Todos los eventos Eventos clave Todos los eventos Total de ingresos\":",
+      "      - row \"Celda vacía para el total en la columna Índice Total 3.493 100 % respecto al total 3.290 100 % respecto al total 2.845 100 % respecto al total 43,16 % Media 0 % 0,81 Media 0 % 4 min y 27 s Media 0 % 25.584 100 % respecto al total Celda vacía para el total del resumen en la columna Eventos clave 0,00 Celda vacía para el total del resumen en la columna Total de ingresos 0,00 $\":",
+      "      - row \"1 web coronabingo.com.ar 3.493 (100 %) 3.290 (100 %) 2.845 (100 %) 43,16 % 0,81 4 min y 27 s 25.584 (100 %) 0,00 (–) 0,00 $ (–)\":"
+    ],
+    "oldOwnership": [
+      "  - generic: ",
+      "  - generic: Propietario verificado",
+      "    - generic: Más información",
+      "  - generic: Métodos de verificación utilizados",
+      "  - generic: Etiqueta HTML",
+      "  - generic: ",
+      "  - generic: Se ha verificado correctamente",
+      "  - generic: Google Analytics",
+      "  - generic: ",
+      "  - generic: Se ha verificado correctamente",
+      "  - generic: Métodos de verificación adicionales",
+      "  - button \"Archivo HTML Subir un archivo HTML a tu sitio web\":",
+      "    - generic: Archivo HTML",
+      "    - generic: Subir un archivo HTML a tu sitio web",
+      "    - generic: ",
+      "  - button \"Google Tag Manager Usar tu cuenta de Google Tag Manager\":",
+      "    - generic: Google Tag Manager",
+      "    - generic: Usar tu cuenta de Google Tag Manager",
+      "    - generic: ",
+      "  - button \"Proveedor de nombres de dominio Asociar un registro DNS a Google\":",
+      "    - generic: Proveedor de nombres de dominio",
+      "    - generic: Asociar un registro DNS a Google",
+      "    - generic: "
+    ]
+  }
+}

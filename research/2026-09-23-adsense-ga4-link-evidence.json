@@ -1,0 +1,79 @@
+{
+  "observed_on": "2026-09-23",
+  "timezone": "America/Argentina/Buenos_Aires",
+  "status": "research_only_no_implementation",
+  "evidence_type": "normalized notes from authenticated console observations and public production asset inspection; not a Google export",
+  "analytics": {
+    "account_id": "161408428",
+    "property_name": "Coronabingo - GA4",
+    "property_id": "385744187",
+    "stream_id": "5469366293",
+    "measurement_id": "G-WYG7FMEWEF",
+    "google_tag_id": "GT-W6J4R92",
+    "stream_url": "https://coronabingo.now.sh",
+    "received_traffic_last_48_hours": true,
+    "adsense_links": 0,
+    "owner_role": "Administrator",
+    "additional_editor_count": 1,
+    "currency": "USD",
+    "report_timezone": "Buenos Aires UTC-03:00",
+    "page_load_measurement": true,
+    "history_change_measurement": false,
+    "tag_diagnostics": ["Legacy Universal Analytics tags with connected site tags", "Some pages are not tagged"],
+    "coverage": {"included": 2251, "untagged": 1, "no_recent_data": 1191, "tagged": 1059, "untagged_route_pattern": "/es/room/{roomId}/{playerId}"},
+    "links_url": "https://analytics.google.com/analytics/web/#/a161408428p385744187/admin/integrations/google-adsense",
+    "stream_url_console": "https://analytics.google.com/analytics/web/#/a161408428p385744187/admin/streams/table/5469366293"
+  },
+  "adsense": {
+    "publisher_id": "pub-6231280485856921",
+    "account_status": "Open",
+    "active_product": "Content",
+    "owner_role": "Administrator",
+    "analytics_links": 0,
+    "target_property_available_in_link_selector": true,
+    "other_coronabingo_property_in_selector": "226709381",
+    "link_dialog_cancelled_without_selection_or_creation": true,
+    "account_timezone": "Buenos Aires UTC-03:00",
+    "report_timezone": "Buenos Aires GMT-03:00",
+    "report_currency": "USD",
+    "site_report": {
+      "from": "2026-09-16", "to": "2026-09-22", "site": "coronabingo.com.ar",
+      "estimated_earnings_usd": 0.81, "impressions": 2609, "page_views": 932,
+      "note": "pre-link baseline; estimated rounded earnings, not backfillable into GA4 by creating the link"
+    },
+    "account_info_url": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/settings/account-information",
+    "report_url": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/reporting/"
+  },
+  "firebase": {
+    "project_id": "coronabingo-bf16f",
+    "linked_analytics_property_id": "226709381",
+    "linked_analytics_property_name": "coronabingo-bf16f",
+    "stream_id": "1861645851",
+    "measurement_id": "G-PR7XZB4T8W",
+    "received_traffic_last_48_hours": true,
+    "integration_url": "https://console.firebase.google.com/u/0/project/coronabingo-bf16f/settings/integrations/analytics"
+  },
+  "production": {
+    "url": "https://coronabingo.com.ar/",
+    "html_gtag_script_id": "UA-161408428-1",
+    "html_gtag_config_id": "UA-161408428-1",
+    "html_adsense_client": "ca-pub-6231280485856921",
+    "app_bundle": "/_next/static/chunks/pages/_app-aeee8dd9322400f5.js",
+    "app_bundle_measurement_ids": ["G-PR7XZB4T8W", "UA-161408428-1"],
+    "google_script_requested_with_ua_contains_ids": ["G-WYG7FMEWEF", "UA-161408428-1"],
+    "network_limit": "Chrome used extension replacement resources for analytics and advertising scripts. Clean-browser g/collect delivery was not established. Extensions were not changed.",
+    "live_vercel_env_inspected": false
+  },
+  "implementation": {"link_created": false, "product_code_changed": false, "account_settings_saved": false, "deployment_created": false, "post_link_impressions_verified": false, "post_link_revenue_verified": false},
+  "sources": [
+    "https://support.google.com/adsense/answer/6084409?hl=en",
+    "https://support.google.com/analytics/answer/13610380?hl=en",
+    "https://support.google.com/adsense/answer/6090771?hl=en",
+    "https://support.google.com/adsense/answer/6089284?hl=en",
+    "https://support.google.com/analytics/answer/12925552?hl=en",
+    "https://support.google.com/analytics/answer/11198161?hl=en",
+    "https://developers.google.com/analytics/devguides/collection/ga4/views",
+    "https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications",
+    "https://firebase.google.com/docs/analytics/web/get-started"
+  ]
+}

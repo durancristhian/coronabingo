@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/",
+    "status": 200
+  },
+  {
+    "path": "/en",
+    "status": 200
+  },
+  {
+    "path": "/es/room/uw0qk1jIjDnrRKBLzIJz",
+    "status": 200
+  },
+  {
+    "path": "/admin",
+    "status": 404
+  },
+  {
+    "path": "/eventos/qa-nonexistent",
+    "status": 404
+  }
+]

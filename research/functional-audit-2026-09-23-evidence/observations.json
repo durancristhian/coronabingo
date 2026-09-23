@@ -1,0 +1,35 @@
+{
+  "roomAdminUrl": "http://localhost:3124/room/uw0qk1jIjDnrRKBLzIJz/admin",
+  "roomUrl": "http://localhost:3124/room/uw0qk1jIjDnrRKBLzIJz",
+  "hostPlayerUrl": "http://localhost:3124/room/uw0qk1jIjDnrRKBLzIJz/ayDHLWb43WcnbQ8MyvqV",
+  "deletedGuestPlayerUrl": "http://127.0.0.1:3124/room/uw0qk1jIjDnrRKBLzIJz/euDqU2dxC4SGOIMCOIv8",
+  "observations": [
+    {
+      "id": "CB-01",
+      "result": "43 lost after second tab reload",
+      "guest": [
+        "7",
+        "11",
+        "63"
+      ]
+    },
+    {
+      "id": "CB-02",
+      "snapshot": "- main:\n  - heading \"Coronabingo\" [level=1]:\n    - link \"Coronabingo\":\n      - /url: /\n  - combobox \"language\":\n    - option \"Español\" [selected]\n    - option \"English\"\n  - insertion\n  - heading \"Preparar sala\" [level=2]:\n    - button \"Preparar sala\"\n  - generic: Nombre\n  - textbox \"Nombre\": QA bugs 20260923\n  - generic: Link a la sala\n  - textbox \"Link a la sala\": http://localhost:3124/es/room/uw0qk1jIjDnrRKBLzIJz\n  - paragraph: Compartí este link a las personas de la videollamada.\n  - button \"Compartir link\":\n    - generic: Compartir link\n  - paragraph:\n    - generic: \"Personas que van a jugar:\"\n    - generic: 1 de 720\n  - generic: Nombre *\n  - textbox \"Nombre *\"\n  - button \"Agregar persona\" [disabled]:\n  - paragraph: Ana QA\n  - generic: Dirige el juego\n  - button \"Eliminar persona\":\n  - generic: Dirige el juego\n  - combobox \"adminId\":\n    - option \"Ana QA\" [selected]\n  - paragraph: Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere.\n  - checkbox \"Usar bolillero online\" [checked]\n  - generic: Usar bolillero online\n  - paragraph: Si tenés un bolillero y querés usarlo no tildes esta opción.\n  - checkbox \"Ocultar los significados de los números\"\n  - generic: Ocultar los significados de los números\n  - paragraph: Recomendamos activar esta opción si están jugando fuera de Argentina ya que los significados se corresponden con la Quiniela Argentina.\n  - button \"Jugar\" [disabled]:\n    - generic: Jugar\n"
+    },
+    {
+      "id": "CB-03",
+      "result": "Fresh origin can open admin and read protected room code",
+      "snapshot": "irige el juego\n  - combobox \"adminId\":\n    - option \"Ana QA\" [selected]\n    - option \"Carla QA\"\n  - paragraph: Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere.\n  - checkbox \"Usar bolillero online\" [checked]\n  - generic: Usar bolillero online\n  - paragraph: Si tenés un bolillero y querés usarlo no tildes esta opción.\n  - checkbox \"Ocultar los significados de los números\"\n  - generic: Ocultar los significados de los números\n  - paragraph: Recomendamos activar esta opción si están jugando fuera de Argentina ya que los significados se corresponden con la Quiniela Argentina.\n  - checkbox \"Activar código para el admin\" [checked]\n  - generic: Activar código para el admin\n  - paragraph: Pedir el código de sala al ingresar a los cartones de quien dirige la sala\n  - paragraph: Código de acceso a la sala\n  - checkbox \"playerId:airplane\"\n  - generic \"playerId:airplane\"\n  - checkbox \"playerId:basketball\"\n  - generic \"playerId:basketball\"\n  - checkbox \"playerId:deciduous_tree\"\n  - generic \"playerId:deciduous_tree\"\n  - button \"Jugar\":\n    - generic: Jugar\n"
+    },
+    {
+      "id": "CB-03-controls",
+      "hostControls": 1
+    },
+    {
+      "id": "CB-04",
+      "missingRoom": "- main:\n  - heading \"Coronabingo\" [level=1]:\n    - link \"Coronabingo\":\n      - /url: /\n  - combobox \"language\":\n    - option \"Español\" [selected]\n    - option \"English\"\n  - insertion\n  - paragraph: Ocurrió un error.\n  - button \"Recargar\":\n    - generic: Recargar\n",
+      "deletedPlayer": "- main:\n  - heading \"Coronabingo\" [level=1]:\n    - link \"Coronabingo\":\n      - /url: /\n  - combobox \"language\":\n    - option \"Español\" [selected]\n    - option \"English\"\n  - insertion\n  - paragraph: Ocurrió un error.\n  - button \"Recargar\":\n    - generic: Recargar\n"
+    }
+  ]
+}
