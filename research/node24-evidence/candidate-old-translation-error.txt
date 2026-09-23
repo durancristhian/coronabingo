@@ -1,0 +1,28 @@
+- navigation:
+  - button "previous" [disabled]:
+    - img "previous"
+  - generic: 1/
+  - generic: "1"
+  - button "next" [disabled]:
+    - img "next"
+- generic "Latest available version is detected (16.3.6).": Next.js 16.3.6
+- generic: Webpack
+- dialog "Build Error":
+  - generic: Build Error
+  - button "Copy Error Info":
+  - link "Go to related documentation":
+    - /url: https://nextjs.org/docs/messages/export-all-in-page
+  - button "Attach Node.js inspector":
+  - generic: "x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead."
+  - generic: ./pages/index.js
+  - button "Open in editor":
+  - text: "Error: x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead. | Read more:"
+  - link "https://nextjs.org/docs/messages/export-all-in-page":
+    - /url: https://nextjs.org/docs/messages/export-all-in-page
+  - text: ",-[/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js:28:1] 25 | 26 | 27 | 28 | export * from '../pages_' : ^^^^^^^^^^^^^^^^^^^^^^^^^ `----"
+- button "Open Next.js Dev Tools":
+- button "Open issues overlay":
+  - generic: "0"
+  - generic: "1"
+  - generic: Issue
+- alert

@@ -1,0 +1,155 @@
+{
+  "next": {
+    "version": "16.3.6",
+    "engines": {
+      "node": ">=20.9.0"
+    },
+    "peerDependencies": {
+      "sass": "^1.3.0",
+      "react": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0",
+      "react-dom": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0",
+      "@playwright/test": "^1.51.1",
+      "@opentelemetry/api": "^1.1.0",
+      "babel-plugin-react-compiler": "*"
+    },
+    "peerDependenciesMeta": {
+      "sass": {
+        "optional": true
+      },
+      "@playwright/test": {
+        "optional": true
+      },
+      "@opentelemetry/api": {
+        "optional": true
+      },
+      "babel-plugin-react-compiler": {
+        "optional": true
+      }
+    }
+  },
+  "react": {
+    "version": "18.3.1",
+    "engines": {
+      "node": ">=0.10.0"
+    },
+    "peerDependencies": null,
+    "peerDependenciesMeta": null
+  },
+  "react-dom": {
+    "version": "18.3.1",
+    "engines": null,
+    "peerDependencies": {
+      "react": "^18.3.1"
+    },
+    "peerDependenciesMeta": null
+  },
+  "typescript": {
+    "version": "5.9.3",
+    "engines": {
+      "node": ">=14.17"
+    },
+    "peerDependencies": null,
+    "peerDependenciesMeta": null
+  },
+  "@types/react": {
+    "version": "18.3.31",
+    "engines": null,
+    "peerDependencies": {},
+    "peerDependenciesMeta": null
+  },
+  "@types/react-dom": {
+    "version": "18.3.7",
+    "engines": null,
+    "peerDependencies": {
+      "@types/react": "^18.0.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "@types/node": {
+    "version": "24.13.6",
+    "engines": null,
+    "peerDependencies": {},
+    "peerDependenciesMeta": null
+  },
+  "next-translate": {
+    "version": "3.2.0",
+    "engines": {
+      "node": ">=16.10.0"
+    },
+    "peerDependencies": {
+      "next": ">= 13.2.5",
+      "react": ">= 18.0.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "next-translate-plugin": {
+    "version": "3.2.0",
+    "engines": {
+      "node": ">=14.15.0"
+    },
+    "peerDependencies": {
+      "next-translate": ">= 2.4.1"
+    },
+    "peerDependenciesMeta": null
+  },
+  "renature": {
+    "version": "0.11.1",
+    "engines": null,
+    "peerDependencies": {
+      "react": "^16.9.0",
+      "react-dom": "^16.9.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "react-tabs": {
+    "version": "6.1.1",
+    "engines": null,
+    "peerDependencies": {
+      "react": "^18.0.0 || ^19.0.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "react-copy-to-clipboard": {
+    "version": "5.1.1",
+    "engines": null,
+    "peerDependencies": {
+      "react": ">=15.3.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "react-markdown-editor-lite": {
+    "version": "1.4.2",
+    "engines": null,
+    "peerDependencies": {
+      "react": ">=16.9.0",
+      "react-dom": ">=16.9.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "swr": {
+    "version": "2.5.1",
+    "engines": null,
+    "peerDependencies": {
+      "react": "^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "@packtracker/webpack-plugin": {
+    "version": "2.3.0",
+    "engines": {
+      "node": ">= 6.14.4"
+    },
+    "peerDependencies": {
+      "webpack": ">= 2.0.0"
+    },
+    "peerDependenciesMeta": null
+  },
+  "next-images": {
+    "version": "1.8.5",
+    "engines": null,
+    "peerDependencies": {
+      "webpack": "^4.0.0 || ^5.0.0"
+    },
+    "peerDependenciesMeta": null
+  }
+}

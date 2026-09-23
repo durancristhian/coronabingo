@@ -1,0 +1,13 @@
+components/OptionTab.tsx(30,10): error TS2786: 'Icon' cannot be used as a JSX component.
+  Its type 'Function' is not a valid JSX element type.
+components/RoundedButton.tsx(39,19): error TS2786: 'Icon' cannot be used as a JSX component.
+  Its type 'Function' is not a valid JSX element type.
+interfaces/custom/ErrorInfo.ts(2,3): error TS2411: Property 'componentStack' of type 'string | null | undefined' is not assignable to 'string' index type 'string'.
+interfaces/custom/ErrorInfo.ts(2,3): error TS2411: Property 'digest' of type 'string | null | undefined' is not assignable to 'string' index type 'string'.
+pages/_app.tsx(42,5): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+pages_/_app.tsx(42,5): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+pages_/eventos/[eventId].tsx(112,22): error TS18046: 'error' is of type 'unknown'.
+polyfills/promise-finally.ts(6,10): error TS2790: The operand of a 'delete' operator must be optional.
+scripts/generate-tickets.ts(84,23): error TS18046: 'e' is of type 'unknown'.
+scripts/generate-tickets.ts(98,21): error TS18046: 'e' is of type 'unknown'.
+utils/telegram.ts(23,16): error TS18046: 'error' is of type 'unknown'.

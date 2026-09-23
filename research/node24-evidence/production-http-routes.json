@@ -1,0 +1,47 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/"
+  },
+  {
+    "path": "/es",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/es"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/en"
+  },
+  {
+    "path": "/admin",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/admin"
+  },
+  {
+    "path": "/es/admin",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/es/admin"
+  },
+  {
+    "path": "/en/admin",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/en/admin"
+  },
+  {
+    "path": "/room/node24-baseline-missing",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/room/node24-baseline-missing"
+  },
+  {
+    "path": "/es/room/node24-baseline-missing",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/es/room/node24-baseline-missing"
+  },
+  {
+    "path": "/en/room/node24-baseline-missing",
+    "status": 200,
+    "finalUrl": "https://coronabingo.com.ar/en/room/node24-baseline-missing"
+  }
+]

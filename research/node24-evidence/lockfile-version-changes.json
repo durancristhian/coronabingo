@@ -1,0 +1,532 @@
+[
+  {
+    "package": "node_modules/@types/json-schema",
+    "before": "7.0.7",
+    "after": "7.0.15"
+  },
+  {
+    "package": "node_modules/@types/node",
+    "before": "13.13.50",
+    "after": "24.13.6"
+  },
+  {
+    "package": "node_modules/@types/react",
+    "before": "16.14.5",
+    "after": "18.3.31"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/ast",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/floating-point-hex-parser",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/helper-api-error",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/helper-buffer",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/helper-wasm-bytecode",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/helper-wasm-section",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/ieee754",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/leb128",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/utf8",
+    "before": "1.9.0",
+    "after": "1.13.2"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/wasm-edit",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/wasm-gen",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/wasm-opt",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/wasm-parser",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/@webassemblyjs/wast-printer",
+    "before": "1.9.0",
+    "after": "1.14.1"
+  },
+  {
+    "package": "node_modules/array-includes",
+    "before": "3.1.3",
+    "after": "3.2.0"
+  },
+  {
+    "package": "node_modules/array.prototype.flat",
+    "before": "1.2.4",
+    "after": "1.3.3"
+  },
+  {
+    "package": "node_modules/array.prototype.flatmap",
+    "before": "1.2.4",
+    "after": "1.3.3"
+  },
+  {
+    "package": "node_modules/browserslist",
+    "before": "4.16.4",
+    "after": "4.29.0"
+  },
+  {
+    "package": "node_modules/call-bind",
+    "before": "1.0.2",
+    "after": "1.0.9"
+  },
+  {
+    "package": "node_modules/caniuse-lite",
+    "before": "1.0.30001214",
+    "after": "1.0.30001810"
+  },
+  {
+    "package": "node_modules/copy-to-clipboard",
+    "before": "3.3.1",
+    "after": "3.3.3"
+  },
+  {
+    "package": "node_modules/csstype",
+    "before": "3.0.8",
+    "after": "3.2.3"
+  },
+  {
+    "package": "node_modules/define-properties",
+    "before": "1.1.3",
+    "after": "1.2.1"
+  },
+  {
+    "package": "node_modules/electron-to-chromium",
+    "before": "1.3.718",
+    "after": "1.5.438"
+  },
+  {
+    "package": "node_modules/enhanced-resolve",
+    "before": "4.5.0",
+    "after": "5.25.1"
+  },
+  {
+    "package": "node_modules/es-abstract",
+    "before": "1.18.0",
+    "after": "1.24.2"
+  },
+  {
+    "package": "node_modules/es-to-primitive",
+    "before": "1.2.1",
+    "after": "1.3.4"
+  },
+  {
+    "package": "node_modules/escalade",
+    "before": "3.1.1",
+    "after": "3.2.0"
+  },
+  {
+    "package": "node_modules/eslint-import-resolver-node",
+    "before": "0.3.4",
+    "after": "0.3.10"
+  },
+  {
+    "package": "node_modules/eslint-import-resolver-node/node_modules/debug",
+    "before": "2.6.9",
+    "after": "3.2.7"
+  },
+  {
+    "package": "node_modules/eslint-module-utils",
+    "before": "2.6.0",
+    "after": "2.14.0"
+  },
+  {
+    "package": "node_modules/eslint-module-utils/node_modules/debug",
+    "before": "2.6.9",
+    "after": "3.2.7"
+  },
+  {
+    "package": "node_modules/eslint-plugin-import",
+    "before": "2.22.1",
+    "after": "2.32.0"
+  },
+  {
+    "package": "node_modules/eslint-plugin-import/node_modules/debug",
+    "before": "2.6.9",
+    "after": "3.2.7"
+  },
+  {
+    "package": "node_modules/eslint-plugin-import/node_modules/doctrine",
+    "before": "1.5.0",
+    "after": "2.1.0"
+  },
+  {
+    "package": "node_modules/function-bind",
+    "before": "1.1.1",
+    "after": "1.1.2"
+  },
+  {
+    "package": "node_modules/get-intrinsic",
+    "before": "1.1.1",
+    "after": "1.3.0"
+  },
+  {
+    "package": "node_modules/graceful-fs",
+    "before": "4.2.6",
+    "after": "4.2.11"
+  },
+  {
+    "package": "node_modules/has-bigints",
+    "before": "1.0.1",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/has-symbols",
+    "before": "1.0.2",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/internal-slot",
+    "before": "1.0.3",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/is-bigint",
+    "before": "1.0.1",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/is-boolean-object",
+    "before": "1.1.0",
+    "after": "1.2.2"
+  },
+  {
+    "package": "node_modules/is-buffer",
+    "before": "1.1.6",
+    "after": "2.0.5"
+  },
+  {
+    "package": "node_modules/is-callable",
+    "before": "1.2.3",
+    "after": "1.2.7"
+  },
+  {
+    "package": "node_modules/is-core-module",
+    "before": "2.2.0",
+    "after": "2.17.0"
+  },
+  {
+    "package": "node_modules/is-date-object",
+    "before": "1.0.2",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/is-glob",
+    "before": "4.0.1",
+    "after": "4.0.3"
+  },
+  {
+    "package": "node_modules/is-negative-zero",
+    "before": "2.0.1",
+    "after": "2.0.3"
+  },
+  {
+    "package": "node_modules/is-number-object",
+    "before": "1.0.4",
+    "after": "1.1.1"
+  },
+  {
+    "package": "node_modules/is-plain-obj",
+    "before": "1.1.0",
+    "after": "2.1.0"
+  },
+  {
+    "package": "node_modules/is-regex",
+    "before": "1.1.2",
+    "after": "1.2.1"
+  },
+  {
+    "package": "node_modules/is-string",
+    "before": "1.0.5",
+    "after": "1.1.1"
+  },
+  {
+    "package": "node_modules/is-symbol",
+    "before": "1.0.3",
+    "after": "1.1.1"
+  },
+  {
+    "package": "node_modules/jest-worker",
+    "before": "24.9.0",
+    "after": "27.5.1"
+  },
+  {
+    "package": "node_modules/jest-worker/node_modules/supports-color",
+    "before": "6.1.0",
+    "after": "8.1.1"
+  },
+  {
+    "package": "node_modules/minimatch",
+    "before": "3.0.4",
+    "after": "3.1.5"
+  },
+  {
+    "package": "node_modules/minimist",
+    "before": "1.2.5",
+    "after": "1.2.8"
+  },
+  {
+    "package": "node_modules/next",
+    "before": "9.5.1",
+    "after": "16.3.6"
+  },
+  {
+    "package": "node_modules/next-translate",
+    "before": "0.14.2",
+    "after": "3.2.0"
+  },
+  {
+    "package": "node_modules/node-releases",
+    "before": "1.1.71",
+    "after": "2.0.57"
+  },
+  {
+    "package": "node_modules/object-inspect",
+    "before": "1.10.2",
+    "after": "1.13.4"
+  },
+  {
+    "package": "node_modules/object.assign",
+    "before": "4.1.2",
+    "after": "4.1.7"
+  },
+  {
+    "package": "node_modules/object.entries",
+    "before": "1.1.3",
+    "after": "1.1.9"
+  },
+  {
+    "package": "node_modules/object.fromentries",
+    "before": "2.0.4",
+    "after": "2.0.8"
+  },
+  {
+    "package": "node_modules/object.values",
+    "before": "1.1.3",
+    "after": "1.2.1"
+  },
+  {
+    "package": "node_modules/parse-entities",
+    "before": "1.2.2",
+    "after": "2.0.0"
+  },
+  {
+    "package": "node_modules/path-parse",
+    "before": "1.0.6",
+    "after": "1.0.7"
+  },
+  {
+    "package": "node_modules/react",
+    "before": "16.14.0",
+    "after": "18.3.1"
+  },
+  {
+    "package": "node_modules/react-copy-to-clipboard",
+    "before": "5.0.3",
+    "after": "5.1.1"
+  },
+  {
+    "package": "node_modules/react-dom",
+    "before": "16.14.0",
+    "after": "18.3.1"
+  },
+  {
+    "package": "node_modules/react-markdown",
+    "before": "4.3.1",
+    "after": "6.0.3"
+  },
+  {
+    "package": "node_modules/react-markdown-editor-lite",
+    "before": "1.2.4",
+    "after": "1.4.2"
+  },
+  {
+    "package": "node_modules/react-modal",
+    "before": "3.13.1",
+    "after": "3.16.3"
+  },
+  {
+    "package": "node_modules/react-tabs",
+    "before": "3.2.2",
+    "after": "4.2.1"
+  },
+  {
+    "package": "node_modules/regexp.prototype.flags",
+    "before": "1.3.1",
+    "after": "1.5.4"
+  },
+  {
+    "package": "node_modules/remark-parse",
+    "before": "5.0.0",
+    "after": "9.0.0"
+  },
+  {
+    "package": "node_modules/scheduler",
+    "before": "0.19.1",
+    "after": "0.23.2"
+  },
+  {
+    "package": "node_modules/schema-utils",
+    "before": "2.6.6",
+    "after": "4.5.0"
+  },
+  {
+    "package": "node_modules/semver",
+    "before": "6.3.0",
+    "after": "6.3.1"
+  },
+  {
+    "package": "node_modules/side-channel",
+    "before": "1.0.4",
+    "after": "1.1.1"
+  },
+  {
+    "package": "node_modules/source-map-support",
+    "before": "0.5.19",
+    "after": "0.5.21"
+  },
+  {
+    "package": "node_modules/string.prototype.trimend",
+    "before": "1.0.4",
+    "after": "1.0.10"
+  },
+  {
+    "package": "node_modules/string.prototype.trimstart",
+    "before": "1.0.4",
+    "after": "1.0.8"
+  },
+  {
+    "package": "node_modules/styled-jsx",
+    "before": "3.3.0",
+    "after": "5.1.6"
+  },
+  {
+    "package": "node_modules/swr",
+    "before": "0.1.18",
+    "after": "1.3.0"
+  },
+  {
+    "package": "node_modules/tapable",
+    "before": "1.1.3",
+    "after": "2.3.3"
+  },
+  {
+    "package": "node_modules/terser",
+    "before": "4.8.0",
+    "after": "5.51.2"
+  },
+  {
+    "package": "node_modules/tsconfig-paths",
+    "before": "3.9.0",
+    "after": "3.15.0"
+  },
+  {
+    "package": "node_modules/tsconfig-paths/node_modules/json5",
+    "before": "1.0.1",
+    "after": "1.0.2"
+  },
+  {
+    "package": "node_modules/typescript",
+    "before": "3.9.9",
+    "after": "5.9.3"
+  },
+  {
+    "package": "node_modules/unbox-primitive",
+    "before": "1.0.1",
+    "after": "1.1.0"
+  },
+  {
+    "package": "node_modules/unified",
+    "before": "6.2.0",
+    "after": "9.2.2"
+  },
+  {
+    "package": "node_modules/unist-util-is",
+    "before": "3.0.0",
+    "after": "4.1.0"
+  },
+  {
+    "package": "node_modules/unist-util-stringify-position",
+    "before": "1.1.2",
+    "after": "2.0.3"
+  },
+  {
+    "package": "node_modules/unist-util-visit",
+    "before": "1.4.1",
+    "after": "2.0.3"
+  },
+  {
+    "package": "node_modules/unist-util-visit-parents",
+    "before": "1.1.2",
+    "after": "3.1.1"
+  },
+  {
+    "package": "node_modules/vfile",
+    "before": "2.3.0",
+    "after": "4.2.1"
+  },
+  {
+    "package": "node_modules/vfile-message",
+    "before": "1.1.1",
+    "after": "2.0.4"
+  },
+  {
+    "package": "node_modules/watchpack",
+    "before": "2.0.0-beta.13",
+    "after": "2.5.2"
+  },
+  {
+    "package": "node_modules/webpack",
+    "before": "4.44.2",
+    "after": "5.111.1"
+  },
+  {
+    "package": "node_modules/webpack-sources",
+    "before": "1.4.3",
+    "after": "3.5.1"
+  },
+  {
+    "package": "node_modules/which-boxed-primitive",
+    "before": "1.0.2",
+    "after": "1.1.1"
+  }
+]

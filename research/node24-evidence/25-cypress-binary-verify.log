@@ -1,0 +1,43 @@
+
+[13:00:13]  Verifying Cypress can run /Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app [started]
+[13:00:24]  Verifying Cypress can run /Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app [failed]
+[13:00:24] → Cypress failed to start.
+
+This is usually caused by a missing library or dependency.
+
+The error below should indicate which dependency is missing.
+
+https://on.cypress.io/required-dependencies
+
+If you are using Docker, we provide containers with all required dependencies installed.
+
+----------
+
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --no-sandbox
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --smoke-test
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --ping=356
+
+----------
+
+Platform: darwin (25.6.0)
+Cypress Version: 4.12.1
+Cypress failed to start.
+
+This is usually caused by a missing library or dependency.
+
+The error below should indicate which dependency is missing.
+
+https://on.cypress.io/required-dependencies
+
+If you are using Docker, we provide containers with all required dependencies installed.
+
+----------
+
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --no-sandbox
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --smoke-test
+/Users/durancristhian/Library/Caches/Cypress/4.12.1/Cypress.app/Contents/MacOS/Cypress: bad option: --ping=356
+
+----------
+
+Platform: darwin (25.6.0)
+Cypress Version: 4.12.1

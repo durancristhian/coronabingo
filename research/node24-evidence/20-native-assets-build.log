@@ -1,0 +1,157 @@
+▲ Next.js 16.3.6 (webpack)
+✓ Running next.config.js took 76ms
+
+  Running TypeScript ...
+  Finished TypeScript in 0ms ...
+  Creating an optimized production build ...
+
+warn - Tailwind is not purging unused styles because no template paths have been provided.
+warn - If you have manually configured PurgeCSS outside of Tailwind or are deliberately not removing unused styles, set `purge: false` in your Tailwind config file to silence this warning.
+warn - https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+✓ Compiled successfully in 1294ms
+  Collecting page data using 6 workers ...
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1564:15)
+    at /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:68:36
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1674:12)
+    at mod.require (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:79:28)
+    at require (node:internal/modules/helpers:157:16) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js'
+  ]
+}
+
+Node.js v24.21.0
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1564:15)
+    at /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:68:36
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1674:12)
+    at mod.require (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:79:28)
+    at require (node:internal/modules/helpers:157:16) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js'
+  ]
+}
+
+Node.js v24.21.0
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1564:15)
+    at /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:68:36
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1674:12)
+    at mod.require (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:79:28)
+    at require (node:internal/modules/helpers:157:16) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js'
+  ]
+}
+
+Node.js v24.21.0
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js
+- /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1564:15)
+    at /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:68:36
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1674:12)
+    at mod.require (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/require-hook.js:79:28)
+    at require (node:internal/modules/helpers:157:16) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/app-render/dynamic-rendering.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/io-utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment-extensions/random.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/server/node-environment.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/utils.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/build/worker.js',
+    '/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/next/dist/compiled/jest-worker/processChild.js'
+  ]
+}
+
+Node.js v24.21.0
+⨯ Next.js build worker exited with code: 1 and signal: null

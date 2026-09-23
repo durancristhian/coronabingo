@@ -1,0 +1,35 @@
+▲ Next.js 16.3.6 (webpack)
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'analyzeBrowser', 'analyzeServer', 'bundleAnalyzerConfig', 'future', 'serverRuntimeConfig'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+✓ Running next.config.js took 86ms
+
+  Running TypeScript ...
+  Finished TypeScript in 1ms ...
+  Creating an optimized production build ...
+
+warn - Tailwind is not purging unused styles because no template paths have been provided.
+warn - If you have manually configured PurgeCSS outside of Tailwind or are deliberately not removing unused styles, set `purge: false` in your Tailwind config file to silence this warning.
+warn - https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+✓ Compiled successfully in 1304ms
+  Collecting page data using 6 workers ...
+  Generating static pages using 6 workers (0/6) ...
+next-translate - compiled page: / - locale: es - namespaces: common, index, roomId - used loader: getStaticProps
+next-translate - compiled page: / - locale: en - namespaces: common, index, roomId - used loader: getStaticProps
+  Generating static pages using 6 workers (1/6) 
+  Generating static pages using 6 workers (2/6) 
+  Generating static pages using 6 workers (4/6) 
+✓ Generating static pages using 6 workers (6/6) in 140ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (pages)
+┌ ● /
+├   /_app
+├ ○ /404
+└ ƒ /room/[roomId]
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+

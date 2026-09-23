@@ -1,0 +1,22 @@
+
+> coronabingo@1.23.1 validate-locales
+> ts-node scripts/validate-locales
+
+🗂  Directory /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es/admin.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es/common.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es/index.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es/playerId.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/es/roomId.json
+🗂  Directory /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en/admin.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en/common.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en/index.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en/playerId.json
+----  📄 File /Users/durancristhian/Repos/coronabingo-node24-investigation/locales/en/roomId.json
+✅ es en
+✅ es en admin.json
+✅ es en common.json
+✅ es en index.json
+✅ es en playerId.json
+✅ es en roomId.json

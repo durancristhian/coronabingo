@@ -1,0 +1,47 @@
+[
+  {
+    "name": "next",
+    "version": "9.5.1",
+    "peer": "^16.6.0"
+  },
+  {
+    "name": "react-copy-to-clipboard",
+    "version": "5.0.3",
+    "peer": "^15.3.0 || ^16.0.0 || ^17.0.0"
+  },
+  {
+    "name": "react-dom",
+    "version": "16.14.0",
+    "peer": "^16.14.0"
+  },
+  {
+    "name": "react-markdown",
+    "version": "4.3.1",
+    "peer": "^15.0.0 || ^16.0.0"
+  },
+  {
+    "name": "react-markdown-editor-lite",
+    "version": "1.2.4",
+    "peer": "^16.9.0"
+  },
+  {
+    "name": "react-modal",
+    "version": "3.13.1",
+    "peer": "^0.14.0 || ^15.0.0 || ^16 || ^17"
+  },
+  {
+    "name": "react-tabs",
+    "version": "3.2.2",
+    "peer": "^16.3.0 || ^17.0.0-0"
+  },
+  {
+    "name": "renature",
+    "version": "0.4.1",
+    "peer": "^16.9.0"
+  },
+  {
+    "name": "swr",
+    "version": "0.1.18",
+    "peer": "^16.11.0"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/es",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "documentLanguage": "en"
+  },
+  {
+    "path": "/es/admin",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/en/admin",
+    "status": 200,
+    "documentLanguage": "en"
+  },
+  {
+    "path": "/es/room/node24-migration-missing",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/en/room/node24-migration-missing/player",
+    "status": 200,
+    "documentLanguage": "en"
+  },
+  {
+    "path": "/es/room/node24-migration-missing/admin",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/es/eventos/node24-migration-missing",
+    "status": 200,
+    "documentLanguage": "es"
+  },
+  {
+    "path": "/en/eventos/node24-migration-missing/admin",
+    "status": 200,
+    "documentLanguage": "en"
+  }
+]

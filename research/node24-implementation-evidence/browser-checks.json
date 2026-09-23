@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-23",
+  "runtime": "Node 24.21.0 / Next 16.3.6 / React 18.3.1",
+  "translation": "next-translate and plugin 3.0.0",
+  "dev": {
+    "home": "Spanish and English render",
+    "languageSwitch": "Memoized News heading updates both ways on 3.0.0; 3.2.0 failed this check",
+    "room": "/es/room/node24-migration-missing?proof=local#details switched to /en/room/node24-migration-missing?proof=local#details; missing record renders existing error view",
+    "admin": "Signed-out login form loads; no login submitted"
+  },
+  "fixture": {
+    "writes": "Only component-local React state; no gameplay/authentication submissions",
+    "ticket": "Ticket 1 renders all 15 numbers; selecting 7 marks the cell",
+    "plurals": {
+      "es": [
+        "Va a jugar 1 persona",
+        "Van a jugar 2 personas",
+        "Cart\u00f3n N\u00ba 1",
+        "Cartones N\u00ba 1"
+      ],
+      "en": [
+        "There are 1 player waiting to play",
+        "There are 2 players waiting to play",
+        "Ticket N\u00ba 1",
+        "Tickets N\u00ba 1"
+      ]
+    },
+    "animation": {
+      "during": {
+        "number": 9,
+        "opacity": 0.404863,
+        "transform": "matrix(-0.826598, 0.562793, -0.562793, -0.826598, -29.7568, 0)"
+      },
+      "settled": {
+        "first": "yellow, opacity 1, scale 1, translate 0",
+        "older": "gray, opacity 1, scale .75, translate 10px"
+      }
+    },
+    "image": "Imported social.jpg complete, naturalWidth 1200",
+    "audio": "Imported MP3 readyState 4, duration .990375 seconds; play reached ended",
+    "markdown": "Typed **Edited locally** rendered in editor preview and ReactMarkdown",
+    "modal": "Dynamic namespace title and imported Markdown rendered",
+    "download": "Both XLSX files validated as ZIP/XML with correct es/en shared links"
+  },
+  "warnings": [
+    "Legacy componentWillUpdate lifecycle warning from retained package",
+    "ReactMarkdown 6 defaultProps future-major deprecation",
+    "Initial Next development HMR isrManifest warning; no serving failure"
+  ],
+  "production": {
+    "home": "Spanish direct /es and English client navigation + direct refresh pass",
+    "memoizedContent": "News heading changes with locale",
+    "modal": "Tutorial dialog opens and YouTube iframe/player appears; playback not exercised",
+    "dynamicRoute": "/es/room/node24-migration-missing?proof=production#details switches to /en/room/node24-migration-missing?proof=production#details and refreshes; translated existing missing-record error",
+    "console": "No errors observed on home or missing-room screens",
+    "css": "Production home screenshot reviewed for layout and styling"
+  }
+}

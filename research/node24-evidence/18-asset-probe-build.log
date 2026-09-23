@@ -1,0 +1,29 @@
+▲ Next.js 16.3.6 (webpack)
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'analyzeBrowser', 'analyzeServer', 'bundleAnalyzerConfig', 'future', 'serverRuntimeConfig'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+✓ Running next.config.js took 92ms
+
+  Running TypeScript ...
+  Finished TypeScript in 2ms ...
+  Creating an optimized production build ...
+Failed to compile.
+
+../../public/cafecito.png
+Error: error:0308010C:digital envelope routines::unsupported
+    at new Hash (node:internal/crypto/hash:114:19)
+    at Object.createHash (node:crypto:146:10)
+    at getHashDigest (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/loader-utils/lib/getHashDigest.js:46:34)
+    at /Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/loader-utils/lib/interpolateName.js:113:11
+    at String.replace (<anonymous>)
+    at interpolateName (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/loader-utils/lib/interpolateName.js:110:8)
+    at Object.loader (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/file-loader/dist/index.js:29:48)
+    at Object.loader (/Users/durancristhian/Repos/coronabingo-node24-investigation/node_modules/url-loader/dist/index.js:127:19)
+
+Import trace for requested module:
+../../public/cafecito.png
+./pages/index.js
+  (from ../../node_modules/url-loader/dist/cjs.js)
+
+
+> Build failed because of webpack errors

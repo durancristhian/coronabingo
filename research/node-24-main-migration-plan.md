@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: planning complete following the scope interview. Implementation, branch changes, and deployment have not started.
+Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Application commit `c93bc83` is on `migrate/node24` in `../coronabingo-node24`. Part three (GitHub Actions and actual CI/Packtracker verification) is next. No remote branch change or deployment has occurred. Legacy production rollback eligibility remains an unresolved release gate.
 
 ## Agreed outcome
 
@@ -28,7 +28,7 @@ The repository inspection and read-only provider checks during this planning ses
 | Production metadata | The inspected READY production deployment dates from 2021-05-07 and identifies commit `002046108df164389ea8b446de495c7913c500fe`, matching inspected local `master`. This is deployment metadata, not proof of current gameplay behavior. |
 | Branches | GitHub default and local primary branch are `master`; no `main` exists. Eleven open Dependabot PRs target `master`. No branch rules, environment branch restrictions, or Vercel deploy hooks were found. Recheck before cutover. |
 
-No clean install, migration build, or browser acceptance run has been performed. Compatibility findings below identify work to prove, not already reproduced failures.
+At planning time, no clean install, migration build, or browser acceptance run had been performed. Parts one and two now record baseline investigation, clean installation, full local builds and focused browser checks. End-to-end gameplay, authenticated, preview and production acceptance remain open; see the linked reports for proof boundaries.
 
 Next 9 is outside support. Next 16 supports React 18 for this Pages Router application, requires TypeScript 5.1 or newer, and permits explicit Webpack use. Select the latest patched Next 16 release at implementation time and record exact resolved versions. React 18 compatibility does not imply that every existing React package supports it.
 
@@ -56,6 +56,8 @@ Retain Firebase, Sentry, Prettier, utility packages, and styling tools unless a 
 
 ### 1. Establish a baseline and run the compatibility investigation
 
+Completed as an investigation. [Part one findings](node-24-baseline-findings.md) select Node 24.21.0/npm 11.19.0, Next 16.3.6/React 18.3.1, and the modern `next-translate` integration. They document the peer, script-runner, type, parser, plural and asset-loader blockers, and the unresolved provider rollback proof. Part two supersedes the provisional translation version with a verified 3.0.0 runtime/plugin pair. The isolated candidate is deliberately incomplete and must not be merged as-is.
+
 - Work on an isolated implementation branch or checkout based on the current primary branch. Preserve unrelated `.vscode/settings.json` changes and the existing `research/` material.
 - Record commit, runtime, dependency versions, public route behavior, language switching, and representative screenshots. Inventory environment variable names and required services without exposing values.
 - Record the current production deployment and determine whether it can actually be restored through the provider. Do not assume Node 12 source can still rebuild, or that an old deployment will remain eligible for promotion.
@@ -63,6 +65,8 @@ Retain Firebase, Sentry, Prettier, utility packages, and styling tools unless a 
 - Classify each proposed update by its blocker or framework support requirement. Resolve exact versions and the translation approach before broad edits. Revise the estimate after roughly half a day; stop if a substantial rewrite is required.
 
 ### 2. Make runtime, framework, and compatibility changes
+
+Completed locally; [part two evidence](node-24-implementation.md) records clean installation, full builds, required local checks and focused browser verification. Final translation runtime/plugin pins are 3.0.0 after a full-app locale-switching regression in 3.2.0. The user approved temporary ESLint 9 with a separate supported-linter follow-up.
 
 - Update runtime declarations, framework dependencies, types, Webpack options, and the lockfile.
 - Apply only proven compatibility changes from the table above. Keep application behavior and shared links intact.
@@ -98,12 +102,12 @@ This is a release step after the candidate passes acceptance and release is auth
 
 ## Acceptance checklist
 
-- [ ] A clean checkout installs reproducibly with the documented Node 24/npm combination using `npm ci`.
-- [ ] `npm run dev` starts and renders the application under Node 24.
-- [ ] TypeScript passes with `tsc --noEmit`; required lint/hook checks work without broad source rewrites.
-- [ ] `npm run validate-locales` passes. `npm run validate-tickets` runs and its output is inspected: the current script catches assertion failures and may still exit successfully.
-- [ ] `npm run build` and `npm run start` succeed, with no migration-related serving or hydration errors.
-- [ ] Both Spanish and English load correctly. Direct visits, refreshes, switching languages, plural text, and existing shared-room URLs retain their behavior.
+- [x] A clean checkout installs reproducibly with the documented Node 24/npm combination using `npm ci`.
+- [x] `npm run dev` starts and renders the application under Node 24.
+- [x] TypeScript passes with `tsc --noEmit`; required lint/hook checks work without broad source rewrites.
+- [x] `npm run validate-locales` passes. `npm run validate-tickets` runs and its output is inspected: the current script catches assertion failures and may still exit successfully.
+- [x] `npm run build` and `npm run start` succeed, with no migration-related serving or hydration errors.
+- [ ] Full locale/shared-room acceptance (partial local proof complete): both Spanish and English load correctly. Direct visits, refreshes, switching languages, plural text, and existing shared-room URLs retain their behavior.
 - [ ] Host and player sessions can create/join a room, receive realtime number updates, and restart a game without cross-room effects.
 - [ ] Authentication and existing event/admin paths work with the agreed test accounts and data.
 - [ ] Production CSS, images, SVGs, animations, audio, Markdown content, and spreadsheet downloads retain their behavior. No UI redesign is introduced.

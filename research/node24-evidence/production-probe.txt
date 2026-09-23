@@ -1,0 +1,13 @@
+- main:
+  - img "Imported PNG"
+  - generic: "# Hello Hello - One 1. One one 2. One two - Two *This is italic* **This is bold**"
+  - heading "Translation compatibility probe" [level=1]
+  - text: Language
+  - combobox "language":
+    - option "Español"
+    - option "English" [selected]
+  - paragraph: Hello!, in this page you'll be able to play bingo with other people.
+  - paragraph: There are 1 player waiting to play
+  - paragraph: There are 2 players waiting to play
+  - paragraph: "Room: home"
+- alert

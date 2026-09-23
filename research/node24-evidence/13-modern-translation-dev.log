@@ -1,0 +1,31 @@
+▲ Next.js 16.3.6 (webpack)
+- Local:         http://127.0.0.1:3125
+- Network:       http://127.0.0.1:3125
+✓ Ready in 129ms
+✓ Running next.config.js took 87ms
+
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /room/node24-probe?check=shared 200 in 631ms (next.js: 619ms, application-code: 12ms)
+next-translate - compiled page: /room/[roomId] - locale: en - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /_next/data/development/en/room/node24-probe.json?check=shared&roomId=node24-probe 200 in 5ms (next.js: 1.8ms, application-code: 3ms)
+next-translate - compiled page: /room/[roomId] - locale: en - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /room/node24-probe?check=shared 200 in 37ms (next.js: 30ms, application-code: 7ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/node24-probe.json?check=shared&roomId=node24-probe 200 in 2ms (next.js: 0.8ms, application-code: 1.4ms)
+⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+▲ Next.js 16.3.6 (webpack)
+- Local:         http://127.0.0.1:3125
+- Network:       http://127.0.0.1:3125
+✓ Ready in 117ms
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'analyzeBrowser', 'analyzeServer', 'bundleAnalyzerConfig', 'future', 'serverRuntimeConfig'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+✓ Running next.config.js took 109ms
+
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /room/node24-probe?check=shared 200 in 1503ms (next.js: 1492ms, application-code: 11ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, index, roomId - used loader: getServerSideProps
+ GET /room/node24-probe?check=shared 304 in 7ms (next.js: 1.9ms, application-code: 5ms)
+[?25h

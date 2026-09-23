@@ -1,0 +1,147 @@
+[
+  {
+    "package": "@next/bundle-analyzer",
+    "before": null,
+    "after": "16.3.6"
+  },
+  {
+    "package": "@types/node",
+    "before": "13.13.50",
+    "after": "24.13.6"
+  },
+  {
+    "package": "@types/react",
+    "before": "16.14.5",
+    "after": "18.3.31"
+  },
+  {
+    "package": "@types/react-dom",
+    "before": null,
+    "after": "18.3.7"
+  },
+  {
+    "package": "@typescript-eslint/eslint-plugin",
+    "before": "2.34.0",
+    "after": "8.70.1"
+  },
+  {
+    "package": "@typescript-eslint/parser",
+    "before": "2.34.0",
+    "after": "8.70.1"
+  },
+  {
+    "package": "@zeit/next-bundle-analyzer",
+    "before": "0.0.3",
+    "after": null
+  },
+  {
+    "package": "@zeit/next-source-maps",
+    "before": "0.0.3",
+    "after": null
+  },
+  {
+    "package": "eslint",
+    "before": "6.8.0",
+    "after": "9.39.5"
+  },
+  {
+    "package": "eslint-config-prettier",
+    "before": "6.15.0",
+    "after": "10.1.8"
+  },
+  {
+    "package": "eslint-plugin-jsx-a11y",
+    "before": "6.4.1",
+    "after": "6.10.2"
+  },
+  {
+    "package": "eslint-plugin-react",
+    "before": "7.23.2",
+    "after": "7.37.5"
+  },
+  {
+    "package": "next",
+    "before": "9.5.1",
+    "after": "16.3.6"
+  },
+  {
+    "package": "next-images",
+    "before": "1.7.0",
+    "after": null
+  },
+  {
+    "package": "next-translate",
+    "before": "0.14.2",
+    "after": "3.0.0"
+  },
+  {
+    "package": "next-translate-plugin",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "package": "raw-loader",
+    "before": "4.0.2",
+    "after": null
+  },
+  {
+    "package": "react",
+    "before": "16.14.0",
+    "after": "18.3.1"
+  },
+  {
+    "package": "react-copy-to-clipboard",
+    "before": "5.0.3",
+    "after": "5.1.1"
+  },
+  {
+    "package": "react-dom",
+    "before": "16.14.0",
+    "after": "18.3.1"
+  },
+  {
+    "package": "react-markdown",
+    "before": "4.3.1",
+    "after": "6.0.3"
+  },
+  {
+    "package": "react-markdown-editor-lite",
+    "before": "1.2.4",
+    "after": "1.4.2"
+  },
+  {
+    "package": "react-modal",
+    "before": "3.13.1",
+    "after": "3.16.3"
+  },
+  {
+    "package": "react-tabs",
+    "before": "3.2.2",
+    "after": "4.2.1"
+  },
+  {
+    "package": "renature",
+    "before": "0.4.1",
+    "after": null
+  },
+  {
+    "package": "swr",
+    "before": "0.1.18",
+    "after": "1.3.0"
+  },
+  {
+    "package": "typescript",
+    "before": "3.9.9",
+    "after": "5.9.3"
+  },
+  {
+    "package": "url-loader",
+    "before": "4.1.1",
+    "after": null
+  },
+  {
+    "package": "webpack",
+    "before": "4.44.2",
+    "after": "5.111.1"
+  }
+]

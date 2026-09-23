@@ -1,0 +1,66 @@
+
+> coronabingo@1.23.1 dev
+> next-translate && next dev --webpack --hostname 127.0.0.1 --port 3124
+
+Building pages | from pages_ to pages
+🔨 /admin [ 'common' ]
+🔨 /eventos/[eventId]/admin [ 'common' ]
+🔨 /eventos/[eventId] [ 'common' ]
+🔨 / [ 'common', 'index' ]
+🔨 /room/[roomId]/[playerId] [ 'common', 'playerId' ]
+🔨 /room/[roomId]/admin [ 'common', 'admin' ]
+🔨 /room/[roomId] [ 'common', 'roomId' ]
+▲ Next.js 16.3.6 (webpack)
+- Local:         http://127.0.0.1:3124
+- Network:       http://127.0.0.1:3124
+✓ Ready in 187ms
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'analyzeBrowser', 'analyzeServer', 'bundleAnalyzerConfig', 'future', 'serverRuntimeConfig'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+✓ Running next.config.js took 20ms
+
+✓ Generated AGENTS.md and CLAUDE.md for AI agents. Set `agentRules: false` in next.config to disable.
+⨯ ./pages/index.js
+Error:   x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead.
+  | Read more: https://nextjs.org/docs/messages/export-all-in-page
+    ,-[/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js:28:1]
+ 25 | 
+ 26 | 
+ 27 | 
+ 28 | export * from '../pages_'
+    : ^^^^^^^^^^^^^^^^^^^^^^^^^
+    `----
+⨯ ./pages/index.js
+Error:   x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead.
+  | Read more: https://nextjs.org/docs/messages/export-all-in-page
+    ,-[/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js:28:1]
+ 25 | 
+ 26 | 
+ 27 | 
+ 28 | export * from '../pages_'
+    : ^^^^^^^^^^^^^^^^^^^^^^^^^
+    `----
+ GET / 500 in 2.3s (next.js: 2.3s, application-code: 40ms)
+[browser] Uncaught ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js):
+Error:   x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead.
+  | Read more: https://nextjs.org/docs/messages/export-all-in-page
+    ,-[/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js:28:1]
+ 25 | 
+ 26 | 
+ 27 | 
+ 28 | export * from '../pages_'
+    : ^^^^^^^^^^^^^^^^^^^^^^^^^
+    `----
+
+[browser] ./pages/index.js
+Error:   x Using `export * from '...'` in a page is disallowed. Please use `export { default } from '...'` instead.
+  | Read more: https://nextjs.org/docs/messages/export-all-in-page
+    ,-[/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js:28:1]
+ 25 | 
+ 26 | 
+ 27 | 
+ 28 | export * from '../pages_'
+    : ^^^^^^^^^^^^^^^^^^^^^^^^^
+    `---- 
+○ Compiling /_error ...
+[?25h

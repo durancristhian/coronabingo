@@ -1,0 +1,68 @@
+import React, { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+import useTranslation from 'next-translate/useTranslation'
+import I18nProvider from 'next-translate/I18nProvider'
+import DynamicNamespaces from 'next-translate/DynamicNamespaces'
+import Trans from 'next-translate/Trans'
+import ReactMarkdown from 'react-markdown'
+import Header from '~/components/Header'
+import LastNumbers from '~/components/LastNumbers'
+import Tickets from '~/components/Tickets'
+import DownloadSpreadsheet from '~/components/DownloadSpreadsheet'
+import InputMarkdown from '~/components/InputMarkdown'
+import Modal from '~/components/Modal'
+import photo from '~/public/social.jpg'
+import sound from '~/public/sounds/windows/windows-error.mp3'
+import changelog from '~/public/changelog/1.12.1/en.md'
+import enCommon from '~/locales/en/common.json'
+import esCommon from '~/locales/es/common.json'
+import enRoom from '~/locales/en/roomId.json'
+import esRoom from '~/locales/es/roomId.json'
+import enPlayer from '~/locales/en/playerId.json'
+import esPlayer from '~/locales/es/playerId.json'
+
+const host = { id: 'host', name: 'Local host', tickets: '1,2' }
+const guest = { id: 'guest', name: 'Local guest', tickets: '3,4' }
+const room = { id: 'local-fixture', adminId: 'host', name: 'node24-fixture', timesPlayed: 1 }
+
+function Check() {
+  const { t, lang } = useTranslation()
+  const [numbers, setNumbers] = useState([7, 4, 2])
+  const [player, setPlayer] = useState({ id: '', tickets: '1', name: 'Fixture' })
+  const [content, setContent] = useState('**Local Markdown**')
+  const [open, setOpen] = useState(false)
+  const [audioStatus, setAudioStatus] = useState('stopped')
+  const audio = useRef(null)
+  return <>
+    <Header />
+    <main className="bg-gray-200 p-8">
+      <h1>Local compatibility fixture</h1>
+      <p>{t('roomId:people', {count: 1})} / {t('roomId:people', {count: 2})}</p>
+      <p>{t('common:ticket', {count: 1, ticketId: 1})} / {t('common:ticket', {count: 2, ticketId: 1})}</p>
+      <button onClick={() => setNumbers([numbers[0] + 1, ...numbers])}>Next fixture number</button>
+      <LastNumbers hideNumbersMeaning selectedNumbers={numbers} />
+      <Tickets player={player} room={room} updatePlayer={data => setPlayer({...player, ...data})} />
+      <DownloadSpreadsheet room={room} players={[host, guest]} />
+      <img src={photo} alt="Imported fixture image" width="200" />
+      <audio ref={audio} src={sound} onEnded={() => setAudioStatus('ended')} />
+      <button onClick={() => audio.current.play().then(() => setAudioStatus('playing')).catch(e => setAudioStatus(e.message))}>Play fixture sound</button>
+      <output>{audioStatus}</output>
+      <InputMarkdown content={content} label="Fixture Markdown" onChange={({text}) => setContent(text)} />
+      <ReactMarkdown>{content}</ReactMarkdown>
+      <button onClick={() => setOpen(true)}>Open fixture news</button>
+      <DynamicNamespaces dynamic={() => Promise.resolve(lang === 'es' ? esCommon : enCommon)} namespaces={['dynamic']}>
+        <Modal isOpen={open} onRequestClose={() => setOpen(false)} className="modal" overlayClassName="overlay" title={<Trans i18nKey="dynamic:new-features-modal-title" values={{version:'fixture'}} />}>
+          <ReactMarkdown>{changelog}</ReactMarkdown>
+        </Modal>
+      </DynamicNamespaces>
+    </main>
+  </>
+}
+
+export default function Fixture() {
+  const { locale } = useRouter()
+  const namespaces = locale === 'es'
+    ? {common: esCommon, roomId: esRoom, playerId: esPlayer}
+    : {common: enCommon, roomId: enRoom, playerId: enPlayer}
+  return <I18nProvider lang={locale} namespaces={namespaces}><Check /></I18nProvider>
+}

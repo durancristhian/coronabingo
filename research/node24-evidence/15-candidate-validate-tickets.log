@@ -1,0 +1,5 @@
+
+> coronabingo@1.23.1 validate-tickets
+> ts-node scripts/validate-tickets
+
+✅ There are no tickets with 10 or more

@@ -1,0 +1,193 @@
+[
+  {
+    "name": "@packtracker/webpack-plugin",
+    "version": "2.3.0",
+    "peers": {
+      "webpack": ">= 2.0.0"
+    }
+  },
+  {
+    "name": "@typescript-eslint/eslint-plugin",
+    "version": "2.34.0",
+    "peers": {
+      "@typescript-eslint/parser": "^2.0.0",
+      "eslint": "^5.0.0 || ^6.0.0"
+    }
+  },
+  {
+    "name": "@typescript-eslint/parser",
+    "version": "2.34.0",
+    "peers": {
+      "eslint": "^5.0.0 || ^6.0.0"
+    }
+  },
+  {
+    "name": "eslint-config-prettier",
+    "version": "6.15.0",
+    "peers": {
+      "eslint": ">=3.14.1"
+    }
+  },
+  {
+    "name": "eslint-import-resolver-typescript",
+    "version": "2.4.0",
+    "peers": {
+      "eslint": "*",
+      "eslint-plugin-import": "*"
+    }
+  },
+  {
+    "name": "eslint-plugin-jsx-a11y",
+    "version": "6.4.1",
+    "peers": {
+      "eslint": "^3 || ^4 || ^5 || ^6 || ^7"
+    }
+  },
+  {
+    "name": "eslint-plugin-prettier",
+    "version": "3.4.0",
+    "peers": {
+      "eslint": ">=5.0.0",
+      "prettier": ">=1.13.0"
+    }
+  },
+  {
+    "name": "eslint-plugin-react",
+    "version": "7.23.2",
+    "peers": {
+      "eslint": "^3 || ^4 || ^5 || ^6 || ^7"
+    }
+  },
+  {
+    "name": "next",
+    "version": "9.5.1",
+    "peers": {
+      "react": "^16.6.0",
+      "react-dom": "^16.6.0"
+    }
+  },
+  {
+    "name": "next-images",
+    "version": "1.7.0",
+    "peers": {
+      "webpack": "^4.0.0 || ^5.0.0"
+    }
+  },
+  {
+    "name": "next-translate",
+    "version": "0.14.2",
+    "peers": {
+      "next": ">= 9.3.0",
+      "react": ">= 16.8.0"
+    }
+  },
+  {
+    "name": "raw-loader",
+    "version": "4.0.2",
+    "peers": {
+      "webpack": "^4.0.0 || ^5.0.0"
+    }
+  },
+  {
+    "name": "react-copy-to-clipboard",
+    "version": "5.0.3",
+    "peers": {
+      "react": "^15.3.0 || ^16.0.0 || ^17.0.0"
+    }
+  },
+  {
+    "name": "react-dom",
+    "version": "16.14.0",
+    "peers": {
+      "react": "^16.14.0"
+    }
+  },
+  {
+    "name": "react-icons",
+    "version": "3.11.0",
+    "peers": {
+      "react": "*"
+    }
+  },
+  {
+    "name": "react-markdown",
+    "version": "4.3.1",
+    "peers": {
+      "react": "^15.0.0 || ^16.0.0"
+    }
+  },
+  {
+    "name": "react-markdown-editor-lite",
+    "version": "1.2.4",
+    "peers": {
+      "react": "^16.9.0"
+    }
+  },
+  {
+    "name": "react-modal",
+    "version": "3.13.1",
+    "peers": {
+      "react": "^0.14.0 || ^15.0.0 || ^16 || ^17",
+      "react-dom": "^0.14.0 || ^15.0.0 || ^16 || ^17"
+    }
+  },
+  {
+    "name": "react-tabs",
+    "version": "3.2.2",
+    "peers": {
+      "react": "^16.3.0 || ^17.0.0-0"
+    }
+  },
+  {
+    "name": "react-toastify",
+    "version": "5.5.0",
+    "peers": {
+      "react": ">=15.0.0",
+      "react-dom": ">=15.0.0"
+    }
+  },
+  {
+    "name": "react-tweet-embed",
+    "version": "1.2.2",
+    "peers": {
+      "react": ">0.14.0"
+    }
+  },
+  {
+    "name": "react-youtube",
+    "version": "7.13.1",
+    "peers": {
+      "react": ">=0.14.1"
+    }
+  },
+  {
+    "name": "renature",
+    "version": "0.4.1",
+    "peers": {
+      "react": "^16.9.0",
+      "react-dom": "^16.9.0"
+    }
+  },
+  {
+    "name": "swr",
+    "version": "0.1.18",
+    "peers": {
+      "react": "^16.11.0"
+    }
+  },
+  {
+    "name": "ts-node",
+    "version": "8.10.2",
+    "peers": {
+      "typescript": ">=2.7"
+    }
+  },
+  {
+    "name": "url-loader",
+    "version": "4.1.1",
+    "peers": {
+      "file-loader": "*",
+      "webpack": "^4.0.0 || ^5.0.0"
+    }
+  }
+]

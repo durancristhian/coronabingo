@@ -1,34 +1,48 @@
-# coronabingo
+# Coronabingo
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+Next.js Pages Router application using React 18, Webpack and npm.
 
-## Getting Started
+## Local setup
 
-Duplicate `.env.template` and rename it as `.env`. Put the necessary data inside in order to be able to run the project.
+Use Node **24.21.0** and npm **11.19.0** (bundled with this Node release):
 
-Run the development server:
+```bash
+nvm install
+nvm use
+npm ci
+cp .env.template .env
+```
+
+Fill in `.env` with the Firebase project configuration from its owner. Firebase authentication and Firestore are required for login and gameplay. Google Analytics and Sentry settings are optional. Keep `.env` private; environment values exposed by `next.config.js` are included in the browser bundle and must not contain server credentials.
+
+A local server or Vercel preview uses whichever Firebase project `.env` points to. Use a test project or agreed test records before creating rooms, registering players, or editing events.
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000). To use another port, run `npm run dev -- --port 3124`. Edit routes in `pages/`; translations live in `locales/es` and `locales/en`. Spanish is the default locale. Existing `/es/…` and `/en/…` links remain accepted; Next.js generates unprefixed Spanish navigation URLs.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Checks and production build
 
-## Learn More
+```bash
+npm run lint:check
+npm run validate-locales
+npm run validate-tickets
+npm run build
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+`lint:check` includes TypeScript and does not modify files. `lint` and the pre-commit hook retain their existing autofix behavior. Inspect the ticket validator's output as well as its exit code: the legacy script catches assertion failures.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run build and start sequentially. Do not run an install, a development server and a production build against the same checkout concurrently.
 
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
+Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. Packtracker runs only in GitHub Actions when `GITHUB_EVENT_PATH` is present; a normal local build does not verify its upload.
 
-## Deploy on ZEIT Now
+Cypress remains disabled in CI and its old suite has not been restored. On a machine inheriting `ELECTRON_RUN_AS_NODE=1`, unset that variable before launching Cypress.
 
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Migration status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Implementation is on `migrate/node24`. The primary and production branch remains `master`; the planned rename to `main`, Actions update and Vercel cutover are separate steps. See the [migration plan](research/node-24-main-migration-plan.md) and [implementation evidence](research/node-24-implementation.md).
+
+ESLint 9 is retained temporarily by agreement because the current React and accessibility plugins do not declare ESLint 10 compatibility. Replace or upgrade those plugins and move to a supported ESLint release in a follow-up. Other legacy dependency maintenance is outside this migration.

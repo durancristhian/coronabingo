@@ -1,0 +1,23 @@
+
+> coronabingo@1.23.1 prebuild
+> npm run validate-locales
+
+
+> coronabingo@1.23.1 validate-locales
+> ts-node scripts/validate-locales
+
+(node:97768) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/durancristhian/Repos/coronabingo-node24-investigation/scripts/validate-locales.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/durancristhian/Repos/coronabingo-node24-investigation/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error: Cannot find package '~' imported from /Users/durancristhian/Repos/coronabingo-node24-investigation/scripts/validate-locales.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:331:9)
+    at packageResolve (node:internal/modules/esm/resolve:784:25)
+    at moduleResolve (node:internal/modules/esm/resolve:873:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1006:11)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:705:20)
+    at ModuleLoader.#resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)
+    at ModuleLoader.#resolve (node:internal/modules/esm/loader:687:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:276:33)

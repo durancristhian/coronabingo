@@ -1,0 +1,154 @@
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/eventos/[eventId]/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/eventos/[eventId].js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/index.js
+   8:22  error  Replace `'common':·ns0,·'index'` with `common:·ns0,·index`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/room/[roomId]/[playerId].js
+   8:22  error  Replace `'common':·ns0,·'playerId'` with `common:·ns0,·playerId`  prettier/prettier
+  10:32  error  Insert `·`                                                        prettier/prettier
+  20:3   error  Insert `·`                                                        prettier/prettier
+  21:71  error  Insert `·`                                                        prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/room/[roomId]/admin.js
+   8:22  error  Replace `'common':·ns0,·'admin'` with `common:·ns0,·admin`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/en/room/[roomId].js
+   8:22  error  Replace `'common':·ns0,·'roomId'` with `common:·ns0,·roomId`  prettier/prettier
+  10:32  error  Insert `·`                                                    prettier/prettier
+  20:3   error  Insert `·`                                                    prettier/prettier
+  21:71  error  Insert `·`                                                    prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                 prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/eventos/[eventId]/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/eventos/[eventId].js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/index.js
+   8:22  error  Replace `'common':·ns0,·'index'` with `common:·ns0,·index`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/room/[roomId]/[playerId].js
+   8:22  error  Replace `'common':·ns0,·'playerId'` with `common:·ns0,·playerId`  prettier/prettier
+  10:32  error  Insert `·`                                                        prettier/prettier
+  20:3   error  Insert `·`                                                        prettier/prettier
+  21:71  error  Insert `·`                                                        prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/room/[roomId]/admin.js
+   8:22  error  Replace `'common':·ns0,·'admin'` with `common:·ns0,·admin`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/es/room/[roomId].js
+   8:22  error  Replace `'common':·ns0,·'roomId'` with `common:·ns0,·roomId`  prettier/prettier
+  10:32  error  Insert `·`                                                    prettier/prettier
+  20:3   error  Insert `·`                                                    prettier/prettier
+  21:71  error  Insert `·`                                                    prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                 prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/eventos/[eventId]/admin.js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/eventos/[eventId].js
+   7:22  error  Replace `'common'` with `common`  prettier/prettier
+   9:32  error  Insert `·`                        prettier/prettier
+  19:3   error  Insert `·`                        prettier/prettier
+  20:71  error  Insert `·`                        prettier/prettier
+  21:2   error  Delete `⏎⏎⏎⏎`                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/index.js
+   8:22  error  Replace `'common':·ns0,·'index'` with `common:·ns0,·index`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/room/[roomId]/[playerId].js
+   8:22  error  Replace `'common':·ns0,·'playerId'` with `common:·ns0,·playerId`  prettier/prettier
+  10:32  error  Insert `·`                                                        prettier/prettier
+  20:3   error  Insert `·`                                                        prettier/prettier
+  21:71  error  Insert `·`                                                        prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                     prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/room/[roomId]/admin.js
+   8:22  error  Replace `'common':·ns0,·'admin'` with `common:·ns0,·admin`  prettier/prettier
+  10:32  error  Insert `·`                                                  prettier/prettier
+  20:3   error  Insert `·`                                                  prettier/prettier
+  21:71  error  Insert `·`                                                  prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                               prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/pages/room/[roomId].js
+   8:22  error  Replace `'common':·ns0,·'roomId'` with `common:·ns0,·roomId`  prettier/prettier
+  10:32  error  Insert `·`                                                    prettier/prettier
+  20:3   error  Insert `·`                                                    prettier/prettier
+  21:71  error  Insert `·`                                                    prettier/prettier
+  22:2   error  Delete `⏎⏎⏎⏎`                                                 prettier/prettier
+
+/Users/durancristhian/Repos/coronabingo-node24-investigation/scripts/generate-tickets.ts
+  0:0  error  Parsing error: Cannot read properties of undefined (reading 'map')
+
+✖ 106 problems (106 errors, 0 warnings)
+  105 errors and 0 warnings potentially fixable with the `--fix` option.
+

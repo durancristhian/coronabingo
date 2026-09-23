@@ -1,0 +1,232 @@
+- main:
+  - heading "Coronabingo" [level=1]:
+    - link "Coronabingo":
+      - /url: /es
+  - combobox "language":
+    - option "Español" [selected]
+    - option "English"
+  - insertion
+  - paragraph: Hola!, en esta página vas a poder jugar al bingo con otras personas.
+  - heading "Crear una sala" [level=2]
+  - generic: Nombre *
+  - textbox "Nombre *"
+  - button "Listo" [disabled]:
+    - generic: Listo
+  - paragraph:
+    - generic: Vas a necesitar crear una videollamada con quienes quieras jugar. Te recomiendo
+    - link "Google Hangouts":
+      - /url: https://hangouts.google.com/
+    - text: .
+  - button "Ver tutorial":
+    - generic: Ver tutorial
+  - heading "Coronabingo y las noticias" [level=2]
+  - iframe [id="twitter-widget-0"]:
+    - article:
+      - link "Visit this post on X":
+        - /url: https://x.com/TV_Publica/status/1266490485650198528?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - link:
+        - /url: https://twitter.com/TV_Publica
+      - link "TVP Verified account":
+        - /url: https://twitter.com/TV_Publica
+        - generic: TVP
+        - img "Verified account"
+      - link "@TV_Publica":
+        - /url: https://twitter.com/TV_Publica
+        - generic: "@TV_Publica"
+      - generic: ·
+      - link "Follow":
+        - /url: https://x.com/intent/follow?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&screen_name=TV_Publica
+      - link "View on X":
+        - /url: https://x.com/TV_Publica/status/1266490485650198528?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - img "🎰"
+      - img "😷"
+      - link "@CaroloVazquez":
+        - /url: https://x.com/CaroloVazquez?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: nos presenta un juego ideal para esta
+      - link "#cuarentena":
+        - /url: https://x.com/hashtag/cuarentena?src=hashtag_click
+      - text: ":"
+      - link "@corona_bingo":
+        - /url: https://x.com/corona_bingo?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: . En
+      - link "@altavozatv":
+        - /url: https://x.com/altavozatv?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: conversamos con su creador
+      - link "@DuranCristhian":
+        - /url: https://x.com/DuranCristhian?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: y conocemos las reglas del juego
+      - button "Play Video. 3 minutes 45 seconds long":
+      - link "Watch on X":
+        - /url: https://x.com/TV_Publica/status/1266490485650198528?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: Watch on X
+      - link "7:03 PM · May 29, 2020":
+        - /url: https://x.com/TV_Publica/status/1266490485650198528?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - time: 7:03 PM · May 29, 2020
+      - link "X Ads info and privacy":
+        - /url: https://help.x.com/x-for-websites-ads-info-and-privacy
+      - link "Like. This post has 38 likes":
+        - /url: https://x.com/intent/like?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&tweet_id=1266490485650198528
+        - generic: "38"
+      - link "Reply to this post on X":
+        - /url: https://x.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&in_reply_to=1266490485650198528
+        - generic: Reply
+      - button "Copy link":
+        - generic: Copy link
+      - link "Read 4 replies":
+        - /url: https://x.com/TV_Publica/status/1266490485650198528?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1266490485650198528%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: Read 4 replies
+  - iframe [id="twitter-widget-1"]:
+    - article:
+      - link "Visit this post on X":
+        - /url: https://x.com/corona_bingo/status/1267934678784389121?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - link:
+        - /url: https://twitter.com/corona_bingo
+      - link "CoronaBingo":
+        - /url: https://twitter.com/corona_bingo
+        - generic: CoronaBingo
+      - link "@corona_bingo":
+        - /url: https://twitter.com/corona_bingo
+        - generic: "@corona_bingo"
+      - generic: ·
+      - link "Follow":
+        - /url: https://x.com/intent/follow?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&screen_name=corona_bingo
+      - link "View on X":
+        - /url: https://x.com/corona_bingo/status/1267934678784389121?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: Les comparto la grabación de anoche en
+      - link "#SensacionalExito":
+        - /url: https://x.com/hashtag/SensacionalExito?src=hashtag_click
+      - text: donde
+      - link "@DuranCristhian":
+        - /url: https://x.com/DuranCristhian?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: habló de como me creó por si no pudieron escucharlo
+      - img "🤓"
+      - link "drive.google.com/file/d/1yg5M01":
+        - /url: https://t.co/fPIfBACOJ6
+        - text: drive.google.com/file/d/1yg5M01…
+      - article:
+        - link "Visit this post on X":
+          - /url: https://x.com/corona_bingo/status/1267656464908369922?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es3_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: CoronaBingo
+        - generic: "@corona_bingo"
+        - text: Es hora de salir en vivooo!
+        - generic: "@DuranCristhian"
+        - text: hablando de mi en
+        - generic: "#SensacionalExito"
+        - generic: "@Metro951"
+        - link "Image":
+          - /url: https://x.com/corona_bingo/status/1267656464908369922/photo/1?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es3_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+          - generic "Image":
+            - img "Image"
+      - link "6:42 PM · Jun 2, 2020":
+        - /url: https://x.com/corona_bingo/status/1267934678784389121?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - time: 6:42 PM · Jun 2, 2020
+      - link "X Ads info and privacy":
+        - /url: https://help.x.com/x-for-websites-ads-info-and-privacy
+      - link "Like. This post has 10 likes":
+        - /url: https://x.com/intent/like?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&tweet_id=1267934678784389121
+        - generic: "10"
+      - link "Reply to this post on X":
+        - /url: https://x.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&in_reply_to=1267934678784389121
+        - generic: Reply
+      - button "Copy link":
+        - generic: Copy link
+      - link "Read more on X":
+        - /url: https://x.com/explore?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1267934678784389121%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: Read more on X
+  - iframe [id="twitter-widget-2"]:
+    - article:
+      - link "Visit this post on X":
+        - /url: https://x.com/clarintecno/status/1246110709005660163?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - link:
+        - /url: https://twitter.com/clarintecno
+      - link "Clarín Tecnología":
+        - /url: https://twitter.com/clarintecno
+        - generic: Clarín Tecnología
+      - link "@clarintecno":
+        - /url: https://twitter.com/clarintecno
+        - generic: "@clarintecno"
+      - generic: ·
+      - link "Follow":
+        - /url: https://x.com/intent/follow?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&screen_name=clarintecno
+      - link "View on X":
+        - /url: https://x.com/clarintecno/status/1246110709005660163?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: Tutti frutti, T.E.G, Bingo y más aplicaciones para jugar durante la cuarentena por coronavirus
+      - link "clarin.com/tecnologia/tut":
+        - /url: https://t.co/qMVdLRm3H3
+        - text: clarin.com/tecnologia/tut…
+      - link "1:21 PM · Apr 3, 2020":
+        - /url: https://x.com/clarintecno/status/1246110709005660163?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - time: 1:21 PM · Apr 3, 2020
+      - link "X Ads info and privacy":
+        - /url: https://help.x.com/x-for-websites-ads-info-and-privacy
+      - link "Like. This post has 70 likes":
+        - /url: https://x.com/intent/like?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&tweet_id=1246110709005660163
+        - generic: "70"
+      - link "Reply to this post on X":
+        - /url: https://x.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&in_reply_to=1246110709005660163
+        - generic: Reply
+      - button "Copy link":
+        - generic: Copy link
+      - link "Read 5 replies":
+        - /url: https://x.com/clarintecno/status/1246110709005660163?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1246110709005660163%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: Read 5 replies
+  - iframe [id="twitter-widget-3"]:
+    - article:
+      - link "Visit this post on X":
+        - /url: https://x.com/capitanintriga/status/1279431298990379012?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - link:
+        - /url: https://twitter.com/capitanintriga
+      - link "Tomás Balmaceda":
+        - /url: https://twitter.com/capitanintriga
+        - generic: Tomás Balmaceda
+      - link "@capitanintriga":
+        - /url: https://twitter.com/capitanintriga
+        - generic: "@capitanintriga"
+      - generic: ·
+      - link "Follow":
+        - /url: https://x.com/intent/follow?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&screen_name=capitanintriga
+      - link "View on X":
+        - /url: https://x.com/capitanintriga/status/1279431298990379012?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: El bingo tiene más de 500 años y vivió muchas vidas. Ahora tiene nuevas encarnaciones digitales y lúdicas gracias a argentinos sagaces en plena cuarentena. Escribí sobre
+      - link "@corona_bingo":
+        - /url: https://x.com/corona_bingo?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: "y"
+      - link "@BingoPandemia":
+        - /url: https://x.com/BingoPandemia?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+      - text: "en La Nación:"
+      - 'generic "lanacion.com.ar Coronabingo y Bingo Pandemia: en plena cuarentena, los argentinos reinventaron un pasatiempo de 500..."':
+        - link:
+          - /url: https://t.co/STlmBGHr4c
+        - 'link "lanacion.com.ar Coronabingo y Bingo Pandemia: en plena cuarentena, los argentinos reinventaron un pasatiempo de 500..."':
+          - /url: https://t.co/STlmBGHr4c
+          - generic: lanacion.com.ar
+          - generic: "Coronabingo y Bingo Pandemia: en plena cuarentena, los argentinos reinventaron un pasatiempo de 500..."
+      - link "12:06 PM · Jul 4, 2020":
+        - /url: https://x.com/capitanintriga/status/1279431298990379012?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - time: 12:06 PM · Jul 4, 2020
+      - link "X Ads info and privacy":
+        - /url: https://help.x.com/x-for-websites-ads-info-and-privacy
+      - link "Like. This post has 9 likes":
+        - /url: https://x.com/intent/like?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&tweet_id=1279431298990379012
+        - generic: "9"
+      - link "Reply to this post on X":
+        - /url: https://x.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F&in_reply_to=1279431298990379012
+        - generic: Reply
+      - button "Copy link":
+        - generic: Copy link
+      - link "Read 1 reply":
+        - /url: https://x.com/capitanintriga/status/1279431298990379012?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1279431298990379012%7Ctwgr%5E40b52abb19b9ad4fb337afa17871bcc235676ec6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcoronabingo.com.ar%2Fes%2F
+        - generic: Read 1 reply
+  - paragraph:
+    - text: Creado por
+    - link "Cristhian Duran":
+      - /url: https://twitter.com/DuranCristhian
+  - list:
+    - button "Doname un café":
+      - generic: Doname un café
+    - link "Feedback":
+      - /url: https://forms.gle/egSBrsKSFnEgabff7
+      - generic: Feedback
+    - link "Twitter":
+      - /url: https://twitter.com/corona_bingo
+      - generic: Twitter

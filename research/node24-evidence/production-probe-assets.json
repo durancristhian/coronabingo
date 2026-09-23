@@ -1,0 +1,17 @@
+{
+  "audio": [
+    {
+      "error": null,
+      "readyState": 4,
+      "src": "/_next/static/media/windows-error.7c233bc8.mp3"
+    }
+  ],
+  "images": [
+    {
+      "alt": "Imported PNG",
+      "complete": true,
+      "src": "/_next/static/media/cafecito.ddedd581.png",
+      "width": 500
+    }
+  ]
+}

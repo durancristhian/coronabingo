@@ -1,0 +1,12 @@
+- main:
+  - heading "Translation compatibility probe" [level=1]
+  - text: Language
+  - combobox "language":
+    - option "Español" [selected]
+    - option "English"
+  - paragraph: Hola!, en esta página vas a poder jugar al bingo con otras personas.
+  - paragraph: Va a jugar 1 persona
+  - paragraph: Va a jugar 2 persona
+  - paragraph: "Room: node24-probe"
+- button "Open Next.js Dev Tools":
+- alert

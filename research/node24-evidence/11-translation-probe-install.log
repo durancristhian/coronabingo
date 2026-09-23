@@ -1,0 +1,15 @@
+
+added 1 package, and changed 1 package in 1s
+npm warn install-scripts 10 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   core-js@3.6.5 (postinstall: node -e "try{require('./postinstall')}catch(e){}")
+npm warn install-scripts   core-js-pure@3.10.2 (postinstall: node -e "try{require('./postinstall')}catch(e){}")
+npm warn install-scripts   cypress@4.12.1 (postinstall: node index.js --exec install)
+npm warn install-scripts   ejs@2.7.4 (postinstall: node ./postinstall.js)
+npm warn install-scripts   fsevents@2.3.2 (install: (install scripts present))
+npm warn install-scripts   highlight.js@9.18.5 (postinstall: node deprecated.js)
+npm warn install-scripts   husky@4.3.8 (install: node husky install; postinstall: opencollective-postinstall || exit 0)
+npm warn install-scripts   protobufjs@6.10.2 (postinstall: node scripts/postinstall)
+npm warn install-scripts   fsevents@1.2.13 (install: node-gyp rebuild)
+npm warn install-scripts   next-translate-plugin@3.2.0 (postinstall: node ./postinstall-message.js)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.

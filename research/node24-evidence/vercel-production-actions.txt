@@ -1,0 +1,206 @@
+- link "Skip to content":
+  - /url: "#geist-skip-nav"
+- main:
+  - link "Cristhian Duran's projects Hobby":
+    - /url: /cristhian-durans-projects-3ace6550
+    - generic: Cristhian Duran's projects
+    - generic: Hobby
+  - button:
+  - button "Find F":
+    - generic: Find
+    - generic: F
+  - navigation:
+    - link "Overview":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo
+      - generic: Overview
+    - link "Deployments":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/deployments
+      - generic: Deployments
+    - link "Logs":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/logs
+      - generic: Logs
+    - link "Analytics":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/analytics
+      - generic: Analytics
+    - link "Speed Insights":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/speed-insights
+      - generic: Speed Insights
+    - link "Observability":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/observability
+      - generic: Observability
+    - link "Firewall":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/firewall
+      - generic: Firewall
+    - link "CDN":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/cdn
+      - generic: CDN
+    - separator
+    - link "Environment Variables":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/settings/environment-variables
+      - generic: Environment Variables
+    - link "Domains":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/settings/domains
+      - generic: Domains
+    - link "Connect":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/connect
+      - generic: Connect
+    - link "Integrations":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/settings/integrations
+      - generic: Integrations
+    - link "Storage":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/stores
+      - generic: Storage
+    - link "Flags":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/flags
+      - generic: Flags
+    - link "Agent":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/agent
+      - generic: Agent
+    - link "AI Gateway":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/ai-gateway
+      - generic: AI Gateway
+    - link "Sandboxes":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/sandboxes
+      - generic: Sandboxes
+    - link "Workflows":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/workflows
+      - generic: Workflows
+    - link "Images":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/images
+      - generic: Images
+    - separator
+    - link "Usage":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/usage
+      - generic: Usage
+    - link "Support":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/support
+      - generic: Support
+    - link "Settings":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/settings
+      - generic: Settings
+  - generic: Speed Insights
+  - button "Dismiss":
+  - generic: Monitor your website performance with Core Web Vitals and real user data
+  - button "Enable":
+    - generic: Enable
+  - button "Avatar for cduran Cristhian Duran":
+    - img "Avatar for cduran":
+      - img "Avatar for cduran"
+    - generic: Cristhian Duran
+  - button "81 unseen notifications":
+  - button:
+  - link "coronabingo":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo
+    - generic: coronabingo
+  - button:
+  - link "Back to team view":
+    - /url: /cristhian-durans-projects-3ace6550/~/deployments
+  - navigation "Breadcrumb":
+    - link "Deployments":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/deployments
+      - generic: Deployments
+    - generic: 94TcP2sYD
+    - button "Copy ID":
+  - button "Vercel Agent is available on Pro":
+    - generic: Agent
+  - link "Deployment":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/94TcP2sYDzaNgEVnJdhvbQCSeW2H
+  - link "Logs":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/94TcP2sYDzaNgEVnJdhvbQCSeW2H/logs
+  - link "Resources":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/94TcP2sYDzaNgEVnJdhvbQCSeW2H/resources
+  - link "Source":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/94TcP2sYDzaNgEVnJdhvbQCSeW2H/source
+  - link "Open Graph":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/94TcP2sYDzaNgEVnJdhvbQCSeW2H/og
+  - heading "Deployment Details" [level=3]
+  - link "Logs":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/logs?deploymentIds=dpl_94TcP2sYDzaNgEVnJdhvbQCSeW2H
+    - generic: Logs
+  - link "Visit":
+    - /url: https://coronabingo-5jgmwxc02-cduran.vercel.app
+    - generic: Visit
+  - button "Deployment Actions" [expanded]:
+  - link "Visit Deployment":
+    - /url: https://coronabingo-5jgmwxc02-cduran.vercel.app
+  - generic: Created
+  - img "github/durancristhian":
+    - img "github/durancristhian"
+  - generic: durancristhian
+  - generic: 5/7/21
+  - generic: Status
+  - generic "This deployment is ready.":
+    - generic: Ready
+    - link "Latest":
+      - /url: /cristhian-durans-projects-3ace6550/coronabingo/deployments?filterBranch=master
+  - generic: Duration
+  - generic "May 7, 2021, 5:08:58 PM GMT-3":
+    - generic: 55s
+    - generic: 1965d ago
+  - generic: Environment
+  - link "Production":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/settings/environments/production
+  - generic: Current
+  - generic: Domains
+  - link "coronabingo.com.ar":
+    - /url: https://coronabingo.com.ar
+    - generic: coronabingo.com.ar
+  - generic: "+2"
+  - link "coronabingo-5jgmwxc02-cduran.vercel.app":
+    - /url: https://coronabingo-5jgmwxc02-cduran.vercel.app
+    - generic: coronabingo-5jgmwxc02-cduran.vercel.app
+  - generic: Source
+  - link "master":
+    - /url: https://github.com/durancristhian/coronabingo/tree/master
+  - link "0020461 1.23.1":
+    - /url: https://github.com/durancristhian/coronabingo/commit/002046108df164389ea8b446de495c7913c500fe
+    - generic: "0020461"
+    - generic "1.23.1"
+  - button "Deployment Settings 4 Recommendations":
+    - generic: Deployment Settings
+    - generic: 4 Recommendations
+  - heading "Build Logs 2 55s" [level=2]:
+    - generic: Build Logs
+    - button "2":
+      - generic: "2"
+    - generic: 55s
+  - heading "Deployment Summary" [level=2]:
+    - generic: Deployment Summary
+  - heading "Deployment Checks" [level=2]:
+    - generic: Deployment Checks
+  - heading "Assigning Custom Domains" [level=2]:
+    - generic: Assigning Custom Domains
+  - link "Runtime Logs View and debug runtime logs & errors":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/logs
+    - paragraph: Runtime Logs
+    - paragraph: View and debug runtime logs & errors
+  - link "Observability Monitor app health & performance":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/observability/serverless-functions
+    - paragraph: Observability
+    - paragraph: Monitor app health & performance
+  - link "Speed Insights Not Enabled Performance metrics from real users":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/speed-insights
+    - paragraph: Speed Insights
+    - generic: Not Enabled
+    - paragraph: Performance metrics from real users
+  - link "Web Analytics Not Enabled Analyze visitors & traffic in real-time":
+    - /url: /cristhian-durans-projects-3ace6550/coronabingo/analytics
+    - paragraph: Web Analytics
+    - generic: Not Enabled
+    - paragraph: Analyze visitors & traffic in real-time
+- alert: coronabingo – Deployment Overview – Vercel
+- menu "Deployment Actions" [active]:
+  - menuitem "Instant Rollback" [disabled]:
+    - generic: Instant Rollback
+  - menuitem "Promote" [disabled]:
+    - generic: Promote
+  - menuitem "Redeploy":
+    - generic: Redeploy
+  - menuitem "Copy URL":
+    - generic: Copy URL
+  - menuitem "View All Branch Deployments":
+    - generic: View All Branch Deployments
+  - menuitem "Skew Protection Threshold" [disabled]:
+    - generic: Skew Protection Threshold
+  - menuitem "Delete":
+    - generic: Delete
