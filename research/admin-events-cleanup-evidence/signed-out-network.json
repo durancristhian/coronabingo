@@ -1,0 +1,329 @@
+{
+  "host": {
+    "requests": [
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      }
+    ],
+    "truncated": true
+  },
+  "player": {
+    "requests": [
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      }
+    ],
+    "truncated": false
+  },
+  "hostFreshReload": {
+    "truncated": false,
+    "requests": [
+      {
+        "method": "POST",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      },
+      {
+        "method": "GET",
+        "endpoint": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel",
+        "authorizationHeader": false,
+        "authorizationInEncodedChannel": false,
+        "targetsDevelopmentProject": true,
+        "eventOrRegistrationTarget": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "expected": 200,
+    "finalUrl": "http://localhost:3124/",
+    "standard404": false,
+    "lang": "es"
+  },
+  {
+    "path": "/es",
+    "status": 200,
+    "expected": 200,
+    "finalUrl": "http://localhost:3124/es",
+    "standard404": false,
+    "lang": "es"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "expected": 200,
+    "finalUrl": "http://localhost:3124/en",
+    "standard404": false,
+    "lang": "en"
+  },
+  {
+    "path": "/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/admin",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/eventos",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/eventos",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/eventos/coronabingo-solidario-por-minka",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/eventos/coronabingo-solidario-por-minka",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/eventos/coronabingo-solidario-por-minka/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/eventos/coronabingo-solidario-por-minka/admin",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/es/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/es/admin",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/es/eventos",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/es/eventos",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/es/eventos/coronabingo-solidario-por-minka",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/es/eventos/coronabingo-solidario-por-minka",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/es/eventos/coronabingo-solidario-por-minka/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/es/eventos/coronabingo-solidario-por-minka/admin",
+    "standard404": true,
+    "lang": "es"
+  },
+  {
+    "path": "/en/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/en/admin",
+    "standard404": true,
+    "lang": "en"
+  },
+  {
+    "path": "/en/eventos",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/en/eventos",
+    "standard404": true,
+    "lang": "en"
+  },
+  {
+    "path": "/en/eventos/coronabingo-solidario-por-minka",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/en/eventos/coronabingo-solidario-por-minka",
+    "standard404": true,
+    "lang": "en"
+  },
+  {
+    "path": "/en/eventos/coronabingo-solidario-por-minka/admin",
+    "status": 404,
+    "expected": 404,
+    "finalUrl": "http://localhost:3124/en/eventos/coronabingo-solidario-por-minka/admin",
+    "standard404": true,
+    "lang": "en"
+  }
+]

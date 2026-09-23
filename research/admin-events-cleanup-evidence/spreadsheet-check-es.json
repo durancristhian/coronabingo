@@ -1,0 +1,35 @@
+{
+  "rows": [
+    [
+      "Sala",
+      "Admin events cleanup QA 20260923"
+    ],
+    [
+      "Link",
+      "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp"
+    ],
+    [
+      "Capacidad",
+      "2"
+    ],
+    [
+      "Dirige",
+      "Cleanup Host",
+      "1427,1428",
+      "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp/4ltUy5u6PEaIwkUITs4c"
+    ],
+    [
+      null
+    ],
+    [
+      "Cleanup Player",
+      "903,904",
+      "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp/LFVLMdMtQjNEaAuty1km"
+    ]
+  ],
+  "links": [
+    "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp",
+    "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp/4ltUy5u6PEaIwkUITs4c",
+    "http://localhost:3124/es/room/pPtwEtJxUbiHuBUWLpcp/LFVLMdMtQjNEaAuty1km"
+  ]
+}

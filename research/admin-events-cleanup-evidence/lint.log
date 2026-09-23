@@ -1,0 +1,10 @@
+
+> coronabingo@1.23.1 lint:check
+> npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet
+
+
+> coronabingo@1.23.1 typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully

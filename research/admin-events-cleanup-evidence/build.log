@@ -1,0 +1,60 @@
+
+> coronabingo@1.23.1 prebuild
+> npm run validate-locales
+
+
+> coronabingo@1.23.1 validate-locales
+> ts-node --project tsconfig.scripts.json scripts/validate-locales
+
+🗂  Directory /Users/durancristhian/Repos/coronabingo/locales/es
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/es/admin.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/es/common.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/es/index.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/es/playerId.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/es/roomId.json
+🗂  Directory /Users/durancristhian/Repos/coronabingo/locales/en
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/en/admin.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/en/common.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/en/index.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/en/playerId.json
+----  📄 File /Users/durancristhian/Repos/coronabingo/locales/en/roomId.json
+✅ es en
+✅ es en admin.json
+✅ es en common.json
+✅ es en index.json
+✅ es en playerId.json
+✅ es en roomId.json
+
+> coronabingo@1.23.1 build
+> next build --webpack
+
+▲ Next.js 16.3.6 (webpack)
+- Environments: .env
+✓ Running next.config.js took 71ms
+
+  Running TypeScript ...
+  Finished TypeScript in 440ms ...
+  Creating an optimized production build ...
+✓ Compiled successfully in 559ms
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/6) ...
+next-translate - compiled page: / - locale: en - namespaces: common, index - used loader: getStaticProps
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+  Generating static pages using 8 workers (1/6)
+  Generating static pages using 8 workers (2/6)
+  Generating static pages using 8 workers (4/6)
+✓ Generating static pages using 8 workers (6/6) in 208ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (pages)
+┌ ● /
+├   /_app
+├ ○ /404
+├ ƒ /room/[roomId]
+├ ƒ /room/[roomId]/[playerId]
+└ ƒ /room/[roomId]/admin
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand

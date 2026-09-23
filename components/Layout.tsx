@@ -9,7 +9,6 @@ import { isThereLocalStorageSupport } from '~/utils/isThereLocalStorageSupport'
 import Ads from './Ads'
 import Box from './Box'
 import Container from './Container'
-import EventBanner from './EventBanner'
 
 const version = pkg.version
 
@@ -60,7 +59,6 @@ export default function Layout({ children, type = 'medium' }: Props) {
           <Container size={type}>{renderContent()}</Container>
         </div>
       </div>
-      <EventBanner />
       <Footer />
     </main>
   )

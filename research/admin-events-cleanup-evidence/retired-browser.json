@@ -1,0 +1,6 @@
+{
+  "path": "http://localhost:3124/en/eventos/coronabingo-solidario-por-minka/admin",
+  "dom": "- heading \"404\" [level=1]\n- heading \"This page could not be found.\" [level=2]\n- alert",
+  "firestoreRequests": 0,
+  "truncated": false
+}

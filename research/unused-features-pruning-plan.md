@@ -1,6 +1,6 @@
 # Unused features pruning plan
 
-Status: accepted by the owner on 2026-09-23 and ready for later execution. This document records research and prepares a later implementation; no application removal has been performed.
+Status: implemented and locally verified on 2026-09-23. See [the execution record](admin-events-cleanup.md) for changes, browser checks, test records, and rollback instructions. The sections below retain the accepted scope and execution checklist.
 
 Evidence baseline: local source at `6905b4d`, inspected on 2026-09-23. Recheck references against the execution checkout before deleting files. Source reachability does not establish whether someone still visits a route or uses historical data.
 
@@ -15,7 +15,7 @@ Simplify the application while preserving the ordinary create-room, configure, s
 | D3: Old URL behavior | Accepted by owner | Standard 404 for retired routes. Keep no retirement-notice routes or redirects. |
 | D4: Shared understanding | Confirmed by owner on 2026-09-23 | The finished plan captures the agreed scope and is ready for later execution. |
 
-Documentation is complete. App implementation is deferred until a later execution request.
+The owner authorized implementation on 2026-09-23. Steps 1 through 5 are complete for the local production build against `coronabingo-dev`. Production deployment and production gameplay verification remain outside this code-only execution.
 
 ## What exists
 
@@ -129,6 +129,8 @@ Cypress is currently disabled in CI and its suite is legacy. `npm test` invokes 
 Complete when checks pass or documented pre-existing limitations are resolved with the owner. Record changed files, test evidence, remaining risks, and the rollback commit. Publish/deploy only under a separate instruction that authorizes it.
 
 ## Preserve during cleanup
+
+The separate owner-authorized Cypress cleanup completed concurrently in `fc55735`. Its removal of the legacy suite supersedes this plan's instruction to retain that suite. The admin/events cleanup preserves all remaining room setup code and translations.
 
 - All `/room/...` routes, including `/room/[roomId]/admin`, plus room/player state and models.
 - Room codes, `activateAdminCode`, `locked`, host selection, and restart behavior. Event retirement alone does not prove these shared fields are obsolete.

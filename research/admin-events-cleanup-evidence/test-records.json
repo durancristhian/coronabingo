@@ -1,0 +1,25 @@
+{
+  "project": "coronabingo-dev",
+  "roomId": "pPtwEtJxUbiHuBUWLpcp",
+  "name": "Admin events cleanup QA 20260923",
+  "readyToPlay": true,
+  "timesPlayed": "2",
+  "selectedNumbers": [
+    "42"
+  ],
+  "activateAdminCode": true,
+  "bingoSpinner": false,
+  "players": [
+    {
+      "id": "4ltUy5u6PEaIwkUITs4c",
+      "name": "Cleanup Host",
+      "tickets": "1427,1428"
+    },
+    {
+      "id": "LFVLMdMtQjNEaAuty1km",
+      "name": "Cleanup Player",
+      "tickets": "903,904"
+    }
+  ],
+  "cleanup": "Retained synthetic development records; no deletions or rules changes attempted."
+}

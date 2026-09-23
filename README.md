@@ -13,9 +13,9 @@ npm ci
 cp .env.template .env
 ```
 
-Fill in `.env` with the Firebase project configuration from its owner. Firebase authentication and Firestore are required for login and gameplay. Google Analytics and Sentry settings are optional. Keep `.env` private; environment values exposed by `next.config.js` are included in the browser bundle and must not contain server credentials.
+Fill in `.env` with the Firebase project configuration from its owner. Firestore is required for gameplay. Rooms work without a Firebase Authentication login. Google Analytics and Sentry settings are optional. Keep `.env` private; environment values exposed by `next.config.js` are included in the browser bundle and must not contain server credentials.
 
-A local server or Vercel preview uses whichever Firebase project `.env` points to. Use a test project or agreed test records before creating rooms, registering players, or editing events.
+A local server or Vercel preview uses whichever Firebase project `.env` points to. Use a test project or agreed test records before creating rooms or adding players.
 
 ```bash
 npm run dev
@@ -40,6 +40,12 @@ Run build and start sequentially. Do not run an install, a development server an
 Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. CI enables this and uploads the HTML reports as the `bundle-reports` artifact, retained for 14 days. These replace the failing Packtracker upload; they provide per-build inspection without Packtracker's historical comparisons or budgets.
 
 Cypress and its legacy suite have been removed. No automated browser suite remains, and `npm test` is no longer defined. Use the explicit checks above; they do not verify gameplay in a browser. See the [removal record](research/cypress-removal-plan.md).
+
+## Retired charity events
+
+Standalone `/admin`, `/eventos/[eventId]`, and `/eventos/[eventId]/admin` return the standard 404 in Spanish and English. Room setup at `/room/[roomId]/admin`, emoji room codes, sharing, and spreadsheet export remain available. Historical Firebase documents and receipt uploads are retained. Authentication and Storage settings are no longer used by the app.
+
+See the [cleanup verification](research/admin-events-cleanup.md) for checks and test records.
 
 ## Migration status
 
