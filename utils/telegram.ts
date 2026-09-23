@@ -20,7 +20,7 @@ class Telegram {
 
         resolve(res)
       } catch (error) {
-        reject(error.message)
+        reject(error instanceof Error ? error.message : String(error))
       }
     })
   }

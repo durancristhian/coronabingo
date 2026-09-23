@@ -1,8 +1,8 @@
 {
   "title": "Información de la sala",
   "room-name": "Nombre de la sala",
-  "people": "Va a jugar {{count}} persona",
-  "people_plural": "Van a jugar {{count}} personas",
+  "people_one": "Va a jugar {{count}} persona",
+  "people_other": "Van a jugar {{count}} personas",
   "not-ready": "La sala no está lista para jugar todavía. Cuando lo esté, esta página se actualizará.",
   "list-description": "Buscate en esta lista y presioná el botón jugar para acceder a tus cartones.",
   "is-admin": "Dirige el juego",

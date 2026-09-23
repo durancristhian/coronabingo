@@ -1,4 +1,4 @@
-const knuthShuffle = require('knuth-shuffle').knuthShuffle
+import { knuthShuffle } from 'knuth-shuffle'
 import { Emojis } from '~/interfaces/custom/Emojis'
 import { CODES } from '~/utils/constants'
 

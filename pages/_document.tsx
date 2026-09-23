@@ -3,8 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React, { Fragment } from 'react'
 import i18n from '~/i18n.json'
 
-const allLanguages = i18n.allLanguages
-const defaultLanguage = i18n.defaultLanguage
+const defaultLanguage = i18n.defaultLocale
 
 if (process.env.NODE_ENV === 'production') {
   process.on('unhandledRejection', err => {
@@ -18,10 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 
 export default class extends Document {
   render() {
-    const langFromUrl = this.props.__NEXT_DATA__.page.substring(1, 3)
-    const lang = allLanguages.includes(langFromUrl)
-      ? langFromUrl
-      : defaultLanguage
+    const lang = this.props.locale || defaultLanguage
 
     return (
       <Html lang={lang}>

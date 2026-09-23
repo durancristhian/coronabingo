@@ -107,7 +107,7 @@ export default function Tickets({ player, room, updatePlayer }: Props) {
         <div key={i} className={classnames([i !== 0 && 'mt-4'])}>
           <Box>
             <p className="font-semibold uppercase">
-              {t('common:ticket', { ticketId: ticket.id })}
+              {t('common:ticket', { count: 1, ticketId: ticket.id })}
             </p>
             <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
               <Cells

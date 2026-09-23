@@ -81,7 +81,7 @@ Promise.all(
         .filter((x: string) => x)
         .map((page: string) => JSON.parse(page).map(flat))
     } catch (e) {
-      throw new Error(e.message)
+      throw new Error(e instanceof Error ? e.message : String(e))
     }
   }),
 ).then(tickets => {
@@ -95,7 +95,7 @@ Promise.all(
 
     console.log(`✅ Tickets generated successfully`)
   } catch (e) {
-    throw new Error(e.message)
+    throw new Error(e instanceof Error ? e.message : String(e))
   }
 })
 

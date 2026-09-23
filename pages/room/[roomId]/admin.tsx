@@ -1,4 +1,4 @@
-import Router from 'next-translate/Router'
+import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
@@ -119,7 +119,7 @@ export default function RoomAdmin() {
         dismissToast(toastId)
       }, 2000)
 
-      Router.pushI18n('/room/[roomId]', `/room/${room.id}`)
+      Router.push('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {
       updateToast('admin:error', 'error', toastId)
 

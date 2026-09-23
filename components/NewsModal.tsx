@@ -98,7 +98,7 @@ export default function NewsModal({ lang }: Props) {
         }
       >
         <div className="markdown-body">
-          <ReactMarkdown source={modal.content} />
+          <ReactMarkdown>{modal.content}</ReactMarkdown>
         </div>
       </Modal>
     </DynamicNamespaces>

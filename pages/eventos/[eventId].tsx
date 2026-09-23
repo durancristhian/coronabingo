@@ -109,7 +109,7 @@ export default function EventId() {
       console.error(error)
 
       log('event_registration_error', {
-        description: error.message,
+        description: error instanceof Error ? error.message : String(error),
         fatal: true,
       })
 

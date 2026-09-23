@@ -1,4 +1,4 @@
-import Router from 'next-translate/Router'
+import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import { FiThumbsUp } from 'react-icons/fi'
@@ -28,7 +28,7 @@ export default function Restart({ room }: Props) {
       login()
     }
 
-    Router.pushI18n('/room/[roomId]/admin', `/room/${room.id}/admin`)
+    Router.push('/room/[roomId]/admin', `/room/${room.id}/admin`)
   }
 
   return (

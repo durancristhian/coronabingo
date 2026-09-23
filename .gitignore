@@ -29,5 +29,5 @@ yarn-error.log*
 .now
 now.json
 
-# next-translate generated pages
-/pages
+*.tsbuildinfo
+next-env.d.ts

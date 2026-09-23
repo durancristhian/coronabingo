@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import Router from 'next-translate/Router'
+import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import { FiLink2 } from 'react-icons/fi'
@@ -105,7 +105,7 @@ export default function RoomId() {
                   </span>
                 )}
                 <p className="italic mt-2 text-gray-800 text-sm w-full">
-                  {t('common:ticket_plural', {
+                  {t('common:ticket_other', {
                     ticketId: player.tickets.split(',').join(' & '),
                   })}
                 </p>
@@ -119,7 +119,7 @@ export default function RoomId() {
                   onClick={() => {
                     if (!room.id || !player.id) return
 
-                    Router.pushI18n(
+                    Router.push(
                       `/room/[roomId]/[playerId]`,
                       `/room/${room.id}/${player.id}`,
                     )

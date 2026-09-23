@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react'
 
 interface Props {
   id: string
-  Icon?: Function
+  Icon?: React.ComponentType<{ className?: string }>
   imageURL?: string
   imageAlt?: string
   iconBgColor: string

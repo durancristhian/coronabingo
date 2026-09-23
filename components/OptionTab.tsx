@@ -4,7 +4,7 @@ import { Tab } from 'react-tabs'
 
 interface Props {
   buttonId: string
-  Icon: Function
+  Icon: React.ComponentType<{ className?: string }>
   iconBgColor: string
   iconColor: string
 }

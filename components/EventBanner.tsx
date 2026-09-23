@@ -1,6 +1,6 @@
 import { isBefore } from 'date-fns'
 import isAfter from 'date-fns/isAfter'
-import Router from 'next-translate/Router'
+import Router from 'next/router'
 import React from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useAnalytics } from '~/hooks/useAnalytics'
@@ -18,7 +18,7 @@ const EventBanner = () => {
       description: route,
     })
 
-    Router.pushI18n(
+    Router.push(
       '/eventos/[eventId]',
       '/eventos/coronabingo-solidario-por-minka',
     )

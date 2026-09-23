@@ -14,8 +14,7 @@ import '~/public/css/styles.css'
 import { pageview } from '~/utils/gtag'
 
 const version = pkg.version
-const allLanguages = i18n.allLanguages
-const defaultLanguage = i18n.defaultLanguage
+const defaultLanguage = i18n.defaultLocale
 
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
@@ -38,8 +37,6 @@ export default class Coronabingo extends App {
         Sentry.captureException(error)
       })
     }
-
-    super.componentDidCatch(error, errorInfo)
   }
 
   componentDidMount() {
@@ -49,8 +46,9 @@ export default class Coronabingo extends App {
   render() {
     const { Component, pageProps, router } = this.props
 
-    const locale = router.pathname.split('/')?.[1]
-    const lang = allLanguages.includes(locale) && locale
+    const locale = router.locale || defaultLanguage
+    const lang =
+      locale === defaultLanguage && router.asPath === '/' ? '' : locale
 
     return (
       <Fragment>

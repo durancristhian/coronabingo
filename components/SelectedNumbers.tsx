@@ -5,7 +5,7 @@ import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { TICKET_NUMBERS } from '~/utils/constants'
 
-const knuthShuffle = require('knuth-shuffle').knuthShuffle
+import { knuthShuffle } from 'knuth-shuffle'
 
 interface Props {
   isAdmin: boolean

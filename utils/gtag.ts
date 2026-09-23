@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string): void => {
   // @ts-ignore

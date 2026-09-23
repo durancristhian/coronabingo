@@ -7,26 +7,18 @@ const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 const tsconfig = require('./tsconfig.json')
 const tsPaths = tsconfig.compilerOptions.paths
+const { locales, defaultLocale, localeDetection } = require('./i18n.json')
 
-const compose = plugins => {
-  let cfg = {}
-
-  return plugins.reduceRight(
-    (prevFn, plugin) => {
-      if (plugin[1]) cfg = { ...cfg, ...plugin[1] }
-
-      return (...args) => plugin[0](prevFn(...args))
-    },
-    value => {
-      return { ...cfg, ...value }
-    },
-  )
-}
+const nextTranslate = require('next-translate-plugin')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: Boolean(process.env.ANALYZE_BUNDLE),
+  openAnalyzer: false,
+})
 
 const nextConfig = {
-  future: {
-    webpack5: true,
-  },
+  i18n: { locales, defaultLocale, localeDetection },
+  images: { disableStaticImages: true },
+  productionBrowserSourceMaps: true,
   env: {
     /* FIREBASE */
     API_KEY: process.env.API_KEY,
@@ -59,15 +51,15 @@ const nextConfig = {
       config.resolve.alias[newKey] = join(__dirname, value)
     })
 
-    config.module.rules.push({
-      test: /\.mp3$/,
-      loader: 'url-loader',
-    })
-
-    config.module.rules.push({
-      test: /\.md$/,
-      use: 'raw-loader',
-    })
+    config.module.rules.push(
+      {
+        test: /\.(jpg|jpeg|png|svg|gif|ico|webp|jp2|avif|mp3)$/,
+        issuer: /\.[jt]sx?$/,
+        type: 'asset',
+        parser: { dataUrlCondition: { maxSize: 8192 } },
+      },
+      { test: /\.md$/, type: 'asset/source' },
+    )
 
     if (!isServer && process.env.GITHUB_EVENT_PATH) {
       const event = require(process.env.GITHUB_EVENT_PATH)
@@ -90,34 +82,4 @@ const nextConfig = {
   },
 }
 
-const plugins = [
-  [require('next-images'), {}],
-  [require('@zeit/next-source-maps'), {}],
-  [
-    require('@zeit/next-bundle-analyzer'),
-    {
-      analyzeBrowser: process.env.ANALYZE_BUNDLE,
-      analyzeServer: process.env.ANALYZE_BUNDLE,
-      bundleAnalyzerConfig: {
-        browser: {
-          analyzerMode: 'static',
-          reportFilename: join(
-            __dirname,
-            'public',
-            'bundle-analyzer/client.html',
-          ),
-        },
-        server: {
-          analyzerMode: 'static',
-          reportFilename: join(
-            __dirname,
-            'public',
-            'bundle-analyzer/server.html',
-          ),
-        },
-      },
-    },
-  ],
-]
-
-module.exports = compose(plugins)(nextConfig)
+module.exports = withBundleAnalyzer(nextTranslate(nextConfig))

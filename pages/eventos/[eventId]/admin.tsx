@@ -11,16 +11,6 @@ import { Player } from '~/interfaces/models/Player'
 import { Registration } from '~/interfaces/models/Registration'
 import { RoomTicket } from '~/interfaces/models/RoomTicket'
 
-export default function EventAdmin() {
-  return (
-    <Layout type="large">
-      <EnsureLogin>
-        <Content />
-      </EnsureLogin>
-    </Layout>
-  )
-}
-
 function Content() {
   const { error: eventError, loading: eventLoading, event } = useEvent()
   const {
@@ -68,5 +58,15 @@ function Content() {
         />
       )}
     </>
+  )
+}
+
+export default function EventAdmin() {
+  return (
+    <Layout type="large">
+      <EnsureLogin>
+        <Content />
+      </EnsureLogin>
+    </Layout>
   )
 }

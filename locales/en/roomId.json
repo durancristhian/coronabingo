@@ -1,8 +1,8 @@
 {
   "title": "Room Lobby",
   "room-name": "Room name",
-  "people": "There are {{count}} player waiting to play",
-  "people_plural": "There are {{count}} players waiting to play",
+  "people_one": "There are {{count}} player waiting to play",
+  "people_other": "There are {{count}} players waiting to play",
   "not-ready": "The room is not ready to play yet. When it is, this page will be updated.",
   "list-description": "Find your name in the list and press the play button to access your tickets.",
   "is-admin": "Admin",
