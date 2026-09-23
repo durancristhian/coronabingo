@@ -2,7 +2,7 @@
 
 Date: 2026-09-23
 
-Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is implemented and locally verified on `migrate/node24-ci` in `../coronabingo-node24-ci`; actual GitHub Actions/Packtracker verification is pending. See [CI verification](node-24-ci.md). The GitHub default branch remains `master`. Legacy production rollback eligibility remains an unresolved release gate.
+Status: parts one and two completed locally on 2026-09-23. See [baseline findings](node-24-baseline-findings.md) and [implementation evidence](node-24-implementation.md). Local `master` and `migrate/node24` contain application commit `c93bc83` and evidence commit `6905b4d`. Part three is complete on `migrate/node24-ci` in `../coronabingo-node24-ci`: commit `47918fc` passed hosted Node 24 CI, including bundle-report uploads replacing the failing Packtracker integration. See [CI verification](node-24-ci.md). Vercel reports a successful automatic preview, but part four preview acceptance remains open. The GitHub default branch remains `master`. Legacy production rollback eligibility remains an unresolved release gate.
 
 ## Agreed outcome
 
@@ -75,11 +75,11 @@ Completed locally; [part two evidence](node-24-implementation.md) records clean 
 
 ### 3. Restore the required development and CI checks
 
-Workflow updated and local acceptance passed on 2026-09-23. The first hosted run passed installation and lint, then failed on Packtracker's unavailable API. Packtracker also reported bundle parser errors. The replacement preserves bundle inspection through the existing Next bundle analyzer and GitHub HTML artifacts; hosted re-verification is pending. See [part three evidence](node-24-ci.md).
+Completed on 2026-09-23. The first hosted run passed installation and lint, then failed on Packtracker's unavailable API. Packtracker also reported bundle parser errors. The replacement preserves per-build inspection through the existing Next bundle analyzer and GitHub HTML artifacts. Hosted run `35893873513` passed all steps on commit `47918fc`; all three uploaded reports were downloaded and inspected. Packtracker history/comparisons/budgets are not replaced. See [part three evidence](node-24-ci.md).
 
 - Update the obsolete GitHub Actions and application runtime declaration.
 - Run the acceptance commands below. The existing lint command uses `--fix`; use its equivalent without `--fix` for verification to avoid unrelated changes.
-- Verify the actual CI build, including the Packtracker path enabled by `GITHUB_EVENT_PATH`. A local build does not exercise that integration.
+- Verify the actual CI build and bundle-report upload. The original Packtracker path was exercised and replaced after its demonstrated failure, as recorded above.
 - Leave the Cypress CI step disabled. Record unrelated lint/test-tool maintenance separately unless it blocks required checks.
 
 ### 4. Verify a Vercel preview
@@ -113,7 +113,8 @@ This is a release step after the candidate passes acceptance and release is auth
 - [ ] Host and player sessions can create/join a room, receive realtime number updates, and restart a game without cross-room effects.
 - [ ] Authentication and existing event/admin paths work with the agreed test accounts and data.
 - [ ] Production CSS, images, SVGs, animations, audio, Markdown content, and spreadsheet downloads retain their behavior. No UI redesign is introduced.
-- [ ] GitHub Actions passes and a Vercel preview verifies the same candidate under Node 24.
+- [x] GitHub Actions passes under Node 24, including bundle-report upload and cache saves.
+- [ ] A Vercel preview verifies the candidate's Node 24 runtime and application behavior; successful deployment status alone is insufficient.
 - [ ] After release, GitHub default, local primary tracking, and Vercel production branch all use `main`; PR bases are correct.
 - [ ] Production runs the expected migration commit on Node 24 and passes smoke checks; rollback evidence is recorded.
 

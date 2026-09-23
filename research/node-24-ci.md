@@ -2,7 +2,7 @@
 
 Date: 2026-09-23. Branch: `migrate/node24-ci`, based on `6905b4d`. Worktree: `/Users/durancristhian/Repos/coronabingo-node24-ci`.
 
-Status: initial workflow committed as `7c7222c` and pushed to `migrate/node24-ci`. Hosted installation and lint passed, but the build failed on Packtracker's unavailable API. The replacement uses the existing Next bundle analyzer and downloadable GitHub artifacts. Its hosted verification is pending.
+Status: complete. Workflow commit `7c7222c` exposed the Packtracker failure in hosted CI. Replacement commit `47918fc` passed the full GitHub Actions run, including upload of three verified bundle reports. Both commits are pushed to `migrate/node24-ci`.
 
 ## Changes
 
@@ -26,7 +26,7 @@ The first local pass and commit hook used the new worktree shell's default Node 
 | `npm run build` | Pass, including prebuild locale validation |
 | `npm run start -- --port 3126` | Pass |
 | HTTP checks | Eleven home/admin/room/player/event routes returned 200, Next HTML, and the expected document language |
-| Production browser | Spanish/English home, client locale switching including memoized News heading, English refresh, tutorial dialog/player load and close, missing-room error translation and refresh, and signed-out admin form passed |
+| Local production-build browser | Spanish/English home, client locale switching including memoized News heading, English refresh, tutorial dialog/player load and close, missing-room error translation and refresh, and signed-out admin form passed |
 | Shared URL | `/es/room/node24-ci-missing?proof=ci#details` switched to `/en/room/node24-ci-missing?proof=ci#details` and refreshed successfully |
 | Browser errors and appearance | No console errors observed on home/tutorial/missing-room checks; Spanish production screenshot visually reviewed |
 
@@ -38,6 +38,8 @@ After replacing Packtracker, `actionlint`, another clean `npm ci`, `lint:check`,
 
 ## Hosted verification
 
+- [Successful run 35893873513](https://github.com/durancristhian/coronabingo/actions/runs/35893873513) verified commit `47918fc74a92208984f4178e85fc28833f993f8b` on Ubuntu. Logs confirm Node 24.21.0/npm 11.19.0. Clean install, typecheck/lint, locale validation/build, report upload, and both cache saves passed.
+- [Bundle reports artifact](https://github.com/durancristhian/coronabingo/actions/runs/35893873513/artifacts/10766052869), 318,710 bytes, was downloaded and inspected. `client.html` (446,304 bytes), `nodejs.html` (414,806 bytes), and `edge.html` (274,799 bytes) all contain HTML and chart data. Local copies are at `/tmp/coronabingo-node24-ci-hosted-reports`. The artifact expires after 14 days.
 - [GitHub Actions run 35892973633](https://github.com/durancristhian/coronabingo/actions/runs/35892973633) runs workflow commit `7c7222c7dfdc1ef6b44977f9cbd9195c18049b1d` on `migrate/node24-ci`.
 - The log confirms Node 24.21.0/npm 11.19.0, successful `npm ci`, and successful `lint:check`. Packtracker initialized and reached its upload, then failed with `getaddrinfo ENOTFOUND api.packtracker.io`. An independent local DNS lookup returned `ENOTFOUND` too. This is not evidence of a bad project token or a confirmed permanent service shutdown.
 - Packtracker's bundled analyzer also reported parse errors for two modern JavaScript bundles. The replacement uses the already-installed `@next/bundle-analyzer` 16.3.6. HTML artifacts preserve per-build bundle inspection, but do not replace Packtracker's hosted history, PR comparisons, or configured asset budgets. No successful Packtracker upload is claimed.
