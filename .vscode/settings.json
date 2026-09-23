@@ -1,9 +1,14 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.options": {
-    "extensinons": [".js", ".jsx", ".ts", ".tsx"]
+    "extensinons": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
   },
   "eslint.validate": [
     "javascript",
