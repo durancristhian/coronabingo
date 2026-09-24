@@ -1,6 +1,10 @@
 # Plan de consentimiento europeo de Coronabingo
 
-Fecha: 23 de septiembre de 2026. Estado: propuesta investigada y revisada; pendiente de aprobación para implementar.
+Fecha de la investigación original: 23 de septiembre de 2026.
+
+**Estado vigente al 24/09/2026:** alcance acordado con el usuario para implementación posterior; ejecución no iniciada. El [acuerdo de alcance](#acuerdo-de-alcance-para-implementación-posterior) registra lo aprobado y los pendientes. Esta solicitud autoriza dejarlo documentado; no iniciar la implementación ni publicar cambios.
+
+**Revalidación del 23/09/2026, 23:50 ART:** Search Console y AdSense ya están vinculados con GA4 según sus registros de ejecución; producción ya carga G-WYG7FMEWEF directamente. La [revisión vigente y recuperación](#revalidación-tras-vincular-search-console-y-adsense-con-ga4) al final reemplaza los pasos pendientes que dependían de UA o de crear esas asociaciones. Los apartados originales se conservan como historial de la investigación. No ejecutar esos pasos antiguos de nuevo.
 
 Se inspeccionaron el repositorio, HTML y bundles públicos, AdSense, Firebase y las dos propiedades de Analytics. No se modificó código de producto, no se guardaron ajustes ni se publicó el mensaje. Los únicos archivos creados para este trabajo son este plan, la investigación de fuentes y la evidencia de lectura.
 
@@ -219,3 +223,107 @@ La revisión posterior a la investigación corrigió estos puntos de una propues
 | Plan de vinculación con cambios superpuestos | Sustitución UA compartida una sola vez; consentimiento prevalece sobre conciliación de ingresos |
 
 La implementación queda lista para dividir en tres entregas: código/política y pruebas locales; integración real en QA; configuración/publicación y aceptación de producción. La aprobación futura debe abarcar explícitamente los cambios de cuenta identificados. Este documento no autoriza ni ejecuta esas entregas.
+
+## Comments
+
+### Revalidación tras vincular Search Console y AdSense con GA4
+
+23 de septiembre de 2026, 23:50 ART. Solicitada por el usuario antes de proceder, con explicación clara de rollback. Sigue siendo una revisión de propuesta: no autoriza implementación, despliegue, cambios en cuentas ni un ensayo de rollback de producción.
+
+**Veredicto:** el objetivo y la elección de Google CMP siguen teniendo sentido. El plan requiere actualizar su punto de partida y hacer concreta la recuperación antes de publicarlo. Las vinculaciones mejoran los informes; no recogen ni aplican el consentimiento del visitante. No hay que esperar a que aparezcan ingresos o datos de Search Console para preparar esta corrección.
+
+#### Estado actualizado y alcance de esta revisión
+
+Base inspeccionada: `/Users/durancristhian/Repos/coronabingo`, rama `main`, commit `6ddd4d2`. Checkout inicialmente limpio. Se consultaron código, registros de implementación, HTML público actual y documentación oficial. No se volvieron a abrir las consolas autenticadas en esta revisión: los estados de cuenta proceden de los registros citados y de la confirmación del usuario, y deben releerse antes de ejecutar cambios.
+
+| Elemento | Evidencia disponible | Qué cambia en el plan |
+| --- | --- | --- |
+| Search Console | Registro del reemplazo a las 19:43 ART: `https://coronabingo.com.ar/` asociado a GA4 `385744187`, flujo `5469366293`; URL del flujo actualizada | Conservar asociación y métodos de verificación; no recrear ni deshacer este trabajo |
+| AdSense y GA4 | Registro del vínculo a las 23:26:46 ART: `pub-6231280485856921` con `385744187` | Conservar el vínculo; no eliminarlo como respuesta a un fallo de consentimiento |
+| Etiqueta principal | HTML público consultado ahora carga/configura `G-WYG7FMEWEF`, sin cargador UA | Retirar la migración UA de esta tarea; adaptar el código ya corregido |
+| Recepción de Analytics | Evidencia final del trabajo anterior registra HTTP 204 de ambas propiedades y navegación ES/EN | Reutilizar como línea de base; no presentarla como prueba de consentimiento |
+| Inicio de medición | `_document.tsx` configura GA antes de los anuncios; `utils/firebase.ts` todavía inicia Analytics al importar en navegador | Interponer consentimiento antes de ambos arranques |
+| Informes nuevos | Ingresos/impresiones AdSense en GA4 e importación Search Console aún pendientes en sus registros | Seguirlos por separado; no condicionar el consentimiento a un informe positivo |
+
+Fuentes locales: [Search Console ejecutado](2026-09-23-search-console-preflight.md), [AdSense/GA4 ejecutado](2026-09-23-adsense-ga4-link-plan.md#ejecución-autorizada-y-seguimiento), [recepción en producción](2026-09-23-adsense-ga4-final-verification.json).
+
+La configuración de CMP, cobertura automática, Figuritas y anuncios limitados sigue siendo la observada en la auditoría inicial, no una lectura nueva. El HTML actual no contiene un default de Consent Mode; eso no descarta mensajes automáticos inyectados por Google.
+
+#### Alcance ajustado
+
+1. Mantener Google CMP, ES/EN, política pública, rechazo accesible y revocación.
+2. Controlar las dos vías de Analytics con modo básico. Conservar las correcciones recientes de título, referencia, navegación y ausencia de duplicados. No volver a UA ni unificar propiedades en esta entrega.
+3. Separar Firestore de Analytics sin cambiar reglas, datos de salas, proyecto Firebase, facturación ni autenticación.
+4. Verificar anuncios manuales, Auto ads y mensaje automático. La opción de anuncios limitados continúa pendiente de aprobación de su tratamiento; no prometer rechazo sin cookies si permanecen cookies antifraude.
+5. Mantener la revisión de terceros, pero decidir expresamente si se conservan los embeds con un control propio o se sustituyen por enlaces. No convertir esa alternativa del plan en una eliminación de funciones ya aprobada.
+6. Registrar la hora del cambio de consentimiento en el seguimiento de GA4. La reducción de medición de quienes rechazan puede afectar la conciliación de ingresos; no activar Analytics sin permiso para conseguir números iguales.
+
+Antes de publicar siguen faltando: contacto público de privacidad, comportamiento al rechazar publicidad, revisión del alcance sobre Figuritas y prueba real del mensaje y de la granularidad de Analytics. No son razones para rehacer Search Console ni las vinculaciones GA4.
+
+#### Qué significa poder volver atrás
+
+Hay recuperación posible, pero son operaciones separadas. No existe un único botón que devuelva sitio, cuentas, navegadores y datos a su estado anterior.
+
+| Parte | Recuperación prevista | Límite |
+| --- | --- | --- |
+| Código publicado | Volver a un despliegue de recuperación verificado o publicar una corrección/reversión acotada | Volver al código anterior a consentimiento reactivaría el problema de medición inicial |
+| Mensaje y ajustes AdSense | Restaurar únicamente valores modificados, a partir de un registro previo | Vercel no revierte AdSense; despublicar puede tardar hasta 10 minutos y deja actuar defaults/cobertura automática |
+| Variables de entorno | Restaurar solo variables nuevas o modificadas de esta tarea, en su ámbito exacto | Cambiar una variable compilada no modifica el JavaScript ya publicado ni las pestañas abiertas |
+| Search Console, vínculos GA4 y Firebase | Preservarlos durante la recuperación | No son parte del cambio de consentimiento y no necesitan deshacerse |
+| Decisiones de visitantes | Conservar rechazo y elección guardada; volver a pedir permiso si no puede interpretarse | No convertir una decisión desconocida o una versión antigua en aceptación |
+| Eventos o ingresos del intervalo | Registrar la incidencia y retomar la medición permitida al corregirla | No reconstruye eventos no enviados ni borra automáticamente los ya recogidos; los ingresos perdidos no se recuperan con rollback |
+
+Vercel permite recuperar un despliegue anterior. En Hobby, el rollback inmediato alcanza el despliegue anterior elegible; un preview no publicado no basta. El registro de la tarea GA4 identifica Hobby, pero plan y elegibilidad deben comprobarse de nuevo al preparar el lanzamiento. El rollback usa el build anterior y no incorpora variables cambiadas después; además suspende la asignación automática de dominios hasta promover una versión nuevamente. [Vercel, Instant Rollback](https://vercel.com/docs/instant-rollback).
+
+Google permite despublicar el mensaje, con hasta 10 minutos de propagación. Eso no garantiza detener todo aviso ni toda publicidad: vuelve a aplicar la configuración del sistema publicitario. [Google, publicar y despublicar](https://support.google.com/adsense/answer/13651178?hl=en). Los switches de Consent Mode afectan a los sitios/apps con mensajes europeos de la cuenta, así que su recuperación debe contemplar ese alcance. [Google, alcance de Consent Mode](https://support.google.com/adsense/answer/16053245?hl=en).
+
+#### Recuperación que recomiendo preparar y probar
+
+1. Construir y validar una versión de recuperación que conserve el juego y la política, con Analytics y publicidad opcional detenidos. No basta con ocultar el componente manual: debe impedir también Auto ads. Si la CMP necesita el script publicitario, comprobar un bootstrap independiente; si no puede garantizarse, la recuperación puede dejar temporalmente esa CMP sin cargar, sin ejecutar etiquetas opcionales ni conceder permiso, con información de privacidad accesible.
+2. Guardar el commit, despliegue, configuración y resultados de esa versión. Probar en entorno de desarrollo la creación, unión y sincronización de una sala, recarga, y ausencia de solicitudes de Analytics/publicidad. La recuperación no debe requerir modificar Firestore ni borrar preferencias.
+3. Si se quiere rollback inmediato en Hobby, hacer que esa versión segura sea la anterior elegible de producción y verificarlo antes de publicar la versión completa. Esto implica una ventana explícita sin medición/anuncios durante la preparación. Coordinar otras publicaciones para que no desplacen ese punto. No ejecutar esa ventana sin autorización de despliegue.
+4. Si no se acepta esa ventana o el despliegue deja de ser elegible, mantener una corrección de recuperación lista para publicar. Esa alternativa requiere despliegue y verificación; no debe llamarse instantánea. Un flag compilado en Next.js tampoco es un interruptor remoto inmediato.
+5. Ante una incidencia: priorizar recuperación si se rompe el juego, si se envía Analytics tras rechazar/retirar, o si anuncios y preferencias dejan de corresponderse. Una reducción esperable de usuarios medidos o un informe todavía procesándose no dispara rollback por sí sola.
+6. Activar la recuperación del sitio y después corregir o restaurar exclusivamente los ajustes de cuenta afectados. No despublicar primero y dejar el sitio midiendo sin controles. Guardar los estados previos y posteriores, incluida cobertura automática; no desactivar globalmente Consent Mode sin considerar Figuritas.
+7. Comprobar el dominio público, juego, ausencia de envíos opcionales y asociaciones preservadas. Las pestañas abiertas pueden seguir ejecutando la versión anterior hasta recargar: registrar este límite, comprobar retirada también en una pestaña abierta y no afirmar que el cambio de despliegue detuvo retroactivamente todos los clientes.
+8. Registrar intervalo, causa, pérdida de medición y resultado. Corregir en una rama aislada y volver a pasar aceptación antes de reactivar. Si se usó Instant Rollback, restablecer deliberadamente las publicaciones normales cuando la versión corregida esté verificada.
+
+La futura autorización de publicación debe identificar quién ejecuta esta recuperación y si incluye esos pasos de emergencia. La revisión actual no ejecuta ni ensaya un rollback de producción. **Hay un procedimiento viable; todavía no hay un rollback de consentimiento implementado y probado.**
+
+#### Orden recomendado para seguir
+
+Preparación local en rama/worktree propio desde `origin/main` actualizado; prueba de consentimiento y recuperación; revisión del resultado; luego ventana de publicación y ajustes Google. Revalidar scripts y suite de pruebas al iniciar: hay trabajo concurrente de Playwright y su plan no debe contarse como una suite ya disponible.
+
+La preparación debe producir un diff revisable, pruebas ES/EN, evidencia de ambos destinos y una recuperación reproducible. La configuración/publicación posterior requiere cubrir el alcance de cuenta definido. No hace falta rehacer las vinculaciones existentes.
+
+Validación de esta revisión documental: contenido contrastado con `6ddd4d2`, scripts y evidencia enlazada; HTML de producción leído de nuevo; referencias oficiales de rollback y propagación consultadas; enlaces locales y `git diff --check` verificados. No se ejecutaron pruebas de aplicación porque no cambió código. Documento sin commit y sin cambios de consola.
+
+### Acuerdo de alcance para implementación posterior
+
+Fecha: 24/09/2026. El usuario acuerda el siguiente alcance y solicita dejarlo documentado para implementarlo luego. Este acuerdo actualiza el estado de la propuesta; las observaciones anteriores se conservan como evidencia histórica y deberán revalidarse al iniciar el trabajo.
+
+#### Cambios acordados
+
+1. **Política de privacidad:** crearla en español e inglés y enlazarla desde el sitio. Describir el uso efectivo de Analytics, AdSense y las preferencias de consentimiento.
+2. **Mensaje de Google:** completar el mensaje europeo con la política, ambos idiomas y opciones visibles para aceptar, rechazar y gestionar preferencias. Antes de activarlo, volver a comprobar si existe otra solución de consentimiento y evitar avisos o controles duplicados.
+3. **Etiquetas y decisión del visitante:** hacer que Analytics espere el permiso correspondiente donde se exige consentimiento y que AdSense respete por separado los permisos publicitarios. Evaluar y probar anuncios limitados cuando sean admisibles; no prometer que siempre habrá anuncios tras un rechazo.
+4. **Cambio de elección:** agregar un acceso permanente «Privacidad y cookies» que permita revisar o retirar preferencias y actualizar el comportamiento de las etiquetas.
+5. **Pruebas y recuperación:** verificar aceptar, rechazar, consentimiento parcial, cambiar la elección y recargar; comprobar solicitudes y almacenamiento, además de la apariencia del mensaje. Cubrir español/inglés y móvil/escritorio, y asegurar que el bingo funciona al rechazar. Preparar y verificar la recuperación descrita en la revisión anterior antes de publicar.
+
+**Separación acordada:** Analytics sirve para medir y no paga ingresos publicitarios. Rechazar únicamente Analytics no debe apagar automáticamente AdSense. Rechazar permisos publicitarios sí puede cambiar los anuncios disponibles y los ingresos. La recuperación de emergencia que detiene temporalmente ambas etiquetas es un procedimiento excepcional, no el comportamiento normal ante un rechazo.
+
+#### Secuencia y límites
+
+Cuando el usuario retome y autorice la ejecución, preparar primero el código y las pruebas en una rama y worktree propios, sin publicar ni cambiar consolas. Presentar el resultado y las comprobaciones pendientes antes de la activación en producción. Las pruebas que dependan de publicar el mensaje se completarán en esa etapa autorizada; no se presentarán como verificadas con pruebas locales solamente.
+
+Conservar las vinculaciones existentes de Search Console, AdSense y GA4. Antes de cambiar ajustes Google, revalidar el alcance de cuenta y su posible efecto sobre Figuritas. Este acuerdo no autoriza cambios en otros sitios, retirada de integraciones ajenas al alcance ni una ventana de producción sin anuncios.
+
+La publicación y los cambios de consola quedan para una autorización posterior sobre el resultado concreto. El procedimiento de recuperación debe quedar probado y con un responsable definido; revertir el sitio no revierte automáticamente los ajustes de Google ni recupera datos o ingresos perdidos.
+
+#### Pendientes para implementar
+
+- Nombre o razón social y correo que el usuario quiere publicar como contacto de privacidad.
+- Revalidación del estado técnico y de las consolas al iniciar, incluidos ambos destinos de Analytics, la CMP efectiva y la elegibilidad de anuncios limitados.
+- Elección y prueba del mecanismo de recuperación antes de autorizar la publicación.
+
+Registro de este acuerdo: actualización documental únicamente. No se implementó código, no se modificaron consolas y no se publicó el mensaje.
