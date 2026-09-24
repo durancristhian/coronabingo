@@ -7,9 +7,15 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/.ui-tests-lock/
+/.ui-tests-config/
+**/*-debug.log
 
 # next.js
 /.next/
+/.next-ui-tests/
 /out/
 !public/
 

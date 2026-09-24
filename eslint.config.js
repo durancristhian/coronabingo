@@ -7,7 +7,17 @@ const accessibility = require('eslint-plugin-jsx-a11y')
 const prettier = require('eslint-plugin-prettier')
 
 module.exports = [
-  { ignores: ['node_modules/**', '.next/**', '.now/**', '.vscode/**'] },
+  {
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      '.next-ui-tests/**',
+      'playwright-report/**',
+      'test-results/**',
+      '.now/**',
+      '.vscode/**',
+    ],
+  },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: { parser, parserOptions: { ecmaFeatures: { jsx: true } } },

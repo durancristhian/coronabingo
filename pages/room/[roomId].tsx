@@ -88,6 +88,7 @@ export default function RoomId() {
           {players.map((player: Player, index: number) => (
             <div
               key={index}
+              data-testid="player-row"
               className={classnames([
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
                 player.id === room.adminId

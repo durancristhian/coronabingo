@@ -43,6 +43,7 @@ export default function Cells({
             onClick={() => handleClick(ticketNumber)}
             onKeyPress={() => handleClick(ticketNumber)}
             role="button"
+            aria-pressed={selectedNumbers.includes(ticketNumber)}
             tabIndex={0}
           >
             <div

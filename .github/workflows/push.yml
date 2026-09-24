@@ -8,20 +8,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-      API_KEY: ${{ secrets.API_KEY }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      PROJECT_ID: ${{ secrets.PROJECT_ID }}
-      MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
-      APP_ID: ${{ secrets.APP_ID }}
-      MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
-
-      GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
-
-      SENTRY_DSN: ''
-
-      URL: ${{ secrets.URL }}
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v7.0.1
@@ -33,33 +20,64 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Set up Java for Firestore
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
       - name: Report runtime versions
         run: |
           node --version
           npm --version
+          java -version
 
-      - name: Restore Next.js build cache
+      - name: Restore Next.js test build cache
         uses: actions/cache@v6.1.0
         with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('.nvmrc', 'package-lock.json') }}-${{ github.sha }}
+          path: ${{ github.workspace }}/.next-ui-tests/cache
+          key: ${{ runner.os }}-ui-nextjs-${{ hashFiles('.nvmrc', 'package-lock.json') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('.nvmrc', 'package-lock.json') }}-
+            ${{ runner.os }}-ui-nextjs-${{ hashFiles('.nvmrc', 'package-lock.json') }}-
 
       - run: npm ci
 
       - run: npm run lint:check
 
-      # prebuild validates locales; the analyzer writes downloadable bundle reports.
-      - run: npm run build
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Download Firestore emulator
+        run: npx firebase setup:emulators:firestore
+
+      # Sets demo configuration before compiling; prebuild validates locales.
+      - name: Build app for UI tests and bundle analysis
+        run: npm run ui-tests:build
         env:
           ANALYZE_BUNDLE: '1'
 
+      # Uses the build above without compiling again. A failure fails this job.
+      - name: Run host and player regression
+        run: npm run ui-tests:ci
+
+      - name: Upload UI test evidence
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ui-test-evidence
+          path: |
+            playwright-report/
+            test-results/
+            tests/ui/*-debug.log
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Upload bundle reports
+        if: always()
         uses: actions/upload-artifact@v7.0.1
         with:
           name: bundle-reports
-          path: .next/analyze/*.html
+          path: .next-ui-tests/analyze/*.html
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14

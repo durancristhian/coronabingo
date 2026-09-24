@@ -2,11 +2,11 @@
 
 Date: 2026-09-23
 
-Status: plan saved for later implementation at the owner's explicit request.
+Status: implemented and verified locally on 2026-09-24.
 
-Work status: open; not started.
+Work status: resolved.
 
-Execution is deferred. The owner requested saving the complete plan without executing it. Resume implementation only when the owner requests it in a later session. The command and workflow below describe the intended result; they are not implemented yet.
+The owner requested implementation in this session. The deferred planning history below is retained; current implementation evidence is recorded under Comments.
 
 ## Requested outcome
 
@@ -117,3 +117,61 @@ Likely files include `package.json`, `package-lock.json`, `utils/firebase.ts`, `
 - [Playwright best practices](https://playwright.dev/docs/best-practices): test visible behavior, isolate tests and their data, and use resilient locators and retrying assertions.
 - [Firebase Local Emulator Suite](https://firebase.google.com/docs/emulator-suite): local integration testing without production data.
 - Installed Next.js testing guide: `node_modules/next/dist/docs/01-app/02-guides/testing/playwright.md`, also referenced by the Pages Router guide. It recommends testing a production build.
+
+## Comments
+
+### 2026-09-24: implementation and local verification
+
+The owner requested implementation on September 23. Retained the accepted scope and adopted one worker, zero retries, HTML reports and failure screenshots/traces. This supersedes the earlier deferral without changing its history.
+
+- Worktree: `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-e8850982`.
+- Branch: `t3code/implement-playwright-test-plan`. Reused the app-created worktree, initially clean.
+- Base: `6ddd4d2279a05f0a9db1c9f62a4bf98cad0a0087`, equal to fetched `origin/main` at implementation start.
+- Test URL: `http://127.0.0.1:3187`. Firebase target: local `demo-coronabingo-ui`, Firestore `127.0.0.1:8187`. No owner environment file was created, copied or modified.
+- Versions verified: Node 24.21.0, npm 11.19.0, OpenJDK 21.0.12.1, Playwright 1.63.0, Chromium 153.0.8010.12, Firebase CLI 15.31.0, Firestore emulator 1.22.0. Installed Java through Homebrew and downloaded Chromium and the emulator. No shell profile or system Java symlink was changed.
+
+Implemented `npm run ui-tests`, `ui-tests:production`, `ui-tests:build` and `ui-tests:ci`. The runner owns its process group, checks reserved ports, uses a worktree lock, verifies Java, and prepares fixed public demo configuration. The runner owns the emulator, Next.js and Playwright process groups and shuts them down in reverse order, with a 10-second graceful shutdown limit before terminating a stalled group. The runner prints its PID and checkout path; during execution `.ui-tests-lock/owner.json` identifies ownership. Services are never reused. Emulator data starts empty, is held locally and is not exported.
+
+Test output and TypeScript cache use `.next-ui-tests`; normal `.next` output remains separate. The runner restores `next-env.d.ts` after Next modifies its generated references, provided it still points at the test build. The app rejects inconsistent emulator configuration. Test analytics and ads are disabled. Both browser contexts block external HTTP requests and websockets; assertions reject attempted hosted Firebase requests. The app's existing Firestore SDK and listeners remain active.
+
+The journey checks both assigned card IDs against the lobby, host-only draw controls, a live draw in the second context, card contents and a selected number after reload, waiting after restart, cleared draws and another synchronized draw. Random IDs, assigned cards and draws are not fixed. Minimal card, lobby-row and called-number selectors were added; card buttons now expose their pressed state to assistive technology. The host select retains its existing accessible name `adminId`.
+
+CI now installs Java and Chromium, builds once with demo configuration and locale validation, runs the same journey against `next start`, and uploads available reports, traces, screenshots and emulator logs even on failure. Existing type/lint and bundle-report checks remain. Hosted Firebase secrets are unnecessary for this job. The workflow was parsed locally and the setup-java v5 tag was verified upstream.
+
+Observed local runs before the final verification pass:
+
+| Command | Result | Wall time including services |
+| --- | --- | --- |
+| `npm run ui-tests` | Complete journey passed | 11.1 s |
+| `ANALYZE_BUNDLE=1 npm run ui-tests:production` | Build and complete journey passed | 13.2 s |
+| `npm run ui-tests:ci` | Same compiled build reused; journey passed | 4.9 s |
+| `npm run ui-tests` again | Fresh emulator; journey passed | 10.4 s |
+
+Early selector failures returned exit 1, produced an HTML report, screenshots for both contexts and a trace, then shut down the services. These were test-selector corrections, not application gameplay changes. The host dropdown's explicit `aria-label` overrides its displayed label, so the final test uses its existing accessible name.
+
+These are local macOS results. Actual GitHub Actions duration and Linux execution remain unverified until an authorized push runs the workflow. No CI, Preview or Production run is claimed. Emulator rules permit room/player operations only and are explicitly test rules; deployed rules, indexes, quotas and hosted behavior are outside this evidence. The broader coverage listed above remains deferred as agreed.
+
+### Final verification
+
+The interruption probe exposed stalled teardown when cancellation arrived as Playwright started a worker. The final runner starts and owns each service directly, independently of Playwright's test lifecycle, so even a stalled test coordinator cannot prevent service cleanup. Repeated the occupied-port, failed-service and interruption probes after that change.
+
+| Check on the final implementation | Result |
+| --- | --- |
+| `npm ci` from the updated lockfile | Passed |
+| `npm run lint:check` and explicit ESLint check of root configuration files | Passed |
+| `npm run build`, with disposable public demo values and test mode disabled | Passed; normal `.next` build, no hosted gameplay or owner environment file |
+| `ANALYZE_BUNDLE=1 npm run ui-tests:build` | Passed, 5.7 s; locale checks and HTML bundle reports produced |
+| `npm run ui-tests:ci` | Complete journey passed, 4.1 s; reused the prepared build |
+| `npm run ui-tests` | Complete journey passed, 9.6 s |
+| A fresh `npm run ui-tests` after a deliberately failing run | Complete journey passed, 9.1 s |
+| Each of the five reserved ports occupied by a probe-owned listener | Exit 1; original listener still running; test lock removed |
+| Emulator launch forced to fail using a temporary Java shim | Exit 1; all five ports free; lock removed |
+| SIGINT as Playwright begins running | Exit 130; all five ports free; lock removed; prior `next-env.d.ts` restored |
+| Deliberately failing browser assertion in a temporary test | Exit 1, 3.6 s; HTML, PNG screenshots and trace ZIP verified; temporary test removed |
+| Invalid hosted project, remote emulator endpoint, or emulator host without test mode | Configuration rejected before startup |
+| Normal build ID and generated declarations before/after test failure | Unchanged |
+| `git diff --check` | Passed |
+
+The intentional failure's artifacts were copied locally to `/tmp/coronabingo-ui-failure-evidence-NIz5oT` before the fresh passing run replaced the default report. Default reports remain ignored, including the last passing HTML report in `playwright-report/`. Runtime output was inspected in `/tmp/coronabingo-ui-final-{build,ci,dev,fresh}.log`; these paths are local evidence, not committed artifacts.
+
+No task server remains running, no emulator records were exported, and no hosted Firebase data was created. The existing unrelated local server was left alone. This record and the implementation are committed together on the task branch; push, merge and deployment are outside this handoff.

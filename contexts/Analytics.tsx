@@ -19,7 +19,7 @@ const AnalyticsContextProvider = ({ children }: Props) => {
     eventName: string,
     eventParams: Partial<firebase.analytics.EventParams>,
   ) => {
-    analytics.logEvent(eventName, eventParams)
+    analytics?.logEvent(eventName, eventParams)
   }
 
   return (

@@ -104,7 +104,11 @@ export default function Tickets({ player, room, updatePlayer }: Props) {
   return (
     <Fragment>
       {tickets.map((ticket, i) => (
-        <div key={i} className={classnames([i !== 0 && 'mt-4'])}>
+        <div
+          key={i}
+          data-testid="bingo-card"
+          className={classnames([i !== 0 && 'mt-4'])}
+        >
           <Box>
             <p className="font-semibold uppercase">
               {t('common:ticket', { count: 1, ticketId: ticket.id })}
