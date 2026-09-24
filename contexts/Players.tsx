@@ -5,6 +5,8 @@ import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
 import { roomsRef } from '~/utils/firebase'
 
+const playerListRoutes = ['/room/[roomId]', '/room/[roomId]/admin']
+
 const PlayersContext = createContext<PlayersContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
   setPlayers: () => void 0,
@@ -17,6 +19,7 @@ interface Props {
 const PlayersContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
+  const shouldListenToPlayers = playerListRoutes.includes(router.pathname)
   const [state, setState] = useState<RemoteData<Error, Player[]>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
@@ -35,7 +38,15 @@ const PlayersContextProvider = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    if (!roomId) return
+    if (!roomId || !shouldListenToPlayers) {
+      setState(prevState =>
+        prevState.type === REMOTE_DATA.NOT_ASKED
+          ? prevState
+          : { type: REMOTE_DATA.NOT_ASKED },
+      )
+
+      return
+    }
 
     setState({ type: REMOTE_DATA.LOADING })
 
@@ -65,7 +76,7 @@ const PlayersContextProvider = ({ children }: Props) => {
           console.error(error)
         },
       )
-  }, [roomId])
+  }, [roomId, shouldListenToPlayers])
 
   return (
     <PlayersContext.Provider

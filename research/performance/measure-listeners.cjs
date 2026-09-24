@@ -12,6 +12,12 @@ const cases = [
   ['setup', '/room/[roomId]/admin', { roomId: 'test-room' }],
   ['cards', '/room/[roomId]/[playerId]', { roomId: 'test-room', playerId: 'test-player' }],
 ]
+const expectedRegistrations = {
+  home: [],
+  lobby: ['doc:test-room', 'collection:test-room/players'],
+  setup: ['doc:test-room', 'collection:test-room/players'],
+  cards: ['doc:test-room', 'doc:test-room/players/test-player'],
+}
 const results = cases.map(([screen, pathname, query]) => {
   const registrations = []
   const cleanups = []
@@ -56,7 +62,20 @@ const results = cases.map(([screen, pathname, query]) => {
   return { screen, registrations, unsubscribeCalls }
 })
 console.log(JSON.stringify({ method: 'Actual providers, mocked dependencies, initial mount and cleanup only', results }, null, 2))
-if (process.argv.includes('--expect-scoped') && results.find(r => r.screen === 'cards').registrations.some(r => r.startsWith('collection:'))) {
-  console.error('FAIL: cards still subscribes to the full player collection')
-  process.exitCode = 1
+if (process.argv.includes('--expect-scoped')) {
+  for (const result of results) {
+    const expected = expectedRegistrations[result.screen]
+    if (JSON.stringify(result.registrations) !== JSON.stringify(expected)) {
+      console.error(
+        `FAIL: ${result.screen} registered ${JSON.stringify(result.registrations)}; expected ${JSON.stringify(expected)}`,
+      )
+      process.exitCode = 1
+    }
+    if (result.unsubscribeCalls !== expected.length) {
+      console.error(
+        `FAIL: ${result.screen} cleaned up ${result.unsubscribeCalls} listeners; expected ${expected.length}`,
+      )
+      process.exitCode = 1
+    }
+  }
 }

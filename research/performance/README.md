@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01 y PERF-02. Sus implementaciones y verificaciones locales están completas; publicación pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-04. Su implementación y verificación local están completas; publicación pendiente. Los estados de los demás tickets se conservan y no se modificaron cuentas.
 
 ## Línea base posterior al push
 
@@ -25,14 +25,14 @@ La portada y los assets muestreados dieron `X-Vercel-Cache: HIT`. JS/CSS con has
 
 ## Tickets y orden sugerido
 
-PERF-01 y PERF-02 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
+PERF-01, PERF-02 y PERF-04 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
 
 | Orden | Ticket | Resultado esperado | Esfuerzo orientativo |
 | --- | --- | --- | --- |
 | Hecho local | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado, sin publicar |
 | Hecho local | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado, sin publicar |
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
-| 4 | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Quitar una consulta de colección por pestaña de cartones; conservar sala y jugador | 0,5–1 día |
+| Hecho local | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado, sin publicar |
 | 5 | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Diferir un chunk de 29,9 KB en la sala; 0 KB de ahorro en portada | 0,5 día |
 | 6 | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Diferir hasta unos 7,8 KB en portada, cerca de 2%; confirmar dependencias compartidas | 0,5 día |
 | 7 | [PERF-07: GIF de coronavirus](tickets/PERF-07-gif.md) | Objetivo experimental: 50–80% menos en ese archivo; calidad pendiente | 0,5 día |
@@ -56,6 +56,7 @@ Para código de producto, usar los validadores vigentes, `npm run lint:check` y 
 - [Inventario local de medios](assets-2026-09-23.json), generado con `ffprobe`; no se codificaron alternativas.
 - [Registro de listeners aislado](listeners-2026-09-23.json). Ejecuta providers reales con React/router/Firestore simulados, sin tráfico ni facturación.
 - [Comparación local y verificación de PERF-02](perf02-evidence/README.md).
+- [Comparación local y verificación de PERF-04](perf04-evidence/README.md).
 
 Desde la raíz:
 
@@ -64,7 +65,7 @@ python3 research/performance/measure-production.py > /tmp/coronabingo-performanc
 node research/performance/measure-listeners.cjs --expect-scoped
 ```
 
-El segundo comando se ejecutó y falla actualmente con `FAIL: cards still subscribes to the full player collection`. Esa es la señal enfocada de PERF-04, no una regresión creada por esta entrega. El script deberá adaptarse si cambian la composición de providers o sus imports; el criterio funcional permanece.
+El segundo comando pasa tras PERF-04 y exige la matriz completa: inicio 0, sala 2, configuración 2 y cartones 2. También comprueba un cleanup por cada listener registrado. El script deberá adaptarse si cambian la composición de providers o sus imports; el criterio funcional permanece.
 
 Los tamaños normalizados comprimen cada recurso con gzip nivel 9, independientemente de cómo lo sirva Vercel. `wire_body_bytes` guarda el cuerpo HTTP recibido por separado. Se cuentan scripts explícitos del HTML, excluyendo `nomodule`; no anuncios, Analytics, módulos que se descarguen después ni source maps. El probe solicita también chunks de otras rutas para inspeccionarlos, pero no los suma a la portada. No ejecuta JavaScript del sitio. No es una traza de navegador, Lighthouse ni medición de LCP/INP/CLS. Los bytes de fuentes en un source map no son bytes de transferencia.
 

@@ -198,3 +198,9 @@ The test now reads the two assigned ticket IDs from the room lobby and checks th
 `ANALYZE_BUNDLE=1 npm run ui-tests:production` rebuilt the app, validated locales and passed the complete Chromium journey in 10.4 seconds. The test URL was `http://127.0.0.1:3187`; Firebase target was local `demo-coronabingo-ui`, with Firestore at `127.0.0.1:8187`. Services and the test lock were removed after the run. No hosted Firebase data, Preview or Production environment was exercised.
 
 PERF-02's route-bundle measurements and implementation evidence remain in [its task record](performance/perf02-evidence/README.md).
+
+### 2026-09-24: PERF-04 listener lifecycle coverage
+
+PERF-04 added a browser-history step to the existing host/player journey. After both participants opened their assigned cards, the host returned to the room through browser history, saw both participant rows, moved forward again and recovered the same assigned cards and host controls. The later restart still returned the host to setup and dealt a new game while the other player stayed synchronized.
+
+`npm run ui-tests -- tests/ui/room.spec.ts` passed in development. The final production run reused an isolated build and passed against a freshly owned Firestore Emulator at `demo-coronabingo-ui`; Playwright reported one passing test in 2.4 seconds. An earlier production browser run was discarded because a concurrent worktree acquired the fixed emulator ports during this worktree's build. No hosted Firebase data, Preview or Production environment was exercised. Details remain in [PERF-04's evidence](performance/perf04-evidence/README.md).

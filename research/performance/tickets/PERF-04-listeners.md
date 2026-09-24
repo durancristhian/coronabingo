@@ -2,6 +2,9 @@
 
 Estado: diagnosticado y reproducido de forma aislada; pendiente de implementación. Prioridad alta. Esfuerzo: 0,5–1 día. Riesgo medio. Sin dependencia de tickets de assets.
 
+Status: ready-for-agent
+Work status: resolved
+
 ## Diagnóstico
 
 `contexts/index.tsx` monta los providers globalmente. `contexts/Players.tsx` abre `rooms/{roomId}/players` con cualquier `roomId`. La pantalla de cartones consume sala y jugador individual, pero no la lista colectiva. Lobby y configuración sí consumen `usePlayers`.
@@ -31,3 +34,13 @@ Se elimina una consulta de colección por pestaña de cartones, pasando de 3 a 2
 - Checks comunes del [índice](../README.md).
 
 Rollback: restaurar activación global de la lista; no requiere migración de datos. [Referencia de Firestore](https://firebase.google.com/docs/firestore/query-data/listen).
+
+## Comments
+
+- 2026-09-24: el usuario autorizó implementar, publicar y comprobar el ticket. El seam enfocado se amplió antes del cambio y falló porque cartones todavía registraba y limpiaba tres listeners. La implementación se limitó al efecto colectivo y añadió cobertura de atrás/adelante al recorrido de navegador.
+
+## Answer
+
+Implementado localmente el 24 de septiembre de 2026. `PlayersContextProvider` usa el patrón de ruta de Pages Router para activar la colección únicamente en sala y configuración. Mantiene el provider global, limpia el estado al desactivarse y conserva sin cambios los listeners de sala y jugador individual.
+
+La medición enfocada pasó con 0 listeners en inicio, 2 en sala, 2 en configuración y 2 en cartones. La regresión de producción contra Firestore Emulator confirmó creación, configuración, sala, cartones, atrás/adelante, entrada directa, sincronización, recarga y reinicio con anfitrión y jugador independientes. Los comandos, resultados y límites están en [la evidencia de PERF-04](../perf04-evidence/README.md).

@@ -112,6 +112,23 @@ test('host and player create, play, reload and restart a room', async ({
     },
   )
 
+  await test.step(
+    'Browser history restores the lobby and the same assigned cards',
+    async () => {
+      await host.goBack()
+      await expect(
+        host.getByRole('heading', { name: 'Información de la sala' }),
+      ).toBeVisible()
+      await expect(host.getByTestId('player-row')).toHaveCount(2)
+
+      await host.goForward()
+      await expectAssignedCards(host, names.host, hostTicketIds)
+      await expect(
+        host.getByRole('button', { name: 'Próximo número' }),
+      ).toBeVisible()
+    },
+  )
+
   await test.step('Direct entry shows the same assigned cards', async () => {
     await player.goto(playerURL)
     await expectAssignedCards(player, names.player, playerTicketIds)
