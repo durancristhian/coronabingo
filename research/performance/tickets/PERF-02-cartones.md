@@ -3,7 +3,7 @@
 Estado: diagnosticado, pendiente de implementación. Prioridad alta. Esfuerzo: 0,5 día. Riesgo bajo. Independiente de PERF-01.
 
 Status: ready-for-agent
-Work status: claimed
+Work status: resolved
 
 ## Diagnóstico
 
@@ -32,6 +32,7 @@ Rollback: volver a la relación de imports anterior, preservando el catálogo or
 ## Comments
 
 - 2026-09-24: el usuario autorizó implementar el ticket. La revisión posterior al primer commit pidió registrar la ejecución en el plan canónico de Playwright y comprobar los IDs exactos de anfitrión y jugador después de entrada directa, recarga y reinicio. Se reabrió el trabajo para cerrar esos puntos antes del handoff.
+- 2026-09-24: la comprobación ampliada pasó sobre `4a0c8ca`; se registraron la revisión candidata, la URL y el entorno en los documentos canónicos, y se volvió a resolver el ticket.
 
 ## Answer
 

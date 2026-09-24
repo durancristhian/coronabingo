@@ -1,6 +1,6 @@
 {
   "base_revision": "f6e789e588acc505dc37c44b3b9c040a8e6a97b3",
-  "candidate": "PERF-02 working tree before final commit",
+  "candidate_revision": "4a0c8ca4e2732e9303e43c8c9513e00317a8e747",
   "environment": "UI_TESTS=1 production build in .next-ui-tests",
   "method": "Unique modern JavaScript from the build manifest per route, compressed with gzip level 9. Catalog presence requires the exact 151921-byte minified JSON literal.",
   "catalog_sha256": {

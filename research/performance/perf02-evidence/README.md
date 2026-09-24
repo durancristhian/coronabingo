@@ -1,6 +1,6 @@
 # Evidencia de PERF-02
 
-Verificación local del 24 de septiembre de 2026. La base y el candidato usaron Node 24.21.0, npm 11.19.0, Webpack y la configuración aislada de pruebas de UI. No se creó ni modificó `.env`, y no hubo tráfico a Firebase alojado.
+Verificación local del 24 de septiembre de 2026 sobre `4a0c8ca4e2732e9303e43c8c9513e00317a8e747`, en la rama `t3code/optimize-cartones-performance` y este worktree. La base y el candidato usaron Node 24.21.0, npm 11.19.0, Webpack y la configuración aislada de pruebas de UI. El recorrido abrió `http://127.0.0.1:3187` y usó `demo-coronabingo-ui` en Firestore Emulator, `127.0.0.1:8187`. No se creó ni modificó `.env`, y no hubo tráfico a Firebase alojado.
 
 ## Resultado
 
@@ -27,5 +27,5 @@ El SHA-256 de `public/tickets.json` fue `1becf3e8f17eb9202fce21c6974bd85e32e2830
 - `ANALYZE_BUNDLE=1 npm run ui-tests:build` pasó y produjo el build candidato en `.next-ui-tests`.
 - `npm run ui-tests:ci` pasó el recorrido completo en Chromium contra el emulador local de Firestore.
 - `npm run lint:check` y `npm run validate-tickets` pasaron en el gate final.
-- `ANALYZE_BUNDLE=1 npm run ui-tests:production` volvió a generar el build, validó locales y pasó el recorrido completo con la comprobación de entrada directa.
+- `ANALYZE_BUNDLE=1 npm run ui-tests:production` volvió a generar el build, validó locales y pasó en 10,4 segundos el recorrido completo con los IDs exactos de anfitrión y jugador tras entrada directa, recarga y reinicio.
 - `git diff --check` pasó. No se verificó Preview ni Production.
