@@ -19,13 +19,23 @@ if (firebase.apps.length) {
   firebaseApp = firebase.initializeApp(firebaseConfig)
 }
 
-let analytics: firebase.analytics.Analytics
+const uiTests = process.env.UI_TESTS === '1'
+let analytics: firebase.analytics.Analytics | undefined
 
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && !uiTests) {
   analytics = firebaseApp.analytics()
 }
 
 const db = firebaseApp.firestore()
+if (uiTests) {
+  if (
+    process.env.PROJECT_ID !== 'demo-coronabingo-ui' ||
+    process.env.FIRESTORE_EMULATOR_HOST !== '127.0.0.1:8187'
+  ) {
+    throw new Error('UI tests require the local demo Firestore emulator.')
+  }
+  db.settings({ host: process.env.FIRESTORE_EMULATOR_HOST, ssl: false })
+}
 
 const { Timestamp } = firebase.firestore
 

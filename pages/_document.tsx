@@ -49,13 +49,14 @@ export default class extends Document {
             </Fragment>
           )}
           {/** Google AdSense */}
-          {process.env.NODE_ENV === 'production' && (
-            <script
-              data-ad-client="ca-pub-6231280485856921"
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-            />
-          )}
+          {process.env.NODE_ENV === 'production' &&
+            process.env.UI_TESTS !== '1' && (
+              <script
+                data-ad-client="ca-pub-6231280485856921"
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+              />
+            )}
         </Head>
         <body className="font-sans leading-normal text-gray-900 text-sm md:text-base">
           <Main />

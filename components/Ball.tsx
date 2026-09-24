@@ -9,7 +9,7 @@ interface Props {
 export default memo(function Ball({ index, number }: Props) {
   return (
     <Pelotita index={index}>
-      <div className="ball">
+      <div className="ball" data-testid="called-number">
         <span>{number}</span>
       </div>
     </Pelotita>
