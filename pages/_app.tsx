@@ -21,11 +21,12 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   })
 }
 
-if (process.env.GA_TRACKING_ID) {
-  Router.events.on('routeChangeComplete', url => pageview(url))
-}
-
 export default class Coronabingo extends App {
+  private trackPageview = (url: string) => {
+    // Let next/head commit the destination title before recording the view.
+    window.requestAnimationFrame(() => pageview(url))
+  }
+
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (process.env.NODE_ENV === 'production') {
       Sentry.withScope(scope => {
@@ -40,6 +41,13 @@ export default class Coronabingo extends App {
 
   componentDidMount() {
     console.log(`v${version}`)
+    if (process.env.GA_TRACKING_ID) {
+      Router.events.on('routeChangeComplete', this.trackPageview)
+    }
+  }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeComplete', this.trackPageview)
   }
 
   render() {

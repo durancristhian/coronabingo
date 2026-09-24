@@ -29,6 +29,25 @@ export default class extends Document {
               content="EmqI8hufGnrAf3Liky84ItzkmjJejzCk382djGct8HA"
             />
           )}
+          {/** Google Analytics: queue configuration before loading ad scripts. */}
+          {process.env.GA_TRACKING_ID && (
+            <Fragment>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.GA_TRACKING_ID}');
+                  `,
+                }}
+              />
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
+              />
+            </Fragment>
+          )}
           {/** Google AdSense */}
           {process.env.NODE_ENV === 'production' && (
             <script
@@ -36,27 +55,6 @@ export default class extends Document {
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             />
-          )}
-          {/** Google Tag Manager / Google Analytics */}
-          {process.env.GA_TRACKING_ID && (
-            <Fragment>
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                    });
-                  `,
-                }}
-              />
-            </Fragment>
           )}
         </Head>
         <body className="font-sans leading-normal text-gray-900 text-sm md:text-base">
