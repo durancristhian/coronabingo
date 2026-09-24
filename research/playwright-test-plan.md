@@ -188,3 +188,13 @@ The owner authorized publishing the branch and opening a PR to validate the full
 - The Vercel deployment check also passed. This establishes preview deployment success, not gameplay verification against hosted Firebase. The automated journey ran only against the local emulator inside CI.
 
 The PR remains open for review. No merge or Production deployment was requested or performed.
+
+### 2026-09-24: PERF-02 exact ticket assignment coverage
+
+PERF-02 extended the existing journey at revision `4a0c8ca4e2732e9303e43c8c9513e00317a8e747` on branch `t3code/optimize-cartones-performance`, in worktree `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-5108c082`.
+
+The test now reads the two assigned ticket IDs from the room lobby and checks those exact IDs for both host and player after direct URL entry, reload and the new deal after restart. It still avoids fixed random IDs; the lobby assignment from each run is the source of truth.
+
+`ANALYZE_BUNDLE=1 npm run ui-tests:production` rebuilt the app, validated locales and passed the complete Chromium journey in 10.4 seconds. The test URL was `http://127.0.0.1:3187`; Firebase target was local `demo-coronabingo-ui`, with Firestore at `127.0.0.1:8187`. Services and the test lock were removed after the run. No hosted Firebase data, Preview or Production environment was exercised.
+
+PERF-02's route-bundle measurements and implementation evidence remain in [its task record](performance/perf02-evidence/README.md).

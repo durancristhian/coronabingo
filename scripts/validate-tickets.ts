@@ -4,10 +4,15 @@ const { readFileSync } = require('fs')
 const { join } = require('path')
 
 const MAX_COINCIDES_ALLOWED = 10
+const TICKETS_PER_PLAYER = 2
 
 type Ticket = (number | null)[]
 type TicketNumbers = number[]
 type Tickets = Ticket[]
+type TicketsMetadata = {
+  ticketCount: number
+  maxPlayers: number
+}
 
 const excludeEmpty = (tickets: Tickets): TicketNumbers[] =>
   // @ts-ignore
@@ -16,7 +21,32 @@ const excludeEmpty = (tickets: Tickets): TicketNumbers[] =>
   })
 
 const ticketsPath = join(__dirname, '../public', 'tickets.json')
-const tickets = JSON.parse(readFileSync(ticketsPath, 'utf-8'))
+const ticketsMetadataPath = join(
+  __dirname,
+  '../public',
+  'tickets-metadata.json',
+)
+const tickets: Tickets = JSON.parse(readFileSync(ticketsPath, 'utf-8'))
+const ticketsMetadata: TicketsMetadata = JSON.parse(
+  readFileSync(ticketsMetadataPath, 'utf-8'),
+)
+
+assert.equal(
+  ticketsMetadata.ticketCount,
+  tickets.length,
+  'Ticket metadata count must match the catalog',
+)
+assert.equal(
+  tickets.length % TICKETS_PER_PLAYER,
+  0,
+  `Ticket catalog must contain ${TICKETS_PER_PLAYER} tickets per player`,
+)
+assert.equal(
+  ticketsMetadata.maxPlayers,
+  tickets.length / TICKETS_PER_PLAYER,
+  'Ticket metadata capacity must match the catalog',
+)
+
 const ticketsOnlyNumbers = excludeEmpty(tickets)
 
 /*
