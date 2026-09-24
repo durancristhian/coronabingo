@@ -2,6 +2,9 @@
 
 Estado: diagnosticado, pendiente de implementación. Prioridad media. Esfuerzo: 0,5 día. Riesgo bajo a medio. Independiente de novedades.
 
+Status: ready-for-agent
+Work status: claimed
+
 ## Diagnóstico
 
 `components/DownloadSpreadsheet.tsx` importa `zipcelx` estáticamente. La ruta `pages/room/[roomId].tsx` importa ese componente aunque lo monte solamente cuando `isActive` habilita la opción oculta. El chunk publicado `735` contiene `zipcelx`/`jszip`: 104.717 bytes sin comprimir y 29.861 gzip. [Baseline](../baseline-2026-09-23.json).
@@ -20,3 +23,7 @@ Importar la biblioteca o componente bajo demanda; precargar cuando el usuario ha
 - Registrar bytes de entrada a sala y primera exportación por separado. Cumplir checks comunes del [índice](../README.md).
 
 Rollback: restaurar el import estático. No cambiar la dependencia ni actualizar Firebase en este ticket.
+
+## Comments
+
+- 2026-09-24: el usuario autorizó implementar PERF-05, agregar una regresión Playwright para la exportación y, después de la verificación local, publicar la rama y abrir un pull request. La revisión del PR y sus checks forma parte del alcance; merge y Production no están autorizados.
