@@ -230,7 +230,29 @@ test('host and player create, play, reload and restart a room', async ({
       await expect
         .poll(() => readPlayedSounds(player))
         .toContainEqual(expect.stringContaining(soundPath))
-      await host.keyboard.press('Escape')
+      await host
+        .getByRole('dialog', { name: 'Sonidos' })
+        .locator('#close-modal')
+        .click()
+    },
+  )
+
+  await test.step(
+    'A host celebration option synchronizes to both participants',
+    async () => {
+      await host.locator('#celebrations:visible').click()
+      const dialog = host.getByRole('dialog', { name: 'Festejos' })
+      await dialog
+        .getByRole('button', { name: 'Activar confetti', exact: true })
+        .click()
+      await expect(host.locator('.confetti-base')).toHaveCount(20)
+      await expect(player.locator('.confetti-base')).toHaveCount(20)
+      await dialog
+        .getByRole('button', { name: 'Desactivar confetti', exact: true })
+        .click()
+      await expect(host.locator('.confetti-base')).toHaveCount(0)
+      await expect(player.locator('.confetti-base')).toHaveCount(0)
+      await dialog.locator('#close-modal').click()
     },
   )
 
@@ -332,6 +354,26 @@ test('host and player create, play, reload and restart a room', async ({
       ).toBeVisible()
       await expect(host.getByText(names.host, { exact: true })).toHaveCount(0)
       await expect(host.getByText(names.player, { exact: true })).toHaveCount(0)
+    },
+  )
+
+  await test.step(
+    'Deleting a persisted player updates their open card view',
+    async () => {
+      await navigateWithNextRouter(host, `${lobbyURL}/admin`)
+      await expect(
+        host.getByRole('heading', { name: 'Preparar sala' }),
+      ).toBeVisible()
+      const playerRow = host
+        .locator('#players-list > div')
+        .filter({ hasText: names.player })
+      await expect(playerRow).toHaveCount(1)
+      await playerRow.getByRole('button', { name: 'Eliminar persona' }).click()
+      await expect(player.getByText('Ocurrió un error.')).toBeVisible()
+      await expect(player.getByTestId('bingo-card')).toHaveCount(0)
+      await expect(
+        host.locator('#players-list').getByText(names.player, { exact: true }),
+      ).toHaveCount(0)
     },
   )
 })

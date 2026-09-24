@@ -38,7 +38,7 @@ Rollback: restaurar activación global de la lista; no requiere migración de da
 ## Comments
 
 - 2026-09-24: el usuario autorizó implementar, publicar y comprobar el ticket. El seam enfocado se amplió antes del cambio y falló porque cartones todavía registraba y limpiaba tres listeners. La implementación se limitó al efecto colectivo y añadió cobertura de atrás/adelante al recorrido de navegador.
-- 2026-09-24: la revisión previa al PR detectó que la primera versión descartaba participantes aún no guardados al salir de configuración. Se reprodujo en navegador, se corrigió conservando borradores por sala y se amplió la cobertura a eliminación, sonidos, cambio de sala y aislamiento de estado.
+- 2026-09-24: la revisión previa al PR detectó que la primera versión descartaba participantes aún no guardados al salir de configuración. Se reprodujo en navegador, se corrigió conservando borradores por sala y se amplió la cobertura a eliminación persistida, festejos, sonidos, cambio de sala y aislamiento de estado.
 
 ## Answer
 
