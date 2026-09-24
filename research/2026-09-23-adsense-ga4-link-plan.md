@@ -1,5 +1,10 @@
 # Plan para vincular AdSense con Coronabingo - GA4
 
+Status: ready-for-agent
+Work status: claimed
+
+**Actualización de ejecución, 23 de septiembre de 2026, 23:27 ART:** el usuario autorizó implementar. La etiqueta directa está publicada y el vínculo está confirmado en ambas consolas. La tarea permanece abierta por verificación de ingresos e impresiones. Ver el registro al final y la [evidencia de implementación](2026-09-23-adsense-ga4-implementation-evidence.json). Los apartados de investigación conservan las observaciones y decisiones anteriores.
+
 Investigación, segunda revisión y revalidación posterior a Search Console realizadas el 23 de septiembre de 2026. Estado de este plan: propuesto, sin ejecutar. Se consultaron las consolas autenticadas, el código local, recursos públicos de producción y documentación oficial. Se abrió el selector de propiedades de AdSense y se canceló sin seleccionar ni crear una vinculación. Durante estas revisiones no se modificaron cuentas, etiquetas, variables, código del producto ni despliegues. La implementación de Search Console se realizó por separado y ya está reflejada aquí.
 
 El resultado buscado es ver impresiones e ingresos reales de AdSense en la propiedad `385744187`, con evidencia de recepción y continuidad. Una vinculación activa será un paso intermedio.
@@ -131,16 +136,16 @@ La configuración de consentimiento no se debe modificar para forzar una prueba 
 
 ## Criterios de aceptación y registro
 
-- [ ] El HTML de producción configura directamente `G-WYG7FMEWEF` y las solicitudes llegan al destino correcto en un contexto sin interferencias.
-- [ ] No hay vistas duplicadas en el flujo objetivo en la carga inicial y la navegación probada.
-- [ ] Firebase sigue asociado a `226709381`; se conservó su instrumentación existente.
-- [ ] El vínculo visible en ambos productos une `pub-6231280485856921` con `385744187`.
+- [x] El HTML de producción configura directamente `G-WYG7FMEWEF` y las solicitudes llegan al destino correcto en un contexto sin interferencias.
+- [x] No hay vistas duplicadas en el flujo objetivo en la carga inicial y la navegación probada.
+- [x] Se conservó la asociación Firebase previamente verificada a `226709381`, sin escribir en esa configuración; su instrumentación `G-PR7XZB4T8W` sigue enviando vistas en producción.
+- [x] El vínculo visible en ambos productos une `pub-6231280485856921` con `385744187`.
 - [ ] Se guardaron impresiones publicitarias mayores que cero e ingresos publicitarios mayores que cero, posteriores a T0 y atribuibles al editor correcto.
 - [ ] Una segunda observación confirma datos de al menos un nuevo día completo.
 - [ ] Se comparó un intervalo consolidado con AdSense y se documentaron las diferencias y cualquier limitación material.
 - [ ] No quedan discrepancias amplias sin investigar ni validaciones pendientes presentadas como aprobadas.
 
-Para cada revisión guardar: fecha de consulta, T_tag, T_link, T0, período, zona horaria, moneda, IDs, filtros, métricas de ambas plataformas, diferencias, capturas o CSV, resultado y próxima acción. Un registro de valores redactado a mano debe distinguirse de una exportación de Google. El archivo de evidencia inicial no contiene pruebas posteriores a una vinculación porque todavía no existe.
+Para cada revisión guardar: fecha de consulta, T_tag, T_link, T0, período, zona horaria, moneda, IDs, filtros, métricas de ambas plataformas, diferencias, capturas o CSV, resultado y próxima acción. Un registro de valores redactado a mano debe distinguirse de una exportación de Google. El archivo de evidencia inicial conserva el estado anterior al vínculo; el archivo de implementación registra las comprobaciones posteriores.
 
 ## Recuperación si algo sale mal
 
@@ -200,3 +205,42 @@ La revisión de las 22:40 ART mantiene la recomendación de implementar este pla
 Se eliminó del trabajo pendiente la actualización de URL ya realizada. Se añadió preservación explícita de Search Console, despliegue aislado, recuperación independiente de variables y vínculo, límite Hobby y alternativa de reversión de código si se pierde la elegibilidad. Los criterios de cierre siguen exigiendo impresiones e ingresos reales, continuidad y conciliación posterior.
 
 El registro separado de Search Console documenta recepción adicional de `page_view` tras una recarga del usuario desde incógnito. Esa observación refuerza que el flujo elegido recibe tráfico; no demuestra por sí sola entrega de eventos publicitarios ni una captura de red sin interferencias. Ver [comprobaciones de Search Console](2026-09-23-search-console-preflight.md).
+
+## Ejecución autorizada y seguimiento
+
+El usuario autorizó los cambios con "ok, vamos adelante con los cambios de esta tarea". La implementación inicial está en el commit `ef582b7`. Se cambió exclusivamente la variable sensible `GA_TRACKING_ID` de Production a `G-WYG7FMEWEF`, conservando Preview y Firebase. Vercel no devuelve el valor sensible anterior descifrado; el valor efectivo de recuperación `UA-161408428-1` se comprobó en el HTML de producción antes del cambio.
+
+Se conservaron el script, editor y bloque de AdSense y la verificación de Search Console. La configuración GA4 se encola antes de cargar los scripts asíncronos de Analytics y anuncios. La vista inicial procede de `config`; las navegaciones emiten `page_view` dirigido al destino elegido, con URL, título y referencia. El helper omite transiciones a la misma URL y conserva el comportamiento UA de otros entornos. El listener del router se registra al montar y se retira al desmontar.
+
+El despliegue inicial `dpl_HN5MoCPZormST4jxSnVJEahPyQ6T` quedó Ready. En Chrome, después de que el usuario desactivara bloqueadores para el sitio, se observaron respuestas HTTP 204 para una vista inicial de `/` y una navegación a `/en` en `G-WYG7FMEWEF`, sin duplicación en esa secuencia. También se recibió la vista inicial en `G-PR7XZB4T8W`. AdSense respondió 200 y aparecieron espacios con `data-ad-status=filled`; otros estaban sin relleno. Eso demuestra funcionamiento técnico, no un ingreso acreditado. No hubo clics en anuncios ni eventos publicitarios artificiales.
+
+Durante las pruebas ampliadas de atrás/adelante se observó una vista con el título del idioma anterior. Se ajustó el envío para esperar el efecto de `next/head` después del primer pintado. Un capturador temporal local, sin envío a Google, confirmó una vista por cambio de idioma, título español/inglés correcto y referencia anterior correcta. La compilación y lint volvieron a pasar después del ajuste. El capturador se retira al cerrar la pestaña de prueba.
+
+La vinculación se creó desde GA4 el **23 de septiembre de 2026 a las 23:26:46 ART**, equivalente a `2026-09-24T02:26:46.655Z`. GA4 confirmó "Vinculación creada correctamente" para `pub-6231280485856921`, AdSense para contenido. AdSense confirmó `Coronabingo - GA4`, propiedad `385744187`. Se toma ese instante como `T0`, posterior a la validación inicial de la etiqueta. No se alteraron Search Console, la asociación Firebase ni permisos.
+
+El informe se encuentra en **Publicidad → Publicación → Anuncios del editor**. Se abrió el 23 de septiembre, con dimensión **Fuente del anuncio**, sin filtros: 0 impresiones, USD 0,00 y "No hay datos disponibles". Se consultó minutos después del vínculo y abarca un día parcial mayormente anterior a T0. No se interpreta como fallo ni como prueba de recepción publicitaria. Los informes aún deben mostrar el editor correcto y valores positivos.
+
+### Revisiones pendientes
+
+Responsable de implementación: Codex en esta sesión. Responsable de reabrir el seguimiento: Cristhian; Codex puede realizar las consultas cuando se reanude esta tarea. No hay automatización ni recordatorio programado y no habrá ejecución autónoma después de esta sesión.
+
+| Fecha, hora argentina | Comprobación y decisión |
+| --- | --- |
+| 24 de septiembre, después de 23:27; por comodidad, 25 de septiembre por la mañana | Primera revisión: impresiones e ingresos de AdSense posteriores a T0 y presencia en GA4. Registrar editor, flujo, fechas, USD, filtros y capturas o exportación. |
+| 26 de septiembre, después de 23:27 | Si AdSense tiene actividad positiva y GA4 sigue sin datos ya procesados, iniciar diagnóstico de la integración. No desvincular automáticamente. |
+| 29 de septiembre | Comparar días completos 24, 25 y 26; ya transcurrieron 48 horas desde el cierre del día 26. Conciliar AdSense por sitio y GA4 por fuente publicitaria, con el mismo corte UTC-3 y USD. |
+| 30 de septiembre | Repetir incluyendo el día 27 para demostrar continuidad. Cerrar solo con impresiones e ingresos mayores que cero y discrepancias explicadas. |
+
+### Validación técnica y entorno
+
+Pasaron `npm run lint:check`, `GA_TRACKING_ID=G-WYG7FMEWEF npm run build`, la validación de idiomas incluida en prebuild y pruebas aisladas del helper: vista inicial sin repetición, destino explícito, query string, referencia anterior, navegación atrás y ausencia de error cuando falta `gtag`. La consulta de errores de Vercel para el despliegue inicial devolvió "No logs found"; no equivale a cobertura continua de monitoreo.
+
+La prueba funcional se realizó en `http://localhost:3107`, Firebase `coronabingo-dev`, con sala propia `yeZ5sUAPiVtJhlDgqD49`, nombre `QA GA4 2026-09-23` y dos participantes sintéticos. Se comprobaron creación, configuración, lobby, cartones, idioma y navegación. Se bloquearon peticiones locales de anuncios y recolección. La evidencia local es la cola de eventos, mientras que la recepción HTTP 204 se probó aparte en producción. Se conserva la sala de desarrollo como registro de prueba; no se escribieron salas de producción.
+
+La primera implementación se hizo en el checkout principal, antes de la incorporación concurrente de las reglas de worktrees. La corrección de título y este registro se prepararon en `codex/adsense-ga4`, `/Users/durancristhian/Repos/coronabingo-worktrees/adsense-ga4`, con instalación y build propios. Node 24.21.0 y npm 11.19.0 en las verificaciones finales. Se preservaron los documentos de otras tareas.
+
+### Recuperación actualizada
+
+La referencia previa a toda esta tarea fue `dpl_WADSHvUBXxBrMHcVEwciAfJYSP8U`, commit `215deb3`. Hubo después una publicación concurrente de documentación, commit `d92a9fb`, despliegue `dpl_95M9qH73ZYW3BEZBap7LcyTViZ5h`, que ya contiene la etiqueta GA4. **El comando antiguo del plan no debe ejecutarse sin revalidar elegibilidad.**
+
+En Hobby, el rollback inmediato regresa al despliegue anterior elegible y puede conservar la integración GA4. Para deshacer toda esta tarea, revertir solamente sus commits de código sobre la rama actual, restituir `GA_TRACKING_ID=UA-161408428-1` únicamente en Production y publicar una nueva versión validada. Preservar cambios concurrentes. Si hace falta quitar el vínculo, eliminar únicamente `pub-6231280485856921` ↔ `385744187`. No se ensayó ni fue necesario un rollback real; las limitaciones sobre datos perdidos y eventos existentes siguen vigentes.

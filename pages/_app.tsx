@@ -23,8 +23,10 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 
 export default class Coronabingo extends App {
   private trackPageview = (url: string) => {
-    // Let next/head commit the destination title before recording the view.
-    window.requestAnimationFrame(() => pageview(url))
+    // next/head updates in a passive effect; wait until after the first paint.
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => pageview(url))
+    })
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {

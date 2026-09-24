@@ -1,0 +1,108 @@
+{
+  "linked_at": "2026-09-24T02:26:46.655Z",
+  "analytics_url": "https://analytics.google.com/analytics/web/#/a161408428p385744187/reports/explorer?restoreUserState=true&params=_u..nav%3Dmaui%26_u..built_comparisons_enabled%3Dtrue%26_u.dateOption%3Dtoday%26_u.comparisonOption%3Ddisabled&ruid=publisher-ads-monetization&r=publisher-ads-monetization&collectionId=publisher-ads-section",
+  "adsense_url": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/settings/analytics",
+  "network": [
+    {
+      "host": "www.google-analytics.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-WYG7FMEWEF",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/robots.txt",
+      "referrer": null,
+      "title": "404: This page could not be found"
+    },
+    {
+      "host": "pagead2.googlesyndication.com",
+      "path": "/pagead/js/adsbygoogle.js",
+      "status": 200,
+      "measurement_id": null,
+      "event": null,
+      "page": null,
+      "referrer": null,
+      "title": null
+    },
+    {
+      "host": "www.google-analytics.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-WYG7FMEWEF",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/",
+      "referrer": null,
+      "title": "Coronabingo | Tu juego de Bingo Online"
+    },
+    {
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-PR7XZB4T8W",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/",
+      "referrer": null,
+      "title": "Coronabingo | Tu juego de Bingo Online"
+    },
+    {
+      "host": "www.google-analytics.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-WYG7FMEWEF",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/en",
+      "referrer": "https://coronabingo.com.ar/",
+      "title": "Coronabingo | Bingo online"
+    }
+  ],
+  "task_status": "implemented_pending_ad_revenue_verification",
+  "property_id": "385744187",
+  "stream_id": "5469366293",
+  "publisher_id": "pub-6231280485856921",
+  "initial_commit": "ef582b7",
+  "initial_deployment": "dpl_HN5MoCPZormST4jxSnVJEahPyQ6T",
+  "pre_change_deployment": "dpl_WADSHvUBXxBrMHcVEwciAfJYSP8U",
+  "pre_change_commit": "215deb3548c0ab3e18054f6f251273a9b2758c28",
+  "production_env": {
+    "id": "bP0ziCQFtsE7ooTV",
+    "key": "GA_TRACKING_ID",
+    "target": [
+      "production"
+    ],
+    "type": "sensitive",
+    "old_effective_value": "UA-161408428-1",
+    "old_value_source": "production HTML; sensitive Vercel value unavailable for decryption",
+    "new_value": "G-WYG7FMEWEF",
+    "preview_unchanged": true,
+    "firebase_unchanged": true
+  },
+  "baseline": {
+    "date_from": "2026-09-16",
+    "date_to": "2026-09-22",
+    "site": "coronabingo.com.ar",
+    "impressions": 2609,
+    "page_views": 932,
+    "estimated_revenue_usd": 0.81
+  },
+  "first_ga4_report": {
+    "date": "2026-09-23",
+    "dimension": "Fuente del anuncio",
+    "impressions": 0,
+    "ad_revenue_usd": 0,
+    "rows": 0,
+    "status": "No hay datos disponibles",
+    "interpretation": "First partial-day observation minutes after linking; not an acceptance result"
+  },
+  "local_test": {
+    "firebase_project": "coronabingo-dev",
+    "room_id": "yeZ5sUAPiVtJhlDgqD49",
+    "room_name": "QA GA4 2026-09-23",
+    "players": [
+      "QA player",
+      "QA player 2"
+    ],
+    "created_in_production": false,
+    "ad_and_collection_requests_blocked": true,
+    "network_proof": "local dataLayer only; actual g/collect 204 verified separately in production"
+  },
+  "rollback_exercised": false
+}
