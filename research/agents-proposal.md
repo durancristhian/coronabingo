@@ -1,3 +1,24 @@
+# Propuesta de AGENTS.md para Coronabingo
+
+Fecha: 2026-09-23
+
+Estado: aprobada por el usuario y aplicada en `AGENTS.md` el 2026-09-23. El bloque siguiente conserva la versión aprobada; las futuras actualizaciones se hacen en `AGENTS.md`.
+
+Revisé el [AGENTS.md de Alinear](https://github.com/durancristhian/alinear/blob/6c604296036ba8e02aca11880ca13bd04b78dcc7/AGENTS.md) mediante la API autenticada de GitHub y lo contrasté con el checkout actual de Coronabingo. La propuesta conserva el idioma del archivo original y de la documentación técnica del proyecto.
+
+Cambios respecto de Alinear:
+
+- Usa npm, Pages Router y Firestore. El seguimiento está en `research/`, con las convenciones que ya existen en `docs/agents/`.
+- Define cómo crear y cerrar worktrees con Git. Coronabingo todavía no tiene los scripts de runtime y worktrees de Alinear.
+- Usa los controles disponibles y contempla los efectos del hook de pre-commit. El plan de Playwright sigue pendiente de implementación.
+- Propone commits locales por cada unidad de trabajo verificada, dentro de una implementación autorizada. Push, merge y despliegue requieren autorización que cubra esa acción.
+- Conserva exactamente el bloque administrado por Next.js.
+
+Aprobar esta propuesta autoriza actualizar el documento. Los scripts de automatización de worktrees o una nueva suite de tests serían trabajos separados.
+
+## Contenido propuesto para AGENTS.md
+
+```markdown
 ## Project context
 
 - Coronabingo uses Next.js Pages Router, React, Webpack, and Firestore. Preserve these choices unless the task explicitly changes them.
@@ -58,3 +79,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Let pre-commit hooks run. Investigate failures instead of bypassing them. Review any hook changes and verify the resulting commit and remaining worktree status before handoff.
 - Push, merge into `main`, deployment, and history rewriting require user authorization covering that action. A push may trigger CI and Vercel; completing local work does not authorize a release. Reuse explicit authorization already given in the session.
 - Handoff should identify the branch/worktree, commits, completed checks, remaining acceptance gaps, and any running server or retained test data. Describe only the environments actually verified.
+```
+
+## Registro de aplicación
+
+- Aprobación del usuario: "si tiene sentido".
+- Se aplicó el contenido propuesto sin cambios en el bloque de Next.js.
+- Se verificaron las referencias locales, los scripts de npm y la igualdad entre la propuesta y el archivo aplicado. `git diff --check` pasó.
+- Cambio exclusivamente documental. No se ejecutaron checks de la aplicación.
