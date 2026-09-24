@@ -33,6 +33,7 @@ Rollback: volver a la relación de imports anterior, preservando el catálogo or
 
 - 2026-09-24: el usuario autorizó implementar el ticket. La revisión posterior al primer commit pidió registrar la ejecución en el plan canónico de Playwright y comprobar los IDs exactos de anfitrión y jugador después de entrada directa, recarga y reinicio. Se reabrió el trabajo para cerrar esos puntos antes del handoff.
 - 2026-09-24: la comprobación ampliada pasó sobre `4a0c8ca`; se registraron la revisión candidata, la URL y el entorno en los documentos canónicos, y se volvió a resolver el ticket.
+- 2026-09-24: el usuario aprobó los cambios y autorizó publicarlos. [PR #188](https://github.com/durancristhian/coronabingo/pull/188) quedó abierto contra `main`. En el head `73aa3f8298cea3b1c4ed1af01c91e04e8fc5c71a`, [GitHub Actions](https://github.com/durancristhian/coronabingo/actions/runs/35953883842) pasó instalación, lint/tipos, build, análisis de bundles y la regresión de anfitrión/jugador en 1 minuto 42 segundos. Vercel marcó el Preview como Ready y su portada respondió HTTP 200 sin sesión. No se hizo merge ni despliegue a Production.
 
 ## Answer
 
