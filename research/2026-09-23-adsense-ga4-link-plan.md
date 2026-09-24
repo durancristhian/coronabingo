@@ -1,7 +1,7 @@
 # Plan para vincular AdSense con Coronabingo - GA4
 
 Status: ready-for-agent
-Work status: claimed
+Work status: open
 
 **Actualización de ejecución, 23 de septiembre de 2026, 23:27 ART:** el usuario autorizó implementar. La etiqueta directa está publicada y el vínculo está confirmado en ambas consolas. La tarea permanece abierta por verificación de ingresos e impresiones. Ver el registro al final y la [evidencia de implementación](2026-09-23-adsense-ga4-implementation-evidence.json). Los apartados de investigación conservan las observaciones y decisiones anteriores.
 
@@ -244,3 +244,13 @@ La primera implementación se hizo en el checkout principal, antes de la incorpo
 La referencia previa a toda esta tarea fue `dpl_WADSHvUBXxBrMHcVEwciAfJYSP8U`, commit `215deb3`. Hubo después una publicación concurrente de documentación, commit `d92a9fb`, despliegue `dpl_95M9qH73ZYW3BEZBap7LcyTViZ5h`, que ya contiene la etiqueta GA4. **El comando antiguo del plan no debe ejecutarse sin revalidar elegibilidad.**
 
 En Hobby, el rollback inmediato regresa al despliegue anterior elegible y puede conservar la integración GA4. Para deshacer toda esta tarea, revertir solamente sus commits de código sobre la rama actual, restituir `GA_TRACKING_ID=UA-161408428-1` únicamente en Production y publicar una nueva versión validada. Preservar cambios concurrentes. Si hace falta quitar el vínculo, eliminar únicamente `pub-6231280485856921` ↔ `385744187`. No se ensayó ni fue necesario un rollback real; las limitaciones sobre datos perdidos y eventos existentes siguen vigentes.
+
+### Comprobación final, 23 de septiembre, 23:36 ART
+
+El ajuste de título está en `a116609`, integrado con `ef582b7` y la documentación concurrente en `213f942`. Ese código llegó a producción en `dpl_Fig8Jqiu8ffsZSaaPcFzHJcha7HA`, estado Ready, URL `https://coronabingo-1m8kjs2kl-cristhian-durans-projects-3ace6550.vercel.app`. CI completada correctamente: [ejecución 35947810425](https://github.com/durancristhian/coronabingo/actions/runs/35947810425). La publicación posterior de este registro cambia solo documentación.
+
+Se repitió una carga normal y navegación a inglés: una vista inicial y una vista de navegación al destino `G-WYG7FMEWEF`, respuestas 204, títulos español/inglés correctos y referencia anterior correcta. Firebase conservó su vista inicial, también con respuesta 204. AdSense devolvió 200 y mostró dos espacios rellenados y tres sin relleno durante esa observación. No se infiere un pago de esos estados. Search Console sigue asociado a `https://coronabingo.com.ar/`, flujo `5469366293`.
+
+El servidor local de esta tarea quedó detenido y se cerraron las pestañas locales, retirando sus bloqueos y capturador temporal. El worktree se conserva para seguimiento, con la rama integrada. La sala sintética de desarrollo queda identificada en el registro. No hay escrituras de juego en producción ni cambios pendientes de código.
+
+La [evidencia final](2026-09-23-adsense-ga4-final-verification.json) resume observaciones de red sin identificadores de visitantes. Los JSON son registros preparados a partir de observaciones, no exportaciones de informes de Google. **Estado final de esta sesión: implementación publicada y vinculada; impresiones e ingresos en GA4 aún no verificados.** La tarea queda abierta para las revisiones fechadas arriba.

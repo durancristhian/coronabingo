@@ -1,0 +1,72 @@
+{
+  "verified_at": "2026-09-24T02:35:55.639Z",
+  "network": [
+    {
+      "host": "pagead2.googlesyndication.com",
+      "path": "/pagead/js/adsbygoogle.js",
+      "status": 200,
+      "measurement_id": null,
+      "event": null,
+      "page": null,
+      "referrer": null,
+      "title": null
+    },
+    {
+      "host": "www.google-analytics.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-WYG7FMEWEF",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/",
+      "referrer": null,
+      "title": "Coronabingo | Tu juego de Bingo Online"
+    },
+    {
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-PR7XZB4T8W",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/",
+      "referrer": null,
+      "title": "Coronabingo | Tu juego de Bingo Online"
+    },
+    {
+      "host": "www.google-analytics.com",
+      "path": "/g/collect",
+      "status": 204,
+      "measurement_id": "G-WYG7FMEWEF",
+      "event": "page_view",
+      "page": "https://coronabingo.com.ar/en",
+      "referrer": "https://coronabingo.com.ar/",
+      "title": "Coronabingo | Bingo online"
+    }
+  ],
+  "source": "Sanitized summary of observed Chrome CDP responses, not a Google report export",
+  "code_commits": [
+    "ef582b75346cab7053064e4f34e4bba715bccd5f",
+    "a116609"
+  ],
+  "integrated_commit": "213f942368a1461c1d38285dc0d7331eb9e5a9c2",
+  "verified_deployment": "dpl_Fig8Jqiu8ffsZSaaPcFzHJcha7HA",
+  "deployment_url": "https://coronabingo-1m8kjs2kl-cristhian-durans-projects-3ace6550.vercel.app",
+  "deployment_status": "READY",
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/durancristhian/coronabingo/actions/runs/35947810425"
+  },
+  "production_ads": {
+    "script_status": 200,
+    "filled_slots_observed": 2,
+    "unfilled_slots_observed": 3,
+    "clicked": false
+  },
+  "runtime_errors_query": "No logs found",
+  "search_console_preserved": true,
+  "local_server_stopped": true,
+  "temporary_browser_instrumentation_removed": true,
+  "retained_dev_room": "yeZ5sUAPiVtJhlDgqD49",
+  "ad_revenue_verified": false,
+  "ad_impressions_in_ga4_verified": false,
+  "follow_up_automatic": false
+}
