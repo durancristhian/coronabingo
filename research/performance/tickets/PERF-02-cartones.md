@@ -2,6 +2,9 @@
 
 Estado: diagnosticado, pendiente de implementación. Prioridad alta. Esfuerzo: 0,5 día. Riesgo bajo. Independiente de PERF-01.
 
+Status: ready-for-agent
+Work status: resolved
+
 ## Diagnóstico
 
 `utils/constants.ts` importa `public/tickets.json` para `MAX_PLAYERS = ticketsData.length / 2`. Consumidores como `utils/generateRoomCode.ts` solo necesitan constantes, pero arrastran el catálogo. `hooks/useTickets.tsx` sí necesita números reales.
@@ -25,3 +28,13 @@ No agregar API, lecturas Firestore ni fetch de todo `/tickets.json` como sustitu
 - Ejecutar validación de cartones y checks comunes del [índice](../README.md).
 
 Rollback: volver a la relación de imports anterior, preservando el catálogo original intacto.
+
+## Answer
+
+Implementado el 24 de septiembre de 2026. `utils/constants.ts` obtiene la capacidad de `public/tickets-metadata.json`; `hooks/useTickets.tsx` conserva el único import del catálogo completo. El generador escribe ambos archivos y el validador detiene la ejecución si cantidad o capacidad divergen del catálogo.
+
+El SHA-256 de `public/tickets.json` no cambió respecto de `f6e789e`, por lo que se conservaron el contenido, el orden y los IDs. La prueba de navegador confirmó los mismos dos cartones asignados mediante navegación, entrada directa, recarga y reinicio.
+
+La portada bajó 26.371 bytes gzip y la configuración 26.712. El catálogo quedó solo en el conjunto de scripts de `/room/[roomId]/[playerId]`. La sala no cambió y la ruta de cartones subió 637 bytes gzip por el nuevo reparto de módulos. Método, cifras y límites están en [la evidencia de PERF-02](../perf02-evidence/README.md).
+
+Pasaron `npm run lint:check`, `npm run validate-tickets` y `ANALYZE_BUNDLE=1 npm run ui-tests:production`; el último comando ejecutó validación de locales, build de producción y el recorrido Playwright contra Firestore Emulator. `git diff --check` también pasó. No se verificó Preview ni Production y no se modificaron datos o configuración alojados.

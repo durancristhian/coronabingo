@@ -22,6 +22,8 @@ async function openCards(page: Page, name: string) {
   for (const card of await page.getByTestId('bingo-card').all()) {
     await expect(card.getByRole('button')).toHaveCount(15)
   }
+
+  return assigned!.slice(1)
 }
 
 async function drawAndObserve(host: Page, player: Page) {
@@ -39,6 +41,8 @@ test('host and player create, play, reload and restart a room', async ({
   playerPage: player,
 }) => {
   let lobbyURL = ''
+  let playerURL = ''
+  let playerTicketIds: string[] = []
   await test.step(
     'Create and configure a room with two participants',
     async () => {
@@ -75,7 +79,8 @@ test('host and player create, play, reload and restart a room', async ({
     'Each participant opens their assigned cards in an isolated context',
     async () => {
       await player.goto(lobbyURL)
-      await openCards(player, names.player)
+      playerTicketIds = await openCards(player, names.player)
+      playerURL = player.url()
       await openCards(host, names.host)
       await expect(
         host.getByRole('button', { name: 'Próximo número' }),
@@ -88,6 +93,21 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(player.getByText(emptyDraw)).toBeVisible()
     },
   )
+
+  await test.step('Direct entry shows the same assigned cards', async () => {
+    await player.goto(playerURL)
+    await expect(
+      player.getByRole('heading', {
+        name: new RegExp(`Hola ${names.player},`),
+      }),
+    ).toBeVisible()
+    await expect(player.getByTestId('bingo-card')).toHaveCount(2)
+    for (const id of playerTicketIds) {
+      await expect(
+        player.getByText(`Cartón Nº ${id}`, { exact: true }),
+      ).toBeVisible()
+    }
+  })
 
   await test.step(
     'A host draw synchronizes without reloading the player',
