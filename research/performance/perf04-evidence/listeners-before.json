@@ -1,5 +1,5 @@
 {
-  "method": "Actual providers with mocked dependencies; initial mount/cleanup matrix plus Players route lifecycle",
+  "method": "Actual providers with mocked dependencies; initial mount/cleanup matrix plus Players route lifecycle; Players loaded from 2ec2fb61b8d9ae733d8258e7af8510a26876f83c",
   "results": [
     {
       "screen": "home",
@@ -26,14 +26,13 @@
       "screen": "cards",
       "registrations": [
         "doc:test-room",
+        "collection:test-room/players",
         "doc:test-room/players/test-player"
       ],
-      "unsubscribeCalls": 2
+      "unsubscribeCalls": 3
     }
   ],
   "lifecycleEvents": [
-    "listen:room-a/players",
-    "unsubscribe:room-a/players",
     "listen:room-a/players",
     "unsubscribe:room-a/players",
     "listen:room-b/players",

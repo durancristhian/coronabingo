@@ -65,7 +65,7 @@ python3 research/performance/measure-production.py > /tmp/coronabingo-performanc
 node research/performance/measure-listeners.cjs --expect-scoped
 ```
 
-El segundo comando pasa tras PERF-04 y exige la matriz completa: inicio 0, sala 2, configuración 2 y cartones 2. También comprueba un cleanup por cada listener registrado. El script deberá adaptarse si cambian la composición de providers o sus imports; el criterio funcional permanece.
+El segundo comando pasa tras PERF-04 y exige la matriz completa: inicio 0, sala 2, configuración 2 y cartones 2. También comprueba un cleanup por cada listener registrado durante inicio → configuración → sala → cartones → sala → otra sala → inicio. `--players-source-ref <revisión>` permite repetir esa medición con la versión histórica del provider; el script deberá adaptarse si cambian la composición de providers o sus imports, pero el criterio funcional permanece.
 
 Los tamaños normalizados comprimen cada recurso con gzip nivel 9, independientemente de cómo lo sirva Vercel. `wire_body_bytes` guarda el cuerpo HTTP recibido por separado. Se cuentan scripts explícitos del HTML, excluyendo `nomodule`; no anuncios, Analytics, módulos que se descarguen después ni source maps. El probe solicita también chunks de otras rutas para inspeccionarlos, pero no los suma a la portada. No ejecuta JavaScript del sitio. No es una traza de navegador, Lighthouse ni medición de LCP/INP/CLS. Los bytes de fuentes en un source map no son bytes de transferencia.
 

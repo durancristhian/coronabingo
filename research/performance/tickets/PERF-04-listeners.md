@@ -38,9 +38,10 @@ Rollback: restaurar activación global de la lista; no requiere migración de da
 ## Comments
 
 - 2026-09-24: el usuario autorizó implementar, publicar y comprobar el ticket. El seam enfocado se amplió antes del cambio y falló porque cartones todavía registraba y limpiaba tres listeners. La implementación se limitó al efecto colectivo y añadió cobertura de atrás/adelante al recorrido de navegador.
+- 2026-09-24: la revisión previa al PR detectó que la primera versión descartaba participantes aún no guardados al salir de configuración. Se reprodujo en navegador, se corrigió conservando borradores por sala y se amplió la cobertura a eliminación, sonidos, cambio de sala y aislamiento de estado.
 
 ## Answer
 
-Implementado localmente el 24 de septiembre de 2026. `PlayersContextProvider` usa el patrón de ruta de Pages Router para activar la colección únicamente en sala y configuración. Mantiene el provider global, limpia el estado al desactivarse y conserva sin cambios los listeners de sala y jugador individual.
+Implementado localmente el 24 de septiembre de 2026. `PlayersContextProvider` usa el patrón de ruta de Pages Router para activar la colección únicamente en sala y configuración. Mantiene el provider global, deja de exponer estado al desactivarse, conserva borradores locales separados por sala y descarta callbacks de suscripciones anteriores. Los listeners de sala y jugador individual no cambiaron.
 
-La medición enfocada pasó con 0 listeners en inicio, 2 en sala, 2 en configuración y 2 en cartones. La regresión de producción contra Firestore Emulator confirmó creación, configuración, sala, cartones, atrás/adelante, entrada directa, sincronización, recarga y reinicio con anfitrión y jugador independientes. Los comandos, resultados y límites están en [la evidencia de PERF-04](../perf04-evidence/README.md).
+La medición enfocada pasó con 0 listeners en inicio, 2 en sala, 2 en configuración y 2 en cartones, además del ciclo completo con cambio de sala. La regresión de producción contra Firestore Emulator confirmó creación, configuración, borradores, eliminación, sala, cartones, atrás/adelante, entrada directa, números, opciones, sonidos, recarga, reinicio y aislamiento entre salas con anfitrión y jugador independientes. Los comandos, resultados y límites están en [la evidencia de PERF-04](../perf04-evidence/README.md).

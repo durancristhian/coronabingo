@@ -1,5 +1,11 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { PlayersContextData } from '~/interfaces/contexts/Players'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
@@ -16,45 +22,72 @@ interface Props {
   children: ReactNode
 }
 
+interface ScopedPlayersState {
+  roomId?: string
+  state: RemoteData<Error, Player[]>
+}
+
+const haveSamePlayerIds = (first: Player[], second: Player[]) => {
+  if (first.length !== second.length) {
+    return false
+  }
+
+  const secondIds = new Set(second.map(player => player.id))
+
+  return first.every(player => secondIds.has(player.id))
+}
+
 const PlayersContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
   const shouldListenToPlayers = playerListRoutes.includes(router.pathname)
-  const [state, setState] = useState<RemoteData<Error, Player[]>>({
-    type: REMOTE_DATA.NOT_ASKED,
+  const draftsByRoom = useRef(new Map<string, Player[]>())
+  const subscriptionId = useRef(0)
+  const [scopedState, setScopedState] = useState<ScopedPlayersState>({
+    state: { type: REMOTE_DATA.NOT_ASKED },
   })
 
   const sortAndSet = (players: Player[]) => {
-    setState(prevState => {
-      if (prevState.type !== REMOTE_DATA.SUCCESS) {
-        return prevState
-      }
+    if (!roomId || !shouldListenToPlayers) {
+      return
+    }
 
-      return {
+    const sortedPlayers = [...players].sort((a, b) =>
+      a.name.localeCompare(b.name),
+    )
+
+    draftsByRoom.current.set(roomId, sortedPlayers)
+    setScopedState({
+      roomId,
+      state: {
         type: REMOTE_DATA.SUCCESS,
-        data: players.sort((a, b) => a.name.localeCompare(b.name)),
-      }
+        data: sortedPlayers,
+      },
     })
   }
 
   useEffect(() => {
-    if (!roomId || !shouldListenToPlayers) {
-      setState(prevState =>
-        prevState.type === REMOTE_DATA.NOT_ASKED
-          ? prevState
-          : { type: REMOTE_DATA.NOT_ASKED },
-      )
+    const currentSubscriptionId = ++subscriptionId.current
 
+    if (!roomId || !shouldListenToPlayers) {
       return
     }
 
-    setState({ type: REMOTE_DATA.LOADING })
+    setScopedState(previousState =>
+      previousState.roomId === roomId
+        ? previousState
+        : { roomId, state: { type: REMOTE_DATA.LOADING } },
+    )
 
-    return roomsRef
+    const unsubscribe = roomsRef
       .doc(roomId)
       .collection('players')
       .onSnapshot(
         snapshot => {
+          if (subscriptionId.current !== currentSubscriptionId) {
+            return
+          }
+
           const players = snapshot.docs
             .filter(p => p.exists)
             .map(p => {
@@ -68,15 +101,47 @@ const PlayersContextProvider = ({ children }: Props) => {
             })
             .sort((a, b) => a.name.localeCompare(b.name))
 
-          setState({ type: REMOTE_DATA.SUCCESS, data: players })
+          const draft = draftsByRoom.current.get(roomId)
+
+          if (draft && !haveSamePlayerIds(draft, players)) {
+            setScopedState({
+              roomId,
+              state: { type: REMOTE_DATA.SUCCESS, data: draft },
+            })
+
+            return
+          }
+
+          draftsByRoom.current.delete(roomId)
+          setScopedState({
+            roomId,
+            state: { type: REMOTE_DATA.SUCCESS, data: players },
+          })
         },
         error => {
-          setState({ type: REMOTE_DATA.FAILURE, error })
+          if (subscriptionId.current !== currentSubscriptionId) {
+            return
+          }
+
+          setScopedState({
+            roomId,
+            state: { type: REMOTE_DATA.FAILURE, error },
+          })
 
           console.error(error)
         },
       )
+
+    return () => {
+      subscriptionId.current += 1
+      unsubscribe()
+    }
   }, [roomId, shouldListenToPlayers])
+
+  const state =
+    roomId && shouldListenToPlayers && scopedState.roomId === roomId
+      ? scopedState.state
+      : { type: REMOTE_DATA.NOT_ASKED as const }
 
   return (
     <PlayersContext.Provider

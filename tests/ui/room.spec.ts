@@ -1,7 +1,11 @@
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
 
-const names = { host: 'Ana anfitriona', player: 'Bruno jugador' }
+const names = {
+  host: 'Ana anfitriona',
+  player: 'Bruno jugador',
+  temporary: 'Carla temporal',
+}
 const emptyDraw = 'No salieron números todavía.'
 
 async function readAssignedTicketIds(page: Page, name: string) {
@@ -9,8 +13,9 @@ async function readAssignedTicketIds(page: Page, name: string) {
   await expect(row).toContainText(/Cartones Nº \d+ & \d+/)
   const assigned = (await row.innerText()).match(/Cartones Nº (\d+) & (\d+)/)
   expect(assigned, 'The lobby shows two assigned cards').not.toBeNull()
+  if (!assigned) throw new Error('The lobby did not show two assigned cards')
 
-  return assigned!.slice(1)
+  return assigned.slice(1)
 }
 
 async function expectAssignedCards(
@@ -51,6 +56,39 @@ async function drawAndObserve(host: Page, player: Page) {
   await expect(player.getByTestId('called-number')).toBeVisible()
 }
 
+async function navigateWithNextRouter(page: Page, url: string) {
+  const pathname = new URL(url).pathname
+
+  await page.evaluate(path => {
+    const nextWindow = window as typeof window & {
+      next: { router: { push: (href: string) => Promise<boolean> } }
+    }
+
+    return nextWindow.next.router.push(path)
+  }, pathname)
+}
+
+async function recordPlayedSounds(page: Page) {
+  await page.evaluate(() => {
+    const soundWindow = window as typeof window & { playedSounds: string[] }
+    soundWindow.playedSounds = []
+    HTMLMediaElement.prototype.play = function() {
+      soundWindow.playedSounds.push(this.src)
+      Object.defineProperty(this, 'duration', { value: 10 })
+
+      return Promise.resolve()
+    }
+  })
+}
+
+async function readPlayedSounds(page: Page) {
+  return page.evaluate(() => {
+    const soundWindow = window as typeof window & { playedSounds: string[] }
+
+    return soundWindow.playedSounds
+  })
+}
+
 test('host and player create, play, reload and restart a room', async ({
   page: host,
   playerPage: player,
@@ -77,6 +115,35 @@ test('host and player create, play, reload and restart a room', async ({
           .fill(name)
         await host.getByRole('button', { name: 'Agregar persona' }).click()
       }
+      await expect(
+        host.getByRole('button', { name: 'Eliminar persona' }),
+      ).toHaveCount(3)
+
+      await host.goBack()
+      await expect(
+        host.getByRole('textbox', { name: 'Nombre *', exact: true }),
+      ).toBeVisible()
+      await host.goForward()
+      await expect(
+        host.getByRole('heading', { name: 'Preparar sala' }),
+      ).toBeVisible()
+      await expect(
+        host
+          .locator('#players-list')
+          .getByText(names.temporary, { exact: true }),
+      ).toBeVisible()
+      await host
+        .getByRole('button', { name: 'Eliminar persona' })
+        .last()
+        .click()
+      await expect(
+        host
+          .locator('#players-list')
+          .getByText(names.temporary, { exact: true }),
+      ).toHaveCount(0)
+      await expect(
+        host.getByRole('button', { name: 'Eliminar persona' }),
+      ).toHaveCount(2)
       await host
         .getByRole('combobox', { name: 'adminId', exact: true })
         .selectOption({ label: names.host })
@@ -144,6 +211,30 @@ test('host and player create, play, reload and restart a room', async ({
   )
 
   await test.step(
+    'A host sound synchronizes to both participants',
+    async () => {
+      const soundPath = '/sounds/cardi-b/coronavirus.mp3'
+      await recordPlayedSounds(host)
+      await recordPlayedSounds(player)
+      await host.locator('#sounds:visible').click()
+      await host
+        .getByRole('dialog', { name: 'Sonidos' })
+        .getByRole('button', {
+          name: 'Reproducir Cardi B - Coronavirus',
+          exact: true,
+        })
+        .click()
+      await expect
+        .poll(() => readPlayedSounds(host))
+        .toContainEqual(expect.stringContaining(soundPath))
+      await expect
+        .poll(() => readPlayedSounds(player))
+        .toContainEqual(expect.stringContaining(soundPath))
+      await host.keyboard.press('Escape')
+    },
+  )
+
+  await test.step(
     'An actual card number and both cards survive reload',
     async () => {
       const cards = player.getByTestId('bingo-card')
@@ -202,6 +293,45 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(host.getByTestId('called-number')).toHaveCount(0)
       await expect(player.getByTestId('called-number')).toHaveCount(0)
       await drawAndObserve(host, player)
+    },
+  )
+
+  await test.step(
+    'Changing rooms never exposes the previous room player list',
+    async () => {
+      const otherRoom = await host.context().newPage()
+      await otherRoom.goto('/')
+      await otherRoom
+        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .fill('Segunda sala')
+      await otherRoom
+        .getByRole('button', { name: 'Listo', exact: true })
+        .click()
+      await expect(
+        otherRoom.getByRole('heading', { name: 'Preparar sala' }),
+      ).toBeVisible()
+      const otherRoomURL = otherRoom.url()
+      await otherRoom.close()
+
+      await navigateWithNextRouter(host, otherRoomURL)
+      await expect(
+        host.getByRole('heading', { name: 'Preparar sala' }),
+      ).toBeVisible()
+      await expect(host.getByText(names.host, { exact: true })).toHaveCount(0)
+      await expect(host.getByText(names.player, { exact: true })).toHaveCount(0)
+
+      await navigateWithNextRouter(host, lobbyURL)
+      await expect(
+        host.getByRole('heading', { name: 'Información de la sala' }),
+      ).toBeVisible()
+      await expect(host.getByTestId('player-row')).toHaveCount(2)
+
+      await host.goBack()
+      await expect(
+        host.getByRole('heading', { name: 'Preparar sala' }),
+      ).toBeVisible()
+      await expect(host.getByText(names.host, { exact: true })).toHaveCount(0)
+      await expect(host.getByText(names.player, { exact: true })).toHaveCount(0)
     },
   )
 })
