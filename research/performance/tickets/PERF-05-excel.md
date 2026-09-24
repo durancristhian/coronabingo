@@ -28,6 +28,7 @@ Rollback: restaurar el import estático. No cambiar la dependencia ni actualizar
 
 - 2026-09-24: el usuario autorizó implementar PERF-05, agregar una regresión Playwright para la exportación y, después de la verificación local, publicar la rama y abrir un pull request. La revisión del PR y sus checks forma parte del alcance; merge y Production no están autorizados.
 - 2026-09-24: la implementación y regresión quedaron en `919c807`. La comprobación local de bundle, error y reintento, descarga única, contenido bilingüe y suite completa pasó; los resultados están en [la evidencia de PERF-05](../perf05-evidence/README.md).
+- 2026-09-24: la revisión previa al PR detectó huecos en la observación de prefetch, la espera de una posible segunda descarga y el viewport móvil. Se corrigieron en `36a6f8f`, se compartió el setup de sala con la regresión principal y la suite compilada volvió a pasar completa.
 
 ## Answer
 
@@ -35,4 +36,4 @@ Implementado el 24 de septiembre de 2026. `DownloadSpreadsheet` precarga `zipcel
 
 El JavaScript inicial de la sala bajó de 263.041 a 227.034 bytes gzip, una diferencia de 36.007 bytes. La primera exportación carga un chunk separado de 36.502 bytes gzip. La portada varió 18 bytes por el mapa de módulos asíncronos, sin incorporar el ahorro de la sala.
 
-La nueva prueba Playwright crea la sala mediante la interfaz, activa la exportación, falla y reintenta el chunk, conserva los jugadores y obtiene un único XLSX ante doble clic. La inspección puntual de los archivos español e inglés confirmó sala, anfitriona, jugador, cartones y URLs completas. Pasaron los checks y builds enumerados en [la evidencia](../perf05-evidence/README.md). No se verificaron Preview ni Production.
+La nueva prueba Playwright crea la sala mediante la interfaz, demuestra que el chunk no se solicita durante la entrada, activa la exportación, falla y reintenta el chunk, conserva los jugadores y obtiene un único XLSX ante doble clic. También cubre los estados nuevos en un viewport móvil y espera para descartar una descarga duplicada tardía. La inspección puntual de los archivos español e inglés confirmó sala, anfitriona, jugador, cartones y URLs completas. Pasaron los checks y builds enumerados en [la evidencia](../perf05-evidence/README.md). No se verificaron Preview ni Production.

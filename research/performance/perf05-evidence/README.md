@@ -17,7 +17,9 @@ La portada cambió 18 bytes gzip por el mapa de módulos asíncronos de Webpack.
 
 ## Navegador y archivo
 
-La regresión `tests/ui/spreadsheet.spec.ts` crea una sala con anfitriona y jugador en Firestore Emulator. Antes de activar la opción, “Exportar” no existe. Después de las siete interacciones, la prueba retiene el nuevo request de script y observa “Preparando exportación...”. Falla ese request, comprueba el mensaje y los dos jugadores, retira el bloqueo, reintenta y hace doble clic. Chromium produce una sola descarga llamada `Sala de exportación.xlsx`.
+La regresión `tests/ui/spreadsheet.spec.ts` crea una sala con anfitriona y jugador en Firestore Emulator. Observa los scripts desde antes de navegar y comprueba que el chunk pedido al activar la exportación no fue solicitado durante la entrada a la sala. Antes de activar la opción, “Exportar” no existe. Después de las siete interacciones, la prueba retiene ese nuevo request y observa “Preparando exportación...”. Falla el request, comprueba el mensaje y los dos jugadores, retira el bloqueo, reintenta y hace doble clic. Chromium produce una sola descarga llamada `Sala de exportación.xlsx`; el test espera 750 ms después de volver al estado listo para descartar una segunda descarga tardía.
+
+Los estados de carga, error, reintento y listo se verificaron con un viewport de 390 × 844 sin desborde horizontal. El armado inicial de la sala también recorrió el viewport de escritorio predeterminado. El setup compartido con la regresión principal quedó en `tests/ui/room-setup.ts`.
 
 Una comprobación puntual adicional descargó los archivos español e inglés desde el build candidato. Se abrió `xl/worksheets/sheet1.xml` con `zipfile` de Python y se verificaron estos valores:
 
@@ -33,7 +35,7 @@ Los archivos medían 4.368 y 4.365 bytes. Eran evidencia local descartable y no 
 - El ciclo rojo falló porque la implementación anterior no mostraba el estado de carga ni solicitaba un chunk al activar la opción.
 - `npm run ui-tests -- spreadsheet.spec.ts` pasó en desarrollo.
 - `npm run ui-tests:ci -- spreadsheet.spec.ts` pasó contra el build de producción.
-- `npm run ui-tests:ci` pasó las dos pruebas en 5,3 segundos, con dos tests Playwright en 3,1 segundos.
+- Tras los ajustes de revisión, `npm run ui-tests:ci -- spreadsheet.spec.ts` pasó en 4,8 segundos y `npm run ui-tests:ci` pasó las dos pruebas en 6,1 segundos, con dos tests Playwright en 3,8 segundos.
 - `npm run lint:check`, `npm run validate-locales` y `npm run validate-tickets` pasaron. El validador de cartones informó `There are no tickets with 10 or more`.
 - `ANALYZE_BUNDLE=1 npm run ui-tests:build`, `npm run build` y `git diff --check` pasaron.
 
