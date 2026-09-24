@@ -175,3 +175,16 @@ The interruption probe exposed stalled teardown when cancellation arrived as Pla
 The intentional failure's artifacts were copied locally to `/tmp/coronabingo-ui-failure-evidence-NIz5oT` before the fresh passing run replaced the default report. Default reports remain ignored, including the last passing HTML report in `playwright-report/`. Runtime output was inspected in `/tmp/coronabingo-ui-final-{build,ci,dev,fresh}.log`; these paths are local evidence, not committed artifacts.
 
 No task server remains running, no emulator records were exported, and no hosted Firebase data was created. The existing unrelated local server was left alone. This record and the implementation are committed together on the task branch; push, merge and deployment are outside this handoff.
+
+### 2026-09-24: PR and GitHub Actions verification
+
+The owner authorized publishing the branch and opening a PR to validate the full process. [PR #187](https://github.com/durancristhian/coronabingo/pull/187) targets `main`. This supersedes the earlier pending-CI note.
+
+[CI run 35950576897](https://github.com/durancristhian/coronabingo/actions/runs/35950576897), on implementation commit `0f4cc972be1a883a08d9ff1083a4ea493c1d5084`, passed on GitHub's Ubuntu runner. The build job ran from 03:13:55 to 03:17:49 UTC, 3 min 54 s. Node 24.21.0, npm 11.19.0 and Temurin 21.0.12.1 were reported by the runner.
+
+- Installation, lint/types, Chromium and emulator setup, locale validation, build and the complete host/player regression passed.
+- The isolated build command took 19.3 s. The regression command reused that build and took 11.3 s including services; Playwright reported one passing test in 5.3 s.
+- `ui-test-evidence` and `bundle-reports` were uploaded successfully. Downloaded `ui-test-evidence` and verified the HTML report and Firestore log were present.
+- The Vercel deployment check also passed. This establishes preview deployment success, not gameplay verification against hosted Firebase. The automated journey ran only against the local emulator inside CI.
+
+The PR remains open for review. No merge or Production deployment was requested or performed.
