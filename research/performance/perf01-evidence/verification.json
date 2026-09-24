@@ -1,0 +1,30 @@
+{
+  "product_files_changed": [
+    "components/NewsModal.tsx",
+    "interfaces/custom/NewsModal.ts",
+    "locales/en/common.json",
+    "locales/es/common.json",
+    "next.config.js",
+    "package-lock.json",
+    "package.json",
+    "pages/_app.tsx",
+    "public/changelog/.gitkeep",
+    "public/changelog/1.12.1/en.md",
+    "public/changelog/1.12.1/es.md",
+    "public/css/markdown-body.css",
+    "public/css/styles.css"
+  ],
+  "unexpected_product_changes": [],
+  "reference_commit": "125bbad01c3d8aa2eb5c99536ca1e614b3bf4423",
+  "development_project": "coronabingo-dev",
+  "node": "24.21.0",
+  "npm": "11.19.0",
+  "checks": [
+    "npm ci",
+    "npm run lint:check",
+    "npm run validate-locales",
+    "npm run validate-tickets",
+    "npm run build",
+    "git diff --check"
+  ]
+}

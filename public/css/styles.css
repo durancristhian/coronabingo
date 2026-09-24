@@ -2,7 +2,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 
-@import 'markdown-body.css';
 @import 'react-toastify.css';
 /* purgecss end ignore */
 

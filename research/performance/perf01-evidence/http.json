@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "bytes": 12561
+  },
+  {
+    "path": "/es",
+    "status": 200,
+    "bytes": 12561
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "bytes": 12279
+  },
+  {
+    "path": "/room/qa-perf01-missing",
+    "status": 200,
+    "bytes": 10533
+  },
+  {
+    "path": "/changelog/1.12.1/es.md",
+    "status": 404,
+    "bytes": 4313
+  },
+  {
+    "path": "/changelog/1.12.1/en.md",
+    "status": 404,
+    "bytes": 4313
+  },
+  {
+    "path": "/tickets.json",
+    "status": 200,
+    "bytes": 354962
+  },
+  {
+    "path": "/favicon.ico",
+    "status": 200,
+    "bytes": 15406
+  }
+]

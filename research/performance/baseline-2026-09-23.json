@@ -1,0 +1,660 @@
+{
+  "observed_at_utc": "2026-09-23T22:18:54.405515+00:00",
+  "local_git_head": "c85eeb92b7accc69e161f1ecec27f3805c00632c",
+  "production_build_id": "Y3Y7XVd6hwy5_jiQeneED",
+  "method": "Public HTTP GET, gzip9 normalized; initial HTML scripts excluding nomodule. No browser execution, no third-party requests. Source maps used only to identify modules, not counted as page payload. Build ID is not a verified Git SHA.",
+  "home": {
+    "path": "/",
+    "status": 200,
+    "wire_body_bytes": 3894,
+    "decoded_bytes": 12904,
+    "gzip9_bytes": 3880,
+    "sha256": "9b6f4149a34b104cd3da3250c247b2cfd0a4e22f7685140b0f775c08987b8416",
+    "headers": {
+      "age": "115",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "gzip",
+      "content-type": "text/html; charset=utf-8",
+      "etag": "W/\"06268802aa5dd6b01f2ccd2447105507\"",
+      "x-vercel-cache": "HIT"
+    }
+  },
+  "initial_modern_js_gzip9_bytes": 365303,
+  "initial_modern_js_decoded_bytes": 1310788,
+  "catalog": {
+    "tickets": 1440,
+    "minified_bytes": 151921,
+    "gzip9_bytes": 25248
+  },
+  "resources": [
+    {
+      "path": "/_next/static/chunks/webpack-60d37b191365ed58.js",
+      "status": 200,
+      "wire_body_bytes": 2026,
+      "decoded_bytes": 3891,
+      "gzip9_bytes": 2026,
+      "sha256": "eeac886969e7ef44c1d93391c3e04e183bff86ad9f06a2ac8b6f07dd3d55a2e7",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"da10d1714d9bea5121e73f69834a828b\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/framework-e0548bc7098fcd09.js",
+      "status": 200,
+      "wire_body_bytes": 45469,
+      "decoded_bytes": 139779,
+      "gzip9_bytes": 44940,
+      "sha256": "7331894450a79675d9b10911a4e204d0a9700cd1e02fc6b4994b70a474a09423",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"df54405af58cafaaeaafc6b265c1e312\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/main-263ee7479e7c5f1d.js",
+      "status": 200,
+      "wire_body_bytes": 41167,
+      "decoded_bytes": 141773,
+      "gzip9_bytes": 40635,
+      "sha256": "46acf8561a0dd1820f20afa476cfd7e9273eb0aee29d2524ea1c6f2115a08a90",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"6b335f8436ffc8bb0607d86270cf07dd\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/pages/_app-d45eebdf6d040496.js",
+      "status": 200,
+      "wire_body_bytes": 239153,
+      "decoded_bytes": 829309,
+      "gzip9_bytes": 235313,
+      "sha256": "36dee4da45d76f32b5cea6c0c5855a8885daf9f4920ffb99b76b400bf72d0213",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"940af149e9d7b389ba6bc07f29de87bf\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 1,
+        "gray-matter/": 9,
+        "react-markdown/": 6,
+        "esprima/": 1,
+        "js-yaml/": 30,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/44f25b85-d1b995b2073d0000.js",
+      "status": 200,
+      "wire_body_bytes": 1134,
+      "decoded_bytes": 2203,
+      "gzip9_bytes": 1134,
+      "sha256": "42919f2db90dd2b73f6211ff476028a83cc524ce02e8433e7e917258e2d46c88",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"7974c1056019230c4aae866ee9101665\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/573-bb295d7b3968b1a1.js",
+      "status": 200,
+      "wire_body_bytes": 7840,
+      "decoded_bytes": 22515,
+      "gzip9_bytes": 7808,
+      "sha256": "26056487b388a69d5b0e4d59376bbf12d0349eb0d7465f02a03b75f3cb6fbf59",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"27944dfe0b08b6402d7be9a1d74c02cd\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 1,
+        "youtube-player/": 10
+      }
+    },
+    {
+      "path": "/_next/static/chunks/264-0ee15a079100d444.js",
+      "status": 200,
+      "wire_body_bytes": 3461,
+      "decoded_bytes": 10661,
+      "gzip9_bytes": 3441,
+      "sha256": "d5da2d5a3106e6b0ab3e72e36505d38a76dccf313baf066950676476c3c59618",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"120157cc6b835feb09af1789571dcf20\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/142-69462c0281c0e0c1.js",
+      "status": 200,
+      "wire_body_bytes": 34261,
+      "decoded_bytes": 156719,
+      "gzip9_bytes": 28135,
+      "sha256": "f5968d4f176634acb79fc6b5f03df9463bef0c35ceea2e1ff642d92502d4c9f8",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"e5b43dfbc08c5170bbd748ecce261c10\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": true,
+      "catalog_removal_gzip9_proxy_bytes": 26148,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/pages/index-71fdbd89dc99ee12.js",
+      "status": 200,
+      "wire_body_bytes": 1291,
+      "decoded_bytes": 2732,
+      "gzip9_bytes": 1291,
+      "sha256": "505e3a455b7a9243b13d747a6c534b29458b34df9d932efcf863751fd33275a3",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"bfaa30e8df508f4f58c4c6ac2c8c54f6\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/Y3Y7XVd6hwy5_jiQeneED/_buildManifest.js",
+      "status": 200,
+      "wire_body_bytes": 508,
+      "decoded_bytes": 1118,
+      "gzip9_bytes": 508,
+      "sha256": "6dcf41aa34708c51ae87eb886d0cb2b52a65e4be3a6c425df0f143580077a648",
+      "headers": {
+        "age": "1",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"e4d70a4f72179978d4ebb4dfc9798265\"",
+        "x-vercel-cache": "HIT"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false
+    },
+    {
+      "path": "/_next/static/Y3Y7XVd6hwy5_jiQeneED/_ssgManifest.js",
+      "status": 200,
+      "wire_body_bytes": 88,
+      "decoded_bytes": 88,
+      "gzip9_bytes": 72,
+      "sha256": "a66383b381b46cccc8f600e19dedea91beedf07e06bb49f011fa7f7073ead591",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "\"bee22ea531beed3eeff60fb48f41c658\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": true,
+      "contains_full_catalog_literal": false
+    },
+    {
+      "path": "/_next/static/chunks/pages/_error-b0b095492401bb91.js",
+      "status": 200,
+      "wire_body_bytes": 270,
+      "decoded_bytes": 270,
+      "gzip9_bytes": 226,
+      "sha256": "cf68bf2304fe13e32d30a75dcaf4e9407a5d389582ac527526836f767cff4da5",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "\"292bfaebb960581d20bc517fc7baabb9\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/735-af3d1162e4b52846.js",
+      "status": 200,
+      "wire_body_bytes": 30152,
+      "decoded_bytes": 104717,
+      "gzip9_bytes": 29861,
+      "sha256": "316d72d3e76016d8b6a1cefd8a9c034c7b6a81aaa0d9628ab088a763e0c8ff3f",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"630dd8d84168a7382b1be9943dfd2403\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 1,
+        "jszip/": 1,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/pages/room/[roomId]-d66c2e74fa7cc4b3.js",
+      "status": 200,
+      "wire_body_bytes": 2729,
+      "decoded_bytes": 7943,
+      "gzip9_bytes": 2721,
+      "sha256": "f599dcacda5664891060e4b3794ea964ed8f372e1e19bc9bf5f87f430f510ad5",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"0211ce5e43347b7954d90bb55bbb3c88\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/pages/room/[roomId]/admin-0b829f99d5f626a4.js",
+      "status": 200,
+      "wire_body_bytes": 5645,
+      "decoded_bytes": 16883,
+      "gzip9_bytes": 5635,
+      "sha256": "5157246ef2b2a64d01fd2b5b9207e99a7ab63af7bd735bff9669e5a1d07d4508",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"6f131ce11269840961908029be2538ac\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/433-80d685cc575e2e28.js",
+      "status": 200,
+      "wire_body_bytes": 4970,
+      "decoded_bytes": 14551,
+      "gzip9_bytes": 4954,
+      "sha256": "484b99cc15d275a7fef0769599536ecd56fee5ff9871bdf02ab34580423f567f",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"dffb61a60f44fecc2c9a03c08c8d7cde\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/pages/room/[roomId]/[playerId]-f132ceba53291191.js",
+      "status": 200,
+      "wire_body_bytes": 7779,
+      "decoded_bytes": 25373,
+      "gzip9_bytes": 7747,
+      "sha256": "1434af87a52200b0f311a46bc9ad1e1b60e199982511d2d1c70aa1dbc743328c",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"69fb45f7cca6a3e16a9ac067b14d46fd\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/chunks/81-ab540274251aa60c.js",
+      "status": 200,
+      "wire_body_bytes": 4579,
+      "decoded_bytes": 11812,
+      "gzip9_bytes": 4566,
+      "sha256": "40b4ba28adeb25d254106594496595285fe780dc0a0b51a23a616d9caa47d194",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "application/javascript; charset=utf-8",
+        "etag": "W/\"ac7b402e11d3a6ce5ef75fc137ee9e2e\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false,
+      "contains_full_catalog_literal": false,
+      "module_source_counts": {
+        "@firebase/auth/": 0,
+        "@firebase/storage/": 0,
+        "@firebase/firestore/": 0,
+        "gray-matter/": 0,
+        "react-markdown/": 0,
+        "esprima/": 0,
+        "js-yaml/": 0,
+        "zipcelx/": 0,
+        "jszip/": 0,
+        "react-youtube/": 0,
+        "youtube-player/": 0
+      }
+    },
+    {
+      "path": "/_next/static/css/fa12ed278078147d.css",
+      "status": 200,
+      "wire_body_bytes": 6762,
+      "decoded_bytes": 29581,
+      "gzip9_bytes": 6651,
+      "sha256": "427039060d9f30ed382f8e6f4036cba07b8326aa68915edb729866be852e9e54",
+      "headers": {
+        "age": "0",
+        "cache-control": "public,max-age=31536000,immutable",
+        "content-encoding": "gzip",
+        "content-type": "text/css; charset=utf-8",
+        "etag": "W/\"88c33e346dae75bef6a33bcf357a519b\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false
+    },
+    {
+      "path": "/background-cells/coronavirus.gif",
+      "status": 200,
+      "wire_body_bytes": 1313518,
+      "decoded_bytes": 1313518,
+      "gzip9_bytes": 1284906,
+      "sha256": "6d602fe01cf8bdeb278aa0bf2d2bd666b3735cf514920a11d8e7be1a9587738a",
+      "headers": {
+        "age": "0",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "image/gif",
+        "etag": "\"858533f488a5715ac67980cd8e8178ab\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false
+    },
+    {
+      "path": "/sounds/cardi-b/coronavirus.mp3",
+      "status": 200,
+      "wire_body_bytes": 522590,
+      "decoded_bytes": 522590,
+      "gzip9_bytes": 465632,
+      "sha256": "3ba697c744acaff2c0da95ecb0146be2cfa084a8a4c30941e85514a05a33a242",
+      "headers": {
+        "age": "0",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "audio/mpeg",
+        "etag": "\"9056d439e092f02a716159de67c4343f\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false
+    },
+    {
+      "path": "/tickets.json",
+      "status": 200,
+      "wire_body_bytes": 42008,
+      "decoded_bytes": 354962,
+      "gzip9_bytes": 29755,
+      "sha256": "1becf3e8f17eb9202fce21c6974bd85e32e2830fac4de5097a36b72eb60539f1",
+      "headers": {
+        "age": "0",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "etag": "W/\"b92e3c6337d4caece0496a4468b58828\"",
+        "x-vercel-cache": "MISS"
+      },
+      "initial_modern_js": false
+    }
+  ],
+  "cache_rechecks": [
+    {
+      "path": "/background-cells/coronavirus.gif",
+      "status": 200,
+      "wire_body_bytes": 1313518,
+      "decoded_bytes": 1313518,
+      "gzip9_bytes": 1284906,
+      "sha256": "6d602fe01cf8bdeb278aa0bf2d2bd666b3735cf514920a11d8e7be1a9587738a",
+      "headers": {
+        "age": "0",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "image/gif",
+        "etag": "\"858533f488a5715ac67980cd8e8178ab\"",
+        "x-vercel-cache": "HIT"
+      }
+    },
+    {
+      "path": "/sounds/cardi-b/coronavirus.mp3",
+      "status": 200,
+      "wire_body_bytes": 522590,
+      "decoded_bytes": 522590,
+      "gzip9_bytes": 465632,
+      "sha256": "3ba697c744acaff2c0da95ecb0146be2cfa084a8a4c30941e85514a05a33a242",
+      "headers": {
+        "age": "0",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "audio/mpeg",
+        "etag": "\"9056d439e092f02a716159de67c4343f\"",
+        "x-vercel-cache": "HIT"
+      }
+    }
+  ]
+}

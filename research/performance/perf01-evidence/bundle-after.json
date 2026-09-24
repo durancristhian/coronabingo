@@ -1,0 +1,260 @@
+{
+  "method": "Build manifest, unique modern JS/CSS per route, gzip level 9. Excludes nomodule polyfills and manifest scripts. Same environment before/after.",
+  "routes": {
+    "/": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-b187bd8419c085f5.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2029
+        },
+        {
+          "path": "static/chunks/framework-9707b0415f385993.js",
+          "bytes": 139771,
+          "gzip9_bytes": 44773
+        },
+        {
+          "path": "static/chunks/main-60aa0cfaac280f15.js",
+          "bytes": 141461,
+          "gzip9_bytes": 40954
+        },
+        {
+          "path": "static/css/8e24a88b6d46e4c8.css",
+          "bytes": 28386,
+          "gzip9_bytes": 6411
+        },
+        {
+          "path": "static/chunks/pages/_app-74a3e1b4131312d2.js",
+          "bytes": 466483,
+          "gzip9_bytes": 132355
+        },
+        {
+          "path": "static/chunks/44f25b85-bc78a000b847a1e0.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/bb5968dd-b21e0797091297ca.js",
+          "bytes": 9542,
+          "gzip9_bytes": 1751
+        },
+        {
+          "path": "static/chunks/122-3fc6621dab241083.js",
+          "bytes": 31150,
+          "gzip9_bytes": 9504
+        },
+        {
+          "path": "static/chunks/220-c00b43efcd83a53e.js",
+          "bytes": 16874,
+          "gzip9_bytes": 5854
+        },
+        {
+          "path": "static/chunks/222-81267546728d4210.js",
+          "bytes": 11732,
+          "gzip9_bytes": 3746
+        },
+        {
+          "path": "static/chunks/582-4b7517d00bbb4354.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28145
+        },
+        {
+          "path": "static/chunks/pages/index-0af8532e2555d011.js",
+          "bytes": 2735,
+          "gzip9_bytes": 1293
+        }
+      ],
+      "js_gzip9_bytes": 271538,
+      "css_gzip9_bytes": 6411
+    },
+    "/room/[roomId]": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-b187bd8419c085f5.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2029
+        },
+        {
+          "path": "static/chunks/framework-9707b0415f385993.js",
+          "bytes": 139771,
+          "gzip9_bytes": 44773
+        },
+        {
+          "path": "static/chunks/main-60aa0cfaac280f15.js",
+          "bytes": 141461,
+          "gzip9_bytes": 40954
+        },
+        {
+          "path": "static/css/8e24a88b6d46e4c8.css",
+          "bytes": 28386,
+          "gzip9_bytes": 6411
+        },
+        {
+          "path": "static/chunks/pages/_app-74a3e1b4131312d2.js",
+          "bytes": 466483,
+          "gzip9_bytes": 132355
+        },
+        {
+          "path": "static/chunks/44f25b85-bc78a000b847a1e0.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/bb5968dd-b21e0797091297ca.js",
+          "bytes": 9542,
+          "gzip9_bytes": 1751
+        },
+        {
+          "path": "static/chunks/122-3fc6621dab241083.js",
+          "bytes": 31150,
+          "gzip9_bytes": 9504
+        },
+        {
+          "path": "static/chunks/922-778710b24d6a2950.js",
+          "bytes": 133281,
+          "gzip9_bytes": 38786
+        },
+        {
+          "path": "static/chunks/222-81267546728d4210.js",
+          "bytes": 11732,
+          "gzip9_bytes": 3746
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]-7721cf6b5b9b22f1.js",
+          "bytes": 7925,
+          "gzip9_bytes": 2719
+        }
+      ],
+      "js_gzip9_bytes": 277751,
+      "css_gzip9_bytes": 6411
+    },
+    "/room/[roomId]/admin": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-b187bd8419c085f5.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2029
+        },
+        {
+          "path": "static/chunks/framework-9707b0415f385993.js",
+          "bytes": 139771,
+          "gzip9_bytes": 44773
+        },
+        {
+          "path": "static/chunks/main-60aa0cfaac280f15.js",
+          "bytes": 141461,
+          "gzip9_bytes": 40954
+        },
+        {
+          "path": "static/css/8e24a88b6d46e4c8.css",
+          "bytes": 28386,
+          "gzip9_bytes": 6411
+        },
+        {
+          "path": "static/chunks/pages/_app-74a3e1b4131312d2.js",
+          "bytes": 466483,
+          "gzip9_bytes": 132355
+        },
+        {
+          "path": "static/chunks/44f25b85-bc78a000b847a1e0.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/bb5968dd-b21e0797091297ca.js",
+          "bytes": 9542,
+          "gzip9_bytes": 1751
+        },
+        {
+          "path": "static/chunks/122-3fc6621dab241083.js",
+          "bytes": 31150,
+          "gzip9_bytes": 9504
+        },
+        {
+          "path": "static/chunks/222-81267546728d4210.js",
+          "bytes": 11732,
+          "gzip9_bytes": 3746
+        },
+        {
+          "path": "static/chunks/582-4b7517d00bbb4354.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28145
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]/admin-f77e7dd1069525b6.js",
+          "bytes": 22917,
+          "gzip9_bytes": 7919
+        }
+      ],
+      "js_gzip9_bytes": 272310,
+      "css_gzip9_bytes": 6411
+    },
+    "/room/[roomId]/[playerId]": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-b187bd8419c085f5.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2029
+        },
+        {
+          "path": "static/chunks/framework-9707b0415f385993.js",
+          "bytes": 139771,
+          "gzip9_bytes": 44773
+        },
+        {
+          "path": "static/chunks/main-60aa0cfaac280f15.js",
+          "bytes": 141461,
+          "gzip9_bytes": 40954
+        },
+        {
+          "path": "static/css/8e24a88b6d46e4c8.css",
+          "bytes": 28386,
+          "gzip9_bytes": 6411
+        },
+        {
+          "path": "static/chunks/pages/_app-74a3e1b4131312d2.js",
+          "bytes": 466483,
+          "gzip9_bytes": 132355
+        },
+        {
+          "path": "static/chunks/44f25b85-bc78a000b847a1e0.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/bb5968dd-b21e0797091297ca.js",
+          "bytes": 9542,
+          "gzip9_bytes": 1751
+        },
+        {
+          "path": "static/chunks/122-3fc6621dab241083.js",
+          "bytes": 31150,
+          "gzip9_bytes": 9504
+        },
+        {
+          "path": "static/chunks/523-706a75373e120596.js",
+          "bytes": 8908,
+          "gzip9_bytes": 2882
+        },
+        {
+          "path": "static/chunks/222-81267546728d4210.js",
+          "bytes": 11732,
+          "gzip9_bytes": 3746
+        },
+        {
+          "path": "static/chunks/582-4b7517d00bbb4354.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28145
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]/[playerId]-73f6683a48b49e7d.js",
+          "bytes": 25356,
+          "gzip9_bytes": 7778
+        }
+      ],
+      "js_gzip9_bytes": 275051,
+      "css_gzip9_bytes": 6411
+    }
+  },
+  "news_sources": []
+}

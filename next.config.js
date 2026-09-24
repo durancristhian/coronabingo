@@ -48,15 +48,12 @@ const nextConfig = {
       config.resolve.alias[newKey] = join(__dirname, value)
     })
 
-    config.module.rules.push(
-      {
-        test: /\.(jpg|jpeg|png|svg|gif|ico|webp|jp2|avif|mp3)$/,
-        issuer: /\.[jt]sx?$/,
-        type: 'asset',
-        parser: { dataUrlCondition: { maxSize: 8192 } },
-      },
-      { test: /\.md$/, type: 'asset/source' },
-    )
+    config.module.rules.push({
+      test: /\.(jpg|jpeg|png|svg|gif|ico|webp|jp2|avif|mp3)$/,
+      issuer: /\.[jt]sx?$/,
+      type: 'asset',
+      parser: { dataUrlCondition: { maxSize: 8192 } },
+    })
 
     return config
   },

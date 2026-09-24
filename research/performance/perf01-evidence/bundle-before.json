@@ -1,0 +1,320 @@
+{
+  "method": "Build manifest, unique modern JS/CSS per route, gzip level 9. Excludes nomodule polyfills and manifest scripts. Same environment before/after.",
+  "routes": {
+    "/": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-221d18477c932a35.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2027
+        },
+        {
+          "path": "static/chunks/framework-f621910dd7aeb935.js",
+          "bytes": 139779,
+          "gzip9_bytes": 44940
+        },
+        {
+          "path": "static/chunks/main-4e48118bb344ca9f.js",
+          "bytes": 141506,
+          "gzip9_bytes": 40509
+        },
+        {
+          "path": "static/css/eb7acd0dd7acf6d2.css",
+          "bytes": 29581,
+          "gzip9_bytes": 6652
+        },
+        {
+          "path": "static/chunks/pages/_app-e227891f98b31d5e.js",
+          "bytes": 829339,
+          "gzip9_bytes": 235301
+        },
+        {
+          "path": "static/chunks/44f25b85-bef32556473dc147.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/573-f5dcf05eb796b966.js",
+          "bytes": 22515,
+          "gzip9_bytes": 7808
+        },
+        {
+          "path": "static/chunks/264-4bda7e9916f3ac53.js",
+          "bytes": 10651,
+          "gzip9_bytes": 3443
+        },
+        {
+          "path": "static/chunks/142-6277a45b5172efc1.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28136
+        },
+        {
+          "path": "static/chunks/pages/index-577d9dcb6f8a08a8.js",
+          "bytes": 2732,
+          "gzip9_bytes": 1291
+        }
+      ],
+      "js_gzip9_bytes": 364589,
+      "css_gzip9_bytes": 6652
+    },
+    "/room/[roomId]": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-221d18477c932a35.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2027
+        },
+        {
+          "path": "static/chunks/framework-f621910dd7aeb935.js",
+          "bytes": 139779,
+          "gzip9_bytes": 44940
+        },
+        {
+          "path": "static/chunks/main-4e48118bb344ca9f.js",
+          "bytes": 141506,
+          "gzip9_bytes": 40509
+        },
+        {
+          "path": "static/css/eb7acd0dd7acf6d2.css",
+          "bytes": 29581,
+          "gzip9_bytes": 6652
+        },
+        {
+          "path": "static/chunks/pages/_app-e227891f98b31d5e.js",
+          "bytes": 829339,
+          "gzip9_bytes": 235301
+        },
+        {
+          "path": "static/chunks/44f25b85-bef32556473dc147.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/81-f79b3c5fd2dd2756.js",
+          "bytes": 11812,
+          "gzip9_bytes": 4566
+        },
+        {
+          "path": "static/chunks/735-9e2b169e1ff1f1cb.js",
+          "bytes": 104717,
+          "gzip9_bytes": 29860
+        },
+        {
+          "path": "static/chunks/264-4bda7e9916f3ac53.js",
+          "bytes": 10651,
+          "gzip9_bytes": 3443
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]-32764825ca092d03.js",
+          "bytes": 7943,
+          "gzip9_bytes": 2721
+        }
+      ],
+      "js_gzip9_bytes": 364501,
+      "css_gzip9_bytes": 6652
+    },
+    "/room/[roomId]/admin": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-221d18477c932a35.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2027
+        },
+        {
+          "path": "static/chunks/framework-f621910dd7aeb935.js",
+          "bytes": 139779,
+          "gzip9_bytes": 44940
+        },
+        {
+          "path": "static/chunks/main-4e48118bb344ca9f.js",
+          "bytes": 141506,
+          "gzip9_bytes": 40509
+        },
+        {
+          "path": "static/css/eb7acd0dd7acf6d2.css",
+          "bytes": 29581,
+          "gzip9_bytes": 6652
+        },
+        {
+          "path": "static/chunks/pages/_app-e227891f98b31d5e.js",
+          "bytes": 829339,
+          "gzip9_bytes": 235301
+        },
+        {
+          "path": "static/chunks/44f25b85-bef32556473dc147.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/81-f79b3c5fd2dd2756.js",
+          "bytes": 11812,
+          "gzip9_bytes": 4566
+        },
+        {
+          "path": "static/chunks/264-4bda7e9916f3ac53.js",
+          "bytes": 10651,
+          "gzip9_bytes": 3443
+        },
+        {
+          "path": "static/chunks/142-6277a45b5172efc1.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28136
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]/admin-7e888ecfc3915d0f.js",
+          "bytes": 16883,
+          "gzip9_bytes": 5635
+        }
+      ],
+      "js_gzip9_bytes": 365691,
+      "css_gzip9_bytes": 6652
+    },
+    "/room/[roomId]/[playerId]": {
+      "files": [
+        {
+          "path": "static/chunks/webpack-221d18477c932a35.js",
+          "bytes": 3891,
+          "gzip9_bytes": 2027
+        },
+        {
+          "path": "static/chunks/framework-f621910dd7aeb935.js",
+          "bytes": 139779,
+          "gzip9_bytes": 44940
+        },
+        {
+          "path": "static/chunks/main-4e48118bb344ca9f.js",
+          "bytes": 141506,
+          "gzip9_bytes": 40509
+        },
+        {
+          "path": "static/css/eb7acd0dd7acf6d2.css",
+          "bytes": 29581,
+          "gzip9_bytes": 6652
+        },
+        {
+          "path": "static/chunks/pages/_app-e227891f98b31d5e.js",
+          "bytes": 829339,
+          "gzip9_bytes": 235301
+        },
+        {
+          "path": "static/chunks/44f25b85-bef32556473dc147.js",
+          "bytes": 2203,
+          "gzip9_bytes": 1134
+        },
+        {
+          "path": "static/chunks/433-efe37531b60eee99.js",
+          "bytes": 14551,
+          "gzip9_bytes": 4953
+        },
+        {
+          "path": "static/chunks/264-4bda7e9916f3ac53.js",
+          "bytes": 10651,
+          "gzip9_bytes": 3443
+        },
+        {
+          "path": "static/chunks/142-6277a45b5172efc1.js",
+          "bytes": 156719,
+          "gzip9_bytes": 28136
+        },
+        {
+          "path": "static/chunks/pages/room/[roomId]/[playerId]-1b32b9c6aaa52f17.js",
+          "bytes": 25373,
+          "gzip9_bytes": 7747
+        }
+      ],
+      "js_gzip9_bytes": 368190,
+      "css_gzip9_bytes": 6652
+    }
+  },
+  "news_sources": [
+    "webpack://_N_E/./node_modules/micromark/dist/constant/splice.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/factory-title.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/label-start-link.js",
+    "webpack://_N_E/./node_modules/react-markdown/node_modules/react-is/index.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/character-reference.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/definition.js",
+    "webpack://_N_E/./node_modules/micromark/dist/initialize/text.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/stringify.js",
+    "webpack://_N_E/./node_modules/micromark/dist/initialize/document.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-punctuation.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/engine.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-control.js",
+    "webpack://_N_E/./components/NewsModal.tsx",
+    "webpack://_N_E/./node_modules/micromark/dist/util/create-tokenizer.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-alpha.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/move-point.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/factory-destination.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/serialize-chunks.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/utils.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/content.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/heading-atx.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/parse.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/prefix-size.js",
+    "webpack://_N_E/./node_modules/micromark/dist/postprocess.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/slice-chunks.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/factory-label.js",
+    "webpack://_N_E/./node_modules/remark-parse/index.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/unicode-whitespace.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/code-indented.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constructs.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/unicode-punctuation-regex.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/subtokenize.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/regex-check.js",
+    "webpack://_N_E/./node_modules/react-markdown/node_modules/react-is/cjs/react-is.production.min.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/character-escape.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/chunked-push.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/html-text.js",
+    "webpack://_N_E/./node_modules/micromark/dist/preprocess.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/partial-blank-line.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/resolve-all.js",
+    "webpack://_N_E/./node_modules/react-markdown/src/react-markdown.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/html-raw-names.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-hex-digit.js",
+    "webpack://_N_E/./node_modules/react-markdown/src/ast-to-react.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/defaults.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/label-start-image.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/list.js",
+    "webpack://_N_E/./node_modules/react-markdown/src/rehype-filter.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/html-block-names.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/code-fenced.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/line-ending.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/hard-break-escape.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/autolink.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/size-chunks.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/thematic-break.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/miniflat.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/classify-character.js",
+    "webpack://_N_E/./node_modules/gray-matter/index.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/markdown-space.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/excerpt.js",
+    "webpack://_N_E/./node_modules/micromark/dist/parse.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/chunked-splice.js",
+    "webpack://_N_E/./node_modules/react-markdown/src/uri-transformer.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/html-flow.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/factory-space.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/markdown-line-ending.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-digit.js",
+    "webpack://_N_E/./node_modules/remark-rehype/index.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/unicode-punctuation.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/to-file.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/has-own-property.js",
+    "webpack://_N_E/./node_modules/micromark/dist/initialize/flow.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/setext-underline.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/label-end.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/attention.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/combine-extensions.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/markdown-line-ending-or-space.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/assign.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-alphanumeric.js",
+    "webpack://_N_E/./node_modules/gray-matter/lib/engines.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/code-text.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/normalize-identifier.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/safe-from-int.js",
+    "webpack://_N_E/./node_modules/micromark/dist/character/ascii-atext.js",
+    "webpack://_N_E/./node_modules/micromark/dist/util/shallow.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/block-quote.js",
+    "webpack://_N_E/./node_modules/micromark/dist/tokenize/factory-whitespace.js",
+    "webpack://_N_E/./node_modules/micromark/dist/constant/from-char-code.js",
+    "webpack://_N_E/./node_modules/micromark/dist/initialize/content.js"
+  ]
+}

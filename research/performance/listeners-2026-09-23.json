@@ -1,0 +1,35 @@
+{
+  "method": "Actual providers, mocked dependencies, initial mount and cleanup only",
+  "results": [
+    {
+      "screen": "home",
+      "registrations": [],
+      "unsubscribeCalls": 0
+    },
+    {
+      "screen": "lobby",
+      "registrations": [
+        "doc:test-room",
+        "collection:test-room/players"
+      ],
+      "unsubscribeCalls": 2
+    },
+    {
+      "screen": "setup",
+      "registrations": [
+        "doc:test-room",
+        "collection:test-room/players"
+      ],
+      "unsubscribeCalls": 2
+    },
+    {
+      "screen": "cards",
+      "registrations": [
+        "doc:test-room",
+        "collection:test-room/players",
+        "doc:test-room/players/test-player"
+      ],
+      "unsubscribeCalls": 3
+    }
+  ]
+}

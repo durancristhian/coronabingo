@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
-import NewsModal from '~/components/NewsModal'
 import Providers from '~/contexts'
 import i18n from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces/custom/ErrorInfo'
@@ -215,7 +214,6 @@ export default class Coronabingo extends App {
           <Component {...pageProps} />
         </Providers>
         <ToastContainer />
-        <NewsModal lang={lang || defaultLanguage} />
       </Fragment>
     )
   }

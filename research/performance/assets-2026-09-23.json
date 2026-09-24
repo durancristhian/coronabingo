@@ -1,0 +1,325 @@
+{
+  "method": "Local ffprobe read-only. No encoding or perceptual quality evaluation.",
+  "resources": [
+    {
+      "path": "public/sounds/cardi-b/coronavirus.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "320000"
+        }
+      ],
+      "format": {
+        "duration": "13.003175",
+        "size": "522590",
+        "bit_rate": "321515"
+      }
+    },
+    {
+      "path": "public/sounds/chino-cirujano/pero-pagaraprata.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "212828"
+        }
+      ],
+      "format": {
+        "duration": "2.006349",
+        "size": "54901",
+        "bit_rate": "218909"
+      }
+    },
+    {
+      "path": "public/sounds/friends/lets-get-ready-to-rumble.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "128000"
+        }
+      ],
+      "format": {
+        "duration": "15.400000",
+        "size": "247359",
+        "bit_rate": "128498"
+      }
+    },
+    {
+      "path": "public/sounds/funeral/dance-with-the-coffin.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "192000"
+        }
+      ],
+      "format": {
+        "duration": "15.900000",
+        "size": "383196",
+        "bit_rate": "192803"
+      }
+    },
+    {
+      "path": "public/sounds/guido/mira-la-repe.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "150716"
+        }
+      ],
+      "format": {
+        "duration": "0.725782",
+        "size": "14764",
+        "bit_rate": "162737"
+      }
+    },
+    {
+      "path": "public/sounds/guido/preparado-listo-ya.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "143923"
+        }
+      ],
+      "format": {
+        "duration": "2.763175",
+        "size": "50755",
+        "bit_rate": "146946"
+      }
+    },
+    {
+      "path": "public/sounds/kun-aguero/ojo-al-tejo.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "192000"
+        }
+      ],
+      "format": {
+        "duration": "2.063673",
+        "size": "50292",
+        "bit_rate": "194961"
+      }
+    },
+    {
+      "path": "public/sounds/patao/carton.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bit_rate": "131540"
+        }
+      ],
+      "format": {
+        "duration": "2.673500",
+        "size": "44637",
+        "bit_rate": "133568"
+      }
+    },
+    {
+      "path": "public/sounds/patao/coronabingo.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bit_rate": "129817"
+        }
+      ],
+      "format": {
+        "duration": "6.513500",
+        "size": "106365",
+        "bit_rate": "130639"
+      }
+    },
+    {
+      "path": "public/sounds/patao/ese-bolillero-papa.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bit_rate": "117884"
+        }
+      ],
+      "format": {
+        "duration": "3.673500",
+        "size": "54861",
+        "bit_rate": "119474"
+      }
+    },
+    {
+      "path": "public/sounds/patao/linea.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bit_rate": "112957"
+        }
+      ],
+      "format": {
+        "duration": "2.773500",
+        "size": "39693",
+        "bit_rate": "114492"
+      }
+    },
+    {
+      "path": "public/sounds/riverito/cruzar-dedos.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "128000"
+        }
+      ],
+      "format": {
+        "duration": "1.854694",
+        "size": "30230",
+        "bit_rate": "130393"
+      }
+    },
+    {
+      "path": "public/sounds/simpsons/homer-bingo.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "209721"
+        }
+      ],
+      "format": {
+        "duration": "1.040000",
+        "size": "28606",
+        "bit_rate": "220046"
+      }
+    },
+    {
+      "path": "public/sounds/simpsons/hundiste-mi-acorazado.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "218953"
+        }
+      ],
+      "format": {
+        "duration": "2.089796",
+        "size": "57498",
+        "bit_rate": "220109"
+      }
+    },
+    {
+      "path": "public/sounds/susana/correctou.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "256000"
+        }
+      ],
+      "format": {
+        "duration": "1.172698",
+        "size": "40256",
+        "bit_rate": "274621"
+      }
+    },
+    {
+      "path": "public/sounds/tano/nooooo.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "256000"
+        }
+      ],
+      "format": {
+        "duration": "1.869206",
+        "size": "62826",
+        "bit_rate": "268888"
+      }
+    },
+    {
+      "path": "public/sounds/the-office/no-god-no.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "128000"
+        }
+      ],
+      "format": {
+        "duration": "9.890000",
+        "size": "159170",
+        "bit_rate": "128752"
+      }
+    },
+    {
+      "path": "public/sounds/the-office/this-is-the-worst.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2,
+          "bit_rate": "128000"
+        }
+      ],
+      "format": {
+        "duration": "4.800000",
+        "size": "77668",
+        "bit_rate": "129446"
+      }
+    },
+    {
+      "path": "public/sounds/windows/windows-error.mp3",
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 1,
+          "bit_rate": "128000"
+        }
+      ],
+      "format": {
+        "duration": "0.990375",
+        "size": "15846",
+        "bit_rate": "128000"
+      }
+    },
+    {
+      "path": "public/background-cells/coronavirus.gif",
+      "streams": [
+        {
+          "codec_name": "gif",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "format": {
+        "duration": "3.600000",
+        "size": "1313518",
+        "bit_rate": "2918928"
+      }
+    }
+  ],
+  "total_mp3_bytes": 2041513
+}

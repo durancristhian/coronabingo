@@ -1,0 +1,34 @@
+{
+  "/": {
+    "before": 364589,
+    "after": 271538,
+    "saved": 93051,
+    "percent": 25.52,
+    "css_before": 6652,
+    "css_after": 6411
+  },
+  "/room/[roomId]": {
+    "before": 364501,
+    "after": 277751,
+    "saved": 86750,
+    "percent": 23.8,
+    "css_before": 6652,
+    "css_after": 6411
+  },
+  "/room/[roomId]/admin": {
+    "before": 365691,
+    "after": 272310,
+    "saved": 93381,
+    "percent": 25.54,
+    "css_before": 6652,
+    "css_after": 6411
+  },
+  "/room/[roomId]/[playerId]": {
+    "before": 368190,
+    "after": 275051,
+    "saved": 93139,
+    "percent": 25.3,
+    "css_before": 6652,
+    "css_after": 6411
+  }
+}

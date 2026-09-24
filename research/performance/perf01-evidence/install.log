@@ -1,0 +1,12 @@
+npm warn deprecated @types/classnames@2.3.1: This is a stub types definition. classnames provides its own type definitions, so you do not need this installed.
+npm warn deprecated axios@0.5.4: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
+npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 888 packages in 6s
+npm warn install-scripts 4 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   core-js@3.6.5 (postinstall: node -e "try{require('./postinstall')}catch(e){}")
+npm warn install-scripts   husky@4.3.8 (install: node husky install; postinstall: opencollective-postinstall || exit 0)
+npm warn install-scripts   next-translate-plugin@3.0.0 (postinstall: node ./postinstall-message.js)
+npm warn install-scripts   protobufjs@6.10.2 (postinstall: node scripts/postinstall)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.

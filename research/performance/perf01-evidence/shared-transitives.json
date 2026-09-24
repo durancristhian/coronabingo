@@ -1,0 +1,585 @@
+[
+  {
+    "name": "esprima",
+    "version": "4.0.1",
+    "location": "node_modules/esprima",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "prod",
+        "name": "esprima",
+        "spec": "^4.0.0",
+        "from": {
+          "name": "js-yaml",
+          "version": "3.14.1",
+          "location": "node_modules/js-yaml",
+          "isWorkspace": false,
+          "dependents": [
+            {
+              "type": "prod",
+              "name": "js-yaml",
+              "spec": "^3.13.1",
+              "from": {
+                "name": "svgo",
+                "version": "1.3.2",
+                "location": "node_modules/svgo",
+                "isWorkspace": false,
+                "dependents": [
+                  {
+                    "type": "prod",
+                    "name": "svgo",
+                    "spec": "^1.2.2",
+                    "from": {
+                      "name": "@svgr/plugin-svgo",
+                      "version": "5.5.0",
+                      "location": "node_modules/@svgr/plugin-svgo",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@svgr/plugin-svgo",
+                          "spec": "^5.5.0",
+                          "from": {
+                            "name": "@svgr/webpack",
+                            "version": "5.5.0",
+                            "location": "node_modules/@svgr/webpack",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@svgr/webpack",
+                                "spec": "^5.2.0",
+                                "from": {
+                                  "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "dev": false,
+          "optional": false,
+          "devOptional": false,
+          "peer": false,
+          "bundled": false,
+          "overridden": false
+        }
+      }
+    ],
+    "dev": false,
+    "optional": false,
+    "devOptional": false,
+    "peer": false,
+    "bundled": false,
+    "overridden": false
+  },
+  {
+    "name": "js-yaml",
+    "version": "4.3.2",
+    "location": "node_modules/@eslint/eslintrc/node_modules/js-yaml",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "prod",
+        "name": "js-yaml",
+        "spec": "^4.3.2",
+        "from": {
+          "name": "@eslint/eslintrc",
+          "version": "3.3.7",
+          "location": "node_modules/@eslint/eslintrc",
+          "isWorkspace": false,
+          "dependents": [
+            {
+              "type": "prod",
+              "name": "@eslint/eslintrc",
+              "spec": "^3.3.6",
+              "from": {
+                "name": "eslint",
+                "version": "9.39.5",
+                "location": "node_modules/eslint",
+                "isWorkspace": false,
+                "dependents": [
+                  {
+                    "type": "prod",
+                    "name": "eslint",
+                    "spec": "9.39.5",
+                    "from": {
+                      "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^6.0.0 || ^7.0.0 || >=8.0.0",
+                    "from": {
+                      "name": "@eslint-community/eslint-utils",
+                      "version": "4.10.1",
+                      "location": "node_modules/@eslint-community/eslint-utils",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@eslint-community/eslint-utils",
+                          "spec": "^4.9.1",
+                          "from": {
+                            "name": "@typescript-eslint/utils",
+                            "version": "8.70.1",
+                            "location": "node_modules/@typescript-eslint/utils",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/utils",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "name": "@typescript-eslint/eslint-plugin",
+                                  "version": "8.70.1",
+                                  "location": "node_modules/@typescript-eslint/eslint-plugin",
+                                  "isWorkspace": false,
+                                  "dependents": [
+                                    {
+                                      "type": "prod",
+                                      "name": "@typescript-eslint/eslint-plugin",
+                                      "spec": "8.70.1",
+                                      "from": {
+                                        "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/utils",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "name": "@typescript-eslint/type-utils",
+                                  "version": "8.70.1",
+                                  "location": "node_modules/@typescript-eslint/type-utils",
+                                  "isWorkspace": false,
+                                  "dependents": [
+                                    {
+                                      "type": "prod",
+                                      "name": "@typescript-eslint/type-utils",
+                                      "spec": "8.70.1",
+                                      "from": {
+                                        "name": "@typescript-eslint/eslint-plugin",
+                                        "version": "8.70.1",
+                                        "location": "node_modules/@typescript-eslint/eslint-plugin",
+                                        "isWorkspace": false,
+                                        "dependents": [
+                                          {
+                                            "type": "prod",
+                                            "name": "@typescript-eslint/eslint-plugin",
+                                            "spec": "8.70.1",
+                                            "from": {
+                                              "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "prod",
+                          "name": "@eslint-community/eslint-utils",
+                          "spec": "^4.8.0",
+                          "from": {
+                            "name": "eslint",
+                            "version": "9.39.5"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^8.57.0 || ^9.0.0 || ^10.0.0",
+                    "from": {
+                      "name": "@typescript-eslint/eslint-plugin",
+                      "version": "8.70.1",
+                      "location": "node_modules/@typescript-eslint/eslint-plugin",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@typescript-eslint/eslint-plugin",
+                          "spec": "8.70.1",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^8.57.0 || ^9.0.0 || ^10.0.0",
+                    "from": {
+                      "name": "@typescript-eslint/parser",
+                      "version": "8.70.1",
+                      "location": "node_modules/@typescript-eslint/parser",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@typescript-eslint/parser",
+                          "spec": "8.70.1",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        },
+                        {
+                          "type": "peer",
+                          "name": "@typescript-eslint/parser",
+                          "spec": "^8.70.1",
+                          "from": {
+                            "name": "@typescript-eslint/eslint-plugin",
+                            "version": "8.70.1",
+                            "location": "node_modules/@typescript-eslint/eslint-plugin",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/eslint-plugin",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^8.57.0 || ^9.0.0 || ^10.0.0",
+                    "from": {
+                      "name": "@typescript-eslint/type-utils",
+                      "version": "8.70.1",
+                      "location": "node_modules/@typescript-eslint/type-utils",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@typescript-eslint/type-utils",
+                          "spec": "8.70.1",
+                          "from": {
+                            "name": "@typescript-eslint/eslint-plugin",
+                            "version": "8.70.1",
+                            "location": "node_modules/@typescript-eslint/eslint-plugin",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/eslint-plugin",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^8.57.0 || ^9.0.0 || ^10.0.0",
+                    "from": {
+                      "name": "@typescript-eslint/utils",
+                      "version": "8.70.1",
+                      "location": "node_modules/@typescript-eslint/utils",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@typescript-eslint/utils",
+                          "spec": "8.70.1",
+                          "from": {
+                            "name": "@typescript-eslint/eslint-plugin",
+                            "version": "8.70.1",
+                            "location": "node_modules/@typescript-eslint/eslint-plugin",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/eslint-plugin",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "prod",
+                          "name": "@typescript-eslint/utils",
+                          "spec": "8.70.1",
+                          "from": {
+                            "name": "@typescript-eslint/type-utils",
+                            "version": "8.70.1",
+                            "location": "node_modules/@typescript-eslint/type-utils",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "@typescript-eslint/type-utils",
+                                "spec": "8.70.1",
+                                "from": {
+                                  "name": "@typescript-eslint/eslint-plugin",
+                                  "version": "8.70.1",
+                                  "location": "node_modules/@typescript-eslint/eslint-plugin",
+                                  "isWorkspace": false,
+                                  "dependents": [
+                                    {
+                                      "type": "prod",
+                                      "name": "@typescript-eslint/eslint-plugin",
+                                      "spec": "8.70.1",
+                                      "from": {
+                                        "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": ">=7.0.0",
+                    "from": {
+                      "name": "eslint-config-prettier",
+                      "version": "10.1.8",
+                      "location": "node_modules/eslint-config-prettier",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "eslint-config-prettier",
+                          "spec": "10.1.8",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "*",
+                    "from": {
+                      "name": "eslint-import-resolver-typescript",
+                      "version": "2.4.0",
+                      "location": "node_modules/eslint-import-resolver-typescript",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "eslint-import-resolver-typescript",
+                          "spec": "^2.0.0",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8 || ^9",
+                    "from": {
+                      "name": "eslint-plugin-import",
+                      "version": "2.32.0",
+                      "location": "node_modules/eslint-plugin-import",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "peer",
+                          "name": "eslint-plugin-import",
+                          "spec": "*",
+                          "from": {
+                            "name": "eslint-import-resolver-typescript",
+                            "version": "2.4.0",
+                            "location": "node_modules/eslint-import-resolver-typescript",
+                            "isWorkspace": false,
+                            "dependents": [
+                              {
+                                "type": "prod",
+                                "name": "eslint-import-resolver-typescript",
+                                "spec": "^2.0.0",
+                                "from": {
+                                  "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9",
+                    "from": {
+                      "name": "eslint-plugin-jsx-a11y",
+                      "version": "6.10.2",
+                      "location": "node_modules/eslint-plugin-jsx-a11y",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "eslint-plugin-jsx-a11y",
+                          "spec": "6.10.2",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": ">=5.0.0",
+                    "from": {
+                      "name": "eslint-plugin-prettier",
+                      "version": "3.4.0",
+                      "location": "node_modules/eslint-plugin-prettier",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "eslint-plugin-prettier",
+                          "spec": "^3.1.2",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "peer",
+                    "name": "eslint",
+                    "spec": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7",
+                    "from": {
+                      "name": "eslint-plugin-react",
+                      "version": "7.37.5",
+                      "location": "node_modules/eslint-plugin-react",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "eslint-plugin-react",
+                          "spec": "7.37.5",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dev": false,
+    "optional": false,
+    "devOptional": false,
+    "peer": false,
+    "bundled": false,
+    "overridden": false
+  },
+  {
+    "name": "js-yaml",
+    "version": "3.14.1",
+    "location": "node_modules/js-yaml",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "prod",
+        "name": "js-yaml",
+        "spec": "^3.13.1",
+        "from": {
+          "name": "svgo",
+          "version": "1.3.2",
+          "location": "node_modules/svgo",
+          "isWorkspace": false,
+          "dependents": [
+            {
+              "type": "prod",
+              "name": "svgo",
+              "spec": "^1.2.2",
+              "from": {
+                "name": "@svgr/plugin-svgo",
+                "version": "5.5.0",
+                "location": "node_modules/@svgr/plugin-svgo",
+                "isWorkspace": false,
+                "dependents": [
+                  {
+                    "type": "prod",
+                    "name": "@svgr/plugin-svgo",
+                    "spec": "^5.5.0",
+                    "from": {
+                      "name": "@svgr/webpack",
+                      "version": "5.5.0",
+                      "location": "node_modules/@svgr/webpack",
+                      "isWorkspace": false,
+                      "dependents": [
+                        {
+                          "type": "prod",
+                          "name": "@svgr/webpack",
+                          "spec": "^5.2.0",
+                          "from": {
+                            "location": "/private/tmp/coronabingo-perf01-mCfNNM"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dev": false,
+    "optional": false,
+    "devOptional": false,
+    "peer": false,
+    "bundled": false,
+    "overridden": false
+  }
+]

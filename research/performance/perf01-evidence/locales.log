@@ -1,0 +1,22 @@
+
+> coronabingo@1.23.1 validate-locales
+> ts-node --project tsconfig.scripts.json scripts/validate-locales
+
+🗂  Directory /private/tmp/coronabingo-perf01-mCfNNM/locales/es
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/es/admin.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/es/common.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/es/index.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/es/playerId.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/es/roomId.json
+🗂  Directory /private/tmp/coronabingo-perf01-mCfNNM/locales/en
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/en/admin.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/en/common.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/en/index.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/en/playerId.json
+----  📄 File /private/tmp/coronabingo-perf01-mCfNNM/locales/en/roomId.json
+✅ es en
+✅ es en admin.json
+✅ es en common.json
+✅ es en index.json
+✅ es en playerId.json
+✅ es en roomId.json
