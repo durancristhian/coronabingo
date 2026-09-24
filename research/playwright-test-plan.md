@@ -198,3 +198,11 @@ The test now reads the two assigned ticket IDs from the room lobby and checks th
 `ANALYZE_BUNDLE=1 npm run ui-tests:production` rebuilt the app, validated locales and passed the complete Chromium journey in 10.4 seconds. The test URL was `http://127.0.0.1:3187`; Firebase target was local `demo-coronabingo-ui`, with Firestore at `127.0.0.1:8187`. Services and the test lock were removed after the run. No hosted Firebase data, Preview or Production environment was exercised.
 
 PERF-02's route-bundle measurements and implementation evidence remain in [its task record](performance/perf02-evidence/README.md).
+
+### 2026-09-24: PERF-05 spreadsheet export coverage
+
+PERF-05 added `tests/ui/spreadsheet.spec.ts` on implementation commit `919c8072b92f15660600cb6105397421dd846cbd`. The separate journey creates and configures a room through the Spanish interface, verifies that the hidden export is initially absent, activates it, holds its asynchronous script request and observes the loading label. It then fails that request, checks the recoverable error and preserved player rows, retries, and confirms that a double click downloads one non-empty `.xlsx` with the room name.
+
+The focused test passed in development and against the compiled production build. The final `npm run ui-tests:ci` ran the gameplay and spreadsheet tests against `demo-coronabingo-ui` in Firestore Emulator; both passed in 5,3 seconds including services, with Playwright reporting two tests in 3,1 seconds. A separate local-only check downloaded Spanish and English files and inspected their worksheet XML. English workbook content is verified evidence, not permanent automated coverage.
+
+Bundle measurements, XLSX contents, commands and environment boundaries are in [the PERF-05 evidence](performance/perf05-evidence/README.md). No hosted Firebase data, Preview or Production environment was exercised.

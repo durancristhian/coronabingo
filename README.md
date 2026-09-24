@@ -41,7 +41,7 @@ Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyz
 
 ## Browser regression tests
 
-`npm run ui-tests` runs a desktop Chromium journey in Spanish against a dedicated Next.js development server and a fresh local Firestore emulator. It creates a room, assigns cards to two participants, checks host controls and live draws, verifies cards and a mark after reload, then restarts and plays again. Host and player use separate browser contexts.
+`npm run ui-tests` runs two desktop Chromium journeys in Spanish against a dedicated Next.js development server and a fresh local Firestore emulator. The gameplay journey creates a room, assigns cards to two participants, checks host controls and live draws, verifies cards and a mark after reload, then restarts and plays again. Host and player use separate browser contexts. The spreadsheet journey activates the hidden export, checks loading and recovery from a failed chunk, then verifies that a double click produces one non-empty XLSX download.
 
 One-time setup after `npm ci`:
 
@@ -75,7 +75,7 @@ The runner reserves ports 3187 for Next.js, 8187 for Firestore, 9187 for the emu
 
 Services stop on completion, startup failure, test failure or Ctrl-C. Emulator data is disposable and is not exported. Tests use one worker and zero retries. Failures return a nonzero status and retain screenshots, traces and an HTML report under `test-results/` and `playwright-report/`; emulator logs live in `tests/ui/*-debug.log`. CI uploads available evidence even on failure, plus bundle reports from `.next-ui-tests/analyze/`, for 14 days.
 
-The emulator uses explicit test rules, not verified copies of deployed rules. A passing run covers this journey only. English, mobile, other browsers, manual draw mode, room-code protection, downloads and deployed Firebase behavior remain outside this suite. See the [plan and verification record](research/playwright-test-plan.md). The retired Cypress suite remains removed; `npm test` is not defined.
+The emulator uses explicit test rules, not verified copies of deployed rules. A passing run covers these journeys only. English, mobile, other browsers, manual draw mode, room-code protection, downloads other than the spreadsheet export and deployed Firebase behavior remain outside this suite. See the [plan and verification record](research/playwright-test-plan.md). The retired Cypress suite remains removed; `npm test` is not defined.
 
 ## Retired charity events
 
