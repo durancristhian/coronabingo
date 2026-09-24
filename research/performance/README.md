@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-04. Su implementación y verificación local están completas; publicación pendiente. Los estados de los demás tickets se conservan y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-04. Su implementación, verificación local y publicación en PR están completas; integración pendiente. Los estados de los demás tickets se conservan y no se modificaron cuentas.
 
 ## Línea base posterior al push
 
@@ -32,7 +32,7 @@ PERF-01, PERF-02 y PERF-04 están resueltos localmente; los restantes están dia
 | Hecho local | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado, sin publicar |
 | Hecho local | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado, sin publicar |
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
-| Hecho local | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado, sin publicar |
+| PR abierto | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado en local, CI y Preview |
 | 5 | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Diferir un chunk de 29,9 KB en la sala; 0 KB de ahorro en portada | 0,5 día |
 | 6 | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Diferir hasta unos 7,8 KB en portada, cerca de 2%; confirmar dependencias compartidas | 0,5 día |
 | 7 | [PERF-07: GIF de coronavirus](tickets/PERF-07-gif.md) | Objetivo experimental: 50–80% menos en ese archivo; calidad pendiente | 0,5 día |

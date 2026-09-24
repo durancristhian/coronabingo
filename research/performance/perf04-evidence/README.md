@@ -29,3 +29,11 @@ Los borradores de participantes quedan separados por sala dentro del provider. A
 Los recorridos usaron `http://127.0.0.1:3187`, el proyecto de demostración `demo-coronabingo-ui` y Firestore Emulator en `127.0.0.1:8187`. Anfitrión y jugador corrieron en contextos de navegador separados. Para comprobar la propagación del sonido sin depender del dispositivo de audio, la prueba interceptó `HTMLMediaElement.play` y verificó el mismo archivo en ambos contextos. El runner bloqueó Firebase alojado, no exportó datos y detuvo sus procesos.
 
 La comparación antes/después cuenta los eventos locales de alta y baja de listeners. Las respuestas reales del emulador se observaron por sus efectos semánticos en dos clientes —listas, asignaciones, números, festejo, sonido, reinicio y eliminación—, pero no se contó el transporte interno del SDK ni se lo convirtió en lecturas. La facturación no se midió. Preview, Production y reglas desplegadas siguen fuera de esta evidencia local.
+
+## Pull request y servicios remotos
+
+El [PR #191](https://github.com/durancristhian/coronabingo/pull/191) se abrió contra `main`. La primera ejecución remota verificó el commit de producto y pruebas `4a9a352ae0ffbb265d1d8241f4c58e5e3e99a87e`:
+
+- [GitHub Actions 36058490008](https://github.com/durancristhian/coronabingo/actions/runs/36058490008) terminó correctamente en 2 min 8 s. Pasaron instalación, lint/tipos, build, Chromium, Firestore Emulator y el recorrido anfitrión/jugador; Playwright informó una prueba aprobada en 9,3 segundos y el runner en 19,0 segundos. Los artefactos de UI y bundles se cargaron.
+- El deployment Vercel `6648005075` terminó en `success` y GitHub lo asocia al mismo SHA. La portada del Preview compartido abrió con título `Coronabingo | Tu juego de Bingo Online`, banner `Staging v1.23.1` y el formulario de creación visible.
+- No se creó una sala ni se ejecutó gameplay en Preview porque su URL no demuestra aislamiento de Firebase. CI sí ejecutó ese flujo contra el emulador. No se verificaron Production, reglas desplegadas ni facturación.
