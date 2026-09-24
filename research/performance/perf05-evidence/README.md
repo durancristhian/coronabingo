@@ -39,4 +39,10 @@ Los archivos medían 4.368 y 4.365 bytes. Eran evidencia local descartable y no 
 - `npm run lint:check`, `npm run validate-locales` y `npm run validate-tickets` pasaron. El validador de cartones informó `There are no tickets with 10 or more`.
 - `ANALYZE_BUNDLE=1 npm run ui-tests:build`, `npm run build` y `git diff --check` pasaron.
 
-La URL de prueba fue `http://127.0.0.1:3187`. El único destino Firebase fue `demo-coronabingo-ui` en Firestore Emulator, `127.0.0.1:8187`. No se creó información alojada ni se verificaron Preview o Production.
+La URL de prueba local fue `http://127.0.0.1:3187`. El único destino Firebase de los recorridos funcionales fue `demo-coronabingo-ui` en Firestore Emulator, `127.0.0.1:8187`. No se creó información alojada.
+
+## Pull request y entornos alojados
+
+[PR #189](https://github.com/durancristhian/coronabingo/pull/189) publicó el candidato `f38f45cc498fcc1317cb685de695c04808d7e76d`. [GitHub Actions 36057328996](https://github.com/durancristhian/coronabingo/actions/runs/36057328996) pasó en 1 minuto 46 segundos: instalación, lint y tipos, build con análisis, los dos tests Playwright en Chromium y la carga de evidencia y reportes de bundle. Playwright informó dos pruebas aprobadas en 8,4 segundos; el recorrido completo, incluidos los servicios, terminó en 13 segundos.
+
+Vercel informó el deployment como `Ready`. Se abrió la [portada del Preview](https://coronabingo-git-t3cod-433d6d-cristhian-durans-projects-3ace6550.vercel.app/) en el navegador colaborativo y se observó `Staging v1.23.1`, el formulario de creación de sala y la navegación en español. Esa comprobación fue de solo lectura: no se creó una sala porque una URL Preview no demuestra aislamiento de Firebase. Por lo tanto, el resultado alojado prueba el despliegue y la portada, mientras que la aceptación funcional de exportación corresponde al build local con Firestore Emulator y al mismo recorrido en CI. No se verificó Production ni se hizo merge.

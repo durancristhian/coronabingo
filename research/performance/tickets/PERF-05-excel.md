@@ -29,6 +29,7 @@ Rollback: restaurar el import estático. No cambiar la dependencia ni actualizar
 - 2026-09-24: el usuario autorizó implementar PERF-05, agregar una regresión Playwright para la exportación y, después de la verificación local, publicar la rama y abrir un pull request. La revisión del PR y sus checks forma parte del alcance; merge y Production no están autorizados.
 - 2026-09-24: la implementación y regresión quedaron en `919c807`. La comprobación local de bundle, error y reintento, descarga única, contenido bilingüe y suite completa pasó; los resultados están en [la evidencia de PERF-05](../perf05-evidence/README.md).
 - 2026-09-24: la revisión previa al PR detectó huecos en la observación de prefetch, la espera de una posible segunda descarga y el viewport móvil. Se corrigieron en `36a6f8f`, se compartió el setup de sala con la regresión principal y la suite compilada volvió a pasar completa.
+- 2026-09-24: [PR #189](https://github.com/durancristhian/coronabingo/pull/189) quedó abierto y mergeable. GitHub Actions y Vercel pasaron para `f38f45c`; la portada del Preview cargó en una comprobación sin sesión y sin escrituras. No se ejercitó la exportación contra Firebase alojado ni se verificó Production.
 
 ## Answer
 
