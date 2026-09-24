@@ -3,7 +3,7 @@
 Estado: diagnosticado, pendiente de implementación. Prioridad alta. Esfuerzo: 0,5 día. Riesgo bajo. Independiente de PERF-01.
 
 Status: ready-for-agent
-Work status: resolved
+Work status: claimed
 
 ## Diagnóstico
 
@@ -28,6 +28,10 @@ No agregar API, lecturas Firestore ni fetch de todo `/tickets.json` como sustitu
 - Ejecutar validación de cartones y checks comunes del [índice](../README.md).
 
 Rollback: volver a la relación de imports anterior, preservando el catálogo original intacto.
+
+## Comments
+
+- 2026-09-24: el usuario autorizó implementar el ticket. La revisión posterior al primer commit pidió registrar la ejecución en el plan canónico de Playwright y comprobar los IDs exactos de anfitrión y jugador después de entrada directa, recarga y reinicio. Se reabrió el trabajo para cerrar esos puntos antes del handoff.
 
 ## Answer
 

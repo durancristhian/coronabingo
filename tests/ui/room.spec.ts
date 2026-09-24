@@ -4,17 +4,25 @@ import { test, expect } from './fixtures'
 const names = { host: 'Ana anfitriona', player: 'Bruno jugador' }
 const emptyDraw = 'No salieron números todavía.'
 
-async function openCards(page: Page, name: string) {
+async function readAssignedTicketIds(page: Page, name: string) {
   const row = page.getByTestId('player-row').filter({ hasText: name })
   await expect(row).toContainText(/Cartones Nº \d+ & \d+/)
   const assigned = (await row.innerText()).match(/Cartones Nº (\d+) & (\d+)/)
   expect(assigned, 'The lobby shows two assigned cards').not.toBeNull()
-  await row.getByRole('button', { name: 'Jugar', exact: true }).click()
+
+  return assigned!.slice(1)
+}
+
+async function expectAssignedCards(
+  page: Page,
+  name: string,
+  ticketIds: string[],
+) {
   await expect(
     page.getByRole('heading', { name: new RegExp(`Hola ${name},`) }),
   ).toBeVisible()
   await expect(page.getByTestId('bingo-card')).toHaveCount(2)
-  for (const id of assigned!.slice(1)) {
+  for (const id of ticketIds) {
     await expect(
       page.getByText(`Cartón Nº ${id}`, { exact: true }),
     ).toBeVisible()
@@ -22,8 +30,15 @@ async function openCards(page: Page, name: string) {
   for (const card of await page.getByTestId('bingo-card').all()) {
     await expect(card.getByRole('button')).toHaveCount(15)
   }
+}
 
-  return assigned!.slice(1)
+async function openCards(page: Page, name: string) {
+  const row = page.getByTestId('player-row').filter({ hasText: name })
+  const assigned = await readAssignedTicketIds(page, name)
+  await row.getByRole('button', { name: 'Jugar', exact: true }).click()
+  await expectAssignedCards(page, name, assigned)
+
+  return assigned
 }
 
 async function drawAndObserve(host: Page, player: Page) {
@@ -41,6 +56,8 @@ test('host and player create, play, reload and restart a room', async ({
   playerPage: player,
 }) => {
   let lobbyURL = ''
+  let hostURL = ''
+  let hostTicketIds: string[] = []
   let playerURL = ''
   let playerTicketIds: string[] = []
   await test.step(
@@ -81,7 +98,8 @@ test('host and player create, play, reload and restart a room', async ({
       await player.goto(lobbyURL)
       playerTicketIds = await openCards(player, names.player)
       playerURL = player.url()
-      await openCards(host, names.host)
+      hostTicketIds = await openCards(host, names.host)
+      hostURL = host.url()
       await expect(
         host.getByRole('button', { name: 'Próximo número' }),
       ).toBeVisible()
@@ -96,17 +114,9 @@ test('host and player create, play, reload and restart a room', async ({
 
   await test.step('Direct entry shows the same assigned cards', async () => {
     await player.goto(playerURL)
-    await expect(
-      player.getByRole('heading', {
-        name: new RegExp(`Hola ${names.player},`),
-      }),
-    ).toBeVisible()
-    await expect(player.getByTestId('bingo-card')).toHaveCount(2)
-    for (const id of playerTicketIds) {
-      await expect(
-        player.getByText(`Cartón Nº ${id}`, { exact: true }),
-      ).toBeVisible()
-    }
+    await expectAssignedCards(player, names.player, playerTicketIds)
+    await host.goto(hostURL)
+    await expectAssignedCards(host, names.host, hostTicketIds)
   })
 
   await test.step(
@@ -133,6 +143,8 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(
         cards.first().getByRole('button', { name: value, exact: true }),
       ).toHaveAttribute('aria-pressed', 'true')
+      await host.reload()
+      await expectAssignedCards(host, names.host, hostTicketIds)
     },
   )
 
@@ -161,13 +173,13 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
-      await openCards(host, names.host)
-      await expect(player.getByTestId('bingo-card')).toHaveCount(2)
-      await expect(
-        player.getByRole('heading', {
-          name: new RegExp(`Hola ${names.player},`),
-        }),
-      ).toBeVisible()
+      const nextPlayerTicketIds = await readAssignedTicketIds(
+        host,
+        names.player,
+      )
+      const nextHostTicketIds = await openCards(host, names.host)
+      await expectAssignedCards(host, names.host, nextHostTicketIds)
+      await expectAssignedCards(player, names.player, nextPlayerTicketIds)
       await expect(host.getByText(emptyDraw)).toBeVisible()
       await expect(player.getByText(emptyDraw)).toBeVisible()
       await expect(host.getByTestId('called-number')).toHaveCount(0)
