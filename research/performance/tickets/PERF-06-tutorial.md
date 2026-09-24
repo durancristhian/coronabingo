@@ -27,6 +27,7 @@ Rollback: restaurar import estático del reproductor. [Next: carga diferida](htt
 ## Comments
 
 - 2026-09-24: el usuario autorizó la implementación y pidió agregar una regresión Playwright que compruebe que el video sigue apareciendo y que el modal abre, cierra y reabre correctamente.
+- 2026-09-24: [PR #190](https://github.com/durancristhian/coronabingo/pull/190) quedó abierto contra `main`. En el commit de implementación `0a33c99`, [GitHub Actions](https://github.com/durancristhian/coronabingo/actions/runs/36057434259) pasó instalación, lint/tipos, build, análisis de bundles y las cinco pruebas Playwright en 1 minuto 47 segundos. Vercel marcó el deployment como Ready y se verificó el Preview: sin recursos del reproductor antes de abrir, chunk/SDK/iframe después, videos correctos en ES/EN, cierre con desmontaje y foco restaurado, y reapertura española sin duplicados. No se hizo merge ni despliegue a Production.
 
 ## Answer
 

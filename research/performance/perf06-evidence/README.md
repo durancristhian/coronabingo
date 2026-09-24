@@ -36,4 +36,8 @@ La simulación reemplaza solo los dos recursos externos de YouTube; el component
 - `ANALYZE_BUNDLE=1 npm run ui-tests:production`: regeneró el build, validó locales y pasó las 5 pruebas, incluida la regresión completa de anfitrión/jugador, en 12,7 segundos.
 - `git diff --check`
 
-Preview y Production todavía no están verificados en este punto.
+## PR y Preview
+
+[PR #190](https://github.com/durancristhian/coronabingo/pull/190) quedó abierto contra `main`. En el commit de implementación `0a33c99f0d529d32456748c0e3cb2be53a34e156`, [GitHub Actions](https://github.com/durancristhian/coronabingo/actions/runs/36057434259) completó instalación, lint/tipos, build, análisis de bundles y las cinco pruebas Playwright. El job pasó en 1 minuto 47 segundos; Playwright informó 5 pruebas pasadas en 9,3 segundos.
+
+Vercel marcó el deployment como Ready. En su [Preview](https://coronabingo-git-t3cod-26fc32-cristhian-durans-projects-3ace6550.vercel.app), la entrada a `/` y `/en` no tenía recursos del reproductor ni iframe. Al abrir cada modal aparecieron, en ese orden lógico, el chunk `818`, `youtube.com/iframe_api` y el iframe del video correcto. El botón de cierre desmontó el iframe y devolvió el foco; el flujo español reabrió con un único reproductor. Esto verifica el Preview, no Production ni la reproducción audiovisual completa.
