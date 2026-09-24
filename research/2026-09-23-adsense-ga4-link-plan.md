@@ -1,6 +1,6 @@
 # Plan para vincular AdSense con Coronabingo - GA4
 
-Investigación y segunda revisión realizadas el 23 de septiembre de 2026. Estado: propuesto, sin ejecutar. Se consultaron las consolas autenticadas, el código local, recursos públicos de producción y documentación oficial. Se abrió el selector de propiedades de AdSense y se canceló sin seleccionar ni crear una vinculación. No se modificaron cuentas, etiquetas, variables, código del producto ni despliegues.
+Investigación, segunda revisión y revalidación posterior a Search Console realizadas el 23 de septiembre de 2026. Estado de este plan: propuesto, sin ejecutar. Se consultaron las consolas autenticadas, el código local, recursos públicos de producción y documentación oficial. Se abrió el selector de propiedades de AdSense y se canceló sin seleccionar ni crear una vinculación. Durante estas revisiones no se modificaron cuentas, etiquetas, variables, código del producto ni despliegues. La implementación de Search Console se realizó por separado y ya está reflejada aquí.
 
 El resultado buscado es ver impresiones e ingresos reales de AdSense en la propiedad `385744187`, con evidencia de recepción y continuidad. Una vinculación activa será un paso intermedio.
 
@@ -15,7 +15,8 @@ La investigación encontró una dependencia concreta: producción sigue cargando
 | Flujo web objetivo | `5469366293` | Conservar el flujo y su historial |
 | ID de medición | `G-WYG7FMEWEF` | Destino directo para el etiquetado web |
 | ID adicional de etiqueta de Google | `GT-W6J4R92` | Identifica la misma etiqueta en su consola |
-| URL declarada del flujo | `https://coronabingo.now.sh` | Es antigua; no crear otro flujo por este motivo |
+| URL declarada del flujo | `https://coronabingo.com.ar/`, revalidada después del trabajo de Search Console | Conservar; la actualización de la URL ya está hecha |
+| Asociación Search Console | Prefijo `https://coronabingo.com.ar/`, flujo `5469366293`, fecha 23 de septiembre de 2026 | Conservar durante implementación y rollback de AdSense |
 | Cuenta AdSense | `pub-6231280485856921` | Es la cuenta que aparece en los anuncios de producción |
 | Producto AdSense | Contenido; cuenta abierta | Es el producto compatible |
 | Vínculos AdSense actuales | Cero, confirmado desde AdSense y desde GA4 | Crear uno hacia `385744187` |
@@ -46,7 +47,7 @@ La inspección de red en Chrome encontró sustituciones de scripts publicitarios
 
 Implementar la etiqueta directa del flujo existente, crear el vínculo AdSense y verificar datos posteriores. Mantener la asociación actual de Firebase. No requiere un proyecto Firebase nuevo, migración de Firestore, cambio de plan de facturación, BigQuery ni Google Ads.
 
-La actualización de la URL descriptiva del flujo a `https://coronabingo.com.ar` es recomendable y puede coordinarse con el trabajo de Search Console. Debe conservar los mismos IDs y registrarse como cambio aparte. No es una condición para seleccionar correctamente la propiedad de AdSense.
+Search Console ya está vinculado al prefijo `https://coronabingo.com.ar/` y la URL descriptiva del flujo ya fue actualizada. Se revalidaron ambos cambios en GA4. La propiedad, el flujo y la medición conservan los mismos IDs. Search Console y AdSense son integraciones independientes: no hace falta esperar la llegada de datos de búsqueda para implementar AdSense. Conservar la asociación actual y los mecanismos de verificación del sitio, incluidos metaetiquetas o archivos existentes. El seguimiento de importación de Search Console continúa en su propio documento.
 
 El consentimiento, la colocación de anuncios y su formato tienen trabajos propios. Si afectan la medición se registrarán como dependencias concretas, sin ampliar esta tarea a un rediseño publicitario. No se generarán manualmente eventos `ad_impression`, importes ficticios ni clics de prueba.
 
@@ -57,7 +58,7 @@ El consentimiento, la colocación de anuncios y su formato tienen trabajos propi
 Responsable: quien implemente y tenga la sesión administrativa de Cristhian. Tiempo orientativo: 20 a 40 minutos.
 
 1. Revalidar los IDs de la tabla, permisos y ausencia de vínculo. Si ya existe exactamente el vínculo correcto por otro trabajo concurrente, conservarlo y pasar a la verificación. No crear duplicados ni borrar vínculos ajenos.
-2. Registrar commit y despliegue de producción, valor actual de `GA_TRACKING_ID` y ámbito de la variable en Vercel. El HTML demuestra el valor compilado UA, pero no se auditó aquí la configuración viva de Vercel.
+2. Registrar nuevamente commit y despliegue de producción, valor actual de `GA_TRACKING_ID` y ámbito de la variable en Vercel antes del cambio. Verificar la elegibilidad del despliegue para regresar y acordar quién ejecutaría la recuperación. La revalidación encontró Vercel Hobby, rol OWNER y producción `dpl_4XHmTtzUJEbr2tkmj6A6HTKFZj27`, commit `e7f36c552f3ce68886298de945fe435108b640ef`. Es la referencia de esta consulta; si otro trabajo publica después, tomar una nueva referencia.
 3. Guardar una línea base de los últimos siete días completos. AdSense: sitio, producto Contenido, impresiones e ingresos estimados. GA4: propiedad, flujo, hostname y vistas. Si el informe publicitario todavía no está disponible, registrar esa ausencia; no convertirla en un cero numérico.
 4. Registrar filtros activos, restricciones de ingresos del usuario que validará, zona horaria, moneda y fecha de consulta. Confirmar que el reporte incluya `coronabingo.com.ar`; incluir `www` solo cuando figure con tráfico en el período comparado.
 5. Coordinar los cambios con las otras tareas del repositorio y reservar dos revisiones posteriores. Al aprobar la ejecución, asignar quién vuelve a las 24 horas y quién revisa el intervalo consolidado. Este documento no crea recordatorios ni automatizaciones.
@@ -69,13 +70,13 @@ Salida: evidencia previa y responsables definidos. La implementación aún no es
 Responsable: implementación técnica. Tiempo orientativo: 1 a 3 horas, según lo que revele la prueba sin extensiones.
 
 1. Releer `AGENTS.md` y las guías de la versión instalada de Next.js antes de editar. El proyecto actual usa Pages Router y Next.js 16.3.6. Los archivos vigentes son `pages/_document.tsx`, `pages/_app.tsx`, `utils/gtag.ts` y `next.config.js`.
-2. Preparar `GA_TRACKING_ID=G-WYG7FMEWEF` en el ámbito de producción que corresponda. Cambiar únicamente esta variable. Conservar `MEASUREMENT_ID=G-PR7XZB4T8W`, los identificadores y la configuración de Firebase. Las variables incorporadas por Next.js requieren un nuevo build para cambiar el JavaScript servido.
+2. Preparar `GA_TRACKING_ID=G-WYG7FMEWEF` únicamente en Production. La revalidación encontró entradas separadas y de tipo sensitive para Production y Preview; no se extrajeron sus valores. Conservar la entrada Preview, `MEASUREMENT_ID`, los identificadores y la configuración de Firebase. La referencia pública compilada de Firebase es `G-PR7XZB4T8W`. Las variables incorporadas por Next.js requieren un nuevo build para cambiar el JavaScript servido.
 3. Sustituir la carga UA por una sola carga directa de la etiqueta objetivo. Revisar el orden de inicialización y de `config` respecto de los anuncios; no introducir una carga tardía que deje impresiones sin contexto analítico. Inspeccionar también la coexistencia con el SDK de Firebase.
 4. Mantener la estrategia de vistas manuales en navegación. Se verificó que las cargas de página están habilitadas y los eventos automáticos por cambios de historial están deshabilitados. Para el flujo objetivo: una vista inicial desde `config` y una vista por transición real, desde el helper del router. Preparar el helper con `event: page_view` dirigido explícitamente a `G-WYG7FMEWEF`, con ubicación, título y referencia correctos, evitando repetir `config` como mecanismo de navegación. No activar simultáneamente las vistas automáticas por historial.
 5. Verificar en un contexto limpio que la carga inicial y cada cambio real de pantalla produzcan exactamente un `page_view` por destino previsto. Dos propiedades distintas pueden recibir sus propias vistas; el error a evitar es duplicar una vista dentro de `G-WYG7FMEWEF`. Comprobar que el flujo Firebase conserve su comportamiento previo.
 6. Cubrir inicio en español e inglés, enlace directo y navegación cliente a una sala de prueba válida, cambio de idioma y atrás/adelante. Usar salas sintéticas de desarrollo para pruebas funcionales. Revisar el patrón de URL que aparece sin etiquetar sin alterar salas de usuarios.
 7. Ejecutar `npm run lint:check`, `npm run validate-locales` y `npm run build`. El build ya invoca la validación de idiomas; no hace falta repetirla si quedó cubierta en ese mismo build. La prueba determinante es la recepción por el destino correcto, no solo que compile.
-8. Validar la versión candidata en un entorno controlado sin impresiones publicitarias de prueba. Guardar evidencia de los eventos y sus destinos, omitiendo identificadores personales. Preparar el diff y el despliegue verificable antes de publicar.
+8. Validar la versión candidata en un entorno controlado sin impresiones publicitarias de prueba. Guardar evidencia de los eventos y sus destinos, omitiendo identificadores personales. Preparar un commit específico de analítica y el despliegue verificable antes de publicar. No mezclar con optimización, anuncios adaptables u otras tareas. Tras publicarlo, evitar otro despliegue de producción hasta completar la validación técnica inmediata; Hobby limita Instant Rollback al despliegue de producción inmediatamente anterior.
 9. Con autorización de publicación, desplegar y comprobar en producción una navegación breve, sin hacer clic en anuncios ni recargar para producir impresiones. Confirmar etiqueta directa, recepción en GA4 y ausencia de doble conteo. Registrar `T_tag`, instante en que el etiquetado correcto queda verificado.
 
 Google recomienda elegir un único mecanismo para las vistas de una SPA y advierte sobre el doble conteo al combinarlo con envíos manuales. [Vistas de página](https://developers.google.com/analytics/devguides/collection/ga4/views), [medición de SPA](https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications). Firebase documenta la convivencia del SDK con etiquetas de otras propiedades. [Firebase con gtag.js existente](https://firebase.google.com/docs/analytics/web/get-started#use-firebase-with-existing-gtagjs-tagging).
@@ -143,9 +144,35 @@ Para cada revisión guardar: fecha de consulta, T_tag, T_link, T0, período, zon
 
 ## Recuperación si algo sale mal
 
-Antes de publicar, conservar el despliegue anterior y el valor anterior de la única variable prevista. Si el cambio de etiqueta rompe la aplicación o duplica eventos, volver a la versión de etiquetado anterior mediante el procedimiento de despliegue autorizado y registrar el intervalo afectado. Volver al mecanismo UA es una recuperación temporal, no un estado final aceptable.
+La recuperación existe, pero comprende tres operaciones independientes. No hay un botón que deshaga al mismo tiempo código, variables e integraciones de Google.
 
-Si se creó el vínculo hacia la propiedad equivocada, documentar el error y retirar solo ese vínculo antes de crear el correcto. No cambiar la asociación Firebase para compensarlo. Ante ausencia de datos con IDs correctos, investigar antes de eliminar y recrear el vínculo. Los períodos sin captura correcta no se reparan retroactivamente con un relink.
+| Qué falla | Recuperación propuesta | Límite |
+| --- | --- | --- |
+| La nueva versión rompe la app, pierde eventos o los duplica | Volver al despliegue guardado antes del cambio | Restaura el código y configuración de ese build, no la configuración de Google |
+| `GA_TRACKING_ID` queda cambiado en los ajustes de Vercel | Restituir su valor anterior únicamente en el ámbito modificado y revertir el commit de analítica antes del próximo build | Instant Rollback no sustituye esta limpieza de configuración para futuros builds |
+| Se vinculó una propiedad incorrecta o se decide retirar la integración | En AdSense → Cuenta → Acceso y autorización → Integración de Google Analytics, quitar solo el vínculo creado por esta tarea | Se detiene la recepción nueva de AdSense en esa propiedad |
+
+El 23 de septiembre, aproximadamente a las 22:40 ART, Vercel devolvió plan `hobby`, rol `OWNER`, producción `Ready` y dominio `coronabingo.com.ar` asociado a `dpl_4XHmTtzUJEbr2tkmj6A6HTKFZj27`. Una vez publicado el cambio aislado, esta versión sería el destino inmediato anterior, siempre que no haya otra publicación intermedia. La restricción Hobby está documentada en [Vercel CLI rollback](https://vercel.com/docs/cli/rollback).
+
+Procedimiento preparado, no ejecutado:
+
+1. Ante un fallo reproducible del juego o de la medición introducido por la nueva versión, registrar el síntoma, hora y despliegue afectado. Detener nuevas publicaciones coordinadamente. No usar una demora normal del informe AdSense como motivo automático de rollback del sitio.
+2. Revalidar el ID de la versión que servía antes del cambio. Si sigue siendo el despliegue elegible, usar Instant Rollback en Vercel o el siguiente comando, sustituyendo el ID si cambió la referencia previa:
+
+   ```sh
+   vercel rollback dpl_4XHmTtzUJEbr2tkmj6A6HTKFZj27 --scope cristhian-durans-projects-3ace6550
+   ```
+
+3. Confirmar con `vercel inspect https://coronabingo.com.ar --scope cristhian-durans-projects-3ace6550` que el dominio apunta al destino esperado. Comprobar portada, navegación, juego y recepción analítica respecto de la línea base. Las pestañas ya abiertas pueden conservar el JavaScript de la versión fallida hasta recargar; no confundirlas con una nueva carga de la versión restaurada.
+4. Restituir `GA_TRACKING_ID` en el ámbito modificado y preparar la reversión del commit aislado, preservando cualquier cambio ajeno. Cambiar una variable afecta a los builds nuevos; no modifica los despliegues ya construidos. [Variables de entorno de Vercel](https://vercel.com/docs/environment-variables).
+5. Instant Rollback suspende la asignación automática de dominios a nuevas publicaciones. Tras validar la corrección, promover deliberadamente una versión sana para reanudarla. No promover de nuevo la versión fallida por error. [Funcionamiento de Instant Rollback](https://vercel.com/docs/instant-rollback).
+6. Mantener intactos el vínculo Search Console, la URL actual del flujo y Firebase. Si el vínculo AdSense es correcto y el fallo era de código, conservarlo mientras se corrige. Si el problema es el vínculo, quitar exclusivamente esa asociación y confirmar su ausencia. [Desvincular Analytics de AdSense](https://support.google.com/adsense/answer/6089298?hl=en).
+
+Si el despliegue deseado dejó de ser elegible, la alternativa es revertir únicamente el commit de analítica sobre la rama actual, restituir la variable y construir una versión nueva. Esa ruta requiere build y validación y no es instantánea. No usar un reset de toda la rama ni volver a un commit viejo que elimine trabajo posterior.
+
+Volver a UA sería una recuperación temporal de la situación anterior. El rollback no elimina automáticamente eventos incorrectos ya recogidos, no recupera impresiones perdidas ni reconstruye ingresos no capturados. Registrar el intervalo afectado. Si posteriormente se restablecen etiqueta y vínculo, fijar una nueva ventana de verificación.
+
+Se verificaron acceso de lectura, plan, rol, despliegue y documentación del procedimiento. No se hizo un ensayo real de rollback ni se garantizan permisos efectivos de escritura o disponibilidad futura sin revalidarlos al ejecutar. Antes de publicar, dejar acordado si la autorización de implementación incluye la recuperación de emergencia o quién la realizará.
 
 ## Segunda revisión del plan
 
@@ -164,4 +191,12 @@ Revisión realizada por el mismo agente después de contrastar consolas, producc
 | Seguir esperando indefinidamente | Diagnóstico desde 72 h con fuente positiva; ausencia de datos conserva la tarea abierta |
 | Dejar el seguimiento sin dueño | Asignación de responsable y fechas antes de implementar |
 
-Quedan por resolver durante la implementación: la prueba de red sin interferencias, el ámbito vigente de la variable en Vercel, la recepción publicitaria después del vínculo y el tamaño real de las discrepancias. Son verificaciones delimitadas; ninguna se da por realizada en este plan.
+Quedan por resolver durante la implementación: la prueba de red sin interferencias, el registro recuperable del valor anterior de la variable Production, la recepción publicitaria después del vínculo y el tamaño real de las discrepancias. El ámbito Production ya está identificado; su valor compilado visible es UA, pero la variable sensible no se descifró. Son verificaciones delimitadas; ninguna se da por realizada en este plan.
+
+## Revalidación posterior a Search Console
+
+La revisión de las 22:40 ART mantiene la recomendación de implementar este plan con las correcciones de recuperación anteriores. Se confirmó en vivo que Search Console apunta a `https://coronabingo.com.ar/` y al flujo `5469366293`, que la URL descriptiva es la actual, que AdSense aún no tiene vínculo en GA4 y que producción continúa configurando `UA-161408428-1`.
+
+Se eliminó del trabajo pendiente la actualización de URL ya realizada. Se añadió preservación explícita de Search Console, despliegue aislado, recuperación independiente de variables y vínculo, límite Hobby y alternativa de reversión de código si se pierde la elegibilidad. Los criterios de cierre siguen exigiendo impresiones e ingresos reales, continuidad y conciliación posterior.
+
+El registro separado de Search Console documenta recepción adicional de `page_view` tras una recarga del usuario desde incógnito. Esa observación refuerza que el flujo elegido recibe tráfico; no demuestra por sí sola entrega de eventos publicitarios ni una captura de red sin interferencias. Ver [comprobaciones de Search Console](2026-09-23-search-console-preflight.md).

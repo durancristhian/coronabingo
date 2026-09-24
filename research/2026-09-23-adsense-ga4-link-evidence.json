@@ -19,8 +19,17 @@
     "report_timezone": "Buenos Aires UTC-03:00",
     "page_load_measurement": true,
     "history_change_measurement": false,
-    "tag_diagnostics": ["Legacy Universal Analytics tags with connected site tags", "Some pages are not tagged"],
-    "coverage": {"included": 2251, "untagged": 1, "no_recent_data": 1191, "tagged": 1059, "untagged_route_pattern": "/es/room/{roomId}/{playerId}"},
+    "tag_diagnostics": [
+      "Legacy Universal Analytics tags with connected site tags",
+      "Some pages are not tagged"
+    ],
+    "coverage": {
+      "included": 2251,
+      "untagged": 1,
+      "no_recent_data": 1191,
+      "tagged": 1059,
+      "untagged_route_pattern": "/es/room/{roomId}/{playerId}"
+    },
     "links_url": "https://analytics.google.com/analytics/web/#/a161408428p385744187/admin/integrations/google-adsense",
     "stream_url_console": "https://analytics.google.com/analytics/web/#/a161408428p385744187/admin/streams/table/5469366293"
   },
@@ -37,8 +46,12 @@
     "report_timezone": "Buenos Aires GMT-03:00",
     "report_currency": "USD",
     "site_report": {
-      "from": "2026-09-16", "to": "2026-09-22", "site": "coronabingo.com.ar",
-      "estimated_earnings_usd": 0.81, "impressions": 2609, "page_views": 932,
+      "from": "2026-09-16",
+      "to": "2026-09-22",
+      "site": "coronabingo.com.ar",
+      "estimated_earnings_usd": 0.81,
+      "impressions": 2609,
+      "page_views": 932,
       "note": "pre-link baseline; estimated rounded earnings, not backfillable into GA4 by creating the link"
     },
     "account_info_url": "https://adsense.google.com/adsense/u/0/pub-6231280485856921/settings/account-information",
@@ -59,12 +72,25 @@
     "html_gtag_config_id": "UA-161408428-1",
     "html_adsense_client": "ca-pub-6231280485856921",
     "app_bundle": "/_next/static/chunks/pages/_app-aeee8dd9322400f5.js",
-    "app_bundle_measurement_ids": ["G-PR7XZB4T8W", "UA-161408428-1"],
-    "google_script_requested_with_ua_contains_ids": ["G-WYG7FMEWEF", "UA-161408428-1"],
+    "app_bundle_measurement_ids": [
+      "G-PR7XZB4T8W",
+      "UA-161408428-1"
+    ],
+    "google_script_requested_with_ua_contains_ids": [
+      "G-WYG7FMEWEF",
+      "UA-161408428-1"
+    ],
     "network_limit": "Chrome used extension replacement resources for analytics and advertising scripts. Clean-browser g/collect delivery was not established. Extensions were not changed.",
     "live_vercel_env_inspected": false
   },
-  "implementation": {"link_created": false, "product_code_changed": false, "account_settings_saved": false, "deployment_created": false, "post_link_impressions_verified": false, "post_link_revenue_verified": false},
+  "implementation": {
+    "link_created": false,
+    "product_code_changed": false,
+    "account_settings_saved": false,
+    "deployment_created": false,
+    "post_link_impressions_verified": false,
+    "post_link_revenue_verified": false
+  },
   "sources": [
     "https://support.google.com/adsense/answer/6084409?hl=en",
     "https://support.google.com/analytics/answer/13610380?hl=en",
@@ -75,5 +101,46 @@
     "https://developers.google.com/analytics/devguides/collection/ga4/views",
     "https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications",
     "https://firebase.google.com/docs/analytics/web/get-started"
-  ]
+  ],
+  "revalidation_after_search_console": {
+    "checked_at": "2026-09-23T22:40:00-03:00",
+    "timestamp_precision": "approximately; individual reads occurred over several minutes",
+    "search_console_prefix": "https://coronabingo.com.ar/",
+    "search_console_stream_id": "5469366293",
+    "search_console_link_date": "2026-09-23",
+    "stream_configured_url": "https://coronabingo.com.ar/",
+    "measurement_id": "G-WYG7FMEWEF",
+    "adsense_links_in_ga4": 0,
+    "production_explicit_tag": "UA-161408428-1",
+    "production_verification_meta_present": true,
+    "vercel": {
+      "scope": "cristhian-durans-projects-3ace6550",
+      "plan": "hobby",
+      "membership_role": "OWNER",
+      "production_deployment_id": "dpl_4XHmTtzUJEbr2tkmj6A6HTKFZj27",
+      "production_deployment_url": "https://coronabingo-bilf505s0-cristhian-durans-projects-3ace6550.vercel.app",
+      "production_commit": "e7f36c552f3ce68886298de945fe435108b640ef",
+      "status": "READY",
+      "domain_alias_confirmed": "coronabingo.com.ar",
+      "tracking_env_metadata": "GA_TRACKING_ID and MEASUREMENT_ID each have separate production and preview entries, type sensitive; values not decrypted",
+      "rollback_executed": false,
+      "write_permission_tested": false,
+      "rollback_constraint": "Hobby only supports immediately preceding production deployment; revalidate baseline immediately before change"
+    },
+    "live_changes_performed": false,
+    "source_commands": [
+      "vercel ls coronabingo",
+      "vercel inspect https://coronabingo.com.ar",
+      "vercel project inspect coronabingo",
+      "GET /v2/teams",
+      "GET /v13/deployments/dpl_4XHmTtzUJEbr2tkmj6A6HTKFZj27",
+      "GET /v9/projects/coronabingo"
+    ],
+    "sources": [
+      "https://vercel.com/docs/cli/rollback",
+      "https://vercel.com/docs/instant-rollback",
+      "https://vercel.com/docs/environment-variables",
+      "https://support.google.com/adsense/answer/6089298?hl=en"
+    ]
+  }
 }
