@@ -6,6 +6,7 @@ export default function Ads() {
   const [visible, setVisibility] = useState(false)
 
   useEffect(() => {
+    if (process.env.UI_TESTS === '1') return
     const timeoutId = setTimeout(() => {
       setVisibility(true)
     }, 1000)

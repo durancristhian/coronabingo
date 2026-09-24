@@ -1,5 +1,5 @@
 import { Emojis } from '~/interfaces/custom/Emojis'
-import ticketsData from '~/public/tickets.json'
+import ticketsMetadata from '~/public/tickets-metadata.json'
 
 export const BACKGROUND_CELL_VALUES = [
   { key: 'playerId:backgrounds.yellow', type: 'color', value: 'yellow' },
@@ -171,7 +171,7 @@ export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'rat',
   'scream',
 ]
-export const MAX_PLAYERS = ticketsData.length / 2
+export const MAX_PLAYERS = ticketsMetadata.maxPlayers
 export const SOUNDS = [
   {
     name: 'Cardi B - Coronavirus',

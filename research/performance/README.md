@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01: el usuario decidió eliminar las novedades. Implementación y verificación locales completas; publicación pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01 y PERF-02. Sus implementaciones y verificaciones locales están completas; publicación pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
 
 ## Línea base posterior al push
 
@@ -25,12 +25,12 @@ La portada y los assets muestreados dieron `X-Vercel-Cache: HIT`. JS/CSS con has
 
 ## Tickets y orden sugerido
 
-PERF-01 está resuelto localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
+PERF-01 y PERF-02 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
 
 | Orden | Ticket | Resultado esperado | Esfuerzo orientativo |
 | --- | --- | --- | --- |
 | Hecho local | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado, sin publicar |
-| 2 | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Cerca de 26 KB menos en pantallas sin cartones, aproximadamente 7% en portada | 0,5 día |
+| Hecho local | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado, sin publicar |
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
 | 4 | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Quitar una consulta de colección por pestaña de cartones; conservar sala y jugador | 0,5–1 día |
 | 5 | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Diferir un chunk de 29,9 KB en la sala; 0 KB de ahorro en portada | 0,5 día |
@@ -39,7 +39,7 @@ PERF-01 está resuelto localmente; los restantes están diagnosticados y pendien
 | 8 | [PERF-08: audios grandes](tickets/PERF-08-audios.md) | Cardi B: alrededor de 60% menos si 128 kbps mantiene calidad | 0,5–1 día |
 | 9 | [PERF-09: estabilidad del anuncio](tickets/PERF-09-anuncio.md) | Reserva estable de espacio; sin porcentaje de velocidad ni ingresos prometido | Según plan y dependencias de cuenta |
 
-El esfuerzo incluye implementación y comprobación enfocada, no esperas de aprobación, revisión o despliegue. La hipótesis inicial conjunta para PERF-01/02/06 era llegar a 250–300 KB. Tras eliminar novedades, PERF-01 solo deja la portada en 271.538 bytes gzip en el build local. Ya no se debe sumar su ahorro a los pendientes ni tratar el rango anterior como una nueva meta. Recalcular PERF-02/06 sobre este build antes de implementarlos; sus porcentajes de la tabla todavía remiten a la base pública de 365 KB. PERF-05 afecta sala, PERF-07/08 recursos optativos y PERF-04 datos en vivo: sus porcentajes no se suman.
+El esfuerzo incluye implementación y comprobación enfocada, no esperas de aprobación, revisión o despliegue. La hipótesis inicial conjunta para PERF-01/02/06 era llegar a 250–300 KB. Tras PERF-01 y PERF-02, la portada del build aislado de PERF-02 quedó en 230.605 bytes gzip. Las cifras no se suman directamente con la base pública porque corresponden a revisiones y entornos distintos. Recalcular PERF-06 sobre este build antes de implementarlo. PERF-05 afecta sala, PERF-07/08 recursos optativos y PERF-04 datos en vivo: sus porcentajes no se suman.
 
 ## Cómo atacar uno por uno
 
@@ -55,6 +55,7 @@ Para código de producto, usar los validadores vigentes, `npm run lint:check` y 
 - [HTTP, tamaños, hashes y módulos publicados](baseline-2026-09-23.json).
 - [Inventario local de medios](assets-2026-09-23.json), generado con `ffprobe`; no se codificaron alternativas.
 - [Registro de listeners aislado](listeners-2026-09-23.json). Ejecuta providers reales con React/router/Firestore simulados, sin tráfico ni facturación.
+- [Comparación local y verificación de PERF-02](perf02-evidence/README.md).
 
 Desde la raíz:
 

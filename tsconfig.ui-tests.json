@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": ".next-ui-tests/cache/tsconfig.tsbuildinfo"
+  },
+  "exclude": ["node_modules", ".next"]
+}

@@ -11,7 +11,11 @@
         "validate-locales": "ts-node --project tsconfig.scripts.json scripts/validate-locales",
         "validate-tickets": "ts-node --project tsconfig.scripts.json scripts/validate-tickets",
         "typecheck": "next typegen && tsc --noEmit",
-        "lint:check": "npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet"
+        "lint:check": "npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet",
+        "ui-tests": "node scripts/ui-tests.js",
+        "ui-tests:production": "node scripts/ui-tests.js --production",
+        "ui-tests:build": "node scripts/ui-tests.js --build-only",
+        "ui-tests:ci": "node scripts/ui-tests.js --production --skip-build"
     },
     "husky": {
         "hooks": {
@@ -77,6 +81,8 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@playwright/test": "1.63.0",
+        "firebase-tools": "15.31.0",
         "webpack": "5.111.1"
     },
     "engines": {

@@ -5,6 +5,8 @@ const { readFileSync, writeFileSync } = require('fs')
 const { join } = require('path')
 const pdfParse = require('pdf-parse')
 
+const TICKETS_PER_PLAYER = 2
+
 const createEmptyArray = () => new Array(9).fill(null)
 
 const buildTickets = (numbers: number[]) => {
@@ -87,10 +89,28 @@ Promise.all(
 ).then(tickets => {
   try {
     const flattedTickets = flat(tickets)
+    const maxPlayers = flattedTickets.length / TICKETS_PER_PLAYER
+
+    if (!Number.isInteger(maxPlayers)) {
+      throw new Error(
+        `Generated catalog must contain ${TICKETS_PER_PLAYER} tickets per player`,
+      )
+    }
 
     writeFileSync(
       join(__dirname, '..', 'public', 'tickets.json'),
       JSON.stringify(flattedTickets, null, 2),
+    )
+    writeFileSync(
+      join(__dirname, '..', 'public', 'tickets-metadata.json'),
+      JSON.stringify(
+        {
+          ticketCount: flattedTickets.length,
+          maxPlayers,
+        },
+        null,
+        2,
+      ),
     )
 
     console.log(`✅ Tickets generated successfully`)

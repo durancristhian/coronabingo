@@ -1,0 +1,80 @@
+{
+  "base_revision": "f6e789e588acc505dc37c44b3b9c040a8e6a97b3",
+  "candidate_revision": "4a0c8ca4e2732e9303e43c8c9513e00317a8e747",
+  "environment": "UI_TESTS=1 production build in .next-ui-tests",
+  "method": "Unique modern JavaScript from the build manifest per route, compressed with gzip level 9. Catalog presence requires the exact 151921-byte minified JSON literal.",
+  "catalog_sha256": {
+    "before": "1becf3e8f17eb9202fce21c6974bd85e32e2830fac4de5097a36b72eb60539f1",
+    "after": "1becf3e8f17eb9202fce21c6974bd85e32e2830fac4de5097a36b72eb60539f1"
+  },
+  "routes": {
+    "/": {
+      "before": {
+        "js_bytes": 932200,
+        "js_gzip9_bytes": 256976,
+        "contains_catalog": true
+      },
+      "after": {
+        "js_bytes": 780117,
+        "js_gzip9_bytes": 230605,
+        "contains_catalog": false
+      },
+      "delta": {
+        "js_bytes": -152083,
+        "js_gzip9_bytes": -26371,
+        "js_gzip9_percent": -10.26
+      }
+    },
+    "/room/[roomId]": {
+      "before": {
+        "js_bytes": 897148,
+        "js_gzip9_bytes": 263041,
+        "contains_catalog": false
+      },
+      "after": {
+        "js_bytes": 897148,
+        "js_gzip9_bytes": 263041,
+        "contains_catalog": false
+      },
+      "delta": {
+        "js_bytes": 0,
+        "js_gzip9_bytes": 0,
+        "js_gzip9_percent": 0.0
+      }
+    },
+    "/room/[roomId]/admin": {
+      "before": {
+        "js_bytes": 935508,
+        "js_gzip9_bytes": 257747,
+        "contains_catalog": true
+      },
+      "after": {
+        "js_bytes": 783425,
+        "js_gzip9_bytes": 231035,
+        "contains_catalog": false
+      },
+      "delta": {
+        "js_bytes": -152083,
+        "js_gzip9_bytes": -26712,
+        "js_gzip9_percent": -10.36
+      }
+    },
+    "/room/[roomId]/[playerId]": {
+      "before": {
+        "js_bytes": 946941,
+        "js_gzip9_bytes": 260527,
+        "contains_catalog": true
+      },
+      "after": {
+        "js_bytes": 946784,
+        "js_gzip9_bytes": 261164,
+        "contains_catalog": true
+      },
+      "delta": {
+        "js_bytes": -157,
+        "js_gzip9_bytes": 637,
+        "js_gzip9_percent": 0.24
+      }
+    }
+  }
+}
