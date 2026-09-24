@@ -75,7 +75,7 @@ The runner reserves ports 3187 for Next.js, 8187 for Firestore, 9187 for the emu
 
 Services stop on completion, startup failure, test failure or Ctrl-C. Emulator data is disposable and is not exported. Tests use one worker and zero retries. Failures return a nonzero status and retain screenshots, traces and an HTML report under `test-results/` and `playwright-report/`; emulator logs live in `tests/ui/*-debug.log`. CI uploads available evidence even on failure, plus bundle reports from `.next-ui-tests/analyze/`, for 14 days.
 
-The emulator uses explicit test rules, not verified copies of deployed rules. A passing run covers this journey only. English, mobile, other browsers, manual draw mode, room-code protection, downloads and deployed Firebase behavior remain outside this suite. See the [plan and verification record](research/playwright-test-plan.md). The retired Cypress suite remains removed; `npm test` is not defined.
+The emulator uses explicit test rules, not verified copies of deployed rules. A passing run covers the Spanish host/player journey plus the Spanish and English tutorial checks only. Mobile automation, other browsers, manual draw mode, room-code protection, downloads and deployed Firebase behavior remain outside this suite. See the [plan and verification record](research/playwright-test-plan.md). The retired Cypress suite remains removed; `npm test` is not defined.
 
 ## Retired charity events
 
