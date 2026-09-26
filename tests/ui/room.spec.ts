@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
+import { testPlayerNames } from './room-setup'
 
 const names = {
-  host: 'Ana anfitriona',
-  player: 'Bruno jugador',
+  ...testPlayerNames,
   temporary: 'Carla temporal',
 }
 const emptyDraw = 'No salieron números todavía.'

@@ -207,6 +207,14 @@ PERF-04 extended the existing host/player journey. Before saving, the host leave
 
 [PR #191](https://github.com/durancristhian/coronabingo/pull/191) then ran the same compiled-build journey on GitHub Actions at product/test commit `4a9a352ae0ffbb265d1d8241f4c58e5e3e99a87e`. The job passed in 2 min 8 s; Playwright reported one passing test in 9.3 seconds and the UI runner took 19.0 seconds. Vercel Preview also passed for that SHA, and its public staging homepage was inspected without creating hosted Firebase data.
 
+### 2026-09-24: PERF-05 spreadsheet export coverage
+
+PERF-05 added `tests/ui/spreadsheet.spec.ts` on implementation commit `919c8072b92f15660600cb6105397421dd846cbd`, then hardened it in `36a6f8f`. The separate journey creates and configures a room through the Spanish interface, observes script requests from before navigation, verifies that the hidden export is initially absent and that its chunk was not requested during room entry, then activates it, holds its asynchronous script request and observes the loading label. It fails that request, checks the recoverable error and preserved player rows, retries, and confirms that a double click downloads one non-empty `.xlsx` with the room name. It verifies loading, error, retry and ready states at 390 × 844 without horizontal overflow, and waits after recovery to rule out a late second download. Room setup is shared with the main journey through `tests/ui/room-setup.ts`.
+
+The focused test passed in development and against the compiled production build. After review hardening, the focused production run passed in 4,8 seconds. The final `npm run ui-tests:ci` ran the gameplay and spreadsheet tests against `demo-coronabingo-ui` in Firestore Emulator; both passed in 6,1 seconds including services, with Playwright reporting two tests in 3,8 seconds. A separate local-only check downloaded Spanish and English files and inspected their worksheet XML. English workbook content is verified evidence, not permanent automated coverage.
+
+Bundle measurements, XLSX contents, commands and environment boundaries are in [the PERF-05 evidence](performance/perf05-evidence/README.md). No hosted Firebase data, Preview or Production environment was exercised.
+
 ### 2026-09-24: PERF-06 tutorial coverage
 
 PERF-06 agregó cuatro pruebas del tutorial en `tests/ui/tutorial.spec.ts`. Verifican que el código del reproductor, el SDK remoto y el iframe no se solicitan antes de abrir el modal y registran cada capa por separado después de la apertura. El chunk se demora 500 ms para comprobar el estado de carga en una conexión limitada.

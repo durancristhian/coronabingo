@@ -44,6 +44,8 @@ El [PR #191](https://github.com/durancristhian/coronabingo/pull/191) se abrió c
 
 [GitHub Actions 36251154817](https://github.com/durancristhian/coronabingo/actions/runs/36251154817) pasó sobre ese mismo SHA en 1 min 52 s. Los checks de Vercel y Vercel Preview Comments también terminaron correctamente.
 
+Mientras se documentaba el gameplay, `main` avanzó de nuevo hasta `22e13fb` con PERF-05. La segunda integración conservó la regresión XLSX, su helper de sala y toda la cobertura específica de PERF-04. Volvieron a pasar lint/tipos, build, la matriz 0/2/2/2 y la suite compilada combinada. El runner terminó en 16,0 segundos y Playwright informó seis pruebas aprobadas en 7,7 segundos.
+
 Vercel asoció el deployment `6680510514` al SHA exacto y lo marcó `success`. El Preview usado fue `https://coronabingo-1c5z2sk7z-cristhian-durans-projects-3ace6550.vercel.app`. Antes de escribir se comparó el `PROJECT_ID` compilado con el `.env` aprobado, sin imprimir valores; coincidió con el proyecto no productivo.
 
 La partida `QA PERF04 20260926` creó la sala `9PRWClk0RoyZZihAqp9P` y dos participantes en pestañas separadas. Se comprobó lo siguiente mediante la UI y los efectos visibles de Firestore alojado:
