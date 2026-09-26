@@ -37,3 +37,23 @@ El [PR #191](https://github.com/durancristhian/coronabingo/pull/191) se abrió c
 - [GitHub Actions 36058490008](https://github.com/durancristhian/coronabingo/actions/runs/36058490008) terminó correctamente en 2 min 8 s. Pasaron instalación, lint/tipos, build, Chromium, Firestore Emulator y el recorrido anfitrión/jugador; Playwright informó una prueba aprobada en 9,3 segundos y el runner en 19,0 segundos. Los artefactos de UI y bundles se cargaron.
 - El deployment Vercel `6648005075` terminó en `success` y GitHub lo asocia al mismo SHA. La portada del Preview compartido abrió con título `Coronabingo | Tu juego de Bingo Online`, banner `Staging v1.23.1` y el formulario de creación visible.
 - No se creó una sala ni se ejecutó gameplay en Preview porque su URL no demuestra aislamiento de Firebase. CI sí ejecutó ese flujo contra el emulador. No se verificaron Production, reglas desplegadas ni facturación.
+
+## Integración de `main` y gameplay en Preview del 26 de septiembre
+
+`origin/main` incorporó PERF-06 y dejó el PR en conflicto documental. La rama integró `4f75283`, conservó los registros de ambos tickets y quedó mergeable en `44fb3251b10be645b1af5d88d7469e4d236053c7`. Sobre esa combinación pasaron Node 24.21.0, npm 11.19.0, `npm run lint:check`, locales, cartones, el seam de listeners 0/2/2/2, `npm run build`, `git diff --check` y `npm run ui-tests:production`. El último comando ejecutó cinco pruebas en 14,3 segundos; Playwright informó cinco aprobadas en 5,9 segundos.
+
+[GitHub Actions 36251154817](https://github.com/durancristhian/coronabingo/actions/runs/36251154817) pasó sobre ese mismo SHA en 1 min 52 s. Los checks de Vercel y Vercel Preview Comments también terminaron correctamente.
+
+Vercel asoció el deployment `6680510514` al SHA exacto y lo marcó `success`. El Preview usado fue `https://coronabingo-1c5z2sk7z-cristhian-durans-projects-3ace6550.vercel.app`. Antes de escribir se comparó el `PROJECT_ID` compilado con el `.env` aprobado, sin imprimir valores; coincidió con el proyecto no productivo.
+
+La partida `QA PERF04 20260926` creó la sala `9PRWClk0RoyZZihAqp9P` y dos participantes en pestañas separadas. Se comprobó lo siguiente mediante la UI y los efectos visibles de Firestore alojado:
+
+- Ambos participantes recibieron dos cartones y el anfitrión obtuvo los controles.
+- Atrás y adelante devolvieron al lobby con dos filas y restauraron los mismos cartones del anfitrión.
+- El número `69` apareció en ambas pestañas sin recarga. Marcar el `1` del jugador sobrevivió una recarga junto con los mismos cartones y el mismo número llamado.
+- Reiniciar llevó al anfitrión a configuración y al jugador al estado de espera sin cartones. La segunda partida mostró dos cartones por participante, comenzó sin números y sincronizó el `65`.
+- Activar confetti produjo 20 elementos en cada pestaña; desactivarlo dejó 0 en ambas.
+- Se disparó el sonido Cardi B desde el anfitrión, pero esta superficie de navegador no expuso el `Audio` separado del DOM para demostrar reproducción en ambas pestañas. La prueba local sí intercepta `HTMLMediaElement.play` y conserva esa cobertura.
+- Al borrar el jugador mediante el mismo cliente configurado para el Preview, su pestaña mostró `Ocurrió un error.`, retiró ambos cartones y la configuración dejó de mostrarlo.
+
+La limpieza eliminó los dos documentos de jugadores. Un batch posterior para borrar la sala falló con `PERMISSION_DENIED`; no había acceso administrativo configurado y no se cambiaron reglas. Se verificó que `rooms/9PRWClk0RoyZZihAqp9P` quedó vacío, con cero jugadores. Es el único dato de prueba retenido. Esta comprobación cubre el Preview y las reglas alojadas del proyecto no productivo; no cubre Production ni facturación.
