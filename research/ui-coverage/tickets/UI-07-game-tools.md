@@ -2,7 +2,7 @@
 
 Status: needs-triage
 
-Work status: open
+Work status: claimed
 
 Type: task
 
