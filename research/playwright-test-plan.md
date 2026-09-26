@@ -224,3 +224,19 @@ Con recursos externos controlados, el iframe se monta con el video español corr
 `ANALYZE_BUNDLE=1 npm run ui-tests:production` regeneró el build aislado y pasó las cinco pruebas contra `demo-coronabingo-ui` y Firestore Emulator. La evidencia detallada y los límites están en [el registro de PERF-06](performance/perf06-evidence/README.md).
 
 En [PR #190](https://github.com/durancristhian/coronabingo/pull/190), la primera ejecución de [GitHub Actions](https://github.com/durancristhian/coronabingo/actions/runs/36057434259) pasó las cinco pruebas en Ubuntu; Playwright informó 5 casos aprobados en 9,3 segundos. Vercel quedó Ready y el Preview se recorrió en español e inglés con YouTube real hasta el iframe correcto, cierre, foco y reapertura. No se probó Production ni audio/video completo.
+
+### 2026-09-25: inventory and proposed coverage tickets
+
+The owner requested a page-by-page inventory of current Playwright coverage and short blocks for expanding it. The [UI coverage inventory](ui-coverage/README.md) records only behaviors with visible assertions as covered and maps the remaining work to ten proposed `UI-xx` tickets.
+
+The inventory is based on revision `2ec2fb6`, the active routes and `tests/ui/room.spec.ts`. All new tickets remain `needs-triage` with open work status. No product code or UI test was changed, no server was started and no hosted Firebase data was accessed.
+
+### 2026-09-26: E2E scope reduced to realistic journeys
+
+The owner reviewed the inventory and rejected using Playwright as a substitute for a missing unit-test layer. The [coverage backlog](ui-coverage/README.md) now keeps only scenarios that require navigation, multiple browser contexts, Firestore synchronization, browser persistence, deferred loading, a mobile viewport or the 90-number boundary.
+
+UI-01 and UI-04 are resolved as `wontfix` for Playwright. The other eight tickets were narrowed to one or two realistic scenarios. Small form validations, presentation variants, links, modal mechanics and isolated error states remain documented as future unit or component-test candidates. No unit-test framework was selected or installed by this review.
+
+### 2026-09-26: retired routes excluded from all new tests
+
+The owner explicitly excluded standalone `/admin`, `/eventos/[eventId]`, `/eventos/[eventId]/admin` and any other removed route from all new test coverage, including Playwright, unit, integration, regression and HTTP checks. This exclusion does not apply to the active `/room/[roomId]/admin` route used to prepare a room.
