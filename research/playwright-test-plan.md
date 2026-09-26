@@ -198,3 +198,9 @@ The test now reads the two assigned ticket IDs from the room lobby and checks th
 `ANALYZE_BUNDLE=1 npm run ui-tests:production` rebuilt the app, validated locales and passed the complete Chromium journey in 10.4 seconds. The test URL was `http://127.0.0.1:3187`; Firebase target was local `demo-coronabingo-ui`, with Firestore at `127.0.0.1:8187`. Services and the test lock were removed after the run. No hosted Firebase data, Preview or Production environment was exercised.
 
 PERF-02's route-bundle measurements and implementation evidence remain in [its task record](performance/perf02-evidence/README.md).
+
+### 2026-09-25: inventory and proposed coverage tickets
+
+The owner requested a page-by-page inventory of current Playwright coverage and short blocks for expanding it. The [UI coverage inventory](ui-coverage/README.md) records only behaviors with visible assertions as covered and maps the remaining work to ten proposed `UI-xx` tickets.
+
+The inventory is based on revision `2ec2fb6`, the active routes and `tests/ui/room.spec.ts`. All new tickets remain `needs-triage` with open work status. No product code or UI test was changed, no server was started and no hosted Firebase data was accessed.
