@@ -4,6 +4,7 @@ import { testPlayerNames } from './room-setup'
 
 const names = {
   ...testPlayerNames,
+  replacement: 'Carla nueva anfitriona',
   temporary: 'Carla temporal',
 }
 const emptyDraw = 'No salieron números todavía.'
@@ -109,7 +110,7 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
-      for (const name of Object.values(names)) {
+      for (const name of [...Object.values(testPlayerNames), names.temporary]) {
         await host
           .getByRole('textbox', { name: 'Nombre *', exact: true })
           .fill(name)
@@ -297,24 +298,50 @@ test('host and player create, play, reload and restart a room', async ({
   )
 
   await test.step(
-    'A new game clears the draw and synchronizes again',
+    'Room setup replaces a player and changes the host before the next game',
     async () => {
+      const removedPlayer = host
+        .locator('#players-list > div')
+        .filter({ hasText: names.player })
+      await removedPlayer
+        .getByRole('button', { name: 'Eliminar persona' })
+        .click()
+      await expect(
+        host.locator('#players-list').getByText(names.player, { exact: true }),
+      ).toHaveCount(0)
+      await host
+        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .fill(names.replacement)
+      await host.getByRole('button', { name: 'Agregar persona' }).click()
+      await host
+        .getByRole('combobox', { name: 'adminId', exact: true })
+        .selectOption({ label: names.replacement })
       await host.getByRole('button', { name: 'Jugar', exact: true }).click()
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
-      const nextPlayerTicketIds = await readAssignedTicketIds(
-        host,
-        names.player,
-      )
+      await expect(
+        host.getByTestId('player-row').filter({ hasText: names.player }),
+      ).toHaveCount(0)
+      const nextLobbyURL = host.url()
       const nextHostTicketIds = await openCards(host, names.host)
+      await player.goto(nextLobbyURL)
+      const nextPlayerTicketIds = await openCards(player, names.replacement)
       await expectAssignedCards(host, names.host, nextHostTicketIds)
-      await expectAssignedCards(player, names.player, nextPlayerTicketIds)
+      await expectAssignedCards(player, names.replacement, nextPlayerTicketIds)
+      await expect(
+        host.getByRole('button', { name: 'Próximo número' }),
+      ).toHaveCount(0)
+      await expect(host.locator('#reboot-game')).toHaveCount(0)
+      await expect(
+        player.getByRole('button', { name: 'Próximo número' }),
+      ).toBeVisible()
+      await expect(player.locator('#reboot-game:visible')).toBeVisible()
       await expect(host.getByText(emptyDraw)).toBeVisible()
       await expect(player.getByText(emptyDraw)).toBeVisible()
       await expect(host.getByTestId('called-number')).toHaveCount(0)
       await expect(player.getByTestId('called-number')).toHaveCount(0)
-      await drawAndObserve(host, player)
+      await drawAndObserve(player, host)
     },
   )
 
@@ -366,13 +393,15 @@ test('host and player create, play, reload and restart a room', async ({
       ).toBeVisible()
       const playerRow = host
         .locator('#players-list > div')
-        .filter({ hasText: names.player })
+        .filter({ hasText: names.replacement })
       await expect(playerRow).toHaveCount(1)
       await playerRow.getByRole('button', { name: 'Eliminar persona' }).click()
       await expect(player.getByText('Ocurrió un error.')).toBeVisible()
       await expect(player.getByTestId('bingo-card')).toHaveCount(0)
       await expect(
-        host.locator('#players-list').getByText(names.player, { exact: true }),
+        host
+          .locator('#players-list')
+          .getByText(names.replacement, { exact: true }),
       ).toHaveCount(0)
     },
   )
