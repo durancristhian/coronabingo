@@ -100,9 +100,15 @@ Estos puntos salen del backlog Playwright. No se implementa todavía ningún fra
 - apertura, Escape, foco y cierre de modales;
 - significado visible u oculto del último número;
 - variantes individuales de fondos, festejos y sonidos;
-- rutas 404 y rutas retiradas, que pueden verificarse con checks HTTP;
+- la página 404 genérica, fuera del backlog actual;
 - `streamerView`, porque no tiene un control visible en el producto;
 - Firefox, WebKit y baselines visuales hasta tener una necesidad concreta o datos de uso.
+
+## Exclusiones explícitas
+
+No agregar tests UI, HTTP, unitarios, de integración ni de regresión para rutas retiradas. Esto incluye `/admin`, `/eventos/[eventId]`, `/eventos/[eventId]/admin` y cualquier otra ruta que se elimine del producto.
+
+Esta exclusión no incluye `/room/[roomId]/admin`: es la preparación activa de una sala y forma parte del happy path principal.
 
 ## Orden sugerido
 

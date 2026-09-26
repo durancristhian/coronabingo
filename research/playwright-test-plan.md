@@ -210,3 +210,7 @@ The inventory is based on revision `2ec2fb6`, the active routes and `tests/ui/ro
 The owner reviewed the inventory and rejected using Playwright as a substitute for a missing unit-test layer. The [coverage backlog](ui-coverage/README.md) now keeps only scenarios that require navigation, multiple browser contexts, Firestore synchronization, browser persistence, deferred loading, a mobile viewport or the 90-number boundary.
 
 UI-01 and UI-04 are resolved as `wontfix` for Playwright. The other eight tickets were narrowed to one or two realistic scenarios. Small form validations, presentation variants, links, modal mechanics and isolated error states remain documented as future unit or component-test candidates. No unit-test framework was selected or installed by this review.
+
+### 2026-09-26: retired routes excluded from all new tests
+
+The owner explicitly excluded standalone `/admin`, `/eventos/[eventId]`, `/eventos/[eventId]/admin` and any other removed route from all new test coverage, including Playwright, unit, integration, regression and HTTP checks. This exclusion does not apply to the active `/room/[roomId]/admin` route used to prepare a room.

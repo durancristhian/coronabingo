@@ -26,10 +26,12 @@ Verificar que el cambio de idioma conserve una ruta dinámica y el estado necesa
 
 ## Fuera de Playwright
 
-Logo, links del pie, donación, fallback de `localStorage`, 404 y rutas retiradas salen del backlog. Los links pueden probarse por componente y las rutas retiradas mediante checks HTTP.
+Logo, links del pie, donación, fallback de `localStorage` y la página 404 genérica salen del backlog. Los links pueden probarse por componente.
+
+No se deben agregar tests de ningún tipo para rutas retiradas como `/admin`, `/eventos/[eventId]` o `/eventos/[eventId]/admin`. Esta exclusión no afecta a `/room/[roomId]/admin`, que sigue activo y forma parte del happy path de una sala.
 
 ## Comments
 
 ### 2026-09-26
 
-El ticket original mezclaba navegación, enlaces, modales y 404. Se conserva sólo la transición de idioma dentro de una partida real.
+El ticket original mezclaba navegación, enlaces, modales y 404. Se conserva solo la transición de idioma dentro de una partida real.
