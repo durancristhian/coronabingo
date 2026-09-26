@@ -66,7 +66,7 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-08: tutorial bajo demanda](tickets/UI-08-home-and-tutorial.md)
 
-- [ ] Abrir el tutorial, comprobar el iframe correcto y cerrarlo sin cargar YouTube antes de tiempo.
+- [x] Abrir el tutorial, comprobar el iframe correcto y cerrarlo sin cargar YouTube antes de tiempo. Cobertura existente de PERF-06, verificada en [UI-08](tickets/UI-08-home-and-tutorial.md).
 
 ### [UI-09: cambio de idioma en una ruta de juego](tickets/UI-09-shell-locales-and-404.md)
 
@@ -122,3 +122,7 @@ Esta exclusión no incluye `/room/[roomId]/admin`: es la preparación activa de 
 8. UI-07, porque son herramientas secundarias y de menor riesgo.
 
 La suite completa debe seguir siendo corta y determinista. El objetivo no es subir el número de tests, sino detectar regresiones que impidan crear, jugar, sincronizar o continuar una partida.
+
+## Entrega de esta tanda
+
+La entrega se organiza con un PR agregador de `codex/ui-coverage/main` hacia `main`. Cada ticket que necesite código tendrá una rama y un PR propio hacia el agregador. Tras verificarlo, se integrará allí antes de abrir la siguiente rama. Este orden de PRs no crea dependencias funcionales entre tickets. El PR agregador queda para revisión humana y no se integra en `main` como parte de este trabajo. UI-08 se resuelve aquí con evidencia de la cobertura ya existente, sin repetirla en otro PR.
