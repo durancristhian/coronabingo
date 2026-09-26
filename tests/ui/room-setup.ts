@@ -6,11 +6,7 @@ export const testPlayerNames = {
   player: 'Bruno jugador',
 }
 
-export async function createReadyRoom(
-  page: Page,
-  roomName: string,
-  { useOnlineCaller = false } = {},
-) {
+export async function createRoom(page: Page, roomName: string) {
   await page.goto('/')
   await page
     .getByRole('textbox', { name: 'Nombre *', exact: true })
@@ -19,7 +15,12 @@ export async function createReadyRoom(
   await expect(
     page.getByRole('heading', { name: 'Preparar sala' }),
   ).toBeVisible()
+}
 
+export async function configureReadyRoom(
+  page: Page,
+  { useOnlineCaller = false } = {},
+) {
   for (const name of Object.values(testPlayerNames)) {
     await page
       .getByRole('textbox', { name: 'Nombre *', exact: true })
@@ -43,4 +44,13 @@ export async function createReadyRoom(
     page.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()
   await expect(page.getByTestId('player-row')).toHaveCount(2)
+}
+
+export async function createReadyRoom(
+  page: Page,
+  roomName: string,
+  options = {},
+) {
+  await createRoom(page, roomName)
+  await configureReadyRoom(page, options)
 }
