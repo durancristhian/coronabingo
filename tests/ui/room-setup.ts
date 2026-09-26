@@ -30,8 +30,13 @@ export async function createReadyRoom(
   await page
     .getByRole('combobox', { name: 'adminId', exact: true })
     .selectOption({ label: testPlayerNames.host })
+  const onlineCaller = page.getByRole('checkbox', {
+    name: 'Usar bolillero online',
+  })
   if (useOnlineCaller) {
-    await page.getByRole('checkbox', { name: 'Usar bolillero online' }).check()
+    await onlineCaller.check()
+  } else {
+    await onlineCaller.uncheck()
   }
   await page.getByRole('button', { name: 'Jugar', exact: true }).click()
   await expect(

@@ -53,8 +53,8 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-03: modos de bolillero y límite de 90](tickets/UI-03-game-configuration-and-draw-modes.md)
 
-- [ ] En modo manual, quien dirige agrega y quita un número y el jugador lo ve en tiempo real.
-- [ ] Con 89 números preparados, la UI sortea el último, llega a 90 sin duplicados y deshabilita el sorteo.
+- [x] En modo manual, quien dirige agrega y quita un número y el jugador lo ve en tiempo real.
+- [x] Con 89 números preparados, la UI sortea el último, llega a 90 sin duplicados y deshabilita el sorteo.
 
 ### [UI-02: reconfigurar participantes entre partidas](tickets/UI-02-setup-player-management.md)
 
