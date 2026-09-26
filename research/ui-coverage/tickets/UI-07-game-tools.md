@@ -25,10 +25,10 @@ Hacer un smoke de las herramientas que dependen del navegador o de sincronizaci�
 
 ## Criterios de aceptación
 
-- [ ] Se prueba un fondo, un festejo y un sonido, no todos los catálogos.
-- [ ] El audio se observa mediante una sustitución controlada de `Audio`; no se valida el parlante.
-- [ ] Los recursos externos siguen bloqueados.
-- [ ] Cada escenario puede filtrarse por separado.
+- [x] Se prueba un fondo, un festejo y un sonido, no todos los catálogos.
+- [x] El audio se observa mediante una sustitución controlada de `Audio`; no se valida el parlante.
+- [x] Los recursos externos siguen bloqueados.
+- [x] Cada escenario puede filtrarse por separado.
 
 ## Fuera de Playwright
 
@@ -39,6 +39,8 @@ Las variantes individuales, sonidos extra, cierre del modal y `streamerView` que
 ### 2026-09-26
 
 El ticket original intentaba cubrir todos los fondos, festejos, sonidos y estados de modales. Se reduce a dos smokes representativos.
+
+## Answer
 
 ### 2026-09-26: cobertura implementada y verificada
 
