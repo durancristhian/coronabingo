@@ -44,8 +44,8 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-05: concurrencia y ciclo de vida de marcas](tickets/UI-05-card-marking-resilience.md)
 
-- [ ] Dos pestañas de la misma persona hacen marcas distintas y ninguna se pierde.
-- [ ] Una partida nueva no recupera marcas de la partida anterior.
+- [x] Dos pestañas de la misma persona hacen marcas distintas y ninguna se pierde.
+- [x] Una partida nueva no recupera marcas de la partida anterior.
 
 ### [UI-06: código de acceso de quien dirige](tickets/UI-06-host-room-code.md)
 
