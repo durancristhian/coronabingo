@@ -4,7 +4,7 @@ Fecha: 2026-09-26
 
 Status: needs-triage
 
-Work status: open
+Work status: resolved
 
 Revisión relevada: `f8dab14`
 
@@ -44,38 +44,38 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-05: concurrencia y ciclo de vida de marcas](tickets/UI-05-card-marking-resilience.md)
 
-- [ ] Dos pestañas de la misma persona hacen marcas distintas y ninguna se pierde.
-- [ ] Una partida nueva no recupera marcas de la partida anterior.
+- [x] Dos pestañas de la misma persona hacen marcas distintas y ninguna se pierde.
+- [x] Una partida nueva no recupera marcas de la partida anterior.
 
 ### [UI-06: código de acceso de quien dirige](tickets/UI-06-host-room-code.md)
 
-- [ ] Activar la protección, entrar como jugador sin código, fallar y acertar como host, jugar, reiniciar y volver a exigir el código.
+- [x] Activar la protección, entrar como jugador sin código, fallar y acertar como host, jugar, reiniciar y volver a exigir el código.
 
 ### [UI-03: modos de bolillero y límite de 90](tickets/UI-03-game-configuration-and-draw-modes.md)
 
-- [ ] En modo manual, quien dirige agrega y quita un número y el jugador lo ve en tiempo real.
-- [ ] Con 89 números preparados, la UI sortea el último, llega a 90 sin duplicados y deshabilita el sorteo.
+- [x] En modo manual, quien dirige agrega y quita un número y el jugador lo ve en tiempo real.
+- [x] Con 89 números preparados, la UI sortea el último, llega a 90 sin duplicados y deshabilita el sorteo.
 
 ### [UI-02: reconfigurar participantes entre partidas](tickets/UI-02-setup-player-management.md)
 
-- [ ] Después de reiniciar, eliminar una persona, agregar otra, cambiar quién dirige y jugar con la nueva configuración.
+- [x] Después de reiniciar, eliminar una persona, agregar otra, cambiar quién dirige y jugar con la nueva configuración.
 
 ### [UI-10: recorrido principal en móvil](tickets/UI-10-responsive-accessibility-matrix.md)
 
-- [ ] Crear, configurar, abrir cartones y sincronizar un sorteo en un viewport móvil sin perder acciones esenciales.
+- [x] Crear, configurar, abrir cartones y sincronizar un sorteo en un viewport móvil sin perder acciones esenciales.
 
 ### [UI-08: tutorial bajo demanda](tickets/UI-08-home-and-tutorial.md)
 
-- [ ] Abrir el tutorial, comprobar el iframe correcto y cerrarlo sin cargar YouTube antes de tiempo.
+- [x] Abrir el tutorial, comprobar el iframe correcto y cerrarlo sin cargar YouTube antes de tiempo. Cobertura existente de PERF-06, verificada en [UI-08](tickets/UI-08-home-and-tutorial.md).
 
 ### [UI-09: cambio de idioma en una ruta de juego](tickets/UI-09-shell-locales-and-404.md)
 
-- [ ] Cambiar una URL dinámica de español a inglés sin perder la sala, la persona ni los cartones.
+- [x] Cambiar una URL dinámica de español a inglés sin perder la sala, la persona ni los cartones.
 
 ### [UI-07: herramientas secundarias durante una partida](tickets/UI-07-game-tools.md)
 
-- [ ] Un jugador cambia un fondo y lo conserva tras recargar.
-- [ ] Quien dirige activa un festejo y un sonido representativos y el otro contexto recibe ambos.
+- [x] Un jugador cambia un fondo y lo conserva tras recargar.
+- [x] Quien dirige activa un festejo y un sonido representativos y el otro contexto recibe ambos.
 
 ## Tickets retirados de Playwright
 
@@ -122,3 +122,13 @@ Esta exclusión no incluye `/room/[roomId]/admin`: es la preparación activa de 
 8. UI-07, porque son herramientas secundarias y de menor riesgo.
 
 La suite completa debe seguir siendo corta y determinista. El objetivo no es subir el número de tests, sino detectar regresiones que impidan crear, jugar, sincronizar o continuar una partida.
+
+## Entrega de esta tanda
+
+La entrega se organiza con un PR agregador de `codex/ui-coverage/main` hacia `main`. Cada ticket que necesite código tendrá una rama y un PR propio hacia el agregador. Tras verificarlo, se integrará allí antes de abrir la siguiente rama. Este orden de PRs no crea dependencias funcionales entre tickets. El PR agregador queda para revisión humana y no se integra en `main` como parte de este trabajo. UI-08 se resuelve aquí con evidencia de la cobertura ya existente, sin repetirla en otro PR.
+
+## Comments
+
+### 2026-09-26: cierre de la tanda
+
+UI-05, UI-06, UI-03, UI-02, UI-10, UI-08, UI-09 y UI-07 tienen `Work status: resolved` y evidencia en sus tickets y en [el plan de Playwright](../playwright-test-plan.md). Los PR secundarios #193 a #200 se integraron sólo en la rama agregadora. Las pruebas de juego documentadas usaron el Firestore Emulator local; los checks de CI y los despliegues Preview se verifican por PR. No se verificó gameplay alojado ni Production.

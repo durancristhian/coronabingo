@@ -242,3 +242,43 @@ UI-01 and UI-04 are resolved as `wontfix` for Playwright. The other eight ticket
 ### 2026-09-26: retired routes excluded from all new tests
 
 The owner explicitly excluded standalone `/admin`, `/eventos/[eventId]`, `/eventos/[eventId]/admin` and any other removed route from all new test coverage, including Playwright, unit, integration, regression and HTTP checks. This exclusion does not apply to the active `/room/[roomId]/admin` route used to prepare a room.
+
+### 2026-09-26: UI-05 card-marking resilience
+
+`tests/ui/card-marking-resilience.spec.ts` now opens two tabs for the same player against the local Firestore Emulator, selects two actual numbers from the assigned card, marks them concurrently, observes both marks in both tabs and verifies their persistence after both tabs reload. It then restarts and configures the next game and verifies that no new-card button is marked. The concurrent-reload journey also runs through English card UI. The test uses retrying visible assertions, not fixed synchronization waits.
+
+The initial test failed before the correction because the second tab did not receive the first tab's mark. The implementation now uses Firestore `arrayUnion` and `arrayRemove` per card number rather than staging and replaying complete arrays from `localStorage`, preventing concurrent tabs from overwriting one another. Reconfiguring drops numeric card-mark fields before it writes the next deal, so the `Restart` increment of `timesPlayed` begins without prior-game marks even if a ticket is assigned again. Focused development UI-05 passed in Spanish and English at product revision `785f5aff56a2e8b611eb2b29ad99fd25c7e1439b`; final baseline results are recorded in the UI-05 ticket. This is emulator-only evidence; no hosted Firebase, Preview or Production behavior was tested.
+
+The immediate-reload regression found later in the base room journey is also covered by the same player subscription: Firestore metadata events are observed, but pending writes do not update the rendered player state. The first visible pressed state is therefore server-confirmed, and the existing immediate-reload assertion passed again with UI-05's concurrent-tab coverage.
+
+### 2026-09-26: UI-03 manual draw and 90-number boundary
+
+At implementation revision `6b5ac077b35c987b188747070f45a50fba4b20c6`, `tests/ui/game-configuration-and-draw-modes.spec.ts` added two Spanish desktop journeys. The manual-room setup explicitly disables the online caller, then separate host and player contexts open assigned cards. The host adds and removes 7 in the grid; both contexts observe each transition without reload, while the player's click cannot alter the number. The online-caller journey seeds integers 1 through 89 using the Firestore Emulator REST API for `demo-coronabingo-ui`, opens host cards, draws the only missing number through the visible control, verifies 90 unique values and checks that `Próximo número` becomes disabled.
+
+Focused development coverage, `npm run lint:check`, `npm run build`, the complete development suite and `npm run ui-tests:production` passed locally. The production runner reported 11 Playwright cases passed in 16.7 seconds and 26.8 seconds including services. This was only `127.0.0.1:3187` plus Firestore Emulator at `127.0.0.1:8187`; no hosted Firebase, Preview or Production behavior was exercised.
+
+### 2026-09-26: UI-02 participant reconfiguration between games
+
+`tests/ui/room.spec.ts` extends the existing Spanish desktop host/player journey after its first game restarts. Its first game begins with only Ana anfitriona and Bruno jugador. In the active room setup after that restart, the host removes Bruno through the UI, adds Carla nueva anfitriona through the UI and selects Carla as the new host. The same room starts the next game; both current players open their two assigned cards in separate contexts, Carla draws a number visible to Ana, and Ana has neither the draw nor restart controls.
+
+The UI-02 review removed an unrelated temporary third participant and browser-history setup navigation from the first-game setup, so the new coverage stays limited to the required between-game reconfiguration. `npm run ui-tests -- tests/ui/room.spec.ts` passed one case in 13.1 seconds. `npm run lint:check`, `npm run build` and `git diff --check` passed. The complete development suite passed 11 cases in 44.1 seconds (48.2 seconds including services), and `npm run ui-tests:production` passed 11 cases in 16.5 seconds (24.6 seconds including services). All verification used `demo-coronabingo-ui` on the local Firestore Emulator at `127.0.0.1:8187`; no hosted Firebase, Preview or Production environment was exercised.
+
+### 2026-09-26: UI-10 mobile primary journey
+
+`tests/ui/mobile-room.spec.ts` adds one Spanish Chromium journey at 390 × 844. It creates and configures a room from the mobile host context, checks room setup overflow after the two participants and caller configuration are present, opens host and player card views in separate contexts set to the same viewport, confirms both visible cards expose an enabled number control and the host draw control remains usable, then makes one online draw and observes it in the player context without reload. It checks `documentElement.scrollWidth <= innerWidth` on the home page, room setup, lobby and both open game views. The test deliberately ends after that first draw.
+
+The shared setup helper now exposes its existing creation and configuration steps separately while preserving `createReadyRoom` for its callers. Focused development coverage passed one case in 5.4 seconds (9.1 seconds including the emulator and server); `npm run lint:check` and `npm run build` passed. The complete development suite passed 12 cases in 47.4 seconds (51.1 seconds including services), and `npm run ui-tests:production` passed the same 12 cases in 17.9 seconds (27.2 seconds including build, emulator and server). Every run used the isolated `demo-coronabingo-ui` Firestore Emulator at `127.0.0.1:8187` and temporary application server at `http://127.0.0.1:3187`. No hosted Firebase, Preview or Production behavior was exercised.
+
+After review, the focused case again passed with the stricter assertions (4.8 seconds Playwright, 8.4 seconds including services); lint, build and diff checks passed. The full development suite passed 12 cases in 46.9 seconds (50.5 seconds including services), and production mode passed 12 in 17.5 seconds (24.9 seconds including build and services).
+
+### 2026-09-26: UI-09 language change in a game route
+
+`tests/ui/shell-locales.spec.ts` adds one desktop host and player journey. It creates one room in Spanish, opens the player's assigned cards through the room UI, and changes to English through the visible `language` selector. The test compares the room and player segments of the dynamic URL, checks the English player heading, Last numbers heading and both assigned ticket IDs, then has the host draw a number that reaches the English player context without reload.
+
+The focused development case passed. `npm run lint:check`, `npm run build` and `git diff --check` passed. The complete development suite passed 13 cases. `npm run ui-tests:production` also passed 13 cases, with Playwright reporting 19.3 seconds and the full runner 29.3 seconds. Every check used Node 24.21.0, npm 11.19.0, `http://127.0.0.1:3187` and the isolated `demo-coronabingo-ui` Firestore Emulator at `127.0.0.1:8187`. No hosted Firebase, Preview or Production behavior was exercised.
+
+### 2026-09-26: UI-07 game tools
+
+Implementation commit `66fa6525b52ca1f8af53d478435ec395ff152eba` adds `tests/ui/game-tools.spec.ts` with two independently filterable Spanish desktop smokes. The personal-background case selects the included Pikachu image and verifies its empty-cell background before and after reload. The host-actions case opens separate host and player contexts, observes representative confetti in the player context, then replaces `Audio` with a controlled browser double in both contexts and verifies that the player attempts the representative Cardi B - Coronavirus resource. The fixture blocks external resources and hosted Firebase requests throughout.
+
+The focused development commands passed once per scenario. `npm run lint:check`, `npm run build`, `git diff --check`, the complete development suite and `npm run ui-tests:production` all passed; both complete suites reported 15 Playwright tests passed. The runner used `http://127.0.0.1:3187`, `demo-coronabingo-ui`, and Firestore Emulator at `127.0.0.1:8187`; it stopped every owned service after each run. No hosted Firebase, Preview, CI or Production environment was exercised.
