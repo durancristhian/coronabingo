@@ -70,7 +70,7 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-09: cambio de idioma en una ruta de juego](tickets/UI-09-shell-locales-and-404.md)
 
-- [ ] Cambiar una URL dinámica de español a inglés sin perder la sala, la persona ni los cartones.
+- [x] Cambiar una URL dinámica de español a inglés sin perder la sala, la persona ni los cartones.
 
 ### [UI-07: herramientas secundarias durante una partida](tickets/UI-07-game-tools.md)
 
