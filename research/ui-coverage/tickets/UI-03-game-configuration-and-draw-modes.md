@@ -27,10 +27,10 @@ Cubrir el modo de juego que falta y el límite que debe detener el sorteo.
 
 ## Criterios de aceptación
 
-- [ ] Sólo el host puede modificar el bolillero manual.
-- [ ] Ambos contextos muestran el mismo resultado.
-- [ ] El caso de 90 no realiza noventa clics ni depende del orden aleatorio.
-- [ ] El recorrido base con bolillero online continúa pasando.
+- [x] Sólo el host puede modificar el bolillero manual.
+- [x] Ambos contextos muestran el mismo resultado.
+- [x] El caso de 90 no realiza noventa clics ni depende del orden aleatorio.
+- [x] El recorrido base con bolillero online continúa pasando.
 
 ## Fuera de Playwright
 
@@ -58,7 +58,7 @@ Se agregaron dos recorridos Playwright deterministas en
 
 ### Evidencia local 2026-09-26
 
-- Base: `e93f48257d881190c2e68b0f2e63c8192886007c`; rama: `codex/ui-coverage/ui-03`.
+- Base: `e93f48257d881190c2e68b0f2e63c8192886007c`; implementación: `6b5ac077b35c987b188747070f45a50fba4b20c6`; rama: `codex/ui-coverage/ui-03`.
 - Runtime: Node `v24.21.0`, npm `11.19.0`.
 - `npm run ui-tests -- tests/ui/game-configuration-and-draw-modes.spec.ts`: 2 casos aprobados en desarrollo, 11.6 s incluyendo servicios.
 - `npm run lint:check`: aprobado.
