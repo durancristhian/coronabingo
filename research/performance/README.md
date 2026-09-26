@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01, PERF-02, PERF-05 y PERF-06. Sus tickets separan verificación local, pull request y publicación. Los demás tickets continúan abiertos y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras integrar PERF-01, PERF-02, PERF-05 y PERF-06, e implementar PERF-04. PERF-04 tiene verificación local, CI y Preview; su integración está pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
 
 ## Línea base posterior al push
 
@@ -25,21 +25,21 @@ La portada y los assets muestreados dieron `X-Vercel-Cache: HIT`. JS/CSS con has
 
 ## Tickets y orden sugerido
 
-PERF-01, PERF-02, PERF-05 y PERF-06 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
+PERF-01, PERF-02, PERF-05 y PERF-06 están integrados. PERF-04 está resuelto en su PR. Los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
 
 | Orden | Ticket | Resultado esperado | Esfuerzo orientativo |
 | --- | --- | --- | --- |
-| Hecho local | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado, sin publicar |
-| Hecho local | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado, sin publicar |
+| Integrado | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado e integrado |
+| Integrado | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado e integrado |
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
-| 4 | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Quitar una consulta de colección por pestaña de cartones; conservar sala y jugador | 0,5–1 día |
-| Hecho local | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Medido: 36,0 KB menos al entrar a la sala; 36,5 KB bajo demanda al activar Excel | Verificado, sin publicar |
-| Hecho local | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Medido: 4,0 KB menos en portada, 1,72%; reproductor diferido hasta abrir el modal | Verificado, sin publicar |
+| PR abierto | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado en local, CI y Preview |
+| Integrado | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Medido: 36,0 KB menos al entrar a la sala; 36,5 KB bajo demanda al activar Excel | Verificado e integrado |
+| Integrado | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Medido: 4,0 KB menos en portada, 1,72%; reproductor diferido hasta abrir el modal | Verificado e integrado |
 | 7 | [PERF-07: GIF de coronavirus](tickets/PERF-07-gif.md) | Objetivo experimental: 50–80% menos en ese archivo; calidad pendiente | 0,5 día |
 | 8 | [PERF-08: audios grandes](tickets/PERF-08-audios.md) | Cardi B: alrededor de 60% menos si 128 kbps mantiene calidad | 0,5–1 día |
 | 9 | [PERF-09: estabilidad del anuncio](tickets/PERF-09-anuncio.md) | Reserva estable de espacio; sin porcentaje de velocidad ni ingresos prometido | Según plan y dependencias de cuenta |
 
-El esfuerzo incluye implementación y comprobación enfocada, no esperas de aprobación, revisión o despliegue. La hipótesis inicial conjunta para PERF-01/02/06 era llegar a 250–300 KB. Tras PERF-01 y PERF-02, la portada del build aislado de PERF-02 quedó en 230.605 bytes gzip. PERF-05 llevó la entrada a sala de 263.041 a 227.034 bytes gzip y dejó 36.502 bytes para la primera exportación. Las cifras no se suman directamente con la base pública porque corresponden a revisiones y entornos distintos. Recalcular PERF-06 sobre este build antes de implementarlo. PERF-07/08 afectan recursos optativos y PERF-04 datos en vivo; sus porcentajes no se suman.
+El esfuerzo incluye implementación y comprobación enfocada, no esperas de aprobación, revisión o despliegue. La hipótesis inicial conjunta para PERF-01/02/06 era llegar a 250–300 KB. Tras PERF-01 y PERF-02, la portada del build aislado de PERF-02 quedó en 230.605 bytes gzip. PERF-05 llevó la entrada a sala de 263.041 a 227.034 bytes gzip y dejó 36.502 bytes para la primera exportación. Las cifras no se suman directamente con la base pública porque corresponden a revisiones y entornos distintos. PERF-07/08 afectan recursos optativos y PERF-04 datos en vivo; sus porcentajes no se suman.
 
 ## Cómo atacar uno por uno
 
@@ -48,7 +48,7 @@ El esfuerzo incluye implementación y comprobación enfocada, no esperas de apro
 3. Cumplir su aceptación y los checks aplicables; actualizar el ticket con cambios, resultados, commit si lo hay y límites. Un resultado local no cierra una comprobación pendiente en producción.
 4. Recalcular los bytes que puedan haberse movido entre chunks antes del siguiente ticket.
 
-Para código de producto, usar los validadores vigentes, `npm run lint:check` y build en un checkout aislado si hay un servidor usando `.next`. Para gameplay, añadir prueba de anfitrión y jugador independiente contra desarrollo/emulador. No ejecutar partidas de prueba ni publicidad repetitiva contra producción. PERF-01 cumplió los checks locales y documenta su cobertura de navegador y límites en [el registro de verificación](perf01-evidence/README.md).
+Para código de producto, usar los validadores vigentes, `npm run lint:check` y build en un checkout aislado si hay un servidor usando `.next`. Para gameplay, añadir prueba de anfitrión y jugador independiente contra desarrollo/emulador. Los gameplays en Preview siguen las reglas de `AGENTS.md`; no ejecutar partidas ni publicidad repetitiva directamente contra Production. PERF-01 cumplió los checks locales y documenta su cobertura de navegador y límites en [el registro de verificación](perf01-evidence/README.md).
 
 ## Evidencia y reproducción
 
@@ -56,6 +56,7 @@ Para código de producto, usar los validadores vigentes, `npm run lint:check` y 
 - [Inventario local de medios](assets-2026-09-23.json), generado con `ffprobe`; no se codificaron alternativas.
 - [Registro de listeners aislado](listeners-2026-09-23.json). Ejecuta providers reales con React/router/Firestore simulados, sin tráfico ni facturación.
 - [Comparación local y verificación de PERF-02](perf02-evidence/README.md).
+- [Comparación local y verificación de PERF-04](perf04-evidence/README.md).
 - [Comparación local y verificación de PERF-05](perf05-evidence/README.md).
 - [Comparación local y verificación de PERF-06](perf06-evidence/README.md).
 
@@ -66,7 +67,7 @@ python3 research/performance/measure-production.py > /tmp/coronabingo-performanc
 node research/performance/measure-listeners.cjs --expect-scoped
 ```
 
-El segundo comando se ejecutó y falla actualmente con `FAIL: cards still subscribes to the full player collection`. Esa es la señal enfocada de PERF-04, no una regresión creada por esta entrega. El script deberá adaptarse si cambian la composición de providers o sus imports; el criterio funcional permanece.
+El segundo comando pasa tras PERF-04 y exige la matriz completa: inicio 0, sala 2, configuración 2 y cartones 2. También comprueba un cleanup por cada listener registrado durante inicio → configuración → sala → cartones → sala → otra sala → inicio. `--players-source-ref <revisión>` permite repetir esa medición con la versión histórica del provider; el script deberá adaptarse si cambian la composición de providers o sus imports, pero el criterio funcional permanece.
 
 Los tamaños normalizados comprimen cada recurso con gzip nivel 9, independientemente de cómo lo sirva Vercel. `wire_body_bytes` guarda el cuerpo HTTP recibido por separado. Se cuentan scripts explícitos del HTML, excluyendo `nomodule`; no anuncios, Analytics, módulos que se descarguen después ni source maps. El probe solicita también chunks de otras rutas para inspeccionarlos, pero no los suma a la portada. No ejecuta JavaScript del sitio. No es una traza de navegador, Lighthouse ni medición de LCP/INP/CLS. Los bytes de fuentes en un source map no son bytes de transferencia.
 

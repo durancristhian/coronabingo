@@ -2,6 +2,9 @@
 
 Estado: diagnosticado y reproducido de forma aislada; pendiente de implementación. Prioridad alta. Esfuerzo: 0,5–1 día. Riesgo medio. Sin dependencia de tickets de assets.
 
+Status: ready-for-agent
+Work status: resolved
+
 ## Diagnóstico
 
 `contexts/index.tsx` monta los providers globalmente. `contexts/Players.tsx` abre `rooms/{roomId}/players` con cualquier `roomId`. La pantalla de cartones consume sala y jugador individual, pero no la lista colectiva. Lobby y configuración sí consumen `usePlayers`.
@@ -31,3 +34,16 @@ Se elimina una consulta de colección por pestaña de cartones, pasando de 3 a 2
 - Checks comunes del [índice](../README.md).
 
 Rollback: restaurar activación global de la lista; no requiere migración de datos. [Referencia de Firestore](https://firebase.google.com/docs/firestore/query-data/listen).
+
+## Comments
+
+- 2026-09-24: el usuario autorizó implementar, publicar y comprobar el ticket. El seam enfocado se amplió antes del cambio y falló porque cartones todavía registraba y limpiaba tres listeners. La implementación se limitó al efecto colectivo y añadió cobertura de atrás/adelante al recorrido de navegador.
+- 2026-09-24: la revisión previa al PR detectó que la primera versión descartaba participantes aún no guardados al salir de configuración. Se reprodujo en navegador, se corrigió conservando borradores por sala y se amplió la cobertura a eliminación persistida, festejos, sonidos, cambio de sala y aislamiento de estado.
+- 2026-09-24: se abrió el [PR #191](https://github.com/durancristhian/coronabingo/pull/191). GitHub Actions y Vercel Preview pasaron sobre el commit `4a9a352`; la portada del Preview cargó sin ejecutar gameplay contra Firebase alojado.
+- 2026-09-26: el usuario autorizó gameplays en Vercel Preview. Se integró `origin/main` para resolver el conflicto con PERF-06, pasaron las cinco pruebas UI y se ejecutó una partida alojada con dos pestañas sobre el commit `44fb325`. Funcionaron asignación, atrás/adelante, números en vivo, marca persistida, reinicio, segunda partida, festejo y eliminación en vivo. Se borraron ambos jugadores de prueba. Las reglas rechazaron borrar la sala vacía `9PRWClk0RoyZZihAqp9P`; el límite quedó asentado en `AGENTS.md` y en la evidencia.
+
+## Answer
+
+Implementado localmente el 24 de septiembre de 2026. `PlayersContextProvider` usa el patrón de ruta de Pages Router para activar la colección únicamente en sala y configuración. Mantiene el provider global, deja de exponer estado al desactivarse, conserva borradores locales separados por sala y descarta callbacks de suscripciones anteriores. Los listeners de sala y jugador individual no cambiaron.
+
+La medición enfocada pasó con 0 listeners en inicio, 2 en sala, 2 en configuración y 2 en cartones, además del ciclo completo con cambio de sala. La regresión de producción contra Firestore Emulator confirmó creación, configuración, borradores, eliminación, sala, cartones, atrás/adelante, entrada directa, números, opciones, sonidos, recarga, reinicio y aislamiento entre salas con anfitrión y jugador independientes. Los comandos, resultados y límites están en [la evidencia de PERF-04](../perf04-evidence/README.md).

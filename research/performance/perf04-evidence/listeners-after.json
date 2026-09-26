@@ -1,0 +1,42 @@
+{
+  "method": "Actual providers with mocked dependencies; initial mount/cleanup matrix plus Players route lifecycle",
+  "results": [
+    {
+      "screen": "home",
+      "registrations": [],
+      "unsubscribeCalls": 0
+    },
+    {
+      "screen": "lobby",
+      "registrations": [
+        "doc:test-room",
+        "collection:test-room/players"
+      ],
+      "unsubscribeCalls": 2
+    },
+    {
+      "screen": "setup",
+      "registrations": [
+        "doc:test-room",
+        "collection:test-room/players"
+      ],
+      "unsubscribeCalls": 2
+    },
+    {
+      "screen": "cards",
+      "registrations": [
+        "doc:test-room",
+        "doc:test-room/players/test-player"
+      ],
+      "unsubscribeCalls": 2
+    }
+  ],
+  "lifecycleEvents": [
+    "listen:room-a/players",
+    "unsubscribe:room-a/players",
+    "listen:room-a/players",
+    "unsubscribe:room-a/players",
+    "listen:room-b/players",
+    "unsubscribe:room-b/players"
+  ]
+}
