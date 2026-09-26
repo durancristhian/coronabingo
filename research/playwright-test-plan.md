@@ -206,3 +206,13 @@ PERF-05 added `tests/ui/spreadsheet.spec.ts` on implementation commit `919c8072b
 The focused test passed in development and against the compiled production build. After review hardening, the focused production run passed in 4,8 seconds. The final `npm run ui-tests:ci` ran the gameplay and spreadsheet tests against `demo-coronabingo-ui` in Firestore Emulator; both passed in 6,1 seconds including services, with Playwright reporting two tests in 3,8 seconds. A separate local-only check downloaded Spanish and English files and inspected their worksheet XML. English workbook content is verified evidence, not permanent automated coverage.
 
 Bundle measurements, XLSX contents, commands and environment boundaries are in [the PERF-05 evidence](performance/perf05-evidence/README.md). No hosted Firebase data, Preview or Production environment was exercised.
+
+### 2026-09-24: PERF-06 tutorial coverage
+
+PERF-06 agregó cuatro pruebas del tutorial en `tests/ui/tutorial.spec.ts`. Verifican que el código del reproductor, el SDK remoto y el iframe no se solicitan antes de abrir el modal y registran cada capa por separado después de la apertura. El chunk se demora 500 ms para comprobar el estado de carga en una conexión limitada.
+
+Con recursos externos controlados, el iframe se monta con el video español correcto, responde a una interacción de reproducción, se desmonta con Escape y con el botón, devuelve el foco y reaparece sin duplicados. Otro caso bloquea YouTube y comprueba el fallback externo. La portada inglesa monta su video correspondiente. Estas pruebas amplían la suite, pero el recorrido completo de anfitrión/jugador sigue limitado a español de escritorio.
+
+`ANALYZE_BUNDLE=1 npm run ui-tests:production` regeneró el build aislado y pasó las cinco pruebas contra `demo-coronabingo-ui` y Firestore Emulator. La evidencia detallada y los límites están en [el registro de PERF-06](performance/perf06-evidence/README.md).
+
+En [PR #190](https://github.com/durancristhian/coronabingo/pull/190), la primera ejecución de [GitHub Actions](https://github.com/durancristhian/coronabingo/actions/runs/36057434259) pasó las cinco pruebas en Ubuntu; Playwright informó 5 casos aprobados en 9,3 segundos. Vercel quedó Ready y el Preview se recorrió en español e inglés con YouTube real hasta el iframe correcto, cierre, foco y reapertura. No se probó Production ni audio/video completo.

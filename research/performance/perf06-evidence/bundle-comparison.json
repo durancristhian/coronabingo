@@ -1,0 +1,21 @@
+{
+  "method": "Unique modern JavaScript assigned to the homepage by the build manifest, compressed independently with gzip level 9. Both builds used Node 24.21.0, npm 11.19.0, Webpack and the isolated UI-test environment.",
+  "base": {
+    "revision": "2ec2fb6",
+    "homepage_js_bytes": 780117,
+    "homepage_js_gzip9_bytes": 230605,
+    "initial_player_chunk_gzip9_bytes": 5879,
+    "player_in_initial_manifest": true
+  },
+  "candidate": {
+    "homepage_js_bytes": 768688,
+    "homepage_js_gzip9_bytes": 226627,
+    "deferred_player_chunk_gzip9_bytes": 5784,
+    "player_in_initial_manifest": false
+  },
+  "difference": {
+    "homepage_js_bytes": -11429,
+    "homepage_js_gzip9_bytes": -3978,
+    "homepage_js_gzip9_percent": -1.72
+  }
+}

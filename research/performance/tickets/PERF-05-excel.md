@@ -30,6 +30,7 @@ Rollback: restaurar el import estático. No cambiar la dependencia ni actualizar
 - 2026-09-24: la implementación y regresión quedaron en `919c807`. La comprobación local de bundle, error y reintento, descarga única, contenido bilingüe y suite completa pasó; los resultados están en [la evidencia de PERF-05](../perf05-evidence/README.md).
 - 2026-09-24: la revisión previa al PR detectó huecos en la observación de prefetch, la espera de una posible segunda descarga y el viewport móvil. Se corrigieron en `36a6f8f`, se compartió el setup de sala con la regresión principal y la suite compilada volvió a pasar completa.
 - 2026-09-24: [PR #189](https://github.com/durancristhian/coronabingo/pull/189) quedó abierto y mergeable. GitHub Actions y Vercel pasaron para `f38f45c`; la portada del Preview cargó en una comprobación sin sesión y sin escrituras. No se ejercitó la exportación contra Firebase alojado ni se verificó Production.
+- 2026-09-26: se integró `origin/main` en la rama del PR después del merge de PERF-06. Los conflictos documentales en `README.md`, el índice de rendimiento y el plan de Playwright se resolvieron conservando la cobertura y evidencia de ambos tickets. Pasaron `npm run lint:check`, `npm run build`, `git diff --check` y `npm run ui-tests:production`; Playwright aprobó los seis casos combinados contra Firestore Emulator.
 
 ## Answer
 
