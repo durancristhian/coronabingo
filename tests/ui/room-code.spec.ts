@@ -2,19 +2,18 @@ import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
 import { testPlayerNames } from './room-setup'
 
-async function openCards(page: Page, name: string) {
-  const row = page.getByTestId('player-row').filter({ hasText: name })
-
-  await row.getByRole('button', { name: 'Jugar', exact: true }).click()
-  await expect(
-    page.getByRole('heading', { name: new RegExp(`Hola ${name},`) }),
-  ).toBeVisible()
-}
-
 async function openPlayerLink(page: Page, name: string) {
   const row = page.getByTestId('player-row').filter({ hasText: name })
 
   await row.getByRole('button', { name: 'Jugar', exact: true }).click()
+}
+
+async function openCards(page: Page, name: string) {
+  await openPlayerLink(page, name)
+
+  await expect(
+    page.getByRole('heading', { name: new RegExp(`Hola ${name},`) }),
+  ).toBeVisible()
 }
 
 function codeChoices(page: Page) {
