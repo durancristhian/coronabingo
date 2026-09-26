@@ -1,4 +1,4 @@
-# UI-03: opciones de partida y modos de bolillero
+# UI-03: modos de bolillero y límite de 90
 
 Status: needs-triage
 
@@ -8,19 +8,36 @@ Type: task
 
 ## Objetivo
 
-Cubrir la configuración que cambia el juego: bolillero online o manual y significados de los números.
+Cubrir el modo de juego que falta y el límite que debe detener el sorteo.
 
-## Alcance
+## Escenario A: bolillero manual
 
-- Bolillero online con varios sorteos, orden idéntico en dos contextos y límite de 90.
-- Bolillero manual con alta y baja de números sólo para quien dirige.
-- Significado del último número visible por defecto.
-- Ocultamiento del significado y del link de la Quiniela.
+1. Crear y configurar una sala con el bolillero online desactivado.
+2. Abrir host y jugador en contextos separados.
+3. El host marca un número en la grilla.
+4. El jugador recibe el mismo número sin recargar.
+5. El host desmarca ese número y desaparece en ambos contextos.
+
+## Escenario B: número 90
+
+1. Preparar 89 números sorteados mediante un helper del emulador.
+2. Abrir los cartones del host.
+3. Sortear el único número restante desde la UI.
+4. Verificar 90 valores únicos y el botón de sorteo deshabilitado.
 
 ## Criterios de aceptación
 
-- [ ] Los dos modos se configuran desde la página de preparación, no modificando el DOM.
-- [ ] La persona que no dirige nunca obtiene controles de escritura.
-- [ ] Agregar o quitar un número se refleja sin recarga en el segundo contexto.
-- [ ] El orden visible coincide en ambos contextos tras varios cambios.
-- [ ] El caso de 90 números evita noventa clics lentos si un helper del emulador puede preparar 89 y la UI completa el último.
+- [ ] Sólo el host puede modificar el bolillero manual.
+- [ ] Ambos contextos muestran el mismo resultado.
+- [ ] El caso de 90 no realiza noventa clics ni depende del orden aleatorio.
+- [ ] El recorrido base con bolillero online continúa pasando.
+
+## Fuera de Playwright
+
+El texto del significado del número y su variante oculta quedan para pruebas de componente.
+
+## Comments
+
+### 2026-09-26
+
+Se eliminan las aserciones pequeñas de presentación. Se conservan el flujo manual y el límite de 90 por su impacto directo en una partida.

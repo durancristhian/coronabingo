@@ -1,27 +1,28 @@
 # UI-04: datos, compartir y exportar desde la sala
 
-Status: needs-triage
+Status: wontfix
 
-Work status: open
+Work status: resolved
 
 Type: task
 
-## Objetivo
+## Resultado
 
-Cubrir las funciones del lobby y de la preparación que no forman parte del juego en sí: datos de sala, compartir y exportar.
+Este ticket se retira del backlog Playwright. Sus comportamientos se pueden verificar con pruebas más chicas y deterministas.
 
-## Alcance
+## Candidatos para pruebas más chicas
 
-- Nombre y URL de sala en preparación y lobby.
-- Modal de compartir, copia al portapapeles y destinos de WhatsApp y Telegram.
-- Orden alfabético y distintivo de quien dirige.
-- Desbloqueo de exportación mediante siete activaciones del título.
-- Descarga y contenido del `.xls`.
+- nombre y URL de sala;
+- orden y distintivo de quien dirige;
+- texto enviado al portapapeles;
+- URLs de WhatsApp y Telegram;
+- configuración y contenido generado para el `.xls`;
+- nombre del archivo descargado.
 
-## Criterios de aceptación
+La descarga real del navegador aporta poca señal adicional porque la exportación está oculta detrás de siete activaciones del título y el riesgo principal está en los datos generados.
 
-- [ ] La URL compartida contiene la sala actual y no un valor fijo.
-- [ ] Portapapeles y `window.open` se interceptan; no se llama a servicios externos.
-- [ ] La descarga tiene el nombre esperado y se valida su contenido básico.
-- [ ] El archivo incluye sala, capacidad, quien dirige, cartones y links de todas las personas.
-- [ ] El caso no valida estilos internos de un servicio o aplicación de terceros.
+## Comments
+
+### 2026-09-26
+
+El dueño pidió retirar de Playwright los casos que reemplazan unit tests. Se conserva el ticket como registro, con estado `wontfix`, en vez de borrar su historia.

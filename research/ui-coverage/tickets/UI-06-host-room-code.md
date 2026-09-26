@@ -8,24 +8,32 @@ Type: task
 
 ## Objetivo
 
-Cubrir la barrera visible que pide el código de sala antes de mostrar los cartones de quien dirige.
+Cubrir en un único recorrido la barrera visible de acceso a los cartones del host.
 
-## Alcance
+## Escenario E2E
 
-- Activación de la opción oculta en la preparación.
-- Visualización del código para quien configura.
-- Entrada sin código para una persona común.
-- Código incompleto, incorrecto y correcto para quien dirige.
-- Nuevo pedido de código después de reiniciar.
+1. Activar la opción de código desde la preparación y leer la secuencia generada.
+2. Empezar la partida.
+3. Verificar que el jugador común entre sin código.
+4. Verificar que el host encuentre la pantalla de acceso.
+5. Ingresar una secuencia incorrecta y observar el rechazo.
+6. Ingresar la secuencia correcta y acceder a los cartones y controles.
+7. Reiniciar la partida.
+8. Empezar otra partida y verificar que el host vuelva a necesitar el código.
 
 ## Criterios de aceptación
 
-- [ ] La prueba obtiene el código generado para la sala actual; no fija una secuencia de emojis.
-- [ ] El botón de ingreso permanece deshabilitado con una secuencia incompleta.
-- [ ] Un código incorrecto muestra error y mantiene la pantalla utilizable.
-- [ ] El código correcto muestra el juego y los controles de quien dirige.
-- [ ] Reiniciar borra el acceso local y vuelve a pedir el código en la partida siguiente.
+- [ ] El test obtiene el código de la sala actual y no fija emojis.
+- [ ] El rechazo no deja bloqueado el reintento.
+- [ ] Los roles usan contextos separados.
+- [ ] El recorrido termina con la protección activa en la partida siguiente.
 
 ## Límite
 
-Esto verifica UX, no seguridad. La comparación ocurre en el cliente y Playwright no demuestra una autorización protegida por reglas de Firestore o servidor.
+Esto verifica UX, no seguridad. La comparación ocurre en el cliente y no demuestra autorización mediante reglas de Firestore o servidor.
+
+## Comments
+
+### 2026-09-26
+
+Los estados incompletos del selector de emojis salen del alcance. El ticket queda como un único flujo de acceso, juego y reinicio.

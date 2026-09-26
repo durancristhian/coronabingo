@@ -1,31 +1,27 @@
 # UI-01: estados de ruta y errores recuperables
 
-Status: needs-triage
+Status: wontfix
 
-Work status: open
+Work status: resolved
 
 Type: task
 
-## Objetivo
+## Resultado
 
-Cubrir los estados que hoy quedan fuera del recorrido feliz: carga, error de Firestore, recursos inexistentes, salas desactualizadas, salas bloqueadas y sala todavía no configurada.
+Este ticket se retira del backlog Playwright. La matriz propuesta cubría carga, errores de lectura, recursos inexistentes, salas desactualizadas, salas bloqueadas y reintentos. Son estados aislados que pueden prepararse y afirmar con menos costo en pruebas de componentes.
 
-## Alcance
+El recorrido E2E existente ya prueba una transición relevante: después del reinicio, el jugador pasa a espera y vuelve al juego cuando el host configura la siguiente partida.
 
-- Inicio: fallo al crear una sala y reintento.
-- Preparación, lobby y cartones: carga y error de lectura.
-- Preparación y lobby: sala inexistente, desactualizada o bloqueada.
-- Cartones: sala inexistente o desactualizada, persona inexistente y espera mientras la sala no está lista.
-- Lobby: transición en tiempo real desde espera hasta sala lista.
+## Candidatos para pruebas más chicas
 
-## Criterios de aceptación
+- render de carga, error y mensajes de recurso inexistente;
+- acción de `Recargar`;
+- error y reintento al crear o guardar;
+- sala desactualizada o bloqueada;
+- persona inexistente.
 
-- [ ] Cada estado tiene una aserción sobre el mensaje o control visible correspondiente.
-- [ ] Los errores recuperables prueban `Recargar` o el reintento disponible.
-- [ ] Ningún caso toca Firebase alojado; los documentos se preparan en el emulador.
-- [ ] Las pruebas no dependen de esperas fijas ni de IDs aleatorios.
-- [ ] El recorrido feliz existente continúa pasando.
+## Comments
 
-## Nota de implementación
+### 2026-09-26
 
-Agregar helpers de datos del emulador antes de duplicar navegación en cada prueba. No confundir estos casos con reglas o disponibilidad de Firebase desplegado.
+El dueño pidió reservar Playwright para recorridos realistas y límites importantes. Se descarta esta matriz E2E. La decisión no implementa todavía una herramienta de unit tests ni elimina los comportamientos del producto.

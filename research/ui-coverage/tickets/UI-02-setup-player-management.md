@@ -1,4 +1,4 @@
-# UI-02: gestión de personas en la preparación
+# UI-02: reconfigurar participantes entre partidas
 
 Status: needs-triage
 
@@ -8,21 +8,32 @@ Type: task
 
 ## Objetivo
 
-Cubrir las reglas de alta, baja, selección de quien dirige y límite de capacidad sin convertir el test en otra partida completa.
+Extender el recorrido existente con una segunda partida cuya lista y host cambian de verdad.
 
-## Alcance
+## Escenario E2E
 
-- Nombre vacío y repetido.
-- Alta hasta el máximo permitido.
-- Baja de una persona común y de quien dirige.
-- Habilitación de `Jugar` sólo con dos personas y quien dirige seleccionado.
-- Orden y actualización en tiempo real de la lista.
-- Dos pestañas de preparación editando la misma sala.
+1. Completar la primera partida del recorrido base y reiniciar.
+2. Eliminar a una de las personas.
+3. Agregar una persona nueva.
+4. Cambiar quién dirige.
+5. Empezar la siguiente partida.
+6. Verificar que el lobby ya no muestre a la persona eliminada.
+7. Abrir los cartones de las dos personas actuales.
+8. Verificar que el nuevo host tenga los controles y que el host anterior no los tenga.
 
 ## Criterios de aceptación
 
-- [ ] Cada regla prueba tanto el control deshabilitado como el resultado al corregir la entrada.
-- [ ] Eliminar a quien dirige limpia el rol y bloquea el inicio de la partida.
-- [ ] El máximo proviene del comportamiento visible, sin fijar en el test una constante duplicada si puede evitarse.
-- [ ] La prueba concurrente deja explícito qué estado debe ganar o combinarse.
-- [ ] Los casos reutilizan una sala preparada en el emulador y no repiten el recorrido completo de creación.
+- [ ] La prueba modifica la sala desde la UI, sin escribir la lista directamente en Firestore.
+- [ ] La persona nueva recibe dos cartones y puede jugar.
+- [ ] El cambio de rol se refleja en ambos contextos.
+- [ ] La prueba reutiliza la partida existente en lugar de repetir la creación desde cero.
+
+## Fuera de Playwright
+
+Nombre vacío o repetido, contador máximo, estados de botones y orden alfabético quedan para pruebas unitarias o de componentes.
+
+## Comments
+
+### 2026-09-26
+
+El ticket original intentaba cubrir cada regla del formulario y dos pestañas de configuración. Se conserva sólo la reconfiguración real entre partidas.

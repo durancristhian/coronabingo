@@ -1,205 +1,118 @@
-# Inventario de cobertura UI con Playwright
+# Backlog de cobertura E2E con Playwright
 
-Fecha: 2026-09-25
+Fecha: 2026-09-26
 
 Status: needs-triage
 
 Work status: open
 
-Revisión relevada: `2ec2fb6`
+Revisión relevada: `f8dab14`
 
-Este inventario extiende el [plan y registro de Playwright](../playwright-test-plan.md). Describe la cobertura que existe hoy y divide lo pendiente en tickets chicos. Es una propuesta de trabajo, no autoriza implementar los tickets.
+Este documento reemplaza el inventario exhaustivo del 25 de septiembre. El primer inventario mezclaba recorridos E2E con validaciones pequeñas que serían más rápidas y claras como pruebas unitarias o de componentes.
 
-## Cómo leer los checks
+La decisión actual es mantener Playwright enfocado en situaciones donde aporta una señal que una prueba chica no puede dar.
 
-- `[x]`: `tests/ui/room.spec.ts` ejecuta el comportamiento y verifica un resultado visible.
-- `[ ]`: no hay una aserción de Playwright suficiente. Que el recorrido pase por la pantalla no cuenta como cobertura.
-- Los IDs `UI-xx` enlazan el pendiente con un ticket propuesto.
+## Qué merece Playwright
 
-La suite actual cubre un recorrido feliz en Chromium de escritorio y en español, con dos contextos de navegador y Firestore Emulator. No cubre Firebase desplegado, reglas de producción, servicios externos ni entrega real de anuncios.
+Un escenario entra en este backlog si necesita al menos uno de estos elementos:
 
-## Mapa de páginas
+- navegación entre páginas;
+- dos personas o pestañas sincronizadas mediante Firestore;
+- persistencia real entre navegador, `localStorage` y Firestore;
+- comportamiento que depende del viewport;
+- carga real de un recurso diferido;
+- un límite importante del flujo que podría bloquear una partida.
 
-| Ruta | Página | Estado actual |
-| --- | --- | --- |
-| `/` | Inicio y creación de sala | Cobertura parcial |
-| `/room/[roomId]/admin` | Preparación de sala | Cobertura parcial |
-| `/room/[roomId]` | Lobby de sala | Cobertura parcial |
-| `/room/[roomId]/[playerId]` | Cartones y controles de juego | Cobertura parcial, es la página mejor cubierta |
-| cualquier ruta inexistente | 404 estándar de Next.js | Sin cobertura |
+No alcanza con que algo sea visible en la UI. Estados de botones, validaciones de campos, variantes de mensajes, destinos de enlaces y props aisladas deben bajar a una futura capa unitaria o de componentes.
 
-Los prefijos de idioma `/es` y `/en` usan las mismas páginas. `/admin` y `/eventos/...` están retiradas y deben responder 404.
+## Cobertura base ya implementada
 
-## Comportamientos compartidos
+`tests/ui/room.spec.ts` ya cubre el recorrido principal en Chromium de escritorio y español:
 
-### Navegación e idioma
+- [x] crear una sala;
+- [x] agregar dos personas y elegir quién dirige;
+- [x] configurar y repartir cartones;
+- [x] abrir host y jugador en contextos separados;
+- [x] sortear y sincronizar un número;
+- [x] marcar un cartón y conservarlo tras recargar;
+- [x] reiniciar y mostrar la espera al jugador;
+- [x] empezar otra partida y volver a sincronizar.
 
-- [ ] El logo vuelve al inicio conservando el idioma activo. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] El selector cambia entre español e inglés sin perder la ruta ni sus parámetros. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] Las cuatro páginas activas muestran su contenido principal en español y en inglés. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] El atributo `lang` del documento coincide con el idioma elegido. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
+Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorrido real o un límite de negocio relevante. No repiten validaciones pequeñas del mismo formulario.
 
-### Modales, estados y pie
+## Tickets E2E activos
 
-- [ ] Los modales abren, cierran con botón y Escape, contienen el foco y lo devuelven al control que los abrió. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] Si `localStorage` no está disponible, aparece el mensaje alternativo y no se muestra un flujo de juego roto. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] El modal de donación abre y sus acciones intentan abrir Cafecito y PayPal sin navegar la página actual. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] Los enlaces de feedback, autor y Twitter tienen el destino esperado. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] La aplicación sigue siendo usable cuando los tweets, anuncios y otros recursos externos están bloqueados. [UI-09](tickets/UI-09-shell-locales-and-404.md)
+### [UI-05: concurrencia y ciclo de vida de marcas](tickets/UI-05-card-marking-resilience.md)
 
-## `/`: inicio y creación de sala
+- [ ] Dos pestañas de la misma persona hacen marcas distintas y ninguna se pierde.
+- [ ] Una partida nueva no recupera marcas de la partida anterior.
 
-### Crear sala
+### [UI-06: código de acceso de quien dirige](tickets/UI-06-host-room-code.md)
 
-- [ ] El botón `Listo` empieza deshabilitado y se habilita al ingresar un nombre. [UI-08](tickets/UI-08-home-and-tutorial.md)
-- [x] Ingresar un nombre y confirmar crea una sala y navega a `Preparar sala`.
-- [ ] Durante el guardado se bloquea un segundo envío y se muestra el estado correspondiente. [UI-08](tickets/UI-08-home-and-tutorial.md)
-- [ ] Un error de Firestore deja el formulario recuperable y muestra un mensaje visible. [UI-01](tickets/UI-01-route-and-firestore-states.md)
+- [ ] Activar la protección, entrar como jugador sin código, fallar y acertar como host, jugar, reiniciar y volver a exigir el código.
 
-### Ayuda y enlaces
+### [UI-03: modos de bolillero y límite de 90](tickets/UI-03-game-configuration-and-draw-modes.md)
 
-- [ ] `Ver tutorial` abre el modal y carga el video correcto para español o inglés. Sólo se verifica la integración del iframe, no la reproducción real de YouTube. [UI-08](tickets/UI-08-home-and-tutorial.md)
-- [ ] El tutorial se puede cerrar y reabrir sin dejar un iframe o foco residual. [UI-08](tickets/UI-08-home-and-tutorial.md)
-- [ ] El enlace de videollamada apunta al destino esperado. [UI-08](tickets/UI-08-home-and-tutorial.md)
+- [ ] En modo manual, quien dirige agrega y quita un número y el jugador lo ve en tiempo real.
+- [ ] Con 89 números preparados, la UI sortea el último, llega a 90 sin duplicados y deshabilita el sorteo.
 
-## `/room/[roomId]/admin`: preparación de sala
+### [UI-02: reconfigurar participantes entre partidas](tickets/UI-02-setup-player-management.md)
 
-### Carga y datos básicos
+- [ ] Después de reiniciar, eliminar una persona, agregar otra, cambiar quién dirige y jugar con la nueva configuración.
 
-- [x] Una sala recién creada muestra `Preparar sala`.
-- [ ] Se ven el nombre y el link de sala como campos de solo lectura. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [ ] El modal de compartir permite copiar y ofrece WhatsApp y Telegram con la URL correcta. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [ ] Se cubren carga, error de Firestore, sala inexistente, desactualizada y bloqueada. [UI-01](tickets/UI-01-route-and-firestore-states.md)
+### [UI-10: recorrido principal en móvil](tickets/UI-10-responsive-accessibility-matrix.md)
 
-### Personas
+- [ ] Crear, configurar, abrir cartones y sincronizar un sorteo en un viewport móvil sin perder acciones esenciales.
 
-- [x] Se agregan dos personas y ambas aparecen en la configuración.
-- [ ] No se puede agregar un nombre vacío ni repetido. [UI-02](tickets/UI-02-setup-player-management.md)
-- [ ] El contador y el formulario respetan el máximo de personas. [UI-02](tickets/UI-02-setup-player-management.md)
-- [ ] Se puede eliminar una persona que no dirige la sala. [UI-02](tickets/UI-02-setup-player-management.md)
-- [ ] Eliminar a quien dirige limpia la selección y vuelve a bloquear `Jugar`. [UI-02](tickets/UI-02-setup-player-management.md)
-- [x] Se elige quién dirige la sala.
-- [ ] `Jugar` permanece deshabilitado hasta tener al menos dos personas y alguien que dirija. [UI-02](tickets/UI-02-setup-player-management.md)
-- [ ] Dos pestañas de preparación no pierden cambios de personas por escrituras concurrentes. [UI-02](tickets/UI-02-setup-player-management.md)
+### [UI-08: tutorial bajo demanda](tickets/UI-08-home-and-tutorial.md)
 
-### Opciones y configuración
+- [ ] Abrir el tutorial, comprobar el iframe correcto y cerrarlo sin cargar YouTube antes de tiempo.
 
-- [x] Se activa el bolillero online y luego quien dirige ve `Próximo número`.
-- [ ] Desactivar el bolillero online habilita el marcado manual y no muestra `Próximo número`. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-- [ ] `Ocultar los significados` elimina el significado del último número para todos. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-- [ ] La opción oculta de código muestra el código y protege los cartones de quien dirige. [UI-06](tickets/UI-06-host-room-code.md)
-- [x] Configurar reparte dos cartones por persona y navega al lobby.
-- [ ] El estado de guardado bloquea cambios y un error permite reintentar sin perder el borrador. [UI-01](tickets/UI-01-route-and-firestore-states.md)
+### [UI-09: cambio de idioma en una ruta de juego](tickets/UI-09-shell-locales-and-404.md)
 
-## `/room/[roomId]`: lobby
+- [ ] Cambiar una URL dinámica de español a inglés sin perder la sala, la persona ni los cartones.
 
-### Información y participantes
+### [UI-07: herramientas secundarias durante una partida](tickets/UI-07-game-tools.md)
 
-- [x] El lobby muestra el encabezado y dos filas de participantes.
-- [x] Cada fila muestra los dos IDs de cartón asignados.
-- [ ] La lista queda ordenada por nombre y señala de forma visible a quien dirige. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [ ] El nombre y el link de sala son correctos y seleccionables. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [ ] El modal de compartir usa la URL exacta del lobby. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [x] `Jugar` lleva a los cartones de la persona elegida.
-- [x] Entrar directamente al link personal conserva los cartones asignados.
-- [ ] El lobby muestra espera mientras la sala no está lista y se actualiza sin recarga al configurarla. [UI-01](tickets/UI-01-route-and-firestore-states.md)
-- [ ] Los cambios de participantes se reflejan en tiempo real. [UI-02](tickets/UI-02-setup-player-management.md)
+- [ ] Un jugador cambia un fondo y lo conserva tras recargar.
+- [ ] Quien dirige activa un festejo y un sonido representativos y el otro contexto recibe ambos.
 
-### Exportación oculta
+## Tickets retirados de Playwright
 
-- [ ] Siete activaciones del título muestran la exportación. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [ ] La descarga genera un `.xls` con sala, capacidad, quien dirige, cartones y links de todas las personas. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
+### [UI-01: estados de ruta y errores](tickets/UI-01-route-and-firestore-states.md)
 
-### Estados de ruta
+`wontfix` como E2E. Los estados de carga, error, sala inexistente y reintento son mejores candidatos para pruebas de componentes con estados remotos controlados. La transición de espera a partida ya aparece en el recorrido base de reinicio.
 
-- [ ] Se cubren carga, error de Firestore, sala inexistente, desactualizada y bloqueada. [UI-01](tickets/UI-01-route-and-firestore-states.md)
+### [UI-04: datos, compartir y exportar](tickets/UI-04-lobby-sharing-and-export.md)
 
-## `/room/[roomId]/[playerId]`: cartones y juego
+`wontfix` como E2E. URLs, portapapeles, `window.open`, orden de listas y contenido de la planilla se pueden verificar sin una partida completa. La exportación está escondida detrás de siete activaciones y no justifica el costo de un recorrido de navegador permanente.
 
-### Entrada, rol y cartones
+## Candidatos para una futura capa unitaria o de componentes
 
-- [x] El saludo identifica a la persona.
-- [ ] El saludo muestra el nombre correcto de la sala. [UI-04](tickets/UI-04-lobby-sharing-and-export.md)
-- [x] Aparecen exactamente dos cartones con los IDs asignados en el lobby.
-- [x] Cada cartón tiene 15 números interactivos.
-- [x] Quien dirige ve controles de sorteo y reinicio; la otra persona no.
-- [ ] Una persona inexistente ve el mensaje correcto y no recibe cartones. [UI-01](tickets/UI-01-route-and-firestore-states.md)
-- [x] Al reiniciar, la otra persona ve el estado de espera y deja de ver cartones.
-- [ ] Se cubren carga, error de Firestore, sala inexistente y sala desactualizada. [UI-01](tickets/UI-01-route-and-firestore-states.md)
+Estos puntos salen del backlog Playwright. No se implementa todavía ningún framework de unit tests.
 
-### Marcas del cartón
-
-- [x] Marcar un número actualiza `aria-pressed` y persiste tras recargar.
-- [ ] Desmarcar un número persiste tras recargar. [UI-05](tickets/UI-05-card-marking-resilience.md)
-- [ ] Las marcas independientes de los dos cartones no se pisan. [UI-05](tickets/UI-05-card-marking-resilience.md)
-- [ ] Dos pestañas de la misma persona conservan marcas concurrentes en vez de sobrescribirlas. [UI-05](tickets/UI-05-card-marking-resilience.md)
-- [ ] Una recarga durante una escritura pendiente recupera la última selección válida. [UI-05](tickets/UI-05-card-marking-resilience.md)
-- [ ] Una partida nueva no recupera marcas de la partida anterior. [UI-05](tickets/UI-05-card-marking-resilience.md)
-
-### Bolillero y sincronización
-
-- [x] Antes del primer sorteo, ambas personas ven el estado vacío.
-- [x] Quien dirige sortea un número y la otra persona lo recibe sin recargar.
-- [ ] Varios números mantienen el mismo orden en ambos contextos y muestran el significado del último. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-- [ ] En modo manual, quien dirige puede agregar y quitar números; los demás sólo observan. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-- [ ] Con significados ocultos, no aparece el texto ni el link de la Quiniela. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-- [ ] Tras sortear los 90 números, el botón queda deshabilitado y no se repiten valores. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md)
-
-### Personalización de cartones
-
-- [ ] Cualquier persona puede abrir la configuración de celdas vacías y elegir un fondo incluido. [UI-07](tickets/UI-07-game-tools.md)
-- [ ] Una URL personalizada cambia las celdas vacías y la preferencia persiste para esa persona. [UI-07](tickets/UI-07-game-tools.md)
-- [ ] Cambiar el fondo no modifica cartones ni preferencias de otra persona. [UI-07](tickets/UI-07-game-tools.md)
-
-### Herramientas de quien dirige
-
-- [ ] Confetti, ghaneses y globos se activan, sincronizan y se pueden apagar. [UI-07](tickets/UI-07-game-tools.md)
-- [ ] Un sonido se publica para ambos contextos, bloquea otro disparo mientras suena y luego se limpia. Se puede simular `Audio`; no hace falta validar parlantes reales. [UI-07](tickets/UI-07-game-tools.md)
-- [ ] Siete activaciones del título de sonidos muestran el catálogo extra. [UI-07](tickets/UI-07-game-tools.md)
-- [x] El modal de reinicio abre, confirma y devuelve a quien dirige a la preparación.
-- [x] Reiniciar limpia el sorteo, reparte de nuevo y permite volver a sincronizar.
-- [ ] Cerrar el modal de reinicio no cambia la partida. [UI-07](tickets/UI-07-game-tools.md)
-
-### Código de sala y vista especial
-
-- [ ] Con protección activa, los cartones de quien dirige piden el código; los demás entran sin código. [UI-06](tickets/UI-06-host-room-code.md)
-- [ ] Un código incorrecto muestra error y permite reintentar; el correcto habilita el juego. [UI-06](tickets/UI-06-host-room-code.md)
-- [ ] Reiniciar vuelve a exigir el código en la partida siguiente. [UI-06](tickets/UI-06-host-room-code.md)
-- [ ] `streamerView` oculta los cartones de quien dirige y amplía el bolillero. Hoy no tiene control visible; requiere decidir cómo preparar el dato de prueba. [UI-07](tickets/UI-07-game-tools.md)
-
-## 404 y rutas retiradas
-
-- [ ] Una ruta desconocida muestra la 404 estándar y permite volver al inicio. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-- [ ] `/admin`, `/eventos/[eventId]` y `/eventos/[eventId]/admin` responden 404 en español e inglés. [UI-09](tickets/UI-09-shell-locales-and-404.md)
-
-## Matriz de entorno pendiente
-
-- [x] Chromium de escritorio, español, 1280 x 720.
-- [ ] Chromium móvil en un ancho representativo para inicio, preparación, lobby y juego. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] Un recorrido corto en inglés. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] Recorrido crítico sólo con teclado, incluidos tabs y modales. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] Firefox o WebKit para el recorrido crítico. Conviene elegir con datos de uso antes de duplicar toda la suite. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
-- [ ] Baselines visuales estables de una pantalla por ruta y breakpoint. Deben congelar contenido aleatorio y excluir embeds/anuncios. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md)
+- campos vacíos, nombres repetidos y máximo de personas;
+- habilitación y deshabilitación de botones durante formularios;
+- textos de carga, error y reintento;
+- campos de solo lectura, badges, orden de listas y links;
+- copia al portapapeles y URLs de WhatsApp, Telegram, Cafecito y PayPal;
+- contenido generado para el `.xls`;
+- apertura, Escape, foco y cierre de modales;
+- significado visible u oculto del último número;
+- variantes individuales de fondos, festejos y sonidos;
+- rutas 404 y rutas retiradas, que pueden verificarse con checks HTTP;
+- `streamerView`, porque no tiene un control visible en el producto;
+- Firefox, WebKit y baselines visuales hasta tener una necesidad concreta o datos de uso.
 
 ## Orden sugerido
 
-1. [UI-01](tickets/UI-01-route-and-firestore-states.md): estados de ruta y errores recuperables.
-2. [UI-05](tickets/UI-05-card-marking-resilience.md): persistencia y concurrencia de marcas.
-3. [UI-06](tickets/UI-06-host-room-code.md): protección por código de quien dirige.
-4. [UI-02](tickets/UI-02-setup-player-management.md): altas, bajas, límites y concurrencia de la preparación.
-5. [UI-03](tickets/UI-03-game-configuration-and-draw-modes.md): opciones y bolillero manual.
-6. [UI-04](tickets/UI-04-lobby-sharing-and-export.md): datos, compartir y exportar.
-7. [UI-07](tickets/UI-07-game-tools.md): fondos, festejos, sonidos y vista especial.
-8. [UI-08](tickets/UI-08-home-and-tutorial.md): inicio y tutorial.
-9. [UI-09](tickets/UI-09-shell-locales-and-404.md): shell, enlaces y 404.
-10. [UI-10](tickets/UI-10-responsive-accessibility-matrix.md): móvil, inglés, teclado, navegadores y visuales.
+1. UI-05, porque cubre una pérdida de datos conocida.
+2. UI-06, porque protege el acceso visible de quien dirige.
+3. UI-03, porque agrega el segundo modo de juego y el límite de 90.
+4. UI-02, porque amplía el ciclo entre partidas.
+5. UI-10, porque el juego se usa en pantallas chicas.
+6. UI-08, por la carga diferida del tutorial.
+7. UI-09, por rutas dinámicas e idioma.
+8. UI-07, porque son herramientas secundarias y de menor riesgo.
 
-El orden prioriza fallas conocidas y pérdida de estado. No implica que los primeros tickets estén aprobados ni que deban entrar en un único PR.
-
-## Fuera del alcance de Playwright UI
-
-- Reglas, índices, cuotas y disponibilidad de Firebase desplegado.
-- Entrega real de AdSense, Analytics, Sentry, tweets, YouTube, WhatsApp, Telegram, Cafecito o PayPal.
-- Calidad de audio o video en el dispositivo.
-- Carga, costos, conteo de listeners y rendimiento. Esos puntos necesitan mediciones específicas.
-- Seguridad real del código de sala. El flujo actual es cliente; un test UI sólo verifica la barrera visible.
+La suite completa debe seguir siendo corta y determinista. El objetivo no es subir el número de tests, sino detectar regresiones que impidan crear, jugar, sincronizar o continuar una partida.

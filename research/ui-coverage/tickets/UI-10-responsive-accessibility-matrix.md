@@ -1,4 +1,4 @@
-# UI-10: matriz responsive, idioma, teclado y navegador
+# UI-10: recorrido principal en móvil
 
 Status: needs-triage
 
@@ -8,26 +8,31 @@ Type: task
 
 ## Objetivo
 
-Agregar una matriz chica sobre los recorridos existentes. No duplicar todos los escenarios en cada combinación.
+Probar que el flujo principal sigue siendo jugable en un viewport móvil sin duplicar toda la suite de escritorio.
 
-## Alcance
+## Escenario E2E
 
-- Un smoke de las cuatro páginas activas en ancho móvil.
-- Un recorrido corto en inglés.
-- Teclado en formularios, tabs y modales.
-- Entrada, contención y retorno de foco en modales.
-- Evaluación de un segundo motor, Firefox o WebKit, basada en uso real.
-- Baselines visuales deterministas de una pantalla por ruta y breakpoint.
+1. Crear una sala desde un viewport móvil representativo.
+2. Agregar dos personas, elegir host y configurar.
+3. Abrir los cartones del host y del jugador en contextos móviles.
+4. Verificar que los cartones y controles esenciales sean visibles y accionables.
+5. Sortear un número y observar la sincronización.
+
+El escenario termina después del primer sorteo. Reinicio, persistencia y segunda partida permanecen cubiertos por el recorrido de escritorio.
 
 ## Criterios de aceptación
 
-- [ ] Ninguna acción esencial desaparece en móvil.
-- [ ] El recorrido en inglés verifica textos clave y `html[lang="en"]`.
-- [ ] Los controles importantes se alcanzan y activan sin mouse, con foco visible.
-- [ ] Escape cierra cada modal y el foco vuelve al disparador.
-- [ ] Las capturas congelan datos aleatorios, fuentes y animaciones; excluyen anuncios y embeds.
-- [ ] La elección de Firefox o WebKit y el costo adicional de CI quedan registrados antes de ampliar la matriz.
+- [ ] Ninguna acción esencial desaparece en el layout móvil.
+- [ ] No hay overflow horizontal en inicio, preparación, lobby ni juego.
+- [ ] Los dos contextos usan el mismo viewport definido por el ticket.
+- [ ] El caso reutiliza helpers del recorrido base.
 
-## Límite
+## Fuera de Playwright
 
-Playwright puede cubrir teclado y semántica observable, pero no reemplaza un smoke manual con lector de pantalla ni una auditoría completa de contraste.
+Recorrido completo en Firefox o WebKit, baselines visuales, foco detallado y cada combinación idioma-viewport quedan fuera hasta tener una necesidad concreta.
+
+## Comments
+
+### 2026-09-26
+
+La matriz original era demasiado amplia. Se conserva un único recorrido móvil que representa el uso real de la aplicación.

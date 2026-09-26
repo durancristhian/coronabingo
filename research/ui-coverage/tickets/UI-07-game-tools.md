@@ -1,4 +1,4 @@
-# UI-07: fondos, festejos, sonidos y vista especial
+# UI-07: herramientas secundarias durante una partida
 
 Status: needs-triage
 
@@ -8,34 +8,34 @@ Type: task
 
 ## Objetivo
 
-Cubrir las herramientas secundarias de la página de juego en casos cortos e independientes.
+Hacer un smoke de las herramientas que dependen del navegador o de sincronización, sin probar cada variante.
 
-## Bloques
+## Escenario A: fondo personal
 
-### Fondos
+1. Un jugador elige un fondo incluido para las celdas vacías.
+2. Recarga la página.
+3. Verifica que el fondo elegido permanezca para esa persona.
 
-- [ ] Elegir un fondo incluido cambia las celdas vacías.
-- [ ] Una URL personalizada persiste para la misma persona.
-- [ ] La preferencia no afecta a otra persona.
+## Escenario B: acciones del host
 
-### Festejos
-
-- [ ] Activar y apagar confetti, ghaneses y globos se sincroniza entre contextos.
-
-### Sonidos
-
-- [ ] Disparar un sonido se sincroniza y bloquea un segundo disparo mientras está activo.
-- [ ] Simular el fin de `Audio` limpia el estado.
-- [ ] Siete activaciones del título muestran los sonidos extra.
-
-### Reinicio y vista especial
-
-- [ ] Cerrar el modal de reinicio no modifica la partida.
-- [ ] Preparar `streamerView` en el emulador oculta los cartones de quien dirige y amplía el bolillero.
+1. El host activa un tipo representativo de festejo.
+2. El jugador observa el festejo en su contexto.
+3. El host dispara un sonido representativo.
+4. El segundo contexto intenta reproducir el mismo recurso.
 
 ## Criterios de aceptación
 
-- [ ] Cada bloque puede ejecutarse o filtrarse por separado.
-- [ ] No se descargan imágenes o audios externos; se interceptan los recursos cuando haga falta.
-- [ ] No se valida calidad audiovisual real.
-- [ ] `streamerView` queda documentado como función sin control visible, salvo que otro ticket agregue ese control.
+- [ ] Se prueba un fondo, un festejo y un sonido, no todos los catálogos.
+- [ ] El audio se observa mediante una sustitución controlada de `Audio`; no se valida el parlante.
+- [ ] Los recursos externos siguen bloqueados.
+- [ ] Cada escenario puede filtrarse por separado.
+
+## Fuera de Playwright
+
+Las variantes individuales, sonidos extra, cierre del modal y `streamerView` quedan fuera. `streamerView` no tiene control visible en el producto.
+
+## Comments
+
+### 2026-09-26
+
+El ticket original intentaba cubrir todos los fondos, festejos, sonidos y estados de modales. Se reduce a dos smokes representativos.
