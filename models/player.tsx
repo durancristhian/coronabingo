@@ -32,7 +32,13 @@ const excludeExtraFields = (player: Player): PlayerBase => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id, ref, ...playerValues } = player
 
-  return playerValues
+  return Object.entries(playerValues).reduce((values, [key, value]) => {
+    if (Number.isNaN(Number(key))) {
+      return { ...values, [key]: value }
+    }
+
+    return values
+  }, {} as PlayerBase)
 }
 
 const removePlayer = async (player: Player) => {
