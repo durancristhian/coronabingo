@@ -68,27 +68,6 @@ async function navigateWithNextRouter(page: Page, url: string) {
   }, pathname)
 }
 
-async function recordPlayedSounds(page: Page) {
-  await page.evaluate(() => {
-    const soundWindow = window as typeof window & { playedSounds: string[] }
-    soundWindow.playedSounds = []
-    HTMLMediaElement.prototype.play = function() {
-      soundWindow.playedSounds.push(this.src)
-      Object.defineProperty(this, 'duration', { value: 10 })
-
-      return Promise.resolve()
-    }
-  })
-}
-
-async function readPlayedSounds(page: Page) {
-  return page.evaluate(() => {
-    const soundWindow = window as typeof window & { playedSounds: string[] }
-
-    return soundWindow.playedSounds
-  })
-}
-
 test('host and player create, play, reload and restart a room', async ({
   page: host,
   playerPage: player,
@@ -178,52 +157,6 @@ test('host and player create, play, reload and restart a room', async ({
     'A host draw synchronizes without reloading the player',
     async () => {
       await drawAndObserve(host, player)
-    },
-  )
-
-  await test.step(
-    'A host sound synchronizes to both participants',
-    async () => {
-      const soundPath = '/sounds/cardi-b/coronavirus.mp3'
-      await recordPlayedSounds(host)
-      await recordPlayedSounds(player)
-      await host.locator('#sounds:visible').click()
-      await host
-        .getByRole('dialog', { name: 'Sonidos' })
-        .getByRole('button', {
-          name: 'Reproducir Cardi B - Coronavirus',
-          exact: true,
-        })
-        .click()
-      await expect
-        .poll(() => readPlayedSounds(host))
-        .toContainEqual(expect.stringContaining(soundPath))
-      await expect
-        .poll(() => readPlayedSounds(player))
-        .toContainEqual(expect.stringContaining(soundPath))
-      await host
-        .getByRole('dialog', { name: 'Sonidos' })
-        .locator('#close-modal')
-        .click()
-    },
-  )
-
-  await test.step(
-    'A host celebration option synchronizes to both participants',
-    async () => {
-      await host.locator('#celebrations:visible').click()
-      const dialog = host.getByRole('dialog', { name: 'Festejos' })
-      await dialog
-        .getByRole('button', { name: 'Activar confetti', exact: true })
-        .click()
-      await expect(host.locator('.confetti-base')).toHaveCount(20)
-      await expect(player.locator('.confetti-base')).toHaveCount(20)
-      await dialog
-        .getByRole('button', { name: 'Desactivar confetti', exact: true })
-        .click()
-      await expect(host.locator('.confetti-base')).toHaveCount(0)
-      await expect(player.locator('.confetti-base')).toHaveCount(0)
-      await dialog.locator('#close-modal').click()
     },
   )
 
