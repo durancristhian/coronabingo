@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-09-26T15:58:49.549Z",
+  "build": "6b5E9UDpqrnb0DgW6EDpL",
+  "path": "/_next/static/chunks/pages/_app-a1d00c4f8c2e1dc4.js",
+  "chunk_gzip9": 132933,
+  "method": "Generated spans attributed using source-map mappings. Concatenated gzip is attribution only, not a working rebuilt chunk or additive bundle savings.",
+  "groups": {
+    "other": {
+      "generated_bytes": 62631,
+      "concatenated_gzip9": 18800
+    },
+    "sentry": {
+      "generated_bytes": 67425,
+      "concatenated_gzip9": 19313
+    },
+    "firebase_other": {
+      "generated_bytes": 94363,
+      "concatenated_gzip9": 31286
+    },
+    "firestore": {
+      "generated_bytes": 243037,
+      "concatenated_gzip9": 64748
+    }
+  },
+  "firestore_removal_gzip_proxy": 64301,
+  "firebase_sources": [
+    "node_modules/@firebase/installations/dist/index.esm.js",
+    "node_modules/@firebase/analytics/dist/index.esm.js",
+    "node_modules/@firebase/component/dist/index.cjs.js",
+    "node_modules/@firebase/util/dist/index.cjs.js",
+    "node_modules/@firebase/webchannel-wrapper/dist/index.esm.js",
+    "node_modules/@firebase/firestore/dist/index.cjs.js",
+    "node_modules/@firebase/logger/dist/index.esm.js",
+    "node_modules/@firebase/app/dist/index.cjs.js"
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "file": "utils/firebase.ts",
+    "published_chunk": "/_next/static/chunks/pages/_app-a1d00c4f8c2e1dc4.js",
+    "identical": true,
+    "local_sha256": "3f3bff01540b283114738836a1174c3b12c7b76aafc387de6de7fef925130b4d",
+    "public_source_sha256": "3f3bff01540b283114738836a1174c3b12c7b76aafc387de6de7fef925130b4d"
+  },
+  {
+    "file": "contexts/Analytics.tsx",
+    "published_chunk": "/_next/static/chunks/pages/_app-a1d00c4f8c2e1dc4.js",
+    "identical": true,
+    "local_sha256": "a2a84f9f2d618c2cd22ebdf62780ecd25007c3ed76d9a1790e701f78abda926f",
+    "public_source_sha256": "a2a84f9f2d618c2cd22ebdf62780ecd25007c3ed76d9a1790e701f78abda926f"
+  },
+  {
+    "file": "contexts/index.tsx",
+    "published_chunk": "/_next/static/chunks/pages/_app-a1d00c4f8c2e1dc4.js",
+    "identical": true,
+    "local_sha256": "4295190ae8d1512eb55faa1441f2f44bdb45635d38327ef9e2ced7c3ac492397",
+    "public_source_sha256": "4295190ae8d1512eb55faa1441f2f44bdb45635d38327ef9e2ced7c3ac492397"
+  },
+  {
+    "file": "components/Ads.tsx",
+    "published_chunk": "/_next/static/chunks/836-923db180bc7b73fb.js",
+    "identical": true,
+    "local_sha256": "5cba49be555ccdf6f589f09438d8b23274b157ff33431e442647a96057c53132",
+    "public_source_sha256": "5cba49be555ccdf6f589f09438d8b23274b157ff33431e442647a96057c53132"
+  },
+  {
+    "file": "components/Layout.tsx",
+    "published_chunk": "/_next/static/chunks/836-923db180bc7b73fb.js",
+    "identical": true,
+    "local_sha256": "a319de3bbc09cb5764da602b7b549ab7c4ba901c553b24673d0bb2811fc92e3d",
+    "public_source_sha256": "a319de3bbc09cb5764da602b7b549ab7c4ba901c553b24673d0bb2811fc92e3d"
+  },
+  {
+    "file": "components/CreateRoom.tsx",
+    "published_chunk": "/_next/static/chunks/pages/index-07251f4af37503e2.js",
+    "identical": true,
+    "local_sha256": "1527330b6041986caaa749cd7646ffb2c36f4169afaa97b247286bcd0f56c127",
+    "public_source_sha256": "1527330b6041986caaa749cd7646ffb2c36f4169afaa97b247286bcd0f56c127"
+  }
+]

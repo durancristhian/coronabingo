@@ -1,6 +1,20 @@
 # Rendimiento: diagnóstico y tickets
 
+Revisión nueva: [selección de prioridades altas y medio-altas del 26/09](revalidation-2026-09-26/README.md). Incluye [PERF-10: Firestore fuera de la carga inicial](tickets/PERF-10-firestore-inicial.md), propuesto y pendiente de aprobación, y revalida PERF-09. La portada publicada mide ahora 242.121 bytes gzip; las cifras del diagnóstico original que siguen se conservan como historia.
+
 Diagnóstico inicial del 23 de septiembre de 2026. Actualizado el 26 de septiembre: PERF-01, PERF-02, PERF-04, PERF-05 y PERF-06 están integrados en el `main` local `8e35fa4`. Los demás tickets continúan abiertos y no se modificaron cuentas. La [revalidación de la auditoría interna](../2026-09-23-internal-optimization-audit.md#revalidación-del-26-de-septiembre-de-2026) distingue los ahorros ya implementados de los candidatos que no alcanzan un impacto alto o medio-alto confirmado.
+
+## Tickets acordados el 26 de septiembre
+
+Desglose aprobado por el usuario mediante `to-tickets`. Se actualizan los tickets existentes y se agrega una investigación independiente. Todos conservan `Work status: open`; registrar el alcance no inicia implementaciones ni autoriza cambios de cuentas o despliegues.
+
+| Ticket | Entrega | Estado de triage | Bloqueado por |
+| --- | --- | --- | --- |
+| [PERF-10: Firestore cuando haga falta](tickets/PERF-10-firestore-inicial.md) | Portada más liviana, creación de sala recuperable y juego verificado | `ready-for-agent` | Ningún ticket |
+| [PERF-09: anuncio estable y adaptable](tickets/PERF-09-anuncio.md) | Reserva inicial y adaptación al ancho, con pruebas del comportamiento publicitario | `needs-info` | Ningún ticket de esta tanda; faltan decisiones de elegibilidad, loader y unidad del plan canónico |
+| [PERF-11: investigar el peso de los assets](tickets/PERF-11-investigar-peso-assets.md) | Inventario, candidatos comparados y recomendaciones con ahorro y calidad comprobados | `ready-for-agent` | Ningún ticket |
+
+PERF-10 es el primer trabajo de implementación propuesto. PERF-11 puede investigarse de forma independiente y debe alimentar PERF-03/07/08, sin duplicarlos ni esperar su implementación. PERF-09 conserva sus decisiones pendientes en el plan existente.
 
 ## Línea base posterior al push
 
