@@ -10,6 +10,8 @@ The owner requested implementation in this session. The deferred planning histor
 
 ## Requested outcome
 
+Reverificación funcional acotada del 26 de septiembre de 2026: se usó el runner existente para comprobar CB-01, CB-02 y CB-03 sobre `8e35fa4`. Dos ejecuciones reprodujeron los comportamientos de CB-01 y CB-03 y dieron CB-02 correcto. El propietario posteriormente aceptó CB-01 como limitación del uso de múltiples pestañas y confirmó CB-03 como diseño intencional; las aserciones diagnósticas fallidas no son requisitos aprobados ni deben agregarse a CI como bloqueos. Son pruebas separadas, sin ampliar la suite ni cambiar el producto. Comando, entorno, decisiones y evidencia en la [auditoría funcional, actualización del 26/09](functional-audit-2026-09-23.md#reverificación-del-26-de-septiembre-de-2026).
+
 Build a reusable Playwright suite that agents and the owner can run while changing Coronabingo. Start with a small useful set and expand coverage of the app's main user flows. A passing run establishes only the behavior covered by its assertions and environment.
 
 This request opens a new testing initiative after the [Cypress removal](cypress-removal-plan.md). It does not restore the retired suite.

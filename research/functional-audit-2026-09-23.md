@@ -1,5 +1,7 @@
 # Diagnóstico funcional local de Coronabingo
 
+Estado vigente tras la revisión del propietario del 26 de septiembre: **no quedan errores de prioridad alta confirmados entre los hallazgos revisados**. CB-03 es comportamiento intencional y se mantiene por ahora. CB-01 es una limitación conocida fuera del uso previsto de una pestaña por jugador. CB-02 pasó su reproducción y persistencia posterior sobre `8e35fa4`. Ver las [decisiones del propietario](#comments) y la [reverificación](#reverificación-del-26-de-septiembre-de-2026). El resto conserva la auditoría histórica del día 23, sin convertir sus propuestas en trabajo aprobado.
+
 Fecha: 23 de septiembre de 2026. Código auditado: `4f14279d882b67075c2989c041db21e34431b4a0`.
 
 Se encontraron cuatro fallos funcionales y un fallo menor de traducción, reproducidos en navegador. No se implementaron correcciones, no se hizo commit y no se modificaron configuraciones de cuentas ni reglas de Firebase.
@@ -140,3 +142,47 @@ Cada arreglo debe empezar reproduciendo su fallo, incorporar una comprobación e
 - Queda como hipótesis pendiente la conservación de campos de marcas de partidas anteriores al redistribuir cartones: el guardado mezcla datos previos del jugador. No se cuenta como bug confirmado porque no se reprodujo la reasignación del mismo cartón entre partidas.
 
 La sala sintética y los archivos de evidencia quedan disponibles para continuar. El código de aplicación y los archivos de entorno no fueron editados.
+
+## Reverificación del 26 de septiembre de 2026
+
+Alcance solicitado: volver a verificar los hallazgos y listar solamente errores de prioridad alta. No se implementaron arreglos ni se revisaron los hallazgos de prioridad media/baja.
+
+- Revisión: `8e35fa47cfafc4e0095dbb6bb3eb5f1123595e8e`, rama `main`, checkout `/Users/durancristhian/Repos/coronabingo`. Investigación en el checkout existente, sin nuevo worktree ni cambios al código de aplicación.
+- Runtime verificado: Node 24.21.0 y npm 11.19.0. Chromium mediante Playwright, Next.js en desarrollo en `http://127.0.0.1:3187` y Firestore Emulator en `127.0.0.1:8187`, proyecto desechable `demo-coronabingo-ui`.
+- Se reutilizaron el runner, los datos públicos de configuración, el bloqueo de conexiones externas y las sesiones aisladas de `tests/ui`. Las pruebas diagnósticas viven separadas de la suite mantenida, en la carpeta de evidencia. No se usó el Firebase remoto configurado en `.env` ni se modificó ese archivo.
+- Se hicieron dos ejecuciones independientes. En ambas: **las aserciones de CB-01 y CB-03 fallan; CB-02 pasa**. El exit code 1 corresponde a las expectativas originales del diagnóstico, que el propietario posteriormente descartó como requisitos. Se conservan como evidencia histórica y no como condiciones de aceptación ni bloqueos de entrega.
+
+Comando para repetir las tres comprobaciones:
+
+```bash
+npm run ui-tests -- --config research/functional-audit-2026-09-26-evidence/probes.config.ts
+```
+
+### Comportamientos reproducidos antes de revisar el alcance con el propietario
+
+**CB-03, protección del anfitrión eludible desde preparación.** Una sesión independiente recibe inicialmente el formulario de código del anfitrión. Desde esa misma sesión abre `/room/<id>/admin`, activa las opciones experimentales presionando siete veces el título, lee los emojis y los ingresa en el formulario. En ambas ejecuciones obtuvo los controles y sorteó una bolilla. La causa sigue en la ausencia de autorización en `pages/room/[roomId]/admin.tsx`, que permite mostrar `room.code`; el control se aplica solamente en la página del jugador, antes de comparar el código en el cliente. Se mantuvo el código sintético únicamente en memoria durante la prueba y no se registró su contenido.
+
+**CB-01, pérdida de marcas entre pestañas.** Dos pestañas del mismo contexto abren el mismo cartón. A marca un número y B otro. Después de recargar B, A pierde su marca y recibe solamente la de B. Primera ejecución: A marcó 10, B marcó 31, resultado `[31]`. Segunda: A marcó 12, B marcó 33, resultado `[33]`. Sigue ocurriendo porque `updatePlayer` solo modifica estado React, `Tickets.tsx` sobrescribe `roomValues` y envía esa copia completa a Firestore al montar. El snapshot posterior reemplaza el estado de la otra pestaña.
+
+### Hallazgo alto anterior que ya no se reproduce
+
+**CB-02 no se incluye en la lista vigente.** Crear Ana y Bruno, iniciar, reiniciar, agregar Carla, borrar a Bruno, confirmar y recargar conserva a Ana y Carla. La segunda ejecución incluyó una espera de observación antes de guardar, para que un guardado inmediato no ocultara el fallo anterior. `contexts/Players.tsx` ahora conserva el borrador por sala y evita reemplazarlo cuando el snapshot tiene IDs distintos. Esta conclusión cubre la reproducción original; no certifica todas las combinaciones de edición concurrente.
+
+### Evidencia, procesos y límites
+
+- [Pruebas diagnósticas](functional-audit-2026-09-26-evidence/high-priority.spec.ts) y [configuración](functional-audit-2026-09-26-evidence/probes.config.ts).
+- [Primera ejecución](functional-audit-2026-09-26-evidence/run.log), [segunda ejecución](functional-audit-2026-09-26-evidence/recheck.log) y [resultados estructurados](functional-audit-2026-09-26-evidence/results.json). Las capturas de fallos están bajo `functional-audit-2026-09-26-evidence/results/`.
+- Los logs registran PID del runner y grupos de procesos propios. El runner detuvo sus servicios al terminar cada ejecución y no exportó los datos del emulador. Los IDs de las seis salas sintéticas quedan en esos logs; no quedan salas remotas creadas por esta reverificación.
+- El servidor preexistente del puerto 3124 no se utilizó ni se detuvo. Su contenido no se considera evidencia de esta revisión.
+- No se ejecutaron lint, build, la suite completa ni pruebas en Preview/Production: se corrieron solamente las tres reproducciones pertinentes, sin cambios al producto. `git diff --check` forma parte del cierre documental.
+- Las reglas del emulador permiten estas operaciones para probar la aplicación y no establecen equivalencia con las reglas desplegadas. CB-03 confirma el comportamiento del flujo local actual, no una certificación de explotación en producción.
+
+## Comments
+
+### 2026-09-26: decisiones del propietario y cierre de la revisión
+
+- **CB-03. Status: wontfix.** El acceso al código desde preparación fue diseñado así. El propietario decide mantenerlo por el momento. La propuesta de modificar la autorización no está aprobada.
+- **CB-01. Status: wontfix.** El uso previsto es una pestaña de cartones por jugador. Abrir el mismo cartón en dos pestañas se considera un uso incorrecto; la pérdida de marcas en ese escenario queda como limitación conocida, no como error de prioridad alta. El propietario descartó la propuesta de persistir cada marca o desmarca en Firestore. No se implementó ni se agregó soporte para múltiples pestañas.
+- **CB-02.** La reproducción original pasó en las dos ejecuciones sobre `8e35fa4`, incluida la confirmación y recarga. Ya no forma parte de la lista de prioridad alta.
+- No quedan errores de prioridad alta confirmados dentro de este conjunto revisado. Esto no certifica la ausencia de otros bugs ni modifica el estado de CB-04 y CB-05, que no se revisaron en esta ronda.
+- Se autoriza commitear el registro de la investigación y estas decisiones. Se preservan las pruebas diagnósticas originales como evidencia separada de la suite mantenida; sus expectativas descartadas no deben incorporarse a CI como requisitos del producto.

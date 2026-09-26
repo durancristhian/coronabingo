@@ -1,0 +1,1327 @@
+
+> coronabingo@1.23.1 ui-tests
+> node scripts/ui-tests.js --config research/functional-audit-2026-09-26-evidence/probes.config.ts
+
+UI tests: development, http://127.0.0.1:3187, demo-coronabingo-ui, runner PID 30104, /Users/durancristhian/Repos/coronabingo
+Started Firestore: PID/group 30106
+i  emulators: Starting emulators: firestore
+i  emulators: Detected demo project ID "demo-coronabingo-ui", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
+✔  firestore: Firestore Emulator was started in standard edition.
+✔  firestore: Firestore Emulator UI websocket is running on 9187.
+⚠  emulators: The Emulator UI is not starting because none of the running emulators have a UI component.
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┐
+│ Emulator  │ Host:Port      │
+├───────────┼────────────────┤
+│ Firestore │ 127.0.0.1:8187 │
+└───────────┴────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4487
+  Other reserved ports: 4587, 9187
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+
+Started Next.js: PID/group 30127
+
+> coronabingo@1.23.1 dev
+> next dev --webpack --hostname 127.0.0.1 --port 3187
+
+▲ Next.js 16.3.6 (webpack)
+- Local:         http://127.0.0.1:3187
+- Network:       http://127.0.0.1:3187
+- Environments: .env
+✓ Ready in 165ms
+✓ Running next.config.js took 86ms
+  Using tsconfig file: tsconfig.ui-tests.json
+
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+ GET / 200 in 3ms (next.js: 0.6ms, application-code: 3ms)
+Started Playwright: PID/group 30159
+
+Running 3 tests using 1 worker
+
+(node:30160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+ GET / 200 in 3ms (next.js: 0.5ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: ProgressBar: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at ProgressBar (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:200:20)
+    at div
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /_next/data/development/es/room/jyNCpnYjif90fPESZD1a/admin.json?roomId=jyNCpnYjif90fPESZD1a 200 in 48ms (next.js: 45ms, application-code: 3ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/jyNCpnYjif90fPESZD1a.json?roomId=jyNCpnYjif90fPESZD1a 200 in 25ms (next.js: 22ms, application-code: 3ms)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/jyNCpnYjif90fPESZD1a/PYxnTiR1JiPIadjfA8sn.json?roomId=jyNCpnYjif90fPESZD1a&playerId=PYxnTiR1JiPIadjfA8sn 200 in 35ms (next.js: 33ms, application-code: 1.5ms)
+[browser] Warning: Tabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: UncontrolledTabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabList: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: Tab: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tab (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tab.js:50:62)
+    at OptionTab (webpack-internal:///(pages-dir-browser)/./components/OptionTab.tsx:16:22)
+    at div
+    at ul
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabPanel: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabPanel (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabPanel.js:41:24)
+    at OptionTabPanel (webpack-internal:///(pages-dir-browser)/./components/OptionTabPanel.tsx:17:27)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /room/jyNCpnYjif90fPESZD1a/PYxnTiR1JiPIadjfA8sn 200 in 7ms (next.js: 0.7ms, application-code: 6ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: Tabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: UncontrolledTabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabList: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: Tab: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tab (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tab.js:50:62)
+    at OptionTab (webpack-internal:///(pages-dir-browser)/./components/OptionTab.tsx:16:22)
+    at div
+    at ul
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabPanel: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabPanel (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabPanel.js:41:24)
+    at OptionTabPanel (webpack-internal:///(pages-dir-browser)/./components/OptionTabPanel.tsx:17:27)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /room/jyNCpnYjif90fPESZD1a/PYxnTiR1JiPIadjfA8sn 200 in 4ms (next.js: 0.6ms, application-code: 4ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: Tabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: UncontrolledTabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabList: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: Tab: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tab (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tab.js:50:62)
+    at OptionTab (webpack-internal:///(pages-dir-browser)/./components/OptionTab.tsx:16:22)
+    at div
+    at ul
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabPanel: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabPanel (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabPanel.js:41:24)
+    at OptionTabPanel (webpack-internal:///(pages-dir-browser)/./components/OptionTabPanel.tsx:17:27)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+{"id":"CB-01","lobby":"http://127.0.0.1:3187/room/jyNCpnYjif90fPESZD1a","firstNumber":"12","secondNumber":"33","marksAfterReload":["33"]}
+  ✘  1 [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:17:5 › CB-01: preserve both tabs marks after reload (6.3s)
+(node:30209) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+ GET / 200 in 7ms (next.js: 3ms, application-code: 4ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: ProgressBar: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at ProgressBar (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:200:20)
+    at div
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /_next/data/development/es/room/wgKCW7JR4TLgqcleqp3X/admin.json?roomId=wgKCW7JR4TLgqcleqp3X 200 in 6ms (next.js: 4ms, application-code: 1.3ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/wgKCW7JR4TLgqcleqp3X.json?roomId=wgKCW7JR4TLgqcleqp3X 200 in 2ms (next.js: 1.5ms, application-code: 0.9ms)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/wgKCW7JR4TLgqcleqp3X/bEGvoFpGO188fdjpYztG.json?roomId=wgKCW7JR4TLgqcleqp3X&playerId=bEGvoFpGO188fdjpYztG 200 in 1.4ms (next.js: 0.5ms, application-code: 0.9ms)
+[browser] Warning: Tabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: UncontrolledTabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabList: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: Tab: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tab (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tab.js:50:62)
+    at OptionTab (webpack-internal:///(pages-dir-browser)/./components/OptionTab.tsx:16:22)
+    at div
+    at ul
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabPanel: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabPanel (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabPanel.js:41:24)
+    at OptionTabPanel (webpack-internal:///(pages-dir-browser)/./components/OptionTabPanel.tsx:17:27)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /_next/data/development/es/room/wgKCW7JR4TLgqcleqp3X/admin.json?roomId=wgKCW7JR4TLgqcleqp3X 200 in 1.5ms (next.js: 0.6ms, application-code: 0.9ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/wgKCW7JR4TLgqcleqp3X.json?roomId=wgKCW7JR4TLgqcleqp3X 200 in 1.8ms (next.js: 0.7ms, application-code: 1.1ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /room/wgKCW7JR4TLgqcleqp3X 200 in 4ms (next.js: 0.5ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+{"id":"CB-02","lobby":"http://127.0.0.1:3187/room/wgKCW7JR4TLgqcleqp3X","result":"Ana and Carla survive save and reload"}
+  ✓  2 [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:42:5 › CB-02: preserve pending addition after persisted player deletion (2.7s)
+next-translate - compiled page: / - locale: es - namespaces: common, index - used loader: getStaticProps
+ GET / 200 in 3ms (next.js: 0.5ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: ProgressBar: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at ProgressBar (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:200:20)
+    at div
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /_next/data/development/es/room/oMoKU6RLQNlc7w95GGai/admin.json?roomId=oMoKU6RLQNlc7w95GGai 200 in 1.6ms (next.js: 0.6ms, application-code: 1.1ms)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/oMoKU6RLQNlc7w95GGai.json?roomId=oMoKU6RLQNlc7w95GGai 200 in 1.2ms (next.js: 0.4ms, application-code: 0.7ms)
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /room/oMoKU6RLQNlc7w95GGai/admin 200 in 3ms (next.js: 0.4ms, application-code: 2ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] [next-translate] "playerId:game_die" is missing in current namespace configuration. Try adding "game_die" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:snail" is missing in current namespace configuration. Try adding "snail" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:deciduous_tree" is missing in current namespace configuration. Try adding "deciduous_tree" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:game_die" is missing in current namespace configuration. Try adding "game_die" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:snail" is missing in current namespace configuration. Try adding "snail" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:deciduous_tree" is missing in current namespace configuration. Try adding "deciduous_tree" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:game_die" is missing in current namespace configuration. Try adding "game_die" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:snail" is missing in current namespace configuration. Try adding "snail" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:deciduous_tree" is missing in current namespace configuration. Try adding "deciduous_tree" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] Warning: ProgressBar: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at ProgressBar (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:200:20)
+    at div
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+next-translate - compiled page: /room/[roomId] - locale: es - namespaces: common, roomId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/oMoKU6RLQNlc7w95GGai.json?roomId=oMoKU6RLQNlc7w95GGai 200 in 1.3ms (next.js: 0.5ms, application-code: 0.8ms)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /_next/data/development/es/room/oMoKU6RLQNlc7w95GGai/TO9g1jdkbaKZci4T7jAz.json?roomId=oMoKU6RLQNlc7w95GGai&playerId=TO9g1jdkbaKZci4T7jAz 200 in 1.3ms (next.js: 0.5ms, application-code: 0.8ms)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /room/oMoKU6RLQNlc7w95GGai/TO9g1jdkbaKZci4T7jAz 200 in 4ms (next.js: 0.6ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+next-translate - compiled page: /room/[roomId]/admin - locale: es - namespaces: common, admin - used loader: getServerSideProps
+ GET /room/oMoKU6RLQNlc7w95GGai/admin 200 in 3ms (next.js: 0.5ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] [next-translate] "playerId:game_die" is missing in current namespace configuration. Try adding "game_die" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:snail" is missing in current namespace configuration. Try adding "snail" to the namespace "playerId". (components/Emoji.tsx:223:19)
+[browser] [next-translate] "playerId:deciduous_tree" is missing in current namespace configuration. Try adding "deciduous_tree" to the namespace "playerId". (components/Emoji.tsx:223:19)
+next-translate - compiled page: /room/[roomId]/[playerId] - locale: es - namespaces: common, playerId - used loader: getServerSideProps
+ GET /room/oMoKU6RLQNlc7w95GGai/TO9g1jdkbaKZci4T7jAz 200 in 4ms (next.js: 0.5ms, application-code: 3ms)
+[browser] Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: r
+[browser] Warning: Tabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: UncontrolledTabs: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabList: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: Tab: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at Tab (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tab.js:50:62)
+    at OptionTab (webpack-internal:///(pages-dir-browser)/./components/OptionTab.tsx:16:22)
+    at div
+    at ul
+    at TabList (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabList.js:28:24)
+    at OptionTabList (webpack-internal:///(pages-dir-browser)/./components/OptionTabList.tsx:13:26)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: TabPanel: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at TabPanel (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/TabPanel.js:41:24)
+    at OptionTabPanel (webpack-internal:///(pages-dir-browser)/./components/OptionTabPanel.tsx:17:27)
+    at div
+    at UncontrolledTabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/UncontrolledTabs.js:82:63)
+    at Tabs (webpack-internal:///(pages-dir-browser)/./node_modules/react-tabs/esm/components/Tabs.js:67:24)
+    at Options (webpack-internal:///(pages-dir-browser)/./components/Options.tsx:34:20)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at BackgroundCellContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/BackgroundCell.tsx:23:42)
+    at div
+    at div
+    at Container (webpack-internal:///(pages-dir-browser)/./components/Container.tsx:23:22)
+    at div
+    at div
+    at main
+    at Layout (webpack-internal:///(pages-dir-browser)/./components/Layout.tsx:33:19)
+    at RoomPlayer (webpack-internal:///(pages-dir-browser)/./pages/room/[roomId]/[playerId].tsx:61:121)
+    at AnalyticsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Analytics.tsx:17:37)
+    at FlagsContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Flags.tsx:68:33)
+    at PlayerContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Player.tsx:26:34)
+    at PlayersContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Players.tsx:37:35)
+    at RoomContextProvider (webpack-internal:///(pages-dir-browser)/./contexts/Room.tsx:26:32)
+    at Providers (webpack-internal:///(pages-dir-browser)/./contexts/index.tsx:28:32)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: ProgressBar: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+    at ProgressBar (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:200:20)
+    at div
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+[browser] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+    at Transition (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/Transition.js:132:30)
+    at Animation (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:152:26)
+    at Toast (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:299:29)
+    at div
+    at TransitionGroup (webpack-internal:///(pages-dir-browser)/./node_modules/react-transition-group/esm/TransitionGroup.js:57:30)
+    at div
+    at ToastContainer (webpack-internal:///(pages-dir-browser)/./node_modules/react-toastify/esm/react-toastify.js:665:29)
+    at Coronabingo (webpack-internal:///(pages-dir-browser)/./pages/_app.tsx:465:9)
+    at I18nProvider (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/I18nProvider.js:31:18)
+    at AppWithTranslations (webpack-internal:///(pages-dir-browser)/./node_modules/next-translate/lib/esm/appWithI18n.js:68:152)
+    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:43)
+    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-error-boundary.js:25:9)
+    at PagesDevOverlayBridge (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:44:34)
+    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:79:1)
+    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:200:25)
+    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:419:17)
+{"id":"CB-03","lobby":"http://127.0.0.1:3187/room/oMoKU6RLQNlc7w95GGai","codeGateInitiallyShown":true,"codeRevealedInSetup":true,"visitorReachedHostControls":true,"visitorDrewNumber":true}
+  ✘  3 [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:66:5 › CB-03: room-code protection cannot be bypassed through setup (6.1s)
+
+
+  1) [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:17:5 › CB-01: preserve both tabs marks after reload
+
+    Error: First tab mark must survive the other tab reload
+
+    expect(locator).toHaveClass(expected) failed
+
+    Locator: getByTestId('bingo-card').first().getByRole('button').first()
+    Expected pattern: /bg-orange-400/
+    Received string:  "bg-white border-b-2 border-r-2 border-gray-900 cursor-poroto flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10"
+    Timeout: 3000ms
+
+    Call log:
+      - First tab mark must survive the other tab reload getByTestId('bingo-card').first().getByRole('button').first() with timeout 3000ms
+      - waiting for getByTestId('bingo-card').first().getByRole('button').first()
+        10 × locator resolved to <div tabindex="0" role="button" aria-pressed="false" class="bg-white border-b-2 border-r-2 border-gray-900 cursor-poroto flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10">…</div>
+           - unexpected value "bg-white border-b-2 border-r-2 border-gray-900 cursor-poroto flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10"
+
+
+      37 |   console.log(JSON.stringify({ id: 'CB-01', lobby, firstNumber, secondNumber,
+      38 |     marksAfterReload: await page.locator('[data-testid="bingo-card"] .bg-orange-400').allTextContents() }))
+    > 39 |   await expect(a, 'First tab mark must survive the other tab reload').toHaveClass(/bg-orange-400/, { timeout: 3000 })
+         |                                                                       ^
+      40 | })
+      41 |
+      42 | test('CB-02: preserve pending addition after persisted player deletion', async ({ page }) => {
+        at /Users/durancristhian/Repos/coronabingo/research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:39:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    research/functional-audit-2026-09-26-evidence/results/high-priority-CB-01-preserve-both-tabs-marks-after-reload-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    research/functional-audit-2026-09-26-evidence/results/high-priority-CB-01-preserve-both-tabs-marks-after-reload-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: research/functional-audit-2026-09-26-evidence/results/high-priority-CB-01-preserve-both-tabs-marks-after-reload-chromium/error-context.md
+
+  2) [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:66:5 › CB-03: room-code protection cannot be bypassed through setup
+
+    Error: A visitor must not obtain host controls by reading the code from setup
+
+    expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('button', { name: 'Próximo número' })
+    Expected: 0
+    Received: 1
+    Timeout:  3000ms
+
+    Call log:
+      - A visitor must not obtain host controls by reading the code from setup getByRole('button', { name: 'Próximo número' }) with timeout 3000ms
+      - waiting for getByRole('button', { name: 'Próximo número' })
+        10 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+       98 |     codeRevealedInSetup: true, visitorReachedHostControls: true, visitorDrewNumber: true }))
+       99 |   await expect(visitor.getByRole('button', { name: 'Próximo número' }),
+    > 100 |     'A visitor must not obtain host controls by reading the code from setup').toHaveCount(0, { timeout: 3000 })
+          |                                                                               ^
+      101 | })
+      102 |
+        at /Users/durancristhian/Repos/coronabingo/research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:100:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    research/functional-audit-2026-09-26-evidence/results/high-priority-CB-03-room-c-a6c68-t-be-bypassed-through-setup-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    research/functional-audit-2026-09-26-evidence/results/high-priority-CB-03-room-c-a6c68-t-be-bypassed-through-setup-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: research/functional-audit-2026-09-26-evidence/results/high-priority-CB-03-room-c-a6c68-t-be-bypassed-through-setup-chromium/error-context.md
+
+  2 failed
+    [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:17:5 › CB-01: preserve both tabs marks after reload
+    [chromium] › research/functional-audit-2026-09-26-evidence/high-priority.spec.ts:66:5 › CB-03: room-code protection cannot be bypassed through setup
+  1 passed (15.6s)
+
+
+i  emulators: Received SIGINT (Ctrl-C) for the first time. Starting a clean shutdown.
+i  emulators: Please wait for a clean shutdown or send the SIGINT (Ctrl-C) signal again to stop right now.
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator
+UI test command finished in 19.9s
+/Users/durancristhian/.nvm/versions/node/v24.21.0/bin/node exited with 1
