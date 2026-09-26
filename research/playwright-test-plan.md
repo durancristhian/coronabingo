@@ -242,3 +242,9 @@ UI-01 and UI-04 are resolved as `wontfix` for Playwright. The other eight ticket
 ### 2026-09-26: retired routes excluded from all new tests
 
 The owner explicitly excluded standalone `/admin`, `/eventos/[eventId]`, `/eventos/[eventId]/admin` and any other removed route from all new test coverage, including Playwright, unit, integration, regression and HTTP checks. This exclusion does not apply to the active `/room/[roomId]/admin` route used to prepare a room.
+
+### 2026-09-26: UI-05 card-marking resilience
+
+`tests/ui/card-marking-resilience.spec.ts` now opens two tabs for the same player against the local Firestore Emulator, selects two actual numbers from the assigned card, marks them concurrently, observes both marks in both tabs and verifies their persistence after both tabs reload. It then restarts and configures the next game and verifies that no new-card button is marked. The concurrent-reload journey also runs through English card UI. The test uses retrying visible assertions, not fixed synchronization waits.
+
+The initial test failed before the correction because the second tab did not receive the first tab's mark. The implementation now uses Firestore `arrayUnion` and `arrayRemove` per card number rather than staging and replaying complete arrays from `localStorage`, preventing concurrent tabs from overwriting one another. Reconfiguring drops numeric card-mark fields before it writes the next deal, so the `Restart` increment of `timesPlayed` begins without prior-game marks even if a ticket is assigned again. Focused development UI-05 passed in Spanish and English at product revision `785f5aff56a2e8b611eb2b29ad99fd25c7e1439b`; final baseline results are recorded in the UI-05 ticket. This is emulator-only evidence; no hosted Firebase, Preview or Production behavior was tested.
