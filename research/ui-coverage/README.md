@@ -74,8 +74,8 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-07: herramientas secundarias durante una partida](tickets/UI-07-game-tools.md)
 
-- [ ] Un jugador cambia un fondo y lo conserva tras recargar.
-- [ ] Quien dirige activa un festejo y un sonido representativos y el otro contexto recibe ambos.
+- [x] Un jugador cambia un fondo y lo conserva tras recargar.
+- [x] Quien dirige activa un festejo y un sonido representativos y el otro contexto recibe ambos.
 
 ## Tickets retirados de Playwright
 
