@@ -4,7 +4,7 @@ Fecha: 2026-09-26
 
 Status: needs-triage
 
-Work status: open
+Work status: resolved
 
 Revisión relevada: `f8dab14`
 
@@ -58,11 +58,11 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-02: reconfigurar participantes entre partidas](tickets/UI-02-setup-player-management.md)
 
-- [ ] Después de reiniciar, eliminar una persona, agregar otra, cambiar quién dirige y jugar con la nueva configuración.
+- [x] Después de reiniciar, eliminar una persona, agregar otra, cambiar quién dirige y jugar con la nueva configuración.
 
 ### [UI-10: recorrido principal en móvil](tickets/UI-10-responsive-accessibility-matrix.md)
 
-- [ ] Crear, configurar, abrir cartones y sincronizar un sorteo en un viewport móvil sin perder acciones esenciales.
+- [x] Crear, configurar, abrir cartones y sincronizar un sorteo en un viewport móvil sin perder acciones esenciales.
 
 ### [UI-08: tutorial bajo demanda](tickets/UI-08-home-and-tutorial.md)
 
@@ -126,3 +126,9 @@ La suite completa debe seguir siendo corta y determinista. El objetivo no es sub
 ## Entrega de esta tanda
 
 La entrega se organiza con un PR agregador de `codex/ui-coverage/main` hacia `main`. Cada ticket que necesite código tendrá una rama y un PR propio hacia el agregador. Tras verificarlo, se integrará allí antes de abrir la siguiente rama. Este orden de PRs no crea dependencias funcionales entre tickets. El PR agregador queda para revisión humana y no se integra en `main` como parte de este trabajo. UI-08 se resuelve aquí con evidencia de la cobertura ya existente, sin repetirla en otro PR.
+
+## Comments
+
+### 2026-09-26: cierre de la tanda
+
+UI-05, UI-06, UI-03, UI-02, UI-10, UI-08, UI-09 y UI-07 tienen `Work status: resolved` y evidencia en sus tickets y en [el plan de Playwright](../playwright-test-plan.md). Los PR secundarios #193 a #200 se integraron sólo en la rama agregadora. Las pruebas de juego documentadas usaron el Firestore Emulator local; los checks de CI y los despliegues Preview se verifican por PR. No se verificó gameplay alojado ni Production.
