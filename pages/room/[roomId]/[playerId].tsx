@@ -24,12 +24,7 @@ import { scrollToTop } from '~/utils/scrollToTop'
 
 export default function RoomPlayer() {
   const { error: roomError, loading: roomLoading, room } = useRoom()
-  const {
-    error: playerError,
-    loading: playerLoading,
-    player,
-    updatePlayer,
-  } = usePlayer()
+  const { error: playerError, loading: playerLoading, player } = usePlayer()
   const { t } = useTranslation()
   const { loggedIn } = useRoomCode()
 
@@ -168,7 +163,7 @@ export default function RoomPlayer() {
             </div>
             {enableStreamerView ? null : (
               <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Tickets player={player} updatePlayer={updatePlayer} />
+                <Tickets player={player} />
               </div>
             )}
           </div>
