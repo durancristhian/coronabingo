@@ -1,0 +1,72 @@
+{
+  "base_revision": "2ec2fb61b8d9ae733d8258e7af8510a26876f83c",
+  "candidate_revision": "919c8072b92f15660600cb6105397421dd846cbd",
+  "environment": "UI_TESTS=1 production build in .next-ui-tests",
+  "method": "Unique modern JavaScript from the build manifest per route, compressed with gzip level 9. Excel presence uses the XLSX MIME type emitted by zipcelx 1.6.2.",
+  "routes": {
+    "/": {
+      "before": {
+        "js_bytes": 780117,
+        "js_gzip9_bytes": 230605
+      },
+      "after": {
+        "js_bytes": 780140,
+        "js_gzip9_bytes": 230623
+      },
+      "delta": {
+        "js_bytes": 23,
+        "js_gzip9_bytes": 18
+      }
+    },
+    "/room/[roomId]": {
+      "before": {
+        "js_bytes": 897148,
+        "js_gzip9_bytes": 263041,
+        "excel_in_initial_scripts": true
+      },
+      "after": {
+        "js_bytes": 770837,
+        "js_gzip9_bytes": 227034,
+        "excel_in_initial_scripts": false
+      },
+      "delta": {
+        "js_bytes": -126311,
+        "js_gzip9_bytes": -36007,
+        "js_gzip9_percent": -13.69
+      }
+    },
+    "/room/[roomId]/admin": {
+      "before": {
+        "js_bytes": 783425,
+        "js_gzip9_bytes": 231035
+      },
+      "after": {
+        "js_bytes": 783448,
+        "js_gzip9_bytes": 231053
+      },
+      "delta": {
+        "js_bytes": 23,
+        "js_gzip9_bytes": 18
+      }
+    },
+    "/room/[roomId]/[playerId]": {
+      "before": {
+        "js_bytes": 946784,
+        "js_gzip9_bytes": 261164
+      },
+      "after": {
+        "js_bytes": 946807,
+        "js_gzip9_bytes": 261182
+      },
+      "delta": {
+        "js_bytes": 23,
+        "js_gzip9_bytes": 18
+      }
+    }
+  },
+  "first_export": {
+    "async_chunk": "static/chunks/168.29a34ea1b079be9a.js",
+    "js_bytes": 127321,
+    "js_gzip9_bytes": 36502
+  }
+}

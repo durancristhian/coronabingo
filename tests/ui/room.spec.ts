@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
+import { createReadyRoom, testPlayerNames as names } from './room-setup'
 
-const names = { host: 'Ana anfitriona', player: 'Bruno jugador' }
 const emptyDraw = 'No salieron números todavía.'
 
 async function readAssignedTicketIds(page: Page, name: string) {
@@ -63,31 +63,9 @@ test('host and player create, play, reload and restart a room', async ({
   await test.step(
     'Create and configure a room with two participants',
     async () => {
-      await host.goto('/')
-      await host
-        .getByRole('textbox', { name: 'Nombre *', exact: true })
-        .fill('Sala de regresión')
-      await host.getByRole('button', { name: 'Listo', exact: true }).click()
-      await expect(
-        host.getByRole('heading', { name: 'Preparar sala' }),
-      ).toBeVisible()
-      for (const name of Object.values(names)) {
-        await host
-          .getByRole('textbox', { name: 'Nombre *', exact: true })
-          .fill(name)
-        await host.getByRole('button', { name: 'Agregar persona' }).click()
-      }
-      await host
-        .getByRole('combobox', { name: 'adminId', exact: true })
-        .selectOption({ label: names.host })
-      await host
-        .getByRole('checkbox', { name: 'Usar bolillero online' })
-        .check()
-      await host.getByRole('button', { name: 'Jugar', exact: true }).click()
-      await expect(
-        host.getByRole('heading', { name: 'Información de la sala' }),
-      ).toBeVisible()
-      await expect(host.getByTestId('player-row')).toHaveCount(2)
+      await createReadyRoom(host, 'Sala de regresión', {
+        useOnlineCaller: true,
+      })
       lobbyURL = host.url()
     },
   )
