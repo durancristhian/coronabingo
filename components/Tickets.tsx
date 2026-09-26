@@ -4,15 +4,14 @@ import React, { Fragment } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
 import useTickets from '~/hooks/useTickets'
-import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { Player } from '~/interfaces/models/Player'
 import { FieldValue } from '~/utils/firebase'
 
 interface Props {
   player: Player
-  updatePlayer: (data: Partial<PlayerBase>) => void
 }
 
-export default function Tickets({ player, updatePlayer }: Props) {
+export default function Tickets({ player }: Props) {
   const tickets = useTickets(player.tickets)
   const { t } = useTranslation()
 
@@ -54,7 +53,7 @@ export default function Tickets({ player, updatePlayer }: Props) {
     console.log(result)
   } */
 
-  const setSelectedNumbers = (
+  const setSelectedNumbers = async (
     ticketId: number,
     newSelectedNumbers: number[],
   ) => {
@@ -67,18 +66,14 @@ export default function Tickets({ player, updatePlayer }: Props) {
     )
 
     if (addedNumber !== undefined) {
-      player.ref.update({
+      await player.ref.update({
         [ticketId]: FieldValue.arrayUnion(addedNumber),
       })
     } else if (removedNumber !== undefined) {
-      player.ref.update({
+      await player.ref.update({
         [ticketId]: FieldValue.arrayRemove(removedNumber),
       })
     }
-
-    updatePlayer({
-      [ticketId]: newSelectedNumbers,
-    })
   }
 
   return (
