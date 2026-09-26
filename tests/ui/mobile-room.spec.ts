@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
-import { configureReadyRoom, testPlayerNames } from './room-setup'
+import { configureRoom, startReadyRoom, testPlayerNames } from './room-setup'
 
 const mobileViewport = { width: 390, height: 844 }
 
@@ -21,7 +21,12 @@ async function openCards(page: Page, name: string) {
   await expect(
     page.getByRole('heading', { name: new RegExp(`Hola ${name},`) }),
   ).toBeVisible()
-  await expect(page.getByTestId('bingo-card')).toHaveCount(2)
+  const cards = page.getByTestId('bingo-card')
+  await expect(cards).toHaveCount(2)
+  for (const card of await cards.all()) {
+    await expect(card).toBeVisible()
+    await expect(card.getByRole('button').first()).toBeEnabled()
+  }
 }
 
 test('mobile host and player create a room and synchronize their first draw', async ({
@@ -60,7 +65,13 @@ test('mobile host and player create a room and synchronize their first draw', as
       ).toBeVisible()
       await expectNoHorizontalOverflow(host)
 
-      await configureReadyRoom(host, { useOnlineCaller: true })
+      await configureRoom(host, { useOnlineCaller: true })
+      await expect(
+        host.getByRole('button', { name: 'Jugar', exact: true }),
+      ).toBeEnabled()
+      await expectNoHorizontalOverflow(host)
+
+      await startReadyRoom(host)
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
@@ -81,6 +92,9 @@ test('mobile host and player create a room and synchronize their first draw', as
       await expect(
         host.getByRole('button', { name: 'Próximo número', exact: true }),
       ).toBeVisible()
+      await expect(
+        host.getByRole('button', { name: 'Próximo número', exact: true }),
+      ).toBeEnabled()
       await expect(
         player.getByRole('button', { name: 'Próximo número', exact: true }),
       ).toHaveCount(0)

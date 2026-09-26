@@ -17,7 +17,7 @@ export async function createRoom(page: Page, roomName: string) {
   ).toBeVisible()
 }
 
-export async function configureReadyRoom(
+export async function configureRoom(
   page: Page,
   { useOnlineCaller = false } = {},
 ) {
@@ -39,11 +39,19 @@ export async function configureReadyRoom(
   } else {
     await onlineCaller.uncheck()
   }
+}
+
+export async function startReadyRoom(page: Page) {
   await page.getByRole('button', { name: 'Jugar', exact: true }).click()
   await expect(
     page.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()
   await expect(page.getByTestId('player-row')).toHaveCount(2)
+}
+
+export async function configureReadyRoom(page: Page, options = {}) {
+  await configureRoom(page, options)
+  await startReadyRoom(page)
 }
 
 export async function createReadyRoom(
