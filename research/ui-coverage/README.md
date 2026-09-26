@@ -49,7 +49,7 @@ Este recorrido sigue siendo la base. Los tickets siguientes agregan otro recorri
 
 ### [UI-06: código de acceso de quien dirige](tickets/UI-06-host-room-code.md)
 
-- [ ] Activar la protección, entrar como jugador sin código, fallar y acertar como host, jugar, reiniciar y volver a exigir el código.
+- [x] Activar la protección, entrar como jugador sin código, fallar y acertar como host, jugar, reiniciar y volver a exigir el código.
 
 ### [UI-03: modos de bolillero y límite de 90](tickets/UI-03-game-configuration-and-draw-modes.md)
 
