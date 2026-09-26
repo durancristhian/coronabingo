@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras integrar PERF-01, PERF-02, PERF-05 y PERF-06, e implementar PERF-04. PERF-04 tiene verificación local, CI y Preview; su integración está pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado el 26 de septiembre: PERF-01, PERF-02, PERF-04, PERF-05 y PERF-06 están integrados en el `main` local `8e35fa4`. Los demás tickets continúan abiertos y no se modificaron cuentas. La [revalidación de la auditoría interna](../2026-09-23-internal-optimization-audit.md#revalidación-del-26-de-septiembre-de-2026) distingue los ahorros ya implementados de los candidatos que no alcanzan un impacto alto o medio-alto confirmado.
 
 ## Línea base posterior al push
 
@@ -25,14 +25,14 @@ La portada y los assets muestreados dieron `X-Vercel-Cache: HIT`. JS/CSS con has
 
 ## Tickets y orden sugerido
 
-PERF-01, PERF-02, PERF-05 y PERF-06 están integrados. PERF-04 está resuelto en su PR. Los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
+PERF-01, PERF-02, PERF-04, PERF-05 y PERF-06 están integrados. Los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
 
 | Orden | Ticket | Resultado esperado | Esfuerzo orientativo |
 | --- | --- | --- | --- |
 | Integrado | [PERF-01: retirar novedades](tickets/PERF-01-novedades.md) | Medido: 93 KB menos de JS inicial en portada, 25,5%; 46 entradas de dependencias retiradas | Verificado e integrado |
 | Integrado | [PERF-02: separar catálogo de cartones](tickets/PERF-02-cartones.md) | Medido: 26,4 KB menos en portada y 26,7 KB menos en configuración | Verificado e integrado |
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
-| PR abierto | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado en local, CI y Preview |
+| Integrado | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Medido: cartones baja de 3 a 2 listeners; sala y configuración conservan 2 | Verificado en local, CI y Preview; matriz aislada repetida el 26/09 en main |
 | Integrado | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Medido: 36,0 KB menos al entrar a la sala; 36,5 KB bajo demanda al activar Excel | Verificado e integrado |
 | Integrado | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Medido: 4,0 KB menos en portada, 1,72%; reproductor diferido hasta abrir el modal | Verificado e integrado |
 | 7 | [PERF-07: GIF de coronavirus](tickets/PERF-07-gif.md) | Objetivo experimental: 50–80% menos en ese archivo; calidad pendiente | 0,5 día |

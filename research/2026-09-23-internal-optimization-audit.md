@@ -2,6 +2,8 @@
 
 Fecha: 2026-09-23. Código revisado: `4f14279`. Propuesta, sin implementar cambios.
 
+> Revalidado el 26 de septiembre sobre `8e35fa4`. Los principales ahorros ya están implementados. Ver la actualización al final antes de usar la lista histórica como backlog.
+
 ## Alcance y evidencia
 
 Revisión de las cuatro pantallas, providers globales, hooks, modelos, almacenamiento local, audio y dependencias de carga inicial. Versiones instaladas: Next 16.3.6, React 18.3.1 y Firebase 7.24.0.
@@ -145,3 +147,35 @@ Impacto bajo en consumo global, medio en robustez de casos puntuales. Los timeou
 - [React: dependencias y cleanup de efectos](https://react.dev/reference/react/useEffect).
 - [Next.js Pages Router: carga diferida](https://nextjs.org/docs/pages/guides/lazy-loading).
 - Se consultaron también las guías de `node_modules/next/dist/docs/` de la versión instalada, incluidos lazy loading y eventos de router.
+
+## Revalidación del 26 de septiembre de 2026
+
+Solicitud: contrastar los hallazgos con la aplicación actual y recomendar únicamente cambios pendientes de impacto alto o medio-alto, conservando apariencia y comportamiento.
+
+Base: `8e35fa47cfafc4e0095dbb6bb3eb5f1123595e8e`, rama `main`, checkout `/Users/durancristhian/Repos/coronabingo`, inicialmente limpio. Node 24.21.0 y npm 11.19.0. Revisión del código local, sin afirmar correspondencia con Production. No se implementó código ni se accedió a datos de Firebase.
+
+**Resultado: no quedan cambios de la lista original con impacto alto o medio-alto confirmado y pendientes de implementación.** Esto no certifica que la aplicación esté completamente optimizada: los candidatos de CPU necesitan una medición antes de subir su prioridad.
+
+| Hallazgo histórico | Comprobación actual | Decisión |
+| --- | --- | --- |
+| Colección completa de jugadores en cartones | `contexts/Players.tsx:14` limita rutas; el efecto limpia la suscripción al salir. El PR #191 está integrado en la historia local. | Resuelto por PERF-04; no volver a proponerlo. |
+| Novedades en el bundle común | `NewsModal` fue eliminado; `_app` ya no lo importa y no quedan `gray-matter` ni `react-markdown` en los manifiestos de dependencias. | Resuelto por PERF-01 mediante retiro de la función. |
+| Excel descargado antes de usarlo | `components/DownloadSpreadsheet.tsx:27` usa un import dinámico cacheado; el componente solo se monta cuando se habilita la opción en la sala. | Resuelto por PERF-05. |
+| Catálogo de cartones en constantes generales | `utils/constants.ts:2` importa metadatos; `useTickets` conserva el catálogo para mostrar cartones. | Resuelto por PERF-02. |
+| Escritura remota de restauración vacía o redundante | `components/Tickets.tsx:71` conserva la llamada a update y la eliminación inmediata del respaldo. | Vigente, impacto medio y de robustez; queda fuera del filtro. No es una escritura remota por marca. |
+| Escrituras locales redundantes | `components/Tickets.tsx:87` conserva la dependencia de `player` completo y permite `tickets=[]`. | Vigente, impacto bajo a medio; queda fuera del filtro. |
+| Doble bolillero/opciones | La página de cartones conserva ambas invocaciones y oculta una por CSS. | Vigente, 180 botones para mostrar 90; impacto medio estructural, sin medición temporal para llamarlo medio-alto. |
+| Renderizados amplios | Cartones, sala y opciones conservan el acoplamiento señalado. | Candidato a perfilado; no se promueve a impacto alto sin evidencia. |
+| Ciclo de vida | `_app` ya usa alta/baja del evento de navegación. Audio sigue sin cleanup y Player sigue sin roomId en dependencias. | Parcialmente resuelto; los pendientes no superan el umbral de rendimiento solicitado. |
+
+También se verificó que PERF-06 ya monta el reproductor de YouTube bajo demanda. Se revisaron los tickets restantes del índice de rendimiento: PERF-03 no mejora la primera visita y su ahorro depende de revalidaciones y uso repetido, sin nueva traza que demuestre impacto medio-alto; PERF-07/08 afectan recursos opcionales y requieren validar fidelidad antes de recomendar conversiones; PERF-09 cambia la reserva y adaptación del anuncio y pertenece a otro alcance. La etiqueta histórica de prioridad alta de PERF-03 no equivale a impacto alto medido.
+
+Comprobación ejecutada de nuevo:
+
+```sh
+node research/performance/measure-listeners.cjs --expect-scoped
+```
+
+Pasó. Matriz de suscripciones/cleanup: inicio 0/0, sala 2/2, configuración 2/2, cartones 2/2. El recorrido de la colección emitió tres altas y tres bajas, sin mantenerla en cartones. Ejecuta los providers actuales con React/router/Firestore simulados; no mide transporte, facturación ni reconciliación real de React.
+
+Se contrastaron imports, efectos y cambios contra `4f14279`, además de la historia de integración y los tickets canónicos. No se reutilizaron los tamaños históricos como ahorro pendiente ni se sumaron resultados de revisiones distintas. No se ejecutaron nuevo build, suite de gameplay, profiler ni pruebas en Production: este trabajo solo actualiza el diagnóstico y documentación. El siguiente paso para descubrir oportunidades grandes nuevas sería medir el flujo real de partida en móvil y atribuir sus tiempos, no implementar automáticamente los candidatos medios.
