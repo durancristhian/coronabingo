@@ -1,6 +1,6 @@
 # Rendimiento: diagnóstico y tickets
 
-Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01 y PERF-02. Sus implementaciones y verificaciones locales están completas; publicación pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
+Diagnóstico inicial del 23 de septiembre de 2026. Actualizado tras implementar PERF-01, PERF-02 y PERF-06. Sus implementaciones y verificaciones locales están completas; publicación pendiente. Los demás tickets continúan abiertos y no se modificaron cuentas.
 
 ## Línea base posterior al push
 
@@ -25,7 +25,7 @@ La portada y los assets muestreados dieron `X-Vercel-Cache: HIT`. JS/CSS con has
 
 ## Tickets y orden sugerido
 
-PERF-01 y PERF-02 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
+PERF-01, PERF-02 y PERF-06 están resueltos localmente; los restantes están diagnosticados y pendientes de implementación. Cada archivo define alcance, estimación, límites y aceptación. Publicidad conserva su plan canónico previo. Los valores base de la sección anterior siguen siendo la observación histórica de producción.
 
 | Orden | Ticket | Resultado esperado | Esfuerzo orientativo |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ PERF-01 y PERF-02 están resueltos localmente; los restantes están diagnosticad
 | 3 | [PERF-03: caché de assets versionados](tickets/PERF-03-cache-assets.md) | Evitar revalidaciones de los archivos versionados aún presentes y frescos en caché | 0,5–1 día |
 | 4 | [PERF-04: suscripción colectiva de jugadores](tickets/PERF-04-listeners.md) | Quitar una consulta de colección por pestaña de cartones; conservar sala y jugador | 0,5–1 día |
 | 5 | [PERF-05: Excel bajo demanda](tickets/PERF-05-excel.md) | Diferir un chunk de 29,9 KB en la sala; 0 KB de ahorro en portada | 0,5 día |
-| 6 | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Diferir hasta unos 7,8 KB en portada, cerca de 2%; confirmar dependencias compartidas | 0,5 día |
+| Hecho local | [PERF-06: tutorial bajo demanda](tickets/PERF-06-tutorial.md) | Medido: 4,0 KB menos en portada, 1,72%; reproductor diferido hasta abrir el modal | Verificado, sin publicar |
 | 7 | [PERF-07: GIF de coronavirus](tickets/PERF-07-gif.md) | Objetivo experimental: 50–80% menos en ese archivo; calidad pendiente | 0,5 día |
 | 8 | [PERF-08: audios grandes](tickets/PERF-08-audios.md) | Cardi B: alrededor de 60% menos si 128 kbps mantiene calidad | 0,5–1 día |
 | 9 | [PERF-09: estabilidad del anuncio](tickets/PERF-09-anuncio.md) | Reserva estable de espacio; sin porcentaje de velocidad ni ingresos prometido | Según plan y dependencias de cuenta |
@@ -56,6 +56,7 @@ Para código de producto, usar los validadores vigentes, `npm run lint:check` y 
 - [Inventario local de medios](assets-2026-09-23.json), generado con `ffprobe`; no se codificaron alternativas.
 - [Registro de listeners aislado](listeners-2026-09-23.json). Ejecuta providers reales con React/router/Firestore simulados, sin tráfico ni facturación.
 - [Comparación local y verificación de PERF-02](perf02-evidence/README.md).
+- [Comparación local y verificación de PERF-06](perf06-evidence/README.md).
 
 Desde la raíz:
 

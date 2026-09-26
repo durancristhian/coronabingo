@@ -3,6 +3,10 @@
   "videocall-suggestion": "Vas a necesitar crear una videollamada con quienes quieras jugar. Te recomiendo",
   "how-to-play-button": "Ver tutorial",
   "how-to-play-modal-title": "Tutorial - Como jugar Coronabingo",
+  "tutorial-loading": "Cargando tutorial...",
+  "tutorial-load-error": "No pudimos cargar el tutorial.",
+  "tutorial-retry": "Reintentar",
+  "tutorial-open-youtube": "Abrir en YouTube",
   "create-room": {
     "title": "Crear una sala",
     "saving": "Creando sala...",

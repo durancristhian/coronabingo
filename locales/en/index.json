@@ -3,6 +3,10 @@
   "videocall-suggestion": "You'll need to create a videocall with all the players. I recommend",
   "how-to-play-button": "Watch tutorial",
   "how-to-play-modal-title": "Tutorial - How to play Coronabingo",
+  "tutorial-loading": "Loading tutorial...",
+  "tutorial-load-error": "We couldn't load the tutorial.",
+  "tutorial-retry": "Try again",
+  "tutorial-open-youtube": "Open on YouTube",
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",
