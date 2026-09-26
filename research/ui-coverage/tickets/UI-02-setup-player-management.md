@@ -54,3 +54,9 @@ Base: `0e60033a4de9c4b7fb07a756670da45a53dc6fea`. Worktree: `/Users/durancristhi
 | `npm run ui-tests:production` | Pasó, 11 casos en 16.9 s de Playwright; 26.3 s del runner. |
 
 Los avisos de APIs de dependencias y claves históricas de traducción aparecieron durante la suite, sin fallos ni cambios de producto. El runner cerró los procesos propios y eliminó el candado; no quedaron registros exportados ni servidores de tarea activos.
+
+### 2026-09-26: corrección de revisión
+
+La revisión separada de Standards y Spec pidió retirar de la primera partida la tercera persona temporal y la navegación atrás/adelante asociada. El recorrido final crea sólo a Ana anfitriona y Bruno jugador, completa y reinicia esa partida, y recién entonces elimina a Bruno, agrega a Carla nueva anfitriona y cambia a Carla como quien dirige. Los nombres del reparto posterior ahora distinguen explícitamente a la anfitriona anterior de la nueva.
+
+Se repitieron `npm run ui-tests -- tests/ui/room.spec.ts` (1 caso, 13.1 s), `npm run lint:check`, `npm run build`, `git diff --check`, `npm run ui-tests` (11 casos, 44.1 s de Playwright; 48.2 s del runner) y `npm run ui-tests:production` (11 casos, 16.5 s de Playwright; 24.6 s del runner). Todos pasaron contra el mismo emulador local; no se accedió a Firebase alojado, Preview ni Production.

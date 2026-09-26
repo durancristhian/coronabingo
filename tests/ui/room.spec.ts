@@ -5,7 +5,6 @@ import { testPlayerNames } from './room-setup'
 const names = {
   ...testPlayerNames,
   replacement: 'Carla nueva anfitriona',
-  temporary: 'Carla temporal',
 }
 const emptyDraw = 'No salieron números todavía.'
 
@@ -110,41 +109,12 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
-      for (const name of [...Object.values(testPlayerNames), names.temporary]) {
+      for (const name of Object.values(testPlayerNames)) {
         await host
           .getByRole('textbox', { name: 'Nombre *', exact: true })
           .fill(name)
         await host.getByRole('button', { name: 'Agregar persona' }).click()
       }
-      await expect(
-        host.getByRole('button', { name: 'Eliminar persona' }),
-      ).toHaveCount(3)
-
-      await host.goBack()
-      await expect(
-        host.getByRole('textbox', { name: 'Nombre *', exact: true }),
-      ).toBeVisible()
-      await host.goForward()
-      await expect(
-        host.getByRole('heading', { name: 'Preparar sala' }),
-      ).toBeVisible()
-      await expect(
-        host
-          .locator('#players-list')
-          .getByText(names.temporary, { exact: true }),
-      ).toBeVisible()
-      await host
-        .getByRole('button', { name: 'Eliminar persona' })
-        .last()
-        .click()
-      await expect(
-        host
-          .locator('#players-list')
-          .getByText(names.temporary, { exact: true }),
-      ).toHaveCount(0)
-      await expect(
-        host.getByRole('button', { name: 'Eliminar persona' }),
-      ).toHaveCount(2)
       await host
         .getByRole('combobox', { name: 'adminId', exact: true })
         .selectOption({ label: names.host })
@@ -323,12 +293,12 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(
         host.getByTestId('player-row').filter({ hasText: names.player }),
       ).toHaveCount(0)
-      const nextLobbyURL = host.url()
-      const nextHostTicketIds = await openCards(host, names.host)
-      await player.goto(nextLobbyURL)
-      const nextPlayerTicketIds = await openCards(player, names.replacement)
-      await expectAssignedCards(host, names.host, nextHostTicketIds)
-      await expectAssignedCards(player, names.replacement, nextPlayerTicketIds)
+      const reconfiguredLobbyURL = host.url()
+      const formerHostTicketIds = await openCards(host, names.host)
+      await player.goto(reconfiguredLobbyURL)
+      const newHostTicketIds = await openCards(player, names.replacement)
+      await expectAssignedCards(host, names.host, formerHostTicketIds)
+      await expectAssignedCards(player, names.replacement, newHostTicketIds)
       await expect(
         host.getByRole('button', { name: 'Próximo número' }),
       ).toHaveCount(0)
