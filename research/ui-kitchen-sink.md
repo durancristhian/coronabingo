@@ -64,7 +64,7 @@ Criterios adicionales:
 - Comprobación angosta dentro de cada panel a 437 px: original y tres propuestas mantuvieron `scrollWidth` igual a `clientWidth`, 4 secciones, 90 números, 19 sonidos y 13 fondos.
 - Las cuatro rutas individuales también mantuvieron `scrollWidth` igual a `clientWidth` a 1905 px. Se revisaron visualmente sus mesas de juego y la consola final no presentó errores ni advertencias de aplicación.
 - No se realizaron lecturas ni escrituras en Firestore.
-- Servidor para revisión: `npm run dev -- --port 3127`, URL principal `http://localhost:3127/kitchen-sink/compare`, ejecutado desde el worktree de la tarea. El PID final se informa en el handoff después de reiniciarlo tras los checks y commits.
+- Durante el estudio comparativo se usó temporalmente `npm run dev -- --port 3127` con `/kitchen-sink/compare`; ese servidor se detuvo antes de los checks de adopción. La URL vigente se registra en el handoff final.
 
 ## Comments
 

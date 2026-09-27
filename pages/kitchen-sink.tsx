@@ -121,11 +121,11 @@ function StaticPlayerList() {
   ]
 
   return (
-    <div className="ks-player-list border-gray-300 border-t-2 mt-4 -mx-4">
+    <div className="cb-list ks-player-list border-gray-300 border-t-2 mt-4 -mx-4">
       {players.map((player, index) => (
         <div
           className={classnames([
-            'ks-list-row',
+            'cb-list-row ks-list-row',
             'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
             player.host
               ? 'bg-green-100'
@@ -138,7 +138,7 @@ function StaticPlayerList() {
           <div className="flex flex-auto items-center min-w-0">
             <p className="truncate">{player.name}</p>
             {player.host && (
-              <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+              <span className="cb-badge bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
                 Dirige el juego
               </span>
             )}
@@ -230,14 +230,14 @@ function StaticOptionButtons() {
 
 function StaticSoundList() {
   return (
-    <div className="ks-sound-list border-gray-300 border-t-2 -mx-4">
+    <div className="cb-list ks-sound-list border-gray-300 border-t-2 -mx-4">
       {SOUNDS_EXTRAS.map(({ language, name }, index) => (
         <div
           className={classnames([
-            'ks-list-row',
+            'cb-list-row ks-list-row',
             'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
             index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
-            index === 1 && 'bg-yellow-200',
+            index === 1 && 'cb-list-row--active bg-yellow-200',
           ])}
           key={name}
         >

@@ -13,6 +13,11 @@
   --cb-red-soft: #ffe0db;
   --cb-purple: #c9bdf4;
   --cb-purple-soft: #ebe6ff;
+  --cb-marked: #f4a261;
+  --cb-line-muted: rgba(44, 56, 80, 0.65);
+  --cb-line-subtle: rgba(44, 56, 80, 0.25);
+  --cb-line-faint: rgba(44, 56, 80, 0.16);
+  --cb-overlay: rgba(37, 49, 73, 0.72);
   --cb-radius-control: 0.75rem;
   --cb-radius-surface: 1.125rem;
   --cb-shadow-control: 3px 3px 0 var(--cb-line);
@@ -84,7 +89,7 @@
 }
 
 .coronabingo-ui .cb-footer-meta {
-  border-top: 2px solid rgba(44, 56, 80, 0.25);
+  border-top: 2px solid var(--cb-line-subtle);
   margin-top: 1.5rem;
   padding-top: 1.5rem;
 }
@@ -155,7 +160,7 @@
 }
 
 .coronabingo-ui .cb-button:disabled {
-  box-shadow: 1px 1px 0 rgba(44, 56, 80, 0.65);
+  box-shadow: 1px 1px 0 var(--cb-line-muted);
   cursor: not-allowed;
   filter: saturate(0.55);
   opacity: 0.55;
@@ -302,6 +307,12 @@
   background: var(--cb-green-soft);
 }
 
+.coronabingo-ui .cb-list-row--active,
+.coronabingo-ui .cb-list-row--active:nth-child(even) {
+  background: var(--cb-yellow);
+  box-shadow: inset 0.35rem 0 0 var(--cb-line);
+}
+
 .coronabingo-ui .cb-badge {
   background: var(--cb-green);
   border-color: var(--cb-line);
@@ -319,14 +330,16 @@
 .coronabingo-ui .ks-ticket-grid > div {
   border-color: var(--cb-line);
   color: var(--cb-ink);
+  min-height: 2.75rem;
 }
 
 .coronabingo-ui .cb-ticket-cell--selected {
-  background: #f4a261;
+  background: var(--cb-marked);
 }
 
 .coronabingo-ui .cb-number-board-cell {
   color: var(--cb-muted);
+  min-height: 2.75rem;
 }
 
 .coronabingo-ui .cb-number-board-cell--called {
@@ -346,7 +359,7 @@
 }
 
 .coronabingo-ui .cb-last-numbers {
-  border-bottom: 1px solid rgba(44, 56, 80, 0.16);
+  border-bottom: 1px solid var(--cb-line-faint);
   padding-bottom: 0.5rem;
 }
 
@@ -430,7 +443,7 @@
 }
 
 .coronabingo-ui .overlay {
-  background: rgba(37, 49, 73, 0.72);
+  background: var(--cb-overlay);
 }
 
 .coronabingo-ui .cb-modal-close {
@@ -635,6 +648,10 @@
   .coronabingo-ui .cb-badge {
     margin-left: 0.5rem;
     white-space: normal;
+  }
+
+  .coronabingo-ui .cb-number-board-cell {
+    width: 20% !important;
   }
 
   .coronabingo-ui .ks-intro {

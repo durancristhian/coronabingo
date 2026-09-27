@@ -34,7 +34,7 @@ export default function Pato({ extraSounds, room }: Props) {
               'cb-list-row',
               'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
               index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
-              room.soundToPlay === url && 'bg-yellow-200',
+              room.soundToPlay === url && 'cb-list-row--active bg-yellow-200',
             ])}
           >
             <div className="mr-4">
