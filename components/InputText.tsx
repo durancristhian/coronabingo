@@ -37,7 +37,7 @@ export default function InputText({
             'border-2 border-gray-300 h-12 mt-1 p-2 rounded',
             'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
             'duration-150 ease-in-out transition',
-            readonly && 'bg-gray-200',
+            readonly && 'cb-input--readonly bg-gray-200',
             'disabled:opacity-50',
           ])}
           id={id}
@@ -45,6 +45,7 @@ export default function InputText({
           onChange={event => onChange && onChange(event.target.value)}
           onFocus={event => onFocus && onFocus(event)}
           disabled={disabled}
+          readOnly={readonly}
           autoComplete={autoComplete || 'off'}
         />
       </label>

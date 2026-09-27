@@ -9,10 +9,13 @@
   --cb-yellow-soft: #fff0bf;
   --cb-green: #75c9a7;
   --cb-green-soft: #d9f0e6;
+  --cb-green-strong: #277a5d;
   --cb-red: #ff8c82;
   --cb-red-soft: #ffe0db;
+  --cb-red-strong: #b93a35;
   --cb-purple: #c9bdf4;
   --cb-purple-soft: #ebe6ff;
+  --cb-yellow-strong: #955900;
   --cb-marked: #f4a261;
   --cb-line-muted: rgba(44, 56, 80, 0.65);
   --cb-line-subtle: rgba(44, 56, 80, 0.25);
@@ -192,8 +195,15 @@
   outline: none;
 }
 
+.coronabingo-ui .cb-input--readonly,
 .coronabingo-ui .cb-input[readonly] {
   background: var(--cb-surface-muted);
+  border-color: var(--cb-line-muted);
+  border-style: dashed;
+  box-shadow: inset 0.35rem 0 0 var(--cb-purple);
+  color: var(--cb-muted);
+  cursor: text;
+  padding-left: 1rem;
 }
 
 .coronabingo-ui .cb-field-hint,
@@ -255,6 +265,35 @@
   background: var(--cb-red-soft);
 }
 
+.coronabingo-ui .cb-message-icon {
+  align-items: center;
+  background: var(--cb-surface);
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--cb-line);
+  display: flex;
+  flex: 0 0 2.25rem;
+  height: 2.25rem;
+  justify-content: center;
+  width: 2.25rem;
+}
+
+.coronabingo-ui .cb-message-icon svg {
+  stroke-width: 2.5;
+}
+
+.coronabingo-ui .cb-message-icon--information {
+  color: var(--cb-yellow-strong);
+}
+
+.coronabingo-ui .cb-message-icon--success {
+  color: var(--cb-green-strong);
+}
+
+.coronabingo-ui .cb-message-icon--error {
+  color: var(--cb-red-strong);
+}
+
 .coronabingo-ui .cb-text-link,
 .coronabingo-ui a.text-blue-800 {
   color: var(--cb-ink);
@@ -314,10 +353,12 @@
 }
 
 .coronabingo-ui .cb-badge {
-  background: var(--cb-green);
+  background: var(--cb-ink);
   border-color: var(--cb-line);
   border-radius: 999px;
-  color: var(--cb-ink);
+  box-shadow: 2px 2px 0 var(--cb-yellow);
+  color: var(--cb-surface);
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
@@ -342,7 +383,7 @@
   min-height: 2.75rem;
 }
 
-.coronabingo-ui .cb-number-board-cell--called {
+.coronabingo-ui .cb-number-board-cell.cb-number-board-cell--called {
   background: transparent;
   color: var(--cb-ink);
 }

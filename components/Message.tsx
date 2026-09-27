@@ -30,7 +30,12 @@ export default function Message({ children, type }: Props) {
         COLORS[type],
       ])}
     >
-      <div className="mr-4">{ICONS[type]}</div>
+      <div
+        aria-hidden="true"
+        className={`cb-message-icon cb-message-icon--${type} mr-4`}
+      >
+        {ICONS[type]}
+      </div>
       {children}
     </div>
   )

@@ -102,7 +102,7 @@ export default function RoomId() {
               <div className="flex flex-auto flex-wrap items-center">
                 <p>{player.name}</p>
                 {player.id === room.adminId && (
-                  <span className="cb-badge bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                  <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                     {t('roomId:is-admin')}
                   </span>
                 )}

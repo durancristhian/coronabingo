@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: resolved
+Work status: claimed
 
 ## Objetivo
 
@@ -106,3 +106,20 @@ Evidencia local del 2026-09-27:
 - [PR #205](https://github.com/durancristhian/coronabingo/pull/205) quedó abierto en `70462f2`. [GitHub Actions 36338443014](https://github.com/durancristhian/coronabingo/actions/runs/36338443014) pasó lint, build y los 15 escenarios de regresión en 43,3 s; Vercel quedó Ready.
 - Preview verificado: `https://coronabingo-git-t3cod-cc7165-cristhian-durans-projects-3ace6550.vercel.app`. La portada y `/kitchen-sink` cargaron con el sistema visual, sin overflow a 1905 px; la referencia conservó 4 secciones, 90 números, 19 sonidos y 13 fondos. Las cuatro rutas descartadas respondieron 404.
 - La revisión del Preview fue de solo lectura: no creó salas ni escribió datos en Firebase alojado. No se verificó ni desplegó Production.
+
+## Ajustes posteriores a la revisión del PR
+
+Feedback aprobado el 2026-09-27:
+
+- Dar al campo de sólo lectura una distinción visual clara y mantenerlo realmente no editable.
+- Hacer que el indicador “Dirige el juego” contraste con cualquier color de fila.
+- Simplificar el estado del bolillero a una única señal: círculo relleno alrededor del número llamado, sin fondo de celda.
+- Dar a los iconos de mensajes un color semántico visible para información, éxito y error.
+
+Criterios de aceptación:
+
+- El readonly se diferencia por superficie, borde y guía lateral, conserva contraste y permite seleccionar el texto.
+- El badge de anfitrión mantiene contraste sobre filas normales, alternadas y destacadas.
+- Los números llamados no combinan fondo completo y círculo.
+- Cada icono semántico destaca sobre el fondo del mensaje sin depender sólo del color para comunicar el estado.
+- Pasan lint, build, la regresión de UI aplicable y `git diff --check`; el Preview del PR se vuelve a inspeccionar.

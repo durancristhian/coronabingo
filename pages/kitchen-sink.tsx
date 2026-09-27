@@ -138,7 +138,7 @@ function StaticPlayerList() {
           <div className="flex flex-auto items-center min-w-0">
             <p className="truncate">{player.name}</p>
             {player.host && (
-              <span className="cb-badge bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+              <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                 Dirige el juego
               </span>
             )}
