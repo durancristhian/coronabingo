@@ -54,13 +54,16 @@ const confettiType = {
   pallbearers: pallbearersClasses,
 }
 
-export const confettiTypes = ['confetti', 'pallbearers', 'balloons']
+export const confettiTypes: Exclude<ConfettiType, ''>[] = [
+  'confetti',
+  'pallbearers',
+  'balloons',
+]
 
 interface Props {
   type: ConfettiType
 }
 
-// eslint-disable-next-line react/prop-types
 export default memo(function Confetti({ type }: Props) {
   if (!type) return null
 
