@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import React, { useContext } from 'react'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
+import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
 
 export const COLORS: { [k: string]: string } = {
   blue: 'bg-blue-300',
@@ -30,7 +31,7 @@ export default function EmptyCell({ index }: { index: number }) {
       ])}
       style={{
         ...(type === 'img' && {
-          backgroundImage: `url(/background-cells/${randomValue})`,
+          backgroundImage: `url(${getBackgroundCellImageUrl(randomValue)})`,
         }),
         ...(type === 'url' && {
           backgroundImage: `url(${randomValue})`,
