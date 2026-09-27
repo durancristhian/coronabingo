@@ -1,7 +1,10 @@
 import {
   AnalyticsEventMap,
+  AnalyticsFirstUse,
   AnalyticsLanguage,
   AnalyticsPageType,
+  AnalyticsSoundCatalog,
+  AnalyticsSoundKey,
 } from '~/interfaces/analytics/Events'
 
 const getAnalyticsLanguage = (language: string): AnalyticsLanguage =>
@@ -111,3 +114,73 @@ export const getTutorialEventParams = (
     tutorial_provider: 'youtube',
   }
 }
+
+type FirstUseEventName = 'celebration_used' | 'sound_used'
+
+const firstUseFallback = new Set<string>()
+const firstUseStoragePrefix = 'coronabingo:analytics:first-use:v1'
+
+export const markFirstAnalyticsUseInPlay = (
+  eventName: FirstUseEventName,
+  roomId: string,
+  playNumber: number,
+): AnalyticsFirstUse => {
+  const key = `${firstUseStoragePrefix}:${eventName}:${roomId}:${playNumber}`
+
+  if (typeof window !== 'undefined') {
+    try {
+      if (window.sessionStorage.getItem(key)) return 'no'
+
+      window.sessionStorage.setItem(key, '1')
+      return 'yes'
+    } catch {
+      // Fall back to in-memory deduplication when storage is unavailable.
+    }
+  }
+
+  if (firstUseFallback.has(key)) return 'no'
+
+  firstUseFallback.add(key)
+  return 'yes'
+}
+
+interface CelebrationUsedEventOptions {
+  celebrationType: 'balloons' | 'confetti' | 'pallbearers'
+  firstUseInPlay: AnalyticsFirstUse
+  language: string
+  playNumber: number
+}
+
+export const getCelebrationUsedEventParams = ({
+  celebrationType,
+  firstUseInPlay,
+  language,
+  playNumber,
+}: CelebrationUsedEventOptions): AnalyticsEventMap['celebration_used'] => ({
+  ...getEventContext(language),
+  celebration_type: celebrationType,
+  first_use_in_play: firstUseInPlay,
+  play_number: playNumber,
+})
+
+interface SoundUsedEventOptions {
+  firstUseInPlay: AnalyticsFirstUse
+  language: string
+  playNumber: number
+  soundCatalog: AnalyticsSoundCatalog
+  soundKey: AnalyticsSoundKey
+}
+
+export const getSoundUsedEventParams = ({
+  firstUseInPlay,
+  language,
+  playNumber,
+  soundCatalog,
+  soundKey,
+}: SoundUsedEventOptions): AnalyticsEventMap['sound_used'] => ({
+  ...getEventContext(language),
+  first_use_in_play: firstUseInPlay,
+  play_number: playNumber,
+  sound_catalog: soundCatalog,
+  sound_key: soundKey,
+})

@@ -48,6 +48,18 @@ El 27 de septiembre de 2026 se autorizó continuar con el PR 4 del plan, apilado
 
 Fondos, festejos y sonidos permanecen fuera de esta entrega. Tampoco se cambian dimensiones, informes o propiedades de GA4, Firebase alojado, merge ni Production.
 
+## Entrega de festejos y sonidos autorizada
+
+El 27 de septiembre de 2026 se autorizó continuar con el PR 5 del plan, apilado sobre `codex/analytics-language-tutorial` en `7d977fe3436c20ec03b21d766819a499463e202e`. Su alcance es:
+
+- emitir `celebration_used` y `sound_used` sólo después de confirmar la escritura en Firestore;
+- registrar tipos y sonidos mediante claves cerradas y estables, sin traducciones, rutas de assets, IDs ni URLs;
+- distinguir el catálogo estándar del extra y la primera activación de cada herramienta dentro de una partida;
+- no contar la acción de ocultar un festejo y evitar duplicados causados por doble clic;
+- verificar la propagación real entre anfitrión y jugador con Firestore Emulator y el colector local.
+
+Los fondos permanecen fuera de esta entrega. Tampoco se cambian dimensiones, informes o propiedades de GA4, Firebase alojado, merge ni Production.
+
 ## Recomendación
 
 Conviene ampliar GA4, pero no sumando eventos sueltos sobre la integración actual. Primero hay que elegir una sola propiedad como destino de producto, eliminar los datos privados que hoy pueden salir y tipar el contrato de eventos. Después se instrumentan las acciones.
@@ -269,7 +281,7 @@ Depends on: ANA-02, resuelto en las entregas anteriores.
 
 Trabajo: instrumentar fondos, festejos, sonidos, idioma y tutorial. Agregar claves analíticas estables a catálogos, sin usar traducciones ni rutas de assets como valores.
 
-Progreso: idioma y tutorial están implementados en la entrega autorizada. Fondos quedan pendientes. Festejos y sonidos se implementan en la siguiente capa del stack.
+Progreso: idioma, tutorial, festejos y sonidos están implementados en sus entregas autorizadas. Fondos quedan pendientes.
 
 Criterios de aceptación:
 
@@ -457,4 +469,26 @@ Fuentes oficiales:
 - GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
 - Preview: `https://coronabingo-git-codex-4250ed-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
 - El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
+
+### 2026-09-27: implementación local de festejos y sonidos
+
+- Rama: `codex/analytics-celebrations-sounds`; base apilada `codex/analytics-language-tutorial` en `7d977fe3436c20ec03b21d766819a499463e202e`.
+- `celebration_used` se emite al activar un festejo después de confirmar la escritura. Ocultarlo no cuenta y los dobles clics se bloquean antes de escribir o registrar.
+- `sound_used` se emite después de confirmar la solicitud de reproducción. Los eventos contienen una clave estable y el catálogo, nunca el nombre visible ni la ruta del archivo.
+- La primera activación de festejos y sonidos se deduplica por tipo de evento, sala y número de partida en `sessionStorage`; la clave queda sólo en el navegador y el ID de sala no se envía a Analytics.
+- El recorrido dirigido con dos contextos de navegador confirma propagación de festejos y sonidos, primer uso `yes`, usos posteriores `no`, doble clic sin duplicado y ausencia del ID de sala y la ruta MP3 en el payload.
+- `npm run validate-analytics`: aprobado.
+- `npm run lint:check`: aprobado con generación de tipos, TypeScript y ESLint.
+- `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado.
+- `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
+- `git diff --check`: aprobado. No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
+
+### 2026-09-27: PR y Preview de festejos y sonidos
+
+- PR apilado: [#207](https://github.com/durancristhian/coronabingo/pull/207), abierto contra `codex/analytics-language-tutorial` (#206) con commit de implementación `7500cff43d0e11850dcce9fb0cb603b965f528d0`.
+- La rama incorporó la evidencia documental más reciente de su base mediante `ccaa03ecb88b82f4df22a2f0f72bdce4967ed974`; el conflicto se limitó al final de este tracker y se resolvió conservando ambos registros.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-cb2def-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, dos contextos de navegador, el colector de prueba y Firestore Emulator.
 - No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.

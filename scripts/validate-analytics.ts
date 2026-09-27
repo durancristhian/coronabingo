@@ -2,11 +2,14 @@ import assert from 'assert'
 import { AnalyticsLog } from '../interfaces/analytics/Events'
 import {
   getAnalyticsPageType,
+  getCelebrationUsedEventParams,
   getLanguageChangedEventParams,
   getRoomCreatedEventParams,
   getRoomRestartedEventParams,
   getRoomStartedEventParams,
+  getSoundUsedEventParams,
   getTutorialEventParams,
+  markFirstAnalyticsUseInPlay,
 } from '../utils/analyticsEvents'
 import {
   ANALYTICS_TEST_STORAGE_KEY,
@@ -32,6 +35,19 @@ const roomRestartedParams = getRoomRestartedEventParams({
   language: 'es',
   playNumber: 1,
 })
+const celebrationUsedParams = getCelebrationUsedEventParams({
+  celebrationType: 'pallbearers',
+  firstUseInPlay: 'yes',
+  language: 'es',
+  playNumber: 2,
+})
+const soundUsedParams = getSoundUsedEventParams({
+  firstUseInPlay: 'no',
+  language: 'en',
+  playNumber: 2,
+  soundCatalog: 'extra',
+  soundKey: 'patao_coronabingo',
+})
 
 assert.deepStrictEqual(roomCreatedParams, {
   room_created_date: '2026-09-27',
@@ -54,6 +70,21 @@ assert.deepStrictEqual(roomRestartedParams, {
   room_created_date: '2026-09-27',
   schema_version: 'v1',
   ui_language: 'es',
+})
+assert.deepStrictEqual(celebrationUsedParams, {
+  celebration_type: 'pallbearers',
+  first_use_in_play: 'yes',
+  play_number: 2,
+  schema_version: 'v1',
+  ui_language: 'es',
+})
+assert.deepStrictEqual(soundUsedParams, {
+  first_use_in_play: 'no',
+  play_number: 2,
+  schema_version: 'v1',
+  sound_catalog: 'extra',
+  sound_key: 'patao_coronabingo',
+  ui_language: 'en',
 })
 assert.strictEqual(getAnalyticsPageType('/'), 'home')
 assert.strictEqual(getAnalyticsPageType('/room/[roomId]'), 'room_lobby')
@@ -96,6 +127,8 @@ const validateAnalyticsTypes = (log: AnalyticsLog) => {
     }),
   )
   log('tutorial_begin', getTutorialEventParams('es'))
+  log('celebration_used', celebrationUsedParams)
+  log('sound_used', soundUsedParams)
 
   // @ts-expect-error Room names are not part of the room_created contract.
   log('room_created', { ...roomCreatedParams, description: 'private name' })
@@ -105,6 +138,11 @@ const validateAnalyticsTypes = (log: AnalyticsLog) => {
     ...getTutorialEventParams('es'),
     // @ts-expect-error Tutorial providers must use the closed analytics vocabulary.
     tutorial_provider: 'vimeo',
+  })
+  log('sound_used', {
+    ...soundUsedParams,
+    // @ts-expect-error Sound paths are not valid analytics keys.
+    sound_key: '/sounds/private.mp3',
   })
 }
 
@@ -172,6 +210,19 @@ Object.defineProperty(globalThis, 'document', {
     title: 'Coronabingo | Tu juego de Bingo Online',
   },
 })
+
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('celebration_used', 'private-room', 1),
+  'yes',
+)
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('celebration_used', 'private-room', 1),
+  'no',
+)
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('sound_used', 'private-room', 1),
+  'yes',
+)
 
 pageview({
   defaultLocale: 'es',

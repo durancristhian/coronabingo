@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test'
+import { readAnalyticsEvents } from './analytics'
 import { test, expect } from './fixtures'
 import { createReadyRoom, testPlayerNames } from './room-setup'
 
@@ -14,7 +15,7 @@ async function replaceAudio(page: Page) {
     soundWindow.playedSounds = []
 
     class TestAudio {
-      duration = 10
+      duration = 0.5
       volume = 1
 
       constructor(src: string) {
@@ -132,20 +133,149 @@ test('host celebration and sound reach another player context', async ({
   const celebrations = host.getByRole('dialog', { name: 'Festejos' })
   await celebrations
     .getByRole('button', { name: 'Activar confetti', exact: true })
-    .click()
+    .evaluate(button => {
+      const celebration = button as HTMLButtonElement
+      celebration.click()
+      celebration.click()
+    })
   await expect(player.locator('.confetti-base')).toHaveCount(20)
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'celebration_used')
+    })
+    .toEqual([
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'confetti',
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  await celebrations
+    .getByRole('button', { name: 'Desactivar confetti', exact: true })
+    .click()
+  await expect(player.locator('.confetti-base')).toHaveCount(0)
+  await celebrations
+    .getByRole('button', { name: 'Mostrar globos', exact: true })
+    .click()
+  await expect(player.locator('.balloon')).toHaveCount(25)
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'celebration_used')
+    })
+    .toEqual([
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'confetti',
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'balloons',
+          first_use_in_play: 'no',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
   await celebrations.locator('#close-modal').click()
 
   const soundPath = '/sounds/cardi-b/coronavirus.mp3'
   await host.locator('#sounds:visible').click()
-  await host
+  const firstSound = host
     .getByRole('dialog', { name: 'Sonidos' })
     .getByRole('button', {
       name: 'Reproducir Cardi B - Coronavirus',
       exact: true,
     })
-    .click()
+  await firstSound.evaluate(button => {
+    const sound = button as HTMLButtonElement
+    sound.click()
+    sound.click()
+  })
   await expect
     .poll(() => readPlayedSounds(player))
     .toContainEqual(expect.stringContaining(soundPath))
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'sound_used')
+    })
+    .toEqual([
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'cardi_b_coronavirus',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  await expect(firstSound).toBeEnabled()
+  await host
+    .getByRole('dialog', { name: 'Sonidos' })
+    .getByRole('button', {
+      name: 'Reproducir Chino cirujano - Pero pagaraprata',
+      exact: true,
+    })
+    .click()
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'sound_used')
+    })
+    .toEqual([
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'cardi_b_coronavirus',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'no',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'chino_cirujano_pagaraprata',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  const eventPayload = JSON.stringify(await readAnalyticsEvents(host))
+  const roomId = new URL(lobbyURL).pathname
+    .split('/')
+    .filter(Boolean)
+    .pop()
+  expect(eventPayload).not.toContain(roomId)
+  expect(eventPayload).not.toContain(soundPath)
 })
