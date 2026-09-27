@@ -557,3 +557,7 @@ Fuentes oficiales:
 - Las pruebas dirigidas cubren fondo inicial, refresh sin duplicado, preset activo, clic repetido, URL privada, español de escritorio e inglés móvil con Firestore Emulator.
 - Pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 16 pruebas y `git diff --check`.
 - La primera ejecución de la suite completa detectó dos expectativas antiguas sobre la cantidad exacta de eventos. Se actualizaron para incluir `player_card_opened`; la repetición completa terminó con las 16 pruebas aprobadas.
+- PR: [#208](https://github.com/durancristhian/coronabingo/pull/208), abierto contra `t3code/plan-product-analytics` (#203) con commit de implementación `faa0574`.
+- GitHub Actions `build`, Vercel y Vercel Preview Comments aprobaron el commit de implementación. No hubo revisiones ni comentarios de código al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-a2c2f1-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene un ID `G-`, `googletagmanager` ni inicialización `gtag`, por lo que no contamina la propiedad de Analytics.
+- El navegador colaborativo no estaba disponible. La verificación interactiva completa se hizo localmente contra el build de producción, Chromium, el colector de pruebas y Firestore Emulator; no se crearon datos en Preview.
