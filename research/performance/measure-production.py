@@ -47,7 +47,7 @@ initial = list(dict.fromkeys(
 manifest, _ = fetch(f"/_next/static/{build_id}/_buildManifest.js")
 route_chunks = ["/_next/" + path for path in re.findall(r'"(static/[^" ]+\.js)"', manifest.decode())]
 css = re.findall(r'href="([^" ]+\.css)"', html)
-samples = ["/background-cells/coronavirus.gif", "/sounds/cardi-b/coronavirus.mp3", "/tickets.json"]
+samples = ["/background-cells/coronavirus.28e4692f.webp", "/sounds/cardi-b/coronavirus.mp3", "/tickets.json"]
 paths = list(dict.fromkeys(initial + route_chunks + css + samples))
 
 

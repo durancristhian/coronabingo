@@ -45,7 +45,7 @@ async function readPlayedSounds(page: Page) {
   })
 }
 
-test('a player keeps an included empty-cell background after reload', async ({
+test('a player keeps the optimized empty-cell background after reload', async ({
   page: host,
   playerPage: player,
 }) => {
@@ -53,18 +53,38 @@ test('a player keeps an included empty-cell background after reload', async ({
   await player.goto(host.url())
   await openPlayerCards(player, testPlayerNames.player)
 
+  const optimizedAsset = player.waitForResponse(response =>
+    response.url().endsWith('/background-cells/coronavirus.28e4692f.webp'),
+  )
   await player.locator('#configure-empty-cells:visible').click()
   await player
     .getByRole('dialog', { name: 'Fondo de las celdas vacías' })
-    .getByRole('button', { name: 'Pikachu', exact: true })
+    .getByRole('button', { name: 'COVID-19', exact: true })
     .click()
+  const assetResponse = await optimizedAsset
+  expect(assetResponse.status()).toBe(200)
+  expect(assetResponse.headers()['content-type']).toBe('image/webp')
+  expect((await assetResponse.body()).byteLength).toBe(1_049_854)
   await expect(
-    player.getByTestId('bingo-card').locator('[style*="pokemon/025.png"]'),
+    player
+      .getByTestId('bingo-card')
+      .locator('[style*="coronavirus.28e4692f.webp"]'),
   ).toHaveCount(24)
+  await expect
+    .poll(() =>
+      player.evaluate(() => {
+        const saved = JSON.parse(localStorage.getItem('backgroundCell') || '{}')
+
+        return Object.values(saved)[0]
+      }),
+    )
+    .toEqual({ type: 'img', value: 'coronavirus.gif' })
 
   await player.reload()
   await expect(
-    player.getByTestId('bingo-card').locator('[style*="pokemon/025.png"]'),
+    player
+      .getByTestId('bingo-card')
+      .locator('[style*="coronavirus.28e4692f.webp"]'),
   ).toHaveCount(24)
 })
 
