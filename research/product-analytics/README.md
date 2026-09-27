@@ -295,7 +295,7 @@ Depends on: ANA-02, resuelto en las entregas anteriores.
 
 Trabajo: instrumentar fondos, festejos, sonidos, idioma y tutorial. Agregar claves analíticas estables a catálogos, sin usar traducciones ni rutas de assets como valores.
 
-Progreso: idioma, tutorial, festejos, sonidos y fondos están implementados en sus entregas autorizadas. La entrega de fondos queda pendiente de revisión e integración en #203.
+Progreso: idioma, tutorial, festejos, sonidos y fondos están implementados e integrados en #203.
 
 Criterios de aceptación:
 
@@ -362,7 +362,7 @@ Esta evidencia prueba contrato y momento de emisión. No prueba recepción ni pr
 
 ## Reanálisis después de completar el contrato
 
-Al integrar la entrega de fondos en #203 no quedan eventos del contrato propuesto sin implementar. Eso no termina la iniciativa: todavía falta publicar el código, configurar GA4 y demostrar recepción y procesamiento con datos controlados.
+Después de integrar la entrega de fondos en #203 no quedan eventos del contrato propuesto sin implementar. Eso no termina la iniciativa: todavía falta publicar el código, configurar GA4 y demostrar recepción y procesamiento con datos controlados.
 
 Orden recomendado:
 
@@ -561,3 +561,10 @@ Fuentes oficiales:
 - GitHub Actions `build`, Vercel y Vercel Preview Comments aprobaron el commit de implementación. No hubo revisiones ni comentarios de código al registrar esta evidencia.
 - Preview: `https://coronabingo-git-codex-a2c2f1-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene un ID `G-`, `googletagmanager` ni inicialización `gtag`, por lo que no contamina la propiedad de Analytics.
 - El navegador colaborativo no estaba disponible. La verificación interactiva completa se hizo localmente contra el build de producción, Chromium, el colector de pruebas y Firestore Emulator; no se crearon datos en Preview.
+
+### 2026-09-27: fondos integrados en #203
+
+- #208 se mergeó en #203 mediante `6e2728fcbf07333b45a70cd3c3454f6859729f6a`.
+- `origin/main` en `4c98747bd128f0124db85e8b984e8f7b7529d5c0` sigue siendo ancestro del commit integrado.
+- Sobre #203 combinado pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 16 pruebas y `git diff --check`.
+- No se mergeó #203 a `main`, no se desplegó a Production y no se crearon datos alojados durante esta verificación.
