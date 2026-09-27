@@ -282,6 +282,7 @@
   stroke-width: 2.5;
 }
 
+/* purgecss start ignore */
 .coronabingo-ui .cb-message-icon--information {
   color: var(--cb-yellow-strong);
 }
@@ -293,6 +294,7 @@
 .coronabingo-ui .cb-message-icon--error {
   color: var(--cb-red-strong);
 }
+/* purgecss end ignore */
 
 .coronabingo-ui .cb-text-link,
 .coronabingo-ui a.text-blue-800 {

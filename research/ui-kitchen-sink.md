@@ -131,3 +131,5 @@ Evidencia local:
 - `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 62,8 s contra Firestore Emulator, incluido el recorrido móvil sin overflow.
 - Revisión visual de `/kitchen-sink` a 1905 px: el readonly expuso el atributo HTML y su estilo diferenciado; el badge conservó fondo azul oscuro sobre la fila verde; las celdas llamadas quedaron transparentes alrededor de un único círculo; los iconos mostraron verde, ocre y rojo según el tipo de mensaje. El documento mantuvo `scrollWidth` igual a `clientWidth`.
 - La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.
+- La primera inspección del Preview de `ef36018` detectó que PurgeCSS quitaba los modificadores de color construidos dinámicamente para los iconos. Se reemplazaron por nombres de clase estáticos y se protegieron esas tres reglas semánticas durante el purge antes de considerar resuelto el feedback.
+- El build de producción posterior pasó y su CSS compilado conservó `cb-message-icon--information`, `cb-message-icon--success` y `cb-message-icon--error`.

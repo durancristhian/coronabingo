@@ -15,6 +15,12 @@ const COLORS = {
   success: 'bg-green-200 border-green-600',
 }
 
+const ICON_COLORS = {
+  error: 'cb-message-icon--error',
+  information: 'cb-message-icon--information',
+  success: 'cb-message-icon--success',
+}
+
 export interface Props {
   children: ReactNode
   type: MessageType
@@ -32,7 +38,7 @@ export default function Message({ children, type }: Props) {
     >
       <div
         aria-hidden="true"
-        className={`cb-message-icon cb-message-icon--${type} mr-4`}
+        className={classnames(['cb-message-icon', ICON_COLORS[type], 'mr-4'])}
       >
         {ICONS[type]}
       </div>
