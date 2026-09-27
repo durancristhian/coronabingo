@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: resolved
+Work status: claimed
 
 ## Objetivo
 
@@ -136,3 +136,33 @@ Evidencia local:
 - Implementación final del ajuste: `0475f3d`. [GitHub Actions 36340804182](https://github.com/durancristhian/coronabingo/actions/runs/36340804182) pasó y Vercel quedó Ready para ese mismo HEAD.
 - En el Preview se midieron los colores computados de los iconos: verde `rgb(39, 122, 93)`, ocre `rgb(149, 89, 0)` y rojo `rgb(185, 58, 53)`. También se reconfirmaron el readonly real con borde punteado, el badge azul oscuro con sombra amarilla, la celda transparente alrededor del único círculo llamado y ausencia de overflow a 1905 px.
 - La verificación remota fue de solo lectura; no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
+
+## Segunda ronda de feedback visual
+
+Feedback aprobado el 2026-09-27:
+
+- Aplicar números tabulares desde la raíz visual de la aplicación.
+- Quitar la guía violeta del input de solo lectura y conservar su superficie y borde diferenciados.
+- Reducir el espacio vertical del bolillero y regularizar su cuadrícula.
+- Evaluar una futura dupla tipográfica de `next/font` y comprobar la cobertura de los iconos actuales en Lucide, sin migrarlos todavía.
+
+Criterios de aceptación:
+
+- Toda la aplicación hereda `font-variant-numeric: tabular-nums`.
+- El readonly mantiene fondo apagado y borde discontinuo, sin línea violeta interior.
+- El bolillero conserva 10 columnas en escritorio y 5 en móvil, con filas compactas y regulares.
+- La recomendación tipográfica prioriza legibilidad numérica y carácter lúdico; la auditoría de Lucide distingue pictogramas de logos de marca.
+- Pasan lint, build, la regresión de UI aplicable y `git diff --check`; el Preview del PR se vuelve a inspeccionar.
+
+Decisiones propuestas:
+
+- Usar `Fredoka` para títulos y `Atkinson Hyperlegible Next` para cuerpo, controles y números. Ambas familias están disponibles en `next/font/google` dentro de Next.js 16.3.6. [Google Fonts describe Fredoka](https://github.com/google/fonts/blob/main/ofl/fredoka/DESCRIPTION.en_us.html) como una familia redonda orientada a titulares; [Atkinson Hyperlegible Next](https://github.com/googlefonts/atkinson-hyperlegible-next) prioriza la distinción de caracteres y amplía pesos y glifos de la familia original.
+- Migrar los 25 pictogramas funcionales actuales a `lucide-react` es viable. El paquete 1.48.0 declara compatibilidad con React 18 y contiene sus equivalentes, con `CirclePlay` como nombre vigente para el actual `FiPlayCircle`.
+- Los cuatro logos actuales, WhatsApp, Telegram, PayPal y Twitter/X, no existen en Lucide. Su [política oficial](https://github.com/lucide-icons/lucide/blob/main/BRAND_LOGOS_STATEMENT.md) excluye logos de marca; deberían conservarse como recursos de marca o migrarse a una fuente especializada.
+
+Evidencia local:
+
+- `npm run lint:check`, `npm run build` y `git diff --check`: pasaron.
+- Revisión de `/kitchen-sink` a 1920 px: el root computó `tabular-nums`, el readonly mantuvo fondo apagado y borde discontinuo sin `box-shadow`, y el bolillero mostró 90 celdas en 10 columnas con filas de 36 px sin separación adicional ni overflow horizontal.
+- `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 63,2 s contra Firestore Emulator, incluido el recorrido móvil a 390 × 844.
+- La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.

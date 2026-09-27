@@ -52,7 +52,7 @@ export default function SelectedNumbers({
           {t('playerId:next-number')}
         </Button>
       )}
-      <div className="cb-number-board flex flex-wrap" id="ticket-numbers">
+      <div className="cb-number-board" id="ticket-numbers">
         {TICKET_NUMBERS.map(n => (
           <button
             type="button"
@@ -66,7 +66,6 @@ export default function SelectedNumbers({
                 'cb-number-board-cell--called bg-green-400 font-medium text-green-800',
               enableForAdmin && 'cursor-pointer focus:shadow-outline',
             ])}
-            style={{ width: '10%' }}
             onClick={() => enableForAdmin && onNewNumber(n)}
           >
             <span className="uppercase">{n}</span>

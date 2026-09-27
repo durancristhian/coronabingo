@@ -27,6 +27,7 @@
   --cb-shadow-surface: 5px 5px 0 var(--cb-line);
   background: var(--cb-canvas);
   color: var(--cb-ink);
+  font-variant-numeric: tabular-nums;
   min-height: 100%;
 }
 
@@ -200,10 +201,8 @@
   background: var(--cb-surface-muted);
   border-color: var(--cb-line-muted);
   border-style: dashed;
-  box-shadow: inset 0.35rem 0 0 var(--cb-purple);
   color: var(--cb-muted);
   cursor: text;
-  padding-left: 1rem;
 }
 
 .coronabingo-ui .cb-field-hint,
@@ -380,9 +379,15 @@
   background: var(--cb-marked);
 }
 
+.coronabingo-ui .cb-number-board {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
 .coronabingo-ui .cb-number-board-cell {
   color: var(--cb-muted);
-  min-height: 2.75rem;
+  min-height: 2.25rem;
+  width: 100%;
 }
 
 .coronabingo-ui .cb-number-board-cell.cb-number-board-cell--called {
@@ -693,8 +698,8 @@
     white-space: normal;
   }
 
-  .coronabingo-ui .cb-number-board-cell {
-    width: 20% !important;
+  .coronabingo-ui .cb-number-board {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .coronabingo-ui .ks-intro {
