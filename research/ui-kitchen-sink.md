@@ -220,4 +220,7 @@ Resultado:
 - `npm run lint:check` y `npm run build`: pasaron.
 - `npm run ui-tests`: pasaron los 16 escenarios de Chromium en 69,5 s contra Firestore Emulator.
 - Revisión local a 1440 × 900, 390 × 844 y 320 × 800: no hubo overflow de página ni controles cortados; la consola de la demo no presentó errores ni advertencias.
+- Implementación: `9c5f81b`. [GitHub Actions 36355757942](https://github.com/durancristhian/coronabingo/actions/runs/36355757942) pasó en 2 min 38 s y Vercel quedó Ready para ese mismo código.
+- Preview verificado: `https://coronabingo-7o3ephh0e-cristhian-durans-projects-3ace6550.vercel.app/kitchen-sink`. Computó Fredoka 500 y Atkinson Hyperlegible Next, mostró las cuatro secciones integradas sin el laboratorio comparativo y mantuvo `scrollWidth` igual a `clientWidth` en 1905 px.
+- Servidor local retenido para revisión: rama `t3code/build-ui-kitchen-sink`, este worktree, `http://127.0.0.1:3127/kitchen-sink`, sesión `screen` `coronabingo-3127-t3code` y proceso Node `52434` propiedad del usuario local.
 - La prueba fue local y de sólo lectura; no leyó ni escribió Firebase alojado. Production no fue desplegado ni verificado.
