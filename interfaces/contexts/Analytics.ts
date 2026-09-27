@@ -1,5 +1,5 @@
-import { AnalyticsEventParams } from '~/utils/gtag'
+import { AnalyticsLog } from '~/interfaces/analytics/Events'
 
 export interface AnalyticsContextData {
-  log: (eventName: string, eventParams?: AnalyticsEventParams) => void
+  log: AnalyticsLog
 }

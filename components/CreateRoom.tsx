@@ -8,11 +8,12 @@ import InputText from '~/components/InputText'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import useToast from '~/hooks/useToast'
 import roomApi from '~/models/room'
+import { getRoomCreatedEventParams } from '~/utils/analyticsEvents'
 import { generateRoomCode } from '~/utils/generateRoomCode'
 
 export default function CreateRoom() {
   const log = useAnalytics()
-  const { t } = useTranslation()
+  const { lang, t } = useTranslation()
   const { createToast, dismissToast, updateToast } = useToast()
   const [name, setName] = useState('')
   const [inProgress, setInProgress] = useState(false)
@@ -23,16 +24,15 @@ export default function CreateRoom() {
     setInProgress(true)
 
     const toastId = createToast('index:create-room.saving', 'information')
-
     try {
-      const roomId = await roomApi.createRoom({
+      const { createdAt, roomId } = await roomApi.createRoom({
         code: generateRoomCode(),
         name,
       })
 
       updateToast('index:create-room.success', 'success', toastId)
 
-      log('room_created')
+      log('room_created', getRoomCreatedEventParams(lang, createdAt))
 
       setTimeout(() => {
         dismissToast(toastId)
