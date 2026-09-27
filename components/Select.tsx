@@ -1,12 +1,13 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 import { Option } from '~/interfaces/custom/Option'
 
 interface Props {
   disabled?: boolean
   hint?: string
+  icon?: ReactNode
   id: string
   label?: string
   onChange?: (value: string) => void
@@ -17,6 +18,7 @@ interface Props {
 export default function Select({
   disabled = false,
   hint = '',
+  icon = <FiChevronDown aria-hidden="true" />,
   id,
   label,
   onChange,
@@ -60,7 +62,9 @@ export default function Select({
               top: '50%',
             }}
           >
-            <FiChevronDown className="text-gray-500" />
+            <span aria-hidden="true" className="text-gray-500">
+              {icon}
+            </span>
           </div>
         </div>
       </label>

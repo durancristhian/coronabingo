@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { TICKET_NUMBERS } from '~/utils/constants'
@@ -12,6 +12,8 @@ interface Props {
   onNewNumber: (n: number) => void
   selectedNumbers: number[]
   bingoSpinner: boolean
+  nextIconLeft?: ReactNode
+  nextIconRight?: ReactNode
 }
 
 export default function SelectedNumbers({
@@ -19,6 +21,8 @@ export default function SelectedNumbers({
   onNewNumber,
   selectedNumbers,
   bingoSpinner,
+  nextIconLeft = <FiChevronsRight aria-hidden="true" />,
+  nextIconRight = <FiChevronsLeft aria-hidden="true" />,
 }: Props) {
   const enableForAdmin = isAdmin && !bingoSpinner
   const roomNumbers = [...selectedNumbers]
@@ -46,8 +50,8 @@ export default function SelectedNumbers({
           className="mb-4 w-full"
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
-          iconLeft={<FiChevronsRight />}
-          iconRight={<FiChevronsLeft />}
+          iconLeft={nextIconLeft}
+          iconRight={nextIconRight}
         >
           {t('playerId:next-number')}
         </Button>

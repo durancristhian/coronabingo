@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Select from '~/components/Select'
@@ -10,7 +10,7 @@ import { getLanguageChangedEventParams } from '~/utils/analyticsEvents'
 
 const allLanguages = i18n.locales
 
-export default function Header() {
+export default function Header({ selectIcon }: { selectIcon?: ReactNode }) {
   const { t, lang } = useTranslation()
   const log = useAnalytics()
   const router = useRouter()
@@ -57,6 +57,7 @@ export default function Header() {
           </Heading>
           <div className="cb-language-select">
             <Select
+              icon={selectIcon}
               id="language"
               onChange={onLanguageChange}
               options={languages}

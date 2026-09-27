@@ -23,10 +23,11 @@ const ICON_COLORS = {
 
 export interface Props {
   children: ReactNode
+  icon?: ReactNode
   type: MessageType
 }
 
-export default function Message({ children, type }: Props) {
+export default function Message({ children, icon, type }: Props) {
   return (
     <div
       className={classnames([
@@ -40,7 +41,7 @@ export default function Message({ children, type }: Props) {
         aria-hidden="true"
         className={classnames(['cb-message-icon', ICON_COLORS[type], 'mr-4'])}
       >
-        {ICONS[type]}
+        {icon ?? ICONS[type]}
       </div>
       {children}
     </div>

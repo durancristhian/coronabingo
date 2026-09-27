@@ -200,3 +200,24 @@ Evidencia local:
 - Preview verificado: `https://coronabingo-git-t3cod-cc7165-cristhian-durans-projects-3ace6550.vercel.app/kitchen-sink`. En escritorio a 1440 × 900 el H1 volvió a 72 px, Fredoka y Atkinson se cargaron correctamente, aparecieron las 25 muestras Lucide y los 4 logos, y `scrollWidth` coincidió con `clientWidth` en 1425 px. En móvil a 390 × 844 el H1 quedó en 40 px, ambas grillas conservaron dos columnas y no hubo overflow horizontal.
 - La consola del Preview final no presentó errores ni advertencias. La verificación remota fue de sólo lectura: no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
 - Antes del handoff, `origin/main` avanzó a `3c58867` con la instrumentación de analítica. Se integró esa base preservando tanto las clases visuales de la lista de sonidos y la mesa como el bloqueo de duplicados y los nuevos eventos. Pasaron nuevamente `npm run validate-analytics`, lint, build, `git diff --check` y los 16 escenarios de `npm run ui-tests` en 69,6 s.
+
+## Identidad integrada y auditoría visual
+
+Feedback aprobado el 2026-09-27:
+
+- Adoptar Fredoka en peso 500 para títulos y Atkinson Hyperlegible Next para cuerpo, controles y números dentro de la kitchen sink.
+- Adoptar Lucide para los pictogramas funcionales mostrados en la demo y Simple Icons para WhatsApp, Telegram, PayPal y X.
+- Retirar las comparaciones del laboratorio y presentar una única demo integrada con escenas reales y componentes.
+- Auditar armonía, color, contraste, responsive, accesibilidad y pulido antes de confirmar la migración final a toda la app.
+
+Resultado:
+
+- `/kitchen-sink` quedó como una única referencia integrada; se retiraron la comparación tipográfica, la galería de iconos y la galería de logos separada.
+- Los logos aprobados aparecen ahora dentro del grupo real de acciones de marca y los pictogramas visibles de la demo usan Lucide.
+- Los componentes compartidos aceptan iconos alternativos, pero conservan Feather como valor por defecto; esta etapa no cambia todavía la identidad tipográfica ni los iconos del resto de la aplicación.
+- Fredoka se redujo a peso 500 y a un tracking más abierto; Atkinson Hyperlegible Next se aplica a todo el contenido de la kitchen sink mediante `next/font`.
+- La auditoría completa quedó en [ui-design-audit-2026-09-27.md](./ui-design-audit-2026-09-27.md): obtuvo 17/20, validó la dirección y dejó cuatro correcciones P1 antes de la migración final.
+- `npm run lint:check` y `npm run build`: pasaron.
+- `npm run ui-tests`: pasaron los 16 escenarios de Chromium en 69,5 s contra Firestore Emulator.
+- Revisión local a 1440 × 900, 390 × 844 y 320 × 800: no hubo overflow de página ni controles cortados; la consola de la demo no presentó errores ni advertencias.
+- La prueba fue local y de sólo lectura; no leyó ni escribió Firebase alojado. Production no fue desplegado ni verificado.
