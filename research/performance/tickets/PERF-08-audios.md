@@ -6,7 +6,7 @@ Work status: claimed
 
 Type: research
 
-Estado: el usuario aprobó los 19 candidatos livianos después de escucharlos en local. Implementación y validación local completas; confirmación en Vercel Preview pendiente. Coordinar el versionado de caché con PERF-03.
+Estado: el usuario aprobó los 19 candidatos livianos después de escucharlos en local. Implementación, CI y Vercel Preview correctos; confirmación auditiva del usuario en Preview pendiente. Coordinar el versionado de caché con PERF-03.
 
 ## Diagnóstico
 
@@ -98,6 +98,14 @@ Validación local en la rama `t3code/optimize-audio-size`:
 - Servidor de producción local en `http://127.0.0.1:4179`: los 19 MP3 respondieron `200 audio/mpeg` y entregaron exactamente los bytes esperados.
 - `git diff --check`: correcto.
 
+Validación remota del commit de implementación `31fa432`:
+
+- GitHub Actions `build`: correcto en 2 min 16 s.
+- Vercel: despliegue completado en `https://coronabingo-git-t3cod-eb5fee-cristhian-durans-projects-3ace6550.vercel.app`.
+- La portada del Preview cargó en español sin errores ni advertencias de consola.
+- Los 19 MP3 del Preview respondieron `200 audio/mpeg` y cada descarga coincidió en bytes con el archivo local aprobado.
+- No se creó ninguna sala durante esta verificación. La reproducción dentro del flujo de anfitrión y jugador queda para la confirmación auditiva del usuario.
+
 ## Alcance
 
 Codificar y escuchar candidatos a partir del original disponible. Conservar duración, volumen percibido y canales cuando sean relevantes. Evitar recompresión sucesiva con pérdida. Mantener MP3 salvo evidencia a favor de otro formato y fallback compatible. No precargar todos los sonidos.
@@ -126,3 +134,7 @@ Se preparó una tabla reproducible con los originales, una variante liviana para
 ### 2026-09-27: elección e implementación
 
 El usuario eligió `liviano` para los 19 sonidos. Se aplicaron esos archivos a las rutas existentes y se verificó una reducción total de 38,13%. El ticket queda reclamado hasta que el usuario confirme el comportamiento en Vercel Preview.
+
+### 2026-09-27: Preview listo para revisión
+
+GitHub Actions y Vercel terminaron correctamente para el commit de implementación. Los 19 audios desplegados coinciden en tamaño con los aprobados. Falta la confirmación auditiva del usuario en el flujo real antes de resolver el ticket.
