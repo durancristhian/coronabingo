@@ -99,7 +99,7 @@ Evidencia local del 2026-09-27:
 - Base de comparación verificada: `origin/main` en `4c98747`.
 - `npm run lint:check`: pasó.
 - `npm run build`: pasó con Next.js 16.3.6 y Webpack; validó locales y generó únicamente `/`, `/kitchen-sink` y las tres rutas dinámicas de sala.
-- `npm run ui-tests`: pasaron los 15 escenarios en Chromium en 68,3 s contra `demo-coronabingo-ui` y Firestore Emulator. La cobertura incluyó los recorridos reales de anfitrión y jugador, marcado y reinicio, cambio de idioma, herramientas de juego y el recorrido móvil a 390 × 844 sin overflow.
+- `npm run ui-tests`: después de los ajustes de revisión pasaron los 15 escenarios en Chromium en 63,1 s sobre `e57eb99`, contra `demo-coronabingo-ui` y Firestore Emulator. La cobertura incluyó los recorridos reales de anfitrión y jugador, marcado y reinicio, cambio de idioma, herramientas de juego y el recorrido móvil a 390 × 844 sin overflow.
 - La revisión visual local cubrió el inicio y `/kitchen-sink` en escritorio; la ruta mostró 4 secciones, 90 números, 19 sonidos y 13 fondos sin desborde horizontal.
 - Las advertencias de navegador observadas durante la suite pertenecen a ciclos de vida y `defaultProps` de dependencias existentes; no aparecieron fallos de aplicación.
 - El PR, el Preview y sus comprobaciones remotas se registran al finalizar esa etapa; no se verificó Production.
