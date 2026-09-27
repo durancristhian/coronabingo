@@ -463,6 +463,14 @@ Fuentes oficiales:
 - `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
 - No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
 
+### 2026-09-27: PR y Preview de idioma y tutorial
+
+- PR apilado: [#206](https://github.com/durancristhian/coronabingo/pull/206), abierto contra `codex/analytics-room-lifecycle` (#204) con commit de implementación `7d977fe3436c20ec03b21d766819a499463e202e`.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-4250ed-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
+
 ### 2026-09-27: implementación local de festejos y sonidos
 
 - Rama: `codex/analytics-celebrations-sounds`; base apilada `codex/analytics-language-tutorial` en `7d977fe3436c20ec03b21d766819a499463e202e`.
