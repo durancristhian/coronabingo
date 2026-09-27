@@ -1,5 +1,18 @@
 import assert from 'assert'
+import { AnalyticsLog } from '../interfaces/analytics/Events'
 import {
+  getAnalyticsPageType,
+  getCelebrationUsedEventParams,
+  getLanguageChangedEventParams,
+  getRoomCreatedEventParams,
+  getRoomRestartedEventParams,
+  getRoomStartedEventParams,
+  getSoundUsedEventParams,
+  getTutorialEventParams,
+  markFirstAnalyticsUseInPlay,
+} from '../utils/analyticsEvents'
+import {
+  ANALYTICS_TEST_STORAGE_KEY,
   logEvent,
   normalizeRoutePath,
   pageview,
@@ -7,6 +20,133 @@ import {
 } from '../utils/gtag'
 
 const origin = 'https://coronabingo.com.ar'
+const createdAt = new Date('2026-09-27T12:00:00.000Z')
+const roomCreatedParams = getRoomCreatedEventParams('es', createdAt)
+const roomStartedParams = getRoomStartedEventParams({
+  createdAt,
+  hideNumbersMeaning: true,
+  language: 'en',
+  playNumber: 2,
+  playerCount: 14,
+  usesOnlineSpinner: false,
+})
+const roomRestartedParams = getRoomRestartedEventParams({
+  createdAt,
+  language: 'es',
+  playNumber: 1,
+})
+const celebrationUsedParams = getCelebrationUsedEventParams({
+  celebrationType: 'pallbearers',
+  firstUseInPlay: 'yes',
+  language: 'es',
+  playNumber: 2,
+})
+const soundUsedParams = getSoundUsedEventParams({
+  firstUseInPlay: 'no',
+  language: 'en',
+  playNumber: 2,
+  soundCatalog: 'extra',
+  soundKey: 'patao_coronabingo',
+})
+
+assert.deepStrictEqual(roomCreatedParams, {
+  room_created_date: '2026-09-27',
+  schema_version: 'v1',
+  ui_language: 'es',
+})
+assert.deepStrictEqual(roomStartedParams, {
+  number_meanings: 'hidden',
+  play_kind: 'replay',
+  play_number: 2,
+  player_count: 14,
+  room_created_date: '2026-09-27',
+  schema_version: 'v1',
+  spinner_mode: 'physical',
+  ui_language: 'en',
+})
+assert.deepStrictEqual(roomRestartedParams, {
+  first_restart: 'yes',
+  restart_number: 1,
+  room_created_date: '2026-09-27',
+  schema_version: 'v1',
+  ui_language: 'es',
+})
+assert.deepStrictEqual(celebrationUsedParams, {
+  celebration_type: 'pallbearers',
+  first_use_in_play: 'yes',
+  play_number: 2,
+  schema_version: 'v1',
+  ui_language: 'es',
+})
+assert.deepStrictEqual(soundUsedParams, {
+  first_use_in_play: 'no',
+  play_number: 2,
+  schema_version: 'v1',
+  sound_catalog: 'extra',
+  sound_key: 'patao_coronabingo',
+  ui_language: 'en',
+})
+assert.strictEqual(getAnalyticsPageType('/'), 'home')
+assert.strictEqual(getAnalyticsPageType('/room/[roomId]'), 'room_lobby')
+assert.strictEqual(
+  getAnalyticsPageType('/room/[roomId]/[playerId]'),
+  'player_card',
+)
+assert.strictEqual(getAnalyticsPageType('/room/[roomId]/admin'), 'room_setup')
+assert.strictEqual(getAnalyticsPageType('/404'), 'not_found')
+assert.deepStrictEqual(
+  getLanguageChangedEventParams({
+    fromLanguage: 'es',
+    pathname: '/room/[roomId]/[playerId]',
+    toLanguage: 'en',
+  }),
+  {
+    from_language: 'es',
+    page_type: 'player_card',
+    schema_version: 'v1',
+    to_language: 'en',
+    ui_language: 'en',
+  },
+)
+assert.deepStrictEqual(getTutorialEventParams('en'), {
+  schema_version: 'v1',
+  tutorial_language: 'en',
+  tutorial_provider: 'youtube',
+  ui_language: 'en',
+})
+
+const validateAnalyticsTypes = (log: AnalyticsLog) => {
+  log('room_created', roomCreatedParams)
+  log('room_started', roomStartedParams)
+  log(
+    'language_changed',
+    getLanguageChangedEventParams({
+      fromLanguage: 'es',
+      pathname: '/',
+      toLanguage: 'en',
+    }),
+  )
+  log('tutorial_begin', getTutorialEventParams('es'))
+  log('celebration_used', celebrationUsedParams)
+  log('sound_used', soundUsedParams)
+
+  // @ts-expect-error Room names are not part of the room_created contract.
+  log('room_created', { ...roomCreatedParams, description: 'private name' })
+  // @ts-expect-error Spinner values must use the closed analytics vocabulary.
+  log('room_started', { ...roomStartedParams, spinner_mode: 'sometimes' })
+  log('tutorial_opened', {
+    ...getTutorialEventParams('es'),
+    // @ts-expect-error Tutorial providers must use the closed analytics vocabulary.
+    tutorial_provider: 'vimeo',
+  })
+  log('sound_used', {
+    ...soundUsedParams,
+    // @ts-expect-error Sound paths are not valid analytics keys.
+    sound_key: '/sounds/private.mp3',
+  })
+}
+
+void validateAnalyticsTypes
 
 assert.strictEqual(normalizeRoutePath('/', 'es', 'es'), '/')
 assert.strictEqual(normalizeRoutePath('/', 'en', 'es'), '/en')
@@ -45,6 +185,7 @@ assert.strictEqual(
 )
 
 const calls: unknown[][] = []
+const sessionStorageValues = new Map<string, string>()
 
 process.env.GA_TRACKING_ID = 'G-TEST123'
 Object.defineProperty(globalThis, 'window', {
@@ -54,6 +195,12 @@ Object.defineProperty(globalThis, 'window', {
       calls.push(args)
     },
     location: { origin },
+    sessionStorage: {
+      getItem: (key: string) => sessionStorageValues.get(key) || null,
+      setItem: (key: string, value: string) => {
+        sessionStorageValues.set(key, value)
+      },
+    },
   },
 })
 Object.defineProperty(globalThis, 'document', {
@@ -63,6 +210,19 @@ Object.defineProperty(globalThis, 'document', {
     title: 'Coronabingo | Tu juego de Bingo Online',
   },
 })
+
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('celebration_used', 'private-room', 1),
+  'yes',
+)
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('celebration_used', 'private-room', 1),
+  'no',
+)
+assert.strictEqual(
+  markFirstAnalyticsUseInPlay('sound_used', 'private-room', 1),
+  'yes',
+)
 
 pageview({
   defaultLocale: 'es',
@@ -79,7 +239,7 @@ pageview({
   locale: 'en',
   pathname: '/room/[roomId]/[playerId]',
 })
-logEvent('room_created')
+logEvent('room_created', roomCreatedParams)
 
 assert.strictEqual(calls.length, 3)
 assert.deepStrictEqual(calls[0], [
@@ -105,7 +265,7 @@ assert.deepStrictEqual(calls[1], [
 assert.deepStrictEqual(calls[2], [
   'event',
   'room_created',
-  { send_to: 'G-TEST123' },
+  { ...roomCreatedParams, send_to: 'G-TEST123' },
 ])
 
 for (const call of calls) {
@@ -114,5 +274,20 @@ for (const call of calls) {
   assert.ok(!payload.includes('private-player'))
   assert.ok(!payload.includes('secret=value'))
 }
+
+process.env.UI_TESTS = '1'
+logEvent('room_restarted', roomRestartedParams)
+delete process.env.UI_TESTS
+
+assert.strictEqual(calls.length, 3)
+assert.deepStrictEqual(
+  JSON.parse(sessionStorageValues.get(ANALYTICS_TEST_STORAGE_KEY) || '[]'),
+  [
+    {
+      eventName: 'room_restarted',
+      eventParams: roomRestartedParams,
+    },
+  ],
+)
 
 console.log('Analytics routes and event destination are valid.')

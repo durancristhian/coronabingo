@@ -1,29 +1,21 @@
 import React, { ReactNode } from 'react'
 import { AnalyticsContextData } from '~/interfaces/contexts/Analytics'
-import { AnalyticsEventParams, logEvent } from '~/utils/gtag'
+import { logEvent } from '~/utils/gtag'
 
 interface Props {
   children: ReactNode
 }
 
 const AnalyticsContext = React.createContext<AnalyticsContextData>({
-  log: () => void 0,
+  log: logEvent,
 })
 
-interface Props {
-  children: ReactNode
-}
+const analyticsContextValue = { log: logEvent }
 
-const AnalyticsContextProvider = ({ children }: Props) => {
-  const log = (eventName: string, eventParams?: AnalyticsEventParams) => {
-    logEvent(eventName, eventParams)
-  }
-
-  return (
-    <AnalyticsContext.Provider value={{ log }}>
-      {children}
-    </AnalyticsContext.Provider>
-  )
-}
+const AnalyticsContextProvider = ({ children }: Props) => (
+  <AnalyticsContext.Provider value={analyticsContextValue}>
+    {children}
+  </AnalyticsContext.Provider>
+)
 
 export { AnalyticsContext, AnalyticsContextProvider }

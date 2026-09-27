@@ -8,7 +8,7 @@ Base revision: `d8f5e60a1a7f207a61bca1fac98048a97ea7e7f8`
 
 Fecha de investigación: 2026-09-27
 
-Alcance original: propuesta para revisión. La primera entrega autorizada se registra abajo; el resto continúa como propuesta y no autoriza cambios de propiedades de Analytics, Firebase, BigQuery, consentimiento, Vercel ni Production.
+Alcance original: propuesta para revisión. Las entregas autorizadas se registran abajo; el resto continúa como propuesta y no autoriza cambios de propiedades de Analytics, Firebase, BigQuery, Vercel ni Production.
 
 ## Primera entrega autorizada
 
@@ -20,9 +20,45 @@ El 27 de septiembre de 2026 se aprobó un PR limitado a estos prerrequisitos:
 
 La entrega desactiva el `page_view` automático del Google tag, emite la vista inicial y las navegaciones desde el mismo helper, y retira el inicializador paralelo de Firebase Analytics. Firebase continúa siendo el backend de Firestore. No se cambia ninguna propiedad ni configuración de cuenta.
 
-Quedan fuera de este PR los eventos nuevos, las dimensiones e informes, BigQuery, consentimiento/CMP, cambios de proveedor, merge y despliegue a Production. Estos puntos conservan sus tickets y bloqueos.
+Quedan fuera de este PR los eventos nuevos, las dimensiones e informes, BigQuery, consentimiento/CMP, cambios de proveedor, merge y despliegue a Production.
 
 Antes de implementar se actualizó la rama a `origin/main` en `d8f5e60a1a7f207a61bca1fac98048a97ea7e7f8`. La portada pública de Production devolvió únicamente la etiqueta directa `G-WYG7FMEWEF`; esta comprobación confirma el destino público actual, pero no sustituye una revisión autenticada de la propiedad ni modifica su configuración.
+
+## Segunda entrega autorizada
+
+El 27 de septiembre de 2026 se aprobó un PR apilado sobre la primera entrega, con base en `t3code/plan-product-analytics` en `14880b933409c9b9a3209c36383ef9991428deb0`. Su alcance es:
+
+- definir una API tipada y versionada para los eventos existentes y los tres eventos del ciclo de sala;
+- emitir `room_created`, `room_started` y `room_restarted` únicamente después de que la escritura remota correspondiente se confirme;
+- registrar opciones finales, cantidad de participantes, número de partida y fecha de creación sin nombres, IDs, códigos ni URLs privadas;
+- evitar emisiones duplicadas por doble clic en inicio y reinicio;
+- habilitar un colector de pruebas local, sin requests a Analytics, y verificar creación, refresh, primera partida, reinicio y replay.
+
+Quedan fuera de esta entrega los eventos de fondos, festejos, sonidos, idioma y tutorial; las dimensiones e informes de GA4; BigQuery; cambios de cuenta; merge y Production.
+
+## Entrega de idioma y tutorial autorizada
+
+El 27 de septiembre de 2026 se autorizó continuar con el PR 4 del plan, apilado sobre `codex/analytics-room-lifecycle` en `41a4effff6887034d6ccb51b4d67a5f9955952db`. Su alcance es:
+
+- emitir `language_changed` sólo después de una navegación a otro idioma que terminó correctamente;
+- clasificar la página con valores cerrados, sin enviar rutas ni IDs;
+- distinguir `tutorial_opened`, `tutorial_begin`, `tutorial_complete` y `tutorial_error` mediante los callbacks reales del reproductor;
+- deduplicar inicio, finalización y error dentro de una apertura del tutorial;
+- verificar ES y EN, cambio de idioma, refresh, reapertura, finalización y error con el colector local.
+
+Fondos, festejos y sonidos permanecen fuera de esta entrega. Tampoco se cambian dimensiones, informes o propiedades de GA4, Firebase alojado, merge ni Production.
+
+## Entrega de festejos y sonidos autorizada
+
+El 27 de septiembre de 2026 se autorizó continuar con el PR 5 del plan, apilado sobre `codex/analytics-language-tutorial` en `7d977fe3436c20ec03b21d766819a499463e202e`. Su alcance es:
+
+- emitir `celebration_used` y `sound_used` sólo después de confirmar la escritura en Firestore;
+- registrar tipos y sonidos mediante claves cerradas y estables, sin traducciones, rutas de assets, IDs ni URLs;
+- distinguir el catálogo estándar del extra y la primera activación de cada herramienta dentro de una partida;
+- no contar la acción de ocultar un festejo y evitar duplicados causados por doble clic;
+- verificar la propagación real entre anfitrión y jugador con Firestore Emulator y el colector local.
+
+Los fondos permanecen fuera de esta entrega. Tampoco se cambian dimensiones, informes o propiedades de GA4, Firebase alojado, merge ni Production.
 
 ## Recomendación
 
@@ -84,15 +120,11 @@ Recomendación: después de revalidar la cuenta, usar como destino canónico la 
 
 No se deben duplicar eventos en las dos propiedades para "estar seguros". Eso hace que dos tableros parezcan válidos y complica cualquier porcentaje.
 
-### Consentimiento y población medida
+### Población medida y decisión sobre consentimiento
 
-El código inspeccionado inicializa Analytics cuando hay configuración y no consulta una decisión de consentimiento. Hay un plan separado en [`research/european-consent-implementation-plan-2026-09-23.md`](../european-consent-implementation-plan-2026-09-23.md), pero no está implementado en esta revisión.
+El 27 de septiembre de 2026 se decidió diferir el trabajo de European Consent: por ahora el producto seguirá midiendo todo el tráfico como lo hace actualmente. Esta iniciativa no implementará una CMP ni Consent Mode y la ausencia de esa integración no bloquea los eventos de producto. Es una decisión de alcance del producto; no constituye una evaluación legal ni modifica por sí sola la configuración de ninguna cuenta.
 
-Los nuevos eventos deben usar la misma señal de consentimiento que `page_view`. No deben guardarse para reproducirse después si se generaron cuando Analytics estaba rechazado. Google indica que el estado por defecto debe establecerse antes de comandos de medición y luego actualizarse cuando cambia la elección. [Consent Mode](https://developers.google.com/tag-platform/security/guides/consent).
-
-La instrumentación se puede construir y verificar con un colector local, pero ampliar la recolección en Production queda bloqueado hasta que el consentimiento esté implementado, integrado con el mismo cliente y verificado en las regiones acordadas. Este plan no incorpora de forma implícita los cambios de cuenta o CMP del plan de consentimiento.
-
-Todo informe debe decir "entre las salas o navegadores medidos". Quienes rechacen Analytics, usen un bloqueador, pierdan conexión o borren almacenamiento pueden no aparecer. GA4 tampoco equivale a personas reales: no hay cuentas en Coronabingo, un navegador puede representar a varias personas y una persona puede usar varios dispositivos.
+Todo informe debe decir "entre las salas o navegadores medidos". Los bloqueadores, la pérdida de conexión u otras fallas de medición pueden dejar actividad afuera. GA4 tampoco equivale a personas reales: no hay cuentas en Coronabingo, un navegador puede representar a varias personas y una persona puede usar varios dispositivos.
 
 ## Contrato de eventos propuesto
 
@@ -102,7 +134,7 @@ Todos los eventos propios llevan `schema_version: "v1"` y `ui_language: "es" | "
 
 | Evento | Cuándo se emite | Parámetros adicionales | Regla de conteo |
 | --- | --- | --- | --- |
-| `room_created` | Después de que Firestore confirma la creación | `room_created_date` | Una vez por sala medida. Se elimina `description`. |
+| `room_created` | Después de que Firestore confirma la creación | `room_created_date` (UTC, `YYYY-MM-DD`) | Una vez por sala medida. Se elimina `description`. |
 | `room_started` | Después del `batch.commit` que configura la sala y reparte cartones | `player_count`, `play_number`, `play_kind: first_play | replay`, `spinner_mode: online | physical`, `number_meanings: shown | hidden`, `room_created_date` | Una vez por partida configurada. Es el denominador de opciones de sala. |
 | `room_restarted` | Después de confirmar el incremento de `timesPlayed` | `restart_number`, `first_restart: yes | no`, `room_created_date` | Una vez por reinicio confirmado. El primer reinicio permite una cohorte sin enviar ID de sala. |
 | `player_card_opened` | Cuando un cartón válido termina de cargar | `play_number`, `background_key`, `background_source: preset | custom_url` | Como máximo una vez por jugador, partida y navegador. La clave de deduplicación puede usar IDs solo en almacenamiento local; nunca se envía. |
@@ -125,7 +157,7 @@ Enviar un parámetro no alcanza para verlo como columna en los informes normales
 
 Registrar como dimensiones de evento:
 
-- `schema_version`, `ui_language`, `room_created_date`;
+- `schema_version`, `ui_language`, `room_created_date` (UTC, `YYYY-MM-DD`);
 - `play_kind`, `spinner_mode`, `number_meanings`, `first_restart`;
 - `background_key`, `background_source`;
 - `celebration_type`, `sound_key`, `sound_catalog`, `first_use_in_play`;
@@ -177,16 +209,16 @@ Los eventos actuales permiten observar el recorrido del organizador `room_create
 
 Son tickets propuestos dentro de este mismo plan. `Status` describe triage, no aprobación para ejecutar.
 
-### ANA-01: destino, consentimiento y contrato
+### ANA-01: destino y contrato
 
-Status: needs-info
+Status: ready-for-agent
 
 Work status: open
 
 Decisiones humanas:
 
 - confirmar en vivo cuál propiedad y flujo recibirán producto;
-- decidir si esta iniciativa espera la implementación del plan de consentimiento o la incluye como dependencia explícita;
+- mantener European Consent diferido y fuera de esta iniciativa mientras no haya una nueva decisión explícita;
 - confirmar la definición de "sala jugada" como configuración guardada y cartones repartidos;
 - aceptar que no se identificarán salas concretas y que "personas" se informará como navegadores o aperturas medidas.
 
@@ -199,11 +231,11 @@ Criterios de aceptación:
 
 ### ANA-02: privacidad y cliente único
 
-Status: needs-info
+Status: ready-for-agent
 
-Work status: open
+Work status: resolved
 
-Blocked by: ANA-01
+Depends on: las decisiones vigentes de ANA-01. La primera entrega fijó el destino canónico usado por esta implementación.
 
 Trabajo:
 
@@ -211,7 +243,6 @@ Trabajo:
 - dirigir producto a un solo destino;
 - quitar `description` de `room_created`;
 - normalizar vistas iniciales, navegación y referencias con plantillas de ruta;
-- integrar la señal de consentimiento elegida;
 - apagar emisión en local, pruebas UI y Preview por defecto;
 - agregar un colector falso para pruebas.
 
@@ -220,16 +251,15 @@ Criterios de aceptación:
 - tipos y pruebas rechazan nombres o parámetros fuera del contrato;
 - ninguna captura de red contiene nombre, código o ID de sala, ID o nombre de jugador, URL privada ni URL de fondo;
 - una carga y cada navegación real emiten una sola vista al destino previsto;
-- rechazo o falta de consentimiento no rompe Firestore ni el juego y no reproduce eventos antiguos al aceptar;
 - el modo de prueba nunca contacta endpoints de Analytics.
 
 ### ANA-03: ciclo de sala
 
-Status: needs-triage
+Status: ready-for-agent
 
-Work status: open
+Work status: resolved
 
-Blocked by: ANA-02
+Depends on: ANA-02, implementado en la primera entrega y completado por el contrato tipado de esta entrega.
 
 Trabajo: implementar `room_created`, `room_started` y `room_restarted` en los puntos de éxito remoto, con protección contra doble clic y emisión duplicada.
 
@@ -243,13 +273,15 @@ Criterios de aceptación:
 
 ### ANA-04: preferencias, idioma y tutorial
 
-Status: needs-triage
+Status: ready-for-agent
 
-Work status: open
+Work status: claimed
 
-Blocked by: ANA-02
+Depends on: ANA-02, resuelto en las entregas anteriores.
 
 Trabajo: instrumentar fondos, festejos, sonidos, idioma y tutorial. Agregar claves analíticas estables a catálogos, sin usar traducciones ni rutas de assets como valores.
+
+Progreso: idioma, tutorial, festejos y sonidos están implementados en sus entregas autorizadas. Fondos quedan pendientes.
 
 Criterios de aceptación:
 
@@ -319,14 +351,14 @@ Esta evidencia prueba contrato y momento de emisión. No prueba recepción ni pr
 - Mantener Analytics real desactivado por defecto. Verificar el build publicado con el colector de prueba o un destino QA separado previamente aprobado.
 - Confirmar una vista por navegación y los eventos del flujo en ES y EN, móvil y escritorio.
 - Si Preview apunta a Production Firestore, usar solo salas de QA inequívocas según `AGENTS.md`, registrar sus IDs únicamente en evidencia privada de prueba y limpiarlas. Esos IDs nunca van a Analytics.
-- No cambiar definiciones de GA4, consentimiento ni propiedades como parte implícita del Preview.
+- No cambiar definiciones ni propiedades de GA4 como parte implícita del Preview.
 
 Esta evidencia prueba el artefacto desplegado y la integración de navegador. No prueba Production ni recepción de la propiedad final.
 
 ### Production
 
 - Requiere autorización de despliegue y, por separado, de cualquier cambio de cuenta.
-- Comprobar con Tag Assistant o DebugView desde un dispositivo de desarrollo filtrado: destino, nombre, parámetros, consentimiento y una sola emisión. Google documenta que DebugView muestra eventos en tiempo real cuando se habilita `debug_mode`. [DebugView](https://support.google.com/analytics/answer/7201382?hl=es).
+- Comprobar con Tag Assistant o DebugView desde un dispositivo de desarrollo filtrado: destino, nombre, parámetros y una sola emisión. Google documenta que DebugView muestra eventos en tiempo real cuando se habilita `debug_mode`. [DebugView](https://support.google.com/analytics/answer/7201382?hl=es).
 - Verificar primero idioma y tutorial, que no escriben en Firestore. No crear una sala de Production solo para probar Analytics sin autorización expresa. Para eventos de sala, esperar tráfico orgánico o acordar un registro sintético y su limpieza.
 - Inspeccionar requests para demostrar que `page_location`, `page_referrer` y eventos no contienen segmentos privados ni texto libre.
 - Esperar 24 a 48 horas y comparar un día completo procesado. Google advierte que los informes pueden cambiar durante ese plazo. [Actualización de datos](https://support.google.com/analytics/answer/11198161?hl=es).
@@ -339,7 +371,7 @@ La iniciativa queda resuelta cuando:
 - todos los eventos del contrato están implementados, probados y documentados;
 - una única propiedad canónica recibe vistas y producto sin duplicados;
 - no se recopilan nombres, IDs, códigos o URLs privadas;
-- el comportamiento respeta la decisión de consentimiento sin afectar el juego;
+- la decisión vigente de medición y cualquier cambio futuro de consentimiento quedan documentados explícitamente;
 - existen informes procesados para las diez preguntas, con denominadores y límites visibles;
 - local, Preview y Production tienen evidencia separada;
 - se documentan fecha de inicio, zona horaria y ausencia de backfill;
@@ -396,3 +428,67 @@ Fuentes oficiales:
 - GitHub Actions `build`: aprobado. Vercel: aprobado. No hubo revisiones ni comentarios de código pendientes.
 - Preview: `https://coronabingo-git-t3cod-525de9-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene una etiqueta de Analytics porque `GA_TRACKING_ID` está desactivado en ese entorno, por lo que no se enviaron vistas ni eventos durante la comprobación.
 - No se crearon salas ni registros de juego en Preview. Esta evidencia prueba el build publicado y la ausencia de Analytics en Preview; no prueba recepción en la propiedad GA4 de Production.
+
+### 2026-09-27: implementación local de la segunda entrega
+
+- Rama: `codex/analytics-room-lifecycle`; base apilada `t3code/plan-product-analytics` en `14880b933409c9b9a3209c36383ef9991428deb0`.
+- Se agregó un contrato TypeScript cerrado y versionado para `room_created`, `room_started`, `room_restarted` y el evento preexistente `no_local_storage_support`. Los tipos rechazan nombres y valores fuera del catálogo.
+- `room_created` usa la misma fecha que se persiste en Firestore. `room_started` se emite después de confirmar el batch de configuración y cartones. `room_restarted` se emite después de confirmar el incremento de `timesPlayed`.
+- Inicio y reinicio tienen guardas sincrónicas contra doble clic. Los fallos de escritura salen por la rama de error antes de registrar un evento de éxito.
+- En `UI_TESTS=1`, los eventos se guardan en `sessionStorage` y retornan antes de resolver o contactar el destino GA4. El recorrido comprueba parámetros, ausencia de nombre/ID de sala y nombres de participantes, persistencia tras refresh, primer reinicio y replay.
+- `npm run validate-analytics`: aprobado.
+- `npm run lint:check`: aprobado con generación de tipos, TypeScript y ESLint.
+- `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado.
+- `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
+- No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
+
+### 2026-09-27: PR y Preview de la segunda entrega
+
+- PR apilado: [#204](https://github.com/durancristhian/coronabingo/pull/204), abierto contra `t3code/plan-product-analytics` (#203) con commit de implementación `e57a63780bcf44591d4fbc524c6056749c795441`.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-50a38f-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
+
+### 2026-09-27: implementación local de idioma y tutorial
+
+- Rama: `codex/analytics-language-tutorial`; base apilada `codex/analytics-room-lifecycle` en `41a4effff6887034d6ccb51b4d67a5f9955952db`.
+- `language_changed` se emite después de que `router.replace` confirma un cambio real. Registra idiomas de origen y destino, más `page_type`; nunca incluye la ruta, sala o jugador.
+- El tutorial registra apertura, primer `onPlay`, primer `onEnd` y primer `onError` por apertura. Reabrirlo genera una nueva apertura sin convertir la carga del iframe en reproducción.
+- El colector de pruebas confirma ES y EN, ausencia de evento al elegir el idioma actual, cambio dentro de un cartón, refresh sin duplicados, callbacks repetidos de YouTube, reapertura y fallback de error.
+- `npm run validate-analytics`: aprobado.
+- `npm run lint:check`: aprobado con generación de tipos, TypeScript y ESLint.
+- `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado.
+- Pruebas dirigidas de idioma y tutorial: 5 aprobadas con Firestore Emulator.
+- `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
+- No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
+
+### 2026-09-27: PR y Preview de idioma y tutorial
+
+- PR apilado: [#206](https://github.com/durancristhian/coronabingo/pull/206), abierto contra `codex/analytics-room-lifecycle` (#204) con commit de implementación `7d977fe3436c20ec03b21d766819a499463e202e`.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-4250ed-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
+
+### 2026-09-27: implementación local de festejos y sonidos
+
+- Rama: `codex/analytics-celebrations-sounds`; base apilada `codex/analytics-language-tutorial` en `7d977fe3436c20ec03b21d766819a499463e202e`.
+- `celebration_used` se emite al activar un festejo después de confirmar la escritura. Ocultarlo no cuenta y los dobles clics se bloquean antes de escribir o registrar.
+- `sound_used` se emite después de confirmar la solicitud de reproducción. Los eventos contienen una clave estable y el catálogo, nunca el nombre visible ni la ruta del archivo.
+- La primera activación de festejos y sonidos se deduplica por tipo de evento, sala y número de partida en `sessionStorage`; la clave queda sólo en el navegador y el ID de sala no se envía a Analytics.
+- El recorrido dirigido con dos contextos de navegador confirma propagación de festejos y sonidos, primer uso `yes`, usos posteriores `no`, doble clic sin duplicado y ausencia del ID de sala y la ruta MP3 en el payload.
+- `npm run validate-analytics`: aprobado.
+- `npm run lint:check`: aprobado con generación de tipos, TypeScript y ESLint.
+- `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado.
+- `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
+- `git diff --check`: aprobado. No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
+
+### 2026-09-27: PR y Preview de festejos y sonidos
+
+- PR apilado: [#207](https://github.com/durancristhian/coronabingo/pull/207), abierto contra `codex/analytics-language-tutorial` (#206) con commit de implementación `7500cff43d0e11850dcce9fb0cb603b965f528d0`.
+- La rama incorporó la evidencia documental más reciente de su base mediante `ccaa03ecb88b82f4df22a2f0f72bdce4967ed974`; el conflicto se limitó al final de este tracker y se resolvió conservando ambos registros.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-cb2def-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, dos contextos de navegador, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.

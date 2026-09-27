@@ -1,8 +1,15 @@
+import {
+  AnalyticsEventMap,
+  AnalyticsEventName,
+  CapturedAnalyticsEvent,
+} from '~/interfaces/analytics/Events'
+
 type AnalyticsWindow = Window & {
   gtag?: (...args: unknown[]) => void
 }
 
-export type AnalyticsEventParams = Record<string, string | number | boolean>
+export const ANALYTICS_TEST_STORAGE_KEY =
+  'coronabingo:ui-tests:analytics-events:v1'
 
 interface PageviewOptions {
   defaultLocale: string
@@ -92,15 +99,46 @@ export const pageview = ({
   previousLocation = location
 }
 
-export const logEvent = (
-  eventName: string,
-  eventParams: AnalyticsEventParams = {},
+const captureTestEvent = <EventName extends AnalyticsEventName>(
+  eventName: EventName,
+  eventParams: AnalyticsEventMap[EventName],
+) => {
+  try {
+    const storedEvents = window.sessionStorage.getItem(
+      ANALYTICS_TEST_STORAGE_KEY,
+    )
+    const events = storedEvents
+      ? (JSON.parse(storedEvents) as CapturedAnalyticsEvent[])
+      : []
+    const event = { eventName, eventParams } as CapturedAnalyticsEvent
+
+    window.sessionStorage.setItem(
+      ANALYTICS_TEST_STORAGE_KEY,
+      JSON.stringify([...events, event]),
+    )
+  } catch {
+    // Analytics test evidence must never affect gameplay.
+  }
+}
+
+export const logEvent = <EventName extends AnalyticsEventName>(
+  eventName: EventName,
+  eventParams: AnalyticsEventMap[EventName],
 ): void => {
+  if (process.env.UI_TESTS === '1') {
+    captureTestEvent(eventName, eventParams)
+    return
+  }
+
   const tracking = getTracking()
   if (!tracking) return
 
-  tracking.gtag?.('event', eventName, {
-    ...eventParams,
-    send_to: tracking.trackingId,
-  })
+  try {
+    tracking.gtag?.('event', eventName, {
+      ...eventParams,
+      send_to: tracking.trackingId,
+    })
+  } catch {
+    // Analytics must never interrupt the action being measured.
+  }
 }
