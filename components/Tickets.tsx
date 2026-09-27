@@ -1,19 +1,17 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
 import useTickets from '~/hooks/useTickets'
-import { Player, PlayerBase } from '~/interfaces/models/Player'
-import { Room } from '~/interfaces/models/Room'
+import { Player } from '~/interfaces/models/Player'
+import { FieldValue } from '~/utils/firebase'
 
 interface Props {
   player: Player
-  room: Room
-  updatePlayer: (data: Partial<PlayerBase>) => void
 }
 
-export default function Tickets({ player, room, updatePlayer }: Props) {
+export default function Tickets({ player }: Props) {
   const tickets = useTickets(player.tickets)
   const { t } = useTranslation()
 
@@ -55,51 +53,28 @@ export default function Tickets({ player, room, updatePlayer }: Props) {
     console.log(result)
   } */
 
-  const setSelectedNumbers = (
+  const setSelectedNumbers = async (
     ticketId: number,
     newSelectedNumbers: number[],
   ) => {
-    updatePlayer({
-      [ticketId]: newSelectedNumbers,
-    })
-  }
+    const selectedNumbers = player[ticketId] || []
+    const addedNumber = newSelectedNumbers.find(
+      number => !selectedNumbers.includes(number),
+    )
+    const removedNumber = selectedNumbers.find(
+      number => !newSelectedNumbers.includes(number),
+    )
 
-  const getStorageKey = (room: Room, player: Player) => {
-    return `${player.id}-${room.timesPlayed}`
-  }
-
-  useEffect(() => {
-    if (player.id) {
-      try {
-        const values = localStorage.getItem('roomValues') || '{}'
-        const roomValues = JSON.parse(values)
-        const playerValues = roomValues?.[getStorageKey(room, player)] || {}
-
-        player.ref.update(playerValues)
-
-        localStorage.removeItem('roomValues')
-      } catch (e) {
-        console.error(e)
-      }
+    if (addedNumber !== undefined) {
+      await player.ref.update({
+        [ticketId]: FieldValue.arrayUnion(addedNumber),
+      })
+    } else if (removedNumber !== undefined) {
+      await player.ref.update({
+        [ticketId]: FieldValue.arrayRemove(removedNumber),
+      })
     }
-  }, [player.id])
-
-  useEffect(() => {
-    if (player.id && tickets) {
-      localStorage.setItem(
-        'roomValues',
-        JSON.stringify({
-          [getStorageKey(room, player)]: tickets.reduce(
-            (acc, ticket) => ({
-              ...acc,
-              [ticket.id]: player[ticket.id] || [],
-            }),
-            {},
-          ),
-        }),
-      )
-    }
-  }, [tickets, player])
+  }
 
   return (
     <Fragment>

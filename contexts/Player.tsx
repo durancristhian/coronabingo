@@ -43,7 +43,10 @@ const PlayerContextProvider = ({ children }: Props) => {
     const unsubscribe = roomsRef
       .doc(`${roomId}/players/${playerId}`)
       .onSnapshot(
+        { includeMetadataChanges: true },
         snapshot => {
+          if (snapshot.metadata.hasPendingWrites) return
+
           if (!snapshot.exists) {
             setState({
               type: REMOTE_DATA.FAILURE,

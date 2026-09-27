@@ -6,11 +6,7 @@ export const testPlayerNames = {
   player: 'Bruno jugador',
 }
 
-export async function createReadyRoom(
-  page: Page,
-  roomName: string,
-  { useOnlineCaller = false } = {},
-) {
+export async function createRoom(page: Page, roomName: string) {
   await page.goto('/')
   await page
     .getByRole('textbox', { name: 'Nombre *', exact: true })
@@ -19,7 +15,12 @@ export async function createReadyRoom(
   await expect(
     page.getByRole('heading', { name: 'Preparar sala' }),
   ).toBeVisible()
+}
 
+export async function configureRoom(
+  page: Page,
+  { useOnlineCaller = false } = {},
+) {
   for (const name of Object.values(testPlayerNames)) {
     await page
       .getByRole('textbox', { name: 'Nombre *', exact: true })
@@ -30,12 +31,34 @@ export async function createReadyRoom(
   await page
     .getByRole('combobox', { name: 'adminId', exact: true })
     .selectOption({ label: testPlayerNames.host })
+  const onlineCaller = page.getByRole('checkbox', {
+    name: 'Usar bolillero online',
+  })
   if (useOnlineCaller) {
-    await page.getByRole('checkbox', { name: 'Usar bolillero online' }).check()
+    await onlineCaller.check()
+  } else {
+    await onlineCaller.uncheck()
   }
+}
+
+export async function startReadyRoom(page: Page) {
   await page.getByRole('button', { name: 'Jugar', exact: true }).click()
   await expect(
     page.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()
   await expect(page.getByTestId('player-row')).toHaveCount(2)
+}
+
+export async function configureReadyRoom(page: Page, options = {}) {
+  await configureRoom(page, options)
+  await startReadyRoom(page)
+}
+
+export async function createReadyRoom(
+  page: Page,
+  roomName: string,
+  options = {},
+) {
+  await createRoom(page, roomName)
+  await configureReadyRoom(page, options)
 }

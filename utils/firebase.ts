@@ -37,10 +37,10 @@ if (uiTests) {
   db.settings({ host: process.env.FIRESTORE_EMULATOR_HOST, ssl: false })
 }
 
-const { Timestamp } = firebase.firestore
+const { FieldValue, Timestamp } = firebase.firestore
 
 const roomsRef = db.collection('rooms')
 
 const createBatch = () => db.batch()
 
-export { analytics, createBatch, roomsRef, Timestamp }
+export { analytics, createBatch, FieldValue, roomsRef, Timestamp }
