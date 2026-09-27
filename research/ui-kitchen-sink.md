@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: claimed
+Work status: resolved
 
 ## Objetivo
 
@@ -102,4 +102,7 @@ Evidencia local del 2026-09-27:
 - `npm run ui-tests`: después de los ajustes de revisión pasaron los 15 escenarios en Chromium en 63,1 s sobre `e57eb99`, contra `demo-coronabingo-ui` y Firestore Emulator. La cobertura incluyó los recorridos reales de anfitrión y jugador, marcado y reinicio, cambio de idioma, herramientas de juego y el recorrido móvil a 390 × 844 sin overflow.
 - La revisión visual local cubrió el inicio y `/kitchen-sink` en escritorio; la ruta mostró 4 secciones, 90 números, 19 sonidos y 13 fondos sin desborde horizontal.
 - Las advertencias de navegador observadas durante la suite pertenecen a ciclos de vida y `defaultProps` de dependencias existentes; no aparecieron fallos de aplicación.
-- El PR, el Preview y sus comprobaciones remotas se registran al finalizar esa etapa; no se verificó Production.
+- La revisión de código final contra `origin/main` no dejó hallazgos bloqueantes en los ejes de estándares ni especificación. Quedó una observación no bloqueante sobre posible extracción futura de presentacionales estáticos de la kitchen sink.
+- [PR #205](https://github.com/durancristhian/coronabingo/pull/205) quedó abierto en `70462f2`. [GitHub Actions 36338443014](https://github.com/durancristhian/coronabingo/actions/runs/36338443014) pasó lint, build y los 15 escenarios de regresión en 43,3 s; Vercel quedó Ready.
+- Preview verificado: `https://coronabingo-git-t3cod-cc7165-cristhian-durans-projects-3ace6550.vercel.app`. La portada y `/kitchen-sink` cargaron con el sistema visual, sin overflow a 1905 px; la referencia conservó 4 secciones, 90 números, 19 sonidos y 13 fondos. Las cuatro rutas descartadas respondieron 404.
+- La revisión del Preview fue de solo lectura: no creó salas ni escribió datos en Firebase alojado. No se verificó ni desplegó Production.
