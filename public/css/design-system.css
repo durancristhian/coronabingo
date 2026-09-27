@@ -104,9 +104,11 @@
   letter-spacing: -0.025em;
 }
 
+/* purgecss start ignore */
 .coronabingo-ui .cb-heading--h1 {
   letter-spacing: -0.045em;
 }
+/* purgecss end ignore */
 
 .coronabingo-ui .cb-box {
   background: var(--cb-surface);
@@ -580,12 +582,14 @@
   width: 2.5rem;
 }
 
+/* purgecss start ignore */
 .coronabingo-ui .ks-intro > .cb-heading--h1 {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   letter-spacing: -0.055em;
   line-height: 0.98;
   max-width: 780px;
 }
+/* purgecss end ignore */
 
 .coronabingo-ui .ks-intro > p:not(.ks-proposal-label) {
   color: var(--cb-muted);
@@ -932,9 +936,11 @@
     top: 0.75rem;
   }
 
+  /* purgecss start ignore */
   .coronabingo-ui .ks-intro > .cb-heading--h1 {
     font-size: 2.5rem;
   }
+  /* purgecss end ignore */
 
   .coronabingo-ui .ks-type-comparison {
     grid-template-columns: minmax(0, 1fr);
