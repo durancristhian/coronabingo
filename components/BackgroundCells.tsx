@@ -74,7 +74,7 @@ export default function BackgroundCells() {
               <div
                 className={classnames([
                   'cb-background-option-preview',
-                  'bg-center bg-contain bg-no-repeat h-16 w-16',
+                  'bg-center bg-contain bg-no-repeat w-16',
                   type === 'color' && COLORS[firstOrDefault],
                 ])}
                 style={{

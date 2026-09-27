@@ -224,3 +224,29 @@ Resultado:
 - Preview verificado: `https://coronabingo-7o3ephh0e-cristhian-durans-projects-3ace6550.vercel.app/kitchen-sink`. Computó Fredoka 500 y Atkinson Hyperlegible Next, mostró las cuatro secciones integradas sin el laboratorio comparativo y mantuvo `scrollWidth` igual a `clientWidth` en 1905 px.
 - Servidor local retenido para revisión: rama `t3code/build-ui-kitchen-sink`, este worktree, `http://127.0.0.1:3127/kitchen-sink`, sesión `screen` `coronabingo-3127-t3code` y proceso Node `52434` propiedad del usuario local.
 - La prueba fue local y de sólo lectura; no leyó ni escribió Firebase alojado. Production no fue desplegado ni verificado.
+
+## Retiro de la demo y ajustes locales — 2026-09-27
+
+Por pedido del usuario, se elimina `pages/kitchen-sink.tsx` y su CSS exclusivo; la versión anterior sigue recuperable en Git. Se mantiene la iteración sin commit ni push sobre `0cae712`, rama `t3code/build-ui-kitchen-sink`, worktree `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-5c7c877e`.
+
+- Bricolage Grotesque 700 y Atkinson Hyperlegible Next se aplican globalmente, incluidos los portales de los modales.
+- Los mensajes conservan sus iconos semánticos sin círculos; el contenedor de notificaciones pierde fondo, padding, borde y sombra duplicados.
+- El spinner usa verde oscuro sobre verde suave. La X de los modales hereda el color tinta y se centra verticalmente con el título.
+- Admin y landing comparten las clases de filas de jugadores y el destacado verde del anfitrión.
+- Los separadores de las muestras de fondo se estiran hasta los bordes de cada fila.
+- El último feedback reemplaza la propuesta de footer oscuro: header y footer comparten `--cb-shell: #f8ecd6`, una variación crema del canvas `#fff4de`, con texto oscuro.
+
+Verificación local:
+
+- `npm run lint:check`, `npm run build` y `git diff --check`: pasaron con Node 24.21.0/npm 11.19.0, incluidos los cambios finales de color.
+- `npm run ui-tests`: 16 casos pasaron contra `demo-coronabingo-ui`/Firestore Emulator, incluido el recorrido móvil. La suite se ejecutó antes del último ajuste exclusivo de color de header/footer; no se repitió para ese token.
+- Navegador: el modal de donaciones computó Bricolage 700, Atkinson para el cuerpo y centros verticales idénticos para título y cierre (329 px). La portada en inglés confirmó header y footer `rgb(248, 236, 214)`, canvas `rgb(255, 244, 222)` y ausencia de overflow horizontal en escritorio.
+- `/kitchen-sink` devuelve HTTP 404 y ya no aparece en el build. Las reglas compartidas de spinner, jugadores y selector de fondos permanecen en el CSS compilado.
+- Servidor de desarrollo retenido en `http://127.0.0.1:3127/`, sesión `screen` `coronabingo-3127-local`, Node PID `19535`, propiedad de `durancristhian` en este worktree.
+- No se creó contenido en Firebase alojado. CI, Preview y Production no se actualizaron ni verificaron en esta iteración.
+
+Feedback posterior: se aclara el token compartido de header/footer a blanco cálido `#fdfbf7`, por pedido de acercarlo al blanco sin usar blanco puro. El canvas permanece en `#fff4de`. Cambio exclusivamente local.
+
+Lint, build y `git diff --check` pasaron para este ajuste de color. Servidor reiniciado en la misma URL, sesión `screen` `coronabingo-3127-offwhite`, Node PID `25013`. No se repitió la suite funcional para el cambio de un token CSS.
+
+El usuario aprobó guardar y publicar los ajustes en PR #205, e integrar el último `main`. La aprobación reemplaza la restricción de mantener esta iteración exclusivamente local.

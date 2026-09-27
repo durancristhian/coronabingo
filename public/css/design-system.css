@@ -1,5 +1,6 @@
 .coronabingo-ui {
   --cb-canvas: #fff4de;
+  --cb-shell: #fdfbf7;
   --cb-surface: #fffdf8;
   --cb-surface-muted: #f4efe6;
   --cb-ink: #253149;
@@ -51,7 +52,7 @@
 }
 
 .coronabingo-ui .cb-header {
-  background: var(--cb-surface);
+  background: var(--cb-shell);
   border-bottom: 2px solid var(--cb-line);
   box-shadow: none;
   padding-bottom: 0.75rem;
@@ -61,8 +62,9 @@
 .coronabingo-ui .cb-brand {
   color: var(--cb-ink);
   display: inline-block;
+  font-family: var(--cb-font-heading);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   position: relative;
   text-decoration: underline;
   text-decoration-color: var(--cb-yellow);
@@ -72,8 +74,7 @@
 }
 
 .coronabingo-ui .cb-brand:focus-visible,
-.coronabingo-ui .cb-text-link:focus-visible,
-.coronabingo-ui .ks-section-nav a:focus-visible {
+.coronabingo-ui .cb-text-link:focus-visible {
   border-radius: 0.2rem;
   box-shadow: 0 0 0 3px var(--cb-purple);
   outline: none;
@@ -84,7 +85,7 @@
 }
 
 .coronabingo-ui .cb-footer {
-  background: var(--cb-purple);
+  background: var(--cb-shell);
   border-top: 2px solid var(--cb-line);
   box-shadow: none;
   color: var(--cb-ink);
@@ -100,13 +101,14 @@
 
 .coronabingo-ui .cb-heading {
   color: var(--cb-ink);
+  font-family: var(--cb-font-heading);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
 }
 
 /* purgecss start ignore */
 .coronabingo-ui .cb-heading--h1 {
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
 }
 /* purgecss end ignore */
 
@@ -268,19 +270,16 @@
 
 .coronabingo-ui .cb-message-icon {
   align-items: center;
-  background: var(--cb-surface);
-  border: 2px solid currentColor;
-  border-radius: 999px;
-  box-shadow: 2px 2px 0 var(--cb-line);
   display: flex;
-  flex: 0 0 2.25rem;
-  height: 2.25rem;
+  flex: 0 0 1.75rem;
   justify-content: center;
-  width: 2.25rem;
+  width: 1.75rem;
 }
 
 .coronabingo-ui .cb-message-icon svg {
+  height: 1.75rem;
   stroke-width: 2.5;
+  width: 1.75rem;
 }
 
 /* purgecss start ignore */
@@ -306,9 +305,10 @@
 }
 
 .coronabingo-ui .cb-home-intro {
+  font-family: var(--cb-font-heading);
   font-size: clamp(1.8rem, 5vw, 3.25rem);
   font-weight: 700;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   line-height: 1.05;
   max-width: 18ch;
 }
@@ -331,21 +331,23 @@
   border-top-width: 2px;
 }
 
-.coronabingo-ui .cb-list-row,
-.coronabingo-ui .ks-list-row {
+.coronabingo-ui .cb-list-row {
   background: var(--cb-surface);
   border-color: var(--cb-line);
   color: var(--cb-ink);
   min-height: 3.75rem;
 }
 
-.coronabingo-ui .cb-list-row:nth-child(even),
-.coronabingo-ui .ks-list-row:nth-child(even) {
+.coronabingo-ui .cb-list-row:nth-child(even) {
   background: var(--cb-yellow-soft);
 }
 
-.coronabingo-ui .cb-list-row.bg-green-100,
-.coronabingo-ui .ks-list-row.bg-green-100 {
+.coronabingo-ui .cb-list-row.bg-green-100 {
+  background: var(--cb-green-soft);
+}
+
+.coronabingo-ui .cb-player-row--host,
+.coronabingo-ui .cb-player-row--host:nth-child(even) {
   background: var(--cb-green-soft);
 }
 
@@ -365,13 +367,11 @@
   white-space: nowrap;
 }
 
-.coronabingo-ui .cb-ticket-grid,
-.coronabingo-ui .ks-ticket-grid {
+.coronabingo-ui .cb-ticket-grid {
   border-color: var(--cb-line);
 }
 
-.coronabingo-ui .cb-ticket-cell,
-.coronabingo-ui .ks-ticket-grid > div {
+.coronabingo-ui .cb-ticket-cell {
   border-color: var(--cb-line);
   color: var(--cb-ink);
   min-height: 2.75rem;
@@ -422,8 +422,7 @@
   gap: 0.5rem;
 }
 
-.coronabingo-ui .cb-option-tab,
-.coronabingo-ui .ks-option-button {
+.coronabingo-ui .cb-option-tab {
   border: 2px solid var(--cb-line);
   border-radius: 999px;
   box-shadow: var(--cb-shadow-control);
@@ -479,7 +478,9 @@
 }
 
 .coronabingo-ui .cb-background-option-preview {
+  align-self: stretch;
   border-right: 2px solid var(--cb-line);
+  min-height: 4.5rem;
 }
 
 .coronabingo-ui .modal {
@@ -503,22 +504,26 @@
   border-radius: 999px;
   color: var(--cb-ink);
   display: flex;
+  flex: 0 0 2.5rem;
   height: 2.5rem;
   justify-content: center;
   min-width: 2.5rem;
 }
 
 .coronabingo-ui .cb-spinner {
-  border-color: var(--cb-purple-soft);
-  border-top-color: var(--cb-yellow);
+  border-color: var(--cb-green-soft);
+  border-top-color: var(--cb-green-strong);
 }
 
 .coronabingo-ui .Toastify__toast {
-  background: var(--cb-surface);
-  border: 2px solid var(--cb-line);
-  border-radius: var(--cb-radius-control);
-  box-shadow: var(--cb-shadow-control);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   color: var(--cb-ink);
+  min-height: 0;
+  overflow: visible;
+  padding: 0;
 }
 
 .coronabingo-ui .bg-yellow-300 {
@@ -558,157 +563,6 @@
   color: var(--cb-ink);
 }
 
-.coronabingo-ui .ks-content {
-  background: var(--cb-canvas);
-  padding-bottom: 5rem;
-  padding-top: 3.5rem;
-}
-
-.coronabingo-ui .kitchen-sink {
-  font-family: var(--ks-font-body);
-}
-
-.coronabingo-ui .kitchen-sink .cb-brand,
-.coronabingo-ui .kitchen-sink .cb-heading {
-  font-family: var(--ks-font-heading);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
-
-.coronabingo-ui .ks-intro {
-  padding-right: min(18vw, 10rem);
-  position: relative;
-}
-
-.coronabingo-ui .ks-intro::after {
-  background: var(--cb-green);
-  border: 2px solid var(--cb-line);
-  border-radius: 999px;
-  box-shadow: -2.75rem 1.5rem 0 var(--cb-yellow), -5.5rem 0 0 var(--cb-red);
-  content: '';
-  height: 2.5rem;
-  position: absolute;
-  right: 0.5rem;
-  top: 2.5rem;
-  width: 2.5rem;
-}
-
-/* purgecss start ignore */
-.coronabingo-ui .ks-intro > .cb-heading--h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  letter-spacing: -0.025em;
-  line-height: 1.02;
-  max-width: 780px;
-}
-/* purgecss end ignore */
-
-.coronabingo-ui .ks-intro > p:not(.ks-proposal-label) {
-  color: var(--cb-muted);
-  font-size: 1.05rem;
-  line-height: 1.65;
-  margin-top: 1.25rem;
-}
-
-.coronabingo-ui .ks-proposal-label {
-  background: var(--cb-yellow);
-  border: 2px solid var(--cb-line);
-  border-radius: 999px;
-  box-shadow: 2px 2px 0 var(--cb-line);
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  margin-bottom: 1.25rem;
-  padding: 0.35rem 0.75rem;
-  text-transform: uppercase;
-}
-
-.coronabingo-ui .ks-section-nav ul {
-  gap: 0.5rem;
-}
-
-.coronabingo-ui .ks-section-nav li {
-  margin: 0;
-}
-
-.coronabingo-ui .ks-section-nav a {
-  background: var(--cb-surface);
-  border: 2px solid var(--cb-line);
-  border-radius: 999px;
-  color: var(--cb-ink);
-  display: inline-block;
-  padding: 0.45rem 0.85rem;
-  text-decoration: none;
-}
-
-.coronabingo-ui .ks-section {
-  border-top: 2px solid var(--cb-line);
-  margin-top: 4rem;
-  padding-top: 3rem;
-}
-
-.coronabingo-ui .ks-section-heading {
-  margin-bottom: 2rem;
-  max-width: 760px;
-}
-
-.coronabingo-ui .ks-section-heading .cb-heading {
-  display: inline;
-  font-size: clamp(1.9rem, 4vw, 2.75rem);
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-  padding: 0 0.1em;
-  text-decoration: underline;
-  text-decoration-color: var(--cb-yellow);
-  text-decoration-thickness: 0.35em;
-  text-underline-offset: -0.16em;
-  text-decoration-skip-ink: none;
-}
-
-.coronabingo-ui .ks-section-heading .cb-heading span {
-  position: relative;
-}
-
-.coronabingo-ui .ks-section-heading p {
-  color: var(--cb-muted);
-  line-height: 1.55;
-  margin-top: 1rem;
-}
-
-.coronabingo-ui .ks-brand-action--whatsapp {
-  background: #25d366;
-}
-
-.coronabingo-ui .ks-brand-action--telegram {
-  background: #26a5e4;
-}
-
-.coronabingo-ui .ks-brand-action--paypal {
-  background: #002991;
-}
-
-.coronabingo-ui .ks-brand-action--x {
-  background: #000;
-}
-
-.coronabingo-ui .ks-background-swatch {
-  background: var(--cb-surface);
-  border-color: var(--cb-line);
-  border-radius: var(--cb-radius-control);
-  box-shadow: 2px 2px 0 var(--cb-line);
-  overflow: hidden;
-}
-
-.coronabingo-ui .ks-background-swatch > p {
-  border-color: var(--cb-line);
-}
-
-.coronabingo-ui .ks-footer {
-  background: var(--cb-purple);
-  border-top: 2px solid var(--cb-line);
-  box-shadow: none;
-}
-
 @media (max-width: 639px) {
   .coronabingo-ui .cb-page-content {
     padding-left: 0.875rem;
@@ -731,29 +585,10 @@
   .coronabingo-ui .cb-number-board {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
-
-  .coronabingo-ui .ks-intro {
-    padding-right: 0;
-    padding-top: 4.5rem;
-  }
-
-  .coronabingo-ui .ks-intro::after {
-    left: 5.75rem;
-    right: auto;
-    top: 0.75rem;
-  }
-
-  /* purgecss start ignore */
-  .coronabingo-ui .ks-intro > .cb-heading--h1 {
-    font-size: 2.5rem;
-  }
-  /* purgecss end ignore */
-
 }
 
 @media (pointer: coarse) {
-  .coronabingo-ui .cb-text-link,
-  .coronabingo-ui .ks-section-nav a {
+  .coronabingo-ui .cb-text-link {
     min-height: 2.75rem;
   }
 }

@@ -90,13 +90,9 @@ export default function RoomId() {
               key={index}
               data-testid="player-row"
               className={classnames([
-                'cb-list-row',
+                'cb-list-row cb-player-row',
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                player.id === room.adminId
-                  ? 'bg-green-100'
-                  : index % 2 === 0
-                  ? 'bg-gray-100'
-                  : 'bg-gray-200',
+                player.id === room.adminId && 'cb-player-row--host',
               ])}
             >
               <div className="flex flex-auto flex-wrap items-center">
