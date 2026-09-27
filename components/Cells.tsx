@@ -37,8 +37,12 @@ export default function Cells({
           <div
             key={i}
             className={classnames([
+              'cb-ticket-cell',
               'bg-white border-b-2 border-r-2 border-gray-900 cursor-poroto flex focus:outline-none h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
-              selectedNumbers.includes(ticketNumber) && 'bg-orange-400',
+              selectedNumbers.includes(ticketNumber) && [
+                'cb-ticket-cell--selected',
+                'bg-orange-400',
+              ],
             ])}
             onClick={() => handleClick(ticketNumber)}
             onKeyPress={() => handleClick(ticketNumber)}

@@ -61,7 +61,7 @@ export default class extends Document {
               />
             )}
         </Head>
-        <body className="font-sans leading-normal text-gray-900 text-sm md:text-base">
+        <body className="coronabingo-ui font-sans leading-normal text-gray-900 text-sm md:text-base">
           <Main />
           <NextScript />
         </body>

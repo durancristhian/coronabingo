@@ -5,6 +5,7 @@
   "pages": {
     "*": ["common"],
     "/": ["index"],
+    "/kitchen-sink": ["playerId"],
     "/room/[roomId]": ["roomId"],
     "/room/[roomId]/admin": ["admin"],
     "/room/[roomId]/[playerId]": ["playerId"]

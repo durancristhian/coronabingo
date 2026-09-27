@@ -111,25 +111,22 @@ export default function Players({
       </form>
       {!!players.length && (
         <div
-          className="border-gray-300 border-t-2 mt-4 -mx-4"
+          className="cb-list border-gray-300 border-t-2 mt-4 -mx-4"
           id="players-list"
         >
           {players.map((player, index) => (
             <div
               key={index}
               className={classnames([
+                'cb-list-row cb-player-row',
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                player.id === room.adminId
-                  ? 'bg-green-100'
-                  : index % 2 === 0
-                  ? 'bg-gray-100'
-                  : 'bg-gray-200',
+                player.id === room.adminId && 'cb-player-row--host',
               ])}
             >
               <div className="flex flex-auto items-center">
                 <p>{player.name}</p>
                 {player.id === room.adminId && (
-                  <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                  <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                     {t('admin:players.admin')}
                   </span>
                 )}

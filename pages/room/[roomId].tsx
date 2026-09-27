@@ -84,24 +84,21 @@ export default function RoomId() {
         <p className="italic mt-2 text-gray-800 text-xs md:text-sm">
           {t('roomId:list-description')}
         </p>
-        <div className="border-gray-300 border-t-2 mt-4 -mx-4">
+        <div className="cb-list border-gray-300 border-t-2 mt-4 -mx-4">
           {players.map((player: Player, index: number) => (
             <div
               key={index}
               data-testid="player-row"
               className={classnames([
+                'cb-list-row cb-player-row',
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
-                player.id === room.adminId
-                  ? 'bg-green-100'
-                  : index % 2 === 0
-                  ? 'bg-gray-100'
-                  : 'bg-gray-200',
+                player.id === room.adminId && 'cb-player-row--host',
               ])}
             >
               <div className="flex flex-auto flex-wrap items-center">
                 <p>{player.name}</p>
                 {player.id === room.adminId && (
-                  <span className="bg-green-200 border-2 border-green-300 font-medium ml-4 px-2 py-1 rounded text-xs">
+                  <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                     {t('roomId:is-admin')}
                   </span>
                 )}

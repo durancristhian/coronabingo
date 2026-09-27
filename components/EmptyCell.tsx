@@ -26,6 +26,7 @@ export default function EmptyCell({ index }: { index: number }) {
   return (
     <div
       className={classnames([
+        'cb-ticket-cell cb-ticket-cell--empty',
         'bg-center bg-contain bg-gray-200 bg-no-repeat border-b-2 border-r-2 border-gray-900 flex h-8 sm:h-20 items-center justify-center p-1 relative w-1/10',
         type === 'color' && COLORS[randomValue],
       ])}

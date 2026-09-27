@@ -21,6 +21,7 @@ export default function OptionTab({
       <button
         id={buttonId}
         className={classnames([
+          'cb-option-tab',
           'block h-12 mx-1 outline-none rounded-full shadow w-12',
           'focus:outline-none focus:shadow-outline',
           'duration-150 ease-in-out transition',

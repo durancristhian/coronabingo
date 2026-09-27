@@ -8,7 +8,9 @@ interface Props {
 export default function OptionTabList({ children, ...otherProps }: Props) {
   return (
     <TabList {...otherProps}>
-      <div className="flex justify-center items-center">{children}</div>
+      <div className="cb-option-tabs flex justify-center items-center">
+        {children}
+      </div>
     </TabList>
   )
 }

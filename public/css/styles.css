@@ -13,6 +13,7 @@
 @import 'modal.css';
 @import 'video.css';
 @import 'spinner.css';
+@import 'design-system.css';
 
 /* purgecss start ignore */
 .ReactModal__Body--open {

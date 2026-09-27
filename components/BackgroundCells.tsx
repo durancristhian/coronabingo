@@ -54,6 +54,7 @@ export default function BackgroundCells() {
             <button
               key={analyticsKey}
               className={classnames([
+                'cb-background-option',
                 'flex items-center justify-between w-full',
                 'focus:outline-none focus:bg-gray-400 hover:bg-gray-400',
                 'duration-150 ease-in-out transition',
@@ -72,7 +73,8 @@ export default function BackgroundCells() {
             >
               <div
                 className={classnames([
-                  'bg-center bg-contain bg-no-repeat h-16 w-16',
+                  'cb-background-option-preview',
+                  'bg-center bg-contain bg-no-repeat w-16',
                   type === 'color' && COLORS[firstOrDefault],
                 ])}
                 style={{

@@ -47,14 +47,14 @@ export default function Layout({ children, type = 'medium' }: Props) {
   }
 
   return (
-    <main className="bg-gray-200 flex flex-col min-h-screen">
+    <main className="cb-layout bg-gray-200 flex flex-col min-h-screen">
       {isStaging && (
         <Banner type="emphasis">{t('common:staging', { version })}</Banner>
       )}
       <Header />
       <Ads />
-      <div className="flex-auto min-h-650px">
-        <div className="px-4 py-8">
+      <div className="cb-layout-main flex-auto min-h-650px">
+        <div className="cb-page-content px-4 py-8">
           <Container size={type}>{renderContent()}</Container>
         </div>
       </div>

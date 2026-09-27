@@ -16,18 +16,20 @@ export default function Modal({ children, title, ...rest }: Props) {
   return (
     <ReactModal {...rest}>
       <Box>
-        <div className="flex items-start justify-between mb-4 text-lg md:text-xl">
+        <div className="flex items-center justify-between mb-4 text-lg md:text-xl">
           <Heading type="h2">{title}</Heading>
           <button
+            type="button"
             onClick={rest.onRequestClose}
             className={classnames([
+              'cb-modal-close',
               'text-lg',
               'focus:outline-none focus:shadow-outline',
               'duration-150 ease-in-out transition',
             ])}
             id="close-modal"
           >
-            <FiX color="gray" />
+            <FiX aria-hidden="true" />
           </button>
         </div>
         {children}

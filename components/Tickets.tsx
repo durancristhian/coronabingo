@@ -82,13 +82,13 @@ export default function Tickets({ player }: Props) {
         <div
           key={i}
           data-testid="bingo-card"
-          className={classnames([i !== 0 && 'mt-4'])}
+          className={classnames(['cb-ticket', i !== 0 && 'mt-4'])}
         >
           <Box>
             <p className="font-semibold uppercase">
               {t('common:ticket', { count: 1, ticketId: ticket.id })}
             </p>
-            <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
+            <div className="cb-ticket-grid border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
               <Cells
                 ticketNumbers={ticket.numbers}
                 selectedNumbers={player[ticket.id]}

@@ -78,16 +78,17 @@ export default function Pato({ extraSounds, room }: Props) {
   }
 
   return (
-    <div className="border-gray-300 border-t-2 -mx-4">
+    <div className="cb-list border-gray-300 border-t-2 -mx-4">
       {sounds.map(
         ({ analyticsCatalog, analyticsKey, language, name, url }, index) => {
           return (
             <div
               key={analyticsKey}
               className={classnames([
+                'cb-list-row',
                 'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
                 index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
-                room.soundToPlay === url && 'bg-yellow-200',
+                room.soundToPlay === url && 'cb-list-row--active bg-yellow-200',
               ])}
             >
               <div className="mr-4">

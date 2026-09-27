@@ -97,20 +97,20 @@ export default function Index() {
 
   return (
     <Layout>
-      <p>{t('index:intro')}</p>
-      <div className="my-8">
+      <p className="cb-home-intro">{t('index:intro')}</p>
+      <div className="cb-home-card my-8">
         <Box>
           <CreateRoom />
         </Box>
       </div>
-      <p>
+      <p className="cb-home-note">
         <span>{t('index:videocall-suggestion')} </span>
         <Anchor href="https://hangouts.google.com/" id="google-hangouts">
           Google Hangouts
         </Anchor>
         <span>.</span>
       </p>
-      <div className="mt-8">
+      <div className="cb-home-tutorial mt-8">
         <Button
           aria-label={t('index:how-to-play-button')}
           id="watch-tutorial"

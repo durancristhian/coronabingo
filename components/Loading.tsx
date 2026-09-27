@@ -10,8 +10,8 @@ export default function Loading({ message }: Props) {
   const msg = message || t('common:loading')
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
-      <div className="spinner"></div>
+    <div className="cb-loading flex flex-col items-center justify-center text-center">
+      <div className="cb-spinner spinner"></div>
       <p className="mt-4">{msg}</p>
     </div>
   )

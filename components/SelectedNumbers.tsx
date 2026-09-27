@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { TICKET_NUMBERS } from '~/utils/constants'
@@ -12,6 +12,8 @@ interface Props {
   onNewNumber: (n: number) => void
   selectedNumbers: number[]
   bingoSpinner: boolean
+  nextIconLeft?: ReactNode
+  nextIconRight?: ReactNode
 }
 
 export default function SelectedNumbers({
@@ -19,6 +21,8 @@ export default function SelectedNumbers({
   onNewNumber,
   selectedNumbers,
   bingoSpinner,
+  nextIconLeft = <FiChevronsRight aria-hidden="true" />,
+  nextIconRight = <FiChevronsLeft aria-hidden="true" />,
 }: Props) {
   const enableForAdmin = isAdmin && !bingoSpinner
   const roomNumbers = [...selectedNumbers]
@@ -46,26 +50,26 @@ export default function SelectedNumbers({
           className="mb-4 w-full"
           onClick={onNextButtonClick}
           disabled={roomNumbers.length === 90}
-          iconLeft={<FiChevronsRight />}
-          iconRight={<FiChevronsLeft />}
+          iconLeft={nextIconLeft}
+          iconRight={nextIconRight}
         >
           {t('playerId:next-number')}
         </Button>
       )}
-      <div className="flex flex-wrap" id="ticket-numbers">
+      <div className="cb-number-board" id="ticket-numbers">
         {TICKET_NUMBERS.map(n => (
           <button
             type="button"
             key={n}
             className={classnames([
+              'cb-number-board-cell',
               'cursor-default flex items-center justify-center h-8 text-gray-800',
               'focus:outline-none',
               'duration-150 ease-in-out transition',
               selectedNumbers.includes(n) &&
-                'bg-green-400 font-medium text-green-800',
+                'cb-number-board-cell--called bg-green-400 font-medium text-green-800',
               enableForAdmin && 'cursor-pointer focus:shadow-outline',
             ])}
-            style={{ width: '10%' }}
             onClick={() => enableForAdmin && onNewNumber(n)}
           >
             <span className="uppercase">{n}</span>

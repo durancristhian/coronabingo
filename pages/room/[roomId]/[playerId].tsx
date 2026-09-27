@@ -136,7 +136,7 @@ export default function RoomPlayer() {
         roomId={room.id}
         trackCardOpened={!enableStreamerView}
       >
-        <div className="mb-4">
+        <div className="cb-game-title mb-4">
           <Heading textAlign="center" type="h2">
             {t('playerId:title', {
               playerName: player.name,
@@ -144,7 +144,7 @@ export default function RoomPlayer() {
             })}
           </Heading>
         </div>
-        <div className="max-w-6xl mx-auto">
+        <div className="cb-game-table max-w-6xl mx-auto">
           <div className="lg:flex lg:justify-center mt-4">
             <div
               className={classnames(
