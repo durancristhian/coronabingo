@@ -568,3 +568,20 @@ Fuentes oficiales:
 - `origin/main` en `4c98747bd128f0124db85e8b984e8f7b7529d5c0` sigue siendo ancestro del commit integrado.
 - Sobre #203 combinado pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 16 pruebas y `git diff --check`.
 - No se mergeó #203 a `main`, no se desplegó a Production y no se crearon datos alojados durante esta verificación.
+
+### 2026-09-27: configuración GA4, despliegue y hallazgo en Production
+
+- En la propiedad canónica `385744187`, flujo web `5469366293` y medición `G-WYG7FMEWEF`, se crearon las 17 dimensiones de evento y las 3 métricas de evento acordadas. Las cuotas quedaron en 19/50 dimensiones y 3/50 métricas, conservando las dos dimensiones antiguas. No se configuró BigQuery, eventos clave ni consentimiento.
+- #203 se mergeó a `main` mediante `3c58867b47936f1275386168e812979470c54a65`. GitHub Actions terminó aprobado y Vercel marcó el despliegue de Production como completado.
+- Production respondió HTTP 200 y cargó solamente `G-WYG7FMEWEF`. Una corrida controlada creó una sala llamada `QA analytics 2026-09-27`, dos participantes sintéticos, una primera partida y un replay. La sala queda retenida con esos dos participantes; no se crearon más salas.
+- Los requests reales a GA4 confirmaron dos `language_changed`, un `tutorial_opened`, un `room_created`, dos `room_started`, tres `player_card_opened`, dos `background_selected`, dos `celebration_used`, dos `sound_used` y un `room_restarted`. Los parámetros de producto coincidieron con el contrato, incluido `custom_url` sin la URL pegada. El reproductor real no expuso un control reproducible en Chromium headless, por lo que `tutorial_begin` y `tutorial_complete` conservan la evidencia automatizada local, no evidencia de Production.
+- Realtime de la propiedad mostró los nuevos nombres `room_started`, `player_card_opened` y `language_changed`, confirmando recepción en GA4. La tarjeta sólo expuso los siete eventos principales del intervalo y no es evidencia de datos ya procesados ni de todas las definiciones personalizadas.
+- La misma captura detectó que `gtag` completaba automáticamente `page_location` con los IDs reales de sala y jugador en los eventos personalizados. No aparecieron los nombres ni la URL libre, pero la normalización aplicada a `page_view` no protegía esos eventos. La aceptación de Production queda bloqueada hasta desplegar y repetir la prueba con la corrección.
+
+### 2026-09-27: corrección local de URLs privadas en eventos
+
+- Rama: `codex/analytics-private-event-urls`; base `origin/main` en `3c58867b47936f1275386168e812979470c54a65`.
+- `logEvent` añade explícitamente `page_location` y `page_referrer` normalizados a todos los eventos de producto. Las rutas dinámicas usan `/room/[roomId]`, `/room/[roomId]/admin` o `/room/[roomId]/[playerId]`, con prefijo de idioma cuando corresponde.
+- `npm run validate-analytics`: aprobado y ampliado para comprobar el contexto de página de un evento de producto sobre una URL privada real.
+- `npm run lint:check`: aprobado. `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado. `npm run ui-tests:production`: 16 pruebas aprobadas con Firestore Emulator. `git diff --check`: aprobado.
+- Falta publicar la rama para revisión, desplegarla y repetir la captura real. Sólo entonces se podrá comprobar que GA4 recibe los eventos sin IDs privados y comenzar la espera de 24–48 horas para validar datos procesados e informes.
