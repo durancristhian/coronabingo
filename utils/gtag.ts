@@ -76,6 +76,18 @@ export const sanitizeReferrer = (referrer: string, origin: string) => {
   }
 }
 
+const getEventPageContext = () => {
+  const origin = window.location.origin
+  const pageLocation = `${origin}${normalizeInternalReferrerPath(
+    window.location.pathname,
+  )}`
+
+  return {
+    page_location: pageLocation,
+    page_referrer: sanitizeReferrer(document.referrer, origin),
+  }
+}
+
 export const pageview = ({
   defaultLocale,
   locale,
@@ -137,6 +149,7 @@ export const logEvent = <EventName extends AnalyticsEventName>(
     tracking.gtag?.('event', eventName, {
       ...eventParams,
       send_to: tracking.trackingId,
+      ...getEventPageContext(),
     })
   } catch {
     // Analytics must never interrupt the action being measured.

@@ -255,7 +255,10 @@ Object.defineProperty(globalThis, 'window', {
     gtag: (...args: unknown[]) => {
       calls.push(args)
     },
-    location: { origin },
+    location: {
+      origin,
+      pathname: '/room/private-room/private-player',
+    },
     localStorage: {
       getItem: (key: string) => localStorageValues.get(key) || null,
       setItem: (key: string, value: string) => {
@@ -344,7 +347,12 @@ assert.deepStrictEqual(calls[1], [
 assert.deepStrictEqual(calls[2], [
   'event',
   'room_created',
-  { ...roomCreatedParams, send_to: 'G-TEST123' },
+  {
+    ...roomCreatedParams,
+    send_to: 'G-TEST123',
+    page_location: `${origin}/room/[roomId]/[playerId]`,
+    page_referrer: `${origin}/room/[roomId]/[playerId]`,
+  },
 ])
 
 for (const call of calls) {
