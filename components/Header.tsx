@@ -4,12 +4,15 @@ import React from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Select from '~/components/Select'
+import { useAnalytics } from '~/hooks/useAnalytics'
 import i18n from '~/i18n.json'
+import { getLanguageChangedEventParams } from '~/utils/analyticsEvents'
 
 const allLanguages = i18n.locales
 
 export default function Header() {
   const { t, lang } = useTranslation()
+  const log = useAnalytics()
   const router = useRouter()
 
   const languages = allLanguages.map(l => ({
@@ -17,11 +20,24 @@ export default function Header() {
     name: t(`common:language-${l}`),
   }))
 
-  const onLanguageChange = (l: string) => {
-    return router.replace(
+  const onLanguageChange = async (nextLanguage: string) => {
+    if (nextLanguage === lang) return
+
+    const didNavigate = await router.replace(
       { pathname: router.pathname, query: router.query },
       router.asPath,
-      { locale: l },
+      { locale: nextLanguage },
+    )
+
+    if (!didNavigate) return
+
+    log(
+      'language_changed',
+      getLanguageChangedEventParams({
+        fromLanguage: lang,
+        pathname: router.pathname,
+        toLanguage: nextLanguage,
+      }),
     )
   }
 

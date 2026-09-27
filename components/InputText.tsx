@@ -7,6 +7,7 @@ interface Props {
   hint?: string | ReactNode
   id: string
   label: string
+  onBlur?: (ev: FocusEvent<HTMLInputElement>) => void
   onFocus?: (ev: FocusEvent<HTMLInputElement>) => void
   onChange?: (value: string) => void
   readonly?: boolean
@@ -20,6 +21,7 @@ export default function InputText({
   hint = '',
   id,
   label,
+  onBlur,
   onFocus,
   onChange,
   readonly,
@@ -42,6 +44,7 @@ export default function InputText({
           ])}
           id={id}
           value={value}
+          onBlur={event => onBlur && onBlur(event)}
           onChange={event => onChange && onChange(event.target.value)}
           onFocus={event => onFocus && onFocus(event)}
           disabled={disabled}

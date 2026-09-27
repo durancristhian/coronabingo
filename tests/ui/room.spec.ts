@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
+import { readAnalyticsEvents } from './analytics'
 import { testPlayerNames } from './room-setup'
 
 const names = {
@@ -100,12 +101,55 @@ test('host and player create, play, reload and restart a room', async ({
       await host
         .getByRole('checkbox', { name: 'Usar bolillero online' })
         .check()
-      await host.getByRole('button', { name: 'Jugar', exact: true }).click()
+      await host
+        .getByRole('button', { name: 'Jugar', exact: true })
+        .evaluate(button => {
+          const submit = button as HTMLButtonElement
+          submit.click()
+          submit.click()
+        })
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
       await expect(host.getByTestId('player-row')).toHaveCount(2)
       lobbyURL = host.url()
+
+      const events = await readAnalyticsEvents(host)
+      expect(events).toEqual([
+        {
+          eventName: 'room_created',
+          eventParams: {
+            room_created_date: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+            schema_version: 'v1',
+            ui_language: 'es',
+          },
+        },
+        {
+          eventName: 'room_started',
+          eventParams: {
+            number_meanings: 'shown',
+            play_kind: 'first_play',
+            play_number: 1,
+            player_count: 2,
+            room_created_date: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+            schema_version: 'v1',
+            spinner_mode: 'online',
+            ui_language: 'es',
+          },
+        },
+      ])
+      expect(events[1].eventParams.room_created_date).toBe(
+        events[0].eventParams.room_created_date,
+      )
+      const privateValues = JSON.stringify(events)
+      const roomId = new URL(lobbyURL).pathname
+        .split('/')
+        .filter(Boolean)
+        .pop()
+      expect(privateValues).not.toContain('Sala de regresión')
+      expect(privateValues).not.toContain(names.host)
+      expect(privateValues).not.toContain(names.player)
+      expect(privateValues).not.toContain(roomId)
     },
   )
 
@@ -179,6 +223,7 @@ test('host and player create, play, reload and restart a room', async ({
       ).toHaveAttribute('aria-pressed', 'true')
       await host.reload()
       await expectAssignedCards(host, names.host, hostTicketIds)
+      await expect.poll(() => readAnalyticsEvents(host)).toHaveLength(3)
     },
   )
 
@@ -189,7 +234,11 @@ test('host and player create, play, reload and restart a room', async ({
       await host
         .getByRole('dialog')
         .getByRole('button', { name: 'Confirmar' })
-        .click()
+        .evaluate(button => {
+          const confirm = button as HTMLButtonElement
+          confirm.click()
+          confirm.click()
+        })
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
@@ -197,6 +246,21 @@ test('host and player create, play, reload and restart a room', async ({
         player.getByText('La sala se está configurando. Espere...'),
       ).toBeVisible()
       await expect(player.getByTestId('bingo-card')).toHaveCount(0)
+
+      const events = await readAnalyticsEvents(host)
+      expect(events.map(event => event.eventName)).toEqual([
+        'room_created',
+        'room_started',
+        'player_card_opened',
+        'room_restarted',
+      ])
+      expect(events[3].eventParams).toEqual({
+        first_restart: 'yes',
+        restart_number: 1,
+        room_created_date: events[0].eventParams.room_created_date,
+        schema_version: 'v1',
+        ui_language: 'es',
+      })
     },
   )
 
@@ -219,7 +283,18 @@ test('host and player create, play, reload and restart a room', async ({
       await host
         .getByRole('combobox', { name: 'adminId', exact: true })
         .selectOption({ label: names.replacement })
-      await host.getByRole('button', { name: 'Jugar', exact: true }).click()
+      await host
+        .getByRole('checkbox', {
+          name: 'Ocultar los significados de los números',
+        })
+        .check()
+      await host
+        .getByRole('button', { name: 'Jugar', exact: true })
+        .evaluate(button => {
+          const submit = button as HTMLButtonElement
+          submit.click()
+          submit.click()
+        })
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
@@ -244,6 +319,26 @@ test('host and player create, play, reload and restart a room', async ({
       await expect(player.getByText(emptyDraw)).toBeVisible()
       await expect(host.getByTestId('called-number')).toHaveCount(0)
       await expect(player.getByTestId('called-number')).toHaveCount(0)
+
+      const events = await readAnalyticsEvents(host)
+      expect(events.map(event => event.eventName)).toEqual([
+        'room_created',
+        'room_started',
+        'player_card_opened',
+        'room_restarted',
+        'room_started',
+        'player_card_opened',
+      ])
+      expect(events[4].eventParams).toEqual({
+        number_meanings: 'hidden',
+        play_kind: 'replay',
+        play_number: 2,
+        player_count: 2,
+        room_created_date: events[0].eventParams.room_created_date,
+        schema_version: 'v1',
+        spinner_mode: 'online',
+        ui_language: 'es',
+      })
       await drawAndObserve(player, host)
     },
   )

@@ -5,6 +5,7 @@ import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import pkg from '~/package.json'
+import { getNoLocalStorageEventParams } from '~/utils/analyticsEvents'
 import { isThereLocalStorageSupport } from '~/utils/isThereLocalStorageSupport'
 import Ads from './Ads'
 import Box from './Box'
@@ -20,7 +21,7 @@ interface Props {
 export default function Layout({ children, type = 'medium' }: Props) {
   const log = useAnalytics()
   const [localStorageSupport, setLocalStorageSupport] = useState(true)
-  const { t } = useTranslation()
+  const { lang, t } = useTranslation()
   const isStaging = process.env.URL?.toString()
     .split('.')
     .includes('cduran')
@@ -36,9 +37,7 @@ export default function Layout({ children, type = 'medium' }: Props) {
       return children
     }
 
-    log('no_local_storage_support', {
-      description: `${localStorageSupport}`,
-    })
+    log('no_local_storage_support', getNoLocalStorageEventParams(lang))
 
     return (
       <Box>

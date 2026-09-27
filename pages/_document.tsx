@@ -18,6 +18,9 @@ if (process.env.NODE_ENV === 'production') {
 export default class extends Document {
   render() {
     const lang = this.props.locale || defaultLanguage
+    const trackingId = process.env.GA_TRACKING_ID?.startsWith('G-')
+      ? process.env.GA_TRACKING_ID
+      : undefined
 
     return (
       <Html lang={lang}>
@@ -30,7 +33,7 @@ export default class extends Document {
             />
           )}
           {/** Google Analytics: queue configuration before loading ad scripts. */}
-          {process.env.GA_TRACKING_ID && (
+          {trackingId && (
             <Fragment>
               <script
                 dangerouslySetInnerHTML={{
@@ -38,13 +41,13 @@ export default class extends Document {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${process.env.GA_TRACKING_ID}');
+                    gtag('config', '${trackingId}', { send_page_view: false });
                   `,
                 }}
               />
               <script
                 async
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
               />
             </Fragment>
           )}

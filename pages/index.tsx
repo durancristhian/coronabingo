@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FiEye } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
@@ -9,6 +9,8 @@ import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Modal from '~/components/Modal'
+import { useAnalytics } from '~/hooks/useAnalytics'
+import { getTutorialEventParams } from '~/utils/analyticsEvents'
 
 interface TutorialLoadingProps {
   error?: Error | null
@@ -51,9 +53,47 @@ const videosByLanguage: { [key: string]: string } = {
 
 export default function Index() {
   const { t, lang } = useTranslation()
+  const log = useAnalytics()
   const [showModal, setShowModal] = useState(false)
   const [tutorialError, setTutorialError] = useState(false)
+  const tutorialProgress = useRef({
+    began: false,
+    completed: false,
+    errored: false,
+  })
   const videoId = videosByLanguage[lang] || videosByLanguage.es
+
+  const openTutorial = () => {
+    tutorialProgress.current = {
+      began: false,
+      completed: false,
+      errored: false,
+    }
+    log('tutorial_opened', getTutorialEventParams(lang))
+    setShowModal(true)
+  }
+
+  const recordTutorialBegin = () => {
+    if (tutorialProgress.current.began) return
+
+    tutorialProgress.current.began = true
+    log('tutorial_begin', getTutorialEventParams(lang))
+  }
+
+  const recordTutorialComplete = () => {
+    if (tutorialProgress.current.completed) return
+
+    tutorialProgress.current.completed = true
+    log('tutorial_complete', getTutorialEventParams(lang))
+  }
+
+  const recordTutorialError = () => {
+    if (tutorialProgress.current.errored) return
+
+    tutorialProgress.current.errored = true
+    log('tutorial_error', getTutorialEventParams(lang))
+    setTutorialError(true)
+  }
 
   return (
     <Layout>
@@ -74,9 +114,7 @@ export default function Index() {
         <Button
           aria-label={t('index:how-to-play-button')}
           id="watch-tutorial"
-          onClick={() => {
-            setShowModal(true)
-          }}
+          onClick={openTutorial}
           className="w-full"
           iconLeft={<FiEye />}
         >
@@ -110,7 +148,9 @@ export default function Index() {
             videoId={videoId}
             containerClassName="video-wrapper"
             className="video-iframe"
-            onError={() => setTutorialError(true)}
+            onPlay={recordTutorialBegin}
+            onEnd={recordTutorialComplete}
+            onError={recordTutorialError}
           />
         )}
       </Modal>

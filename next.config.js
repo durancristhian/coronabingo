@@ -46,7 +46,6 @@ const nextConfig = {
     PROJECT_ID: process.env.PROJECT_ID,
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
-    MEASUREMENT_ID: process.env.MEASUREMENT_ID,
     /* Google Analytics */
     GA_TRACKING_ID: process.env.GA_TRACKING_ID,
     /* Sentry */

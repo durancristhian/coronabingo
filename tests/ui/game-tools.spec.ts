@@ -1,10 +1,17 @@
 import { Page } from '@playwright/test'
+import { readAnalyticsEvents } from './analytics'
 import { test, expect } from './fixtures'
 import { createReadyRoom, testPlayerNames } from './room-setup'
 
-async function openPlayerCards(page: Page, name: string) {
+async function openPlayerCards(
+  page: Page,
+  name: string,
+  playButtonName = 'Jugar',
+) {
   const playerRow = page.getByTestId('player-row').filter({ hasText: name })
-  await playerRow.getByRole('button', { name: 'Jugar', exact: true }).click()
+  await playerRow
+    .getByRole('button', { name: playButtonName, exact: true })
+    .click()
   await expect(page.getByTestId('bingo-card')).toHaveCount(2)
 }
 
@@ -14,7 +21,7 @@ async function replaceAudio(page: Page) {
     soundWindow.playedSounds = []
 
     class TestAudio {
-      duration = 10
+      duration = 0.5
       volume = 1
 
       constructor(src: string) {
@@ -50,8 +57,31 @@ test('a player keeps the optimized empty-cell background after reload', async ({
   playerPage: player,
 }) => {
   await createReadyRoom(host, 'Fondo personal')
-  await player.goto(host.url())
+  const lobbyUrl = host.url()
+  const roomId = new URL(lobbyUrl).pathname
+    .split('/')
+    .filter(Boolean)
+    .pop()
+  await player.goto(lobbyUrl)
   await openPlayerCards(player, testPlayerNames.player)
+
+  const expectedCardOpenedEvent = {
+    eventName: 'player_card_opened',
+    eventParams: {
+      background_key: 'yellow',
+      background_source: 'preset',
+      play_number: 1,
+      schema_version: 'v1',
+      ui_language: 'es',
+    },
+  }
+  await expect
+    .poll(async () =>
+      (await readAnalyticsEvents(player)).filter(
+        event => event.eventName === 'player_card_opened',
+      ),
+    )
+    .toEqual([expectedCardOpenedEvent])
 
   const playerId = new URL(player.url()).pathname.split('/').pop()
   expect(playerId).toBeTruthy()
@@ -77,6 +107,13 @@ test('a player keeps the optimized empty-cell background after reload', async ({
       .locator('[style*="coronavirus.28e4692f.webp"]'),
   ).toHaveCount(24)
   await expect
+    .poll(async () =>
+      (await readAnalyticsEvents(player)).filter(
+        event => event.eventName === 'player_card_opened',
+      ),
+    )
+    .toEqual([expectedCardOpenedEvent])
+  await expect
     .poll(() =>
       player.evaluate(() => {
         const saved = JSON.parse(localStorage.getItem('backgroundCell') || '{}')
@@ -95,6 +132,61 @@ test('a player keeps the optimized empty-cell background after reload', async ({
   ).toHaveCount(1)
   await expect(coronavirusOption).toHaveClass(/bg-green-200/)
 
+  const blueOption = player
+    .getByRole('dialog', { name: 'Fondo de las celdas vacías' })
+    .getByRole('button', { name: 'Azul', exact: true })
+  await blueOption.click()
+  await blueOption.click()
+
+  await expect
+    .poll(async () =>
+      (await readAnalyticsEvents(player)).filter(
+        event => event.eventName === 'background_selected',
+      ),
+    )
+    .toEqual([
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'blue',
+          background_source: 'preset',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  const privateBackgroundUrl = 'https://private.example/background.png'
+  await player.locator('#background').fill(privateBackgroundUrl)
+  await player.locator('#background').press('Tab')
+
+  await expect
+    .poll(async () =>
+      (await readAnalyticsEvents(player)).filter(
+        event => event.eventName === 'background_selected',
+      ),
+    )
+    .toEqual([
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'blue',
+          background_source: 'preset',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'custom_url',
+          background_source: 'custom_url',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
+
   await player.evaluate(() => localStorage.removeItem('backgroundCell'))
   await coronavirusOption.click()
   await expect
@@ -107,12 +199,97 @@ test('a player keeps the optimized empty-cell background after reload', async ({
     )
     .toEqual({ type: 'img', value: 'coronavirus.gif' })
 
+  await expect
+    .poll(async () =>
+      (await readAnalyticsEvents(player)).filter(
+        event => event.eventName === 'background_selected',
+      ),
+    )
+    .toEqual([
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'blue',
+          background_source: 'preset',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'custom_url',
+          background_source: 'custom_url',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'covid_19',
+          background_source: 'preset',
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
+
   await player.reload()
   await expect(
     player
       .getByTestId('bingo-card')
       .locator('[style*="coronavirus.28e4692f.webp"]'),
   ).toHaveCount(24)
+
+  const analyticsPayload = JSON.stringify(await readAnalyticsEvents(player))
+  expect(analyticsPayload).not.toContain(privateBackgroundUrl)
+  expect(analyticsPayload).not.toContain(playerId)
+  expect(analyticsPayload).not.toContain(roomId)
+})
+
+test('an English mobile player records the observed and selected background', async ({
+  page: host,
+  playerPage: player,
+}) => {
+  await createReadyRoom(host, 'Fondos móviles en inglés')
+  const lobbyUrl = new URL(host.url())
+  lobbyUrl.pathname = `/en${lobbyUrl.pathname}`
+
+  await player.setViewportSize({ width: 390, height: 844 })
+  await player.goto(lobbyUrl.toString())
+  await openPlayerCards(player, testPlayerNames.player, 'Play')
+
+  await player.locator('#configure-empty-cells:visible').click()
+  const backgrounds = player.getByRole('dialog', {
+    name: 'Empty cells background',
+  })
+  await expect(backgrounds).toBeVisible()
+  await backgrounds.getByRole('button', { name: 'Green', exact: true }).click()
+
+  await expect
+    .poll(async () => await readAnalyticsEvents(player))
+    .toEqual([
+      {
+        eventName: 'player_card_opened',
+        eventParams: {
+          background_key: 'yellow',
+          background_source: 'preset',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'en',
+        },
+      },
+      {
+        eventName: 'background_selected',
+        eventParams: {
+          background_key: 'green',
+          background_source: 'preset',
+          schema_version: 'v1',
+          ui_language: 'en',
+        },
+      },
+    ])
 })
 
 test('host celebration and sound reach another player context', async ({
@@ -132,20 +309,149 @@ test('host celebration and sound reach another player context', async ({
   const celebrations = host.getByRole('dialog', { name: 'Festejos' })
   await celebrations
     .getByRole('button', { name: 'Activar confetti', exact: true })
-    .click()
+    .evaluate(button => {
+      const celebration = button as HTMLButtonElement
+      celebration.click()
+      celebration.click()
+    })
   await expect(player.locator('.confetti-base')).toHaveCount(20)
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'celebration_used')
+    })
+    .toEqual([
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'confetti',
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  await celebrations
+    .getByRole('button', { name: 'Desactivar confetti', exact: true })
+    .click()
+  await expect(player.locator('.confetti-base')).toHaveCount(0)
+  await celebrations
+    .getByRole('button', { name: 'Mostrar globos', exact: true })
+    .click()
+  await expect(player.locator('.balloon')).toHaveCount(25)
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'celebration_used')
+    })
+    .toEqual([
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'confetti',
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'celebration_used',
+        eventParams: {
+          celebration_type: 'balloons',
+          first_use_in_play: 'no',
+          play_number: 1,
+          schema_version: 'v1',
+          ui_language: 'es',
+        },
+      },
+    ])
   await celebrations.locator('#close-modal').click()
 
   const soundPath = '/sounds/cardi-b/coronavirus.mp3'
   await host.locator('#sounds:visible').click()
-  await host
+  const firstSound = host
     .getByRole('dialog', { name: 'Sonidos' })
     .getByRole('button', {
       name: 'Reproducir Cardi B - Coronavirus',
       exact: true,
     })
-    .click()
+  await firstSound.evaluate(button => {
+    const sound = button as HTMLButtonElement
+    sound.click()
+    sound.click()
+  })
   await expect
     .poll(() => readPlayedSounds(player))
     .toContainEqual(expect.stringContaining(soundPath))
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'sound_used')
+    })
+    .toEqual([
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'cardi_b_coronavirus',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  await expect(firstSound).toBeEnabled()
+  await host
+    .getByRole('dialog', { name: 'Sonidos' })
+    .getByRole('button', {
+      name: 'Reproducir Chino cirujano - Pero pagaraprata',
+      exact: true,
+    })
+    .click()
+
+  await expect
+    .poll(async () => {
+      const events = await readAnalyticsEvents(host)
+      return events.filter(event => event.eventName === 'sound_used')
+    })
+    .toEqual([
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'yes',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'cardi_b_coronavirus',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'sound_used',
+        eventParams: {
+          first_use_in_play: 'no',
+          play_number: 1,
+          schema_version: 'v1',
+          sound_catalog: 'standard',
+          sound_key: 'chino_cirujano_pagaraprata',
+          ui_language: 'es',
+        },
+      },
+    ])
+
+  const eventPayload = JSON.stringify(await readAnalyticsEvents(host))
+  const roomId = new URL(lobbyURL).pathname
+    .split('/')
+    .filter(Boolean)
+    .pop()
+  expect(eventPayload).not.toContain(roomId)
+  expect(eventPayload).not.toContain(soundPath)
 })

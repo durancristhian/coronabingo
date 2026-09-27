@@ -1,22 +1,65 @@
-import { Emojis } from '~/interfaces/custom/Emojis'
-import ticketsMetadata from '~/public/tickets-metadata.json'
+import { Emojis } from '../interfaces/custom/Emojis'
+import {
+  AnalyticsBackgroundKey,
+  AnalyticsSoundCatalog,
+  AnalyticsSoundKey,
+} from '../interfaces/analytics/Events'
+import ticketsMetadata from '../public/tickets-metadata.json'
 
-export const BACKGROUND_CELL_VALUES = [
-  { key: 'playerId:backgrounds.yellow', type: 'color', value: 'yellow' },
-  { key: 'playerId:backgrounds.blue', type: 'color', value: 'blue' },
-  { key: 'playerId:backgrounds.orange', type: 'color', value: 'orange' },
-  { key: 'playerId:backgrounds.green', type: 'color', value: 'green' },
+interface Sound {
+  analyticsCatalog: AnalyticsSoundCatalog
+  analyticsKey: AnalyticsSoundKey
+  language: string
+  name: string
+  url: string
+}
+
+interface BackgroundCellOption {
+  analyticsKey: Exclude<AnalyticsBackgroundKey, 'custom_url'>
+  key: string
+  type: string
+  value: string[] | string
+}
+
+export const BACKGROUND_CELL_VALUES: BackgroundCellOption[] = [
   {
+    analyticsKey: 'yellow',
+    key: 'playerId:backgrounds.yellow',
+    type: 'color',
+    value: 'yellow',
+  },
+  {
+    analyticsKey: 'blue',
+    key: 'playerId:backgrounds.blue',
+    type: 'color',
+    value: 'blue',
+  },
+  {
+    analyticsKey: 'orange',
+    key: 'playerId:backgrounds.orange',
+    type: 'color',
+    value: 'orange',
+  },
+  {
+    analyticsKey: 'green',
+    key: 'playerId:backgrounds.green',
+    type: 'color',
+    value: 'green',
+  },
+  {
+    analyticsKey: 'multicolor',
     key: 'playerId:backgrounds.multicolor',
     type: 'color',
     value: ['indigo', 'pink', 'purple', 'teal'],
   },
   {
+    analyticsKey: 'pikachu',
     key: 'playerId:backgrounds.pikachu',
     type: 'img',
     value: 'pokemon/025.png',
   },
   {
+    analyticsKey: 'pokemon',
     key: 'playerId:backgrounds.pokemon',
     type: 'img',
     value: [
@@ -27,21 +70,25 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'cremona',
     key: 'playerId:backgrounds.cremona',
     type: 'img',
     value: 'cremona.png',
   },
   {
+    analyticsKey: 'covid_19',
     key: 'playerId:backgrounds.covid-19',
     type: 'img',
     value: 'coronavirus.gif',
   },
   {
+    analyticsKey: 'clippy',
     key: 'playerId:backgrounds.clippy',
     type: 'img',
     value: 'clippy.png',
   },
   {
+    analyticsKey: 'ghana_pallbearers',
     key: 'playerId:backgrounds.ghana-pallbearers',
     type: 'img',
     value: [
@@ -52,6 +99,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'frameworks',
     key: 'playerId:backgrounds.frameworks',
     type: 'img',
     value: [
@@ -62,6 +110,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'kun_aguero',
     key: 'playerId:backgrounds.kun-aguero',
     type: 'img',
     value: 'kun-aguero.jpg',
@@ -172,101 +221,139 @@ export const DREAMS_EMOJIS: (keyof Emojis)[] = [
   'scream',
 ]
 export const MAX_PLAYERS = ticketsMetadata.maxPlayers
-export const SOUNDS = [
+export const SOUNDS: Sound[] = [
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'cardi_b_coronavirus',
     name: 'Cardi B - Coronavirus',
     language: 'en',
     url: '/sounds/cardi-b/coronavirus.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'chino_cirujano_pagaraprata',
     name: 'Chino cirujano - Pero pagaraprata',
     language: 'ar',
     url: '/sounds/chino-cirujano/pero-pagaraprata.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'ghana_pallbearers',
     name: 'Ghaneses del ataúd - Ghana pallbearers',
     language: 'world',
     url: '/sounds/funeral/dance-with-the-coffin.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'friends_ready_to_rumble',
     name: "Friends - Let's get ready to rumble",
     language: 'en',
     url: '/sounds/friends/lets-get-ready-to-rumble.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'guido_mira_la_repe',
     name: 'Guido Kaczka  - Mirá la repe',
     language: 'ar',
     url: '/sounds/guido/mira-la-repe.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'guido_preparado_listo_ya',
     name: 'Guido Kaczka - Preparado, listo, ya',
     language: 'ar',
     url: '/sounds/guido/preparado-listo-ya.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'kun_aguero_ojo_al_tejo',
     name: 'Kun Agüero - Ojo al tejo',
     language: 'ar',
     url: '/sounds/kun-aguero/ojo-al-tejo.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'simpsons_hundiste_acorazado',
     name: 'Los Simpsons - Hundiste mi acorazado',
     language: 'ar',
     url: '/sounds/simpsons/hundiste-mi-acorazado.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'riverito_cruzar_dedos',
     name: 'Riverito - A cruzar los dedos',
     language: 'ar',
     url: '/sounds/riverito/cruzar-dedos.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'susana_correctou',
     name: 'Susana - Correctou',
     language: 'ar',
     url: '/sounds/susana/correctou.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'tano_pasman_no',
     name: 'Tano Pasman - Nooooo',
     language: 'ar',
     url: '/sounds/tano/nooooo.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'the_office_no_god_no',
     name: 'The Office - No, God, no',
     language: 'en',
     url: '/sounds/the-office/no-god-no.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'the_office_this_is_the_worst',
     name: 'The Office - This is the worst',
     language: 'en',
     url: '/sounds/the-office/this-is-the-worst.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'simpsons_bingo',
     name: 'The Simpsons - Bingo',
     language: 'en',
     url: '/sounds/simpsons/homer-bingo.mp3',
   },
   {
+    analyticsCatalog: 'standard',
+    analyticsKey: 'windows_error',
     name: 'Error de Windows - Windows Error',
     language: 'world',
     url: '/sounds/windows/windows-error.mp3',
   },
 ]
-export const SOUNDS_EXTRAS = [
+export const SOUNDS_EXTRAS: Sound[] = [
   ...SOUNDS,
   {
+    analyticsCatalog: 'extra',
+    analyticsKey: 'patao_carton',
     name: 'Patao - Cartón',
     language: 'ar',
     url: '/sounds/patao/carton.mp3',
   },
   {
+    analyticsCatalog: 'extra',
+    analyticsKey: 'patao_coronabingo',
     name: 'Patao - Coronabingo',
     language: 'ar',
     url: '/sounds/patao/coronabingo.mp3',
   },
   {
+    analyticsCatalog: 'extra',
+    analyticsKey: 'patao_ese_bolillero',
     name: 'Patao - Ese bolillero papá',
     language: 'ar',
     url: '/sounds/patao/ese-bolillero-papa.mp3',
   },
   {
+    analyticsCatalog: 'extra',
+    analyticsKey: 'patao_linea',
     name: 'Patao - Linea',
     language: 'ar',
     url: '/sounds/patao/linea.mp3',

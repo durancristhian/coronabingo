@@ -1,6 +1,5 @@
+import { AnalyticsLog } from '~/interfaces/analytics/Events'
+
 export interface AnalyticsContextData {
-  log: (
-    eventName: string,
-    eventParams: Partial<firebase.analytics.EventParams>,
-  ) => void
+  log: AnalyticsLog
 }

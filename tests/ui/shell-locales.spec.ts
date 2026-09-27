@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test'
+import { readAnalyticsEvents } from './analytics'
 import { test, expect } from './fixtures'
 import { createReadyRoom, testPlayerNames } from './room-setup'
 
@@ -37,6 +38,23 @@ test('a player changes the language without leaving the room or cards', async ({
 
   await player
     .getByRole('combobox', { name: 'language', exact: true })
+    .selectOption('es')
+  const playerCardOpenedEvent = {
+    eventName: 'player_card_opened',
+    eventParams: {
+      background_key: 'yellow',
+      background_source: 'preset',
+      play_number: 1,
+      schema_version: 'v1',
+      ui_language: 'es',
+    },
+  }
+  await expect
+    .poll(() => readAnalyticsEvents(player))
+    .toEqual([playerCardOpenedEvent])
+
+  await player
+    .getByRole('combobox', { name: 'language', exact: true })
     .selectOption('en')
 
   const englishURL = new URL(player.url())
@@ -65,6 +83,25 @@ test('a player changes the language without leaving the room or cards', async ({
       player.getByText(`Ticket Nº ${ticketId}`, { exact: true }),
     ).toBeVisible()
   }
+
+  await expect
+    .poll(() => readAnalyticsEvents(player))
+    .toEqual([
+      playerCardOpenedEvent,
+      {
+        eventName: 'language_changed',
+        eventParams: {
+          from_language: 'es',
+          page_type: 'player_card',
+          schema_version: 'v1',
+          to_language: 'en',
+          ui_language: 'en',
+        },
+      },
+    ])
+
+  await player.reload()
+  await expect.poll(() => readAnalyticsEvents(player)).toHaveLength(2)
 
   await host.goto(lobbyURL)
   await openPlayerCards(host, testPlayerNames.host)
