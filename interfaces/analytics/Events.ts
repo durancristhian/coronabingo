@@ -1,4 +1,10 @@
 export type AnalyticsLanguage = 'en' | 'es'
+export type AnalyticsPageType =
+  | 'home'
+  | 'not_found'
+  | 'player_card'
+  | 'room_lobby'
+  | 'room_setup'
 
 interface AnalyticsEventContext {
   schema_version: 'v1'
@@ -6,6 +12,11 @@ interface AnalyticsEventContext {
 }
 
 export interface AnalyticsEventMap {
+  language_changed: AnalyticsEventContext & {
+    from_language: AnalyticsLanguage
+    page_type: AnalyticsPageType
+    to_language: AnalyticsLanguage
+  }
   no_local_storage_support: AnalyticsEventContext & {
     description: string
   }
@@ -24,6 +35,22 @@ export interface AnalyticsEventMap {
     player_count: number
     room_created_date: string
     spinner_mode: 'online' | 'physical'
+  }
+  tutorial_begin: AnalyticsEventContext & {
+    tutorial_language: AnalyticsLanguage
+    tutorial_provider: 'youtube'
+  }
+  tutorial_complete: AnalyticsEventContext & {
+    tutorial_language: AnalyticsLanguage
+    tutorial_provider: 'youtube'
+  }
+  tutorial_error: AnalyticsEventContext & {
+    tutorial_language: AnalyticsLanguage
+    tutorial_provider: 'youtube'
+  }
+  tutorial_opened: AnalyticsEventContext & {
+    tutorial_language: AnalyticsLanguage
+    tutorial_provider: 'youtube'
   }
 }
 

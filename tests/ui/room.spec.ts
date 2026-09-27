@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
-import { ANALYTICS_TEST_STORAGE_KEY } from '../../utils/gtag'
 import { test, expect } from './fixtures'
+import { readAnalyticsEvents } from './analytics'
 import { testPlayerNames } from './room-setup'
 
 const names = {
@@ -8,17 +8,6 @@ const names = {
   replacement: 'Carla nueva anfitriona',
 }
 const emptyDraw = 'No salieron números todavía.'
-
-interface CapturedAnalyticsEvent {
-  eventName: string
-  eventParams: Record<string, number | string>
-}
-
-async function readAnalyticsEvents(page: Page) {
-  return page.evaluate((storageKey): CapturedAnalyticsEvent[] => {
-    return JSON.parse(window.sessionStorage.getItem(storageKey) || '[]')
-  }, ANALYTICS_TEST_STORAGE_KEY)
-}
 
 async function readAssignedTicketIds(page: Page, name: string) {
   const row = page.getByTestId('player-row').filter({ hasText: name })

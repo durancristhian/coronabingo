@@ -1,9 +1,12 @@
 import assert from 'assert'
 import { AnalyticsLog } from '../interfaces/analytics/Events'
 import {
+  getAnalyticsPageType,
+  getLanguageChangedEventParams,
   getRoomCreatedEventParams,
   getRoomRestartedEventParams,
   getRoomStartedEventParams,
+  getTutorialEventParams,
 } from '../utils/analyticsEvents'
 import {
   ANALYTICS_TEST_STORAGE_KEY,
@@ -52,15 +55,57 @@ assert.deepStrictEqual(roomRestartedParams, {
   schema_version: 'v1',
   ui_language: 'es',
 })
+assert.strictEqual(getAnalyticsPageType('/'), 'home')
+assert.strictEqual(getAnalyticsPageType('/room/[roomId]'), 'room_lobby')
+assert.strictEqual(
+  getAnalyticsPageType('/room/[roomId]/[playerId]'),
+  'player_card',
+)
+assert.strictEqual(getAnalyticsPageType('/room/[roomId]/admin'), 'room_setup')
+assert.strictEqual(getAnalyticsPageType('/404'), 'not_found')
+assert.deepStrictEqual(
+  getLanguageChangedEventParams({
+    fromLanguage: 'es',
+    pathname: '/room/[roomId]/[playerId]',
+    toLanguage: 'en',
+  }),
+  {
+    from_language: 'es',
+    page_type: 'player_card',
+    schema_version: 'v1',
+    to_language: 'en',
+    ui_language: 'en',
+  },
+)
+assert.deepStrictEqual(getTutorialEventParams('en'), {
+  schema_version: 'v1',
+  tutorial_language: 'en',
+  tutorial_provider: 'youtube',
+  ui_language: 'en',
+})
 
 const validateAnalyticsTypes = (log: AnalyticsLog) => {
   log('room_created', roomCreatedParams)
   log('room_started', roomStartedParams)
+  log(
+    'language_changed',
+    getLanguageChangedEventParams({
+      fromLanguage: 'es',
+      pathname: '/',
+      toLanguage: 'en',
+    }),
+  )
+  log('tutorial_begin', getTutorialEventParams('es'))
 
   // @ts-expect-error Room names are not part of the room_created contract.
   log('room_created', { ...roomCreatedParams, description: 'private name' })
   // @ts-expect-error Spinner values must use the closed analytics vocabulary.
   log('room_started', { ...roomStartedParams, spinner_mode: 'sometimes' })
+  log('tutorial_opened', {
+    ...getTutorialEventParams('es'),
+    // @ts-expect-error Tutorial providers must use the closed analytics vocabulary.
+    tutorial_provider: 'vimeo',
+  })
 }
 
 void validateAnalyticsTypes
