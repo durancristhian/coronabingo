@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: claimed
+Work status: resolved
 
 ## Objetivo
 
@@ -196,3 +196,6 @@ Evidencia local:
 - Revisión local móvil a 390 × 844: las grillas de pictogramas y marcas conservaron dos columnas y `scrollWidth` coincidió con `clientWidth` en 375 px. La comparación tipográfica se apiló en una columna.
 - La prueba de navegador fue de sólo lectura y la suite usó el proyecto aislado `demo-coronabingo-ui`; no se leyó ni escribió Firebase alojado.
 - La primera revisión del Preview de `7bdc596` detectó que PurgeCSS quitaba el selector dinámico `cb-heading--h1`: el título introductorio quedaba en 24 px aunque el resto del laboratorio era correcto. Se protegieron el modificador y sus dos reglas de la kitchen sink; el build siguiente conservó los tamaños `clamp(2.5rem, 6vw, 4.5rem)` y `2.5rem` para móvil.
+- Implementación final: `7bdc596` y corrección de paridad Production en `d25c73b`. [GitHub Actions 36351061754](https://github.com/durancristhian/coronabingo/actions/runs/36351061754) pasó en 2 min 37 s y Vercel quedó Ready para ese mismo HEAD.
+- Preview verificado: `https://coronabingo-git-t3cod-cc7165-cristhian-durans-projects-3ace6550.vercel.app/kitchen-sink`. En escritorio a 1440 × 900 el H1 volvió a 72 px, Fredoka y Atkinson se cargaron correctamente, aparecieron las 25 muestras Lucide y los 4 logos, y `scrollWidth` coincidió con `clientWidth` en 1425 px. En móvil a 390 × 844 el H1 quedó en 40 px, ambas grillas conservaron dos columnas y no hubo overflow horizontal.
+- La consola del Preview final no presentó errores ni advertencias. La verificación remota fue de sólo lectura: no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
