@@ -36,6 +36,7 @@ import Select from '~/components/Select'
 import SelectedNumbers from '~/components/SelectedNumbers'
 import { COLORS } from '~/components/EmptyCell'
 import { TicketNumbers } from '~/interfaces/custom/Ticket'
+import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
 import { BACKGROUND_CELL_VALUES, CODES, SOUNDS_EXTRAS } from '~/utils/constants'
 
 const DEMO_TICKET: TicketNumbers = [
@@ -266,7 +267,9 @@ function BackgroundPreview() {
               ])}
               style={{
                 ...(type === 'img' && {
-                  backgroundImage: `url(/background-cells/${firstValue})`,
+                  backgroundImage: `url(${getBackgroundCellImageUrl(
+                    firstValue,
+                  )})`,
                 }),
               }}
             />
