@@ -1,4 +1,33 @@
 import classnames from 'classnames'
+import {
+  Check,
+  ChevronDown,
+  ChevronsLeft,
+  ChevronsRight,
+  CirclePlay,
+  Coffee,
+  Copy,
+  Download,
+  Eye,
+  Frown,
+  Heart,
+  Info,
+  Link2,
+  LogIn,
+  LucideIcon,
+  Plus,
+  RefreshCw,
+  RotateCcw,
+  Settings,
+  Share2,
+  Smile,
+  ThumbsDown,
+  ThumbsUp,
+  Trash2,
+  Volume2,
+  X,
+} from 'lucide-react'
+import { Atkinson_Hyperlegible_Next, Fredoka } from 'next/font/google'
 import Head from 'next/head'
 import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
@@ -17,6 +46,7 @@ import {
   FiTrash2,
   FiVolume2,
 } from 'react-icons/fi'
+import { SimpleIcon, siPaypal, siTelegram, siWhatsapp, siX } from 'simple-icons'
 import Banner from '~/components/Banner'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -38,6 +68,21 @@ import { COLORS } from '~/components/EmptyCell'
 import { TicketNumbers } from '~/interfaces/custom/Ticket'
 import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
 import { BACKGROUND_CELL_VALUES, CODES, SOUNDS_EXTRAS } from '~/utils/constants'
+
+const proposedHeadingFont = Fredoka({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--ks-font-heading',
+  weight: 'variable',
+})
+
+const proposedBodyFont = Atkinson_Hyperlegible_Next({
+  adjustFontFallback: false,
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--ks-font-body',
+  weight: 'variable',
+})
 
 const DEMO_TICKET: TicketNumbers = [
   7,
@@ -79,11 +124,102 @@ const LANGUAGE_ICONS: { [key: string]: ReactNode } = {
 }
 
 const SECTION_LINKS = [
+  { id: 'identidad-propuesta', label: 'Fuentes e íconos' },
   { id: 'inicio-y-preparacion', label: 'Inicio y preparación' },
   { id: 'mesa-de-juego', label: 'Mesa de juego' },
   { id: 'herramientas', label: 'Herramientas' },
   { id: 'componentes', label: 'Componentes y estados' },
 ]
+
+const LUCIDE_ICON_SAMPLES: Array<{
+  current: string
+  Icon: LucideIcon
+  label: string
+  proposed: string
+}> = [
+  { current: 'FiCheck', Icon: Check, label: 'Confirmar', proposed: 'Check' },
+  {
+    current: 'FiChevronDown',
+    Icon: ChevronDown,
+    label: 'Desplegar',
+    proposed: 'ChevronDown',
+  },
+  {
+    current: 'FiChevronsLeft',
+    Icon: ChevronsLeft,
+    label: 'Anterior',
+    proposed: 'ChevronsLeft',
+  },
+  {
+    current: 'FiChevronsRight',
+    Icon: ChevronsRight,
+    label: 'Siguiente',
+    proposed: 'ChevronsRight',
+  },
+  { current: 'FiCoffee', Icon: Coffee, label: 'Cafecito', proposed: 'Coffee' },
+  { current: 'FiCopy', Icon: Copy, label: 'Copiar', proposed: 'Copy' },
+  {
+    current: 'FiDownload',
+    Icon: Download,
+    label: 'Descargar',
+    proposed: 'Download',
+  },
+  { current: 'FiEye', Icon: Eye, label: 'Ver', proposed: 'Eye' },
+  { current: 'FiFrown', Icon: Frown, label: 'Desactivar', proposed: 'Frown' },
+  { current: 'FiHeart', Icon: Heart, label: 'Apoyar', proposed: 'Heart' },
+  { current: 'FiInfo', Icon: Info, label: 'Información', proposed: 'Info' },
+  { current: 'FiLink2', Icon: Link2, label: 'Enlace', proposed: 'Link2' },
+  { current: 'FiLogIn', Icon: LogIn, label: 'Ingresar', proposed: 'LogIn' },
+  {
+    current: 'FiPlayCircle',
+    Icon: CirclePlay,
+    label: 'Reproducir',
+    proposed: 'CirclePlay',
+  },
+  { current: 'FiPlus', Icon: Plus, label: 'Agregar', proposed: 'Plus' },
+  {
+    current: 'FiRefreshCw',
+    Icon: RefreshCw,
+    label: 'Actualizar',
+    proposed: 'RefreshCw',
+  },
+  {
+    current: 'FiRotateCcw',
+    Icon: RotateCcw,
+    label: 'Reiniciar',
+    proposed: 'RotateCcw',
+  },
+  {
+    current: 'FiSettings',
+    Icon: Settings,
+    label: 'Configurar',
+    proposed: 'Settings',
+  },
+  { current: 'FiShare2', Icon: Share2, label: 'Compartir', proposed: 'Share2' },
+  { current: 'FiSmile', Icon: Smile, label: 'Festejar', proposed: 'Smile' },
+  {
+    current: 'FiThumbsDown',
+    Icon: ThumbsDown,
+    label: 'No me gusta',
+    proposed: 'ThumbsDown',
+  },
+  {
+    current: 'FiThumbsUp',
+    Icon: ThumbsUp,
+    label: 'Me gusta',
+    proposed: 'ThumbsUp',
+  },
+  { current: 'FiTrash2', Icon: Trash2, label: 'Eliminar', proposed: 'Trash2' },
+  {
+    current: 'FiVolume2',
+    Icon: Volume2,
+    label: 'Sonido',
+    proposed: 'Volume2',
+  },
+  { current: 'FiX', Icon: X, label: 'Cerrar', proposed: 'X' },
+]
+
+const BRAND_ICON_SAMPLES = [siWhatsapp, siTelegram, siPaypal, siX]
 
 function Section({
   children,
@@ -295,6 +431,134 @@ function BackgroundPreview() {
   )
 }
 
+function BrandIcon({ icon }: { icon: SimpleIcon }) {
+  return (
+    <svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+      <path d={icon.path} />
+    </svg>
+  )
+}
+
+function ProposedIdentityPreview() {
+  return (
+    <div
+      className={classnames([
+        'ks-identity-lab',
+        proposedHeadingFont.variable,
+        proposedBodyFont.variable,
+      ])}
+    >
+      <div className="ks-type-comparison">
+        <article className="ks-type-card ks-type-card--current">
+          <p className="ks-specimen-label">Actual · tipografía del sistema</p>
+          <h3>Una noche de bingo</h3>
+          <p className="ks-type-lead">
+            Una mesa simple para compartir números, cartones y festejos con
+            amigos y familia.
+          </p>
+          <p className="ks-number-specimen">01 08 17 26 34 47 59 63 75 90</p>
+          <p className="ks-character-specimen">
+            B8 · I1 · N7 · G3 · O0 — ¿Línea o bingo?
+          </p>
+        </article>
+
+        <article
+          className="ks-type-card ks-type-card--proposed"
+          data-testid="proposed-font-sample"
+        >
+          <p className="ks-specimen-label">Propuesta · Fredoka + Atkinson</p>
+          <h3>Una noche de bingo</h3>
+          <p className="ks-type-lead">
+            Una mesa simple para compartir números, cartones y festejos con
+            amigos y familia.
+          </p>
+          <p className="ks-number-specimen">01 08 17 26 34 47 59 63 75 90</p>
+          <p className="ks-character-specimen">
+            B8 · I1 · N7 · G3 · O0 — ¿Línea o bingo?
+          </p>
+        </article>
+      </div>
+
+      <div className="ks-proposal-note">
+        <Info aria-hidden="true" size={20} strokeWidth={2.25} />
+        <p>
+          Fredoka se usa sólo en títulos; Atkinson Hyperlegible Next en cuerpo,
+          controles y números. Esta muestra no cambia todavía la tipografía de
+          la app.
+        </p>
+      </div>
+
+      <div className="ks-identity-group">
+        <div className="ks-identity-group-heading">
+          <h3>Íconos funcionales · Lucide</h3>
+          <p>
+            Los 25 pictogramas actuales tienen reemplazo directo. Se muestran
+            con un mismo tamaño y trazo para comparar su lenguaje visual.
+          </p>
+        </div>
+        <div className="ks-icon-grid" data-testid="lucide-icon-grid">
+          {LUCIDE_ICON_SAMPLES.map(({ current, Icon, label, proposed }) => (
+            <article className="ks-icon-sample" key={proposed}>
+              <span className="ks-icon-glyph">
+                <Icon aria-hidden="true" size={24} strokeWidth={2.25} />
+              </span>
+              <span className="ks-icon-copy">
+                <strong>{label}</strong>
+                <small>
+                  {current} → {proposed}
+                </small>
+              </span>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="ks-identity-group">
+        <div className="ks-identity-group-heading">
+          <h3>Logos de marca · Simple Icons</h3>
+          <p>
+            Se conservan como logos SVG, separados de los pictogramas de
+            interfaz. Cada marca aparece en su color de referencia y en una
+            alternativa monocroma.
+          </p>
+        </div>
+        <div className="ks-brand-grid" data-testid="brand-icon-grid">
+          {BRAND_ICON_SAMPLES.map(icon => (
+            <article className="ks-brand-sample" key={icon.slug}>
+              <div className="ks-brand-marks">
+                <span
+                  aria-label={`${icon.title} en color de marca`}
+                  className="ks-brand-mark"
+                  role="img"
+                  style={{ color: `#${icon.hex}` }}
+                >
+                  <BrandIcon icon={icon} />
+                </span>
+                <span
+                  aria-label={`${icon.title} en monocromo`}
+                  className="ks-brand-mark ks-brand-mark--mono"
+                  role="img"
+                >
+                  <BrandIcon icon={icon} />
+                </span>
+              </div>
+              <div className="ks-brand-copy">
+                <strong>{icon.title}</strong>
+                <span>#{icon.hex}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="ks-brand-legal">
+          Simple Icons distribuye los SVG bajo CC0; los nombres y logos siguen
+          perteneciendo a sus respectivas marcas y deben usarse según sus
+          lineamientos.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function KitchenSink() {
   return (
     <main className="kitchen-sink cb-layout bg-gray-200 flex flex-col min-h-screen">
@@ -338,6 +602,14 @@ export default function KitchenSink() {
               </ul>
             </nav>
           </header>
+
+          <Section
+            description="Una comparación aislada para decidir la futura tipografía y el nuevo sistema de íconos antes de aplicarlos a la interfaz real."
+            id="identidad-propuesta"
+            title="Fuentes e íconos propuestos"
+          >
+            <ProposedIdentityPreview />
+          </Section>
 
           <Section
             description="La entrada a la app y los controles usados para preparar una sala."

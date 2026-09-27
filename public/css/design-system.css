@@ -571,8 +571,7 @@
   background: var(--cb-green);
   border: 2px solid var(--cb-line);
   border-radius: 999px;
-  box-shadow: -2.75rem 1.5rem 0 var(--cb-yellow),
-    -5.5rem 0 0 var(--cb-red);
+  box-shadow: -2.75rem 1.5rem 0 var(--cb-yellow), -5.5rem 0 0 var(--cb-red);
   content: '';
   height: 2.5rem;
   position: absolute;
@@ -661,6 +660,226 @@
   margin-top: 1rem;
 }
 
+.coronabingo-ui .ks-type-comparison {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.coronabingo-ui .ks-type-card {
+  background: var(--cb-surface);
+  border: 2px solid var(--cb-line);
+  border-radius: var(--cb-radius-surface);
+  box-shadow: 4px 4px 0 var(--cb-line);
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.coronabingo-ui .ks-type-card--proposed {
+  background: var(--cb-yellow-soft);
+  font-family: var(--ks-font-body);
+}
+
+.coronabingo-ui .ks-specimen-label {
+  color: var(--cb-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.coronabingo-ui .ks-type-card h3 {
+  color: var(--cb-ink);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin-top: 1.25rem;
+}
+
+.coronabingo-ui .ks-type-card--proposed h3 {
+  font-family: var(--ks-font-heading);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.coronabingo-ui .ks-type-lead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin-top: 1rem;
+  max-width: 34rem;
+}
+
+.coronabingo-ui .ks-number-specimen {
+  border-bottom: 2px solid var(--cb-line-subtle);
+  border-top: 2px solid var(--cb-line-subtle);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  line-height: 1.4;
+  margin-top: 1.5rem;
+  overflow-wrap: anywhere;
+  padding: 0.8rem 0;
+}
+
+.coronabingo-ui .ks-character-specimen {
+  color: var(--cb-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.coronabingo-ui .ks-proposal-note {
+  align-items: flex-start;
+  background: var(--cb-purple-soft);
+  border: 2px solid var(--cb-line);
+  border-radius: var(--cb-radius-control);
+  display: flex;
+  gap: 0.75rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+}
+
+.coronabingo-ui .ks-proposal-note svg {
+  flex: none;
+  margin-top: 0.1rem;
+}
+
+.coronabingo-ui .ks-identity-group {
+  margin-top: 2.5rem;
+}
+
+.coronabingo-ui .ks-identity-group-heading {
+  max-width: 760px;
+}
+
+.coronabingo-ui .ks-identity-group-heading h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.coronabingo-ui .ks-identity-group-heading p {
+  color: var(--cb-muted);
+  line-height: 1.55;
+  margin-top: 0.5rem;
+}
+
+.coronabingo-ui .ks-icon-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  margin-top: 1.25rem;
+}
+
+.coronabingo-ui .ks-icon-sample {
+  align-items: center;
+  background: var(--cb-surface);
+  border: 2px solid var(--cb-line);
+  border-radius: var(--cb-radius-control);
+  display: flex;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.coronabingo-ui .ks-icon-glyph {
+  align-items: center;
+  background: var(--cb-green-soft);
+  border: 2px solid var(--cb-line);
+  border-radius: 999px;
+  display: flex;
+  flex: 0 0 2.75rem;
+  height: 2.75rem;
+  justify-content: center;
+}
+
+.coronabingo-ui .ks-icon-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.coronabingo-ui .ks-icon-copy strong {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.coronabingo-ui .ks-icon-copy small {
+  color: var(--cb-muted);
+  font-size: 0.7rem;
+  line-height: 1.35;
+  margin-top: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.coronabingo-ui .ks-brand-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1.25rem;
+}
+
+.coronabingo-ui .ks-brand-sample {
+  background: var(--cb-surface);
+  border: 2px solid var(--cb-line);
+  border-radius: var(--cb-radius-surface);
+  min-width: 0;
+  padding: 1rem;
+}
+
+.coronabingo-ui .ks-brand-marks {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.coronabingo-ui .ks-brand-mark {
+  align-items: center;
+  background: white;
+  border: 2px solid var(--cb-line-subtle);
+  border-radius: var(--cb-radius-control);
+  display: flex;
+  height: 3.5rem;
+  justify-content: center;
+  width: 3.5rem;
+}
+
+.coronabingo-ui .ks-brand-mark svg {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+.coronabingo-ui .ks-brand-mark--mono {
+  color: var(--cb-ink);
+}
+
+.coronabingo-ui .ks-brand-copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  justify-content: space-between;
+  margin-top: 0.9rem;
+}
+
+.coronabingo-ui .ks-brand-copy span {
+  color: var(--cb-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.coronabingo-ui .ks-brand-legal {
+  color: var(--cb-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+  max-width: 760px;
+}
+
 .coronabingo-ui .ks-background-swatch {
   background: var(--cb-surface);
   border-color: var(--cb-line);
@@ -715,6 +934,24 @@
 
   .coronabingo-ui .ks-intro > .cb-heading--h1 {
     font-size: 2.5rem;
+  }
+
+  .coronabingo-ui .ks-type-comparison {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coronabingo-ui .ks-icon-grid,
+  .coronabingo-ui .ks-brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .coronabingo-ui .ks-icon-sample {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .coronabingo-ui .ks-brand-marks {
+    gap: 0.5rem;
   }
 }
 

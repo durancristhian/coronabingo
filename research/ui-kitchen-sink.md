@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: resolved
+Work status: claimed
 
 ## Objetivo
 
@@ -169,3 +169,29 @@ Evidencia local:
 - Implementación: `6b82f7d`. [GitHub Actions 36343091690](https://github.com/durancristhian/coronabingo/actions/runs/36343091690) pasó y Vercel quedó Ready para ese mismo HEAD.
 - El Preview computó `tabular-nums` en el root, `box-shadow: none` en el readonly y una grilla de 90 celdas, 10 columnas y filas de 36 px en escritorio. `scrollWidth` y `clientWidth` coincidieron en 1905 px.
 - La verificación remota fue de solo lectura; no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
+
+## Laboratorio de identidad visual
+
+Feedback aprobado el 2026-09-27:
+
+- Añadir a `/kitchen-sink` la dupla propuesta Fredoka + Atkinson Hyperlegible Next para decidirla visualmente antes de migrar la aplicación.
+- Mostrar los 25 reemplazos funcionales propuestos de Lucide sin cambiar todavía los iconos reales.
+- Buscar una biblioteca SVG coherente para WhatsApp, Telegram, PayPal y X, e incorporar sus recursos a la comparación.
+- Conservar la kitchen sink como demo estática, sin lecturas ni escrituras en Firestore.
+
+Criterios de aceptación:
+
+- La tipografía actual y la propuesta aparecen lado a lado, con títulos, cuerpo, caracteres ambiguos y una muestra numérica.
+- Los 25 pictogramas funcionales auditados aparecen identificados con su nombre actual y su equivalente en Lucide.
+- Los cuatro logos de marca aparecen en su color de referencia y en versión monocroma, con un origen y una advertencia de marca documentados.
+- Las fuentes e iconos nuevos permanecen aislados a la kitchen sink hasta recibir aprobación explícita para migrarlos.
+- La ruta no presenta desborde horizontal en escritorio ni móvil y pasan lint, build y `git diff --check`.
+
+Evidencia local:
+
+- Se incorporaron `lucide-react` 1.48.0 y `simple-icons` 16.33.0; la investigación de cobertura, licencia y uso de marca quedó en `research/brand-icons-simple-icons-2026-09-27.md`.
+- `npm run lint:check`, `npm run build` y `git diff --check`: pasaron con Node 24.21.0 y npm 11.19.0. El build compiló `/kitchen-sink` como página estática en español e inglés y no emitió advertencias de fuentes.
+- `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 62,9 s contra Firestore Emulator, incluido el recorrido móvil real.
+- Revisión local de escritorio a 1440 × 900: se computaron Fredoka para el título propuesto y Atkinson Hyperlegible Next para el cuerpo; aparecieron 25 muestras Lucide y 4 logos Simple Icons. Los colores computados fueron WhatsApp `rgb(37, 211, 102)`, Telegram `rgb(38, 165, 228)`, PayPal `rgb(0, 41, 145)` y X `rgb(0, 0, 0)`.
+- Revisión local móvil a 390 × 844: las grillas de pictogramas y marcas conservaron dos columnas y `scrollWidth` coincidió con `clientWidth` en 375 px. La comparación tipográfica se apiló en una columna.
+- La prueba de navegador fue de sólo lectura y la suite usó el proyecto aislado `demo-coronabingo-ui`; no se leyó ni escribió Firebase alojado.
