@@ -85,6 +85,49 @@ const SECTION_LINKS = [
   { id: 'componentes', label: 'Componentes y estados' },
 ]
 
+export type KitchenSinkVariant = 'original' | 'time' | 'refined' | 'playful'
+
+const VARIANT_COPY: Record<
+  KitchenSinkVariant,
+  {
+    banner: string
+    description: string
+    label?: string
+    title: string
+  }
+> = {
+  original: {
+    banner: 'Demo estática de interfaz. No crea salas ni modifica partidas.',
+    description:
+      'Una foto de la interfaz actual para revisar jerarquía, color, densidad y comportamiento responsive antes de rediseñar.',
+    title: 'Referencia visual de Coronabingo',
+  },
+  time: {
+    banner:
+      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
+    description:
+      'Una dirección cálida y lineal: la mesa de juego vive dentro de una retícula liviana, con nodos circulares y títulos de mayor presencia.',
+    label: 'Propuesta 1 · Cálida y lineal',
+    title: 'El bingo, entre líneas',
+  },
+  refined: {
+    banner:
+      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
+    description:
+      'La interfaz conocida, con una paleta más contenida, espaciado consistente y superficies cuidadas para sentirse más clara y profesional.',
+    label: 'Propuesta 2 · Evolución refinada',
+    title: 'Coronabingo, más claro',
+  },
+  playful: {
+    banner:
+      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
+    description:
+      'Una mesa de juego luminosa y simple, con bloques de color, formas táctiles y pequeños guiños al bolillero sin perder legibilidad.',
+    label: 'Propuesta 3 · Mesa de juego',
+    title: 'Una ronda para compartir',
+  },
+}
+
 function Section({
   children,
   description,
@@ -97,8 +140,12 @@ function Section({
   title: string
 }) {
   return (
-    <section aria-labelledby={`${id}-title`} className="mt-12" id={id}>
-      <div className="mb-4">
+    <section
+      aria-labelledby={`${id}-title`}
+      className="ks-section mt-12"
+      id={id}
+    >
+      <div className="ks-section-heading mb-4">
         <Heading type="h2">
           <span id={`${id}-title`}>{title}</span>
         </Heading>
@@ -117,10 +164,11 @@ function StaticPlayerList() {
   ]
 
   return (
-    <div className="border-gray-300 border-t-2 mt-4 -mx-4">
+    <div className="ks-player-list border-gray-300 border-t-2 mt-4 -mx-4">
       {players.map((player, index) => (
         <div
           className={classnames([
+            'ks-list-row',
             'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
             player.host
               ? 'bg-green-100'
@@ -156,13 +204,15 @@ function StaticPlayerList() {
 function StaticTicket() {
   return (
     <Box>
-      <p className="font-semibold uppercase">Cartón Nº 1</p>
-      <div className="border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
-        <Cells
-          onSelectNumber={() => void 0}
-          selectedNumbers={MARKED_NUMBERS}
-          ticketNumbers={DEMO_TICKET}
-        />
+      <div className="ks-ticket">
+        <p className="font-semibold uppercase">Cartón Nº 1</p>
+        <div className="ks-ticket-grid border-l-2 border-t-2 border-gray-900 flex flex-wrap mt-2">
+          <Cells
+            onSelectNumber={() => void 0}
+            selectedNumbers={MARKED_NUMBERS}
+            ticketNumbers={DEMO_TICKET}
+          />
+        </div>
       </div>
     </Box>
   )
@@ -197,12 +247,13 @@ function StaticOptionButtons() {
   ]
 
   return (
-    <div className="flex flex-wrap justify-center items-start -mx-2">
+    <div className="ks-option-buttons flex flex-wrap justify-center items-start -mx-2">
       {buttons.map(({ bg, color, Icon, label }) => (
         <div className="mx-2 text-center" key={label}>
           <button
             aria-label={label}
             className={classnames([
+              'ks-option-button',
               'block h-12 mx-auto outline-none rounded-full shadow w-12',
               'focus:outline-none focus:shadow-outline',
               'duration-150 ease-in-out transition',
@@ -222,10 +273,11 @@ function StaticOptionButtons() {
 
 function StaticSoundList() {
   return (
-    <div className="border-gray-300 border-t-2 -mx-4">
+    <div className="ks-sound-list border-gray-300 border-t-2 -mx-4">
       {SOUNDS_EXTRAS.map(({ language, name }, index) => (
         <div
           className={classnames([
+            'ks-list-row',
             'border-b-2 border-gray-300 flex items-center justify-between px-4 py-2',
             index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200',
             index === 1 && 'bg-yellow-200',
@@ -255,11 +307,14 @@ function BackgroundPreview() {
   const { t } = useTranslation()
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
+    <div className="ks-background-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
       {BACKGROUND_CELL_VALUES.map(({ key, type, value }, index) => {
         const firstValue = Array.isArray(value) ? value[0] : value
         return (
-          <div className="bg-gray-100 border-2 border-gray-300" key={key}>
+          <div
+            className="ks-background-swatch bg-gray-100 border-2 border-gray-300"
+            key={key}
+          >
             <div
               className={classnames([
                 'bg-center bg-contain bg-no-repeat h-20 w-full',
@@ -283,30 +338,52 @@ function BackgroundPreview() {
   )
 }
 
-function KitchenSink() {
+export function KitchenSinkDemo({
+  variant = 'original',
+}: {
+  variant?: KitchenSinkVariant
+}) {
+  const copy = VARIANT_COPY[variant]
+
   return (
-    <main className="bg-gray-200 flex flex-col min-h-screen">
+    <main
+      className={classnames([
+        'kitchen-sink bg-gray-200 flex flex-col min-h-screen',
+        `kitchen-sink--${variant}`,
+      ])}
+      data-kitchen-sink-variant={variant}
+    >
       <Head>
-        <title>Referencia visual | Coronabingo</title>
+        <title>
+          {variant === 'original'
+            ? 'Referencia visual | Coronabingo'
+            : `${copy.title} | Coronabingo`}
+        </title>
         <meta content="noindex,nofollow" name="robots" />
       </Head>
 
       <Banner type="emphasis">
-        <span className="font-medium text-center">
-          Demo estática de interfaz. No crea salas ni modifica partidas.
-        </span>
+        <span className="font-medium text-center">{copy.banner}</span>
       </Banner>
       <Header />
 
-      <div className="flex-auto px-4 py-8">
+      <div className="ks-content flex-auto px-4 py-8">
         <Container size="large">
-          <header>
-            <Heading type="h1">Referencia visual de Coronabingo</Heading>
-            <p className="mt-2 max-w-3xl text-gray-700">
-              Una foto de la interfaz actual para revisar jerarquía, color,
-              densidad y comportamiento responsive antes de rediseñar.
-            </p>
-            <nav aria-label="Secciones de la referencia" className="mt-6">
+          <header className="ks-intro">
+            {copy.label && (
+              <div className="ks-proposal-meta">
+                <p className="ks-proposal-label">{copy.label}</p>
+                <a className="ks-compare-link" href="/kitchen-sink/compare">
+                  Comparar las cuatro versiones
+                </a>
+              </div>
+            )}
+            <Heading type="h1">{copy.title}</Heading>
+            <p className="mt-2 max-w-3xl text-gray-700">{copy.description}</p>
+            <nav
+              aria-label="Secciones de la referencia"
+              className="ks-section-nav mt-6"
+            >
               <ul className="flex flex-wrap -mx-2">
                 {SECTION_LINKS.map(({ id, label }) => (
                   <li className="mx-2 mb-2" key={id}>
@@ -784,7 +861,7 @@ function KitchenSink() {
         </Container>
       </div>
 
-      <footer className="bg-white p-4 shadow">
+      <footer className="ks-footer bg-white p-4 shadow">
         <Container size="large">
           <div className="md:flex md:items-center md:justify-between">
             <p className="text-center md:text-left">
@@ -800,4 +877,6 @@ function KitchenSink() {
   )
 }
 
-export default KitchenSink
+export default function KitchenSink() {
+  return <KitchenSinkDemo />
+}

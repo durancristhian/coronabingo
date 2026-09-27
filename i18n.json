@@ -6,6 +6,10 @@
     "*": ["common"],
     "/": ["index"],
     "/kitchen-sink": ["playerId"],
+    "/kitchen-sink/compare": ["playerId"],
+    "/kitchen-sink/playful": ["playerId"],
+    "/kitchen-sink/refined": ["playerId"],
+    "/kitchen-sink/time": ["playerId"],
     "/room/[roomId]": ["roomId"],
     "/room/[roomId]/admin": ["admin"],
     "/room/[roomId]/[playerId]": ["playerId"]

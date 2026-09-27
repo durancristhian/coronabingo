@@ -26,6 +26,24 @@ Crear una página local, estática y responsive que reúna la interfaz actual de
 - Pasan `npm run lint:check`, `npm run build` y `git diff --check`.
 - La comprobación de navegador queda registrada con revisión móvil y de escritorio.
 
+## Rediseño comparativo
+
+Alcance aprobado el 2026-09-27:
+
+- Conservar `/kitchen-sink` como referencia original sin cambios visuales.
+- Añadir tres propuestas aplicadas a la misma anatomía y contenido estático, sin cambiar tipografía, iconos ni significado funcional de cartones, bolillero, listas o controles.
+- Propuesta 1: dirección cálida y lineal inspirada en time.fyi, con jerarquía tipográfica fuerte, líneas estructurales y puntos circulares en los encuentros del layout.
+- Propuesta 2: evolución refinada, minimalista y profesional de la interfaz actual.
+- Propuesta 3: dirección original, lúdica, simple e inclusiva, reconocible como juego para todo público.
+- Añadir una vista que permita comparar las cuatro versiones lado a lado en escritorio y apiladas en pantallas angostas.
+
+Criterios adicionales:
+
+- Las cuatro versiones están disponibles en rutas independientes y la comparación no depende de Firestore.
+- Las propuestas comparten el mismo contenido base para que las diferencias observadas sean de diseño, no de funcionalidad.
+- La comparación y cada propuesta evitan desbordes horizontales de página en escritorio y móvil.
+- Se conservan los 90 números, el cartón, la lista de jugadores, los sonidos y los fondos de la referencia original.
+
 ## Evidencia
 
 - Rama y worktree: `t3code/build-ui-kitchen-sink` en `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-5c7c877e`.
@@ -37,9 +55,19 @@ Crear una página local, estática y responsive que reúna la interfaz actual de
 - Navegador de escritorio: la ruta cargó sin errores ni advertencias de consola, mostró 4 secciones, 19 sonidos y 13 fondos, y mantuvo `scrollWidth` igual a `clientWidth`.
 - Navegador móvil a 375 × 812: las 4 secciones siguieron visibles y el documento mantuvo 360 px tanto de `scrollWidth` como de `clientWidth`. La tira de últimos números conserva su scroll horizontal interno, igual que la pantalla real.
 - El fondo COVID-19 resolvió a `/background-cells/coronavirus.28e4692f.webp`, en línea con `origin/main`.
-- Servidor para revisión: `npm run dev -- --port 3127`, URL `http://localhost:3127/kitchen-sink`, ejecutado desde el worktree de la tarea. El PID final se informa en el handoff después de reiniciarlo tras los checks y commits.
+- Se inspeccionó la página pública de time.fyi el 2026-09-27. La propuesta 1 toma como sistema sus líneas finas, nodos circulares, superficies planas, botones píldora y jerarquía tipográfica marcada, aplicados a los componentes propios de Coronabingo.
+- Rutas del estudio: original en `/kitchen-sink`, propuesta lineal en `/kitchen-sink/time`, refinada en `/kitchen-sink/refined`, lúdica en `/kitchen-sink/playful` y comparación en `/kitchen-sink/compare`.
+- `npm run lint:check`: pasó para el rediseño comparativo.
+- `npm run build`: pasó, validó los locales y generó las cinco rutas del estudio como páginas estáticas para español e inglés.
+- `git diff --check`: pasó.
+- Navegador de escritorio a 1920 px: la comparación mostró cuatro paneles simultáneos de 452 px y el documento mantuvo `scrollWidth` igual a `clientWidth` (1905 px).
+- Comprobación angosta dentro de cada panel a 437 px: original y tres propuestas mantuvieron `scrollWidth` igual a `clientWidth`, 4 secciones, 90 números, 19 sonidos y 13 fondos.
+- Las cuatro rutas individuales también mantuvieron `scrollWidth` igual a `clientWidth` a 1905 px. Se revisaron visualmente sus mesas de juego y la consola final no presentó errores ni advertencias de aplicación.
+- No se realizaron lecturas ni escrituras en Firestore.
+- Servidor para revisión: `npm run dev -- --port 3127`, URL principal `http://localhost:3127/kitchen-sink/compare`, ejecutado desde el worktree de la tarea. El PID final se informa en el handoff después de reiniciarlo tras los checks y commits.
 
 ## Comments
 
 - 2026-09-27: implementación autorizada por el pedido de crear la primera demo y levantar un servidor local para revisión.
 - 2026-09-27: se completó la referencia estática y se verificó en escritorio y móvil. No se crearon salas ni registros de juego.
+- 2026-09-27: se añadieron tres direcciones visuales sobre la misma anatomía, se conservó la original y se creó la comparación simultánea solicitada.
