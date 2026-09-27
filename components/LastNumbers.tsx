@@ -26,7 +26,7 @@ export default function LastNumbers({
 
   return (
     <Fragment>
-      <div className="flex items-center">
+      <div className="cb-last-numbers flex items-center">
         <div className="flex overflow-x-scroll overflow-y-hidden w-full">
           {selectedNumbers.map((n, i) => (
             <Ball key={n} number={n} index={i} />
@@ -36,7 +36,7 @@ export default function LastNumbers({
       {!hideNumbersMeaning && (
         <div
           id="number-meaning"
-          className="flex items-center justify-between mt-4"
+          className="cb-number-meaning flex items-center justify-between mt-4"
         >
           <p
             className="appear-after flex flex-auto font-medium items-center"

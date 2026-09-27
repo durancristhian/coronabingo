@@ -12,6 +12,8 @@ export default function Banner({ children, type = 'information' }: Props) {
   return (
     <div
       className={classnames([
+        'cb-banner',
+        `cb-banner--${type}`,
         'px-4 py-2',
         type === 'information' && 'bg-yellow-200',
         type === 'emphasis' && 'bg-purple-200',

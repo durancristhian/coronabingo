@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function Box({ children }: Props) {
-  return <div className="bg-white p-4 rounded shadow">{children}</div>
+  return <div className="cb-box bg-white p-4 rounded shadow">{children}</div>
 }

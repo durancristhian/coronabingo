@@ -20,9 +20,13 @@ export default function Checkbox({
 }: Props) {
   return (
     <Fragment>
-      <label htmlFor={id} className="cursor-pointer flex items-center">
+      <label
+        htmlFor={id}
+        className="cb-checkbox cursor-pointer flex items-center"
+      >
         <input
           className={classnames([
+            'cb-checkbox-input',
             'block p-2',
             'focus:outline-none focus:shadow-outline',
             'duration-150 ease-in-out transition',
@@ -34,9 +38,13 @@ export default function Checkbox({
           onChange={event => onChange && onChange(event.target.checked)}
           disabled={disabled}
         />
-        <span className="flex-auto pl-4 py-2">{label}</span>
+        <span className="cb-checkbox-label flex-auto pl-4 py-2">{label}</span>
       </label>
-      {hint && <p className="italic mt-2 text-gray-800 md:text-sm">{hint}</p>}
+      {hint && (
+        <p className="cb-field-hint italic mt-2 text-gray-800 md:text-sm">
+          {hint}
+        </p>
+      )}
     </Fragment>
   )
 }

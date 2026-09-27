@@ -85,49 +85,6 @@ const SECTION_LINKS = [
   { id: 'componentes', label: 'Componentes y estados' },
 ]
 
-export type KitchenSinkVariant = 'original' | 'time' | 'refined' | 'playful'
-
-const VARIANT_COPY: Record<
-  KitchenSinkVariant,
-  {
-    banner: string
-    description: string
-    label?: string
-    title: string
-  }
-> = {
-  original: {
-    banner: 'Demo estática de interfaz. No crea salas ni modifica partidas.',
-    description:
-      'Una foto de la interfaz actual para revisar jerarquía, color, densidad y comportamiento responsive antes de rediseñar.',
-    title: 'Referencia visual de Coronabingo',
-  },
-  time: {
-    banner:
-      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
-    description:
-      'Una dirección cálida y lineal: la mesa de juego vive dentro de una retícula liviana, con nodos circulares y títulos de mayor presencia.',
-    label: 'Propuesta 1 · Cálida y lineal',
-    title: 'El bingo, entre líneas',
-  },
-  refined: {
-    banner:
-      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
-    description:
-      'La interfaz conocida, con una paleta más contenida, espaciado consistente y superficies cuidadas para sentirse más clara y profesional.',
-    label: 'Propuesta 2 · Evolución refinada',
-    title: 'Coronabingo, más claro',
-  },
-  playful: {
-    banner:
-      'Propuesta visual estática. La estructura y la funcionalidad no cambian.',
-    description:
-      'Una mesa de juego luminosa y simple, con bloques de color, formas táctiles y pequeños guiños al bolillero sin perder legibilidad.',
-    label: 'Propuesta 3 · Mesa de juego',
-    title: 'Una ronda para compartir',
-  },
-}
-
 function Section({
   children,
   description,
@@ -338,48 +295,31 @@ function BackgroundPreview() {
   )
 }
 
-export function KitchenSinkDemo({
-  variant = 'original',
-}: {
-  variant?: KitchenSinkVariant
-}) {
-  const copy = VARIANT_COPY[variant]
-
+export default function KitchenSink() {
   return (
-    <main
-      className={classnames([
-        'kitchen-sink bg-gray-200 flex flex-col min-h-screen',
-        `kitchen-sink--${variant}`,
-      ])}
-      data-kitchen-sink-variant={variant}
-    >
+    <main className="kitchen-sink cb-layout bg-gray-200 flex flex-col min-h-screen">
       <Head>
-        <title>
-          {variant === 'original'
-            ? 'Referencia visual | Coronabingo'
-            : `${copy.title} | Coronabingo`}
-        </title>
+        <title>Sistema visual | Coronabingo</title>
         <meta content="noindex,nofollow" name="robots" />
       </Head>
 
       <Banner type="emphasis">
-        <span className="font-medium text-center">{copy.banner}</span>
+        <span className="font-medium text-center">
+          Referencia estática del sistema visual. No crea salas ni modifica
+          partidas.
+        </span>
       </Banner>
       <Header />
 
-      <div className="ks-content flex-auto px-4 py-8">
+      <div className="ks-content cb-page-content flex-auto px-4 py-8">
         <Container size="large">
           <header className="ks-intro">
-            {copy.label && (
-              <div className="ks-proposal-meta">
-                <p className="ks-proposal-label">{copy.label}</p>
-                <a className="ks-compare-link" href="/kitchen-sink/compare">
-                  Comparar las cuatro versiones
-                </a>
-              </div>
-            )}
-            <Heading type="h1">{copy.title}</Heading>
-            <p className="mt-2 max-w-3xl text-gray-700">{copy.description}</p>
+            <p className="ks-proposal-label">Sistema Mesa de juego</p>
+            <Heading type="h1">Una ronda para compartir</Heading>
+            <p className="mt-2 max-w-3xl text-gray-700">
+              El inventario vigente de Coronabingo: una interfaz cálida, simple
+              y lúdica para jugar con amigos y familia.
+            </p>
             <nav
               aria-label="Secciones de la referencia"
               className="ks-section-nav mt-6"
@@ -875,8 +815,4 @@ export function KitchenSinkDemo({
       </footer>
     </main>
   )
-}
-
-export default function KitchenSink() {
-  return <KitchenSinkDemo />
 }

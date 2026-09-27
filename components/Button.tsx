@@ -40,6 +40,8 @@ export default function Button({
       id={id}
       type={type}
       className={classnames([
+        'cb-button',
+        `cb-button--${color}`,
         'font-medium h-12 px-4 py-2 rounded text-center uppercase',
         'focus:outline-none focus:shadow-outline',
         'duration-150 ease-in-out transition',

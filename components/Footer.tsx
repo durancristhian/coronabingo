@@ -29,10 +29,10 @@ export default function Footer() {
 
   return (
     <Fragment>
-      <footer className="bg-white p-4 shadow">
+      <footer className="cb-footer bg-white p-4 shadow">
         <Container size="large">
           <News tweetIds={TWEETS} />
-          <div className="md:flex md:items-center md:justify-between">
+          <div className="cb-footer-meta md:flex md:items-center md:justify-between">
             <p className="text-center md:text-left">
               <span>{t('common:made-by')}</span>
               <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
@@ -44,7 +44,7 @@ export default function Footer() {
                 <li className="mb-2 md:mb-0 md:mr-4">
                   <button
                     id="donate"
-                    className="focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
+                    className="cb-text-link focus:outline-none focus:shadow-outline font-medium text-blue-800 underline"
                     onClick={() => {
                       setShowModal(true)
                     }}

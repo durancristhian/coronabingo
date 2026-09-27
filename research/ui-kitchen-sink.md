@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: resolved
+Work status: claimed
 
 ## Objetivo
 
@@ -71,3 +71,35 @@ Criterios adicionales:
 - 2026-09-27: implementación autorizada por el pedido de crear la primera demo y levantar un servidor local para revisión.
 - 2026-09-27: se completó la referencia estática y se verificó en escritorio y móvil. No se crearon salas ni registros de juego.
 - 2026-09-27: se añadieron tres direcciones visuales sobre la misma anatomía, se conservó la original y se creó la comparación simultánea solicitada.
+- 2026-09-27: se eligió la propuesta 3, “Mesa de juego”, como dirección oficial. Se autorizó descartar las demás propuestas, aplicar el sistema a toda la app y abrir un pull request para revisión.
+
+## Adopción del sistema “Mesa de juego”
+
+Alcance aprobado el 2026-09-27:
+
+- Aplicar la propuesta seleccionada al inicio, configuración de sala, sala de espera, mesa de juego, modales, listas, formularios y estados compartidos.
+- Conservar tipografía, iconos, arquitectura de información y comportamiento funcional.
+- Mantener una única ruta `/kitchen-sink` como inventario vigente del sistema visual.
+- Eliminar las rutas y estilos exclusivos de las propuestas descartadas y de la comparación.
+- Centralizar color, bordes, radios y elevación para permitir una etapa posterior de pulido.
+- Verificar la experiencia real en escritorio y móvil, incluyendo el recorrido automatizado de anfitrión y jugador.
+- Abrir un pull request contra la base verificada y monitorear GitHub y Vercel hasta un resultado terminal.
+
+Criterios de aceptación:
+
+- Todas las superficies reales adoptan el lenguaje “Mesa de juego” sin perder controles ni estados.
+- `/kitchen-sink/time`, `/kitchen-sink/refined`, `/kitchen-sink/playful` y `/kitchen-sink/compare` dejan de existir.
+- `/kitchen-sink` representa el único sistema visual vigente.
+- La app mantiene navegación, creación y preparación de sala, sincronización, marcado de cartones y reinicio.
+- No aparecen desbordes horizontales de página en los anchos verificados.
+- Pasan `npm run lint:check`, `npm run build`, `npm run ui-tests` y `git diff --check`.
+
+Evidencia local del 2026-09-27:
+
+- Base de comparación verificada: `origin/main` en `4c98747`.
+- `npm run lint:check`: pasó.
+- `npm run build`: pasó con Next.js 16.3.6 y Webpack; validó locales y generó únicamente `/`, `/kitchen-sink` y las tres rutas dinámicas de sala.
+- `npm run ui-tests`: pasaron los 15 escenarios en Chromium en 68,3 s contra `demo-coronabingo-ui` y Firestore Emulator. La cobertura incluyó los recorridos reales de anfitrión y jugador, marcado y reinicio, cambio de idioma, herramientas de juego y el recorrido móvil a 390 × 844 sin overflow.
+- La revisión visual local cubrió el inicio y `/kitchen-sink` en escritorio; la ruta mostró 4 secciones, 90 números, 19 sonidos y 13 fondos sin desborde horizontal.
+- Las advertencias de navegador observadas durante la suite pertenecen a ciclos de vida y `defaultProps` de dependencias existentes; no aparecieron fallos de aplicación.
+- El PR, el Preview y sus comprobaciones remotas se registran al finalizar esa etapa; no se verificó Production.

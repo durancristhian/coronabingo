@@ -23,6 +23,7 @@ export default function RoundedButton({
   return (
     <button
       className={classnames([
+        'cb-rounded-action',
         'flex flex-col items-center justify-center mx-2 p-1 outline-none rounded text-center',
         'focus:outline-none focus:shadow-outline',
         'duration-150 ease-in-out transition',
@@ -32,6 +33,7 @@ export default function RoundedButton({
     >
       <div
         className={classnames([
+          'cb-rounded-action-icon',
           'h-16 flex items-center justify-center p-2 rounded-full w-16',
           iconBgColor,
         ])}
@@ -39,7 +41,7 @@ export default function RoundedButton({
         {Icon && <Icon className="text-3xl text-white" />}
         {imageURL && <img src={imageURL} alt={imageAlt} className="block" />}
       </div>
-      {label && <p className="mt-2">{label}</p>}
+      {label && <p className="cb-rounded-action-label mt-2">{label}</p>}
     </button>
   )
 }

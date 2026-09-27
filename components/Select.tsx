@@ -27,13 +27,14 @@ export default function Select({
 
   return (
     <Fragment>
-      <label htmlFor={id} className="flex flex-col">
-        {label && <span className="mb-1">{label}</span>}
-        <div className="relative">
+      <label htmlFor={id} className="cb-field-label flex flex-col">
+        {label && <span className="cb-field-label-text mb-1">{label}</span>}
+        <div className="cb-select-wrap relative">
           <select
             id={id}
             aria-label={id}
             className={classnames([
+              'cb-select',
               'appearance-none bg-white border-2 border-gray-300 h-12 p-2 pr-6 rounded w-full',
               'focus:border-gray-600 focus:outline-none focus:shadow-outline hover:border-gray-500',
               'duration-150 ease-in-out transition',
@@ -64,7 +65,9 @@ export default function Select({
         </div>
       </label>
       {hint && (
-        <p className="italic mt-1 text-gray-800 text-xs md:text-sm">{hint}</p>
+        <p className="cb-field-hint italic mt-1 text-gray-800 text-xs md:text-sm">
+          {hint}
+        </p>
       )}
     </Fragment>
   )

@@ -24,6 +24,9 @@ export default function RoomCodeCell({
         <label
           htmlFor={`${emoji}${index}`}
           className={classnames([
+            'cb-room-code-cell',
+            isChecked && 'cb-room-code-cell--checked',
+            highlighted && 'cb-room-code-cell--highlighted',
             'bg-gray-100 block border-2 border-gray-300 flex items-center justify-center h-24 py-4 rounded text-center text-xl md:text-2xl',
             'focus-within:outline-none focus-within:shadow-outline',
             'duration-150 ease-in-out transition',

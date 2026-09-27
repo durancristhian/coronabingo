@@ -21,6 +21,7 @@ export default function Modal({ children, title, ...rest }: Props) {
           <button
             onClick={rest.onRequestClose}
             className={classnames([
+              'cb-modal-close',
               'text-lg',
               'focus:outline-none focus:shadow-outline',
               'duration-150 ease-in-out transition',

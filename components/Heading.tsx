@@ -30,6 +30,8 @@ export default function Heading({
   const Type = type
 
   const className = classnames([
+    'cb-heading',
+    `cb-heading--${type}`,
     'font-medium',
     ...HEADER_STYLES[type],
     ALIGNMENT[textAlign],

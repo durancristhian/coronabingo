@@ -21,6 +21,7 @@ export default function Anchor({
       target="_blank"
       rel="noopener noreferrer"
       className={classnames([
+        'cb-text-link',
         'focus:outline-none focus:shadow-outline font-medium text-blue-800 underline',
         display,
       ])}

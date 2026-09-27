@@ -28,23 +28,25 @@ export default function Header() {
   const href = lang === i18n.defaultLocale ? '/' : `/${lang}`
 
   return (
-    <header className="bg-white px-4 py-2 shadow">
+    <header className="cb-header bg-white px-4 py-2 shadow">
       <Container size="large">
         <div className="flex items-center justify-between">
           <Heading type="h1">
             <a
               href={href}
-              className="duration-150 ease-in-out focus:outline-none focus:shadow-outline outline-none transition"
+              className="cb-brand duration-150 ease-in-out focus:outline-none focus:shadow-outline outline-none transition"
             >
               Coronabingo
             </a>
           </Heading>
-          <Select
-            id="language"
-            onChange={onLanguageChange}
-            options={languages}
-            value={lang}
-          />
+          <div className="cb-language-select">
+            <Select
+              id="language"
+              onChange={onLanguageChange}
+              options={languages}
+              value={lang}
+            />
+          </div>
         </div>
       </Container>
     </header>
