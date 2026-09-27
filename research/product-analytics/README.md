@@ -366,7 +366,7 @@ Después de integrar la entrega de fondos en #203 no quedan eventos del contrato
 
 Orden recomendado:
 
-1. Revisar y mergear la entrega de fondos en #203. Repetir CI y Preview sobre el commit combinado.
+1. Completado: #208 se mergeó en #203 y se repitieron CI, Preview y la validación local sobre el resultado combinado.
 2. Revisar la propiedad canónica y sus cupos. Crear las dimensiones y métricas de ANA-05 antes de la corrida controlada, porque los informes personalizados no recuperan parámetros anteriores como si hubieran estado registrados.
 3. Autorizar y mergear #203 a `main`. Separar el commit integrado, el deployment de Production y la recepción de GA4 en la evidencia.
 4. Ejecutar una sola sala de QA con dos participantes, una primera partida y un replay. Puede quedar persistida si la aplicación no permite borrarla; no crear más salas para repetir una comprobación que ya pasó.
@@ -557,7 +557,7 @@ Fuentes oficiales:
 - Las pruebas dirigidas cubren fondo inicial, refresh sin duplicado, preset activo, clic repetido, URL privada, español de escritorio e inglés móvil con Firestore Emulator.
 - Pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 16 pruebas y `git diff --check`.
 - La primera ejecución de la suite completa detectó dos expectativas antiguas sobre la cantidad exacta de eventos. Se actualizaron para incluir `player_card_opened`; la repetición completa terminó con las 16 pruebas aprobadas.
-- PR: [#208](https://github.com/durancristhian/coronabingo/pull/208), abierto contra `t3code/plan-product-analytics` (#203) con commit de implementación `faa0574`.
+- PR: [#208](https://github.com/durancristhian/coronabingo/pull/208), creado contra `t3code/plan-product-analytics` (#203) con commit de implementación `faa0574`; luego se integró como se registra abajo.
 - GitHub Actions `build`, Vercel y Vercel Preview Comments aprobaron el commit de implementación. No hubo revisiones ni comentarios de código al registrar esta evidencia.
 - Preview: `https://coronabingo-git-codex-a2c2f1-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene un ID `G-`, `googletagmanager` ni inicialización `gtag`, por lo que no contamina la propiedad de Analytics.
 - El navegador colaborativo no estaba disponible. La verificación interactiva completa se hizo localmente contra el build de producción, Chromium, el colector de pruebas y Firestore Emulator; no se crearon datos en Preview.
