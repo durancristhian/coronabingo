@@ -1,12 +1,12 @@
 # PERF-08: comprimir los audios con mayor margen
 
-Status: needs-info
+Status: ready-for-agent
 
-Work status: claimed
+Work status: resolved
 
 Type: research
 
-Estado: el usuario aprobó los 19 candidatos livianos después de escucharlos en local. Implementación, CI y Vercel Preview correctos; confirmación auditiva del usuario en Preview pendiente. Coordinar el versionado de caché con PERF-03.
+Estado: resuelto. El usuario aprobó los 19 candidatos livianos en local y confirmó su reproducción en Vercel Preview. El versionado de caché permanece en PERF-03.
 
 ## Diagnóstico
 
@@ -104,7 +104,11 @@ Validación remota del commit de implementación `31fa432`:
 - Vercel: despliegue completado en `https://coronabingo-git-t3cod-eb5fee-cristhian-durans-projects-3ace6550.vercel.app`.
 - La portada del Preview cargó en español sin errores ni advertencias de consola.
 - Los 19 MP3 del Preview respondieron `200 audio/mpeg` y cada descarga coincidió en bytes con el archivo local aprobado.
-- No se creó ninguna sala durante esta verificación. La reproducción dentro del flujo de anfitrión y jugador queda para la confirmación auditiva del usuario.
+- No se creó ninguna sala durante la verificación automatizada. El usuario confirmó después la reproducción en el flujo del Preview.
+
+## Answer
+
+Se adoptó la variante liviana para los 19 MP3. El catálogo conserva sus rutas y baja de 2.041.513 a 1.263.164 bytes, un ahorro de 778.349 bytes o 38,13%. El usuario confirmó el 27/09/2026 que el Preview funciona y que los audios se reproducen correctamente. PERF-08 queda resuelto; el merge y el despliegue a Producción no forman parte de este cierre.
 
 ## Alcance
 
@@ -138,3 +142,7 @@ El usuario eligió `liviano` para los 19 sonidos. Se aplicaron esos archivos a l
 ### 2026-09-27: Preview listo para revisión
 
 GitHub Actions y Vercel terminaron correctamente para el commit de implementación. Los 19 audios desplegados coinciden en tamaño con los aprobados. Falta la confirmación auditiva del usuario en el flujo real antes de resolver el ticket.
+
+### 2026-09-27: aceptación del Preview
+
+El usuario confirmó que el Preview funciona y que los audios se reproducen correctamente. Se marca PERF-08 como resuelto. El PR sigue abierto y no se autorizó merge ni despliegue a Producción.
