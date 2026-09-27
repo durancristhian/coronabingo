@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: claimed
+Work status: resolved
 
 ## Objetivo
 
@@ -133,3 +133,6 @@ Evidencia local:
 - La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.
 - La primera inspección del Preview de `ef36018` detectó que PurgeCSS quitaba los modificadores de color construidos dinámicamente para los iconos. Se reemplazaron por nombres de clase estáticos y se protegieron esas tres reglas semánticas durante el purge antes de considerar resuelto el feedback.
 - El build de producción posterior pasó y su CSS compilado conservó `cb-message-icon--information`, `cb-message-icon--success` y `cb-message-icon--error`.
+- Implementación final del ajuste: `0475f3d`. [GitHub Actions 36340804182](https://github.com/durancristhian/coronabingo/actions/runs/36340804182) pasó y Vercel quedó Ready para ese mismo HEAD.
+- En el Preview se midieron los colores computados de los iconos: verde `rgb(39, 122, 93)`, ocre `rgb(149, 89, 0)` y rojo `rgb(185, 58, 53)`. También se reconfirmaron el readonly real con borde punteado, el badge azul oscuro con sombra amarilla, la celda transparente alrededor del único círculo llamado y ausencia de overflow a 1905 px.
+- La verificación remota fue de solo lectura; no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
