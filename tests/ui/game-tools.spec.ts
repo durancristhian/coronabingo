@@ -53,14 +53,20 @@ test('a player keeps the optimized empty-cell background after reload', async ({
   await player.goto(host.url())
   await openPlayerCards(player, testPlayerNames.player)
 
+  const playerId = new URL(player.url()).pathname.split('/').pop()
+  expect(playerId).toBeTruthy()
+  await player.evaluate(id => {
+    localStorage.setItem(
+      'backgroundCell',
+      JSON.stringify({
+        [id as string]: { type: 'img', value: 'coronavirus.gif' },
+      }),
+    )
+  }, playerId)
   const optimizedAsset = player.waitForResponse(response =>
     response.url().endsWith('/background-cells/coronavirus.28e4692f.webp'),
   )
-  await player.locator('#configure-empty-cells:visible').click()
-  await player
-    .getByRole('dialog', { name: 'Fondo de las celdas vacías' })
-    .getByRole('button', { name: 'COVID-19', exact: true })
-    .click()
+  await player.reload()
   const assetResponse = await optimizedAsset
   expect(assetResponse.status()).toBe(200)
   expect(assetResponse.headers()['content-type']).toBe('image/webp')
@@ -80,12 +86,14 @@ test('a player keeps the optimized empty-cell background after reload', async ({
     )
     .toEqual({ type: 'img', value: 'coronavirus.gif' })
 
-  await player.reload()
+  await player.locator('#configure-empty-cells:visible').click()
+  const coronavirusOption = player
+    .getByRole('dialog', { name: 'Fondo de las celdas vacías' })
+    .getByRole('button', { name: 'COVID-19', exact: true })
   await expect(
-    player
-      .getByTestId('bingo-card')
-      .locator('[style*="coronavirus.28e4692f.webp"]'),
-  ).toHaveCount(24)
+    coronavirusOption.locator('[style*="coronavirus.28e4692f.webp"]'),
+  ).toHaveCount(1)
+  await expect(coronavirusOption).toHaveClass(/bg-green-200/)
 })
 
 test('host celebration and sound reach another player context', async ({

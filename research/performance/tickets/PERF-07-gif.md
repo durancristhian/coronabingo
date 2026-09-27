@@ -106,8 +106,9 @@ La [demo local](../perf07-demo/index.html) compara el original con el WebP lossl
 - Asset público: `public/background-cells/coronavirus.28e4692f.webp`, 1.049.854 bytes y SHA-256 `28e4692fa02f895354ab025485841932801f18aa16b0e17ec32ca9557c4903b7`.
 - Compatibilidad: el valor guardado continúa siendo `{ type: 'img', value: 'coronavirus.gif' }`; un resolvedor interno entrega el WebP versionado tanto en el selector como en las celdas.
 - Rollback: `public/background-cells/coronavirus.gif` permanece intacto y basta cambiar el mapeo para volver a servirlo.
-- Cobertura: la prueba UI comprueba MIME, tamaño exacto, uso del WebP en 24 celdas, persistencia del identificador anterior y funcionamiento después de recargar.
+- Cobertura: la prueba UI siembra una preferencia legacy antes de recargar y comprueba MIME, tamaño exacto, uso del WebP en 24 celdas, persistencia del identificador anterior y vista activa del selector.
 - Validación local sobre la rama: `npm run lint:check`, `npm run ui-tests` (15/15), `npm run build` y `git diff --check` correctos. El build incluyó `validate-locales`. Validación de Preview: pendiente.
+- Criterios todavía abiertos: revisión de Safari y viewport móvil, comparación perceptible del costo de decodificación con varias celdas y cabecera de caché de Preview. La política `immutable` general permanece en PERF-03; PERF-07 aporta la URL versionada sin cerrar ese ticket.
 
 ### Fuentes primarias
 
