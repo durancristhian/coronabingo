@@ -386,4 +386,13 @@ Fuentes oficiales:
 - `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator. Incluye creación, host, jugador, sincronización, persistencia, reinicio, idiomas y tutorial.
 - Comprobación dirigida con Playwright sobre `http://127.0.0.1:3199`: la URL real `/room/private-room/private-player?secret=value` produjo una sola vista con `page_location` `/room/[roomId]/[playerId]`, sin los valores privados. Se bloquearon los endpoints de Google y se usó `G-TEST123`.
 - `git diff --check`: aprobado. No se crearon salas ni datos persistentes y el servidor local fue detenido. El navegador colaborativo no estaba disponible, por lo que la comprobación dirigida usó el Playwright del repositorio.
-- Sin verificación de cuenta autenticada, recepción en GA4, Vercel Preview ni Production en esta etapa. No se cambió configuración de proveedor ni se autorizó merge o despliegue.
+- Sin verificación de cuenta autenticada, recepción en GA4 ni Production en esta etapa. No se cambió configuración de proveedor ni se autorizó merge o despliegue.
+
+### 2026-09-27: PR y Preview de la primera entrega
+
+- PR: [#203](https://github.com/durancristhian/coronabingo/pull/203), abierto contra `main` con commit de implementación `f0bd2fcf580bc695287c13cee7a7e7828aadaae3`.
+- Mientras se consultaba metadata de Preview, una invocación incorrecta al endpoint de deployments hizo que GitHub actualizara la rama con el `main` recién avanzado. No se creó un objeto de deployment de GitHub ni se desplegó a Production. El merge resultante es `827513613841802c63a3642a6e9b2397135ffabc`; el diff del PR siguió limitado a analytics.
+- Se repitieron sobre `827513613841802c63a3642a6e9b2397135ffabc`: `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 15 pruebas aprobadas y `git diff --check`.
+- GitHub Actions `build`: aprobado. Vercel: aprobado. No hubo revisiones ni comentarios de código pendientes.
+- Preview: `https://coronabingo-git-t3cod-525de9-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene una etiqueta de Analytics porque `GA_TRACKING_ID` está desactivado en ese entorno, por lo que no se enviaron vistas ni eventos durante la comprobación.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia prueba el build publicado y la ausencia de Analytics en Preview; no prueba recepción en la propiedad GA4 de Production.
