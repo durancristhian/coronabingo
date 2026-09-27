@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test'
+import { readAnalyticsEvents } from './analytics'
 import { test, expect } from './fixtures'
 
 interface YouTubeMockOptions {
@@ -15,7 +16,7 @@ async function mockYouTubePlayer(
       contentType: 'application/javascript',
       body: `
         window.YT = {
-          PlayerState: { CUED: 5 },
+          PlayerState: { ENDED: 0, PLAYING: 1, CUED: 5 },
           Player: function(element, options) {
             var iframe = document.createElement('iframe');
             iframe.className = element.className;
@@ -24,6 +25,10 @@ async function mockYouTubePlayer(
             this.destroy = function() { iframe.remove(); };
             this.getIframe = function() { return iframe; };
             this.getPlayerState = function() { return 5; };
+            this.emitState = function(state) {
+              options.events.onStateChange({ target: this, data: state });
+            };
+            window.tutorialPlayer = this;
             setTimeout(function() {
               options.events.onReady({ target: this });
             }.bind(this), 0);
@@ -110,6 +115,47 @@ test('opens, closes and reopens one working tutorial player', async ({
       .frameLocator('iframe.video-iframe')
       .getByText('Tutorial video ready'),
   ).toBeVisible()
+
+  await page.evaluate(() => {
+    const player = (window as typeof window & {
+      tutorialPlayer: { emitState: (state: number) => void }
+    }).tutorialPlayer
+    player.emitState(1)
+    player.emitState(1)
+    player.emitState(0)
+    player.emitState(0)
+  })
+  await expect
+    .poll(() => readAnalyticsEvents(page))
+    .toEqual([
+      {
+        eventName: 'tutorial_opened',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'es',
+          tutorial_provider: 'youtube',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'tutorial_begin',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'es',
+          tutorial_provider: 'youtube',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'tutorial_complete',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'es',
+          tutorial_provider: 'youtube',
+          ui_language: 'es',
+        },
+      },
+    ])
   await page.keyboard.press('Escape')
   await expect(dialog).toBeHidden()
   await expect(page.locator('iframe.video-iframe')).toHaveCount(0)
@@ -117,6 +163,7 @@ test('opens, closes and reopens one working tutorial player', async ({
 
   await openTutorial.click()
   await expect(dialog.locator('iframe.video-iframe')).toHaveCount(1)
+  await expect.poll(() => readAnalyticsEvents(page)).toHaveLength(4)
   const playerFrame = dialog.frameLocator('iframe.video-iframe')
   await playerFrame.getByRole('button', { name: 'Play tutorial' }).click()
   await expect(playerFrame.getByRole('status')).toHaveText(
@@ -141,6 +188,28 @@ test('offers a usable fallback and restores focus when YouTube fails', async ({
   await expect(
     dialog.getByRole('link', { name: 'Abrir en YouTube' }),
   ).toHaveAttribute('href', 'https://www.youtube.com/watch?v=XJpKBegq5GY')
+  await expect
+    .poll(() => readAnalyticsEvents(page))
+    .toEqual([
+      {
+        eventName: 'tutorial_opened',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'es',
+          tutorial_provider: 'youtube',
+          ui_language: 'es',
+        },
+      },
+      {
+        eventName: 'tutorial_error',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'es',
+          tutorial_provider: 'youtube',
+          ui_language: 'es',
+        },
+      },
+    ])
 
   await dialog.locator('#close-modal').click()
   await expect(dialog).toBeHidden()
@@ -170,4 +239,17 @@ test('loads the English tutorial on the English homepage', async ({ page }) => {
       .frameLocator('iframe.video-iframe')
       .getByText('Tutorial video ready'),
   ).toBeVisible()
+  await expect
+    .poll(() => readAnalyticsEvents(page))
+    .toEqual([
+      {
+        eventName: 'tutorial_opened',
+        eventParams: {
+          schema_version: 'v1',
+          tutorial_language: 'en',
+          tutorial_provider: 'youtube',
+          ui_language: 'en',
+        },
+      },
+    ])
 })

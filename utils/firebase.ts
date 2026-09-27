@@ -1,4 +1,3 @@
-import 'firebase/analytics'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -8,7 +7,6 @@ const firebaseConfig = {
   projectId: process.env.PROJECT_ID,
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID,
 }
 
 let firebaseApp: firebase.app.App
@@ -20,11 +18,6 @@ if (firebase.apps.length) {
 }
 
 const uiTests = process.env.UI_TESTS === '1'
-let analytics: firebase.analytics.Analytics | undefined
-
-if (typeof window !== 'undefined' && !uiTests) {
-  analytics = firebaseApp.analytics()
-}
 
 const db = firebaseApp.firestore()
 if (uiTests) {
@@ -43,4 +36,4 @@ const roomsRef = db.collection('rooms')
 
 const createBatch = () => db.batch()
 
-export { analytics, createBatch, FieldValue, roomsRef, Timestamp }
+export { createBatch, FieldValue, roomsRef, Timestamp }

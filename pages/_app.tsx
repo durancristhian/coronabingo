@@ -22,10 +22,16 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 }
 
 export default class Coronabingo extends App {
-  private trackPageview = (url: string) => {
+  private trackPageview = () => {
     // next/head updates in a passive effect; wait until after the first paint.
     window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => pageview(url))
+      window.requestAnimationFrame(() =>
+        pageview({
+          defaultLocale: defaultLanguage,
+          locale: Router.locale,
+          pathname: Router.pathname,
+        }),
+      )
     })
   }
 
@@ -45,6 +51,7 @@ export default class Coronabingo extends App {
     console.log(`v${version}`)
     if (process.env.GA_TRACKING_ID) {
       Router.events.on('routeChangeComplete', this.trackPageview)
+      this.trackPageview()
     }
   }
 

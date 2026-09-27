@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -15,6 +15,7 @@ import Message from '~/components/Message'
 import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
+import { useAnalytics } from '~/hooks/useAnalytics'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
@@ -23,13 +24,15 @@ import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces/custom/Emojis'
 import playerApi, { defaultPlayerData } from '~/models/player'
 import roomApi, { defaultRoomData } from '~/models/room'
+import { getRoomStartedEventParams } from '~/utils/analyticsEvents'
 import { createBatch } from '~/utils/firebase'
 import { getBaseUrl } from '~/utils/getBaseUrl'
 import { isRoomOld } from '~/utils/isRoomOld'
 import { scrollToTop } from '~/utils/scrollToTop'
 
 export default function RoomAdmin() {
-  const { t } = useTranslation()
+  const { lang, t } = useTranslation()
+  const log = useAnalytics()
   const {
     error: playersError,
     loading: playersLoading,
@@ -39,6 +42,7 @@ export default function RoomAdmin() {
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
+  const submitInProgress = useRef(false)
   const { createToast, dismissToast, updateToast } = useToast()
   const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
 
@@ -85,6 +89,9 @@ export default function RoomAdmin() {
   }
 
   const submitRoom = async () => {
+    if (submitInProgress.current) return
+
+    submitInProgress.current = true
     setInProgress(true)
 
     const toastId = createToast('admin:saving', 'information')
@@ -113,6 +120,18 @@ export default function RoomAdmin() {
 
       await batch.commit()
 
+      log(
+        'room_started',
+        getRoomStartedEventParams({
+          createdAt: room.date.toDate(),
+          hideNumbersMeaning: room.hideNumbersMeaning,
+          language: lang,
+          playNumber: room.timesPlayed,
+          playerCount: players.length,
+          usesOnlineSpinner: room.bingoSpinner,
+        }),
+      )
+
       updateToast('admin:success', 'success', toastId)
 
       setTimeout(() => {
@@ -121,6 +140,7 @@ export default function RoomAdmin() {
 
       Router.push('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {
+      submitInProgress.current = false
       updateToast('admin:error', 'error', toastId)
 
       setInProgress(false)

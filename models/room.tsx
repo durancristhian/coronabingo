@@ -18,23 +18,18 @@ const defaultRoomData: RoomBase = {
   timesPlayed: 1,
 }
 
-const createRoom = (room: Partial<RoomBase>): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const roomDoc = roomsRef.doc()
-      const roomId = roomDoc.id
+const createRoom = async (room: Partial<RoomBase>) => {
+  const roomDoc = roomsRef.doc()
+  const roomId = roomDoc.id
+  const createdAt = new Date()
 
-      await roomDoc.set(
-        Object.assign({}, defaultRoomData, room, {
-          date: Timestamp.fromDate(new Date()),
-        }),
-      )
+  await roomDoc.set(
+    Object.assign({}, defaultRoomData, room, {
+      date: Timestamp.fromDate(createdAt),
+    }),
+  )
 
-      resolve(roomId)
-    } catch (e) {
-      reject(e)
-    }
-  })
+  return { createdAt, roomId }
 }
 
 const excludeExtraFields = (room: Room): RoomBase => {
