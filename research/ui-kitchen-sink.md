@@ -123,3 +123,11 @@ Criterios de aceptación:
 - Los números llamados no combinan fondo completo y círculo.
 - Cada icono semántico destaca sobre el fondo del mensaje sin depender sólo del color para comunicar el estado.
 - Pasan lint, build, la regresión de UI aplicable y `git diff --check`; el Preview del PR se vuelve a inspeccionar.
+
+Evidencia local:
+
+- Implementación: `f762615`.
+- `npm run lint:check`, `npm run build` y `git diff --check`: pasaron.
+- `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 62,8 s contra Firestore Emulator, incluido el recorrido móvil sin overflow.
+- Revisión visual de `/kitchen-sink` a 1905 px: el readonly expuso el atributo HTML y su estilo diferenciado; el badge conservó fondo azul oscuro sobre la fila verde; las celdas llamadas quedaron transparentes alrededor de un único círculo; los iconos mostraron verde, ocre y rojo según el tipo de mensaje. El documento mantuvo `scrollWidth` igual a `clientWidth`.
+- La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.
