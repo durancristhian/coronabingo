@@ -39,7 +39,19 @@ test('a player changes the language without leaving the room or cards', async ({
   await player
     .getByRole('combobox', { name: 'language', exact: true })
     .selectOption('es')
-  await expect.poll(() => readAnalyticsEvents(player)).toEqual([])
+  const playerCardOpenedEvent = {
+    eventName: 'player_card_opened',
+    eventParams: {
+      background_key: 'yellow',
+      background_source: 'preset',
+      play_number: 1,
+      schema_version: 'v1',
+      ui_language: 'es',
+    },
+  }
+  await expect
+    .poll(() => readAnalyticsEvents(player))
+    .toEqual([playerCardOpenedEvent])
 
   await player
     .getByRole('combobox', { name: 'language', exact: true })
@@ -75,6 +87,7 @@ test('a player changes the language without leaving the room or cards', async ({
   await expect
     .poll(() => readAnalyticsEvents(player))
     .toEqual([
+      playerCardOpenedEvent,
       {
         eventName: 'language_changed',
         eventParams: {
@@ -88,7 +101,7 @@ test('a player changes the language without leaving the room or cards', async ({
     ])
 
   await player.reload()
-  await expect.poll(() => readAnalyticsEvents(player)).toHaveLength(1)
+  await expect.poll(() => readAnalyticsEvents(player)).toHaveLength(2)
 
   await host.goto(lobbyURL)
   await openPlayerCards(host, testPlayerNames.host)

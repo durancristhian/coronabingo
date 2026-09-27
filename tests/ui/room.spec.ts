@@ -223,7 +223,7 @@ test('host and player create, play, reload and restart a room', async ({
       ).toHaveAttribute('aria-pressed', 'true')
       await host.reload()
       await expectAssignedCards(host, names.host, hostTicketIds)
-      await expect.poll(() => readAnalyticsEvents(host)).toHaveLength(2)
+      await expect.poll(() => readAnalyticsEvents(host)).toHaveLength(3)
     },
   )
 
@@ -251,9 +251,10 @@ test('host and player create, play, reload and restart a room', async ({
       expect(events.map(event => event.eventName)).toEqual([
         'room_created',
         'room_started',
+        'player_card_opened',
         'room_restarted',
       ])
-      expect(events[2].eventParams).toEqual({
+      expect(events[3].eventParams).toEqual({
         first_restart: 'yes',
         restart_number: 1,
         room_created_date: events[0].eventParams.room_created_date,
@@ -323,10 +324,12 @@ test('host and player create, play, reload and restart a room', async ({
       expect(events.map(event => event.eventName)).toEqual([
         'room_created',
         'room_started',
+        'player_card_opened',
         'room_restarted',
         'room_started',
+        'player_card_opened',
       ])
-      expect(events[3].eventParams).toEqual({
+      expect(events[4].eventParams).toEqual({
         number_meanings: 'hidden',
         play_kind: 'replay',
         play_number: 2,

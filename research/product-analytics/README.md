@@ -60,6 +60,20 @@ El 27 de septiembre de 2026 se autorizó continuar con el PR 5 del plan, apilado
 
 Los fondos permanecen fuera de esta entrega. Tampoco se cambian dimensiones, informes o propiedades de GA4, Firebase alojado, merge ni Production.
 
+## Entrega de fondos autorizada
+
+El 27 de septiembre de 2026 se autorizó completar los eventos de producto restantes en un PR contra `t3code/plan-product-analytics`, después de integrar #204, #206 y #207 en esa rama. La base verificada es `fc2381af516ff3d9f94b0506cc5b4d314e845e2b` e incluye `origin/main` en `4c98747bd128f0124db85e8b984e8f7b7529d5c0`.
+
+Esta entrega:
+
+- emite `player_card_opened` una vez por jugador, partida y navegador cuando sus cartones son visibles, con el fondo cargado;
+- emite `background_selected` por cada cambio explícito de preset y una vez al confirmar una edición de URL;
+- usa claves estables para todos los presets y reduce cualquier URL libre a `custom_url`;
+- guarda los IDs usados para deduplicar sólo en el navegador y nunca los envía a Analytics;
+- verifica español e inglés, escritorio y móvil, refresh, presets y URL libre con Firestore Emulator.
+
+No cambia dimensiones, informes o propiedades de GA4 y no despliega a Production. El propietario autorizó una futura comprobación acotada en Production que puede dejar como máximo una sala de QA y sus pocos participantes si la aplicación no permite eliminarlos.
+
 ## Recomendación
 
 Conviene ampliar GA4, pero no sumando eventos sueltos sobre la integración actual. Primero hay que elegir una sola propiedad como destino de producto, eliminar los datos privados que hoy pueden salir y tipar el contrato de eventos. Después se instrumentan las acciones.
@@ -273,15 +287,15 @@ Criterios de aceptación:
 
 ### ANA-04: preferencias, idioma y tutorial
 
-Status: ready-for-agent
+Status: ready-for-human
 
-Work status: claimed
+Work status: resolved
 
 Depends on: ANA-02, resuelto en las entregas anteriores.
 
 Trabajo: instrumentar fondos, festejos, sonidos, idioma y tutorial. Agregar claves analíticas estables a catálogos, sin usar traducciones ni rutas de assets como valores.
 
-Progreso: idioma, tutorial, festejos y sonidos están implementados en sus entregas autorizadas. Fondos quedan pendientes.
+Progreso: idioma, tutorial, festejos, sonidos y fondos están implementados en sus entregas autorizadas. La entrega de fondos queda pendiente de revisión e integración en #203.
 
 Criterios de aceptación:
 
@@ -345,6 +359,39 @@ Criterios de aceptación:
 - Ejecutar `npm run lint:check`, `npm run build`, `npm run ui-tests:production` y `git diff --check`. Si el cambio no afecta todo el recorrido, igualmente hay que conservar la regresión host/jugador porque los eventos se insertan en sus mutaciones.
 
 Esta evidencia prueba contrato y momento de emisión. No prueba recepción ni procesamiento de Google.
+
+## Reanálisis después de completar el contrato
+
+Al integrar la entrega de fondos en #203 no quedan eventos del contrato propuesto sin implementar. Eso no termina la iniciativa: todavía falta publicar el código, configurar GA4 y demostrar recepción y procesamiento con datos controlados.
+
+Orden recomendado:
+
+1. Revisar y mergear la entrega de fondos en #203. Repetir CI y Preview sobre el commit combinado.
+2. Revisar la propiedad canónica y sus cupos. Crear las dimensiones y métricas de ANA-05 antes de la corrida controlada, porque los informes personalizados no recuperan parámetros anteriores como si hubieran estado registrados.
+3. Autorizar y mergear #203 a `main`. Separar el commit integrado, el deployment de Production y la recepción de GA4 en la evidencia.
+4. Ejecutar una sola sala de QA con dos participantes, una primera partida y un replay. Puede quedar persistida si la aplicación no permite borrarla; no crear más salas para repetir una comprobación que ya pasó.
+5. Confirmar envío en el navegador y DebugView o Realtime. Esperar entre 24 y 48 horas y aceptar los informes sólo con un día completo procesado.
+6. Decidir si los resultados agregados alcanzan. Dejar ANA-06 sin implementar si no hace falta identificar cohortes exactas ni calcular porcentajes por partida con BigQuery.
+
+### Corrida controlada de Production
+
+La sala de QA debe usar un nombre inequívoco y dos participantes sintéticos. El recorrido mínimo esperado es:
+
+| Acción | Eventos esperados | Comprobación principal |
+| --- | --- | --- |
+| Cargar portada, cambiar idioma y abrir el tutorial | `page_view`, `language_changed`, `tutorial_opened`, `tutorial_begin`, `tutorial_complete` | Una emisión por acción, idioma y tipo de página correctos. `tutorial_error` se certifica con la prueba controlada de fallo, no provocando fallos repetidos en Production. |
+| Crear y configurar una sala con dos participantes | `room_created`, `room_started` | Una creación y una primera partida; cantidad, bolillero y significados coinciden con la configuración confirmada. |
+| Abrir un cartón, recargarlo y cambiar el fondo | `player_card_opened`, `background_selected` | La recarga no duplica la apertura. Un preset usa su clave y una URL usa sólo `custom_url`. |
+| Activar dos festejos y dos sonidos | `celebration_used`, `sound_used` | El primer uso de cada categoría lleva `yes`; el segundo, `no`. No aparecen nombres visibles ni rutas de archivos. |
+| Reiniciar, iniciar el replay y volver a abrir un cartón | `room_restarted`, `room_started`, `player_card_opened` | Reinicio uno, `play_kind: replay`, nuevo número de partida y una nueva apertura válida para esa partida. |
+
+La certificación tiene tres niveles y no deben mezclarse:
+
+- El request del navegador demuestra destino, nombre, parámetros y ausencia de nombres, códigos, IDs y URLs privadas.
+- DebugView o Realtime demuestra que la propiedad canónica recibió el evento.
+- El informe procesado demuestra que las definiciones y consultas producen los conteos y porcentajes acordados.
+
+La corrida no valida personas únicas. Coronabingo no tiene cuentas y la deduplicación de `player_card_opened`, festejos y sonidos depende del almacenamiento del navegador. Cambiar de dispositivo o borrar ese almacenamiento puede duplicar una observación. La reproducción solicitada de un sonido tampoco prueba que el navegador produjo audio.
 
 ### Vercel Preview
 
@@ -492,3 +539,21 @@ Fuentes oficiales:
 - Preview: `https://coronabingo-git-codex-cb2def-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
 - El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, dos contextos de navegador, el colector de prueba y Firestore Emulator.
 - No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
+
+### 2026-09-27: integración del stack en #203
+
+- #207 se mergeó en #206 mediante `ce8d4480d2a7ab6383d3cb28ceefa962afe0dd73`; sus checks de GitHub Actions y Vercel terminaron aprobados.
+- #206 se mergeó en #204 mediante `9d1833fa96bccfefac6b0145996e6d2d734cc8e6`; sus checks combinados terminaron aprobados.
+- #204 se mergeó en #203 mediante `fc2381af516ff3d9f94b0506cc5b4d314e845e2b`. `origin/main` en `4c98747bd128f0124db85e8b984e8f7b7529d5c0` es ancestro de ese commit.
+- Sobre #203 combinado pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 15 pruebas y `git diff --check`.
+- GitHub Actions `build`, Vercel y Vercel Preview Comments quedaron aprobados para #203. No se mergeó #203 a `main` ni se desplegó este stack a Production.
+
+### 2026-09-27: implementación local de fondos
+
+- Rama: `codex/analytics-cell-backgrounds`; base #203 en `fc2381af516ff3d9f94b0506cc5b4d314e845e2b`.
+- `player_card_opened` registra el fondo observado cuando el cartón válido y visible se monta; la vista de streamer, que oculta los cartones, no cuenta como apertura. Una clave versionada en `localStorage` evita otra emisión para el mismo jugador, sala y partida; esos IDs nunca salen del navegador.
+- `background_selected` registra cambios de preset después de guardarlos. La URL personalizada se registra una vez al perder foco y el payload contiene sólo `custom_url`, nunca el texto pegado.
+- Cada preset tiene una clave analítica estable junto al catálogo. La escritura de preferencias conserva los fondos guardados por otros jugadores del mismo navegador y tolera datos locales inválidos.
+- Las pruebas dirigidas cubren fondo inicial, refresh sin duplicado, preset activo, clic repetido, URL privada, español de escritorio e inglés móvil con Firestore Emulator.
+- Pasaron `npm run validate-analytics`, `npm run lint:check`, `GA_TRACKING_ID=G-TEST123 npm run build`, `npm run ui-tests:production` con 16 pruebas y `git diff --check`.
+- La primera ejecución de la suite completa detectó dos expectativas antiguas sobre la cantidad exacta de eventos. Se actualizaron para incluir `player_card_opened`; la repetición completa terminó con las 16 pruebas aprobadas.

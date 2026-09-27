@@ -1,6 +1,6 @@
 export interface BackgrounCell {
   backgroundCell: Cell
-  setBackgroundCell: (cell: Cell) => void
+  setBackgroundCell: (cell: Cell) => boolean
 }
 
 export interface Cell {
