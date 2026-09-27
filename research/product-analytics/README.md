@@ -415,3 +415,11 @@ Fuentes oficiales:
 - `GA_TRACKING_ID=G-TEST123 npm run build`: aprobado.
 - `npm run ui-tests:production`: 15 pruebas aprobadas en Chromium con Firestore Emulator; el runner detuvo sus procesos al terminar.
 - No se usó Firebase alojado, no se crearon datos persistentes y no se verificó recepción en GA4 ni Production.
+
+### 2026-09-27: PR y Preview de la segunda entrega
+
+- PR apilado: [#204](https://github.com/durancristhian/coronabingo/pull/204), abierto contra `t3code/plan-product-analytics` (#203) con commit de implementación `e57a63780bcf44591d4fbc524c6056749c795441`.
+- GitHub Actions `build`: aprobado. Vercel y Vercel Preview Comments: aprobados. No hubo revisiones ni comentarios de código pendientes al registrar esta evidencia.
+- Preview: `https://coronabingo-git-codex-50a38f-cristhian-durans-projects-3ace6550.vercel.app`, HTTP 200. El HTML no contiene ID `G-`, `googletagmanager` ni inicialización `gtag`, porque Analytics está desactivado en ese entorno.
+- El navegador colaborativo no estaba disponible; la comprobación de Preview fue HTTP y la interacción completa se cubrió localmente con el build de producción, Chromium, el colector de prueba y Firestore Emulator.
+- No se crearon salas ni registros de juego en Preview. Esta evidencia no prueba recepción ni procesamiento en la propiedad GA4 de Production.
