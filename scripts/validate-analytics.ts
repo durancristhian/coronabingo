@@ -2,15 +2,20 @@ import assert from 'assert'
 import { AnalyticsLog } from '../interfaces/analytics/Events'
 import {
   getAnalyticsPageType,
+  getBackgroundSelectedEventParams,
   getCelebrationUsedEventParams,
   getLanguageChangedEventParams,
+  getPlayerCardOpenedEventParams,
   getRoomCreatedEventParams,
   getRoomRestartedEventParams,
   getRoomStartedEventParams,
   getSoundUsedEventParams,
   getTutorialEventParams,
   markFirstAnalyticsUseInPlay,
+  markPlayerCardOpened,
 } from '../utils/analyticsEvents'
+import { getBackgroundAnalyticsValue } from '../utils/backgroundAnalytics'
+import { BACKGROUND_CELL_VALUES } from '../utils/constants'
 import {
   ANALYTICS_TEST_STORAGE_KEY,
   logEvent,
@@ -47,6 +52,23 @@ const soundUsedParams = getSoundUsedEventParams({
   playNumber: 2,
   soundCatalog: 'extra',
   soundKey: 'patao_coronabingo',
+})
+const presetBackground = getBackgroundAnalyticsValue({
+  type: 'img',
+  value: 'coronavirus.gif',
+})
+const customBackground = getBackgroundAnalyticsValue({
+  type: 'url',
+  value: 'https://private.example/image.png',
+})
+const backgroundSelectedParams = getBackgroundSelectedEventParams({
+  ...customBackground,
+  language: 'en',
+})
+const playerCardOpenedParams = getPlayerCardOpenedEventParams({
+  ...presetBackground,
+  language: 'es',
+  playNumber: 2,
 })
 
 assert.deepStrictEqual(roomCreatedParams, {
@@ -86,6 +108,37 @@ assert.deepStrictEqual(soundUsedParams, {
   sound_key: 'patao_coronabingo',
   ui_language: 'en',
 })
+assert.deepStrictEqual(backgroundSelectedParams, {
+  background_key: 'custom_url',
+  background_source: 'custom_url',
+  schema_version: 'v1',
+  ui_language: 'en',
+})
+assert.deepStrictEqual(playerCardOpenedParams, {
+  background_key: 'covid_19',
+  background_source: 'preset',
+  play_number: 2,
+  schema_version: 'v1',
+  ui_language: 'es',
+})
+assert.deepStrictEqual(
+  BACKGROUND_CELL_VALUES.map(({ analyticsKey }) => analyticsKey),
+  [
+    'yellow',
+    'blue',
+    'orange',
+    'green',
+    'multicolor',
+    'pikachu',
+    'pokemon',
+    'cremona',
+    'covid_19',
+    'clippy',
+    'ghana_pallbearers',
+    'frameworks',
+    'kun_aguero',
+  ],
+)
 assert.strictEqual(getAnalyticsPageType('/'), 'home')
 assert.strictEqual(getAnalyticsPageType('/room/[roomId]'), 'room_lobby')
 assert.strictEqual(
@@ -129,6 +182,8 @@ const validateAnalyticsTypes = (log: AnalyticsLog) => {
   log('tutorial_begin', getTutorialEventParams('es'))
   log('celebration_used', celebrationUsedParams)
   log('sound_used', soundUsedParams)
+  log('background_selected', backgroundSelectedParams)
+  log('player_card_opened', playerCardOpenedParams)
 
   // @ts-expect-error Room names are not part of the room_created contract.
   log('room_created', { ...roomCreatedParams, description: 'private name' })
@@ -143,6 +198,11 @@ const validateAnalyticsTypes = (log: AnalyticsLog) => {
     ...soundUsedParams,
     // @ts-expect-error Sound paths are not valid analytics keys.
     sound_key: '/sounds/private.mp3',
+  })
+  log('background_selected', {
+    ...backgroundSelectedParams,
+    // @ts-expect-error Raw URLs are not valid analytics background keys.
+    background_key: 'https://private.example/image.png',
   })
 }
 
@@ -185,6 +245,7 @@ assert.strictEqual(
 )
 
 const calls: unknown[][] = []
+const localStorageValues = new Map<string, string>()
 const sessionStorageValues = new Map<string, string>()
 
 process.env.GA_TRACKING_ID = 'G-TEST123'
@@ -195,6 +256,12 @@ Object.defineProperty(globalThis, 'window', {
       calls.push(args)
     },
     location: { origin },
+    localStorage: {
+      getItem: (key: string) => localStorageValues.get(key) || null,
+      setItem: (key: string, value: string) => {
+        localStorageValues.set(key, value)
+      },
+    },
     sessionStorage: {
       getItem: (key: string) => sessionStorageValues.get(key) || null,
       setItem: (key: string, value: string) => {
@@ -222,6 +289,18 @@ assert.strictEqual(
 assert.strictEqual(
   markFirstAnalyticsUseInPlay('sound_used', 'private-room', 1),
   'yes',
+)
+assert.strictEqual(
+  markPlayerCardOpened('private-room', 'private-player', 1),
+  true,
+)
+assert.strictEqual(
+  markPlayerCardOpened('private-room', 'private-player', 1),
+  false,
+)
+assert.strictEqual(
+  markPlayerCardOpened('private-room', 'private-player', 2),
+  true,
 )
 
 pageview({

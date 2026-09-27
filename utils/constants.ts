@@ -1,9 +1,10 @@
-import { Emojis } from '~/interfaces/custom/Emojis'
+import { Emojis } from '../interfaces/custom/Emojis'
 import {
+  AnalyticsBackgroundKey,
   AnalyticsSoundCatalog,
   AnalyticsSoundKey,
-} from '~/interfaces/analytics/Events'
-import ticketsMetadata from '~/public/tickets-metadata.json'
+} from '../interfaces/analytics/Events'
+import ticketsMetadata from '../public/tickets-metadata.json'
 
 interface Sound {
   analyticsCatalog: AnalyticsSoundCatalog
@@ -13,22 +14,52 @@ interface Sound {
   url: string
 }
 
-export const BACKGROUND_CELL_VALUES = [
-  { key: 'playerId:backgrounds.yellow', type: 'color', value: 'yellow' },
-  { key: 'playerId:backgrounds.blue', type: 'color', value: 'blue' },
-  { key: 'playerId:backgrounds.orange', type: 'color', value: 'orange' },
-  { key: 'playerId:backgrounds.green', type: 'color', value: 'green' },
+interface BackgroundCellOption {
+  analyticsKey: Exclude<AnalyticsBackgroundKey, 'custom_url'>
+  key: string
+  type: string
+  value: string[] | string
+}
+
+export const BACKGROUND_CELL_VALUES: BackgroundCellOption[] = [
   {
+    analyticsKey: 'yellow',
+    key: 'playerId:backgrounds.yellow',
+    type: 'color',
+    value: 'yellow',
+  },
+  {
+    analyticsKey: 'blue',
+    key: 'playerId:backgrounds.blue',
+    type: 'color',
+    value: 'blue',
+  },
+  {
+    analyticsKey: 'orange',
+    key: 'playerId:backgrounds.orange',
+    type: 'color',
+    value: 'orange',
+  },
+  {
+    analyticsKey: 'green',
+    key: 'playerId:backgrounds.green',
+    type: 'color',
+    value: 'green',
+  },
+  {
+    analyticsKey: 'multicolor',
     key: 'playerId:backgrounds.multicolor',
     type: 'color',
     value: ['indigo', 'pink', 'purple', 'teal'],
   },
   {
+    analyticsKey: 'pikachu',
     key: 'playerId:backgrounds.pikachu',
     type: 'img',
     value: 'pokemon/025.png',
   },
   {
+    analyticsKey: 'pokemon',
     key: 'playerId:backgrounds.pokemon',
     type: 'img',
     value: [
@@ -39,21 +70,25 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'cremona',
     key: 'playerId:backgrounds.cremona',
     type: 'img',
     value: 'cremona.png',
   },
   {
+    analyticsKey: 'covid_19',
     key: 'playerId:backgrounds.covid-19',
     type: 'img',
     value: 'coronavirus.gif',
   },
   {
+    analyticsKey: 'clippy',
     key: 'playerId:backgrounds.clippy',
     type: 'img',
     value: 'clippy.png',
   },
   {
+    analyticsKey: 'ghana_pallbearers',
     key: 'playerId:backgrounds.ghana-pallbearers',
     type: 'img',
     value: [
@@ -64,6 +99,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'frameworks',
     key: 'playerId:backgrounds.frameworks',
     type: 'img',
     value: [
@@ -74,6 +110,7 @@ export const BACKGROUND_CELL_VALUES = [
     ],
   },
   {
+    analyticsKey: 'kun_aguero',
     key: 'playerId:backgrounds.kun-aguero',
     type: 'img',
     value: 'kun-aguero.jpg',

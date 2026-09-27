@@ -1,4 +1,6 @@
 import {
+  AnalyticsBackgroundKey,
+  AnalyticsBackgroundSource,
   AnalyticsEventMap,
   AnalyticsFirstUse,
   AnalyticsLanguage,
@@ -113,6 +115,66 @@ export const getTutorialEventParams = (
     tutorial_language: tutorialLanguage,
     tutorial_provider: 'youtube',
   }
+}
+
+interface BackgroundEventOptions {
+  backgroundKey: AnalyticsBackgroundKey
+  backgroundSource: AnalyticsBackgroundSource
+  language: string
+}
+
+export const getBackgroundSelectedEventParams = ({
+  backgroundKey,
+  backgroundSource,
+  language,
+}: BackgroundEventOptions): AnalyticsEventMap['background_selected'] => ({
+  ...getEventContext(language),
+  background_key: backgroundKey,
+  background_source: backgroundSource,
+})
+
+interface PlayerCardOpenedEventOptions extends BackgroundEventOptions {
+  playNumber: number
+}
+
+export const getPlayerCardOpenedEventParams = ({
+  backgroundKey,
+  backgroundSource,
+  language,
+  playNumber,
+}: PlayerCardOpenedEventOptions): AnalyticsEventMap['player_card_opened'] => ({
+  ...getEventContext(language),
+  background_key: backgroundKey,
+  background_source: backgroundSource,
+  play_number: playNumber,
+})
+
+const playerCardOpenedFallback = new Set<string>()
+const playerCardOpenedStoragePrefix =
+  'coronabingo:analytics:player-card-opened:v1'
+
+export const markPlayerCardOpened = (
+  roomId: string,
+  playerId: string,
+  playNumber: number,
+) => {
+  const key = `${playerCardOpenedStoragePrefix}:${roomId}:${playerId}:${playNumber}`
+
+  if (typeof window !== 'undefined') {
+    try {
+      if (window.localStorage.getItem(key)) return false
+
+      window.localStorage.setItem(key, '1')
+      return true
+    } catch {
+      // Fall back to in-memory deduplication when storage is unavailable.
+    }
+  }
+
+  if (playerCardOpenedFallback.has(key)) return false
+
+  playerCardOpenedFallback.add(key)
+  return true
 }
 
 type FirstUseEventName = 'celebration_used' | 'sound_used'

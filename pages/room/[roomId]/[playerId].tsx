@@ -130,7 +130,12 @@ export default function RoomPlayer() {
 
   return (
     <Layout type="large">
-      <BackgroundCellContextProvider playerId={player.id}>
+      <BackgroundCellContextProvider
+        playNumber={room.timesPlayed}
+        playerId={player.id}
+        roomId={room.id}
+        trackCardOpened={!enableStreamerView}
+      >
         <div className="mb-4">
           <Heading textAlign="center" type="h2">
             {t('playerId:title', {

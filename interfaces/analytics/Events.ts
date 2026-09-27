@@ -1,5 +1,21 @@
 export type AnalyticsLanguage = 'en' | 'es'
 export type AnalyticsFirstUse = 'no' | 'yes'
+export type AnalyticsBackgroundKey =
+  | 'blue'
+  | 'clippy'
+  | 'covid_19'
+  | 'cremona'
+  | 'custom_url'
+  | 'frameworks'
+  | 'ghana_pallbearers'
+  | 'green'
+  | 'kun_aguero'
+  | 'multicolor'
+  | 'orange'
+  | 'pikachu'
+  | 'pokemon'
+  | 'yellow'
+export type AnalyticsBackgroundSource = 'custom_url' | 'preset'
 export type AnalyticsPageType =
   | 'home'
   | 'not_found'
@@ -34,6 +50,10 @@ interface AnalyticsEventContext {
 }
 
 export interface AnalyticsEventMap {
+  background_selected: AnalyticsEventContext & {
+    background_key: AnalyticsBackgroundKey
+    background_source: AnalyticsBackgroundSource
+  }
   celebration_used: AnalyticsEventContext & {
     celebration_type: 'balloons' | 'confetti' | 'pallbearers'
     first_use_in_play: AnalyticsFirstUse
@@ -46,6 +66,11 @@ export interface AnalyticsEventMap {
   }
   no_local_storage_support: AnalyticsEventContext & {
     description: string
+  }
+  player_card_opened: AnalyticsEventContext & {
+    background_key: AnalyticsBackgroundKey
+    background_source: AnalyticsBackgroundSource
+    play_number: number
   }
   room_created: AnalyticsEventContext & {
     room_created_date: string
