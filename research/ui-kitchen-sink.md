@@ -2,7 +2,7 @@
 
 Status: ready-for-agent
 
-Work status: claimed
+Work status: resolved
 
 ## Objetivo
 
@@ -130,7 +130,7 @@ Evidencia local:
 - `npm run lint:check`, `npm run build` y `git diff --check`: pasaron.
 - `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 62,8 s contra Firestore Emulator, incluido el recorrido móvil sin overflow.
 - Revisión visual de `/kitchen-sink` a 1905 px: el readonly expuso el atributo HTML y su estilo diferenciado; el badge conservó fondo azul oscuro sobre la fila verde; las celdas llamadas quedaron transparentes alrededor de un único círculo; los iconos mostraron verde, ocre y rojo según el tipo de mensaje. El documento mantuvo `scrollWidth` igual a `clientWidth`.
-- La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.
+- La comprobación local no leyó ni escribió Firebase alojado.
 - La primera inspección del Preview de `ef36018` detectó que PurgeCSS quitaba los modificadores de color construidos dinámicamente para los iconos. Se reemplazaron por nombres de clase estáticos y se protegieron esas tres reglas semánticas durante el purge antes de considerar resuelto el feedback.
 - El build de producción posterior pasó y su CSS compilado conservó `cb-message-icon--information`, `cb-message-icon--success` y `cb-message-icon--error`.
 - Implementación final del ajuste: `0475f3d`. [GitHub Actions 36340804182](https://github.com/durancristhian/coronabingo/actions/runs/36340804182) pasó y Vercel quedó Ready para ese mismo HEAD.
@@ -166,3 +166,6 @@ Evidencia local:
 - Revisión de `/kitchen-sink` a 1920 px: el root computó `tabular-nums`, el readonly mantuvo fondo apagado y borde discontinuo sin `box-shadow`, y el bolillero mostró 90 celdas en 10 columnas con filas de 36 px sin separación adicional ni overflow horizontal.
 - `npm run ui-tests`: pasaron los 15 escenarios de Chromium en 63,2 s contra Firestore Emulator, incluido el recorrido móvil a 390 × 844.
 - La comprobación fue local y no leyó ni escribió Firebase alojado. Queda pendiente verificar el nuevo HEAD en CI y Vercel Preview.
+- Implementación: `6b82f7d`. [GitHub Actions 36343091690](https://github.com/durancristhian/coronabingo/actions/runs/36343091690) pasó y Vercel quedó Ready para ese mismo HEAD.
+- El Preview computó `tabular-nums` en el root, `box-shadow: none` en el readonly y una grilla de 90 celdas, 10 columnas y filas de 36 px en escritorio. `scrollWidth` y `clientWidth` coincidieron en 1905 px.
+- La verificación remota fue de solo lectura; no creó salas ni escribió datos en Firebase alojado. Production no fue desplegado ni verificado.
