@@ -250,3 +250,9 @@ Feedback posterior: se aclara el token compartido de header/footer a blanco cál
 Lint, build y `git diff --check` pasaron para este ajuste de color. Servidor reiniciado en la misma URL, sesión `screen` `coronabingo-3127-offwhite`, Node PID `25013`. No se repitió la suite funcional para el cambio de un token CSS.
 
 El usuario aprobó guardar y publicar los ajustes en PR #205, e integrar el último `main`. La aprobación reemplaza la restricción de mantener esta iteración exclusivamente local.
+
+Publicación aprobada:
+
+- `8afd236` guarda los ajustes visuales; `35ad6bf` integra `origin/main` en `08ab0ec` sin conflictos e incorpora la sanitización de URLs de analítica.
+- Sobre el resultado integrado pasaron `npm run lint:check`, `npm run validate-analytics`, `npm run build`, `git diff --check` y los 16 casos de `npm run ui-tests` en 66,5 segundos incluyendo servicios. El runner aislado detuvo todos sus procesos al finalizar.
+- PR #205 conserva `main` como base. Su descripción se actualiza para reflejar las fuentes finales, el retiro de la demo, el pulido visual y la cobertura de 16 escenarios. No se autoriza merge ni despliegue a Production.
