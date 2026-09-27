@@ -94,6 +94,25 @@ test('a player keeps the optimized empty-cell background after reload', async ({
     coronavirusOption.locator('[style*="coronavirus.28e4692f.webp"]'),
   ).toHaveCount(1)
   await expect(coronavirusOption).toHaveClass(/bg-green-200/)
+
+  await player.evaluate(() => localStorage.removeItem('backgroundCell'))
+  await coronavirusOption.click()
+  await expect
+    .poll(() =>
+      player.evaluate(() => {
+        const saved = JSON.parse(localStorage.getItem('backgroundCell') || '{}')
+
+        return Object.values(saved)[0]
+      }),
+    )
+    .toEqual({ type: 'img', value: 'coronavirus.gif' })
+
+  await player.reload()
+  await expect(
+    player
+      .getByTestId('bingo-card')
+      .locator('[style*="coronavirus.28e4692f.webp"]'),
+  ).toHaveCount(24)
 })
 
 test('host celebration and sound reach another player context', async ({
