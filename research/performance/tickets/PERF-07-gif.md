@@ -110,6 +110,12 @@ La [demo local](../perf07-demo/index.html) compara el original con el WebP lossl
 - Validación local sobre la rama: `npm run lint:check`, `npm run ui-tests` (15/15), `npm run build` y `git diff --check` correctos. El build incluyó `validate-locales`. Validación de Preview: pendiente.
 - Criterios todavía abiertos: revisión de Safari y viewport móvil, comparación perceptible del costo de decodificación con varias celdas y cabecera de caché de Preview. La política `immutable` general permanece en PERF-03; PERF-07 aporta la URL versionada sin cerrar ese ticket.
 
+### Evidencia de Vercel Preview
+
+El Preview de la rama quedó disponible en `https://coronabingo-git-t3cod-4f4fc6-cristhian-durans-projects-3ace6550.vercel.app`. La ruta `/background-cells/coronavirus.28e4692f.webp` respondió `200`, `Content-Type: image/webp`, `Content-Length: 1049854` y SHA-256 `28e4692fa02f895354ab025485841932801f18aa16b0e17ec32ca9557c4903b7`.
+
+Vercel informó el deployment como Ready. La respuesta conserva `Cache-Control: public, max-age=0, must-revalidate`; aplicar `immutable` sigue pendiente en PERF-03. La automatización visual compartida no estuvo disponible para este entorno, por lo que la revisión humana del flujo en Preview, Safari y viewport móvil continúa abierta antes de resolver PERF-07.
+
 ### Fuentes primarias
 
 - [Manual de Gifsicle](https://www.lcdf.org/gifsicle/man.html): `-O1`, `-O2` y `-O3`, transparencia y advertencia de que optimizar puede no reducir el archivo.
