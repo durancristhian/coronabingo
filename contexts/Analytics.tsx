@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { AnalyticsContextData } from '~/interfaces/contexts/Analytics'
-import { analytics } from '~/utils/firebase'
+import { AnalyticsEventParams, logEvent } from '~/utils/gtag'
 
 interface Props {
   children: ReactNode
@@ -15,11 +15,8 @@ interface Props {
 }
 
 const AnalyticsContextProvider = ({ children }: Props) => {
-  const log = (
-    eventName: string,
-    eventParams: Partial<firebase.analytics.EventParams>,
-  ) => {
-    analytics?.logEvent(eventName, eventParams)
+  const log = (eventName: string, eventParams?: AnalyticsEventParams) => {
+    logEvent(eventName, eventParams)
   }
 
   return (

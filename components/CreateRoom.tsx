@@ -32,9 +32,7 @@ export default function CreateRoom() {
 
       updateToast('index:create-room.success', 'success', toastId)
 
-      log('room_created', {
-        description: name,
-      })
+      log('room_created')
 
       setTimeout(() => {
         dismissToast(toastId)

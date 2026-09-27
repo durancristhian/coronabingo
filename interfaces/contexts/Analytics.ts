@@ -1,6 +1,5 @@
+import { AnalyticsEventParams } from '~/utils/gtag'
+
 export interface AnalyticsContextData {
-  log: (
-    eventName: string,
-    eventParams: Partial<firebase.analytics.EventParams>,
-  ) => void
+  log: (eventName: string, eventParams?: AnalyticsEventParams) => void
 }

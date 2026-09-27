@@ -8,6 +8,7 @@
         "generate-tickets": "ts-node --project tsconfig.scripts.json scripts/generate-tickets",
         "lint": "npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
+        "validate-analytics": "ts-node --project tsconfig.scripts.json scripts/validate-analytics",
         "validate-locales": "ts-node --project tsconfig.scripts.json scripts/validate-locales",
         "validate-tickets": "ts-node --project tsconfig.scripts.json scripts/validate-tickets",
         "typecheck": "next typegen && tsc --noEmit",
