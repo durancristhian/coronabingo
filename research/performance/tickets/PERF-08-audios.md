@@ -2,11 +2,11 @@
 
 Status: needs-info
 
-Work status: open
+Work status: claimed
 
 Type: research
 
-Estado: diagnóstico de formatos confirmado; escucha de candidatos pendiente. Prioridad media a baja. Esfuerzo: 0,5–1 día. Riesgo medio por calidad, reproducción y URLs compartidas. Coordinar con PERF-03.
+Estado: el usuario aprobó los 19 candidatos livianos después de escucharlos en local. Implementación y validación local completas; confirmación en Vercel Preview pendiente. Coordinar el versionado de caché con PERF-03.
 
 ## Diagnóstico
 
@@ -79,7 +79,24 @@ bash research/performance/audio-demo/generate-demo.sh
 python3 -m http.server 4178 --bind 127.0.0.1
 ```
 
-Luego abrir `http://127.0.0.1:4178/research/performance/audio-demo/index.html`. Los audios generados quedan ignorados por Git y los archivos de `public/sounds` no se modifican. La decisión del usuario sigue pendiente antes de cerrar el ticket o implementar reemplazos.
+Luego abrir `http://127.0.0.1:4178/research/performance/audio-demo/index.html`. Los audios generados quedan ignorados por Git. La demo no modifica `public/sounds`; la implementación aprobada se registra a continuación.
+
+### Decisión e implementación
+
+El usuario escuchó la demo local y eligió la variante liviana para los 19 sonidos. Se reemplazaron los MP3 de `public/sounds` sin cambiar rutas, nombres ni el mecanismo de carga bajo demanda.
+
+| Medición | Original | Implementado | Diferencia |
+| --- | ---: | ---: | ---: |
+| Catálogo completo, 19 MP3 | 2.041.513 B | 1.263.164 B | -778.349 B; -38,13% |
+
+FFmpeg decodificó los 19 archivos nuevos sin errores. Todos conservan MP3, sample rate y cantidad de canales. La mayor diferencia de duración informada por el contenedor es 0,011996 segundos. La escucha local del usuario cubre la pérdida perceptual aceptada; falta confirmar la reproducción dentro del flujo real en Vercel Preview.
+
+Validación local en la rama `t3code/optimize-audio-size`:
+
+- `npm run lint:check`: correcto.
+- `npm run build`: correcto con Next.js 16.3.6 y Webpack; conserva la advertencia existente de Tailwind sin rutas de purge.
+- Servidor de producción local en `http://127.0.0.1:4179`: los 19 MP3 respondieron `200 audio/mpeg` y entregaron exactamente los bytes esperados.
+- `git diff --check`: correcto.
 
 ## Alcance
 
@@ -105,3 +122,7 @@ El usuario pidió investigar cuánto puede reducirse el catálogo sin perder cal
 ### 2026-09-27: demo comparativa local
 
 Se preparó una tabla reproducible con los originales, una variante liviana para evaluación auditiva y una variante sin pérdida validada. El usuario elegirá la política después de escucharla; los assets publicados permanecen intactos y el trabajo sigue abierto.
+
+### 2026-09-27: elección e implementación
+
+El usuario eligió `liviano` para los 19 sonidos. Se aplicaron esos archivos a las rutas existentes y se verificó una reducción total de 38,13%. El ticket queda reclamado hasta que el usuario confirme el comportamiento en Vercel Preview.

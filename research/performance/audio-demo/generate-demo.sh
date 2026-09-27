@@ -61,7 +61,8 @@ if [ ! -x "$tool_binary" ]; then
 fi
 
 manifest_tmp="$generated_dir/manifest.js.next"
-printf 'window.PERF08_AUDIO_MANIFEST = {\n' > "$manifest_tmp"
+printf '/* eslint-disable prettier/prettier */\n' > "$manifest_tmp"
+printf 'window.PERF08_AUDIO_MANIFEST = {\n' >> "$manifest_tmp"
 printf '  generatedAt: %s,\n' "$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")" >> "$manifest_tmp"
 printf '  lossyMethod: "MP3 LAME VBR V4; V5 sólo cuando V4 no reduce",\n' >> "$manifest_tmp"
 printf '  losslessMethod: "mp3packercpp 1.2.1 con PCM validado por FFmpeg",\n' >> "$manifest_tmp"
