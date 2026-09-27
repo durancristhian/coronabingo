@@ -5,6 +5,7 @@ import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
 import InputText from '~/components/InputText'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
+import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
 
 export default function BackgroundCells() {
@@ -47,7 +48,9 @@ export default function BackgroundCells() {
                 ])}
                 style={{
                   ...(type === 'img' && {
-                    backgroundImage: `url(/background-cells/${firstOrDefault})`,
+                    backgroundImage: `url(${getBackgroundCellImageUrl(
+                      firstOrDefault,
+                    )})`,
                   }),
                   ...(type === 'url' && {
                     backgroundImage: `url(${firstOrDefault})`,
