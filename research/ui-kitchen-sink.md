@@ -256,3 +256,21 @@ Publicación aprobada:
 - `8afd236` guarda los ajustes visuales; `35ad6bf` integra `origin/main` en `08ab0ec` sin conflictos e incorpora la sanitización de URLs de analítica.
 - Sobre el resultado integrado pasaron `npm run lint:check`, `npm run validate-analytics`, `npm run build`, `git diff --check` y los 16 casos de `npm run ui-tests` en 66,5 segundos incluyendo servicios. El runner aislado detuvo todos sus procesos al finalizar.
 - PR #205 conserva `main` como base. Su descripción se actualiza para reflejar las fuentes finales, el retiro de la demo, el pulido visual y la cobertura de 16 escenarios. No se autoriza merge ni despliegue a Production.
+
+## Release a producción y limpieza — 2026-09-27
+
+El usuario autorizó explícitamente merge, producción, verificación funcional y eliminación de los worktrees existentes. PR #205 se mergeó en `0ea2fb454a6e603d04709a3f7a093408cfb21b48`. El checkout principal se actualizó por fast-forward.
+
+- [CI de main](https://github.com/durancristhian/coronabingo/actions/runs/36358465919) pasó. Vercel publicó `dpl_GqsXZWPD14S3UeFhdCQC41V2coid`, asociado por el check de ese commit, con target `production`, estado `READY`, alias `coronabingo.com.ar` y funciones `nodejs24.x`.
+- En el checkout principal, `npm ci`, `npm run lint:check`, `npm run validate-analytics`, `git diff --check` y `npm run ui-tests:production` pasaron. La suite compilada pasó 16 casos en 21,3 segundos, 33,1 segundos incluyendo servicios, sobre `demo-coronabingo-ui`. Incluye contextos aislados, recorrido móvil, roles, sincronización, marcado, persistencia, reinicio, herramientas, exportación y tutoriales.
+- El bundle público confirmó el proyecto Firebase `coronabingo-bf16f` antes de crear datos. La comprobación real usó la sala `hShoRlaoDLJDS3uzBY5H`, nombre `QA UI release 20260927 0ea2fb4`, y los jugadores `pwO1aMzPYhQydqbZ11zH` y `VYVTLegJ1mtU4JIocNvX`.
+- En producción pasaron creación y preparación, asignación de dos cartones por jugador, entrada de anfitrión/jugador, sorteo sincronizado de 39, marcado del 3, cambio a inglés conservando la ruta y recarga conservando marca y sorteo. Reiniciar devolvió el anfitrión a preparación y el jugador a espera; comenzar otra partida asignó nuevos cartones sin marcas ni números sorteados. El nuevo sorteo de 28 llegó a ambos.
+- La revisión real usó pestañas distintas del mismo perfil. Los contextos independientes y el viewport móvil corresponden a la suite aislada, no a una prueba móvil en Firebase alojado. Son comprobaciones acotadas, no cobertura exhaustiva de todos los dispositivos o condiciones.
+- Se verificaron las mismas filas verdes/amarillas en admin y landing, fuente Bricolage 700 en portales, X centrada con el título y separadores de fondos continuos hasta los bordes. Seleccionar Pikachu actualizó el fondo del cartón. La ruta retirada `/kitchen-sink` devuelve 404.
+- La consulta de logs de error de ese deployment para los 15 minutos anteriores no devolvió registros. No se cambiaron reglas, configuración de Firebase, variables ni monitoreo.
+
+Limpieza de datos: se borraron ambos documentos de jugador con precondición de versión. Firestore rechazó borrar el documento de sala con HTTP 403. La sala permanece identificada como QA, vacía, inactiva, sin anfitrión ni números seleccionados; esta es la única brecha de limpieza de datos alojados. El intento inicial de usar la configuración local se detuvo antes de acceder porque apuntaba a otro proyecto; la limpieza utilizó después el endpoint REST del proyecto de producción verificado.
+
+Limpieza local: los ocho worktrees del inventario inicial estaban sin cambios y sus `.env` eran idénticos al conservado en el checkout principal. Se retiran los cinco worktrees de analytics, el plan de analytics, el de diseño y `wontfix-ads-consent`; sus commits y ramas permanecen recuperables en Git. La rama de consentimiento conserva el commit no integrado `11024db`. Se detuvo el servidor del worktree de diseño antes de retirarlo.
+
+Durante la verificación se crearon dos worktrees nuevos con trabajo activo y cambios sin commit: `t3code/analyze-feedback-features-bugs` y `codex/remove-paypal`. Quedan preservados y fuera de la limpieza para no destruir el trabajo concurrente. Por esta razón el resultado no es literalmente un único worktree: quedan `main` y esas dos tareas nuevas.
