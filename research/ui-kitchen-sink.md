@@ -274,3 +274,31 @@ Limpieza de datos: se borraron ambos documentos de jugador con precondición de 
 Limpieza local: los ocho worktrees del inventario inicial estaban sin cambios y sus `.env` eran idénticos al conservado en el checkout principal. Se retiran los cinco worktrees de analytics, el plan de analytics, el de diseño y `wontfix-ads-consent`; sus commits y ramas permanecen recuperables en Git. La rama de consentimiento conserva el commit no integrado `11024db`. Se detuvo el servidor del worktree de diseño antes de retirarlo.
 
 Durante la verificación se crearon dos worktrees nuevos con trabajo activo y cambios sin commit: `t3code/analyze-feedback-features-bugs` y `codex/remove-paypal`. Quedan preservados y fuera de la limpieza para no destruir el trabajo concurrente. Por esta razón el resultado no es literalmente un único worktree: quedan `main` y esas dos tareas nuevas.
+
+## Bolillero responsive: volver a diez columnas, 2026-09-27
+
+Status: ready-for-agent
+Work status: claimed
+
+El usuario pidió diagnosticar las filas de cinco números y corregirlas en un PR.
+Esta solicitud reemplaza el criterio anterior de cinco columnas en móvil.
+
+- Base verificada tras `git fetch origin`: `12f2d8a`, igual a `origin/main`.
+- Worktree: `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-1c9cf165`.
+- Rama: `t3code/fix-responsive-bolillero`.
+- Bootstrap: copia local autorizada de `.env` sin sobrescritura; `npm ci` correcto con Node 24.21.0 y npm 11.19.0.
+- Causa: `e57eb99` introdujo `width: 20% !important` para las celdas por debajo de 640 px. `6b82f7d` mantuvo esa decisión como `grid-template-columns: repeat(5, minmax(0, 1fr))`. El navegador no decidía reducir columnas por falta de espacio.
+- Reproducción: `npm run ui-tests -- tests/ui/number-board-responsive.spec.ts` falló antes de modificar CSS. A 390 px, el tablero de 326 px mostraba 18 filas de 5; se esperaban 9 filas de 10.
+- Corrección: eliminar únicamente la regla móvil que sustituía las diez columnas compartidas. Se mantienen los controles y el comportamiento del juego.
+- Aceptación: nueve filas de diez números entre 320 y 1280 px, celdas de al menos 24 px, números contenidos en sus celdas, sin overflow horizontal y marcado manual operativo en español e inglés.
+- Prueba focal posterior: pasó en 7,3 s de runner, 3,7 s de Playwright. Verificó 320, 360, 375, 390, 639, 640, 767, 768, 1023, 1024 y 1280 px en ambos idiomas, y agregar/quitar el 90 mediante la UI. A 320 px, tablero de 256 px y celdas mínimas de 25,59 px; a 390 px, tablero de 326 px y celdas mínimas de 32,59 px.
+- Entorno: `http://127.0.0.1:3187`, Firestore Emulator `demo-coronabingo-ui` en `127.0.0.1:8187`. El runner verifica puertos libres, registra sus PID y detiene sus procesos al terminar. Reproducción inicial: runner 30646, Firestore 30648 y Next.js 30901.
+- La sala `QA bolillero responsive` vive únicamente en el emulador descartable. No se escribió Firebase alojado.
+- Pendientes: validación completa, revisión visual de capturas, CI y Vercel del PR. Production queda fuera de esta verificación.
+
+Verificación local final:
+
+- `npm run lint:check` y `npm run build`: pasaron. El build incluyó validación de locales.
+- `npm run ui-tests`: 21 escenarios aprobados, 75,8 s de runner. Incluye sincronización host/jugador, marcado, persistencia y reinicio, además de la nueva matriz responsive bilingüe.
+- `git diff --check`: pasó. Capturas móviles disponibles como adjuntos de la prueba responsive en el reporte Playwright. La inspección visual a 320 px confirmó nueve filas de diez y el 90 marcado dentro de su celda.
+- Todos los procesos del runner terminaron; no quedan salas de prueba alojadas ni datos del emulador retenidos.
