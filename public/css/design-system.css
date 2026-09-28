@@ -581,10 +581,6 @@
     margin-left: 0.5rem;
     white-space: normal;
   }
-
-  .coronabingo-ui .cb-number-board {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
 }
 
 @media (pointer: coarse) {

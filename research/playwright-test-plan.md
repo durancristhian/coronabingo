@@ -301,3 +301,13 @@ La iteración local sobre `0cae712` del 2026-09-27 retiró la kitchen sink, apli
 ### 2026-09-27: Copy audit in neutral Spanish and English
 
 [Copy audit](app-copy-audit.md) updates existing journey selectors to the reviewed text and adds four bilingual journeys at 390×844 and 1280×844. They exercise creation, setup, lobby, sharing, cards and restart through translated accessible names, check horizontal overflow, and attach screenshots. Existing gameplay assertions are retained. `npm run ui-tests` passed 20/20; `npm run ui-tests:production` passed 20/20 in 25.7 seconds, 35.8 seconds including build/services. Both used the task worktree on `t3code/audit-app-copy`, `http://127.0.0.1:3187` and the isolated `demo-coronabingo-ui` emulator. The runners stopped all owned processes and discarded test data. Hosted verification is tracked separately in the audit.
+
+## 2026-09-27: regresión del bolillero responsive
+
+Base `12f2d8a`, rama `t3code/fix-responsive-bolillero`, worktree `/Users/durancristhian/.t3/worktrees/coronabingo/t3code-1c9cf165`.
+
+`tests/ui/number-board-responsive.spec.ts` reproduce el problema en una sala manual real: antes del cambio, a 390 px muestra 18 filas de cinco y falla al esperar nueve filas de diez. Tras eliminar la excepción CSS de menos de 640 px, comprueba 11 anchos entre 320 y 1280 px en español e inglés, filas de diez, botones de al menos 24 px, etiquetas dentro de sus celdas y ausencia de overflow. Agrega el 90 antes de medir y lo quita al terminar. Adjunta capturas del tablero a 320 px en ambos idiomas.
+
+`npm run ui-tests` pasó los 21 escenarios en 75,8 s de runner. `npm run lint:check`, `npm run build` y `git diff --check` también pasaron. URL `http://127.0.0.1:3187`, Firebase aislado `demo-coronabingo-ui` en `127.0.0.1:8187`; el runner comprobó puertos y detuvo sus propios procesos. Sin escritura en Firebase alojado. El caso nuevo usa Chromium; otros motores y gameplay de Preview/Production no fueron verificados.
+
+El diagnóstico, la historia de la regla y el cambio de criterio quedan en [el registro del sistema visual](ui-kitchen-sink.md#bolillero-responsive-volver-a-diez-columnas-2026-09-27).
