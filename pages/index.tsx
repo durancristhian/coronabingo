@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
 import React, { useRef, useState } from 'react'
-import { FiEye } from 'react-icons/fi'
+import { FiPlayCircle } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -105,8 +105,8 @@ export default function Index() {
       </div>
       <p className="cb-home-note">
         <span>{t('index:videocall-suggestion')} </span>
-        <Anchor href="https://hangouts.google.com/" id="google-hangouts">
-          Google Hangouts
+        <Anchor href="https://meet.google.com/" id="google-hangouts">
+          Google Meet
         </Anchor>
         <span>.</span>
       </p>
@@ -116,7 +116,7 @@ export default function Index() {
           id="watch-tutorial"
           onClick={openTutorial}
           className="w-full"
-          iconLeft={<FiEye />}
+          iconLeft={<FiPlayCircle />}
         >
           {t('index:how-to-play-button')}
         </Button>

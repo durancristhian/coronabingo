@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { FiCoffee, FiHeart, FiTwitter } from 'react-icons/fi'
+import { FiCoffee, FiMessageSquare, FiTwitter } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import News from '~/components/News'
@@ -47,7 +47,7 @@ export default function Footer() {
                   display="block"
                 >
                   <span className="flex items-center justify-center">
-                    <FiHeart />
+                    <FiMessageSquare />
                     <span className="ml-1">{t('common:feedback-form')}</span>
                   </span>
                 </Anchor>

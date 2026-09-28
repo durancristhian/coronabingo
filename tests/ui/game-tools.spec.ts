@@ -262,7 +262,7 @@ test('an English mobile player records the observed and selected background', as
 
   await player.locator('#configure-empty-cells:visible').click()
   const backgrounds = player.getByRole('dialog', {
-    name: 'Empty cells background',
+    name: 'Empty cell background',
   })
   await expect(backgrounds).toBeVisible()
   await backgrounds.getByRole('button', { name: 'Green', exact: true }).click()
@@ -308,7 +308,7 @@ test('host celebration and sound reach another player context', async ({
   await host.locator('#celebrations:visible').click()
   const celebrations = host.getByRole('dialog', { name: 'Festejos' })
   await celebrations
-    .getByRole('button', { name: 'Activar confetti', exact: true })
+    .getByRole('button', { name: 'Mostrar confeti', exact: true })
     .evaluate(button => {
       const celebration = button as HTMLButtonElement
       celebration.click()
@@ -335,7 +335,7 @@ test('host celebration and sound reach another player context', async ({
     ])
 
   await celebrations
-    .getByRole('button', { name: 'Desactivar confetti', exact: true })
+    .getByRole('button', { name: 'Ocultar confeti', exact: true })
     .click()
   await expect(player.locator('.confetti-base')).toHaveCount(0)
   await celebrations

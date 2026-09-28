@@ -83,9 +83,11 @@ test('host and player create, play, reload and restart a room', async ({
     async () => {
       await host.goto('/')
       await host
-        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
         .fill('Sala de regresión')
-      await host.getByRole('button', { name: 'Listo', exact: true }).click()
+      await host
+        .getByRole('button', { name: 'Crear sala', exact: true })
+        .click()
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
@@ -96,13 +98,13 @@ test('host and player create, play, reload and restart a room', async ({
         await host.getByRole('button', { name: 'Agregar persona' }).click()
       }
       await host
-        .getByRole('combobox', { name: 'adminId', exact: true })
+        .getByRole('combobox', { name: 'Dirige el juego', exact: true })
         .selectOption({ label: names.host })
       await host
         .getByRole('checkbox', { name: 'Usar bolillero online' })
         .check()
       await host
-        .getByRole('button', { name: 'Jugar', exact: true })
+        .getByRole('button', { name: 'Empezar partida', exact: true })
         .evaluate(button => {
           const submit = button as HTMLButtonElement
           submit.click()
@@ -233,7 +235,7 @@ test('host and player create, play, reload and restart a room', async ({
       await host.locator('#reboot-game:visible').click()
       await host
         .getByRole('dialog')
-        .getByRole('button', { name: 'Confirmar' })
+        .getByRole('button', { name: 'Reiniciar partida' })
         .evaluate(button => {
           const confirm = button as HTMLButtonElement
           confirm.click()
@@ -243,7 +245,7 @@ test('host and player create, play, reload and restart a room', async ({
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
       await expect(
-        player.getByText('La sala se está configurando. Espere...'),
+        player.getByText('Están preparando la sala. Espera un momento...'),
       ).toBeVisible()
       await expect(player.getByTestId('bingo-card')).toHaveCount(0)
 
@@ -281,7 +283,7 @@ test('host and player create, play, reload and restart a room', async ({
         .fill(names.replacement)
       await host.getByRole('button', { name: 'Agregar persona' }).click()
       await host
-        .getByRole('combobox', { name: 'adminId', exact: true })
+        .getByRole('combobox', { name: 'Dirige el juego', exact: true })
         .selectOption({ label: names.replacement })
       await host
         .getByRole('checkbox', {
@@ -289,7 +291,7 @@ test('host and player create, play, reload and restart a room', async ({
         })
         .check()
       await host
-        .getByRole('button', { name: 'Jugar', exact: true })
+        .getByRole('button', { name: 'Empezar partida', exact: true })
         .evaluate(button => {
           const submit = button as HTMLButtonElement
           submit.click()
@@ -349,10 +351,10 @@ test('host and player create, play, reload and restart a room', async ({
       const otherRoom = await host.context().newPage()
       await otherRoom.goto('/')
       await otherRoom
-        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
         .fill('Segunda sala')
       await otherRoom
-        .getByRole('button', { name: 'Listo', exact: true })
+        .getByRole('button', { name: 'Crear sala', exact: true })
         .click()
       await expect(
         otherRoom.getByRole('heading', { name: 'Preparar sala' }),
@@ -394,7 +396,11 @@ test('host and player create, play, reload and restart a room', async ({
         .filter({ hasText: names.replacement })
       await expect(playerRow).toHaveCount(1)
       await playerRow.getByRole('button', { name: 'Eliminar persona' }).click()
-      await expect(player.getByText('Ocurrió un error.')).toBeVisible()
+      await expect(
+        player.getByText(
+          'No pudimos cargar la información. Intenta recargar la página.',
+        ),
+      ).toBeVisible()
       await expect(player.getByTestId('bingo-card')).toHaveCount(0)
       await expect(
         host

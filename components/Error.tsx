@@ -16,7 +16,7 @@ export default function Error({ message }: Props) {
       <p className="mb-4">{t('common:error')}</p>
       <Button
         id="reload"
-        aria-label=""
+        aria-label={t('common:reload')}
         iconLeft={<FiRefreshCw />}
         onClick={() => {
           window.location.reload()

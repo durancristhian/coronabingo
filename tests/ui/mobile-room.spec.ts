@@ -43,17 +43,19 @@ test('mobile host and player create a room and synchronize their first draw', as
     async () => {
       await host.goto('/')
       await expect(
-        host.getByRole('textbox', { name: 'Nombre *', exact: true }),
+        host.getByRole('textbox', { name: 'Nombre de la sala *', exact: true }),
       ).toBeVisible()
       await host
-        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
         .fill('Sala móvil')
       await expect(
-        host.getByRole('button', { name: 'Listo', exact: true }),
+        host.getByRole('button', { name: 'Crear sala', exact: true }),
       ).toBeEnabled()
       await expectNoHorizontalOverflow(host)
 
-      await host.getByRole('button', { name: 'Listo', exact: true }).click()
+      await host
+        .getByRole('button', { name: 'Crear sala', exact: true })
+        .click()
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
@@ -61,13 +63,13 @@ test('mobile host and player create a room and synchronize their first draw', as
         host.getByRole('button', { name: 'Agregar persona', exact: true }),
       ).toBeVisible()
       await expect(
-        host.getByRole('combobox', { name: 'adminId', exact: true }),
+        host.getByRole('combobox', { name: 'Dirige el juego', exact: true }),
       ).toBeVisible()
       await expectNoHorizontalOverflow(host)
 
       await configureRoom(host, { useOnlineCaller: true })
       await expect(
-        host.getByRole('button', { name: 'Jugar', exact: true }),
+        host.getByRole('button', { name: 'Empezar partida', exact: true }),
       ).toBeEnabled()
       await expectNoHorizontalOverflow(host)
 

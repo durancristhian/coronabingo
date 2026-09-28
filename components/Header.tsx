@@ -59,6 +59,7 @@ export default function Header({ selectIcon }: { selectIcon?: ReactNode }) {
             <Select
               icon={selectIcon}
               id="language"
+              aria-label={t('common:language')}
               onChange={onLanguageChange}
               options={languages}
               value={lang}

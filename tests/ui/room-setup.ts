@@ -9,9 +9,9 @@ export const testPlayerNames = {
 export async function createRoom(page: Page, roomName: string) {
   await page.goto('/')
   await page
-    .getByRole('textbox', { name: 'Nombre *', exact: true })
+    .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
     .fill(roomName)
-  await page.getByRole('button', { name: 'Listo', exact: true }).click()
+  await page.getByRole('button', { name: 'Crear sala', exact: true }).click()
   await expect(
     page.getByRole('heading', { name: 'Preparar sala' }),
   ).toBeVisible()
@@ -29,7 +29,7 @@ export async function configureRoom(
   }
 
   await page
-    .getByRole('combobox', { name: 'adminId', exact: true })
+    .getByRole('combobox', { name: 'Dirige el juego', exact: true })
     .selectOption({ label: testPlayerNames.host })
   const onlineCaller = page.getByRole('checkbox', {
     name: 'Usar bolillero online',
@@ -42,7 +42,9 @@ export async function configureRoom(
 }
 
 export async function startReadyRoom(page: Page) {
-  await page.getByRole('button', { name: 'Jugar', exact: true }).click()
+  await page
+    .getByRole('button', { name: 'Empezar partida', exact: true })
+    .click()
   await expect(
     page.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()

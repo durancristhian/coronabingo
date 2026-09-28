@@ -84,7 +84,7 @@ test('room export recovers from a failed load and downloads once', async ({
   await page.getByRole('button', { name: 'Reintentar exportación' }).click()
 
   const downloadButton = page.getByRole('button', {
-    name: `${roomName}.xls`,
+    name: `${roomName}.xlsx`,
   })
   await expect(downloadButton).toBeEnabled()
   expect(

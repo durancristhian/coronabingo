@@ -1,26 +1,26 @@
 {
   "title": "Hi {{playerName}}, you are in the room {{roomName}}",
   "room-not-ready": "The room is being set up. Please wait...",
-  "unexisting-player": "Player doesn't exist.",
-  "last-numbers": "Last numbers",
+  "unexisting-player": "We couldn't find this player in the room. Check the link you used to join.",
+  "last-numbers": "Latest numbers",
   "next-number": "Next number",
-  "no-bingo-spinner-description": "In the list below, mark the numbers that come out in your bingo spinner.",
+  "no-bingo-spinner-description": "Mark the numbers below as you draw them from your bingo cage.",
   "show-confetti": "Show confetti",
   "hide-confetti": "Hide confetti",
-  "show-pallbearers": "Show ghana pallbearers",
-  "hide-pallbearers": "Hide ghana pallbearers",
+  "show-pallbearers": "Show dancing pallbearers",
+  "hide-pallbearers": "Hide dancing pallbearers",
   "show-balloons": "Show balloons",
   "hide-balloons": "Hide balloons",
   "celebrations": "Celebrations",
   "no-numbers": "No numbers yet.",
   "empty-cells": {
-    "title": "Empty cells background",
-    "url": "Or paste here the link of a random image from the internet"
+    "title": "Empty cell background",
+    "url": "Or paste an image link from the internet"
   },
   "replay": {
-    "reboot-game": "Reboot game",
-    "description": "This action will redirect you to the admin so you can update the room information in order to start a new game. You can edit the list of players, change roles and redistribute the tickets.",
-    "confirm": "Confirm"
+    "reboot-game": "Restart game",
+    "description": "This clears the called numbers and returns you to room setup. You can change the players and host. Starting the next game deals new cards and clears all marks.",
+    "confirm": "Restart game"
   },
   "backgrounds": {
     "yellow": "Yellow",
@@ -33,7 +33,7 @@
     "cremona": "Cremona",
     "covid-19": "COVID-19",
     "clippy": "Clippy",
-    "ghana-pallbearers": "Ghana pallbearers",
+    "ghana-pallbearers": "Dancing pallbearers",
     "frameworks": "Frameworks",
     "kun-aguero": "Kun Agüero"
   },

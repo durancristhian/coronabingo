@@ -112,12 +112,12 @@ export default class Coronabingo extends App {
               <meta name="title" content="Coronabingo | Bingo online" />
               <meta
                 name="description"
-                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="Play bingo online for free with friends and family. Coronabingo includes bingo cards and an online caller."
               />
               <meta property="og:title" content="Coronabingo | Bingo online" />
               <meta
                 property="og:description"
-                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="Play bingo online for free with friends and family. Coronabingo includes bingo cards and an online caller."
               />
               <meta
                 property="twitter:url"
@@ -129,7 +129,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:description"
-                content="CoronaBingo, now you can play free bingo with tickets and a bingo spinner. Play bingo with your friends or family. #CoronaBingo"
+                content="Play bingo online for free with friends and family. Coronabingo includes bingo cards and an online caller."
               />
               <meta
                 property="og:url"
@@ -158,7 +158,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 name="description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta
                 property="og:title"
@@ -166,7 +166,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="og:description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta
                 property="twitter:url"
@@ -178,7 +178,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta
                 property="og:url"
@@ -212,7 +212,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 name="description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta
                 property="og:title"
@@ -220,7 +220,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="og:description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta
                 property="twitter:url"
@@ -232,7 +232,7 @@ export default class Coronabingo extends App {
               />
               <meta
                 property="twitter:description"
-                content="CoronaBingo, ahora podés jugar al bingo gratis con bolillero y cartones incluidos. Jugá al bingo con tus amigos o familia. #CoronaBingo"
+                content="Juega al bingo online gratis con amigos y familia. Coronabingo incluye cartones y un bolillero online."
               />
               <meta property="og:url" content="https://coronabingo.com.ar/" />
             </Fragment>

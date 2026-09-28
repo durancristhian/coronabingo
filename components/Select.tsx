@@ -5,6 +5,7 @@ import { FiChevronDown } from 'react-icons/fi'
 import { Option } from '~/interfaces/custom/Option'
 
 interface Props {
+  'aria-label'?: string
   disabled?: boolean
   hint?: string
   icon?: ReactNode
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function Select({
+  'aria-label': ariaLabel,
   disabled = false,
   hint = '',
   icon = <FiChevronDown aria-hidden="true" />,
@@ -34,7 +36,7 @@ export default function Select({
         <div className="cb-select-wrap relative">
           <select
             id={id}
-            aria-label={id}
+            aria-label={ariaLabel || label}
             className={classnames([
               'cb-select',
               'appearance-none bg-white border-2 border-gray-300 h-12 p-2 pr-6 rounded w-full',

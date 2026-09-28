@@ -102,7 +102,7 @@ test('opens, closes and reopens one working tutorial player', async ({
 
   await openTutorial.click()
   const dialog = page.getByRole('dialog', {
-    name: 'Tutorial - Como jugar Coronabingo',
+    name: 'Cómo jugar a Coronabingo',
   })
   const player = dialog.locator('iframe.video-iframe')
   await expect(player).toHaveCount(1)
@@ -226,7 +226,7 @@ test('loads the English tutorial on the English homepage', async ({ page }) => {
   await page.getByRole('button', { name: 'Watch tutorial' }).click()
 
   const dialog = page.getByRole('dialog', {
-    name: 'Tutorial - How to play Coronabingo',
+    name: 'How to play Coronabingo',
   })
   const player = dialog.locator('iframe.video-iframe')
   await expect(player).toHaveCount(1)

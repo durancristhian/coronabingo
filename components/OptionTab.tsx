@@ -4,6 +4,7 @@ import { Tab } from 'react-tabs'
 
 interface Props {
   buttonId: string
+  label: string
   Icon: React.ComponentType<{ className?: string }>
   iconBgColor: string
   iconColor: string
@@ -11,6 +12,7 @@ interface Props {
 
 export default function OptionTab({
   buttonId,
+  label,
   Icon,
   iconBgColor,
   iconColor,
@@ -20,6 +22,8 @@ export default function OptionTab({
     <Tab {...otherProps} className="mx-2">
       <button
         id={buttonId}
+        aria-label={label}
+        title={label}
         className={classnames([
           'cb-option-tab',
           'block h-12 mx-1 outline-none rounded-full shadow w-12',
