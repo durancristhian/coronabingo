@@ -60,16 +60,18 @@ test('two tabs retain concurrent marks and a new game starts unmarked', async ({
   await host.locator('#reboot-game:visible').click()
   await host
     .getByRole('dialog')
-    .getByRole('button', { name: 'Confirmar' })
+    .getByRole('button', { name: 'Reiniciar partida' })
     .click()
   await expect(
     host.getByRole('heading', { name: 'Preparar sala' }),
   ).toBeVisible()
   await expect(
-    firstTab.getByText('La sala se está configurando. Espere...'),
+    firstTab.getByText('Están preparando la sala. Espera un momento...'),
   ).toBeVisible()
 
-  await host.getByRole('button', { name: 'Jugar', exact: true }).click()
+  await host
+    .getByRole('button', { name: 'Empezar partida', exact: true })
+    .click()
   await expect(
     host.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()

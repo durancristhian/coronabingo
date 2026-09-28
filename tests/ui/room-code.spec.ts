@@ -18,7 +18,7 @@ async function openCards(page: Page, name: string) {
 
 function codeChoices(page: Page) {
   return page
-    .getByText('Ingrese el código de acceso a la sala')
+    .getByText('Elige los 3 emojis del código de la sala, en orden.')
     .locator('xpath=following-sibling::div[1]')
 }
 
@@ -39,9 +39,11 @@ test('the host room code protects each game while players enter normally', async
     async () => {
       await host.goto('/')
       await host
-        .getByRole('textbox', { name: 'Nombre *', exact: true })
+        .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
         .fill('Sala con código')
-      await host.getByRole('button', { name: 'Listo', exact: true }).click()
+      await host
+        .getByRole('button', { name: 'Crear sala', exact: true })
+        .click()
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
@@ -53,12 +55,14 @@ test('the host room code protects each game while players enter normally', async
         await host.getByRole('button', { name: 'Agregar persona' }).click()
       }
       await host
-        .getByRole('combobox', { name: 'adminId', exact: true })
+        .getByRole('combobox', { name: 'Dirige el juego', exact: true })
         .selectOption({ label: testPlayerNames.host })
 
       await host.locator('#room-title').click({ clickCount: 7 })
       await host
-        .getByRole('checkbox', { name: 'Activar código para el admin' })
+        .getByRole('checkbox', {
+          name: 'Proteger a quien dirige con el código',
+        })
         .check()
     },
   )
@@ -84,7 +88,9 @@ test('the host room code protects each game while players enter normally', async
     },
   )
 
-  await host.getByRole('button', { name: 'Jugar', exact: true }).click()
+  await host
+    .getByRole('button', { name: 'Empezar partida', exact: true })
+    .click()
   await expect(
     host.getByRole('heading', { name: 'Información de la sala' }),
   ).toBeVisible()
@@ -94,7 +100,7 @@ test('the host room code protects each game while players enter normally', async
     await player.goto(lobbyURL)
     await openCards(player, testPlayerNames.player)
     await expect(
-      player.getByText('Ingrese el código de acceso a la sala'),
+      player.getByText('Elige los 3 emojis del código de la sala, en orden.'),
     ).toHaveCount(0)
   })
 
@@ -103,7 +109,7 @@ test('the host room code protects each game while players enter normally', async
     async () => {
       await openPlayerLink(host, testPlayerNames.host)
       await expect(
-        host.getByText('Ingrese el código de acceso a la sala'),
+        host.getByText('Elige los 3 emojis del código de la sala, en orden.'),
       ).toBeVisible()
 
       const wrongCode = (
@@ -129,10 +135,10 @@ test('the host room code protects each game while players enter normally', async
       await selectCode(host, wrongCode)
       await host.getByRole('button', { name: 'Ingresar', exact: true }).click()
       await expect(
-        host.getByText('Código incorrecto. Intenta nuevamente...'),
+        host.getByText('Código incorrecto. Revisa los emojis y su orden.'),
       ).toBeVisible()
       await expect(
-        host.getByText('Ingrese el código de acceso a la sala'),
+        host.getByText('Elige los 3 emojis del código de la sala, en orden.'),
       ).toBeVisible()
 
       await selectCode(host, wrongCode)
@@ -151,22 +157,24 @@ test('the host room code protects each game while players enter normally', async
       await host.locator('#reboot-game:visible').click()
       await host
         .getByRole('dialog')
-        .getByRole('button', { name: 'Confirmar' })
+        .getByRole('button', { name: 'Reiniciar partida' })
         .click()
       await expect(
         host.getByRole('heading', { name: 'Preparar sala' }),
       ).toBeVisible()
       await expect(
-        player.getByText('La sala se está configurando. Espere...'),
+        player.getByText('Están preparando la sala. Espera un momento...'),
       ).toBeVisible()
 
-      await host.getByRole('button', { name: 'Jugar', exact: true }).click()
+      await host
+        .getByRole('button', { name: 'Empezar partida', exact: true })
+        .click()
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
       await openPlayerLink(host, testPlayerNames.host)
       await expect(
-        host.getByText('Ingrese el código de acceso a la sala'),
+        host.getByText('Elige los 3 emojis del código de la sala, en orden.'),
       ).toBeVisible()
       await expect(host.getByTestId('bingo-card')).toHaveCount(0)
     },

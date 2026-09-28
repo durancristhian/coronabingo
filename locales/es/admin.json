@@ -1,15 +1,15 @@
 {
-  "success": "Sala configurada con éxito. Espere...",
-  "saving": "Configurando sala...",
+  "success": "Sala lista para jugar.",
+  "saving": "Preparando sala...",
   "title": "Preparar sala",
-  "error": "Ocurrió un error al guardar la información de la sala. Intenta de nuevo.",
-  "field-name": "Nombre",
-  "field-link-hint": "Compartí este link a las personas de la videollamada.",
+  "error": "No pudimos guardar la sala. Intenta de nuevo.",
+  "field-name": "Nombre de la sala",
+  "field-link-hint": "Comparte este link con quienes van a jugar.",
   "field-link": "Link a la sala",
   "room-code": "Código de acceso a la sala",
-  "field-bingo-spinner-hint": "Si tenés un bolillero y querés usarlo no tildes esta opción.",
+  "field-bingo-spinner-hint": "Desmarca esta opción si van a usar un bolillero físico.",
   "field-bingo-spinner": "Usar bolillero online",
-  "field-submit": "Jugar",
+  "field-submit": "Empezar partida",
   "players": {
     "title": "Personas que van a jugar:",
     "amount": "{{amount}} de {{max}}",
@@ -17,9 +17,11 @@
     "admin": "Dirige el juego",
     "add-player": "Agregar persona",
     "remove-player": "Eliminar persona",
-    "field-admin-hint": "Elegí la persona que se va a hacer cargo de marcar los números para que el resto se entere.",
+    "field-admin-hint": "Elige quién va a sacar o marcar los números para que todos los vean.",
     "field-admin": "Dirige el juego"
   },
-  "field-hide-dreams-hint": "Recomendamos activar esta opción si están jugando fuera de Argentina ya que los significados se corresponden con la Quiniela Argentina.",
-  "field-hide-dreams": "Ocultar los significados de los números"
+  "field-hide-dreams-hint": "Los significados vienen de la quiniela argentina. Puedes ocultarlos si no los usan.",
+  "field-hide-dreams": "Ocultar los significados de los números",
+  "field-admin-code": "Proteger a quien dirige con el código",
+  "field-admin-code-hint": "Pedir el código de la sala para abrir los cartones de quien dirige."
 }

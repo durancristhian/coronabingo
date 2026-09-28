@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
-import { FiSmile } from 'react-icons/fi'
+import { FiPlay } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
@@ -227,9 +227,9 @@ export default function RoomAdmin() {
             <Fragment>
               <div className="mt-4">
                 <Checkbox
-                  hint="Pedir el código de sala al ingresar a los cartones de quien dirige la sala"
+                  hint={t('admin:field-admin-code-hint')}
                   id="activate-admin-code"
-                  label="Activar código para el admin"
+                  label={t('admin:field-admin-code')}
                   onChange={value => {
                     updateRoom({ activateAdminCode: value })
                   }}
@@ -266,7 +266,7 @@ export default function RoomAdmin() {
               className="w-full"
               disabled={!room.adminId || players.length < 2 || inProgress}
               onClick={submitRoom}
-              iconLeft={<FiSmile />}
+              iconLeft={<FiPlay />}
             >
               {t('admin:field-submit')}
             </Button>

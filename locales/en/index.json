@@ -1,8 +1,8 @@
 {
-  "intro": "Hello!, in this page you'll be able to play bingo with other people.",
-  "videocall-suggestion": "You'll need to create a videocall with all the players. I recommend",
+  "intro": "Hi! Play bingo here with friends and family.",
+  "videocall-suggestion": "If you're playing from different places, you can start a video call. For example, with",
   "how-to-play-button": "Watch tutorial",
-  "how-to-play-modal-title": "Tutorial - How to play Coronabingo",
+  "how-to-play-modal-title": "How to play Coronabingo",
   "tutorial-loading": "Loading tutorial...",
   "tutorial-load-error": "We couldn't load the tutorial.",
   "tutorial-retry": "Try again",
@@ -10,9 +10,9 @@
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",
-    "error": "An error has ocurred. Try again.",
-    "success": "Successfully created room. Wait...",
-    "field-name": "Name *",
-    "field-submit": "Ready"
+    "error": "We couldn't create the room. Try again.",
+    "success": "Room created. You can now set it up.",
+    "field-name": "Room name *",
+    "field-submit": "Create room"
   }
 }

@@ -31,6 +31,7 @@ export default function Options({ isAdmin, room }: Props) {
       <OptionTabList>
         <OptionTab
           buttonId="configure-empty-cells"
+          label={t('playerId:empty-cells.title')}
           Icon={FiSettings}
           iconBgColor="bg-yellow-300"
           iconColor="text-yellow-800"
@@ -39,18 +40,21 @@ export default function Options({ isAdmin, room }: Props) {
           <Fragment>
             <OptionTab
               buttonId="celebrations"
+              label={t('playerId:celebrations')}
               Icon={FiSmile}
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
             ></OptionTab>
             <OptionTab
               buttonId="sounds"
+              label={t('playerId:sounds')}
               Icon={FiVolume2}
               iconBgColor="bg-green-300"
               iconColor="text-green-800"
             ></OptionTab>
             <OptionTab
               buttonId="reboot-game"
+              label={t('playerId:replay.reboot-game')}
               Icon={FiRotateCcw}
               iconBgColor="bg-red-300"
               iconColor="text-red-800"

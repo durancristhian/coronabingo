@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useRef, useState } from 'react'
-import { FiThumbsUp } from 'react-icons/fi'
+import { FiRotateCcw } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { useAnalytics } from '~/hooks/useAnalytics'
 import useRoomCode from '~/hooks/useRoomCode'
@@ -66,7 +66,7 @@ export default function Restart({ room }: Props) {
           onClick={replay}
           color="green"
           disabled={inProgress}
-          iconLeft={<FiThumbsUp />}
+          iconLeft={<FiRotateCcw />}
         >
           {t('playerId:replay.confirm')}
         </Button>

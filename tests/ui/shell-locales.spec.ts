@@ -37,7 +37,7 @@ test('a player changes the language without leaving the room or cards', async ({
   const spanishURL = new URL(player.url())
 
   await player
-    .getByRole('combobox', { name: 'language', exact: true })
+    .getByRole('combobox', { name: 'Idioma', exact: true })
     .selectOption('es')
   const playerCardOpenedEvent = {
     eventName: 'player_card_opened',
@@ -54,7 +54,7 @@ test('a player changes the language without leaving the room or cards', async ({
     .toEqual([playerCardOpenedEvent])
 
   await player
-    .getByRole('combobox', { name: 'language', exact: true })
+    .getByRole('combobox', { name: 'Idioma', exact: true })
     .selectOption('en')
 
   const englishURL = new URL(player.url())
@@ -75,12 +75,12 @@ test('a player changes the language without leaving the room or cards', async ({
     }),
   ).toBeVisible()
   await expect(
-    player.getByRole('heading', { name: 'Last numbers' }),
+    player.getByRole('heading', { name: 'Latest numbers' }),
   ).toBeVisible()
   await expect(player.getByTestId('bingo-card')).toHaveCount(2)
   for (const ticketId of ticketIds) {
     await expect(
-      player.getByText(`Ticket Nº ${ticketId}`, { exact: true }),
+      player.getByText(`Card No. ${ticketId}`, { exact: true }),
     ).toBeVisible()
   }
 

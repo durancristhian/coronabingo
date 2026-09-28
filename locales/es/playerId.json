@@ -1,12 +1,12 @@
 {
   "title": "Hola {{playerName}}, estás en la sala {{roomName}}",
-  "room-not-ready": "La sala se está configurando. Espere...",
-  "unexisting-player": "No eres parte de la sala.",
+  "room-not-ready": "Están preparando la sala. Espera un momento...",
+  "unexisting-player": "No encontramos a esta persona en la sala. Revisa el link que usaste para entrar.",
   "last-numbers": "Últimos números",
   "next-number": "Próximo número",
-  "no-bingo-spinner-description": "Marcá en la lista de abajo los números que van saliendo en tu bolillero.",
-  "show-confetti": "Activar confetti",
-  "hide-confetti": "Desactivar confetti",
+  "no-bingo-spinner-description": "Marca en la lista de abajo los números que van saliendo en tu bolillero.",
+  "show-confetti": "Mostrar confeti",
+  "hide-confetti": "Ocultar confeti",
   "show-pallbearers": "Mostrar ghaneses del ataúd",
   "hide-pallbearers": "Ocultar ghaneses del ataúd",
   "show-balloons": "Mostrar globos",
@@ -15,12 +15,12 @@
   "no-numbers": "No salieron números todavía.",
   "replay": {
     "reboot-game": "Reiniciar partida",
-    "description": "Esta acción te permitirá volver a configurar la sala para que se adapte a un nuevo juego. Podrás editar la lista de personas, cambiar roles y redistribuir los cartones.",
-    "confirm": "Confirmar"
+    "description": "Se borrarán los números que salieron y volverás a preparar la sala. Podrás cambiar quiénes juegan y quién dirige. Al empezar, se repartirán nuevos cartones y se borrarán las marcas.",
+    "confirm": "Reiniciar partida"
   },
   "empty-cells": {
     "title": "Fondo de las celdas vacías",
-    "url": "O bien, pegá el link a una imágen en internet"
+    "url": "O pega el link a una imagen de internet"
   },
   "backgrounds": {
     "yellow": "Amarillo",
@@ -48,8 +48,8 @@
   "game_die": "Dado",
   "tornado": "Tornado",
   "airplane": "Avión",
-  "rainbow": "Arcoiris",
-  "basketball": "Pelota de Básquet",
+  "rainbow": "Arcoíris",
+  "basketball": "Pelota de básquet",
   "volcano": "Volcán",
   "banana": "Banana",
   "dreams": {
@@ -59,7 +59,7 @@
     "4": "La cama",
     "5": "El gato",
     "6": "El perro",
-    "7": "El revolver",
+    "7": "El revólver",
     "8": "El incendio",
     "9": "El arroyo",
     "10": "La leche",

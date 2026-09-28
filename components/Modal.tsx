@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
 import { FiX } from 'react-icons/fi'
 import ReactModal from 'react-modal'
@@ -13,6 +14,8 @@ interface Props extends ReactModal.Props {
 }
 
 export default function Modal({ children, title, ...rest }: Props) {
+  const { t } = useTranslation()
+
   return (
     <ReactModal {...rest}>
       <Box>
@@ -28,6 +31,8 @@ export default function Modal({ children, title, ...rest }: Props) {
               'duration-150 ease-in-out transition',
             ])}
             id="close-modal"
+            aria-label={t('common:close')}
+            title={t('common:close')}
           >
             <FiX aria-hidden="true" />
           </button>

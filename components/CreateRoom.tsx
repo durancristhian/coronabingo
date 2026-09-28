@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useState } from 'react'
-import { FiSmile } from 'react-icons/fi'
+import { FiPlus } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
@@ -69,7 +69,7 @@ export default function CreateRoom() {
             disabled={!name || inProgress}
             type="submit"
             id="create-room"
-            iconLeft={<FiSmile />}
+            iconLeft={<FiPlus />}
           >
             {t('index:create-room.field-submit')}
           </Button>
