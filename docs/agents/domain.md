@@ -1,19 +1,7 @@
-# Domain docs
+# Domain guidance
 
-This repo uses a single-context layout.
+Before changing product language or behavior, read [CONTEXT.md](../../CONTEXT.md) and any applicable decisions in `docs/adr/`. This is a single-context project; an absent ADR directory needs no setup.
 
-## Before exploring
+Use the glossary in proposals, tickets, tests, and new code. If a concept is missing, check existing terms before proposing an addition. Keep definitions separate from implementation details.
 
-- Read `CONTEXT.md` at the repo root.
-- Read decisions in `docs/adr/` that apply to the work.
-
-If a file or directory is absent, proceed silently. Domain documents and ADRs are created as terminology or decisions are resolved through domain modeling.
-
-## Vocabulary
-
-Use the terms defined in `CONTEXT.md` in tickets, proposals, tests, and code.
-If a needed concept is missing, check whether an existing term fits; otherwise, note the gap for domain modeling.
-
-## Decision conflicts
-
-If a proposal contradicts an ADR, identify the ADR and explain why the decision should be reconsidered.
+Identify any conflict with an approved decision and explain the new evidence before proposing a change. Create ADRs only for decisions that warrant a durable rationale.

@@ -1,67 +1,105 @@
 # Coronabingo
 
-Next.js Pages Router application using React 18, Webpack and npm.
+Play bingo together in shared rooms. The app uses Next.js Pages Router, React, Webpack, Firestore, and npm.
 
 ## Local setup
 
-Use Node **24.21.0** and npm **11.19.0** (bundled with this Node release):
+Use the Node version in `.nvmrc` and npm version in `package.json`. Dependencies are locked in `package-lock.json`.
 
 ```bash
 nvm install
 nvm use
 npm ci
-cp .env.template .env
 ```
 
-Fill in `.env` with the Firebase project configuration from its owner. Firestore is required for gameplay. Rooms work without a Firebase Authentication login. Google Analytics and Sentry settings are optional. Keep `.env` private; environment values exposed by `next.config.js` are included in the browser bundle and must not contain server credentials.
-
-A local server or Vercel preview uses whichever Firebase project `.env` points to. Use a test project or agreed test records before creating rooms or adding players.
+For an initial checkout, create `.env` only if it does not exist:
 
 ```bash
-npm run dev
+if [ ! -e .env ]; then
+  cp .env.template .env
+fi
 ```
 
-Open [localhost:3000](http://localhost:3000). To use another port, run `npm run dev -- --port 3124`. Edit routes in `pages/`; translations live in `locales/es` and `locales/en`. Spanish is the default locale. Existing `/es/…` and `/en/…` links remain accepted; Next.js generates unprefixed Spanish navigation URLs.
+Obtain Firebase configuration from the environment owner. Firestore is required; gameplay does not require Firebase Authentication. Google Analytics and Sentry are optional. Keep `.env` private. Values exported through `next.config.js` enter the browser bundle and must contain no server credentials.
 
-## Checks and production build
+For task worktrees, follow the approved environment-copy procedure in the [workflow](docs/agents/workflow.md). A local or Preview server can use Production Firestore. Verify its target and data authorization before creating rooms or players.
+
+Choose an available port:
 
 ```bash
-npm run lint:check
-npm run validate-locales
-npm run validate-tickets
+npm run dev -- --port 3124
+```
+
+Open [localhost:3124](http://localhost:3124). Routes live in `pages/`; translations are in `locales/es` and `locales/en`. Spanish is the default. Existing `/es/…` and `/en/…` links remain accepted; generated Spanish navigation URLs are unprefixed.
+
+## Checks and builds
+
+| Change | Required checks |
+| --- | --- |
+| Application code | `npm run lint:check`, `npm run build`, `git diff --check` |
+| Translations | `npm run validate-locales` for focused checks; also runs during `prebuild` |
+| Card data or generator | `npm run validate-tickets`; inspect output because its legacy error handler can return success after an assertion failure |
+| Analytics | `npm run validate-analytics` and the affected browser journey |
+| Room setup, card assignment, host/player synchronization, marking, reload, or restart | `npm run ui-tests`; use `npm run ui-tests:production` for a compiled build |
+| Documentation only | Content, links, command accuracy, and `git diff --check`; commit hooks still run |
+
+`lint:check` performs type generation, TypeScript checking, and ESLint without source autofixes. `lint` and pre-commit hooks can autofix source files; review those edits. The scripts in `package.json` are authoritative. `npm test` is not defined.
+
+Run installation, development, type generation, and builds sequentially within a checkout. Stop its development server before building. To serve a successful production build on an available port:
+
+```bash
 npm run build
-npm run start
+npm run start -- --port 3124
 ```
 
-`lint:check` includes TypeScript and does not modify files. `lint` and the pre-commit hook retain their existing autofix behavior. Inspect the ticket validator's output as well as its exit code: the legacy script catches assertion failures.
-
-Run build and start sequentially. Do not run an install, a development server and a production build against the same checkout concurrently.
-
-Use `ANALYZE_BUNDLE=1 npm run build` to write bundle reports under `.next/analyze/`. CI enables this and uploads the HTML reports as the `bundle-reports` artifact, retained for 14 days. These replace the failing Packtracker upload; they provide per-build inspection without Packtracker's historical comparisons or budgets.
+For bundle reports, use `ANALYZE_BUNDLE=1 npm run build` and inspect `.next/analyze/`. Compare equivalent builds and report byte savings separately from measured loading performance.
 
 ## Browser regression tests
 
-`npm run ui-tests` runs desktop Chromium journeys in Spanish against a dedicated Next.js development server and a fresh local Firestore emulator. The gameplay journey creates a room, assigns cards to two participants, checks host controls and live draws, verifies cards and a mark after reload, then restarts and plays again. Host and player use separate browser contexts. The manual-draw journey verifies that only the host can add and remove a number live, and that an emulator-seeded 89-number room reaches the deterministic 90-number limit and disables the draw control. The spreadsheet journey activates the hidden export, checks loading and recovery from a failed chunk, then verifies that a double click produces one non-empty XLSX download.
+The Playwright suite runs Chromium against a dedicated Next.js server and disposable Firestore emulator. Its current coverage includes:
 
-One-time setup after `npm ci`:
+- Room setup, player replacement, host selection, card assignment, play, reload, and restart.
+- Separate host/player contexts, manual draws, the 90-number limit, room-code protection, and concurrent card marks.
+- Mobile gameplay, language switching, translated controls/dialogs, and the ten-column number board across responsive widths.
+- Background persistence, celebrations, sounds, tutorial loading/failure recovery, and hidden spreadsheet export with duplicate-download protection.
+- Local analytics event capture within relevant journeys.
+
+See `tests/ui/*.spec.ts` for exact assertions and locale/viewport combinations. Coverage varies by journey; this is not an all-browser or all-device guarantee. Emulator rules are test rules, not verified copies of deployed Firebase rules. External playback, hosted analytics delivery, and hosted Firebase behavior need separate checks.
+
+### One-time setup
+
+After `npm ci`, install Java 21+, Chromium, and the Firestore emulator. On macOS:
 
 ```bash
-# macOS, using Homebrew. The runner detects this keg-only JDK automatically.
+# The runner detects Homebrew's keg-only JDK.
 brew install openjdk@21
 npx playwright install chromium
 npx firebase setup:emulators:firestore
 ```
 
-Linux and WSL need Java 21+ on `PATH` or `JAVA_HOME`, for example Temurin 21, and `npx playwright install --with-deps chromium`. Native Windows is not supported by the process-group runner. Verified tooling: Node 24.21.0, npm 11.19.0, Java 21.0.12.1, Playwright 1.63.0 with Chromium 153.0.8010.12, Firebase CLI 15.31.0 and Firestore emulator 1.22.0. npm tooling is pinned in `package-lock.json`.
+Linux and WSL need Java on `PATH` or `JAVA_HOME` and `npx playwright install --with-deps chromium`. Native Windows is unsupported by the process-group runner. Browser and npm tool versions follow the lockfile; rerun the browser installer after a Playwright update.
+
+### Run and inspect
 
 ```bash
-npm run ui-tests                  # Development server; normal local command
-npm run ui-tests:production       # Build once, serve with next start, run journey
-npm run ui-tests -- --headed      # Watch the browser
-npx playwright show-report       # Open the latest HTML report
+npm run ui-tests                         # Development server
+npm run ui-tests:production              # Build, serve, and test
+npm run ui-tests -- --headed             # Visible browser
+npm run ui-tests -- tests/ui/room.spec.ts # Focused journey
+npx playwright show-report
 ```
 
-To reproduce the CI sequence with bundle reports and reuse the prepared build:
+The runner uses `demo-coronabingo-ui` at `127.0.0.1:8187`, overriding hosted settings without requiring `.env`, Firebase login, or repository secrets. External analytics delivery and ads are disabled; application events are captured locally. Browser traffic outside the app and emulator is blocked. Initial installations and downloads require internet.
+
+Ports are fixed: 3187 for Next.js, 8187 for Firestore, 9187 for its websocket, 4487 for the emulator hub, and 4587 for logging. Run one suite at a time across all worktrees. Occupied ports fail the command; existing services are never reused or stopped.
+
+On a lock error, inspect `.ui-tests-lock/owner.json` and verify its process and services have exited before removing the lock directory. If Java is missing, set `JAVA_HOME` to a JDK 21+ installation.
+
+The runner stops its services on completion, failure, or Ctrl-C. Data is not exported. Tests use one worker and zero retries. Failures retain screenshots, traces, and reports in `test-results/` and `playwright-report/`; emulator logs are in `tests/ui/*-debug.log`.
+
+### CI build reuse
+
+To reproduce the sequence in [.github/workflows/push.yml](.github/workflows/push.yml):
 
 ```bash
 npm run lint:check
@@ -69,26 +107,14 @@ ANALYZE_BUNDLE=1 npm run ui-tests:build
 npm run ui-tests:ci
 ```
 
-`ui-tests:ci` requires a build made by `ui-tests:build`; rebuild after source changes. Test builds and their TypeScript cache use `.next-ui-tests/`, separate from `.next/`. The suite does not need `.env`, Firebase login or repository secrets. Its fixed public configuration overrides hosted settings and uses only `demo-coronabingo-ui` at `127.0.0.1:8187`. Analytics and ads are disabled, and browser requests outside the app and emulator are blocked. Installations and the first browser/emulator downloads require internet; gameplay does not use hosted services.
+`ui-tests:ci` requires an unchanged build from `ui-tests:build`. Test output and TypeScript caches use `.next-ui-tests/`, separate from normal builds. CI uploads available test evidence even on failure and bundle reports from `.next-ui-tests/analyze/`, retained for 14 days.
 
-The runner reserves ports 3187 for Next.js, 8187 for Firestore, 9187 for the emulator websocket, 4487 for the emulator hub and 4587 for logging. An occupied port fails the command; existing servers are never reused or stopped. Run one suite at a time, including across worktrees. On a lock error, inspect `.ui-tests-lock/owner.json` and verify that its process and services have exited before removing that directory. If Java is missing, set `JAVA_HOME` to an installed JDK 21+; after updating Playwright run its browser installer again.
+## Analytics and product references
 
-Services stop on completion, startup failure, test failure or Ctrl-C. Emulator data is disposable and is not exported. Tests use one worker and zero retries. Failures return a nonzero status and retain screenshots, traces and an HTML report under `test-results/` and `playwright-report/`; emulator logs live in `tests/ui/*-debug.log`. CI uploads available evidence even on failure, plus bundle reports from `.next-ui-tests/analyze/`, for 14 days.
+The event contract is in [Events.ts](interfaces/analytics/Events.ts), payload construction in [analyticsEvents.ts](utils/analyticsEvents.ts), and delivery/URL sanitization in [gtag.ts](utils/gtag.ts). Preserve normalized private routes and exclude room/player names, identifiers, and custom background URLs from outgoing payloads. Local capture proves application event behavior; network delivery and GA4 processing require their own evidence.
 
-The emulator uses explicit test rules, not verified copies of deployed rules. A passing run covers the Spanish host/player journey, manual draw synchronization and its 90-number boundary, host room-code protection, Spanish and English tutorial checks, and the Spanish spreadsheet export at desktop and mobile widths. Other browsers, downloads other than the spreadsheet export and deployed Firebase behavior remain outside this suite. See the [plan and verification record](research/playwright-test-plan.md). The retired Cypress suite remains removed; `npm test` is not defined.
+Read [AGENTS.md](AGENTS.md) for contribution rules, [CONTEXT.md](CONTEXT.md) for terminology, and [.better-web-ui.md](.better-web-ui.md) for approved design and copy decisions. Documentation outside `research/` is in English; application translations remain bilingual.
 
-## Retired charity events
+The primary branch is `main`. The standalone `/admin` and `/eventos/…` flows are retired; room setup at `/room/[roomId]/admin` remains active. Historical records are retained, and gameplay uses neither Firebase Authentication nor Storage. Do not add regression journeys for retired routes as part of ordinary gameplay work.
 
-Standalone `/admin`, `/eventos/[eventId]`, and `/eventos/[eventId]/admin` return the standard 404 in Spanish and English. Room setup at `/room/[roomId]/admin`, emoji room codes, sharing, and spreadsheet export remain available. Historical Firebase documents and receipt uploads are retained. Authentication and Storage settings are no longer used by the app.
-
-See the [cleanup verification](research/admin-events-cleanup.md) for checks and test records.
-
-## Migration status
-
-The primary branch is `main`, tracking `origin/main`. GitHub's default branch and Vercel's production branch use `main`; the Vercel project runtime is Node 24.
-
-CI reads `.nvmrc`, installs with `npm ci`, runs `lint:check`, then builds with the isolated emulator configuration and locale validation. It runs the browser regression against that build and uploads test evidence and bundle reports. [CI verification](research/node-24-ci.md) and [Vercel preview acceptance](research/node-24-preview.md) cover the verified application. Standalone admin/event checks were excluded by request.
-
-See the [migration plan](research/node-24-main-migration-plan.md) and [release record](research/node-24-release.md) for production verification. The user waived development test-room cleanup and pre-release rollback verification, and will handle rollback in Vercel if needed.
-
-ESLint 9 is retained temporarily by agreement because the current React and accessibility plugins do not declare ESLint 10 compatibility. Replace or upgrade those plugins and move to a supported ESLint release in a follow-up. Other legacy dependency maintenance is outside this migration.
+ESLint 9 remains pinned pending compatibility work on the React and accessibility plugins. Dependency upgrades are separate work. Historical migration and release evidence remains under `research/`; old waivers do not establish standing permissions.
