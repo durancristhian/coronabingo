@@ -278,7 +278,7 @@ Durante la verificación se crearon dos worktrees nuevos con trabajo activo y ca
 ## Bolillero responsive: volver a diez columnas, 2026-09-27
 
 Status: ready-for-agent
-Work status: claimed
+Work status: resolved
 
 El usuario pidió diagnosticar las filas de cinco números y corregirlas en un PR.
 Esta solicitud reemplaza el criterio anterior de cinco columnas en móvil.
@@ -294,7 +294,7 @@ Esta solicitud reemplaza el criterio anterior de cinco columnas en móvil.
 - Prueba focal posterior: pasó en 7,3 s de runner, 3,7 s de Playwright. Verificó 320, 360, 375, 390, 639, 640, 767, 768, 1023, 1024 y 1280 px en ambos idiomas, y agregar/quitar el 90 mediante la UI. A 320 px, tablero de 256 px y celdas mínimas de 25,59 px; a 390 px, tablero de 326 px y celdas mínimas de 32,59 px.
 - Entorno: `http://127.0.0.1:3187`, Firestore Emulator `demo-coronabingo-ui` en `127.0.0.1:8187`. El runner verifica puertos libres, registra sus PID y detiene sus procesos al terminar. Reproducción inicial: runner 30646, Firestore 30648 y Next.js 30901.
 - La sala `QA bolillero responsive` vive únicamente en el emulador descartable. No se escribió Firebase alojado.
-- Pendientes: validación completa, revisión visual de capturas, CI y Vercel del PR. Production queda fuera de esta verificación.
+- Al iniciar la validación quedaban pendientes la suite completa, las capturas y las comprobaciones remotas. La evidencia local final se registra debajo. Production queda fuera de esta verificación.
 
 Verificación local final:
 
@@ -302,3 +302,5 @@ Verificación local final:
 - `npm run ui-tests`: 21 escenarios aprobados, 75,8 s de runner. Incluye sincronización host/jugador, marcado, persistencia y reinicio, además de la nueva matriz responsive bilingüe.
 - `git diff --check`: pasó. Capturas móviles disponibles como adjuntos de la prueba responsive en el reporte Playwright. La inspección visual a 320 px confirmó nueve filas de diez y el 90 marcado dentro de su celda.
 - Todos los procesos del runner terminaron; no quedan salas de prueba alojadas ni datos del emulador retenidos.
+
+Implementación verificada: `30d893f`. [PR #211](https://github.com/durancristhian/coronabingo/pull/211), abierto contra `main` y enlazado al hilo. Criterios locales cumplidos; CI y Vercel se siguen en los checks del PR. La publicación no incluye merge ni despliegue a Production.
