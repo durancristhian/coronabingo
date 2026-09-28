@@ -1,7 +1,7 @@
 # App copy audit, 2026-09-27
 
 Status: accepted
-Work status: claimed
+Work status: resolved
 
 ## Scope and baseline
 
@@ -46,7 +46,7 @@ Traditional quiniela associations, sound names, artwork names and external video
 
 ## Verification
 
-Local verification passed on the implementation introduced with this record, based on `e81afc8`. Hosted checks are pending publication.
+Local verification passed on the implementation introduced with this record, based on `e81afc8`. Hosted checks passed on implementation commit `796e6b0c0f38ef8873d9fb290298d10a056281a1`; details below.
 
 | Command / review | Result |
 | --- | --- |
@@ -74,3 +74,14 @@ Coverage limits: Chromium only; no human usability study, screen-reader session 
 - 2026-09-27: Audit and implementation started within the owner's explicit PR/Preview request. No additional approval required for these edits or branch publication.
 
 - 2026-09-27: Owner chose neutral Spanish. Updated all existing Spanish imperative copy, including sharing, help, recovery and donations, to avoid mixing voseo and tú.
+
+## PR and Preview verification
+
+- [PR #210](https://github.com/durancristhian/coronabingo/pull/210), linked to the active T3 thread, against `main`. Branch `t3code/audit-app-copy` is pushed. Implementation commit `796e6b0c0f38ef8873d9fb290298d10a056281a1`.
+- [GitHub Actions 36366714944](https://github.com/durancristhian/coronabingo/actions/runs/36366714944): successful lint/typecheck, build and 20/20 Chromium tests. Tests took 48.5 seconds, the browser runner 54.7 seconds and the job 3m13s.
+- [Vercel deployment](https://vercel.com/cristhian-durans-projects-3ace6550/coronabingo/5EE5s8LDSUfqeGXXfGVpXRCbG2pi): successful for the implementation commit.
+- [Branch Preview](https://coronabingo-git-t3cod-d83e16-cristhian-durans-projects-3ace6550.vercel.app), with English at `/en`.
+- Preview home was checked read-only in both languages at 390×844 and 1280×844: HTTP 200, correct labels, empty form disabled, named form enabled and no horizontal overflow. The create button was never submitted. External requests were blocked in this inspection, so ads and embedded news are not verified. [Recorded result](app-copy-audit-evidence/preview-home.json).
+- No hosted game records created, no local servers left running, no merge or Production deployment. The owner still needs to review and approve the copy in Preview.
+
+This final evidence update changes documentation and screenshots only. PR checks for the final branch head remain visible in GitHub; they are monitored through completion before handoff.
