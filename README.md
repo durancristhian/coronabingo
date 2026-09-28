@@ -117,4 +117,14 @@ Read [AGENTS.md](AGENTS.md) for contribution rules, [CONTEXT.md](CONTEXT.md) for
 
 The primary branch is `main`. The standalone `/admin` and `/eventos/…` flows are retired; room setup at `/room/[roomId]/admin` remains active. Historical records are retained, and gameplay uses neither Firebase Authentication nor Storage. Do not add regression journeys for retired routes as part of ordinary gameplay work.
 
-ESLint 9 remains pinned pending compatibility work on the React and accessibility plugins. Dependency upgrades are separate work. Historical migration and release evidence remains under `research/`; old waivers do not establish standing permissions.
+ESLint 9 remains pinned pending compatibility work on the React and accessibility plugins. Dependency upgrades are separate work.
+
+## Local research and tickets
+
+`research/` holds local plans, tickets, and evidence. It is ignored by Git, ESLint, and the application/UI TypeScript configurations. Application and CI builds do not depend on it. Skill configuration remains versioned under `docs/agents/` and the root agent/domain documents; skills use local records when a task needs them.
+
+Use the primary checkout's `research/` as the canonical directory across worktrees, following the [tracker instructions](docs/agents/issue-tracker.md). New clones do not receive these files; recover existing task records from an owner-provided backup. Back up local research separately. Include non-sensitive acceptance criteria and validation summaries in PRs for remote review. Old research waivers do not establish standing permissions.
+
+Before first updating an existing checkout to the commit that removes research from Git, back up its entire `research/`, including untracked work, outside all worktrees and verify the copy. Git can delete previously tracked files when applying that commit even though the directory is now ignored. After updating, restore missing files and compare differing versions without overwriting local work. Preserve unique records from other worktrees before removing them.
+
+This change removes research from future snapshots; it does not rewrite Git history. Earlier committed records remain recoverable from older revisions.

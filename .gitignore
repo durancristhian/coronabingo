@@ -13,6 +13,9 @@
 /.ui-tests-config/
 **/*-debug.log
 
+# local plans, tickets, and evidence
+/research/
+
 # next.js
 /.next/
 /.next-ui-tests/

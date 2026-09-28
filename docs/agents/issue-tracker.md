@@ -1,6 +1,14 @@
 # Issue tracker: local Markdown
 
-Issues, specs, plans, and investigations live under `research/`. Use these paths when a skill supplies a generic `.scratch/` layout.
+Issues, specs, plans, and investigations live in a local, ignored `research/` directory. Skill configuration remains versioned in `docs/agents/`, `AGENTS.md`, `CLAUDE.md`, and `CONTEXT.md`. Use this tracker when a skill supplies a generic `.scratch/` layout.
+
+## Locate the shared records
+
+- Use an explicitly supplied canonical research path. Otherwise inspect `git worktree list --porcelain` and use `research/` in the primary checkout, not the current task worktree. Resolve and pass absolute paths to skills and agents.
+- All relative `research/` paths below refer to that canonical directory. Use `rg --files --hidden --no-ignore <absolute-research-path>` when locating ignored records; Git file listings will omit them.
+- Preserve existing records and coordinate claims before editing shared tickets. Do not overwrite canonical files with stale worktree copies.
+- New worktrees use the shared directory. A fresh clone has no research history: restore the relevant owner-provided backup for existing tasks, or create the directory for new work. Missing existing specifications must be recovered, not silently replaced.
+- Research has no Git backup going forward. Back it up separately and preserve unique worktree records before cleanup. Local records may contain private evidence; publish only the necessary non-sensitive summaries.
 
 ## Find and organize work
 
@@ -17,7 +25,7 @@ Issues, specs, plans, and investigations live under `research/`. Use these paths
 - Append dated decisions and rationale under `## Comments`. Distinguish defects, intentional behavior, accepted limitations, and deferred suggestions.
 - Put outcomes under `## Answer`: criteria met, commands/results, revision, environment, relevant URL, and gaps. Separate local, CI, Preview, and Production evidence.
 - Record blockers and next actions without resolving incomplete work. Preserve valid deliveries when resuming.
-- Commit durable evidence with the implementation. Live PR/check status may remain in PRs and handoffs; avoid commits solely to refresh transient status or self-referential HEADs.
+- Keep detailed evidence in the local record; never force-add it to Git. Summarize acceptance criteria and checks in PRs/handoffs so remote review does not depend on local files. Keep approved product decisions needed by future contributors in the appropriate versioned domain/design docs.
 
 ## Wayfinding operations
 

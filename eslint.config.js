@@ -14,6 +14,7 @@ module.exports = [
       '.next-ui-tests/**',
       'playwright-report/**',
       'test-results/**',
+      'research/**',
       '.now/**',
       '.vscode/**',
     ],

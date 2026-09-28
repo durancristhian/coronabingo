@@ -16,7 +16,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Setup, commands, and troubleshooting: [README.md](README.md).
 - Implementation, review, PRs, or cleanup: [workflow](docs/agents/workflow.md).
-- Plans, tickets, or evidence: [issue tracker](docs/agents/issue-tracker.md). Reuse the canonical record under `research/`; small tasks need only a short record.
+- Plans, tickets, or evidence: [issue tracker](docs/agents/issue-tracker.md). Use the primary checkout's local, ignored `research/` by absolute path; small tasks need only a short record. Keep skill configuration in versioned `docs/agents/`.
 - Product language or behavior: [CONTEXT.md](CONTEXT.md) and [domain guidance](docs/agents/domain.md).
 - UI, copy, or assets: [design context](.better-web-ui.md). Preserve approved terminology and interactions.
 

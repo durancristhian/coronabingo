@@ -17,6 +17,7 @@
    Replace placeholders. Dependent work uses its agreed base. If fetching fails, report the local base's freshness before relying on it.
 4. Bootstrap each new worktree before implementation or analysis: copy `.env` from the local checkout used to create it, without printing values or overwriting a destination. This is owner-approved when both checkouts target the same environment. Resolve a missing source or existing destination before continuing. Copying `.env` does not isolate Firebase.
 5. Activate `.nvmrc`, run `npm ci`, and confirm Node/npm satisfy the runtime files. Setup is complete only when installation succeeds. Keep `node_modules`, Next.js output, and TypeScript caches local to each checkout.
+6. Resolve the canonical local research directory using the [tracker](issue-tracker.md). Pass absolute ticket/spec paths to skills and agents. Worktrees do not receive ignored research files from Git; use the shared records instead of creating competing copies.
 
 ## Implement and verify
 
@@ -26,14 +27,14 @@
 
 ## Commit and review
 
-1. Stage only task-owned changes and the corresponding tracker update. Review `git diff --cached` and `git diff --cached --check`; exclude secrets, generated output, and browser state.
+1. Update the local tracker, then stage only task-owned versioned changes. Keep `research/` ignored; never force-add it. Review `git diff --cached` and `git diff --cached --check`; exclude secrets, generated output, and browser state.
 2. Commit coherent, verified chunks using `fix:`, `feat:`, `perf:`, or `docs:`. Let hooks run, investigate failures, inspect autofixes, and verify the resulting commit and worktree status.
 3. Review against the fixed base and originating requirements, covering both repository standards and requested behavior. When using `$code-review`, supply the base SHA and canonical specification; commit first so its comparison against `HEAD` includes the implementation.
 4. Correct justified in-scope findings, repeat affected checks, and record the reviewed HEAD. Keep optional suggestions separate. Renew affected reviews when code or base changes.
 
 ## Publish when authorized
 
-Push the task branch, open a PR against its verified base, and link it to the active thread when supported. Describe the problem, resulting behavior, validation, and remaining gaps. Include a Preview link for user review.
+Push the task branch, open a PR against its verified base, and link it to the active thread when supported. Describe the problem, acceptance criteria, resulting behavior, validation, and remaining gaps. Include a Preview link for user review. Local ticket paths are not available to remote reviewers; include the necessary non-sensitive specification and evidence summary in the PR.
 
 Monitor GitHub and Vercel checks to a terminal result and read available review comments. Fix in-scope failures and repeat affected checks after pushing. Verify the affected Preview journey under the standing gameplay permission. Distinguish a ready deployment from tested functionality and report any acceptance gap.
 
@@ -51,6 +52,6 @@ Use this section when the user selects the principal-PR workflow:
 
 1. Fetch the target branch, check the PR's current base/HEAD, and resolve in-scope conflicts. Preserve concurrent work. Renew affected checks and reviews; absence of conflicts alone does not establish merge readiness. History rewriting requires its own authorization and protection against the expected remote SHA.
 2. Merge only after applicable checks, reviews, and repository rules pass. When Production release is authorized, verify the deployment corresponds to the integrated revision and exercise the affected flow within the authorized data scope. Report deployment and functional results separately.
-3. Update a clean local `main` with a fast-forward and verify it matches fetched `origin/main`. Preserve local changes or divergence and report anything preventing the update.
+3. Update a clean local `main` with a fast-forward and verify it matches fetched `origin/main`. Preserve local changes or divergence and report anything preventing the update. Before first integrating the commit that untracks `research/`, follow the backup/restore procedure in README; Git may remove previously tracked local files during the update.
 4. When cleanup is requested, identify only this task's resources. Confirm integration using PR/merge evidence, including for squash merges, and ensure all changes are committed. Stop owned processes, preserve required evidence and local files, and remove worktrees with `git worktree remove <path>`. Delete only integrated or explicitly authorized task branches, local and remote. Never force removal to discard unfinished work.
 5. Report revision, checks, environment, cleanup, and gaps. Retain work awaiting review or integration.

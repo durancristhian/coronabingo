@@ -3,5 +3,5 @@
   "compilerOptions": {
     "tsBuildInfoFile": ".next-ui-tests/cache/tsconfig.tsbuildinfo"
   },
-  "exclude": ["node_modules", ".next"]
+  "exclude": ["node_modules", ".next", "research"]
 }
