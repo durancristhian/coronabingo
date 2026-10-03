@@ -1,4 +1,6 @@
 import assert from 'assert'
+import { runInNewContext } from 'vm'
+import { getAnalyticsInitializationScript } from '../utils/analyticsPageContext'
 import { AnalyticsLog } from '../interfaces/analytics/Events'
 import {
   getAnalyticsPageType,
@@ -22,6 +24,7 @@ import {
   normalizeRoutePath,
   pageview,
   sanitizeReferrer,
+  updateAnalyticsPageContext,
 } from '../utils/gtag'
 
 const origin = 'https://coronabingo.com.ar'
@@ -257,6 +260,7 @@ Object.defineProperty(globalThis, 'window', {
     },
     location: {
       origin,
+      href: `${origin}/room/private-room/private-player?secret=value#private-fragment`,
       pathname: '/room/private-room/private-player',
     },
     localStorage: {
@@ -321,10 +325,13 @@ pageview({
   locale: 'en',
   pathname: '/room/[roomId]/[playerId]',
 })
+updateAnalyticsPageContext(
+  '/room/private-room/private-player?secret=value#private-fragment',
+)
 logEvent('room_created', roomCreatedParams)
 
-assert.strictEqual(calls.length, 3)
-assert.deepStrictEqual(calls[0], [
+assert.strictEqual(calls.length, 6)
+assert.deepStrictEqual(calls[1], [
   'event',
   'page_view',
   {
@@ -334,7 +341,7 @@ assert.deepStrictEqual(calls[0], [
     page_referrer: `${origin}/room/[roomId]/[playerId]`,
   },
 ])
-assert.deepStrictEqual(calls[1], [
+assert.deepStrictEqual(calls[3], [
   'event',
   'page_view',
   {
@@ -344,16 +351,109 @@ assert.deepStrictEqual(calls[1], [
     page_referrer: `${origin}/room/[roomId]/[playerId]`,
   },
 ])
-assert.deepStrictEqual(calls[2], [
+assert.deepStrictEqual(calls[5], [
   'event',
   'room_created',
   {
     ...roomCreatedParams,
     send_to: 'G-TEST123',
     page_location: `${origin}/room/[roomId]/[playerId]`,
-    page_referrer: `${origin}/room/[roomId]/[playerId]`,
+    page_referrer: `${origin}/en/room/[roomId]/[playerId]`,
   },
 ])
+
+// Configuration applies even when an automatic event supplies no page context.
+assert.deepStrictEqual(
+  calls.filter(([command]) => command === 'config'),
+  [
+    [
+      'config',
+      'G-TEST123',
+      {
+        page_location: `${origin}/room/[roomId]/[playerId]`,
+        page_referrer: `${origin}/room/[roomId]/[playerId]`,
+        send_page_view: false,
+        update: true,
+      },
+    ],
+    [
+      'config',
+      'G-TEST123',
+      {
+        page_location: `${origin}/en/room/[roomId]/[playerId]`,
+        page_referrer: `${origin}/room/[roomId]/[playerId]`,
+        send_page_view: false,
+        update: true,
+      },
+    ],
+    [
+      'config',
+      'G-TEST123',
+      {
+        page_location: `${origin}/room/[roomId]/[playerId]`,
+        page_referrer: `${origin}/en/room/[roomId]/[playerId]`,
+        send_page_view: false,
+        update: true,
+      },
+    ],
+  ],
+)
+
+for (const [path, expectedPath] of [
+  ['/room/private-room', '/room/[roomId]'],
+  ['/room/private-room/admin', '/room/[roomId]/admin'],
+  ['/en/room/private-room/private-player', '/en/room/[roomId]/[playerId]'],
+  ['/es/room/private-room/private-player/', '/es/room/[roomId]/[playerId]'],
+  [
+    '/room/private-room/private-player/extra-private',
+    '/room/[roomId]/[playerId]',
+  ],
+  ['/en', '/en'],
+  ['/', '/'],
+]) {
+  for (const [referrer, expectedReferrer] of [
+    ['', ''],
+    ['invalid URL', ''],
+    [
+      'https://external.example/private?secret=value#private-fragment',
+      'https://external.example/',
+    ],
+    [
+      `${origin}/room/private-room/admin?secret=value#private-fragment`,
+      `${origin}/room/[roomId]/admin`,
+    ],
+  ]) {
+    const sandbox = {
+      window: {
+        location: { href: `${origin}${path}?secret=value#private-fragment` },
+      },
+      document: { referrer },
+      URL,
+    }
+    // Match the browser global and execute the exact inline bootstrap, without
+    // gtag.js or React. Privacy must be configured before either can run.
+    Object.assign(sandbox, sandbox.window)
+    Object.assign(sandbox, { window: sandbox })
+    const commands = runInNewContext(
+      `${getAnalyticsInitializationScript(
+        'G-TEST123',
+      )}; dataLayer.map(c => Array.from(c))`,
+      sandbox,
+    )
+    assert.deepStrictEqual(JSON.parse(JSON.stringify(commands[1])), [
+      'config',
+      'G-TEST123',
+      {
+        send_page_view: false,
+        page_location: `${origin}${expectedPath}`,
+        page_referrer: expectedReferrer,
+      },
+    ])
+    assert.strictEqual(commands.length, 2)
+    assert.ok(!JSON.stringify(commands).includes('private-'))
+    assert.ok(!JSON.stringify(commands).includes('secret=value'))
+  }
+}
 
 for (const call of calls) {
   const payload = JSON.stringify(call)
@@ -366,7 +466,7 @@ process.env.UI_TESTS = '1'
 logEvent('room_restarted', roomRestartedParams)
 delete process.env.UI_TESTS
 
-assert.strictEqual(calls.length, 3)
+assert.strictEqual(calls.length, 6)
 assert.deepStrictEqual(
   JSON.parse(sessionStorageValues.get(ANALYTICS_TEST_STORAGE_KEY) || '[]'),
   [
@@ -377,4 +477,20 @@ assert.deepStrictEqual(
   ],
 )
 
-console.log('Analytics routes and event destination are valid.')
+Object.defineProperty(window, 'gtag', {
+  configurable: true,
+  value: () => {
+    throw new Error('Tag unavailable')
+  },
+})
+assert.doesNotThrow(() =>
+  updateAnalyticsPageContext('/room/other-private/admin'),
+)
+assert.doesNotThrow(() => updateAnalyticsPageContext('http://['))
+delete process.env.GA_TRACKING_ID
+assert.doesNotThrow(() => updateAnalyticsPageContext('/en'))
+assert.strictEqual(calls.length, 6)
+
+console.log(
+  'Analytics routes, stream context, and event destination are valid.',
+)

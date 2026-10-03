@@ -111,7 +111,9 @@ npm run ui-tests:ci
 
 ## Analytics and product references
 
-The event contract is in [Events.ts](interfaces/analytics/Events.ts), payload construction in [analyticsEvents.ts](utils/analyticsEvents.ts), and delivery/URL sanitization in [gtag.ts](utils/gtag.ts). Preserve normalized private routes and exclude room/player names, identifiers, and custom background URLs from outgoing payloads. Local capture proves application event behavior; network delivery and GA4 processing require their own evidence.
+The event contract is in [Events.ts](interfaces/analytics/Events.ts), payload construction in [analyticsEvents.ts](utils/analyticsEvents.ts), delivery in [gtag.ts](utils/gtag.ts), and shared URL sanitization/initialization in [analyticsPageContext.ts](utils/analyticsPageContext.ts). The document configures sanitized stream defaults before loading Google scripts, and the app updates them before SPA history changes. Keep the serialized initialization function self-contained. Preserve normalized private routes and exclude room/player names, identifiers, and custom background URLs from outgoing payloads.
+
+The isolated UI suite uses a fake measurement ID and blocks external traffic to check the compiled bootstrap and routing configuration. It does not prove how Google's automatic advertising events use that configuration. Verify real `ad_impression` requests after an authorized Production release, then check processed reports and AdSense continuity. This protection concerns GA4 page context; it does not rewrite AdSense's own advertising requests or historical reports.
 
 Read [AGENTS.md](AGENTS.md) for contribution rules, [CONTEXT.md](CONTEXT.md) for terminology, and [.better-web-ui.md](.better-web-ui.md) for approved design and copy decisions. Documentation outside `research/` is in English; application translations remain bilingual.
 

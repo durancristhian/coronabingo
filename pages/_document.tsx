@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/browser'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React, { Fragment } from 'react'
+import { getAnalyticsInitializationScript } from '~/utils/analyticsPageContext'
 import i18n from '~/i18n.json'
 
 const defaultLanguage = i18n.defaultLocale
@@ -37,12 +38,7 @@ export default class extends Document {
             <Fragment>
               <script
                 dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${trackingId}', { send_page_view: false });
-                  `,
+                  __html: getAnalyticsInitializationScript(trackingId),
                 }}
               />
               <script
