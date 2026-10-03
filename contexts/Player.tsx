@@ -18,13 +18,13 @@ const PlayerContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const playerId = router.query.playerId?.toString()
   const roomId = router.query.roomId?.toString()
-  const [state, setState] = useState<RemoteData<Error, Player>>({
+  const [state, setState] = useState<RemoteData<Error, Player | null>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
 
   const updatePlayer = (partialPlayer: Partial<PlayerBase>) => {
     setState(prevState => {
-      if (prevState.type !== REMOTE_DATA.SUCCESS) {
+      if (prevState.type !== REMOTE_DATA.SUCCESS || !prevState.data) {
         return prevState
       }
 
@@ -36,7 +36,7 @@ const PlayerContextProvider = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    if (!playerId) return
+    if (!roomId || !playerId) return
 
     setState({ type: REMOTE_DATA.LOADING })
 
@@ -49,8 +49,8 @@ const PlayerContextProvider = ({ children }: Props) => {
 
           if (!snapshot.exists) {
             setState({
-              type: REMOTE_DATA.FAILURE,
-              error: new Error('Deleted player'),
+              type: REMOTE_DATA.SUCCESS,
+              data: null,
             })
 
             return
@@ -73,7 +73,7 @@ const PlayerContextProvider = ({ children }: Props) => {
       )
 
     return unsubscribe
-  }, [playerId])
+  }, [roomId, playerId])
 
   return (
     <PlayerContext.Provider value={{ state, updatePlayer }}>

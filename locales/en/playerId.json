@@ -2,6 +2,8 @@
   "title": "Hi {{playerName}}, you are in the room {{roomName}}",
   "room-not-ready": "The room is being set up. Please wait...",
   "unexisting-player": "We couldn't find this player in the room. Check the link you used to join.",
+  "back-to-room": "Back to room",
+  "mark-error": "We couldn't save this mark. Try marking the number again.",
   "last-numbers": "Latest numbers",
   "next-number": "Next number",
   "no-bingo-spinner-description": "Mark the numbers below as you draw them from your bingo cage.",
