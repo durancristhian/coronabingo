@@ -1,3 +1,4 @@
+import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
 
 const widgetsURL = '**://platform.twitter.com/widgets.js'
@@ -24,6 +25,30 @@ const widgetsScript = `
   };
 `
 
+async function createRoomFromHome(
+  page: Page,
+  locale: string,
+  roomName: string,
+) {
+  await page
+    .getByRole('textbox', {
+      name: locale === 'en' ? 'Room name *' : 'Nombre de la sala *',
+      exact: true,
+    })
+    .fill(roomName)
+  await page
+    .getByRole('button', {
+      name: locale === 'en' ? 'Create room' : 'Crear sala',
+      exact: true,
+    })
+    .click()
+  await expect(
+    page.getByRole('heading', {
+      name: locale === 'en' ? 'Set up room' : 'Preparar sala',
+    }),
+  ).toBeVisible()
+}
+
 for (const locale of ['es', 'en']) {
   test(`${locale}: delayed tweets ignore unmounted targets after navigation`, async ({
     page,
@@ -45,23 +70,7 @@ for (const locale of ['es', 'en']) {
     })
     await page.goto(locale === 'en' ? '/en' : '/')
     await expect.poll(() => requests).toBe(1)
-    await page
-      .getByRole('textbox', {
-        name: locale === 'en' ? 'Room name *' : 'Nombre de la sala *',
-        exact: true,
-      })
-      .fill(`Tweet lifecycle ${locale}`)
-    await page
-      .getByRole('button', {
-        name: locale === 'en' ? 'Create room' : 'Crear sala',
-        exact: true,
-      })
-      .click()
-    await expect(
-      page.getByRole('heading', {
-        name: locale === 'en' ? 'Set up room' : 'Preparar sala',
-      }),
-    ).toBeVisible()
+    await createRoomFromHome(page, locale, `Tweet lifecycle ${locale}`)
     release()
     await expect(page.getByTestId('rendered-tweet')).toHaveCount(4)
     await expect(page.locator('html')).not.toHaveAttribute(
@@ -114,23 +123,7 @@ for (const locale of ['es', 'en']) {
       'href',
       'https://twitter.com/i/web/status/1266490485650198528',
     )
-    await page
-      .getByRole('textbox', {
-        name: locale === 'en' ? 'Room name *' : 'Nombre de la sala *',
-        exact: true,
-      })
-      .fill(`Tweet retry ${locale}`)
-    await page
-      .getByRole('button', {
-        name: locale === 'en' ? 'Create room' : 'Crear sala',
-        exact: true,
-      })
-      .click()
-    await expect(
-      page.getByRole('heading', {
-        name: locale === 'en' ? 'Set up room' : 'Preparar sala',
-      }),
-    ).toBeVisible()
+    await createRoomFromHome(page, locale, `Tweet retry ${locale}`)
     await expect(page.getByTestId('rendered-tweet')).toHaveCount(4)
     await expect(links).toHaveCount(0)
     expect(requests).toBe(2)
