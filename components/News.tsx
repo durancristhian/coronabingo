@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, memo } from 'react'
-import TweetEmbed from 'react-tweet-embed'
+import TweetEmbed from '~/components/TweetEmbed'
 import Heading from '~/components/Heading'
 
 interface Props {
@@ -18,7 +18,7 @@ export default memo(function News({ tweetIds }: Props) {
       <div className="sm:flex sm:flex-wrap my-4 -mx-2">
         {tweetIds.map(id => (
           <div key={id} className="mx-2">
-            <TweetEmbed id={id} options={{ align: 'center', width: 275 }} />
+            <TweetEmbed id={id} />
           </div>
         ))}
       </div>
