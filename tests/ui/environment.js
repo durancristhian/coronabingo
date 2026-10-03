@@ -12,7 +12,7 @@ const appEnv = {
   PROJECT_ID: projectId,
   MESSAGING_SENDER_ID: '123456789',
   APP_ID: '1:123456789:web:demo',
-  GA_TRACKING_ID: '',
+  GA_TRACKING_ID: 'G-TEST123',
   SENTRY_DSN: '',
   URL: baseURL,
 }

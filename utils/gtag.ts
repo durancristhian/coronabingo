@@ -3,6 +3,7 @@ import {
   AnalyticsEventName,
   CapturedAnalyticsEvent,
 } from '~/interfaces/analytics/Events'
+import { getAnalyticsPageContext } from './analyticsPageContext'
 
 type AnalyticsWindow = Window & {
   gtag?: (...args: unknown[]) => void
@@ -18,6 +19,9 @@ interface PageviewOptions {
 }
 
 let previousLocation = ''
+let configuredPageContext:
+  | ReturnType<typeof getAnalyticsPageContext>
+  | undefined
 
 const getTracking = () => {
   const trackingId = process.env.GA_TRACKING_ID
@@ -50,41 +54,42 @@ export const normalizeRoutePath = (
   return `${localePrefix}${normalizedPath}` || '/'
 }
 
-const normalizeInternalReferrerPath = (pathname: string) => {
-  const path = withoutQueryOrHash(pathname).replace(/\/$/, '') || '/'
-  const roomRoute = path.match(/^(\/(?:es|en))?\/room\/[^/]+(?:\/([^/]+))?$/)
+export const sanitizeReferrer = (referrer: string, origin: string) =>
+  getAnalyticsPageContext(origin, referrer).page_referrer
 
-  if (!roomRoute) return path
-
-  const [, localePrefix = '', roomChild] = roomRoute
-  if (!roomChild) return `${localePrefix}/room/[roomId]`
-
-  const childRoute = roomChild === 'admin' ? 'admin' : '[playerId]'
-  return `${localePrefix}/room/[roomId]/${childRoute}`
+const getEventPageContext = (location = window.location.href) => {
+  const context = getAnalyticsPageContext(
+    location,
+    configuredPageContext?.page_location || document.referrer,
+  )
+  return configuredPageContext &&
+    context.page_location === configuredPageContext.page_location
+    ? configuredPageContext
+    : context
 }
 
-export const sanitizeReferrer = (referrer: string, origin: string) => {
-  if (!referrer) return ''
+// Update the stream defaults, not just the next manually emitted event.
+// beforeHistoryChange calls this before Google observes the new browser URL.
+export const updateAnalyticsPageContext = (url?: string): void => {
+  const tracking = getTracking()
+  if (!tracking) return
 
   try {
-    const url = new URL(referrer)
-    if (url.origin !== origin) return `${url.origin}/`
+    const location = new URL(
+      url || window.location.href,
+      window.location.origin,
+    ).href
+    const context = getEventPageContext(location)
+    if (context === configuredPageContext) return
 
-    return `${origin}${normalizeInternalReferrerPath(url.pathname)}`
+    tracking.gtag?.('config', tracking.trackingId, {
+      ...context,
+      send_page_view: false,
+      update: true,
+    })
+    configuredPageContext = context
   } catch {
-    return ''
-  }
-}
-
-const getEventPageContext = () => {
-  const origin = window.location.origin
-  const pageLocation = `${origin}${normalizeInternalReferrerPath(
-    window.location.pathname,
-  )}`
-
-  return {
-    page_location: pageLocation,
-    page_referrer: sanitizeReferrer(document.referrer, origin),
+    // A blocked or failing tag must never cancel a router transition.
   }
 }
 
@@ -98,6 +103,7 @@ export const pageview = ({
 
   const path = normalizeRoutePath(pathname, locale, defaultLocale)
   const location = `${window.location.origin}${path}`
+  updateAnalyticsPageContext(location)
   if (location === previousLocation) return
 
   tracking.gtag?.('event', 'page_view', {

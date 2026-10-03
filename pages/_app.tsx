@@ -14,7 +14,7 @@ import { ErrorInfo } from '~/interfaces/custom/ErrorInfo'
 import pkg from '~/package.json'
 import '~/polyfills/promise-finally'
 import '~/public/css/styles.css'
-import { pageview } from '~/utils/gtag'
+import { pageview, updateAnalyticsPageContext } from '~/utils/gtag'
 
 const version = pkg.version
 const defaultLanguage = i18n.defaultLocale
@@ -67,12 +67,15 @@ export default class Coronabingo extends App {
   componentDidMount() {
     console.log(`v${version}`)
     if (process.env.GA_TRACKING_ID) {
+      updateAnalyticsPageContext()
+      Router.events.on('beforeHistoryChange', updateAnalyticsPageContext)
       Router.events.on('routeChangeComplete', this.trackPageview)
       this.trackPageview()
     }
   }
 
   componentWillUnmount() {
+    Router.events.off('beforeHistoryChange', updateAnalyticsPageContext)
     Router.events.off('routeChangeComplete', this.trackPageview)
   }
 
