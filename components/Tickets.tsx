@@ -1,8 +1,10 @@
+import { captureException } from '@sentry/browser'
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Box from '~/components/Box'
 import Cells from '~/components/Cells'
+import Message from '~/components/Message'
 import useTickets from '~/hooks/useTickets'
 import { Player } from '~/interfaces/models/Player'
 import { FieldValue } from '~/utils/firebase'
@@ -13,6 +15,7 @@ interface Props {
 
 export default function Tickets({ player }: Props) {
   const tickets = useTickets(player.tickets)
+  const [writeError, setWriteError] = useState(false)
   const { t } = useTranslation()
 
   /* const verifyWinningConditions = (
@@ -65,19 +68,37 @@ export default function Tickets({ player }: Props) {
       number => !newSelectedNumbers.includes(number),
     )
 
-    if (addedNumber !== undefined) {
-      await player.ref.update({
-        [ticketId]: FieldValue.arrayUnion(addedNumber),
-      })
-    } else if (removedNumber !== undefined) {
-      await player.ref.update({
-        [ticketId]: FieldValue.arrayRemove(removedNumber),
-      })
+    try {
+      setWriteError(false)
+      if (addedNumber !== undefined) {
+        await player.ref.update({
+          [ticketId]: FieldValue.arrayUnion(addedNumber),
+        })
+      } else if (removedNumber !== undefined) {
+        await player.ref.update({
+          [ticketId]: FieldValue.arrayRemove(removedNumber),
+        })
+      }
+    } catch (error) {
+      // The player subscription handles removal and replaces the cards.
+      if (
+        error instanceof Error &&
+        'code' in error &&
+        error.code === 'not-found'
+      )
+        return
+      setWriteError(true)
+      captureException(error)
     }
   }
 
   return (
     <Fragment>
+      {writeError && (
+        <div role="alert" className="mb-4">
+          <Message type="error">{t('playerId:mark-error')}</Message>
+        </div>
+      )}
       {tickets.map((ticket, i) => (
         <div
           key={i}

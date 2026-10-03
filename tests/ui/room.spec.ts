@@ -398,7 +398,7 @@ test('host and player create, play, reload and restart a room', async ({
       await playerRow.getByRole('button', { name: 'Eliminar persona' }).click()
       await expect(
         player.getByText(
-          'No pudimos cargar la información. Intenta recargar la página.',
+          'No encontramos a esta persona en la sala. Revisa el link que usaste para entrar.',
         ),
       ).toBeVisible()
       await expect(player.getByTestId('bingo-card')).toHaveCount(0)

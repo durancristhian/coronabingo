@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
 import Box from '~/components/Box'
@@ -62,18 +63,28 @@ export default function RoomPlayer() {
     )
   }
 
-  if (!room.readyToPlay) {
+  if (!player) {
     return (
       <Layout>
-        <Loading message={t('playerId:room-not-ready')} />
+        <Message type="error">
+          <div>
+            <p>{t('playerId:unexisting-player')}</p>
+            <Link
+              href={`/room/${room.id}`}
+              className="cb-text-link inline-block mt-2 font-medium text-blue-800 underline focus:outline-none focus:shadow-outline"
+            >
+              {t('playerId:back-to-room')}
+            </Link>
+          </div>
+        </Message>
       </Layout>
     )
   }
 
-  if (!player) {
+  if (!room.readyToPlay) {
     return (
       <Layout>
-        <Message type="error">{t('playerId:unexisting-player')}</Message>
+        <Loading message={t('playerId:room-not-ready')} />
       </Layout>
     )
   }
