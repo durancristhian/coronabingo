@@ -1,255 +1,224 @@
-import { Page } from '@playwright/test'
+import { tutorials } from '../../utils/tutorials'
 import { readAnalyticsEvents } from './analytics'
 import { test, expect } from './fixtures'
 
-interface YouTubeMockOptions {
-  requests?: string[]
+for (const language of ['es', 'en'] as const) {
+  test(`plays the ${language} tutorial on demand and restores focus`, async ({
+    page,
+  }) => {
+    const mediaRequests: string[] = []
+    page.on('request', request => {
+      if (request.url().includes('/tutorials/'))
+        mediaRequests.push(request.url())
+    })
+    await page.goto(language === 'en' ? '/en' : '/')
+    expect(mediaRequests).toEqual([])
+    const open = page.getByRole('button', {
+      name: language === 'en' ? 'Watch tutorial' : 'Ver tutorial',
+    })
+    await open.click()
+    const dialog = page.getByRole('dialog')
+    const video = dialog.locator('video')
+    await expect(video).toHaveAttribute(
+      'src',
+      new RegExp(`tutorial-${language}\\.[a-f0-9]+\\.mp4$`),
+    )
+    await expect(video).toHaveAttribute('playsinline', '')
+    await expect
+      .poll(async () => video.evaluate((v: HTMLVideoElement) => v.readyState))
+      .toBeGreaterThan(0)
+    expect(await video.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true)
+    expect(
+      mediaRequests.every(
+        url => !url.includes(`tutorial-${language === 'en' ? 'es' : 'en'}.`),
+      ),
+    ).toBe(true)
+    await expect
+      .poll(() => readAnalyticsEvents(page))
+      .toEqual([
+        {
+          eventName: 'tutorial_opened',
+          eventParams: {
+            schema_version: 'v1',
+            tutorial_language: language,
+            tutorial_provider: 'self_hosted',
+            tutorial_version: '2026-10-v1',
+            ui_language: language,
+          },
+        },
+      ])
+    await video.evaluate((v: HTMLVideoElement) => v.play())
+    await expect
+      .poll(async () => video.evaluate((v: HTMLVideoElement) => v.currentTime))
+      .toBeGreaterThan(0.2)
+    await video.evaluate((v: HTMLVideoElement) => v.pause())
+    await video.evaluate((v: HTMLVideoElement) => v.play())
+    await expect
+      .poll(
+        async () =>
+          (await readAnalyticsEvents(page)).filter(
+            e => e.eventName === 'tutorial_begin',
+          ).length,
+      )
+      .toBe(1)
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
+    await expect(page.locator('video')).toHaveCount(0)
+    await expect(open).toBeFocused()
+    await open.click()
+    await expect(video).toHaveCount(1)
+    expect(await video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBe(0)
+    await video.evaluate((v: HTMLVideoElement) => v.play())
+    await expect
+      .poll(
+        async () =>
+          (await readAnalyticsEvents(page)).filter(
+            e => e.eventName === 'tutorial_begin',
+          ).length,
+      )
+      .toBe(2)
+    await dialog.locator('#close-modal').click()
+    await expect(page.locator('video')).toHaveCount(0)
+  })
 }
 
-async function mockYouTubePlayer(
-  page: Page,
-  { requests = [] }: YouTubeMockOptions = {},
-) {
-  await page.route('**://www.youtube.com/iframe_api', route => {
-    requests.push(route.request().url())
-    return route.fulfill({
-      contentType: 'application/javascript',
-      body: `
-        window.YT = {
-          PlayerState: { ENDED: 0, PLAYING: 1, CUED: 5 },
-          Player: function(element, options) {
-            var iframe = document.createElement('iframe');
-            iframe.className = element.className;
-            iframe.src = 'https://www.youtube.com/embed/' + options.videoId;
-            element.replaceWith(iframe);
-            this.destroy = function() { iframe.remove(); };
-            this.getIframe = function() { return iframe; };
-            this.getPlayerState = function() { return 5; };
-            this.emitState = function(state) {
-              options.events.onStateChange({ target: this, data: state });
-            };
-            window.tutorialPlayer = this;
-            setTimeout(function() {
-              options.events.onReady({ target: this });
-            }.bind(this), 0);
-          }
-        };
-        setTimeout(function() { window.onYouTubeIframeAPIReady(); }, 0);
-      `,
-    })
-  })
-  await page.route('https://www.youtube.com/embed/**', route => {
-    requests.push(route.request().url())
-    return route.fulfill({
-      contentType: 'text/html',
-      body: `
-        <main>
-          <p role="status">Tutorial video ready</p>
-          <button type="button" onclick="document.querySelector('[role=status]').textContent = 'Tutorial video playing'">
-            Play tutorial
-          </button>
-        </main>
-      `,
-    })
-  })
-}
-
-test('loads the tutorial player only after the visitor opens it', async ({
+test('counts distinct playback at 80 percent, without credit for seeking or replays', async ({
   page,
 }) => {
-  const playerScripts: string[] = []
-  const youtubeRequests: string[] = []
-
-  await mockYouTubePlayer(page, { requests: youtubeRequests })
-  await page.route('**/_next/static/chunks/**', async route => {
-    const response = await route.fetch()
-    const body = await response.text()
-    if (body.includes('youtube.com/iframe_api')) {
-      playerScripts.push(response.url())
-      await new Promise(resolve => setTimeout(resolve, 500))
-    }
-    await route.fulfill({ response, body })
-  })
-
   await page.goto('/')
-  expect(playerScripts).toEqual([])
-  expect(youtubeRequests).toEqual([])
-
   await page.getByRole('button', { name: 'Ver tutorial' }).click()
-  await expect(page.getByRole('status')).toContainText('Cargando tutorial...')
-  await expect(page.getByRole('dialog')).toBeVisible()
-  await expect.poll(() => playerScripts).toHaveLength(1)
+  const video = page.locator('video')
   await expect
-    .poll(
-      () => youtubeRequests.filter(url => url.endsWith('/iframe_api')).length,
-    )
-    .toBe(1)
-  await expect
-    .poll(
-      () =>
-        youtubeRequests.filter(url => url.includes('/embed/XJpKBegq5GY'))
-          .length,
-    )
-    .toBe(1)
-})
-
-test('opens, closes and reopens one working tutorial player', async ({
-  page,
-}) => {
-  await mockYouTubePlayer(page)
-  await page.goto('/')
-  const openTutorial = page.getByRole('button', { name: 'Ver tutorial' })
-
-  await openTutorial.click()
-  const dialog = page.getByRole('dialog', {
-    name: 'Cómo jugar a Coronabingo',
-  })
-  const player = dialog.locator('iframe.video-iframe')
-  await expect(player).toHaveCount(1)
-  await expect(player).toHaveAttribute(
-    'src',
-    'https://www.youtube.com/embed/XJpKBegq5GY',
-  )
-  await expect(
-    dialog
-      .frameLocator('iframe.video-iframe')
-      .getByText('Tutorial video ready'),
-  ).toBeVisible()
-
-  await page.evaluate(() => {
-    const player = (window as typeof window & {
-      tutorialPlayer: { emitState: (state: number) => void }
-    }).tutorialPlayer
-    player.emitState(1)
-    player.emitState(1)
-    player.emitState(0)
-    player.emitState(0)
+    .poll(async () => video.evaluate((v: HTMLVideoElement) => v.duration))
+    .toBeGreaterThan(80)
+  await video.evaluate(async (v: HTMLVideoElement) => {
+    v.currentTime = v.duration - 1
+    v.playbackRate = 8
+    await v.play()
   })
   await expect
-    .poll(() => readAnalyticsEvents(page))
+    .poll(async () => video.evaluate((v: HTMLVideoElement) => v.ended))
+    .toBe(true)
+  expect((await readAnalyticsEvents(page)).map(e => e.eventName)).toEqual([
+    'tutorial_opened',
+    'tutorial_begin',
+  ])
+  // Repeating a watched segment still does not count as unique coverage.
+  await video.evaluate(async (v: HTMLVideoElement) => {
+    v.currentTime = v.duration - 1
+    await v.play()
+  })
+  await expect
+    .poll(async () => video.evaluate((v: HTMLVideoElement) => v.ended))
+    .toBe(true)
+  expect((await readAnalyticsEvents(page)).map(e => e.eventName)).toEqual([
+    'tutorial_opened',
+    'tutorial_begin',
+  ])
+  await video.evaluate(async (v: HTMLVideoElement) => {
+    v.currentTime = 0
+    await v.play()
+  })
+  await expect
+    .poll(
+      async () =>
+        (await readAnalyticsEvents(page)).filter(
+          e => e.eventName === 'tutorial_engaged',
+        ),
+      { timeout: 20000 },
+    )
     .toEqual([
       {
-        eventName: 'tutorial_opened',
+        eventName: 'tutorial_engaged',
         eventParams: {
           schema_version: 'v1',
-          tutorial_language: 'es',
-          tutorial_provider: 'youtube',
           ui_language: 'es',
-        },
-      },
-      {
-        eventName: 'tutorial_begin',
-        eventParams: {
-          schema_version: 'v1',
           tutorial_language: 'es',
-          tutorial_provider: 'youtube',
-          ui_language: 'es',
-        },
-      },
-      {
-        eventName: 'tutorial_complete',
-        eventParams: {
-          schema_version: 'v1',
-          tutorial_language: 'es',
-          tutorial_provider: 'youtube',
-          ui_language: 'es',
+          tutorial_provider: 'self_hosted',
+          tutorial_version: '2026-10-v1',
+          watched_percent: 80,
         },
       },
     ])
-  await page.keyboard.press('Escape')
-  await expect(dialog).toBeHidden()
-  await expect(page.locator('iframe.video-iframe')).toHaveCount(0)
-  await expect(openTutorial).toBeFocused()
-
-  await openTutorial.click()
-  await expect(dialog.locator('iframe.video-iframe')).toHaveCount(1)
-  await expect.poll(() => readAnalyticsEvents(page)).toHaveLength(4)
-  const playerFrame = dialog.frameLocator('iframe.video-iframe')
-  await playerFrame.getByRole('button', { name: 'Play tutorial' }).click()
-  await expect(playerFrame.getByRole('status')).toHaveText(
-    'Tutorial video playing',
-  )
-  await dialog.locator('#close-modal').click()
-  await expect(dialog).toBeHidden()
-  await expect(page.locator('iframe.video-iframe')).toHaveCount(0)
+  await expect
+    .poll(async () => video.evaluate((v: HTMLVideoElement) => v.ended), {
+      timeout: 10000,
+    })
+    .toBe(true)
+  expect((await readAnalyticsEvents(page)).map(e => e.eventName)).toEqual([
+    'tutorial_opened',
+    'tutorial_begin',
+    'tutorial_engaged',
+    'tutorial_complete',
+  ])
 })
 
-test('offers a usable fallback and restores focus when YouTube fails', async ({
+test('offers localized fallback and a working retry after a media error', async ({
   page,
 }) => {
-  await page.goto('/')
-  const openTutorial = page.getByRole('button', { name: 'Ver tutorial' })
-
-  await openTutorial.click()
+  await page.route('**/tutorials/*.mp4', route =>
+    route.fulfill({ status: 404, body: '' }),
+  )
+  await page.goto('/en')
+  const open = page.getByRole('button', { name: 'Watch tutorial' })
+  await open.click()
   const dialog = page.getByRole('dialog')
   await expect(dialog.getByRole('alert')).toContainText(
-    'No pudimos cargar el tutorial.',
+    "We couldn't load the tutorial.",
   )
   await expect(
-    dialog.getByRole('link', { name: 'Abrir en YouTube' }),
-  ).toHaveAttribute('href', 'https://www.youtube.com/watch?v=XJpKBegq5GY')
+    dialog.getByRole('link', { name: 'Open video' }),
+  ).toHaveAttribute('href', /tutorial-en\.[a-f0-9]+\.mp4$/)
+  expect((await readAnalyticsEvents(page)).map(e => e.eventName)).toEqual([
+    'tutorial_opened',
+    'tutorial_error',
+  ])
+  await page.unroute('**/tutorials/*.mp4')
+  await dialog.getByRole('button', { name: 'Try again' }).click()
+  const video = dialog.locator('video')
+  await video.evaluate((v: HTMLVideoElement) => v.play())
   await expect
-    .poll(() => readAnalyticsEvents(page))
-    .toEqual([
-      {
-        eventName: 'tutorial_opened',
-        eventParams: {
-          schema_version: 'v1',
-          tutorial_language: 'es',
-          tutorial_provider: 'youtube',
-          ui_language: 'es',
-        },
-      },
-      {
-        eventName: 'tutorial_error',
-        eventParams: {
-          schema_version: 'v1',
-          tutorial_language: 'es',
-          tutorial_provider: 'youtube',
-          ui_language: 'es',
-        },
-      },
-    ])
-
+    .poll(async () => video.evaluate((v: HTMLVideoElement) => v.currentTime))
+    .toBeGreaterThan(0)
   await dialog.locator('#close-modal').click()
-  await expect(dialog).toBeHidden()
-  await expect(openTutorial).toBeFocused()
-
-  await openTutorial.click()
-  await expect(dialog.getByRole('alert')).toBeVisible()
-  await expect(dialog.locator('.video-wrapper')).toHaveCount(0)
+  await expect(open).toBeFocused()
 })
 
-test('loads the English tutorial on the English homepage', async ({ page }) => {
-  await mockYouTubePlayer(page)
-  await page.goto('/en')
-  await page.getByRole('button', { name: 'Watch tutorial' }).click()
+test('keeps the tutorial and its controls within a phone viewport', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Ver tutorial' }).click()
+  const video = page.locator('video')
+  const box = await video.boundingBox()
+  expect(box).not.toBeNull()
+  expect(box!.x).toBeGreaterThanOrEqual(0)
+  expect(box!.x + box!.width).toBeLessThanOrEqual(390)
+  await expect(video).toHaveAttribute('controls', '')
+  await expect(page.getByRole('dialog').locator('details')).toHaveCount(0)
+})
 
-  const dialog = page.getByRole('dialog', {
-    name: 'How to play Coronabingo',
-  })
-  const player = dialog.locator('iframe.video-iframe')
-  await expect(player).toHaveCount(1)
-  await expect(player).toHaveAttribute(
-    'src',
-    'https://www.youtube.com/embed/iP0732WuS5E',
-  )
-  await expect(
-    dialog
-      .frameLocator('iframe.video-iframe')
-      .getByText('Tutorial video ready'),
-  ).toBeVisible()
-  await expect
-    .poll(() => readAnalyticsEvents(page))
-    .toEqual([
-      {
-        eventName: 'tutorial_opened',
-        eventParams: {
-          schema_version: 'v1',
-          tutorial_language: 'en',
-          tutorial_provider: 'youtube',
-          ui_language: 'en',
-        },
-      },
-    ])
+test('serves versioned media with immutable caching and byte ranges', async ({
+  request,
+}) => {
+  for (const tutorial of Object.values(tutorials)) {
+    const video = await request.get(tutorial.src, {
+      headers: { Range: 'bytes=0-1023' },
+    })
+    expect(video.status()).toBe(206)
+    expect(video.headers()['content-type']).toBe('video/mp4')
+    expect(video.headers()['content-range']).toMatch(/^bytes 0-1023\/\d+$/)
+    expect(video.headers()['cache-control']).toBe(
+      'public, max-age=31536000, immutable',
+    )
+    expect((await video.body()).length).toBe(1024)
+    for (const path of [tutorial.poster, tutorial.captions]) {
+      const response = await request.get(path)
+      expect(response.ok()).toBe(true)
+      expect(response.headers()['cache-control']).toBe(
+        'public, max-age=31536000, immutable',
+      )
+    }
+  }
 })

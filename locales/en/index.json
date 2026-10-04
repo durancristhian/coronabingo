@@ -6,7 +6,6 @@
   "tutorial-loading": "Loading tutorial...",
   "tutorial-load-error": "We couldn't load the tutorial.",
   "tutorial-retry": "Try again",
-  "tutorial-open-youtube": "Open on YouTube",
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",
@@ -14,5 +13,6 @@
     "success": "Room created. You can now set it up.",
     "field-name": "Room name *",
     "field-submit": "Create room"
-  }
+  },
+  "tutorial-open-video": "Open video"
 }

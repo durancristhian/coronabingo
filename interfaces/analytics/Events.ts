@@ -49,6 +49,12 @@ interface AnalyticsEventContext {
   ui_language: AnalyticsLanguage
 }
 
+interface TutorialEventParams extends AnalyticsEventContext {
+  tutorial_language: AnalyticsLanguage
+  tutorial_provider: 'self_hosted'
+  tutorial_version: '2026-10-v1'
+}
+
 export interface AnalyticsEventMap {
   background_selected: AnalyticsEventContext & {
     background_key: AnalyticsBackgroundKey
@@ -94,22 +100,11 @@ export interface AnalyticsEventMap {
     sound_catalog: AnalyticsSoundCatalog
     sound_key: AnalyticsSoundKey
   }
-  tutorial_begin: AnalyticsEventContext & {
-    tutorial_language: AnalyticsLanguage
-    tutorial_provider: 'youtube'
-  }
-  tutorial_complete: AnalyticsEventContext & {
-    tutorial_language: AnalyticsLanguage
-    tutorial_provider: 'youtube'
-  }
-  tutorial_error: AnalyticsEventContext & {
-    tutorial_language: AnalyticsLanguage
-    tutorial_provider: 'youtube'
-  }
-  tutorial_opened: AnalyticsEventContext & {
-    tutorial_language: AnalyticsLanguage
-    tutorial_provider: 'youtube'
-  }
+  tutorial_begin: TutorialEventParams
+  tutorial_complete: TutorialEventParams
+  tutorial_engaged: TutorialEventParams & { watched_percent: 80 }
+  tutorial_error: TutorialEventParams
+  tutorial_opened: TutorialEventParams
 }
 
 export type AnalyticsEventName = keyof AnalyticsEventMap
