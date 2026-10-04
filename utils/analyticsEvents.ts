@@ -113,7 +113,8 @@ export const getTutorialEventParams = (
   return {
     ...getEventContext(tutorialLanguage),
     tutorial_language: tutorialLanguage,
-    tutorial_provider: 'youtube',
+    tutorial_provider: 'self_hosted',
+    tutorial_version: '2026-10-v1',
   }
 }
 
