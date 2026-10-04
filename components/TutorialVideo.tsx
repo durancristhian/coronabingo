@@ -75,22 +75,6 @@ export default function TutorialVideo() {
           <a href={tutorial.src}>{t('index:tutorial-open-video')}</a>
         </video>
       )}
-      <details className="mt-4">
-        <summary className="cursor-pointer underline">
-          {t('index:tutorial-transcript')}
-        </summary>
-        <ol className="list-decimal pl-6 mt-2">
-          {(t(
-            'index:tutorial-steps',
-            {},
-            { returnObjects: true },
-          ) as string[]).map(step => (
-            <li className="mt-2" key={step}>
-              {step}
-            </li>
-          ))}
-        </ol>
-      </details>
     </div>
   )
 }

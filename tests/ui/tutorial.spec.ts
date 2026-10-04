@@ -195,12 +195,8 @@ test('keeps the tutorial and its controls within a phone viewport', async ({
   expect(box).not.toBeNull()
   expect(box!.x).toBeGreaterThanOrEqual(0)
   expect(box!.x + box!.width).toBeLessThanOrEqual(390)
-  await page.getByText('Leer los pasos').click()
-  await expect(
-    page
-      .getByRole('dialog')
-      .getByText('Crea una sala y agrega a las personas que van a jugar.'),
-  ).toBeVisible()
+  await expect(video).toHaveAttribute('controls', '')
+  await expect(page.getByRole('dialog').locator('details')).toHaveCount(0)
 })
 
 test('serves versioned media with immutable caching and byte ranges', async ({

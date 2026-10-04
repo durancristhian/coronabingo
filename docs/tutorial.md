@@ -1,6 +1,6 @@
 # Homepage tutorial
 
-The home page opens a native video player in the existing tutorial dialog. Spanish is the default; `/en` selects the English recording. Both cuts are 81-second, 1080p videos of the real application, with text and instrumental music. No narration. Captions and a written walkthrough provide text alternatives.
+The home page opens a native video player in the existing tutorial dialog. Spanish is the default; `/en` selects the English recording. Both cuts are 81-second, 1080p videos of the real application, with text and instrumental music. No narration. Localized captions are available through the video controls.
 
 Media is requested only after the dialog opens. Playback requires the visitor to press Play. Closing the dialog unmounts the player and stops playback. Reopening starts a new viewing attempt. Native controls support seeking, volume, fullscreen and inline mobile playback. A media error offers retry and a direct link to the same localized file.
 
