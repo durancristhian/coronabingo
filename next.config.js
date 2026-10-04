@@ -37,6 +37,17 @@ const nextConfig = {
   i18n: { locales, defaultLocale, localeDetection },
   images: { disableStaticImages: true },
   productionBrowserSourceMaps: true,
+  headers: async () => [
+    {
+      source: '/tutorials/:asset',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+  ],
   env: {
     UI_TESTS: uiTests ? '1' : '',
     FIRESTORE_EMULATOR_HOST: uiTests ? process.env.FIRESTORE_EMULATOR_HOST : '',

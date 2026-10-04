@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
@@ -42,57 +42,17 @@ function TutorialLoading({ error, retry }: TutorialLoadingProps) {
   )
 }
 
-const YouTube = dynamic(() => import('react-youtube'), {
+const TutorialVideo = dynamic(() => import('~/components/TutorialVideo'), {
   loading: TutorialLoading,
 })
-
-const videosByLanguage: { [key: string]: string } = {
-  en: 'iP0732WuS5E',
-  es: 'XJpKBegq5GY',
-}
 
 export default function Index() {
   const { t, lang } = useTranslation()
   const log = useAnalytics()
   const [showModal, setShowModal] = useState(false)
-  const [tutorialError, setTutorialError] = useState(false)
-  const tutorialProgress = useRef({
-    began: false,
-    completed: false,
-    errored: false,
-  })
-  const videoId = videosByLanguage[lang] || videosByLanguage.es
-
   const openTutorial = () => {
-    tutorialProgress.current = {
-      began: false,
-      completed: false,
-      errored: false,
-    }
     log('tutorial_opened', getTutorialEventParams(lang))
     setShowModal(true)
-  }
-
-  const recordTutorialBegin = () => {
-    if (tutorialProgress.current.began) return
-
-    tutorialProgress.current.began = true
-    log('tutorial_begin', getTutorialEventParams(lang))
-  }
-
-  const recordTutorialComplete = () => {
-    if (tutorialProgress.current.completed) return
-
-    tutorialProgress.current.completed = true
-    log('tutorial_complete', getTutorialEventParams(lang))
-  }
-
-  const recordTutorialError = () => {
-    if (tutorialProgress.current.errored) return
-
-    tutorialProgress.current.errored = true
-    log('tutorial_error', getTutorialEventParams(lang))
-    setTutorialError(true)
   }
 
   return (
@@ -132,27 +92,7 @@ export default function Index() {
         title={t('index:how-to-play-modal-title')}
         contentLabel={t('index:how-to-play-modal-title')}
       >
-        {showModal && tutorialError && (
-          <div className="text-center" role="alert">
-            <p>{t('index:tutorial-load-error')}</p>
-            <Anchor
-              href={`https://www.youtube.com/watch?v=${videoId}`}
-              id="tutorial-youtube-fallback"
-            >
-              {t('index:tutorial-open-youtube')}
-            </Anchor>
-          </div>
-        )}
-        {showModal && !tutorialError && (
-          <YouTube
-            videoId={videoId}
-            containerClassName="video-wrapper"
-            className="video-iframe"
-            onPlay={recordTutorialBegin}
-            onEnd={recordTutorialComplete}
-            onError={recordTutorialError}
-          />
-        )}
+        {showModal && <TutorialVideo key={lang} />}
       </Modal>
     </Layout>
   )

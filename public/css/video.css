@@ -1,14 +1,7 @@
-.video-iframe {
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.video-wrapper {
+.cb-tutorial-video {
   display: block;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 */
-  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #253149;
+  border-radius: 8px;
 }

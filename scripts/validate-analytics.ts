@@ -167,7 +167,8 @@ assert.deepStrictEqual(
 assert.deepStrictEqual(getTutorialEventParams('en'), {
   schema_version: 'v1',
   tutorial_language: 'en',
-  tutorial_provider: 'youtube',
+  tutorial_provider: 'self_hosted',
+  tutorial_version: '2026-10-v1',
   ui_language: 'en',
 })
 

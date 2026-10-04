@@ -6,7 +6,6 @@
   "tutorial-loading": "Loading tutorial...",
   "tutorial-load-error": "We couldn't load the tutorial.",
   "tutorial-retry": "Try again",
-  "tutorial-open-youtube": "Open on YouTube",
   "create-room": {
     "title": "Create a room",
     "saving": "Creating room...",
@@ -14,5 +13,14 @@
     "success": "Room created. You can now set it up.",
     "field-name": "Room name *",
     "field-submit": "Create room"
-  }
+  },
+  "tutorial-open-video": "Open video",
+  "tutorial-transcript": "Read the steps",
+  "tutorial-steps": [
+    "Create a room and add everyone who will be playing.",
+    "Choose a host and select Start game.",
+    "Share the link. Everyone finds their name and selects Play, on a phone, tablet or computer.",
+    "The host draws the numbers. If a number is on your card, select it to mark it.",
+    "Open the card options to choose a background for the empty cells."
+  ]
 }
