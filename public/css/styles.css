@@ -19,13 +19,6 @@
 .ReactModal__Body--open {
   overflow-y: hidden;
 }
-
-/* Google can leave a fixed-width empty iframe in an unfilled unit. Keep the
-   outer reservation, but remove this empty unit from layout after its response.
-   Filled and unfill-optimized units must remain visible. */
-.cb-ad-reservation > ins.adsbygoogle[data-ad-status='unfilled'] {
-  display: none !important;
-}
 /* purgecss end ignore */
 
 .debug * {
