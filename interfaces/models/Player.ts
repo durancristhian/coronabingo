@@ -1,3 +1,5 @@
+import firebase from 'firebase/compat/app'
+
 export interface PlayerBase {
   [key: number]: number[]
   tickets: string

@@ -121,7 +121,7 @@ Read [AGENTS.md](AGENTS.md) for contribution rules, [CONTEXT.md](CONTEXT.md) for
 
 The primary branch is `main`. The standalone `/admin` and `/eventos/…` flows are retired; room setup at `/room/[roomId]/admin` remains active. Historical records are retained, and gameplay uses neither Firebase Authentication nor Storage. Do not add regression journeys for retired routes as part of ordinary gameplay work.
 
-ESLint 9 remains pinned pending compatibility work on the React and accessibility plugins. Dependency upgrades are separate work. See the [IMP-02 dependency report](docs/reports/imp-02-dependencies.md) for compatible security updates, unused-package removals, and remaining audit findings.
+ESLint 9 remains pinned pending compatibility work on the React and accessibility plugins. Dependency upgrades are separate work. See the [IMP-02 dependency report](docs/reports/imp-02-dependencies.md) for security updates, the approved Firebase compat migration, bundle costs, unused-package removals, and remaining audit findings.
 
 ## Local research and tickets
 

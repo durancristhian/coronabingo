@@ -1,19 +1,19 @@
 # IMP-02 dependency maintenance
 
 Date: 2026-10-04. Base: `edc2d5a791d2ca372024d8278549e106bf4f5daf`.
-Runtime: Node 24.21.0, npm 11.19.0. This is a bounded security update, with no application source changes, direct major upgrades, overrides, or framework migration.
+Runtime: Node 24.21.0, npm 11.19.0. This security update includes the explicitly approved Firebase 7 → 12 migration through its compat API. Next, React, Pages Router, Webpack and Node remain fixed. No dependency overrides are used.
 
 ## Result
 
-The installed-tree audit changes from 61 affected packages to 39: critical 4 → 1, high 27 → 15, moderate 28 → 23, low 2 → 0. These counts include inherited dependency findings and unused SDK components. They do not count demonstrated application exploits.
+The installed-tree audit changes from 61 affected packages to 27: critical 4 → 0, high 27 → 14, moderate 28 → 13, low 2 → 0. The first compatible-only delivery had 39 findings, including one critical; the approved Firebase extension removes that remaining critical. These counts include inherited dependency findings and unused SDK components. They do not count demonstrated application exploits.
 
 Remove unused `@svgr/webpack` 5.5.0, `gsheets` 1.2.3 and `@types/gsheets` 2.0.0. Repository-wide searches found no imports, dynamic loads, scripts or configuration consumers. SVGs use the existing Webpack asset rule. Spreadsheet export uses `zipcelx`, not `gsheets`. `pdf-parse` remains because `scripts/generate-tickets.ts` consumes it.
 
-The lockfile removes 180 package locations, adds `setimmediate` 1.0.5, and updates the 12 existing locations below. Other resolved versions are preserved, including all retained direct dependencies. `setimmediate` replaces JSZip's removed `@types/setimmediate` dependency; `regenerator-runtime` also disappears after the Babel runtime update. No packages were moved between dependency sections to disguise audit results.
+The first compatible-only update removes 180 package locations, adds `setimmediate` 1.0.5, and updates the 12 existing locations below. At that checkpoint, other resolved versions were preserved, including all retained direct dependencies. The Firebase extension below supersedes this checkpoint. `setimmediate` replaces JSZip's removed `@types/setimmediate` dependency; `regenerator-runtime` also disappears after the Babel runtime update. No packages were moved between dependency sections to disguise audit results.
 
 ## Changed versions and compatibility
 
-All updates satisfy the existing parent ranges. Registry metadata declares no peer dependencies for these targets, and all declared Node engines admit Node 24. Unspecified engines are not a compatibility guarantee; installation, builds and behavior checks remain required.
+The following first-stage updates satisfy the existing parent ranges. Firebase is the subsequent, explicitly approved major exception. Registry metadata declares no peer dependencies for these targets, and all declared Node engines admit Node 24. Unspecified engines are not a compatibility guarantee; installation, builds and behavior checks remain required.
 
 | Package | Before | After | Parent and compatibility evidence |
 | --- | --- | --- | --- |
@@ -29,6 +29,26 @@ All updates satisfy the existing parent ranges. Registry metadata declares no pe
 | `semver-regex` | 3.1.2 | 3.1.4 | Husky → find-versions accepts `^3.1.2`; same-major security patches. [Releases](https://github.com/sindresorhus/semver-regex/releases). |
 | `websocket-driver` | 0.7.4 | 0.7.5 | faye-websocket 0.11.3 accepts `>=0.5.1`. This is a patch within 0.7, tightening message-length checks without changing the client API. [Changelog](https://github.com/faye/websocket-driver-node/blob/main/CHANGELOG.md). |
 | `yaml` | 1.10.2 | 1.10.3 | Husky → cosmiconfig 7 accepts `^1.10.0`; security backport, existing YAML 2 stays unchanged. [Release](https://github.com/eemeli/yaml/releases/tag/v1.10.3). |
+
+## Approved Firebase migration
+
+Firebase is pinned to 12.19.0 and uses `firebase/compat/app` and `firebase/compat/firestore`, following the [official upgrade guide](https://firebase.google.com/docs/web/modular-upgrade). Four model/interface files import the compat namespace for types; existing timestamp, document reference, batch, snapshot and gameplay APIs remain in use. No database schema, Firebase rules, authentication or provider configuration change is required. Compat is a transition API, not a bundle-size optimization.
+
+`promise-polyfill` 8.1.3 is now a direct dependency: `polyfills/promise-finally.ts` already imported it, but it previously arrived only through Firebase Auth. The first migration build exposed that undeclared dependency; retaining the same version preserves the existing fallback. The repository's Prettier 1 parser does not support `import type`, so type-only uses retain the conventional import syntax that TypeScript/SWC erase.
+
+Relative to compatible-only commit `2adb243`, the extension updates 33 package locations, adds 55 and removes 18. Most additions are current Firebase components, their compat adapters and transport dependencies. Protobuf copies deduplicate to 7.6.6. Removed legacy Firebase pins also allow `node-fetch` 2.6.1 → 2.7.0 within the remaining CLI consumer's `^2.6.1` range; redundant nested 2.7.0 copies deduplicate. Other retained direct versions are unchanged.
+
+| Package | Before extension | Final | Compatibility evidence |
+| --- | --- | --- | --- |
+| `firebase` | 7.24.0 | 12.19.0 | Official compat migration; Node 24 satisfies the SDK's Node 20+ requirement. |
+| `@firebase/firestore` | 1.18.0 | 4.17.2 | Selected by Firebase 12; existing Firestore operations use the compat adapter. |
+| `@firebase/firestore-compat` | absent | 0.4.14 | Preserves namespaced Firestore API contracts. |
+| `@grpc/proto-loader` | 0.5.6 | 0.7.15 | Firestore accepts `^0.7.8`; loader accepts protobufjs `^7.2.5`. |
+| `protobufjs` | 6.11.6 | 7.6.6 | Supported loader range; no matching audit findings. |
+| `node-fetch` | 2.6.1 | 2.7.0 | Legacy Firebase exact pin removed; CLI parent accepts the patched 2.x version. |
+| `promise-polyfill` | transitive 8.1.3 | direct 8.1.3 | Existing application import, unchanged implementation. |
+
+The user requested reverting this extension if functional validation cannot be completed successfully. Commit `2adb243` is the known-good compatible-only checkpoint; keep this migration in a separate commit so it can be reverted without losing the first delivery.
 
 ## The four original critical packages
 
@@ -50,19 +70,15 @@ The latter two need crafted input reaching build-time loader helpers. No applica
 
 ### Protobuf.js
 
-The affected path is `firebase@7.24.0 → @firebase/firestore@1.18.0 → @grpc/proto-loader@0.5.6 → protobufjs@6.10.2`, now 6.11.6. Firebase CLI uses separate 7.6.6 copies through Cloud SQL's grpc-js/proto-loader and Pub/Sub's google-gax/proto-loader/proto3-json-serializer. Those copies are unchanged and absent from the affected audit nodes.
+The original affected path was `firebase@7.24.0 → @firebase/firestore@1.18.0 → @grpc/proto-loader@0.5.6 → protobufjs@6.10.2`. The first compatible-only update reached 6.11.6. The approved migration replaces it with `firebase@12.19.0 → @firebase/firestore@4.17.2 → @grpc/proto-loader@0.7.15 → protobufjs@7.6.6`. Firebase CLI paths also resolve to 7.6.6. No protobufjs audit finding remains.
 
-The browser build uses Firestore's browser entry and WebChannel. Bundle reports contain no protobufjs. Next server output traces do include the Node Firestore SDK and protobufjs, even though the bundle analyzer does not inline these external packages. The Node SDK loads its own `dist/src/protos/google/firestore/v1/firestore.proto`, not a room-supplied schema. Gameplay listeners run in React effects. No public schema-upload or descriptor-loading route was found. This limits demonstrated reachability; it is not proof that every advisory is harmless.
+The critical [GHSA-xq3m-2v4x-88gg](https://github.com/advisories/GHSA-xq3m-2v4x-88gg) requires attacker-controlled protobuf schemas or JSON descriptors reaching JavaScript generation. Firestore loads bundled definitions; no public schema-upload, descriptor-loading or arbitrary protobuf endpoint was found. The browser uses WebChannel rather than protobufjs, while Next server traces contain the Node SDK. This distinction limits demonstrated reachability but does not establish blanket safety for all decoding advisories.
 
-Version 6.11.6 clears the older prototype-pollution ranges in [GHSA-g954-5hwp-pp24](https://github.com/advisories/GHSA-g954-5hwp-pp24) and [GHSA-h755-8qp9-cq85](https://github.com/advisories/GHSA-h755-8qp9-cq85). Those require attacker-controlled property paths or protobuf definitions.
-
-There is an upstream/audit discrepancy for [GHSA-xq3m-2v4x-88gg](https://github.com/advisories/GHSA-xq3m-2v4x-88gg). npm still matches all versions below 7.5.5, but the official [6.11.6 release](https://github.com/protobufjs/protobuf.js/releases/tag/v6.11.6) backports the type-name code-injection fix via [PR 2221](https://github.com/protobufjs/protobuf.js/pull/2221). The installed `src/type.js` contains that filter. The advisory requires loading an attacker-controlled schema or descriptor, which this app does not expose. We retain the audit finding and do not claim zero critical findings or complete security of protobufjs 6.
-
-Other remaining protobufjs advisories concern bytes defaults and generated code, crafted field/type names, prototype injection/options, recursive schemas/messages/Any conversion and UTF-8 decoding. Schema-based issues need schema control; decoding issues can instead depend on message bytes from the endpoint. The app talks to Firestore and does not accept arbitrary protobuf endpoints or raw protobuf uploads. The exact remaining advisory list and ranges are preserved below. A supported Firebase/Firestore migration is the future route to eliminating this obsolete Node chain; forcing protobufjs 7 into the current loader is excluded.
+The intermediate 6.11.6 version included an official [code-injection backport](https://github.com/protobufjs/protobuf.js/releases/tag/v6.11.6), despite the audit range still including it. It also cleared the older prototype-pollution ranges in [GHSA-g954-5hwp-pp24](https://github.com/advisories/GHSA-g954-5hwp-pp24) and [GHSA-h755-8qp9-cq85](https://github.com/advisories/GHSA-h755-8qp9-cq85). Other 6.x findings covered code generation, prototype injection, recursion and message decoding. Moving through the supported Firebase/loader chain removes all those audit findings without forcing an incompatible transitive version. The archived intermediate audit retains the exact advisory ranges.
 
 ### WebSocket driver
 
-The sole path is `firebase@7.24.0 → @firebase/database@0.6.13 → faye-websocket@0.11.3 → websocket-driver@0.7.4`, now 0.7.5. The application imports `firebase/app` and `firebase/firestore`, not Realtime Database. Browser modules and server traces contain no websocket-driver or Realtime Database package.
+The original sole path was `firebase@7.24.0 → @firebase/database@0.6.13 → faye-websocket@0.11.3 → websocket-driver@0.7.4`, now 0.7.5. The application now imports Firebase App and Firestore compat, not Realtime Database. Firebase 12 resolves database 1.1.5 and faye-websocket 0.11.4, retaining patched websocket-driver 0.7.5. Browser modules and server traces contain no websocket-driver or Realtime Database package.
 
 [GHSA-xv26-6w52-cph6](https://github.com/advisories/GHSA-xv26-6w52-cph6) requires malformed legacy protocol length headers. [GHSA-mp7j-qc5w-4988](https://github.com/advisories/GHSA-mp7j-qc5w-4988) requires compressed messages bypassing configured size limits. Both affect versions below 0.7.5 and are addressed by this patch. No exposed WebSocket server or Realtime Database consumer was found in the app. Removal of Firebase itself would break Firestore and is not proposed.
 
@@ -70,52 +86,40 @@ The sole path is `firebase@7.24.0 → @firebase/database@0.6.13 → faye-websock
 
 The full current audit is summarized below, including inherited findings. The direct-advisory rows link the published affected range. Parent rows point to the flagged dependencies rather than inventing a separate vulnerability.
 
-- **Firebase SDK / Node transport:** old components pin `@firebase/util@0.3.2` and `node-fetch@2.6.1`. No range-compatible patch exists for those exact pins. Upgrade Firebase as a separate migration; preserve browser/SSR distinction and test host/player synchronization.
+- **Firebase SDK / Node transport:** Firestore 4.17.2 requires grpc-js `~1.9.0`, resolving 1.9.16. Its remaining high certificate-authentication advisory requires a gRPC server using `getAuthContext` with optional client certificates; the low error-disclosure advisory also concerns server handlers. Coronabingo is a Firestore client and exposes no gRPC server or such authentication calls. Keep the findings visible and wait for a parent-supported transport update; do not force grpc-js outside that range. Both advisories are linked in the inventory.
 - **Sentry:** the browser SDK remains 5.30.0. The DOM-clobbering advisory needs hostile DOM content. This task does not establish that condition. Its patched range requires a major upgrade and a separate instrumentation review.
 - **CSS build:** PostCSS 7 and the PostCSS 6 copy under postcss-functions remain. The build consumes repository CSS/configuration; no public CSS compilation endpoint exists. Fixing all current ranges requires coordinated PostCSS/Tailwind/plugin migration. A PostCSS 7 patch alone would not clear current findings.
 - **Development and QA tooling:** braces retains an advisory with no patched version listed, inherited by micromatch, lint-staged and chokidar. Avoid treating the successfully patched older braces advisory as complete remediation. Firebase CLI's Pub/Sub chain requires OpenTelemetry core 1.x; patched 2.8.0 is outside that range. Its proxy/FTP and uuid findings similarly need parent changes beyond the current supported child ranges. The CLI is used for the disposable emulator, not shipped as browser gameplay code. Reevaluate its parent releases separately; npm's suggested downgrade is not an approved fix.
 
-Non-security direct updates remain candidates, not validated upgrades. Next, React, router, bundler and Node stay fixed. Firebase and Sentry's current direct majors cannot become fully current within this ticket. Optional icon packages remain for the approved later migration. No PDF parser update is included, so regenerating the catalog is unnecessary; the existing catalog validator is still run.
+Non-security direct updates remain candidates, not validated upgrades. Next, React, router, bundler and Node stay fixed. Firebase is now updated under explicit approval; Sentry remains a separate migration. Optional icon packages remain for the approved later migration. No PDF parser update is included, so regenerating the catalog is unnecessary; the existing catalog validator is still run.
 
 ### Audit inventory
 
 | Affected package | Severity | Direct advisory or inherited dependency |
 | --- | --- | --- |
-| `@firebase/analytics` | moderate | `@firebase/component`; `@firebase/installations`; `@firebase/util` |
-| `@firebase/app` | moderate | `@firebase/component`; `@firebase/util` |
-| `@firebase/component` | moderate | `@firebase/util` |
-| `@firebase/database` | moderate | `@firebase/component`; `@firebase/util` |
-| `@firebase/firestore` | high | `@firebase/component`; `@firebase/util`; `@grpc/proto-loader`; `node-fetch` |
-| `@firebase/functions` | high | `@firebase/component`; `node-fetch` |
-| `@firebase/installations` | moderate | `@firebase/component`; `@firebase/util` |
-| `@firebase/messaging` | moderate | `@firebase/component`; `@firebase/installations`; `@firebase/util` |
-| `@firebase/performance` | moderate | `@firebase/component`; `@firebase/installations`; `@firebase/util` |
-| `@firebase/remote-config` | moderate | `@firebase/component`; `@firebase/installations`; `@firebase/util` |
-| `@firebase/storage` | moderate | `@firebase/component`; `@firebase/util` |
-| `@firebase/util` | moderate | [GHSA-fpm5-vv97-jfwg](https://github.com/advisories/GHSA-fpm5-vv97-jfwg) `<0.3.4` |
+| `@firebase/firestore` | high | `@grpc/grpc-js` |
+| `@firebase/firestore-compat` | high | `@firebase/firestore` |
 | `@fullhuman/postcss-purgecss` | moderate | `postcss`; `purgecss` |
 | `@google-cloud/pubsub` | moderate | `@opentelemetry/core` |
-| `@grpc/proto-loader` | high | `protobufjs` |
+| `@grpc/grpc-js` | high | [GHSA-m9gg-hp2v-232j](https://github.com/advisories/GHSA-m9gg-hp2v-232j) `<1.13.6`; [GHSA-f596-whhp-79r4](https://github.com/advisories/GHSA-f596-whhp-79r4) `<1.13.6` |
 | `@opentelemetry/core` | moderate | [GHSA-8988-4f7v-96qf](https://github.com/advisories/GHSA-8988-4f7v-96qf) `<2.8.0` |
 | `@sentry/browser` | moderate | [GHSA-593m-55hh-j8gv](https://github.com/advisories/GHSA-593m-55hh-j8gv) `<7.119.1` |
 | `autoprefixer` | moderate | `postcss` |
 | `basic-ftp` | high | [GHSA-c475-qrg2-pj4r](https://github.com/advisories/GHSA-c475-qrg2-pj4r) `<=6.2.0` |
 | `braces` | high | [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) `<=3.0.3` |
 | `chokidar` | high | `braces` |
-| `firebase` | high | `@firebase/analytics`; `@firebase/app`; `@firebase/database`; `@firebase/firestore`; `@firebase/functions`; `@firebase/installations`; `@firebase/messaging`; `@firebase/performance`; `@firebase/remote-config`; `@firebase/storage`; `@firebase/util`; [GHSA-3wf4-68gx-mph8](https://github.com/advisories/GHSA-3wf4-68gx-mph8) `<10.9.0` |
+| `firebase` | high | `@firebase/firestore`; `@firebase/firestore-compat` |
 | `firebase-tools` | high | `@google-cloud/pubsub`; `chokidar`; `gaxios`; `proxy-agent` |
 | `gaxios` | moderate | `uuid` |
 | `get-uri` | high | `basic-ftp` |
 | `lint-staged` | high | `micromatch` |
 | `micromatch` | high | `braces` |
-| `node-fetch` | high | [GHSA-r683-j2x4-v87g](https://github.com/advisories/GHSA-r683-j2x4-v87g) `<2.6.7` |
 | `pac-proxy-agent` | high | `get-uri` |
 | `postcss` | high | [GHSA-hwj9-h5mp-3pm3](https://github.com/advisories/GHSA-hwj9-h5mp-3pm3) `>=7.0.0 <7.0.36`; [GHSA-566m-qj78-rww5](https://github.com/advisories/GHSA-566m-qj78-rww5) `<7.0.36`; [GHSA-7fh5-64p2-3v2j](https://github.com/advisories/GHSA-7fh5-64p2-3v2j) `<8.4.31`; [GHSA-qx2v-qp2m-jg93](https://github.com/advisories/GHSA-qx2v-qp2m-jg93) `<8.5.10`; [GHSA-6g55-p6wh-862q](https://github.com/advisories/GHSA-6g55-p6wh-862q) `<=8.5.11`; [GHSA-fxqj-rqcc-2cmp](https://github.com/advisories/GHSA-fxqj-rqcc-2cmp) `<=8.5.22`; [GHSA-r28c-9q8g-f849](https://github.com/advisories/GHSA-r28c-9q8g-f849) `<=8.5.17` |
 | `postcss-functions` | moderate | `postcss` |
 | `postcss-import` | moderate | `postcss` |
 | `postcss-js` | moderate | `postcss` |
 | `postcss-nested` | moderate | `postcss` |
-| `protobufjs` | critical | [GHSA-xq3m-2v4x-88gg](https://github.com/advisories/GHSA-xq3m-2v4x-88gg) `<7.5.5`; [GHSA-66ff-xgx4-vchm](https://github.com/advisories/GHSA-66ff-xgx4-vchm) `<=7.5.5`; [GHSA-2pr8-phx7-x9h3](https://github.com/advisories/GHSA-2pr8-phx7-x9h3) `<=7.5.5`; [GHSA-fx83-v9x8-x52w](https://github.com/advisories/GHSA-fx83-v9x8-x52w) `<=7.5.5`; [GHSA-75px-5xx7-5xc7](https://github.com/advisories/GHSA-75px-5xx7-5xc7) `<=7.5.5`; [GHSA-jvwf-75h9-cwgg](https://github.com/advisories/GHSA-jvwf-75h9-cwgg) `<=7.5.5`; [GHSA-685m-2w69-288q](https://github.com/advisories/GHSA-685m-2w69-288q) `<=7.5.5`; [GHSA-q6x5-8v7m-xcrf](https://github.com/advisories/GHSA-q6x5-8v7m-xcrf) `<=7.5.5`; [GHSA-jggg-4jg4-v7c6](https://github.com/advisories/GHSA-jggg-4jg4-v7c6) `<=7.5.7`; [GHSA-wcpc-wj8m-hjx6](https://github.com/advisories/GHSA-wcpc-wj8m-hjx6) `<=7.6.0`; [GHSA-f38q-mgvj-vph7](https://github.com/advisories/GHSA-f38q-mgvj-vph7) `<=7.6.2` |
 | `proxy-agent` | high | `pac-proxy-agent` |
 | `purgecss` | moderate | `postcss` |
 | `tailwindcss` | moderate | `@fullhuman/postcss-purgecss`; `autoprefixer`; `postcss`; `postcss-functions`; `postcss-js`; `postcss-nested` |
@@ -123,7 +127,7 @@ Non-security direct updates remain candidates, not validated upgrades. Next, Rea
 
 ### Direct dependency inventory
 
-Snapshot from `npm outdated --json` and registry metadata before changes. “Wanted” respects the declared range, so exact pins intentionally show the installed version. Latest major versions are discovery only. Retained direct versions are unchanged. Declared engines/peers were archived for all 53 candidates; release review and behavior validation apply to the selected transitives above, not every unselected direct upgrade.
+Snapshot from `npm outdated --json` and registry metadata before changes. “Wanted” respects the declared range, so exact pins intentionally show the installed version. Latest major versions are discovery only. The table retains the discovery snapshot; Firebase was subsequently updated under approval, and the existing polyfill became direct. Other retained direct versions are unchanged. Declared engines/peers were archived for all 53 candidates; release review and behavior validation apply to the selected transitives above, not every unselected direct upgrade.
 
 | Direct dependency | Declared | Installed | Wanted | Latest | Use / decision |
 | --- | --- | --- | --- | --- | --- |
@@ -152,7 +156,7 @@ Snapshot from `npm outdated --json` and registry metadata before changes. “Wan
 | `eslint-plugin-jsx-a11y` | `6.10.2` | 6.10.2 | 6.10.2 | 6.10.2 | Build/scripts/hooks; retain direct version |
 | `eslint-plugin-prettier` | `^3.1.2` | 3.4.0 | 3.4.1 | 5.5.6 | Build/scripts/hooks; retain direct version |
 | `eslint-plugin-react` | `7.37.5` | 7.37.5 | 7.37.5 | 7.37.5 | Build/scripts/hooks; retain direct version |
-| `firebase` | `^7.15.5` | 7.24.0 | 7.24.0 | 12.19.0 | Browser and Node Firestore; major migration deferred |
+| `firebase` | `^7.15.5` | 7.24.0 | 7.24.0 | 12.19.0 | Updated to 12.19.0 through compat after explicit approval |
 | `gsheets` | `^1.2.3` | 1.2.3 | 1.2.3 | 3.0.1 | No consumers; removed |
 | `husky` | `^4.2.3` | 4.3.8 | 4.3.8 | 9.1.7 | Build/scripts/hooks; retain direct version |
 | `knuth-shuffle` | `^1.0.8` | 1.0.8 | 1.0.8 | 1.0.8 | Application runtime; retain direct version |
@@ -189,6 +193,9 @@ The baseline lockfile SHA-256 is `d0f6c7d7251b36ced631126d252bf122eb17a9c3971823
 npm uninstall @svgr/webpack gsheets @types/gsheets
 npm update protobufjs websocket-driver
 npm update @babel/runtime jszip diff micromatch picomatch brace-expansion semver-regex yaml
+# Approved Firebase extension:
+npm install --save-exact firebase@12.19.0 promise-polyfill@8.1.3
+npm update node-fetch
 ```
 
 These commands reproduce the selection policy against the registry, not an immutable future resolution. Use the committed lockfile and `npm ci` for exact reproduction. No forced audit fix or lockfile reset was used. `git diff --histogram -- package-lock.json` presents the removal-heavy diff more clearly than Git's default matching.
@@ -197,17 +204,17 @@ Local checks on the final dependency set: `npm ci`, `npm ls --all`, `npm run lin
 
 ## Bundle comparison
 
-Both regular builds use this same checkout, private environment, Node/npm, Next/Webpack, analyzer setting and application source. For each route, deduplicate `_app` plus route JS from `.next/build-manifest.json`; sum raw bytes and deterministic gzip bytes per file. This measures required first-party JS, excluding maps, inline data, third-party requests, and asynchronously loaded chunks. It is not a network-speed measurement.
+Regular builds use the same checkout, private environment, Node/npm, Next/Webpack and analyzer setting. For each route, deduplicate `_app` plus route JS from `.next/build-manifest.json`; sum deterministic gzip bytes per file. This measures required first-party JS, excluding maps, inline data, third-party requests and asynchronous chunks. It is not a network-speed measurement. No PERF-10 lazy-loading savings are attributed to this change.
 
-| Route | Before gzip bytes | After gzip bytes | Difference |
-| --- | ---: | ---: | ---: |
-| `/` | 233,957 | 233,967 | +10 |
-| `/room/[roomId]` | 235,272 | 235,282 | +10 |
-| `/room/[roomId]/[playerId]` | 272,432 | 272,442 | +10 |
-| `/room/[roomId]/admin` | 240,347 | 240,357 | +10 |
+| Route | Original gzip bytes | Compatible-only checkpoint | Firebase 12 | Extension delta |
+| --- | ---: | ---: | ---: | ---: |
+| `/` | 233,957 | 233,967 | 318,450 | +84,483 |
+| `/room/[roomId]` | 235,272 | 235,282 | 319,762 | +84,480 |
+| `/room/[roomId]/[playerId]` | 272,432 | 272,442 | 356,922 | +84,480 |
+| `/room/[roomId]/admin` | 240,347 | 240,357 | 324,839 | +84,482 |
 
-The shared app chunk changes by 45 raw bytes and 10 gzip bytes after the Babel runtime update. Removing unused packages does not reduce public JS. Firebase browser code stays unchanged; no Firestore lazy-loading savings are attributed to this ticket. The asynchronous export chunk shrinks from 127,321 to 125,894 raw bytes, while analyzer gzip grows from 36,628 to 37,138 bytes, +510 bytes or 1.4%. This is the cost of the updated JSZip distribution and its fixes; it is fetched only when export is activated. No initial-load savings are claimed.
+Firebase 12 and its compat implementation increase the shared runtime by about 84.5 kB gzip: +36.1% on this branch's homepage and +31.0% on the player route. Analyzer reports confirm growth in Firebase modules inside the shared app chunk. This is an explicit performance cost of the security migration. A future modular migration can pursue tree shaking; compat alone does not promise smaller downloads. The branch predates the separate Firestore loading improvement already merged into main, so these numbers describe this PR branch, not current Production's initial homepage cost.
 
-The final local `ui-tests:build` succeeds. `ui-tests:ci` cannot start while another worktree owns port 3187 and the emulator ports. Its services are preserved. The PR CI runs the isolated full suite on its own runner; that result is required before handoff.
+The initial compatible-only update added 10 gzip bytes per route. Its asynchronous spreadsheet chunk changed from 127,321 to 125,894 raw bytes and from 36,628 to 37,138 analyzer gzip bytes (+510, 1.4%); the Firebase extension does not modify spreadsheet dependencies. An integration check generated a real zipcelx Blob and read its workbook/relationship entries, numeric cell and escaped accented text through JSZip.
 
-A local integration check invokes the installed `zipcelx` with only the download sink replaced, reads the resulting Blob as a ZIP, and verifies workbook/relationship entries plus a numeric cell and escaped accented text. It passes with JSZip 3.10.2. This checks archive content independently of the browser suite's download and duplicate-download assertions.
+The Firebase migration passed all 35 local Chromium UI tests against the disposable Firestore emulator, covering separate host/player contexts, drawing, concurrent marks, persistence after reload, restart, rejected writes, ES/EN, responsive layouts and spreadsheet download/retry. CI and hosted Preview evidence for the published revision are recorded in the PR and canonical task record. Production is outside this delivery.
