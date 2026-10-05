@@ -62,7 +62,7 @@ export default function Ads() {
                 ref={slot}
                 className="adsbygoogle"
                 data-ad-client="ca-pub-6231280485856921"
-                data-ad-slot="1185318534"
+                data-ad-slot="9427584752"
                 style={{ display: 'block', width: '100%', height: '90px' }}
               />
             )}

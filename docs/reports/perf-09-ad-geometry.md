@@ -10,7 +10,7 @@ The manual ad moves the page content down by **106 px** when its empty wrapper a
 
 Keep 90 px as the proposed height. A 100 px mobile variant consumes another 10 px and introduces a height change at its breakpoint. Automatic sizing gives the application less control over the height above the game. None of these options guarantees that an already served creative will shrink when the window does.
 
-The owner subsequently approved the 90 px geometry and later authorized release with immediate rollback on failure. Account changes remain excluded. Authenticated read-only inspection confirmed that the existing unit is fixed at 728 × 90 px; a separate responsive-unit proposal now awaits account authorization.
+The owner subsequently approved the 90 px geometry and later authorized release with immediate rollback on failure. Authenticated inspection confirmed that the existing unit is fixed at 728 × 90 px. The owner then explicitly authorized a new responsive unit, which was created as `9427584752`; the existing fixed unit remains unchanged for rollback.
 
 ## Baseline application at the fixed revision
 
@@ -20,7 +20,7 @@ The owner subsequently approved the 90 px geometry and later authorized release 
 - [Document](../../pages/_document.tsx) loads the SDK only in production, outside UI tests. It provides no client readiness signal. [App](../../pages/_app.tsx) has no ad loader provider. Development still mounts the ad wrapper and queues a request despite having no SDK.
 - Loading, error, missing/old room, missing player, room-not-ready, room-code, and unavailable-localStorage states can still mount Ads through Layout. Room setup and host/player views use the same component. No state-specific eligibility contract exists.
 
-The public slot identifier in source is `1185318534`. During the initial investigation, the account console redirected to Google sign-in in the collaborative browser. The later owner-authorized Chrome inspection confirmed the fixed unit and its snippet, as recorded in the release section below. Auto ads and consent configuration have not been comprehensively audited in this task.
+The baseline public slot identifier was `1185318534`. During the initial investigation, the account console redirected to Google sign-in in the collaborative browser. The later owner-authorized Chrome inspection confirmed the fixed unit and its snippet, as recorded in the release section below. Auto ads and consent configuration have not been comprehensively audited in this task.
 
 ## Measurements on the unchanged app
 
@@ -98,7 +98,7 @@ The responsive tag parameters describe automatic shape and full-width behavior s
 
 **Geometry decision, completed:** the owner chose the 90 px fixed reservation and flexible width up to 728 px. Current placement and page states are preserved. A placement or interaction change requires its own explicit choice.
 
-**Account prerequisite, verified:** slot `1185318534` remains fixed at 728 × 90 px. The proposed next step is a new display unit named `Layout PERF-09 responsive`, with Responsive sizing, followed by replacing the PR's manual slot ID with the generated ID. This preserves the existing unit for rollback and avoids changing the currently deployed slot. Creating the unit requires separate owner authorization; the prepared form has not been saved. Global ad settings are outside this proposal.
+**Account prerequisite, completed:** the owner authorized creation of `Layout PERF-09 responsive`, with Responsive sizing. Its generated slot ID is `9427584752`, now used by the component. The old fixed unit `1185318534` remains unchanged for rollback. No global ad settings were changed.
 
 **Eligibility and loader prerequisite:** decide which real page states may request an ad and verify current consent/loader behavior. The shared Layout cannot infer eligibility from a URL alone. This report does not classify gameplay, consent, or existing placements as approved. Resolve these before activating a replacement globally; do not expand this task into general advertising/account work.
 
@@ -108,7 +108,7 @@ The responsive tag parameters describe automatic shape and full-width behavior s
 
 `Ads` now reserves the agreed geometry in server HTML and retains it through loader failure and no fill. The `ins` mounts only after the shared SDK loader reports readiness. A positive-width check, a temporary ResizeObserver, and a DOM-node request reference prevent early or duplicate requests; unmount cancels observation. SDK errors leave the game usable and produce one generic warning without room or player data. No automatic retries or refreshes were added.
 
-The sole ad loader moved from Document to an App-level provider using `next/script` with `afterInteractive`, `onReady`, and `onError`. Its URL and publisher attribute remain unchanged. Analytics initialization still runs in the server document before the SDK. The unused `@ctrl/react-adsense` dependency was removed. The slot ID, current placement, and current page-state eligibility are unchanged; preserving them does not certify their suitability for release.
+The sole ad loader moved from Document to an App-level provider using `next/script` with `afterInteractive`, `onReady`, and `onError`. Its URL and publisher attribute remain unchanged. Analytics initialization still runs in the server document before the SDK. The unused `@ctrl/react-adsense` dependency was removed. Current placement and page-state eligibility are unchanged; preserving them does not certify their suitability for release. The later approved account migration replaces only the slot ID with `9427584752`.
 
 The isolated UI suite now renders the actual reservation and attempts the shared loader under its existing network block. Dedicated ad tests fulfill that request with a stub. Other journeys exercise the blocked-loader state. This replaces the earlier ad bypass, so ad geometry now participates in application tests. Frozen stub iframe dimensions deliberately remain distinct from the responsive slot; tests do not claim that application CSS can resize a real creative.
 
@@ -122,7 +122,7 @@ The isolated UI suite now renders the actual reservation and attempts the shared
 
 All game writes used the disposable `demo-coronabingo-ui` emulator. Advertising traffic was intercepted or blocked. Services shut down after each run. The compiled application checks above are local checks, not hosted Preview or real-inventory acceptance.
 
-Rollback is the implementation commit's inverse, restoring the old component, loader location, and wrapper dependency while preserving unrelated work. There are no account changes to reverse in this delivery. A later approved account change would also require restoring its captured settings; Git cannot reverse AdSense.
+Rollback of the integrated PR restores the old component, loader location, wrapper dependency, and fixed slot ID while preserving unrelated work. The new responsive unit can remain unused; the old unit was not changed. Git cannot archive the new AdSense unit.
 
 ## Release verification and no-fill correction
 
@@ -134,12 +134,12 @@ The correction hides only an `unfilled` manual `ins`, following [Google's docume
 
 The SDK stub now retains a fixed-width empty iframe instead of hiding it itself. The regression assertion checks actual document overflow after desktop-to-mobile resize, preserved height/content position, and one request. A separate case verifies that optimized content is not hidden. The integrated tweet suite now matches Twitter hostnames instead of the substring `syndication`, which incorrectly counted the newly exercised AdSense loader as Twitter traffic.
 
-The corrected branch passed lint/typechecking and all 60 compiled UI tests, including 10 ad cases and the integrated Firestore/tweet journeys. Hosted verification of this correction and the authorized Production release remain pending. No provider settings have changed. The subsequently authorized Chrome session supplied the account evidence below.
+The corrected branch passed lint/typechecking and all 60 compiled UI tests, including 10 ad cases and the integrated Firestore/tweet journeys. The real-SDK Preview correction retained 90 px with no document overflow after an unfilled response and desktop-to-mobile resize. The subsequent responsive-unit migration and authorized Production release require their own verification. The Chrome session supplied the account evidence below.
 
 ### Authenticated account inspection
 
 Read-only inspection of the owner's Chrome session confirmed `Layout` / `1185318534`, Fixed sizing, width 728 and height 90. The unit list displayed a last-modified date of October 7, 2020. Its generated HTML declares `display:inline-block;width:728px;height:90px`, without automatic-format attributes. The global mobile ad-size optimization switch is off. The existing unit editor was closed with Cancel.
 
-A new display-unit form is prepared, unsaved, with name `Layout PERF-09 responsive` and Responsive sizing. Proposed implementation: create that unit after explicit authorization, use its generated slot ID in the reviewed component, repeat isolated checks and a bounded real Preview check, then perform the already-authorized release and Production verification. Google documents variable width with fixed height for responsive units; creating one does not by itself prove filled-creative resize or orientation behavior.
+After explicit owner authorization, the display unit `Layout PERF-09 responsive` was created with Responsive sizing and slot ID `9427584752`. The generated snippet and unit list confirmed creation. The reviewed component now uses this ID; the generated automatic-format attributes are omitted for the documented explicit-height implementation. Validation proceeds through isolated checks, a bounded real Preview check, and the authorized Production release. Google documents variable width with fixed height for responsive units; creating one does not by itself prove filled-creative resize or orientation behavior.
 
 Rollback would restore the old application implementation and slot ID, without changing the old unit. The new unit could remain unused after rollback; archiving it would be a separate account action. Neither account approval nor absence of inventory substitutes for successful geometry checks.
