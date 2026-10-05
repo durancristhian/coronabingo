@@ -3,7 +3,6 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { RoomContextData } from '~/interfaces/contexts/Room'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Room, RoomBase } from '~/interfaces/models/Room'
-import { roomsRef } from '~/utils/firebase'
 
 const RoomContext = createContext<RoomContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
@@ -16,7 +15,9 @@ interface Props {
 
 const RoomContextProvider = ({ children }: Props) => {
   const router = useRouter()
-  const roomId = router.query.roomId?.toString()
+  const roomId = router.pathname.startsWith('/room/')
+    ? router.query.roomId?.toString()
+    : undefined
   const [state, setState] = useState<RemoteData<Error, Room>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
@@ -39,34 +40,50 @@ const RoomContextProvider = ({ children }: Props) => {
 
     setState({ type: REMOTE_DATA.LOADING })
 
-    const unsubscribe = roomsRef.doc(roomId).onSnapshot(
-      snapshot => {
-        if (!snapshot.exists) {
-          setState({
-            type: REMOTE_DATA.FAILURE,
-            error: new Error('Deleted room'),
-          })
+    let active = true
+    let unsubscribe: (() => void) | undefined
+    void import('~/utils/firebase').then(
+      ({ roomsRef }) => {
+        if (!active) return
 
-          return
-        }
+        unsubscribe = roomsRef.doc(roomId).onSnapshot(
+          snapshot => {
+            if (!active) return
+            if (!snapshot.exists) {
+              setState({
+                type: REMOTE_DATA.FAILURE,
+                error: new Error('Deleted room'),
+              })
 
-        const roomData = snapshot.data() as RoomBase
-        const room = {
-          ...roomData,
-          id: snapshot.id,
-          ref: snapshot.ref,
-        }
+              return
+            }
 
-        setState({ type: REMOTE_DATA.SUCCESS, data: room })
+            const roomData = snapshot.data() as RoomBase
+            const room = {
+              ...roomData,
+              id: snapshot.id,
+              ref: snapshot.ref,
+            }
+
+            setState({ type: REMOTE_DATA.SUCCESS, data: room })
+          },
+          error => {
+            if (!active) return
+            setState({ type: REMOTE_DATA.FAILURE, error })
+
+            console.error(error)
+          },
+        )
       },
       error => {
-        setState({ type: REMOTE_DATA.FAILURE, error })
-
-        console.error(error)
+        if (active) setState({ type: REMOTE_DATA.FAILURE, error })
       },
     )
 
-    return unsubscribe
+    return () => {
+      active = false
+      unsubscribe?.()
+    }
   }, [roomId])
 
   return (
