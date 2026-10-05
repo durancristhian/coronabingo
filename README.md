@@ -97,9 +97,13 @@ npm run ui-tests -- tests/ui/room.spec.ts # Focused journey
 npx playwright show-report
 ```
 
-The runner uses `demo-coronabingo-ui` at `127.0.0.1:8187`, overriding hosted settings without requiring `.env`, Firebase login, or repository secrets. External analytics delivery and ads are disabled; application events are captured locally. Browser traffic outside the app and emulator is blocked. Initial installations and downloads require internet.
+Each run uses a unique `demo-coronabingo-ui-<id>` project on a local Firestore emulator, overriding hosted settings without requiring `.env`, Firebase login, or repository secrets. External analytics delivery and ads are disabled; application events are captured locally. Browser traffic outside the app and emulator is blocked. Initial installations and downloads require internet.
 
-Ports are fixed: 3187 for Next.js, 8187 for Firestore, 9187 for its websocket, 4487 for the emulator hub, and 4587 for logging. Run one suite at a time across all worktrees. Occupied ports fail the command; existing services are never reused or stopped.
+The runner automatically reserves five available loopback ports for Next.js, Firestore, its websocket, the emulator hub, and logging. Separate worktrees can run suites concurrently. Each checkout still runs one suite at a time to protect its build output and reports. The command prints its URL and ports and records its configuration and process groups in `.ui-tests-lock/owner.json`.
+
+Startup waits for the owned emulator to announce readiness and checks a unique response header from the app. An unexpected service exit aborts the suite, including during Playwright. A port taken during service startup fails safely; rerun the command to select new ports. Existing services are never reused or stopped.
+
+Run `npm run test:ui-runner` for the fast Node regression checks covering port reservation, server identity, and service supervision. CI runs these before the browser suite.
 
 On a lock error, inspect `.ui-tests-lock/owner.json` and verify its process and services have exited before removing the lock directory. If Java is missing, set `JAVA_HOME` to a JDK 21+ installation.
 
@@ -115,7 +119,7 @@ ANALYZE_BUNDLE=1 npm run ui-tests:build
 npm run ui-tests:ci
 ```
 
-`ui-tests:ci` requires an unchanged build from `ui-tests:build`. Test output and TypeScript caches use `.next-ui-tests/`, separate from normal builds. CI uploads available test evidence even on failure and bundle reports from `.next-ui-tests/analyze/`, retained for 14 days.
+`ui-tests:ci` requires an unchanged build from `ui-tests:build` in the same checkout. The build marker retains the selected ports, demo project, and server identity because Next.js embeds them during compilation. The runner reserves those ports again before serving. If any are occupied, it fails without touching their owner; use `npm run ui-tests:production` to select new ports and rebuild. Test output and TypeScript caches use `.next-ui-tests/`, separate from normal builds. CI uploads available test evidence even on failure and bundle reports from `.next-ui-tests/analyze/`, retained for 14 days.
 
 ## Analytics and product references
 

@@ -23,7 +23,7 @@
 
 - For an exploration of design or asset quality, prepare a local comparison with originals, alternatives, and relevant measurements. Apply the chosen alternative after approval. Remove temporary demos when their review purpose is complete.
 - Before starting a server, check port availability. Use `npm run dev -- --port <port>` and record checkout, branch, URL, and process ownership. Use that URL for checks and manual review.
-- Run installation, development, type generation, and builds sequentially within a checkout. Stop its development server before building; run `npm run start -- --port <port>` only after a successful build. The UI runner also needs exclusive access to its fixed ports across worktrees.
+- Run installation, development, type generation, and builds sequentially within a checkout. Stop its development server before building; run `npm run start -- --port <port>` only after a successful build. The UI runner allocates its own ports and supports concurrent suites in separate worktrees. Use the URL and ownership record it prints; keep one suite per checkout. For compiled-build reuse and port conflicts, follow README.
 
 ## Commit and review
 

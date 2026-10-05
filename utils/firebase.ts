@@ -22,8 +22,10 @@ const uiTests = process.env.UI_TESTS === '1'
 const db = firebaseApp.firestore()
 if (uiTests) {
   if (
-    process.env.PROJECT_ID !== 'demo-coronabingo-ui' ||
-    process.env.FIRESTORE_EMULATOR_HOST !== '127.0.0.1:8187'
+    !/^demo-coronabingo-ui-[a-f0-9]{8}$/.test(process.env.PROJECT_ID || '') ||
+    !/^127\.0\.0\.1:\d{4,5}$/.test(process.env.FIRESTORE_EMULATOR_HOST || '') ||
+    Number(process.env.FIRESTORE_EMULATOR_HOST?.split(':')[1]) < 1024 ||
+    Number(process.env.FIRESTORE_EMULATOR_HOST?.split(':')[1]) > 65535
   ) {
     throw new Error('UI tests require the local demo Firestore emulator.')
   }

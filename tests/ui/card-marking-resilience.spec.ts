@@ -1,3 +1,4 @@
+import { firestorePort, projectId } from './environment'
 import { readFileSync } from 'node:fs'
 import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
@@ -219,8 +220,7 @@ test('a rejected card write shows a retry message without confirming the mark', 
   await openPlayerCards(player)
   const errors: string[] = []
   player.on('pageerror', error => errors.push(error.message))
-  const rulesURL =
-    'http://127.0.0.1:8187/emulator/v1/projects/demo-coronabingo-ui:securityRules'
+  const rulesURL = `http://127.0.0.1:${firestorePort}/emulator/v1/projects/${projectId}:securityRules`
   const rules = readFileSync('tests/ui/firestore.rules', 'utf8')
   const deniedRules = rules.replace(
     'match /players/{playerId} {\n        allow read, write: if true;',
