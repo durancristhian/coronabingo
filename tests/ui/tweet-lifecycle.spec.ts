@@ -252,7 +252,7 @@ for (const locale of ['es', 'en']) {
     await expect(page.getByTestId('rendered-tweet')).toHaveCount(4)
     expect(requests).toBe(1)
     await page.goBack()
-    await expect(page.locator('#name')).toBeVisible()
+    await expect(page.locator('#create-room')).toBeVisible()
     await revealNews(page)
     await expect(page.getByTestId('rendered-tweet')).toHaveCount(4)
     expect(requests).toBe(1)
