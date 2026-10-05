@@ -10,8 +10,10 @@ const { locales, defaultLocale, localeDetection } = require('./i18n.json')
 
 const nextTranslate = require('next-translate-plugin')
 const uiTests = process.env.UI_TESTS === '1'
+let uiTestId
 if (uiTests) {
   const { appEnv } = require('./tests/ui/environment')
+  uiTestId = JSON.parse(appEnv.UI_TEST_CONFIG).id
   for (const [name, value] of Object.entries(appEnv)) {
     if (process.env[name] !== value) {
       throw new Error(
@@ -38,6 +40,14 @@ const nextConfig = {
   images: { disableStaticImages: true },
   productionBrowserSourceMaps: true,
   headers: async () => [
+    ...(uiTests
+      ? [
+          {
+            source: '/:path*',
+            headers: [{ key: 'x-coronabingo-ui-run', value: uiTestId }],
+          },
+        ]
+      : []),
     {
       source: '/tutorials/:asset',
       headers: [
