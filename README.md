@@ -97,7 +97,7 @@ npm run ui-tests -- tests/ui/room.spec.ts # Focused journey
 npx playwright show-report
 ```
 
-Each run uses a unique `demo-coronabingo-ui-<id>` project on a local Firestore emulator, overriding hosted settings without requiring `.env`, Firebase login, or repository secrets. External analytics delivery and ads are disabled; application events are captured locally. Browser traffic outside the app and emulator is blocked. Initial installations and downloads require internet.
+Each run uses a unique `demo-coronabingo-ui-<id>` project on a local Firestore emulator, overriding hosted settings without requiring `.env`, Firebase login, or repository secrets. External analytics delivery is disabled; application events are captured locally. Browser traffic outside the app and emulator is blocked. Ads retain their reserved space; the loader is blocked unless a focused test intercepts it with a local SDK stub. `tests/ui/ads.spec.ts` exercises reservation, script failure, zero width, and navigation without real advertising. Initial installations and downloads require internet.
 
 The runner automatically reserves five available loopback ports for Next.js, Firestore, its websocket, the emulator hub, and logging. Separate worktrees can run suites concurrently. Each checkout still runs one suite at a time to protect its build output and reports. The command prints its URL and ports and records its configuration and process groups in `.ui-tests-lock/owner.json`.
 
@@ -122,6 +122,8 @@ npm run ui-tests:ci
 `ui-tests:ci` requires an unchanged build from `ui-tests:build` in the same checkout. The build marker retains the selected ports, demo project, and server identity because Next.js embeds them during compilation. The runner reserves those ports again before serving. If any are occupied, it fails without touching their owner; use `npm run ui-tests:production` to select new ports and rebuild. Test output and TypeScript caches use `.next-ui-tests/`, separate from normal builds. CI uploads available test evidence even on failure and bundle reports from `.next-ui-tests/analyze/`, retained for 14 days.
 
 ## Analytics and product references
+
+The manual ad reserves 90 px of height plus its existing 16 px bottom gap from server rendering onward. Its width follows the available space up to 728 px. A single loader in `contexts/AdScript.tsx` signals readiness; `components/Ads.tsx` requests once per connected node with positive width. Empty inventory or script failure retains the reservation. The app does not refresh ads on resize or game updates. See [PERF-09 evidence and release prerequisites](docs/reports/perf-09-ad-geometry.md) for the distinction between slot geometry and a served creative, and the limits of real-ad acceptance. The approved responsive unit is `9427584752`; the old fixed unit `1185318534` is retained in AdSense for rollback.
 
 See [Homepage tutorial](docs/tutorial.md) for localized video assets, caching and playback analytics.
 
