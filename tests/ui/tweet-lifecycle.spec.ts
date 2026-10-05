@@ -185,7 +185,8 @@ for (const locale of ['es', 'en']) {
       await page.setViewportSize({ width, height: 600 })
       const requests: string[] = []
       page.on('request', request => {
-        if (/twitter|twimg|syndication/.test(request.url())) {
+        const host = new URL(request.url()).hostname
+        if (/(^|\.)(twitter\.com|twimg\.com)$/.test(host)) {
           requests.push(request.url())
         }
       })
