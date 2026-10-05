@@ -54,6 +54,12 @@ npm run start -- --port 3124
 
 For bundle reports, use `ANALYZE_BUNDLE=1 npm run build` and inspect `.next/analyze/`. Compare equivalent builds and report byte savings separately from measured loading performance.
 
+## Firestore loading
+
+The homepage loads the room model and Firestore when the room-name field receives focus. Submitting shares that load, prevents duplicate submissions, and allows retry after a failed download. The shared contexts stay mounted to preserve room drafts; their data subscriptions load Firestore only when room/player IDs are needed. Game pages also import their data operations, so direct room links load the SDK with the route.
+
+Run `node scripts/validate-firestore-listeners.cjs` to check listener scope, cleanup, navigation during a pending import, and stale callbacks without a database. CI runs this probe and the ES/EN browser tests for cold-home loading, delayed downloads, failure recovery, and room creation.
+
 ## Browser regression tests
 
 The Playwright suite runs Chromium against a dedicated Next.js server and disposable Firestore emulator. Its current coverage includes:

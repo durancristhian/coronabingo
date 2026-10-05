@@ -44,6 +44,9 @@ jobs:
 
       - run: npm run lint:check
 
+      - name: Check Firestore listener lifecycle
+        run: node scripts/validate-firestore-listeners.cjs
+
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
 

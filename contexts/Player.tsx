@@ -3,7 +3,6 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { PlayerContextData } from '~/interfaces/contexts/Player'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
-import { roomsRef } from '~/utils/firebase'
 
 const PlayerContext = createContext<PlayerContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
@@ -17,7 +16,9 @@ interface Props {
 const PlayerContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const playerId = router.query.playerId?.toString()
-  const roomId = router.query.roomId?.toString()
+  const roomId = router.pathname.startsWith('/room/')
+    ? router.query.roomId?.toString()
+    : undefined
   const [state, setState] = useState<RemoteData<Error, Player | null>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
@@ -40,39 +41,53 @@ const PlayerContextProvider = ({ children }: Props) => {
 
     setState({ type: REMOTE_DATA.LOADING })
 
-    const unsubscribe = roomsRef
-      .doc(`${roomId}/players/${playerId}`)
-      .onSnapshot(
-        { includeMetadataChanges: true },
-        snapshot => {
-          if (snapshot.metadata.hasPendingWrites) return
+    let active = true
+    let unsubscribe: (() => void) | undefined
+    void import('~/utils/firebase').then(
+      ({ roomsRef }) => {
+        if (!active) return
 
-          if (!snapshot.exists) {
-            setState({
-              type: REMOTE_DATA.SUCCESS,
-              data: null,
-            })
+        unsubscribe = roomsRef.doc(`${roomId}/players/${playerId}`).onSnapshot(
+          { includeMetadataChanges: true },
+          snapshot => {
+            if (!active) return
+            if (snapshot.metadata.hasPendingWrites) return
 
-            return
-          }
+            if (!snapshot.exists) {
+              setState({
+                type: REMOTE_DATA.SUCCESS,
+                data: null,
+              })
 
-          const playerData = snapshot.data() as PlayerBase
-          const player = {
-            ...playerData,
-            id: snapshot.id,
-            ref: snapshot.ref,
-          }
+              return
+            }
 
-          setState({ type: REMOTE_DATA.SUCCESS, data: player })
-        },
-        error => {
-          setState({ type: REMOTE_DATA.FAILURE, error })
+            const playerData = snapshot.data() as PlayerBase
+            const player = {
+              ...playerData,
+              id: snapshot.id,
+              ref: snapshot.ref,
+            }
 
-          console.error(error)
-        },
-      )
+            setState({ type: REMOTE_DATA.SUCCESS, data: player })
+          },
+          error => {
+            if (!active) return
+            setState({ type: REMOTE_DATA.FAILURE, error })
 
-    return unsubscribe
+            console.error(error)
+          },
+        )
+      },
+      error => {
+        if (active) setState({ type: REMOTE_DATA.FAILURE, error })
+      },
+    )
+
+    return () => {
+      active = false
+      unsubscribe?.()
+    }
   }, [roomId, playerId])
 
   return (
