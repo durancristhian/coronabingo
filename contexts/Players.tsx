@@ -9,7 +9,6 @@ import React, {
 import { PlayersContextData } from '~/interfaces/contexts/Players'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
-import { roomsRef } from '~/utils/firebase'
 
 const playerListRoutes = ['/room/[roomId]', '/room/[roomId]/admin']
 
@@ -79,62 +78,81 @@ const PlayersContextProvider = ({ children }: Props) => {
         : { roomId, state: { type: REMOTE_DATA.LOADING } },
     )
 
-    const unsubscribe = roomsRef
-      .doc(roomId)
-      .collection('players')
-      .onSnapshot(
-        snapshot => {
-          if (subscriptionId.current !== currentSubscriptionId) {
-            return
-          }
+    let active = true
+    let unsubscribe: (() => void) | undefined
+    void import('~/utils/firebase').then(
+      ({ roomsRef }) => {
+        if (!active) return
 
-          const players = snapshot.docs
-            .filter(p => p.exists)
-            .map(p => {
-              const playerData = p.data() as PlayerBase
-
-              return {
-                ...playerData,
-                id: p.id,
-                ref: p.ref,
+        unsubscribe = roomsRef
+          .doc(roomId)
+          .collection('players')
+          .onSnapshot(
+            snapshot => {
+              if (!active) return
+              if (subscriptionId.current !== currentSubscriptionId) {
+                return
               }
-            })
-            .sort((a, b) => a.name.localeCompare(b.name))
 
-          const draft = draftsByRoom.current.get(roomId)
+              const players = snapshot.docs
+                .filter(p => p.exists)
+                .map(p => {
+                  const playerData = p.data() as PlayerBase
 
-          if (draft && !haveSamePlayerIds(draft, players)) {
-            setScopedState({
-              roomId,
-              state: { type: REMOTE_DATA.SUCCESS, data: draft },
-            })
+                  return {
+                    ...playerData,
+                    id: p.id,
+                    ref: p.ref,
+                  }
+                })
+                .sort((a, b) => a.name.localeCompare(b.name))
 
-            return
-          }
+              const draft = draftsByRoom.current.get(roomId)
 
-          draftsByRoom.current.delete(roomId)
-          setScopedState({
-            roomId,
-            state: { type: REMOTE_DATA.SUCCESS, data: players },
-          })
-        },
-        error => {
-          if (subscriptionId.current !== currentSubscriptionId) {
-            return
-          }
+              if (draft && !haveSamePlayerIds(draft, players)) {
+                setScopedState({
+                  roomId,
+                  state: { type: REMOTE_DATA.SUCCESS, data: draft },
+                })
 
+                return
+              }
+
+              draftsByRoom.current.delete(roomId)
+              setScopedState({
+                roomId,
+                state: { type: REMOTE_DATA.SUCCESS, data: players },
+              })
+            },
+            error => {
+              if (!active) return
+              if (subscriptionId.current !== currentSubscriptionId) {
+                return
+              }
+
+              setScopedState({
+                roomId,
+                state: { type: REMOTE_DATA.FAILURE, error },
+              })
+
+              console.error(error)
+            },
+          )
+      },
+      error => {
+        if (active) {
           setScopedState({
             roomId,
             state: { type: REMOTE_DATA.FAILURE, error },
           })
-
-          console.error(error)
-        },
-      )
+        }
+      },
+    )
 
     return () => {
+      active = false
       subscriptionId.current += 1
-      unsubscribe()
+      unsubscribe?.()
     }
   }, [roomId, shouldListenToPlayers])
 
