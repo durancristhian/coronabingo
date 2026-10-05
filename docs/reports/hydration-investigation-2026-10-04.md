@@ -124,3 +124,39 @@ React documents that [hydration requires matching server and client content](htt
 The installed Next.js Pages Router guides on rendering and automatic static
 optimization were consulted. They describe post-hydration router updates but do
 not establish that router state caused this incident.
+
+
+## Follow-up: reproduce the deployed build locally
+
+A later check compared the public build `0g3qkJI-UQ7JK--1G26Ga`, deployed from
+`e23886342503873871195afa17bbd2e98c15d7e5`, with a fresh `npm run build` followed
+by `npm run start -- --port 3190`. The task branch incorporated that deployed
+revision before building. Production subsequently advanced to `4d9a9b3` during
+this investigation; results from the two revisions must remain separate.
+
+The original local `.env` was not equivalent to Production. Its Firebase values
+differed and its Analytics, Sentry and URL settings were absent. Public values
+were recovered from the downloaded browser bundles and supplied only to the
+build/start child processes. The existing `.env` was preserved, and no values
+were committed. This produced local build `DQfNyCSCxjXGmFrcGeU19`.
+
+After excluding only the final `sourceMappingURL` comment, seven of the nine
+homepage JavaScript chunks were byte-identical to the published files: React's
+framework, polyfills, `_app`, the homepage, and shared chunks `95`, `703` and
+`bb5968dd`. The server-rendered application body was also byte-identical.
+The remaining `main` and Webpack runtime files differed. The public `main`
+includes an extra module that loads Vercel feedback, and its minified variable
+names differ. The runtime references generated chunk hashes. These two files
+were not claimed to be byte-identical.
+
+A direct T3 visit to the public homepage again produced four early `Uncaught`
+exceptions. The corresponding local build's homepage did not report exceptions.
+This is stronger evidence than the original environment-mismatched local build,
+but still a bounded result with different origin, cookies and provider behavior.
+
+Replacing the document in the existing Production tab allowed early local
+instrumentation, but retained the JavaScript realm and third-party state. One
+replay was abandoned before the delayed application started; subsequent replay
+results also cannot be treated as fresh navigations. These attempts did not
+establish causality and are excluded from the reproduction matrix. A clean
+browser capture with pre-navigation instrumentation remains necessary.
