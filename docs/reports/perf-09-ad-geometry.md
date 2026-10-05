@@ -2,7 +2,7 @@
 
 Date: 2026-10-04, America/Argentina/Buenos_Aires.
 Base: `edc2d5a791d2ca372024d8278549e106bf4f5daf`.
-Delivery: diagnosis and a standalone comparison. Application behavior is unchanged.
+Delivery: investigation, standalone comparison, and the subsequently approved 90 px implementation. Real advertising acceptance remains pending.
 
 ## Finding and recommendation
 
@@ -10,9 +10,9 @@ The manual ad moves the page content down by **106 px** when its empty wrapper a
 
 Keep 90 px as the proposed height. A 100 px mobile variant consumes another 10 px and introduces a height change at its breakpoint. Automatic sizing gives the application less control over the height above the game. None of these options guarantees that an already served creative will shrink when the window does.
 
-This recommendation requires a geometry decision before product implementation. It does not authorize account changes. Actual creative delivery, eligible page states, and the current account configuration remain unresolved.
+The owner subsequently approved the 90 px geometry. This does not authorize account changes. Actual creative delivery, eligible page states, and the current account configuration remain unresolved.
 
-## Current application
+## Baseline application at the fixed revision
 
 - [Ads](../../components/Ads.tsx) returns `null` until a 1,000 ms effect timer expires. It then renders an `ins` through `@ctrl/react-adsense`, declaring 728 × 90 px. `UI_TESTS=1` prevents it from appearing.
 - [Layout](../../components/Layout.tsx) mounts Ads unconditionally between Header and the main content. The wrapper has 16 px of horizontal padding, a [Container](../../components/Container.tsx) capped at 1,152 px, and 16 px of bottom margin.
@@ -80,15 +80,15 @@ After filling the proposed slot at 1280 px and shrinking its frame to 390 px:
 
 This is a synthetic counterexample, not an observation of Google's current response. It proves that a flexible wrapper alone cannot establish the resize acceptance criterion. Do not hide overflow, scale the iframe, or refresh on window changes to make a test pass. A served creative and real orientation/desktop-resize checks are still needed.
 
-## Proposed implementation boundary
+## Implementation contract
 
-After the geometry decision, the smallest complete component change would:
+The approved component change follows this contract, preserving current page states until a separate eligibility decision:
 
 1. Reserve the agreed height and existing 16 px gap before requesting an ad, including no-fill and loader failure.
 2. Use explicit `ins` dimensions and a small initialization adapter instead of the wrapper's implicit automatic format. Remove the package only if unused elsewhere.
 3. Expose readiness from a single loader, preserving existing analytics initialization order. The installed Next.js Pages Router guides confirm that Document is server-only; client `next/script` readiness/error handling belongs in App or a provider. Moving the existing loader changes its timing and must be tested separately, including Auto ads.
 4. Request once per connected, eligible DOM node with positive width after SDK readiness. Cancel waiting on unmount; disconnect size observation after initialization. Do not refresh for marks, called numbers, language, or resize. Preserve a request on a retained node and request a new eligible node only once.
-5. Add stub-based tests to a configuration that actually enables the component while intercepting the loader and blocking advertising traffic. The existing UI suite disables ads and cannot certify this behavior.
+5. Add stub-based tests to a configuration that actually enables the component while intercepting the loader and blocking advertising traffic. The baseline UI suite disabled ads; the updated suite exercises the real component with blocked or simulated advertising.
 
 Google documents variable width with explicit height and custom breakpoint sizes for **responsive units**. Its advanced examples omit the automatic-format attributes. This supports the proposed direction; it does not establish current slot compatibility or inventory at every available width. [Allowed responsive-code modifications](https://support.google.com/adsense/answer/9183363?hl=en).
 
@@ -96,12 +96,30 @@ The responsive tag parameters describe automatic shape and full-width behavior s
 
 ## Decisions and remaining acceptance
 
-**Geometry decision:** choose the recommended 90 px fixed reservation, the 100 px mobile alternative, or defer the component change. Retain current placement in the comparison. A placement or interaction change requires its own explicit choice.
+**Geometry decision, completed:** the owner chose the 90 px fixed reservation and flexible width up to 728 px. Current placement and page states are preserved. A placement or interaction change requires its own explicit choice.
 
 **Account prerequisite:** obtain an authenticated read-only view of slot `1185318534` and its current snippet. If it is already responsive, no unit conversion may be necessary. If it remains fixed, prepare either conversion of that slot or a new responsive unit for separate approval. A new unit would isolate the existing site's slot; conversion would affect that shared slot. Capture the original settings and snippet before any approved mutation. No account mutation is part of this report.
 
 **Eligibility and loader prerequisite:** decide which real page states may request an ad and verify current consent/loader behavior. The shared Layout cannot infer eligibility from a URL alone. This report does not classify gameplay, consent, or existing placements as approved. Resolve these before activating a replacement globally; do not expand this task into general advertising/account work.
 
-**Validation still required:** application integration; SSR/hydration; zero-width to positive-width initialization; effect replay; unmount before SDK readiness; route and language navigation; back/forward; host/player/streamer controls and their distance from the ad; real device orientation; actual creative resizing; Preview and authorized real-ad delivery. Prototype document replacement is not React navigation coverage. No claim about revenue, fill rate, SDK cost, or field CLS follows from these local measurements.
+**Validation still required:** dedicated React effect-replay coverage; placement distances across host/player/streamer views; real device orientation; actual creative resizing; Preview browser behavior and authorized real-ad delivery. The application tests below cover navigation separately from the prototype. No claim about revenue, fill rate, SDK cost, or field CLS follows from these local measurements.
 
-Rollback for this delivery is removal of the report and prototype. A future component change needs a code rollback and, if separately approved, restoration of the captured account settings. Git cannot reverse an AdSense change.
+## Approved implementation
+
+`Ads` now reserves the agreed geometry in server HTML and retains it through loader failure and no fill. The `ins` mounts only after the shared SDK loader reports readiness. A positive-width check, a temporary ResizeObserver, and a DOM-node request reference prevent early or duplicate requests; unmount cancels observation. SDK errors leave the game usable and produce one generic warning without room or player data. No automatic retries or refreshes were added.
+
+The sole ad loader moved from Document to an App-level provider using `next/script` with `afterInteractive`, `onReady`, and `onError`. Its URL and publisher attribute remain unchanged. Analytics initialization still runs in the server document before the SDK. The unused `@ctrl/react-adsense` dependency was removed. The slot ID, current placement, and current page-state eligibility are unchanged; preserving them does not certify their suitability for release.
+
+The isolated UI suite now renders the actual reservation and attempts the shared loader under its existing network block. Dedicated ad tests fulfill that request with a stub. Other journeys exercise the blocked-loader state. This replaces the earlier ad bypass, so ad geometry now participates in application tests. Frozen stub iframe dimensions deliberately remain distinct from the responsive slot; tests do not claim that application CSS can resize a real creative.
+
+### Local verification
+
+- `npm run lint:check`, `npm run validate-analytics`, `npm run build`, and `git diff --check` passed.
+- `npm run ui-tests:production` passed all 43 tests at that point, including eight ad cases and the existing host/player journeys.
+- After adding screenshots and the SDK-before-slot case, `npm run ui-tests:ci -- tests/ui/ads.spec.ts` passed all nine ad tests against the unchanged compiled application. Lint/typechecking passed again for the final tests.
+- The actual component preserved the main content's coordinate before and after a delayed simulated fill in both languages at 390 × 844. Tests checked 90 px height and available width capped at 728 px across the 12 investigated widths. Screenshots for mobile and desktop in both languages are attached to the Playwright report.
+- Blocked loader, collapsed unfilled `ins`, SDK exception, and initial zero width retained the outer reservation. SDK-ready-before-slot and navigation-before-SDK cases initialized only the active node. Back/forward navigation created one request per replacement node; a language change retained the same node/request. Host draws and player card marks did not request new ads.
+
+All game writes used the disposable `demo-coronabingo-ui` emulator. Advertising traffic was intercepted or blocked. Services shut down after each run. The compiled application checks above are local checks, not hosted Preview or real-inventory acceptance.
+
+Rollback is the implementation commit's inverse, restoring the old component, loader location, and wrapper dependency while preserving unrelated work. There are no account changes to reverse in this delivery. A later approved account change would also require restoring its captured settings; Git cannot reverse AdSense.
