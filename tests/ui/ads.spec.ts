@@ -21,17 +21,17 @@ function sdk(outcome = 'filled') {
       if (${JSON.stringify(
         outcome,
       )} === 'error') throw new Error('SDK failure');
-      node.dataset.adStatus = ${JSON.stringify(outcome)};
-      if (${JSON.stringify(outcome)} === 'unfilled') {
-        node.style.display = 'none';
-      } else {
+      {
         const frame = document.createElement('iframe');
         frame.title = 'Simulated advertisement';
         frame.width = String(node.getBoundingClientRect().width);
+        node.style.width = frame.width + 'px';
         frame.height = '90';
         frame.style.border = '0';
-        frame.srcdoc = '<p>Simulated advertisement</p>';
+        frame.srcdoc = ${JSON.stringify(outcome)} === 'unfilled'
+          ? '' : '<p>Simulated advertisement</p>';
         node.appendChild(frame);
+        node.dataset.adStatus = ${JSON.stringify(outcome)};
       }
     }};
   `
@@ -133,6 +133,7 @@ for (const outcome of ['unfilled', 'error']) {
   }) => {
     const errors: string[] = []
     page.on('pageerror', error => errors.push(error.message))
+    await page.setViewportSize({ width: 1280, height: 844 })
     await page.route(scriptURL, route =>
       route.fulfill({
         contentType: 'application/javascript',
@@ -147,6 +148,15 @@ for (const outcome of ['unfilled', 'error']) {
       .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
       .fill('Ad failure')
     await page.setViewportSize({ width: 390, height: 844 })
+    if (outcome === 'unfilled') {
+      await expect(page.locator(ad)).toHaveCSS('display', 'none')
+      await expect(page.locator(`${ad} iframe`)).toHaveAttribute('width', '728')
+      const documentSize = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        content: document.documentElement.scrollWidth,
+      }))
+      expect(documentSize.content).toBe(documentSize.viewport)
+    }
     await expectRequests(page, 1)
     expect(await contentTop(page)).toBe(top)
     await expect(
@@ -155,6 +165,21 @@ for (const outcome of ['unfilled', 'error']) {
     expect(errors).toEqual([])
   })
 }
+
+test('unfill-optimized content remains visible inside the reservation', async ({
+  page,
+}) => {
+  await page.route(scriptURL, route =>
+    route.fulfill({
+      contentType: 'application/javascript',
+      body: sdk('unfill-optimized'),
+    }),
+  )
+  await page.goto('/')
+  await expect(page.locator(`${ad} iframe`)).toBeVisible()
+  await expect(page.locator(reservation)).toHaveCSS('height', '90px')
+  await expectRequests(page, 1)
+})
 
 test('blocked SDK leaves only the reserved space and no queued request', async ({
   page,

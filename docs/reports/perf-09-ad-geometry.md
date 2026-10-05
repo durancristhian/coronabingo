@@ -123,3 +123,15 @@ The isolated UI suite now renders the actual reservation and attempts the shared
 All game writes used the disposable `demo-coronabingo-ui` emulator. Advertising traffic was intercepted or blocked. Services shut down after each run. The compiled application checks above are local checks, not hosted Preview or real-inventory acceptance.
 
 Rollback is the implementation commit's inverse, restoring the old component, loader location, and wrapper dependency while preserving unrelated work. There are no account changes to reverse in this delivery. A later approved account change would also require restoring its captured settings; Git cannot reverse AdSense.
+
+## Release verification and no-fill correction
+
+The owner authorized merge, Production verification, immediate rollback on a regression, and cleanup only after successful acceptance. The branch incorporates `main` at `4d9a9b3` before release checks.
+
+A bounded real-SDK Preview check on `2a8381a` found that an **unfilled** manual unit retained its empty 728 × 90 px iframe after resizing from 1280 to 390 px. The outer reservation adapted to 343 × 90 px, but document scroll width reached 744 px against a 375 px viewport. This is an observed empty-iframe failure, not proof of delivered-creative behavior. The pre-release Production baseline separately showed the old automatic-format manual unit at 728 × 280 px with `data-ad-status="unfill-optimized"`.
+
+The correction hides only an `unfilled` manual `ins`, following [Google's documented no-fill handling](https://support.google.com/adsense/answer/10762946?hl=en). The 90 px outer reservation remains. The CSS rule is scoped to the manual reservation and retained through production CSS purging. Filled and `unfill-optimized` units remain visible; this does not solve or conceal an oversized delivered creative.
+
+The SDK stub now retains a fixed-width empty iframe instead of hiding it itself. The regression assertion checks actual document overflow after desktop-to-mobile resize, preserved height/content position, and one request. A separate case verifies that optimized content is not hidden. The integrated tweet suite now matches Twitter hostnames instead of the substring `syndication`, which incorrectly counted the newly exercised AdSense loader as Twitter traffic.
+
+The corrected branch passed lint/typechecking and all 60 compiled UI tests, including 10 ad cases and the integrated Firestore/tweet journeys. Hosted verification of this correction and the authorized Production release remain pending. No provider settings have changed. The account requires sign-in in the collaborative browser, so the current unit type/snippet remains unverified.
