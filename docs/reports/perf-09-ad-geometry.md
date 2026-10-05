@@ -2,7 +2,7 @@
 
 Date: 2026-10-04, America/Argentina/Buenos_Aires.
 Base: `edc2d5a791d2ca372024d8278549e106bf4f5daf`.
-Delivery: investigation and approved geometry; first release reverted after a real filled-ad failure. Replacement implementation is a draft with explicit visibility and provider acceptance gaps.
+Delivery: first release reverted after a real filled-ad failure; replacement PR #222 deployed and verified for the approved manual-slot behavior on 2026-10-05 UTC. Auto ads remain an independent limitation.
 
 ## Finding and recommendation
 
@@ -78,7 +78,7 @@ After filling the proposed slot at 1280 px and shrinking its frame to 390 px:
 - Document scroll width grew to 744 px against 375 px available, producing 369 px of horizontal overflow.
 - Main top remained 180 px. Returning to 1280 px restored the fit without another stub insertion.
 
-This is a synthetic counterexample, not an observation of Google's current response. It proves that a flexible wrapper alone cannot establish the resize acceptance criterion. Do not hide overflow, scale the iframe, or refresh on window changes to make a test pass. A served creative and real orientation/desktop-resize checks are still needed.
+This is a synthetic counterexample, not an observation of Google's current response. It proves that a flexible wrapper alone cannot establish the resize acceptance criterion. Do not clip overflow, scale the iframe, or refresh on window changes to make a test pass. A served creative and real orientation/desktop-resize checks are still needed.
 
 ## Implementation contract
 
@@ -94,7 +94,7 @@ Google documents variable width with explicit height and custom breakpoint sizes
 
 The responsive tag parameters describe automatic shape and full-width behavior separately. An automatic format is not a fixed-height promise. [Responsive parameters](https://support.google.com/adsense/answer/9183460?hl=en). No-fill handling must distinguish documented `unfilled` and `unfill-optimized` states; retaining the outer reservation is an application decision. [Ad status](https://support.google.com/adsense/answer/10762946?hl=en).
 
-## Current release status
+## First release and rollback
 
 PR [#218](https://github.com/durancristhian/coronabingo/pull/218) was merged as `f973f9c` after 68 CI tests passed. Its Production deployment served a filled 728 × 90 px manual ad. When the viewport shrank from 1280 to 390 px, the reservation became 343 × 90 px but the served `ins` and iframe remained 728 × 90 px. This failed acceptance. The earlier filled-ad tests asserted the reservation dimensions without asserting actual document overflow; a passing result did not prove the creative fitted.
 
@@ -106,9 +106,9 @@ Auto ads also injected separate blocks and contributed to page shifts and overfl
 
 The owner approved a 90 px reservation, available width capped at 728 px, retained without inventory. Existing placement and page states are preserved. The owner separately authorized creating the display unit `Layout PERF-09 responsive`, with Responsive sizing. Its generated slot ID is `9427584752`. The old `Layout` unit `1185318534` remains Fixed at 728 × 90 px and was not edited. The global mobile size optimization switch was observed off and left unchanged.
 
-The responsive unit remains in the account, unused by Production following rollback. It can be reused by the replacement PR. Creating the unit does not guarantee delivery, resize behavior, or improved income. Compare coverage, impressions, viewability and RPM by device over comparable periods; a new unit and a short before/after sample are not a controlled revenue experiment.
+The responsive unit was unused following the first rollback and is now used by the accepted replacement. Creating the unit does not guarantee delivery, resize behavior, or improved income. Compare coverage, impressions, viewability and RPM by device over comparable periods; a new unit and a short before/after sample are not a controlled revenue experiment.
 
-## Replacement proposal: preserve space and hide an oversized unit completely
+## Accepted replacement: preserve space and hide an oversized unit completely
 
 The replacement starts from rollback commit `1589d9d`, reuses the approved responsive unit, and retains the 90 px server-rendered reservation and existing 16 px bottom gap. It uses the shared `AdScript` readiness provider already shipped separately by HYD-01. The temporary initialization observer waits for positive width and requests once per DOM node. Route unmount cancels pending initialization; locale changes, game updates and viewport changes do not trigger an application ad refresh.
 
@@ -118,7 +118,7 @@ Unfilled inventory is hidden independently under Google's documented no-fill rul
 
 **Tradeoff:** a served desktop ad disappears while its window is too narrow. This preserves usable controls but reduces that ad's visible time. It does not make the same creative responsive and does not guarantee unchanged income.
 
-**Provider documentation:** Google's ad-code modification guidance explicitly exempts responsive units from its general prohibition on hiding ads, and its responsive-code guide demonstrates hiding units by screen size. The fit guard uses that responsive-unit exception to prevent overlap, without inflating requests or manipulating clicks. The exact runtime observer is application code, not a Google-provided implementation. Real-inventory behavior and the visibility tradeoff still require acceptance; an unfilled Preview response is insufficient. [Ad-code modifications](https://support.google.com/adsense/answer/1354736), [responsive code examples](https://support.google.com/adsense/answer/9183363?hl=en).
+**Provider documentation:** Google's ad-code modification guidance explicitly exempts responsive units from its general prohibition on hiding ads, and its responsive-code guide demonstrates hiding units by screen size. The fit guard uses that responsive-unit exception to prevent overlap, without inflating requests or manipulating clicks. The exact runtime observer is application code, not a Google-provided implementation. The owner approved this visibility tradeoff before the second merge. A real filled unit was then checked in Production; earlier unfilled Preview responses were not used as proof of filled-creative behavior. [Ad-code modifications](https://support.google.com/adsense/answer/1354736), [responsive code examples](https://support.google.com/adsense/answer/9183363?hl=en).
 
 ## Replacement verification
 
@@ -126,4 +126,25 @@ The SDK fixture freezes a served iframe at its requested width, matching the obs
 
 These are isolated browser tests using a disposable local Firestore emulator. A landscape-shaped desktop viewport is not a physical device orientation test. Real filled inventory, physical orientation, page-state placement/eligibility and field CLS remain distinct acceptance items. No broad advertising-policy or consent certification is implied by preserving the current page states.
 
-Local validation passed: `npm ci`, `npm run lint:check`, `npm run validate-analytics`, `npm run build`, `git diff --check`, and all 71 compiled UI tests (13 ad cases). The run used `demo-coronabingo-ui-a2ebd967` with external traffic blocked and stopped its owned services. Review against base1589d9d found no additional implementation defects; hosted filled inventory and physical orientation remain acceptance gaps. CI and hosted Preview evidence are tracked in the replacement PR. Production stays on the verified revert while the replacement is under review. Worktree cleanup is deferred until successful acceptance and integration; the failed release does not satisfy the user's cleanup condition.
+Local validation passed: `npm ci`, `npm run lint:check`, `npm run validate-analytics`, `npm run build`, `git diff --check`, and all 71 compiled UI tests (13 ad cases). The run used `demo-coronabingo-ui-a2ebd967` with external traffic blocked and stopped its owned services. Review against base1589d9d found no additional implementation defects. Branch CI37255205462 and merge CI37256386307 passed, including71 UI tests and9 runner tests. Hosted acceptance is recorded below; no physical-device test is claimed.
+
+
+## Production acceptance of PR #222
+
+The owner explicitly approved merging the replacement, checking Production and immediately reverting any new failure. PR [#222](https://github.com/durancristhian/coronabingo/pull/222) merged as `e3d6144bf827a77a50f32e0cde9d6f816f53aa7f`. Vercel deployment `dpl_4hwKjHAui32u7iedeJKvovKuERBD` was READY for that exact revision with the `coronabingo.com.ar` alias. Chrome loaded build `iQBa7XtXMlWF2qI7AIyeg` from the public domain. The browser viewport was restored after testing.
+
+| Actual response and transition | Manual unit | Reservation | Result |
+| --- | --- | --- | --- |
+| Spanish, initial1280 × 900 | Filled728 × 90, iframe `aswift_2` | 728 × 90 | Visible and within bounds |
+| Same page reduced to390 × 844 | Same iframe ID and width attribute728; entire unit hidden | 343 × 90 | No manual-unit overflow; main top unchanged at480px |
+| Same page returned to1280 × 900 | Filled728 × 90, same iframe ID | 728 × 90 | Visible again; main top still480px |
+| English, initial390 × 844 | `unfill-optimized`,343 × 90 | 343 × 90 | Visible; document scroll/client width375/375 |
+| Same page reduced to320 × 844 | Entire optimized unit hidden | 273 × 90 | Manual unit cannot extend beyond the slot |
+| Same page expanded to844 × 390 | Original optimized343 × 90 unit visible | 728 × 90 | Slot and unit fit |
+| Return to390 × 844 and English-to-Spanish selection | Optimized343 × 90 remains visible | 343 × 90 | Document width375/375; room-name input and create button usable |
+
+No application refresh was introduced. The one-request guarantee is covered by isolated SDK tests; real checks observed a stable iframe identifier and dimensions, not a complete network accounting of every Google request. No ad was clicked and no room/player records were created. The bounded10minute Production Vercel error-log query returned no entries.
+
+**Remaining independent issue:** Auto ads retained1200px-wide iframes after desktop-to-mobile resize, leaving the whole document1200px wide against a375px client width even while the manual unit was fully hidden. A fresh narrow load fitted the viewport. The same Auto ads behavior was present before this replacement. Reverting the manual fix would not fix those units, so the accepted manual-slot change was retained. No Auto ads settings were changed. Investigate that behavior separately before claiming that all advertising on the page adapts correctly.
+
+These checks establish the approved manual-slot behavior in desktop Chrome at portrait and landscape CSS dimensions. They do not establish physical-device orientation behavior, a field CLS improvement, universal inventory coverage, unchanged revenue, or broad placement/consent compliance. Detailed sanitized geometry is retained in the primary checkout's ignored PERF-09 research evidence before worktree cleanup.
