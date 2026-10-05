@@ -1,5 +1,7 @@
 # IMP-02 dependency maintenance
 
+Status: completed. Implementation and risk assessment accepted; release evidence is maintained in [PR #220](https://github.com/durancristhian/coronabingo/pull/220) and the local IMP-02 record.
+
 Date: 2026-10-04. Base: `edc2d5a791d2ca372024d8278549e106bf4f5daf`.
 Runtime: Node 24.21.0, npm 11.19.0. This security update includes the explicitly approved Firebase 7 → 12 migration through its compat API. Next, React, Pages Router, Webpack and Node remain fixed. No dependency overrides are used.
 
@@ -200,7 +202,7 @@ npm update node-fetch
 
 These commands reproduce the selection policy against the registry, not an immutable future resolution. Use the committed lockfile and `npm ci` for exact reproduction. No forced audit fix or lockfile reset was used. `git diff --histogram -- package-lock.json` presents the removal-heavy diff more clearly than Git's default matching.
 
-Local checks on the final dependency set: `npm ci`, `npm ls --all`, `npm run lint:check`, `ANALYZE_BUNDLE=1 npm run build`, `npm run validate-analytics`, `npm run validate-tickets`, and `git diff --check`. Local logs are retained in the canonical ticket evidence. Browser/CI acceptance is recorded in the PR and task record. Production is not part of this delivery.
+Local checks on the final dependency set: `npm ci`, `npm ls --all`, `npm run lint:check`, `ANALYZE_BUNDLE=1 npm run build`, `npm run validate-analytics`, `npm run validate-tickets`, and `git diff --check`. Local logs are retained in the canonical ticket evidence. Browser/CI acceptance is recorded in the PR and task record. The owner subsequently authorized merging, Production verification and worktree cleanup; release evidence is recorded in PR #220 and the canonical task record.
 
 ## Bundle comparison
 
@@ -213,8 +215,17 @@ Regular builds use the same checkout, private environment, Node/npm, Next/Webpac
 | `/room/[roomId]/[playerId]` | 272,432 | 272,442 | 356,922 | +84,480 |
 | `/room/[roomId]/admin` | 240,347 | 240,357 | 324,839 | +84,482 |
 
-Firebase 12 and its compat implementation increase the shared runtime by about 84.5 kB gzip: +36.1% on this branch's homepage and +31.0% on the player route. Analyzer reports confirm growth in Firebase modules inside the shared app chunk. This is an explicit performance cost of the security migration. A future modular migration can pursue tree shaking; compat alone does not promise smaller downloads. The branch predates the separate Firestore loading improvement already merged into main, so these numbers describe this PR branch, not current Production's initial homepage cost.
+Firebase 12 and its compat implementation increase the shared runtime by about 84.5 kB gzip: +36.1% on this branch's homepage and +31.0% on the player route. Analyzer reports confirm growth in Firebase modules inside the shared app chunk. This is an explicit performance cost of the security migration. A future modular migration can pursue tree shaking; compat alone does not promise smaller downloads. These measurements were captured before integrating the separate Firestore loading improvement from main. They isolate the Firebase migration cost, not the final combined homepage payload.
 
 The initial compatible-only update added 10 gzip bytes per route. Its asynchronous spreadsheet chunk changed from 127,321 to 125,894 raw bytes and from 36,628 to 37,138 analyzer gzip bytes (+510, 1.4%); the Firebase extension does not modify spreadsheet dependencies. An integration check generated a real zipcelx Blob and read its workbook/relationship entries, numeric cell and escaped accented text through JSZip.
 
-The Firebase migration passed all 35 local Chromium UI tests against the disposable Firestore emulator, covering separate host/player contexts, drawing, concurrent marks, persistence after reload, restart, rejected writes, ES/EN, responsive layouts and spreadsheet download/retry. CI and hosted Preview evidence for the published revision are recorded in the PR and canonical task record. Production is outside this delivery.
+The Firebase migration passed all 35 local Chromium UI tests against the disposable Firestore emulator, covering separate host/player contexts, drawing, concurrent marks, persistence after reload, restart, rejected writes, ES/EN, responsive layouts and spreadsheet download/retry. CI and hosted Preview evidence for the published revision are recorded in the PR and canonical task record. The final integration with main also includes the independent Firestore loading and tweet lifecycle improvements. All 50 combined local Chromium tests pass, including the six Firestore-loading journeys; final CI and release checks are recorded in PR #220.
+
+
+## Completion and release
+
+Implementation, dependency audit and risk assessment are complete. The owner accepted the Firebase major exception and bundle tradeoff, then authorized merge, Production verification and removal of this task worktree. The integrated revision retains main's Firestore lazy loading; the unchanged-listener probe passes for home (0) and lobby/setup/cards (2), including cleanup and stale callbacks.
+
+Using the same regular-build gzip method after integrating main at `4d9a9b3`, initial JS is 144,863 bytes for `/`, 146,344 for the lobby, 360,406 for player cards and 328,321 for setup. These combined totals include the separate loading and tweet fixes and must not be attributed solely to dependency maintenance. Firestore now remains outside the initial homepage/lobby payload; loading the gameplay SDK still has the documented migration cost.
+
+[PR #220](https://github.com/durancristhian/coronabingo/pull/220) records the final CI result, merged revision, Production deployment and observed gameplay checks. The canonical local IMP-02 ticket retains exact task data IDs, cleanup results and worktree removal evidence. The 27 residual dependency findings remain documented above; completed status does not mean zero residual risk.
