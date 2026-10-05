@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app'
 import { ConfettiType } from '~/interfaces/custom/ConfettiType'
 
 export interface RoomBase {
