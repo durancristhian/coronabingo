@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
 import { Room } from '~/interfaces/models/Room'
 import { Timestamp } from '~/utils/firebase'
