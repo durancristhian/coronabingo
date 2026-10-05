@@ -2,6 +2,8 @@ import { test, expect } from './fixtures'
 import { readAnalyticsEvents } from './analytics'
 import { firestorePort, projectId } from './environment'
 
+test.use({ trace: 'on' })
+
 const copy = {
   es: {
     path: '/',
@@ -37,12 +39,13 @@ for (const locale of ['es', 'en'] as const) {
       let delivered = false
       // Inspect the actual script, avoiding assumptions about chunk names or IDs.
       await page.route('**/_next/static/chunks/**', async route => {
+        const requestedAt = Date.now()
         const response = await route.fetch()
         const body = await response.text()
         if (body.includes('Could not reach Cloud Firestore backend.')) {
           sdkRequests.push({
             path: new URL(route.request().url()).pathname,
-            at: Date.now(),
+            at: requestedAt,
           })
           if (sdkRequests.length === 1 && mode !== 'fast') {
             await held
@@ -109,7 +112,7 @@ for (const locale of ['es', 'en'] as const) {
       ).toBeVisible()
       const readyAt = Date.now()
       const roomResponse = await request.get(
-        `http://127.0.0.1:${firestorePort}/v1/projects/${projectId}/databases/(default)/documents/rooms`,
+        `http://127.0.0.1:${firestorePort}/v1/projects/${projectId}/databases/(default)/documents/rooms?pageSize=1000`,
       )
       expect(roomResponse.ok()).toBe(true)
       const rooms = (await roomResponse.json()).documents || []
