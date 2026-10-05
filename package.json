@@ -13,6 +13,7 @@
         "validate-tickets": "ts-node --project tsconfig.scripts.json scripts/validate-tickets",
         "typecheck": "next typegen && tsc --noEmit",
         "lint:check": "npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet",
+        "test:ui-runner": "node --test tests/runner/*.test.js",
         "ui-tests": "node scripts/ui-tests.js",
         "ui-tests:production": "node scripts/ui-tests.js --production",
         "ui-tests:build": "node scripts/ui-tests.js --build-only",

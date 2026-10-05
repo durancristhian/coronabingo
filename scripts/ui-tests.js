@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { spawn, spawnSync } = require('node:child_process')
 const fs = require('node:fs/promises')
-const net = require('node:net')
+const { randomBytes } = require('node:crypto')
 const path = require('node:path')
-const { setTimeout: delay } = require('node:timers/promises')
+const { environment, validateConfig, distDir } = require('../tests/ui/config')
 const {
-  appEnv,
-  appPort,
-  baseURL,
-  distDir,
-  firestorePort,
-  projectId,
-} = require('../tests/ui/environment')
-const { emulators } = require('../tests/ui/firebase.json')
+  reservePorts,
+  supervise,
+  waitForService,
+  waitForEmulator,
+} = require('./ui-test-runtime')
 
 const root = path.resolve(__dirname, '..')
 const lock = path.join(root, '.ui-tests-lock')
@@ -25,7 +22,6 @@ const playwrightArgs = args.filter(
 )
 const env = {
   ...process.env,
-  ...appEnv,
   UI_TEST_RUNNER: '1',
   UI_TEST_MODE: production ? 'production' : 'development',
   NEXT_TELEMETRY_DISABLED: '1',
@@ -33,8 +29,6 @@ const env = {
   FIREBASE_TOKEN: '',
   FIRESTORE_EMULATOR_VERSION: '',
   GOOGLE_APPLICATION_CREDENTIALS: '',
-  GCLOUD_PROJECT: appEnv.PROJECT_ID,
-  GOOGLE_CLOUD_PROJECT: appEnv.PROJECT_ID,
   XDG_CONFIG_HOME: path.join(root, '.ui-tests-config'),
 }
 // Homebrew's keg-only JDK does not replace macOS's /usr/bin/java stub.
@@ -78,7 +72,7 @@ function start(command, commandArgs, options = {}) {
   const child = spawn(command, commandArgs, {
     cwd: options.cwd || root,
     env,
-    stdio: 'inherit',
+    stdio: options.readyText ? ['ignore', 'pipe', 'pipe'] : 'inherit',
     detached: true,
   })
   const owned = { child, signal: options.signal || 'SIGTERM', result: null }
@@ -90,6 +84,17 @@ function start(command, commandArgs, options = {}) {
     child.once('error', error => finish({ error }))
     child.once('exit', (code, signal) => finish({ code, signal }))
   })
+  if (options.readyText) {
+    let output = ''
+    for (const stream of [child.stdout, child.stderr]) {
+      stream.on('data', chunk => {
+        process.stdout.write(chunk)
+        output = (output + chunk.toString()).slice(-4096)
+        if (output.includes(options.readyText)) owned.ready = true
+      })
+    }
+  }
+  if (options.service) supervise(owned, interrupt, options.name)
   ownedProcesses.add(owned)
   console.log(`Started ${options.name || command}: PID/group ${child.pid}`)
   return owned
@@ -105,6 +110,7 @@ function signalGroup(owned, signal) {
 }
 
 async function stop(owned) {
+  owned.stopping = true
   signalGroup(owned, owned.signal)
   let timer
   try {
@@ -136,40 +142,6 @@ async function run(command, commandArgs, options = {}) {
   }
 }
 
-async function waitForService(owned, url) {
-  const deadline = Date.now() + 120_000
-  while (Date.now() < deadline) {
-    interrupt.signal.throwIfAborted()
-    if (owned.result)
-      throw new Error(`Service at ${url} exited before becoming ready`)
-    const ready = await interruptible(
-      fetch(url, { signal: AbortSignal.timeout(1000) })
-        .then(async response => {
-          await response.body?.cancel()
-          return response.ok
-        })
-        .catch(() => false),
-    )
-    if (ready) return
-    await delay(200, undefined, { signal: interrupt.signal })
-  }
-  throw new Error(`Service at ${url} did not become ready within 120 seconds`)
-}
-
-async function checkPort(port) {
-  await new Promise((resolve, reject) => {
-    const server = net.createServer()
-    server.once('error', () => {
-      reject(
-        new Error(
-          `Port ${port} is occupied. Stop its owner or use another worktree after that run finishes.`,
-        ),
-      )
-    })
-    server.listen(port, '127.0.0.1', () => server.close(resolve))
-  })
-}
-
 async function main() {
   if (process.platform === 'win32') {
     throw new Error('Run UI tests in WSL, Linux or macOS.')
@@ -185,6 +157,7 @@ async function main() {
   const started = Date.now()
   const nextEnvPath = path.join(root, 'next-env.d.ts')
   let previousNextEnv
+  let reservation
   try {
     previousNextEnv = await fs.readFile(nextEnvPath, 'utf8').catch(error => {
       if (error.code !== 'ENOENT') throw error
@@ -194,16 +167,64 @@ async function main() {
       path.join(lock, 'owner.json'),
       JSON.stringify({ pid: process.pid, root }),
     )
-    if (!buildOnly) {
-      for (const port of [
-        appPort,
-        emulators.firestore.port,
-        emulators.firestore.websocketPort,
-        emulators.hub.port,
-        emulators.logging.port,
-      ]) {
-        await checkPort(port)
+    const marker = path.join(root, distDir, 'ui-test-build.json')
+    let config
+    let saved
+    if (skipBuild) {
+      saved = JSON.parse(await fs.readFile(marker, 'utf8'))
+      config = validateConfig(saved.config)
+      const buildId = await fs.readFile(
+        path.join(root, distDir, 'BUILD_ID'),
+        'utf8',
+      )
+      if (
+        saved.root !== root ||
+        saved.buildId !== buildId ||
+        JSON.stringify(saved.appEnv) !==
+          JSON.stringify(environment(config).appEnv)
+      ) {
+        throw new Error(
+          'Test build configuration changed. Run npm run ui-tests:build.',
+        )
       }
+    }
+    reservation = await reservePorts(config?.ports)
+    config = config || {
+      id: randomBytes(16).toString('hex'),
+      ports: reservation.ports,
+    }
+    const { appEnv, appPort, baseURL, firestorePort, projectId } = environment(
+      config,
+    )
+    Object.assign(env, appEnv, {
+      GCLOUD_PROJECT: projectId,
+      GOOGLE_CLOUD_PROJECT: projectId,
+    })
+    const writeOwner = () =>
+      fs.writeFile(
+        path.join(lock, 'owner.json'),
+        JSON.stringify(
+          {
+            pid: process.pid,
+            root,
+            config,
+            baseURL,
+            projectId,
+            services: [...ownedProcesses].map(owned => ({
+              pid: owned.child.pid,
+              processGroup: owned.child.pid,
+            })),
+          },
+          null,
+          2,
+        ),
+      )
+    await writeOwner()
+    console.log(
+      `UI tests: ${env.UI_TEST_MODE}, ${baseURL}, ${projectId}, runner PID ${process.pid}, ${root}`,
+    )
+    console.log(`UI test ports: ${JSON.stringify(config.ports)}`)
+    if (!buildOnly) {
       const java = spawnSync('java', ['-version'], { env, encoding: 'utf8' })
       const version = `${java.stdout || ''}${java.stderr || ''}`.match(
         /version "(\d+)/,
@@ -212,7 +233,6 @@ async function main() {
         throw new Error('Java 21+ is required. See README UI test setup.')
       }
     }
-    const marker = path.join(root, distDir, 'ui-test-build.json')
     if (production && !skipBuild) {
       await fs.rm(marker, { force: true })
       await run('npm', ['run', 'build'])
@@ -220,24 +240,32 @@ async function main() {
         path.join(root, distDir, 'BUILD_ID'),
         'utf8',
       )
-      await fs.writeFile(marker, JSON.stringify({ appEnv, buildId }))
+      await fs.writeFile(
+        marker,
+        JSON.stringify({ root, config, appEnv, buildId }),
+      )
     }
     if (buildOnly) return
-    if (skipBuild) {
-      const saved = JSON.parse(await fs.readFile(marker, 'utf8'))
-      const buildId = await fs.readFile(
-        path.join(root, distDir, 'BUILD_ID'),
-        'utf8',
-      )
-      if (JSON.stringify(saved) !== JSON.stringify({ appEnv, buildId })) {
-        throw new Error(
-          'Test build configuration changed. Run npm run ui-tests:build.',
-        )
-      }
-    }
-    console.log(
-      `UI tests: ${env.UI_TEST_MODE}, ${appEnv.URL}, ${appEnv.PROJECT_ID}, runner PID ${process.pid}, ${root}`,
+    const firebaseConfig = path.join(lock, 'firebase.json')
+    const endpoint = name => ({ host: '127.0.0.1', port: config.ports[name] })
+    await fs.writeFile(
+      firebaseConfig,
+      JSON.stringify({
+        firestore: { rules: path.join(root, 'tests/ui/firestore.rules') },
+        emulators: {
+          firestore: {
+            ...endpoint('firestore'),
+            websocketPort: config.ports.websocket,
+          },
+          hub: endpoint('hub'),
+          logging: endpoint('logging'),
+          ui: { enabled: false },
+          singleProjectMode: true,
+        },
+      }),
     )
+    // Hold the app reservation until its own startup, including during compilation.
+    await reservation.release(['firestore', 'websocket', 'hub', 'logging'])
     const firestore = start(
       process.execPath,
       [
@@ -248,15 +276,25 @@ async function main() {
         '--project',
         projectId,
         '--config',
-        'firebase.json',
+        firebaseConfig,
         '--non-interactive',
       ],
-      { cwd: path.join(root, 'tests/ui'), signal: 'SIGINT', name: 'Firestore' },
+      {
+        cwd: path.join(root, 'tests/ui'),
+        signal: 'SIGINT',
+        name: 'Firestore',
+        service: true,
+        readyText: 'All emulators ready!',
+      },
     )
+    await writeOwner()
+    await waitForEmulator(firestore, interrupt.signal)
     await waitForService(
       firestore,
       `http://127.0.0.1:${firestorePort}/v1/projects/${projectId}/databases/(default)/documents/rooms`,
+      { signal: interrupt.signal },
     )
+    await reservation.release(['app'])
     const next = start(
       'npm',
       [
@@ -268,20 +306,13 @@ async function main() {
         '--port',
         String(appPort),
       ],
-      { name: 'Next.js' },
+      { name: 'Next.js', service: true },
     )
-    await waitForService(next, baseURL)
-    await fs.writeFile(
-      path.join(lock, 'owner.json'),
-      JSON.stringify({
-        pid: process.pid,
-        root,
-        services: [...ownedProcesses].map(owned => ({
-          pid: owned.child.pid,
-          processGroup: owned.child.pid,
-        })),
-      }),
-    )
+    await writeOwner()
+    await waitForService(next, baseURL, {
+      signal: interrupt.signal,
+      identity: config.id,
+    })
     await run(
       process.execPath,
       [require.resolve('@playwright/test/cli'), 'test', ...playwrightArgs],
@@ -289,6 +320,7 @@ async function main() {
     )
   } finally {
     for (const owned of [...ownedProcesses].reverse()) await stop(owned)
+    await reservation?.release()
     // Next writes this shared declaration even when distDir is separate.
     // Restore it only if it still points at our build, not another server's.
     const currentNextEnv = await fs
@@ -311,6 +343,6 @@ async function main() {
 }
 
 main().catch(error => {
-  console.error(error.message)
+  console.error(interrupt.signal.reason?.message || error.message)
   process.exitCode = interrupt.signal.aborted ? 130 : 1
 })
