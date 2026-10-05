@@ -1,70 +1,95 @@
-# HYD-01 hydration investigation
+# HYD-01: Auto ads races React hydration
 
-The production hydration defect remains open. The isolated application did not
-reproduce it, and this change does not alter application behavior. It adds a
-repeatable diagnostic with a positive control and records the remaining evidence
-gap. Passing this diagnostic is not proof that production hydration is fixed.
+A clean Production capture identified the cause of the observed React 418/423
+errors: AdSense Auto ads inserts a sibling inside the server-rendered React root
+before hydration. React encounters that unexpected element and rebuilds the root.
+Replaying just that insertion reproduces the same errors in a local production
+build. Moving the insertion after hydration preserves the original DOM.
 
-## Scope and reference builds
+The runtime correction already exists in [PR #218](https://github.com/durancristhian/coronabingo/pull/218):
+its shared AdSense loader uses `next/script` with `afterInteractive` and removes
+the early async script from `_document`. This investigation does not duplicate
+that implementation. PR #219 provides the causal evidence and isolated hydration
+coverage. Production acceptance remains pending the deployment of the correction.
 
-- Source baseline: `edc2d5a791d2ca372024d8278549e106bf4f5daf`.
-- Observed production build: `ByZUPFNlyJ8vLx_oU-X93`.
-- Ordinary local production build: `Eq7iaZ5mgwslXlkdKvJId`.
-- Runtime: Node 24.21.0, npm 11.19.0, Next.js 16.3.6, React 18.3.1,
-  Pages Router and Webpack, using the committed lockfile.
-- Routes: `/`, `/en/`, and nonexistent `/room/[roomId]` routes in both languages.
-  Missing-room inputs use disposable fixture identifiers and synthetic query and
-  fragment values. No hosted rooms or players were created.
-- Browser inspection used T3 Code 0.0.45, Electron 44.4.2 and Chromium
-  152.0.7977.130 on macOS, with `en-US` browser language and a 1280 by 800 viewport.
-  This is a persistent application session, not a clean Chrome profile.
-- The automated diagnostic uses the repository's fresh Chromium contexts,
-  `es-AR` browser language, desktop viewport and external-network isolation.
-  Application language is selected explicitly. It does not test a personal
-  Chrome profile, browser extensions, Safari or mobile browser behavior.
+## Original-origin capture
 
-## Observations
+The owner explicitly authorized a fresh Playwright Chromium session because T3's
+exception summaries did not expose the full error messages or pre-navigation
+instrumentation. One normal public homepage navigation captured:
 
-The original production evidence contained three React 418 errors and one 423
-per affected load. Those error codes identify hydration recovery, not a guilty
-component. A single public-homepage visit during this investigation recorded four
-early exceptions and an AdSense `no_div` error. The collaborative browser exposed
-the four exceptions only as `Uncaught`, so their exact React codes could not be
-confirmed in that capture. Do not treat the nearby AdSense error as causation.
+- Production revision `4d9a9b3cfd2f63250ef3f81933e572bd424d3e94`, build
+  `r5DubCCfGXZe2b3eotuKt`.
+- Chromium `153.0.8010.12`, headless, fresh context, no extensions, `en-US`,
+  1280 by 800 viewport, service workers blocked.
+- At 355.6 ms, `adsbygoogle.js` called `insertBefore` on `main.cb-layout`, inserting
+  `div.google-auto-placed` immediately before `.cb-layout-main`.
+- At 357.2 ms and 437.8 ms, AdSense populated the inserted ad container.
+- At 479.6, 481.4 and 481.7 ms, React reported error 418. At 482.1 ms, it reported
+  error 423. React then replaced the original root content.
 
-The server-rendered application body from the public homepage was byte-identical
-to the ordinary local production build's body. This comparison excludes the head,
-Next data, build-specific scripts and any browser-side mutations. It rules out a
-static body difference for those two responses, not a timing or runtime problem.
+The mutation stack identifies `adsbygoogle.js` functions `Sj`, `qn`, `nn` and
+`vn.start`. The first differing node is the automatic ad wrapper between the
+header and page content. The manual ad component's one-second delay does not
+protect against Auto ads: the global SDK previously loaded from `_document`
+before React mounted.
+
+Error listeners and DOM-operation wrappers were installed before navigation.
+This is an instrumented observation, so the causal check below varies ordering
+without contacting the advertising provider. No hosted gameplay records were
+created and no provider settings were changed.
+
+## Controlled reproduction
+
+The replay substitutes a small local stub for the AdSense SDK. It inserts the
+captured element type, class and position, with an empty `ins.adsbygoogle` child.
+It does not load ads, create frames, or depend on provider availability. All other
+external traffic is blocked. The heading's DOM identity distinguishes successful
+hydration from recovery that merely leaves the page looking correct.
 
 | Condition | Attempts | Result |
 | --- | --- | --- |
-| T3, isolated production build, homepage ES/EN and missing-room ES/EN | 5 entries per route/language, 20 total | No early exceptions reported; hydration completed. Some missing-room snapshots preceded the final error state. |
-| T3, public production homepage | 1 | Four early `Uncaught` exceptions; exact messages unavailable. One separate `no_div` error. |
-| T3, exact public HTML/chunks replayed through a local diagnostic proxy, external scripts blocked | 5 | No captured hydration errors. |
-| Same replay, Twitter script origin permitted | 5 | No captured hydration errors. Embedded frames and external connections remained blocked. |
-| Same replay, Vercel feedback script origin permitted | 5 | No captured hydration errors. External connections remained blocked. |
-| T3, ordinary local build, AdSense static scripts permitted, frames/connections blocked | 2, including delayed Next chunks | No captured hydration errors. Observed pre-hydration insertions were outside `#__next`. |
-| T3, public-build replay, AdSense scripts and ad frame origins permitted, parent external connections blocked | 1 with delayed Next chunks | No captured hydration errors. This was not a production-origin ad configuration. |
-| Automated isolated production build | 5 entries and 5 reloads for each of 4 route/language combinations | No hydration diagnostics in 40 loads. Also exercised 20 locale transitions and 10 header returns to home. |
-| Automated isolated development build | Same matrix | No hydration diagnostics in 40 loads; the 5-test suite passed. Development remains secondary to the compiled-build result. |
+| Captured Production HTML and published chunks, stub inserts before hydration | 1 | Three 418 errors and one 423; original heading replaced; inserted node discarded. |
+| Equivalent local production build, same stub inserts before hydration | 5 | Same four errors on every attempt; original heading replaced. |
+| Same local build and origin, only insertion timing moved after hydration | 5 | No errors; original heading and inserted node retained. |
+| PR #218 Preview with its real loader and the same immediate-insertion stub | 1 | Loader executes after client mount; no errors; original heading and inserted node retained. |
+| Later PR #218 Preview: home/missing-room, ES/EN, 1280/390 px | 8 entries | No errors; loader executes after client mount; original heading and inserted node retained. External Firebase requests blocked; this checks hydration, not room availability. |
 
-The local proxy inserted an error listener before application scripts, recorded
-DOM operations and held Next JavaScript responses for 1.5 seconds to expose early
-mutations. The initial ordinary-local baseline also passed with all external
-scripts blocked. Proxy runs used `Cache-Control: no-store`; the T3 browser cache
-was otherwise not reset. Initial T3 entries shared a session and were not cold
-profile trials. Automated request routing disables the HTTP cache and every test
-gets a fresh context; the five repetitions within a test share that context.
+The first PR #218 Preview capture used build `8_0cqRaC8_BOrAGy8NWmQ`; the
+later eight-entry matrix used `yPVRIIlcq5quRi3AcLxyg`. The branch advanced during
+inspection, so these observations are identified by build rather than assuming
+an immutable branch URL. Its loader implementation is in `contexts/AdScript.tsx`.
+The test substitutes the SDK response and blocks other external traffic,
+so it exercises the deployed loader's timing. This demonstrates the correction
+for the captured insertion; it is not a claim about filled-ad rendering, revenue,
+all Auto ads formats, or a Production deployment that has not happened yet.
 
-These are bounded negative results. Replaying production assets on localhost
-changes the origin, cookies, provider configuration and timing. The CSP also
-blocks provider dependencies. Enabling one script origin in this restricted
-environment does not reproduce the full provider behavior on production and
-cannot independently clear or blame that provider. The diagnostic proxy and
-instrumentation were temporary local research tools, not application changes.
+## Reproducing the deployed build locally
 
-## Repeatable diagnostic
+An earlier comparison used public build `0g3qkJI-UQ7JK--1G26Ga`, deployed from
+`e23886342503873871195afa17bbd2e98c15d7e5`. That revision was incorporated into
+the task branch before `npm run build` and `npm run start -- --port 3190`.
+The resulting local build was `DQfNyCSCxjXGmFrcGeU19`, also used for the controlled
+five-before/five-after experiment above.
+
+The original local `.env` differed from Production: Firebase values differed,
+and Analytics, Sentry and URL settings were absent. Public browser configuration
+was recovered from downloaded bundles and supplied only to build/start child
+processes. The existing `.env` was preserved and no values were committed.
+
+Excluding only final source-map comments, seven of nine homepage chunks were
+byte-identical: React's framework, polyfills, `_app`, the homepage and shared
+chunks `95`, `703` and `bb5968dd`. The server-rendered application body was also
+byte-identical. `main` and the Webpack runtime differed: public `main` includes
+Vercel feedback and different minified names; the runtime references generated
+hashes. This is not a claim that the entire environment or all bundles matched.
+
+The build alone initially passed because localhost did not reproduce Production's
+Auto ads placement and timing. Adding the captured mutation made the same local
+build fail reliably. Production advanced to `4d9a9b3` during the investigation;
+those build observations are kept separate.
+
+## Automated diagnostic
 
 Follow the [UI test setup](../../README.md#browser-regression-tests), then run:
 
@@ -73,90 +98,30 @@ npm run ui-tests:production -- tests/ui/hydration.spec.ts
 npm run ui-tests -- tests/ui/hydration.spec.ts
 ```
 
-The [diagnostic](../../tests/ui/hydration.spec.ts) attaches listeners before the
-first navigation. It checks descriptive hydration messages and the observed React
-418/423 codes, plus text-mismatch code 425. It waits for the client-mounted Next
-route announcer and two animation frames before inspecting errors. Missing-room
-checks also wait for the translated recovery action. It records a JSON matrix in
-the Playwright report.
+The [suite](../../tests/ui/hydration.spec.ts) covers homepage and missing-room
+entry/reload in ES/EN, locale transitions and header returns. It captures hydration
+messages before navigation and waits for the client-mounted route announcer.
+The header performs a document navigation; the locale control performs a client
+transition and is checked without counting a reload as SPA coverage.
 
-The real header link performs a document navigation. The locale selector performs
-a client transition. The test checks that the latter preserves the document's
-time origin instead of silently counting a reload as SPA coverage.
+Two ordering tests replay the observed Auto ads insertion before and after
+hydration. The former intentionally expects recovery and checks replacement of
+the original heading. The latter expects no hydration errors, keeps both nodes,
+and exercises a locale transition. These tests establish the timing boundary;
+they do not assert that this branch itself changes the SDK loader. The isolated
+runner disables real advertising and uses disposable Firebase configuration.
 
-A separate positive control removes the server-rendered heading just before the
-real React runtime executes. It verifies that the collector detects hydration
-failure and that React restores the heading. This deliberately induced mismatch
-validates the diagnostic's signal. It is not a reproduction of HYD-01's unknown
-production cause, and it does not justify an application fix.
+## Earlier negative results and limits
 
-## Next decisive experiment
+Before the clean capture, ordinary local builds, development builds, and public
+assets replayed through a restrictive local proxy did not reproduce the original
+error. T3 public visits repeatedly reported four generic `Uncaught` exceptions.
+Partial Twitter, Vercel and AdSense allowances changed origin and provider
+behavior and could neither clear nor blame those providers. Rewriting the document
+inside an existing Production tab retained its JavaScript realm; those attempts
+were not clean navigations and are excluded from causal evidence.
 
-Capture the original origin with a browser facility that supports an initialization
-script and request interception before navigation. Keep the first differing DOM
-node, mutation stack, complete recoverable-error message and application commit
-timing together. The available T3 tools support post-navigation evaluation but do
-not expose pre-navigation initialization or request interception. Their exception
-summary was insufficient here. A local proxy can instrument early but changes the
-origin, as described above.
-
-Use a clean profile first and compare the existing personal session only if the
-clean one does not reproduce. Record exact build, browser, extensions, viewport,
-language, cache and response timing. Stub ad delivery to avoid repeated live
-impressions. After one attributable failing capture, replay the captured mutation
-or response locally and vary one input at a time:
-
-1. If an external mutation precedes the first mismatch inside `#__next`, replay
-   that mutation without contacting its provider. Test its ordering against React
-   hydration before choosing a loading change.
-2. If the initial application render differs without an external mutation,
-   compare the responsible component's server/client inputs and locale/router
-   readiness.
-3. If only the personal session reproduces, repeat with its extensions and stored
-   state isolated individually. Do not infer extension responsibility from a
-   clean-profile pass alone.
-
-No loading change, `suppressHydrationWarning`, Sentry filter, dependency upgrade
-or SSR removal is justified by the evidence collected so far. A safe fix needs
-the original failure to go red before the change and green after it.
-
-React documents that [hydration requires matching server and client content](https://react.dev/reference/react-dom/client/hydrateRoot).
-The installed Next.js Pages Router guides on rendering and automatic static
-optimization were consulted. They describe post-hydration router updates but do
-not establish that router state caused this incident.
-
-
-## Follow-up: reproduce the deployed build locally
-
-A later check compared the public build `0g3qkJI-UQ7JK--1G26Ga`, deployed from
-`e23886342503873871195afa17bbd2e98c15d7e5`, with a fresh `npm run build` followed
-by `npm run start -- --port 3190`. The task branch incorporated that deployed
-revision before building. Production subsequently advanced to `4d9a9b3` during
-this investigation; results from the two revisions must remain separate.
-
-The original local `.env` was not equivalent to Production. Its Firebase values
-differed and its Analytics, Sentry and URL settings were absent. Public values
-were recovered from the downloaded browser bundles and supplied only to the
-build/start child processes. The existing `.env` was preserved, and no values
-were committed. This produced local build `DQfNyCSCxjXGmFrcGeU19`.
-
-After excluding only the final `sourceMappingURL` comment, seven of the nine
-homepage JavaScript chunks were byte-identical to the published files: React's
-framework, polyfills, `_app`, the homepage, and shared chunks `95`, `703` and
-`bb5968dd`. The server-rendered application body was also byte-identical.
-The remaining `main` and Webpack runtime files differed. The public `main`
-includes an extra module that loads Vercel feedback, and its minified variable
-names differ. The runtime references generated chunk hashes. These two files
-were not claimed to be byte-identical.
-
-A direct T3 visit to the public homepage again produced four early `Uncaught`
-exceptions. The corresponding local build's homepage did not report exceptions.
-This is stronger evidence than the original environment-mismatched local build,
-but still a bounded result with different origin, cookies and provider behavior.
-
-Replacing the document in the existing Production tab allowed early local
-instrumentation, but retained the JavaScript realm and third-party state. One
-replay was abandoned before the delayed application started; subsequent replay
-results also cannot be treated as fresh navigations. These attempts did not
-establish causality and are excluded from the reproduction matrix. A clean
-browser capture with pre-navigation instrumentation remains necessary.
+The earlier synthetic test removed the heading to validate error collection.
+It has been replaced by the actual Auto ads mutation replay. No error suppression,
+SSR removal, Sentry filter or dependency upgrade was introduced. The claim is
+bounded to the captured race; unrelated hydration errors may have other causes.

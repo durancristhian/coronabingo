@@ -98,13 +98,24 @@ for (const locale of ['es', 'en']) {
   }
 }
 
-test('hydration diagnostic detects a controlled pre-hydration DOM mismatch', async ({
+// Replay the first divergent node captured on Production: Auto ads inserts a
+// sibling before the layout content. No advertising SDK or delivery is needed.
+const insertAutoAd = `
+  window.__hydOriginalHeading = document.querySelector('header h1');
+  const target = document.querySelector('main.cb-layout > .cb-layout-main');
+  if (!target) throw new Error('Auto-ad replay target is missing');
+  const ad = document.createElement('div');
+  ad.className = 'google-auto-placed';
+  ad.innerHTML = '<ins class="adsbygoogle" data-ad-format="auto"></ins>';
+  target.parentNode.insertBefore(ad, target);
+`
+
+test('Auto ads insertion before hydration reproduces root recovery', async ({
   page,
 }) => {
   const errors = collectHydrationErrors(page)
-  // Positive control for the diagnostic, not a reproduction of HYD-01's cause.
-  // Defer scripts execute after parsing. Remove SSR content immediately before
-  // the real React runtime executes, with every external request still blocked.
+  // Defer scripts execute after parsing. Replay before the React runtime, with
+  // every external request still blocked by the isolated fixtures.
   let injected = false
   await page.route(
     /\/_next\/static\/chunks\/(framework[^/]*|main)\.js/,
@@ -113,7 +124,7 @@ test('hydration diagnostic detects a controlled pre-hydration DOM mismatch', asy
       injected = true
       await route.fulfill({
         response,
-        body: `document.querySelector('header h1')?.remove();\n${await response.text()}`,
+        body: `(() => { ${insertAutoAd} })();\n${await response.text()}`,
       })
     },
   )
@@ -122,4 +133,30 @@ test('hydration diagnostic detects a controlled pre-hydration DOM mismatch', asy
   expect(injected).toBe(true)
   await expect.poll(() => errors.length).toBeGreaterThan(0)
   await expect(page.locator('header h1')).toHaveText('Coronabingo')
+  expect(
+    await page.evaluate(
+      "window.__hydOriginalHeading === document.querySelector('header h1')",
+    ),
+  ).toBe(false)
+  await expect(page.locator('.google-auto-placed')).toHaveCount(0)
+})
+
+test('the same Auto ads insertion after hydration preserves the root', async ({
+  page,
+}) => {
+  const errors = collectHydrationErrors(page)
+  await page.goto('/')
+  await afterHydration(page)
+  await page.evaluate(`(() => { ${insertAutoAd} })()`)
+  await afterHydration(page)
+  await page.locator('#language').selectOption('en')
+  await expect(page.locator('#language')).toHaveValue('en')
+  await afterHydration(page)
+  expect(errors).toEqual([])
+  expect(
+    await page.evaluate(
+      "window.__hydOriginalHeading === document.querySelector('header h1')",
+    ),
+  ).toBe(true)
+  await expect(page.locator('.google-auto-placed')).toHaveCount(1)
 })
