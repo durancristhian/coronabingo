@@ -1,34 +1,123 @@
-import { Adsense } from '@ctrl/react-adsense'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useAdScriptReady } from '~/contexts/AdScript'
 import Container from './Container'
 
 export default function Ads() {
-  const [visible, setVisibility] = useState(false)
+  const ready = useAdScriptReady()
+  const reservation = useRef<HTMLDivElement>(null)
+  const slot = useRef<HTMLModElement>(null)
+  const requested = useRef<HTMLModElement | null>(null)
 
   useEffect(() => {
-    if (process.env.UI_TESTS === '1') return
-    const timeoutId = setTimeout(() => {
-      setVisibility(true)
-    }, 1000)
+    const node = slot.current
+    const space = reservation.current
+    if (!ready || !node || !space) return
 
-    return () => clearTimeout(timeoutId)
-  }, [])
+    const checkFit = () => {
+      if (!node.isConnected) return
+      // Measure the complete unit synchronously, including while hidden. The
+      // final display state is restored before paint; no creative is resized.
+      node.removeAttribute('data-ad-overflow')
+      const bounds = space.getBoundingClientRect()
+      const outside = (element: Element) => {
+        const rect = element.getBoundingClientRect()
+        if (!rect.width || !rect.height) return false
+        return (
+          rect.left < bounds.left - 0.5 ||
+          rect.right > bounds.right + 0.5 ||
+          rect.top < bounds.top - 0.5 ||
+          rect.bottom > bounds.bottom + 0.5
+        )
+      }
+      if (
+        outside(node) ||
+        Array.from(node.querySelectorAll('iframe')).some(outside)
+      ) {
+        node.setAttribute('data-ad-overflow', 'true')
+      }
+    }
 
-  return visible ? (
+    // Observe the reservation, not the hidden unit: hiding must not trigger a
+    // resize-observer feedback loop. SDK mutations cover late iframe sizing.
+    const resize = new ResizeObserver(checkFit)
+    resize.observe(space)
+    const mutations = new MutationObserver(checkFit)
+    mutations.observe(node, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'width', 'height', 'class', 'data-ad-status'],
+    })
+    checkFit()
+    return () => {
+      resize.disconnect()
+      mutations.disconnect()
+    }
+  }, [ready])
+
+  useEffect(() => {
+    const node = slot.current
+    if (!ready || !node || requested.current === node) return
+
+    const request = (
+      _entries: ResizeObserverEntry[],
+      observer: ResizeObserver,
+    ) => {
+      if (
+        !node.isConnected ||
+        slot.current !== node ||
+        requested.current === node ||
+        node.getBoundingClientRect().width <= 0
+      ) {
+        return
+      }
+
+      // The DOM node owns the request, including when effects replay.
+      requested.current = node
+      observer.disconnect()
+      try {
+        const adsWindow = window as Window & {
+          adsbygoogle?: { push: (request: Record<string, never>) => void }
+        }
+        if (!adsWindow.adsbygoogle) throw new Error('AdSense unavailable')
+        adsWindow.adsbygoogle.push({})
+      } catch {
+        // An advertising failure must not interrupt the game or retry a slot.
+        console.warn('AdSense could not initialize the manual ad.')
+      }
+    }
+
+    const observer = new ResizeObserver(request)
+    observer.observe(node)
+    request([], observer)
+    return () => observer.disconnect()
+  }, [ready])
+
+  return (
     <div className="px-4">
       <Container size="large">
         <div className="flex justify-center mb-4">
-          <Adsense
-            client="ca-pub-6231280485856921"
-            slot="1185318534"
+          <div
+            ref={reservation}
+            className="cb-ad-reservation"
             style={{
-              display: 'inline-block',
               height: '90px',
-              width: '728px',
+              width: '100%',
+              maxWidth: '728px',
             }}
-          />
+          >
+            {ready && (
+              <ins
+                ref={slot}
+                className="adsbygoogle"
+                data-ad-client="ca-pub-6231280485856921"
+                data-ad-slot="9427584752"
+                style={{ display: 'block', width: '100%', height: '90px' }}
+              />
+            )}
+          </div>
         </div>
       </Container>
     </div>
-  ) : null
+  )
 }

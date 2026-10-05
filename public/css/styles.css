@@ -19,6 +19,13 @@
 .ReactModal__Body--open {
   overflow-y: hidden;
 }
+
+/* Keep the reservation when there is no inventory or the complete served unit
+   no longer fits. Never clip, scale, or refresh a creative to make it fit. */
+.cb-ad-reservation > ins.adsbygoogle[data-ad-status='unfilled'],
+.cb-ad-reservation > ins.adsbygoogle[data-ad-overflow='true'] {
+  display: none !important;
+}
 /* purgecss end ignore */
 
 .debug * {
