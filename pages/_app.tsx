@@ -9,6 +9,7 @@ import Router from 'next/router'
 import React, { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
 import Providers from '~/contexts'
+import { AdScriptProvider } from '~/contexts/AdScript'
 import i18n from '~/i18n.json'
 import { ErrorInfo } from '~/interfaces/custom/ErrorInfo'
 import pkg from '~/package.json'
@@ -255,9 +256,11 @@ export default class Coronabingo extends App {
             content="width=device-width,initial-scale=1,maximum-scale=5"
           />
         </Head>
-        <Providers>
-          <Component {...pageProps} />
-        </Providers>
+        <AdScriptProvider>
+          <Providers>
+            <Component {...pageProps} />
+          </Providers>
+        </AdScriptProvider>
         <ToastContainer />
       </Fragment>
     )

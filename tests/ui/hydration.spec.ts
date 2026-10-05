@@ -160,3 +160,42 @@ test('the same Auto ads insertion after hydration preserves the root', async ({
   ).toBe(true)
   await expect(page.locator('.google-auto-placed')).toHaveCount(1)
 })
+
+for (const locale of ['es', 'en']) {
+  test(`${locale}: the AdSense loader waits for hydration before executing`, async ({
+    page,
+  }) => {
+    const errors = collectHydrationErrors(page)
+    let requests = 0
+    await page.route(
+      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+      route => {
+        requests++
+        return route.fulfill({
+          contentType: 'application/javascript',
+          body: `(() => {
+          window.__hydAdStartedAfterMount = !!document.querySelector('#__next-route-announcer__');
+          ${insertAutoAd}
+          window.adsbygoogle = { push() {} };
+        })();`,
+        })
+      },
+    )
+    const response = await page.goto(locale === 'en' ? '/en/' : '/')
+    expect(await response?.text()).not.toContain(
+      'src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"',
+    )
+    await expect(page.locator('.google-auto-placed')).toHaveCount(1)
+    await afterHydration(page)
+    expect(await page.evaluate('window.__hydAdStartedAfterMount')).toBe(true)
+    await page.locator('#language').selectOption(locale === 'en' ? 'es' : 'en')
+    await afterHydration(page)
+    expect(requests).toBe(1)
+    expect(errors).toEqual([])
+    expect(
+      await page.evaluate(
+        "window.__hydOriginalHeading === document.querySelector('header h1')",
+      ),
+    ).toBe(true)
+  })
+}

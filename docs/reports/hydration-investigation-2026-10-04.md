@@ -6,11 +6,16 @@ before hydration. React encounters that unexpected element and rebuilds the root
 Replaying just that insertion reproduces the same errors in a local production
 build. Moving the insertion after hydration preserves the original DOM.
 
-The runtime correction already exists in [PR #218](https://github.com/durancristhian/coronabingo/pull/218):
-its shared AdSense loader uses `next/script` with `afterInteractive` and removes
-the early async script from `_document`. This investigation does not duplicate
-that implementation. PR #219 provides the causal evidence and isolated hydration
-coverage. Production acceptance remains pending the deployment of the correction.
+The runtime correction uses `next/script` with `afterInteractive` and removes
+AdSense's early async script from `_document`. The shared loader was first
+implemented in [PR #218](https://github.com/durancristhian/coronabingo/pull/218).
+Its exact implementation is now included in PR #219 so hydration can be released
+independently of PERF-09's pending ad-unit and geometry decisions. The manual
+slot, dimensions, eligibility and account settings are unchanged by HYD-01.
+
+Production acceptance is recorded in the local HYD-01 release record after the
+merged revision is deployed and verified. The earlier evidence below predates
+this correction and must not be read as the current deployment state.
 
 ## Original-origin capture
 
@@ -108,8 +113,10 @@ Two ordering tests replay the observed Auto ads insertion before and after
 hydration. The former intentionally expects recovery and checks replacement of
 the original heading. The latter expects no hydration errors, keeps both nodes,
 and exercises a locale transition. These tests establish the timing boundary;
-they do not assert that this branch itself changes the SDK loader. The isolated
-runner disables real advertising and uses disposable Firebase configuration.
+two additional ES/EN tests intercept the real SDK request and assert that the
+loader executes after mount, preserves the SSR heading, and loads once across a
+locale transition. They also reject an early SDK script in the server HTML. The
+isolated runner blocks real advertising and uses disposable Firebase configuration.
 
 ## Earlier negative results and limits
 
