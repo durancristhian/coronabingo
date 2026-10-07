@@ -1,6 +1,6 @@
 # Task workflow
 
-[AGENTS.md](../../AGENTS.md) defines authorization and data boundaries; [README.md](../../README.md) owns setup and test commands.
+[AGENTS.md](../../AGENTS.md) defines authorization and data boundaries; [development guide](../development.md) owns setup and test commands.
 
 ## Prepare
 
@@ -23,7 +23,7 @@
 
 - For an exploration of design or asset quality, prepare a local comparison with originals, alternatives, and relevant measurements. Apply the chosen alternative after approval. Remove temporary demos when their review purpose is complete.
 - Before starting a server, check port availability. Use `npm run dev -- --port <port>` and record checkout, branch, URL, and process ownership. Use that URL for checks and manual review.
-- Run installation, development, type generation, and builds sequentially within a checkout. Stop its development server before building; run `npm run start -- --port <port>` only after a successful build. The UI runner allocates its own ports and supports concurrent suites in separate worktrees. Use the URL and ownership record it prints; keep one suite per checkout. For compiled-build reuse and port conflicts, follow README.
+- Run installation, development, type generation, and builds sequentially within a checkout. Stop its development server before building; run `npm run start -- --port <port>` only after a successful build. The UI runner allocates its own ports and supports concurrent suites in separate worktrees. Use the URL and ownership record it prints; keep one suite per checkout. For compiled-build reuse and port conflicts, follow the development guide.
 
 ## Commit and review
 
@@ -52,6 +52,6 @@ Use this section when the user selects the principal-PR workflow:
 
 1. Fetch the target branch, check the PR's current base/HEAD, and resolve in-scope conflicts. Preserve concurrent work. Renew affected checks and reviews; absence of conflicts alone does not establish merge readiness. History rewriting requires its own authorization and protection against the expected remote SHA.
 2. Merge only after applicable checks, reviews, and repository rules pass. When Production release is authorized, verify the deployment corresponds to the integrated revision and exercise the affected flow within the authorized data scope. Report deployment and functional results separately.
-3. Update a clean local `main` with a fast-forward and verify it matches fetched `origin/main`. Preserve local changes or divergence and report anything preventing the update. Before first integrating the commit that untracks `research/`, follow the backup/restore procedure in README; Git may remove previously tracked local files during the update.
+3. Update a clean local `main` with a fast-forward and verify it matches fetched `origin/main`. Preserve local changes or divergence and report anything preventing the update. Before first integrating the commit that untracks `research/`, follow the backup/restore procedure in the development guide; Git may remove previously tracked local files during the update.
 4. When cleanup is requested, identify only this task's resources. Confirm integration using PR/merge evidence, including for squash merges, and ensure all changes are committed. Stop owned processes, preserve required evidence and local files, and remove worktrees with `git worktree remove <path>`. Delete only integrated or explicitly authorized task branches, local and remote. Never force removal to discard unfinished work.
 5. Report revision, checks, environment, cleanup, and gaps. Retain work awaiting review or integration.

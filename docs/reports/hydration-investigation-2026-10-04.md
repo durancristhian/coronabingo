@@ -96,7 +96,7 @@ those build observations are kept separate.
 
 ## Automated diagnostic
 
-Follow the [UI test setup](../../README.md#browser-regression-tests), then run:
+Follow the [UI test setup](../development.md#browser-regression-tests), then run:
 
 ```bash
 npm run ui-tests:production -- tests/ui/hydration.spec.ts
