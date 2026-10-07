@@ -70,7 +70,7 @@ export default function Ads() {
     // accepting that an unusually slow response may be discarded.
     const timeout = window.setTimeout(() => {
       if (!hasOutcome()) setDismissed(true)
-    }, 15_000)
+    }, 5_000)
     const checkStatus = () => {
       if (hasOutcome()) window.clearTimeout(timeout)
       if (node.getAttribute('data-ad-status') === 'unfilled') setDismissed(true)

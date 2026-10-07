@@ -324,9 +324,9 @@ test('silent SDK times out and a late load cannot reopen the gap on navigation',
   })
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.locator('#name').fill('Keep my input')
-  await page.clock.fastForward(10_000)
+  await page.clock.fastForward(3_000)
   await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-  await page.clock.fastForward(6_000)
+  await page.clock.fastForward(3_000)
   await expectCollapsed(page)
   release()
   await expectRequests(page, 0)
@@ -352,9 +352,9 @@ test('silent slot times out without retry or late reinsertion', async ({
   await page.goto('/')
   await expectRequests(page, 1)
   const retained = await page.locator(ad).elementHandle()
-  await page.clock.fastForward(10_000)
+  await page.clock.fastForward(3_000)
   await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-  await page.clock.fastForward(6_000)
+  await page.clock.fastForward(3_000)
   await expectCollapsed(page)
   await retained!.evaluate(node =>
     node.setAttribute('data-ad-status', 'filled'),
@@ -377,7 +377,7 @@ for (const outcome of ['filled', 'unfill-optimized']) {
     )
     await page.goto('/')
     await expectRequests(page, 1)
-    await page.clock.fastForward(10_000)
+    await page.clock.fastForward(3_000)
     await page
       .locator(ad)
       .evaluate(

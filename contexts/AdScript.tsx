@@ -22,7 +22,7 @@ export function AdScriptProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (status !== 'loading') return
-    const timeout = window.setTimeout(() => setStatus('unavailable'), 15_000)
+    const timeout = window.setTimeout(() => setStatus('unavailable'), 5_000)
     return () => window.clearTimeout(timeout)
   }, [status])
 
