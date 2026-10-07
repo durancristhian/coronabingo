@@ -14,13 +14,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Read for the task
 
-- Setup, commands, and troubleshooting: [README.md](README.md).
+- Setup, commands, and troubleshooting: [development guide](docs/development.md).
 - Implementation, review, PRs, or cleanup: [workflow](docs/agents/workflow.md).
 - Plans, tickets, or evidence: [issue tracker](docs/agents/issue-tracker.md). Use the primary checkout's local, ignored `research/` by absolute path; small tasks need only a short record. Keep skill configuration in versioned `docs/agents/`.
 - Product language or behavior: [CONTEXT.md](CONTEXT.md) and [domain guidance](docs/agents/domain.md).
 - UI, copy, or assets: [design context](.better-web-ui.md). Preserve approved terminology and interactions.
 
-Write all project documentation outside `research/` in English, including headings, instructions, and explanatory examples. This rule does not change the conversation language or the app's Spanish and English translations.
+Keep the root `README.md` concise, in Spanish, and written for public repository visitors. Write all other project documentation outside `research/` in English, including headings, instructions, and explanatory examples. This rule does not change the conversation language or the app's Spanish and English translations.
 
 ## Scope and authorization
 
@@ -41,7 +41,7 @@ Write all project documentation outside `research/` in English, including headin
 
 ## Validation and delivery
 
-- Code baseline: `npm run lint:check`, `npm run build`, and `git diff --check`. Use focused checks during development and the baseline before handoff. See README for checks triggered by locales, card data, analytics, and gameplay.
+- Code baseline: `npm run lint:check`, `npm run build`, and `git diff --check`. Use focused checks during development and the baseline before handoff. See the development guide for checks triggered by locales, card data, analytics, and gameplay.
 - Documentation-only changes require content, link, command, and diff checks. Commit hooks still apply; inspect their changes and repeat affected checks.
 - Exercise affected user journeys at the task's verified URL. Use separate host/player contexts for synchronization, both languages for shared UI/copy, and relevant mobile/desktop widths for layout. Prefer realistic flows and meaningful boundaries; test small logic at the appropriate level.
 - Reuse results only for unchanged code, environment, and scope. Distinguish local, CI, Preview, and Production evidence. A successful build or ready deployment does not prove gameplay or deployed Firebase rules.
