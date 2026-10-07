@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coronabingo.com.ar/sitemap.xml
