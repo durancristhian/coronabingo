@@ -43,6 +43,22 @@ async function contentTop(page: Page) {
     .evaluate(node => node.getBoundingClientRect().top)
 }
 
+async function expectCollapsed(page: Page) {
+  await expect(page.locator(reservation)).toHaveCount(0)
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const header = document.querySelector('.cb-header')!
+        const content = document.querySelector('.cb-layout-main')!
+        return (
+          content.getBoundingClientRect().top -
+          header.getBoundingClientRect().bottom
+        )
+      }),
+    )
+    .toBe(0)
+}
+
 async function expectRequests(page: Page, count: number) {
   await expect(page.locator('html')).toHaveAttribute(
     'data-ad-requests',
@@ -206,42 +222,43 @@ test('late SDK iframe size changes are checked even while the unit is hidden', a
 })
 
 for (const outcome of ['unfilled', 'error']) {
-  test(`${outcome}: retains the reservation without retrying or breaking controls`, async ({
-    page,
-  }) => {
-    const errors: string[] = []
-    page.on('pageerror', error => errors.push(error.message))
-    await page.setViewportSize({ width: 1280, height: 844 })
-    await page.route(scriptURL, route =>
-      route.fulfill({
-        contentType: 'application/javascript',
-        body: sdk(outcome),
-      }),
-    )
-    await page.goto('/')
-    await expectRequests(page, 1)
-    await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-    const top = await contentTop(page)
-    await page
-      .getByRole('textbox', { name: 'Nombre de la sala *', exact: true })
-      .fill('Ad failure')
-    await page.setViewportSize({ width: 390, height: 844 })
-    if (outcome === 'unfilled') {
-      await expect(page.locator(ad)).toHaveCSS('display', 'none')
-      await expect(page.locator(`${ad} iframe`)).toHaveAttribute('width', '728')
-      const documentSize = await page.evaluate(() => ({
-        viewport: document.documentElement.clientWidth,
-        content: document.documentElement.scrollWidth,
-      }))
-      expect(documentSize.content).toBe(documentSize.viewport)
-    }
-    await expectRequests(page, 1)
-    expect(await contentTop(page)).toBe(top)
-    await expect(
-      page.getByRole('button', { name: 'Crear sala', exact: true }),
-    ).toBeEnabled()
-    expect(errors).toEqual([])
-  })
+  for (const locale of ['es', 'en']) {
+    test(`${locale} ${outcome}: removes the whole gap and preserves form input`, async ({
+      page,
+    }) => {
+      const errors: string[] = []
+      page.on('pageerror', error => errors.push(error.message))
+      let release!: () => void
+      const gate = new Promise<void>(resolve => {
+        release = resolve
+      })
+      await page.setViewportSize({ width: 1280, height: 844 })
+      await page.route(scriptURL, async route => {
+        await gate
+        await route.fulfill({
+          contentType: 'application/javascript',
+          body: sdk(outcome),
+        })
+      })
+      await page.goto(locale === 'en' ? '/en' : '/', {
+        waitUntil: 'domcontentloaded',
+      })
+      await page.locator('#name').fill('Ad failure')
+      const top = await contentTop(page)
+      release()
+      await expectRequests(page, 1)
+      await expectCollapsed(page)
+      expect(top - (await contentTop(page))).toBe(106)
+      await expect(page.locator('#name')).toHaveValue('Ad failure')
+      await expect(page.locator('#name')).toBeFocused()
+      await expect(page.locator('#create-room')).toBeEnabled()
+      await page.setViewportSize({ width: 390, height: 844 })
+      await expectCollapsed(page)
+      await expectNoOverflow(page)
+      await expectRequests(page, 1)
+      expect(errors).toEqual([])
+    })
+  }
 }
 
 test('unfill-optimized content remains visible inside the reservation', async ({
@@ -259,27 +276,121 @@ test('unfill-optimized content remains visible inside the reservation', async ({
   await expectRequests(page, 1)
 })
 
-test('blocked SDK leaves only the reserved space and no queued request', async ({
+for (const width of [390, 1280]) {
+  test(`blocked SDK at ${width}px removes the entire gap and no request is queued`, async ({
+    page,
+  }, testInfo) => {
+    let loads = 0
+    await page.setViewportSize({ width, height: 844 })
+    await page.route(scriptURL, route => {
+      loads++
+      return route.abort('blockedbyclient')
+    })
+    await page.goto('/')
+    await expect.poll(() => loads).toBe(1)
+    await expectCollapsed(page)
+    await expect(page.locator(ad)).toHaveCount(0)
+    expect(await page.evaluate(() => 'adsbygoogle' in window)).toBe(false)
+    await testInfo.attach(`blocked-${width}-es`, {
+      body: await page.screenshot(),
+      contentType: 'image/png',
+    })
+    await page
+      .getByRole('combobox', { name: 'Idioma', exact: true })
+      .selectOption('en')
+    await expect(page).toHaveURL(/\/en$/)
+    await expectCollapsed(page)
+    await expect(page.locator(ad)).toHaveCount(0)
+    await expectNoOverflow(page)
+    await testInfo.attach(`blocked-${width}-en`, {
+      body: await page.screenshot(),
+      contentType: 'image/png',
+    })
+    expect(loads).toBe(1)
+  })
+}
+
+test('silent SDK times out and a late load cannot reopen the gap on navigation', async ({
   page,
 }) => {
-  let loads = 0
-  await page.route(scriptURL, route => {
-    loads++
-    return route.abort('failed')
+  await page.clock.install()
+  let release!: () => void
+  const gate = new Promise<void>(resolve => {
+    release = resolve
   })
-  await page.goto('/')
-  await expect.poll(() => loads).toBe(1)
+  await page.route(scriptURL, async route => {
+    await gate
+    await route.fulfill({ contentType: 'application/javascript', body: sdk() })
+  })
+  await page.goto('/', { waitUntil: 'domcontentloaded' })
+  await page.locator('#name').fill('Keep my input')
+  await page.clock.fastForward(10_000)
   await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-  await expect(page.locator(ad)).toHaveCount(0)
-  expect(await page.evaluate(() => 'adsbygoogle' in window)).toBe(false)
-  await page
-    .getByRole('combobox', { name: 'Idioma', exact: true })
-    .selectOption('en')
+  await page.clock.fastForward(6_000)
+  await expectCollapsed(page)
+  release()
+  await expectRequests(page, 0)
+  await page.clock.fastForward(20_000)
+  await expectCollapsed(page)
+  await expect(page.locator('#name')).toHaveValue('Keep my input')
+  await page.locator('#language').selectOption('en')
   await expect(page).toHaveURL(/\/en$/)
-  await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-  await expect(page.locator(ad)).toHaveCount(0)
-  expect(loads).toBe(1)
+  await expectCollapsed(page)
+  await expectRequests(page, 0)
 })
+
+test('silent slot times out without retry or late reinsertion', async ({
+  page,
+}) => {
+  await page.clock.install()
+  await page.route(scriptURL, route =>
+    route.fulfill({
+      contentType: 'application/javascript',
+      body: sdk('pending'),
+    }),
+  )
+  await page.goto('/')
+  await expectRequests(page, 1)
+  const retained = await page.locator(ad).elementHandle()
+  await page.clock.fastForward(10_000)
+  await expect(page.locator(reservation)).toHaveCSS('height', '90px')
+  await page.clock.fastForward(6_000)
+  await expectCollapsed(page)
+  await retained!.evaluate(node =>
+    node.setAttribute('data-ad-status', 'filled'),
+  )
+  await page.clock.fastForward(20_000)
+  await expectCollapsed(page)
+  await expectRequests(page, 1)
+})
+
+for (const outcome of ['filled', 'unfill-optimized']) {
+  test(`${outcome}: delayed slot response cancels the empty-slot deadline`, async ({
+    page,
+  }) => {
+    await page.clock.install()
+    await page.route(scriptURL, route =>
+      route.fulfill({
+        contentType: 'application/javascript',
+        body: sdk('pending'),
+      }),
+    )
+    await page.goto('/')
+    await expectRequests(page, 1)
+    await page.clock.fastForward(10_000)
+    await page
+      .locator(ad)
+      .evaluate(
+        (node, status) => node.setAttribute('data-ad-status', status),
+        outcome,
+      )
+    await expect(page.locator(ad)).toHaveAttribute('data-ad-status', outcome)
+    await page.clock.fastForward(20_000)
+    await expect(page.locator(`${ad} iframe`)).toBeVisible()
+    await expect(page.locator(reservation)).toHaveCSS('height', '90px')
+    await expectRequests(page, 1)
+  })
+}
 
 test('waits for positive width and stops observing after the request', async ({
   page,

@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react'
-import { useAdScriptReady } from '~/contexts/AdScript'
+import React, { useEffect, useRef, useState } from 'react'
+import { useAdScriptStatus } from '~/contexts/AdScript'
 import Container from './Container'
 
 export default function Ads() {
-  const ready = useAdScriptReady()
+  const scriptStatus = useAdScriptStatus()
+  const ready = scriptStatus === 'ready'
+  const [dismissed, setDismissed] = useState(false)
+  const collapsed = scriptStatus === 'unavailable' || dismissed
   const reservation = useRef<HTMLDivElement>(null)
   const slot = useRef<HTMLModElement>(null)
   const requested = useRef<HTMLModElement | null>(null)
@@ -11,7 +14,7 @@ export default function Ads() {
   useEffect(() => {
     const node = slot.current
     const space = reservation.current
-    if (!ready || !node || !space) return
+    if (!ready || collapsed || !node || !space) return
 
     const checkFit = () => {
       if (!node.isConnected) return
@@ -53,11 +56,40 @@ export default function Ads() {
       resize.disconnect()
       mutations.disconnect()
     }
-  }, [ready])
+  }, [ready, collapsed])
 
   useEffect(() => {
     const node = slot.current
-    if (!ready || !node || requested.current === node) return
+    if (!ready || collapsed || !node) return
+
+    const hasOutcome = () =>
+      ['filled', 'unfilled', 'unfill-optimized'].includes(
+        node.getAttribute('data-ad-status') || '',
+      )
+    // Loading silence is not proof of an ad blocker. Bound the empty wait,
+    // accepting that an unusually slow response may be discarded.
+    const timeout = window.setTimeout(() => {
+      if (!hasOutcome()) setDismissed(true)
+    }, 15_000)
+    const checkStatus = () => {
+      if (hasOutcome()) window.clearTimeout(timeout)
+      if (node.getAttribute('data-ad-status') === 'unfilled') setDismissed(true)
+    }
+    const observer = new MutationObserver(checkStatus)
+    observer.observe(node, {
+      attributes: true,
+      attributeFilter: ['data-ad-status'],
+    })
+    checkStatus()
+    return () => {
+      window.clearTimeout(timeout)
+      observer.disconnect()
+    }
+  }, [ready, collapsed])
+
+  useEffect(() => {
+    const node = slot.current
+    if (!ready || collapsed || !node || requested.current === node) return
 
     const request = (
       _entries: ResizeObserverEntry[],
@@ -84,6 +116,7 @@ export default function Ads() {
       } catch {
         // An advertising failure must not interrupt the game or retry a slot.
         console.warn('AdSense could not initialize the manual ad.')
+        setDismissed(true)
       }
     }
 
@@ -91,7 +124,9 @@ export default function Ads() {
     observer.observe(node)
     request([], observer)
     return () => observer.disconnect()
-  }, [ready])
+  }, [ready, collapsed])
+
+  if (collapsed) return null
 
   return (
     <div className="px-4">
