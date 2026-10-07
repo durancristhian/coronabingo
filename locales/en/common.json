@@ -32,5 +32,13 @@
   "unexisting-room": "This room doesn't exist.",
   "no-local-storage-support": "We can't save game data in this browser. Try another browser.",
   "close": "Close",
-  "language": "Language"
+  "language": "Language",
+  "seo-home-title": "Free online bingo with friends | Coronabingo",
+  "seo-home-description": "Play free online bingo with friends and family. Create a room, share bingo cards and use the online caller. No sign-up or downloads.",
+  "seo-room-title": "Bingo room | Coronabingo",
+  "seo-room-description": "Enter the room and choose your name to open your bingo cards.",
+  "seo-admin-title": "Room setup | Coronabingo",
+  "seo-admin-description": "Set up the players, cards and options for your bingo room.",
+  "seo-player-title": "Your bingo cards | Coronabingo",
+  "seo-player-description": "Open your bingo cards and follow the called numbers during the game."
 }

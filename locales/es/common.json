@@ -32,5 +32,13 @@
   "unexisting-room": "La sala no existe.",
   "no-local-storage-support": "No podemos guardar los datos del juego en este navegador. Prueba con otro.",
   "close": "Cerrar",
-  "language": "Idioma"
+  "language": "Idioma",
+  "seo-home-title": "Bingo online gratis con amigos | Coronabingo",
+  "seo-home-description": "Juega al bingo online gratis con amigos y familia. Crea una sala, comparte los cartones y usa el bolillero online. Sin registro ni descargas.",
+  "seo-room-title": "Sala de bingo | Coronabingo",
+  "seo-room-description": "Entra a la sala y elige tu nombre para abrir tus cartones de bingo.",
+  "seo-admin-title": "Preparar sala | Coronabingo",
+  "seo-admin-description": "Prepara los jugadores, los cartones y las opciones de la sala de bingo.",
+  "seo-player-title": "Tus cartones de bingo | Coronabingo",
+  "seo-player-description": "Abre tus cartones y sigue los números que salen durante la partida."
 }

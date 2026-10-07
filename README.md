@@ -121,6 +121,14 @@ npm run ui-tests:ci
 
 `ui-tests:ci` requires an unchanged build from `ui-tests:build` in the same checkout. The build marker retains the selected ports, demo project, and server identity because Next.js embeds them during compilation. The runner reserves those ports again before serving. If any are occupied, it fails without touching their owner; use `npm run ui-tests:production` to select new ports and rebuild. Test output and TypeScript caches use `.next-ui-tests/`, separate from normal builds. CI uploads available test evidence even on failure and bundle reports from `.next-ui-tests/analyze/`, retained for 14 days.
 
+## Search metadata
+
+[PageMetadata.tsx](components/PageMetadata.tsx) owns localized titles, descriptions, and social metadata. Only the Spanish homepage at `/` and the English homepage at `/en` are indexable. Their canonical and reciprocal `es`, `en`, and `x-default` links use the Production domain, independently of query parameters or fragments. Legacy `/es` links remain supported.
+
+Room, setup, player, and error pages return `noindex` in their initial HTML and omit homepage canonical/alternate links. Game metadata uses generic translated text, never room names or player identifiers. `noindex` controls search indexing, not access to room data.
+
+[robots.txt](public/robots.txt) allows crawling so search engines can read `noindex`; it advertises [sitemap.xml](public/sitemap.xml), which lists only the two canonical homepages. Keep this allowlist and the metadata rules consistent if adding public pages. SEO regression checks are in [seo.spec.ts](tests/ui/seo.spec.ts), run with `npm run ui-tests -- tests/ui/seo.spec.ts` or the production UI suite.
+
 ## Analytics and product references
 
 The manual ad reserves 90 px of height plus its existing 16 px bottom gap from server rendering onward. Its width follows the available space up to 728 px. A single loader in `contexts/AdScript.tsx` signals readiness; `components/Ads.tsx` requests once per connected node with positive width.
