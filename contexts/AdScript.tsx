@@ -1,18 +1,33 @@
 import Script from 'next/script'
-import React, { createContext, ReactNode, useContext, useState } from 'react'
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
-const AdScriptReady = createContext(false)
+type ScriptStatus = 'loading' | 'ready' | 'unavailable'
+const AdScriptStatus = createContext<ScriptStatus>('loading')
 
-export const useAdScriptReady = () => useContext(AdScriptReady)
+export const useAdScriptStatus = () => useContext(AdScriptStatus)
 
 export function AdScriptProvider({ children }: { children: ReactNode }) {
-  const [ready, setReady] = useState(false)
   // The isolated UI runner intercepts this script and blocks external traffic.
   const enabled =
     process.env.NODE_ENV === 'production' || process.env.UI_TESTS === '1'
+  const [status, setStatus] = useState<ScriptStatus>(
+    enabled ? 'loading' : 'unavailable',
+  )
+
+  useEffect(() => {
+    if (status !== 'loading') return
+    const timeout = window.setTimeout(() => setStatus('unavailable'), 5_000)
+    return () => window.clearTimeout(timeout)
+  }, [status])
 
   return (
-    <AdScriptReady.Provider value={ready}>
+    <AdScriptStatus.Provider value={status}>
       {children}
       {enabled && (
         <Script
@@ -20,10 +35,13 @@ export function AdScriptProvider({ children }: { children: ReactNode }) {
           data-ad-client="ca-pub-6231280485856921"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           strategy="afterInteractive"
-          onReady={() => setReady(true)}
-          onError={() => setReady(false)}
+          // A late SDK must not reopen manual slots after the loading deadline.
+          onReady={() =>
+            setStatus(current => (current === 'loading' ? 'ready' : current))
+          }
+          onError={() => setStatus('unavailable')}
         />
       )}
-    </AdScriptReady.Provider>
+    </AdScriptStatus.Provider>
   )
 }
