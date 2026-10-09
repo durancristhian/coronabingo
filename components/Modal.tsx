@@ -18,8 +18,8 @@ export default function Modal({ children, title, ...rest }: Props) {
 
   return (
     <ReactModal {...rest}>
-      <Box>
-        <div className="flex items-center justify-between mb-4 text-lg md:text-xl">
+      <Box className="cb-modal-panel">
+        <div className="cb-modal-header text-lg md:text-xl">
           <Heading type="h2">{title}</Heading>
           <button
             type="button"
@@ -37,7 +37,7 @@ export default function Modal({ children, title, ...rest }: Props) {
             <FiX aria-hidden="true" />
           </button>
         </div>
-        {children}
+        <div className="cb-modal-body">{children}</div>
       </Box>
     </ReactModal>
   )
