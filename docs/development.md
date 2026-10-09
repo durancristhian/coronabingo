@@ -32,6 +32,16 @@ npm run dev -- --port 3124
 
 Open [localhost:3124](http://localhost:3124). Routes live in `pages/`; translations are in `locales/es` and `locales/en`. Spanish is the default. Existing `/es/…` and `/en/…` links remain accepted; generated Spanish navigation URLs are unprefixed.
 
+### Installed references
+
+After setup, discover the relevant Pages Router guide in this checkout's installed Next.js package. For example:
+
+```bash
+rg --files node_modules/next/dist/docs | rg '/02-pages/.*(lazy-loading|webpack|custom-document)'
+```
+
+Read the returned path in the next operation; directory numbering and file extensions can change between versions. A missing package requires completing setup. For a skill reference, resolve its exact link relative to the installed `SKILL.md`; if the target is missing, inspect that skill's file listing before choosing a replacement.
+
 ## Checks and builds
 
 | Change | Required checks |
@@ -73,6 +83,8 @@ The Playwright suite runs Chromium against a dedicated Next.js server and dispos
 - Local analytics event capture within relevant journeys.
 
 See `tests/ui/*.spec.ts` for exact assertions and locale/viewport combinations. Coverage varies by journey; this is not an all-browser or all-device guarantee. Emulator rules are test rules, not verified copies of deployed Firebase rules. External playback, hosted analytics delivery, and hosted Firebase behavior need separate checks.
+
+Use [fixtures.ts](../tests/ui/fixtures.ts) for host/player contexts and network isolation, and [room-setup.ts](../tests/ui/room-setup.ts) for shared room preparation. The [navigation map](agents/navigation.md) also locates runtime configuration and test-service ownership.
 
 ### One-time setup
 

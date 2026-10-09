@@ -13,9 +13,18 @@ Issues, specs, plans, and investigations live in a local, ignored `research/` di
 ## Find and organize work
 
 - Read the supplied path or locate the ticket ID, then follow its linked plan/index. Compare it with current code, Git, and PRs before implementation or resumption.
+- If `research/README.md` exists, use it as a link directory to canonical initiative indexes, keeping ticket status in its owning record.
 - Reuse canonical documents, preserving paths, IDs, evidence, and history. Small tasks may use one short record directly under `research/`.
 - New ticket groups use `research/<feature>/README.md`, `tickets/<ID>-<slug>.md`, and an optional `spec.md`. Continue existing ID sequences; otherwise start at `01`.
 - Link new tickets from the index. Keep scope, exclusions, acceptance criteria, and evidence in the canonical record; link an existing specification instead of duplicating it.
+
+When no exact record is supplied, set `research_dir` to the absolute canonical directory resolved above and search Markdown filenames first. For example:
+
+```bash
+rg --files --hidden --no-ignore "$research_dir" -g '*.md' -g '!**/node_modules/**' -g '!**/.venv/**' | rg 'PERF-09|product-analytics'
+```
+
+Read the selected record's current state and linked outcome. Search bodies within the relevant initiative if filenames do not identify it; include evidence artifacts only when needed.
 
 ## State and evidence
 
@@ -25,6 +34,7 @@ Issues, specs, plans, and investigations live in a local, ignored `research/` di
 - Append dated decisions and rationale under `## Comments`. Distinguish defects, intentional behavior, accepted limitations, and deferred suggestions.
 - Put outcomes under `## Answer`: criteria met, commands/results, revision, environment, relevant URL, and gaps. Separate local, CI, Preview, and Production evidence.
 - Record blockers and next actions without resolving incomplete work. Preserve valid deliveries when resuming.
+- For long-lived initiatives, keep a dated `## Current state` near the top with the revision checked, implemented scope, dated deployment evidence, and remaining follow-ups. Link canonical answers and refresh this summary at material transitions. Keep the original narrative under `## History`; partial completion and historical approval do not authorize remaining work. Recheck the relevant code and PRs before acting on the summary.
 - Keep detailed evidence in the local record; never force-add it to Git. Summarize acceptance criteria and checks in PRs/handoffs so remote review does not depend on local files. Keep approved product decisions needed by future contributors in the appropriate versioned domain/design docs.
 
 ## Wayfinding operations

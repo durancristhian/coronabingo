@@ -15,6 +15,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Read for the task
 
 - Setup, commands, and troubleshooting: [development guide](docs/development.md).
+- Source or test navigation: [entry-point map and search recipes](docs/agents/navigation.md).
 - Implementation, review, PRs, or cleanup: [workflow](docs/agents/workflow.md).
 - Plans, tickets, or evidence: [issue tracker](docs/agents/issue-tracker.md). Use the primary checkout's local, ignored `research/` by absolute path; small tasks need only a short record. Keep skill configuration in versioned `docs/agents/`.
 - Product language or behavior: [CONTEXT.md](CONTEXT.md) and [domain guidance](docs/agents/domain.md).
