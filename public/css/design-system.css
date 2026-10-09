@@ -1,6 +1,9 @@
+/* Next's document uses <Html>, so PurgeCSS cannot discover the html tag. */
+/* purgecss start ignore */
 html {
   scrollbar-gutter: stable;
 }
+/* purgecss end ignore */
 
 .coronabingo-ui {
   --cb-canvas: #fff4de;

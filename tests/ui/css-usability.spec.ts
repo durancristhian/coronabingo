@@ -65,6 +65,8 @@ for (const language of ['es', 'en'] as const) {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto(language === 'es' ? '/' : '/en')
     await expect(page.locator('.cb-ad-reservation')).toHaveCount(0)
+    // Headless Chromium's overlay scrollbar can hide a missing compiled rule.
+    await expect(page.locator('html')).toHaveCSS('scrollbar-gutter', 'stable')
     for (const control of await page.locator('input, select').all()) {
       expect(
         await control.evaluate(element =>
