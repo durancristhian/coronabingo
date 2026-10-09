@@ -28,7 +28,7 @@ Both screenshots show the background picker scrolled to its final field. Previou
 
 ## Card focus
 
-The number 7 has focus in both screenshots. The new inset outline identifies it without changing its marked state or the card geometry. Number-board cells use the same outline, and the number board keeps ten columns.
+The number 7 is the focus target in both screenshots. The new violet frame and white edge identify it without changing its marked state or the card geometry. Number-board cells use the same frame, and the number board keeps ten columns. See the [focus follow-up](focus.md) for comparisons against the first PR version across card themes and a marked mobile cell, including capture methodology.
 
 | Before, 1280 × 900 | After, 1280 × 900 |
 | --- | --- |

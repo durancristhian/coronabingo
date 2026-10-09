@@ -36,6 +36,8 @@ html {
   --cb-surface-padding: clamp(1rem, 3vw, 1.5rem);
   /* 35.2px at 400px, 52px at 1200px, with rem bounds for text zoom. */
   --cb-text-intro: clamp(2.2rem, 1.675rem + 2.1vw, 3.25rem);
+  --cb-focus-ring: oklch(0.491 0.241 292.581);
+  --cb-focus-edge: oklch(1 0 none);
   background: var(--cb-canvas);
   color: var(--cb-ink);
   font-variant-numeric: tabular-nums;
@@ -424,8 +426,34 @@ html {
 
 .coronabingo-ui .cb-ticket-cell:focus-visible,
 .coronabingo-ui .cb-number-board-cell:focus-visible {
-  outline: 3px solid var(--cb-ink);
-  outline-offset: -4px;
+  position: relative;
+  outline: 2px solid var(--cb-focus-edge);
+  outline-offset: -2px;
+}
+
+/* Paint above the bean marker, inside the cell, without intercepting clicks. */
+.coronabingo-ui .cb-ticket-cell:focus-visible::after,
+.coronabingo-ui .cb-number-board-cell:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  outline: 2px solid var(--cb-focus-ring);
+  outline-offset: -2px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@media (forced-colors: active) {
+  .coronabingo-ui .cb-ticket-cell:focus-visible,
+  .coronabingo-ui .cb-number-board-cell:focus-visible {
+    outline-color: Highlight;
+    outline-offset: -4px;
+  }
+
+  .coronabingo-ui .cb-ticket-cell:focus-visible::after,
+  .coronabingo-ui .cb-number-board-cell:focus-visible::after {
+    display: none;
+  }
 }
 
 .coronabingo-ui .cb-number-board {

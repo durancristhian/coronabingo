@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 import { test, expect } from './fixtures'
+import { BACKGROUND_CELL_VALUES } from '../../utils/constants'
 
 const copy = {
   es: {
@@ -54,6 +55,40 @@ async function expectVisibleFocus(cell: Locator) {
   expect(focus.style).toBe('solid')
   expect(focus.width).toBeGreaterThanOrEqual(2)
   expect(focus.color).not.toBe('rgba(0, 0, 0, 0)')
+
+  const frame = await cell.evaluate(element => {
+    const outer = getComputedStyle(element)
+    const inner = getComputedStyle(element, '::after')
+    const context = document.createElement('canvas').getContext('2d')!
+    const luminance = (color: string) => {
+      context.fillStyle = color
+      context.fillRect(0, 0, 1, 1)
+      const rgb = [...context.getImageData(0, 0, 1, 1).data].slice(0, 3)
+      const linear = rgb.map(value => {
+        const s = value / 255
+        return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4
+      })
+      return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722
+    }
+    const colors = [outer.outlineColor, inner.outlineColor].map(luminance)
+    return {
+      forced: matchMedia('(forced-colors: active)').matches,
+      display: inner.display,
+      style: inner.outlineStyle,
+      color: inner.outlineColor,
+      border: outer.borderColor,
+      pointerEvents: inner.pointerEvents,
+      contrast: (Math.max(...colors) + 0.05) / (Math.min(...colors) + 0.05),
+    }
+  })
+  if (frame.forced) {
+    expect(frame.display).toBe('none')
+  } else {
+    expect(frame.style).toBe('solid')
+    expect(frame.color).not.toBe(frame.border)
+    expect(frame.contrast).toBeGreaterThanOrEqual(7)
+    expect(frame.pointerEvents).toBe('none')
+  }
 }
 
 for (const language of ['es', 'en'] as const) {
@@ -165,6 +200,40 @@ for (const language of ['es', 'en'] as const) {
     await page.emulateMedia({ forcedColors: 'active' })
     await expectVisibleFocus(focused)
     await page.emulateMedia({ forcedColors: 'none' })
+
+    // Themes decorate empty cells. Exercise the actual saved preference and
+    // keyboard marking beside every catalog theme and a custom image URL.
+    for (const [index, background] of [
+      ...BACKGROUND_CELL_VALUES,
+      { type: 'url', value: '/background-cells/kun-aguero.jpg' },
+    ].entries()) {
+      await page.setViewportSize({ width: index % 2 ? 320 : 1280, height: 900 })
+      await page.evaluate(({ type, value }) => {
+        const playerId = location.pathname.split('/').pop()!
+        localStorage.setItem(
+          'backgroundCell',
+          JSON.stringify({ [playerId]: { type, value } }),
+        )
+      }, background)
+      await page.reload()
+      await expect(card).toBeVisible()
+      if (background.type !== 'color') {
+        await expect(
+          card.locator('.cb-ticket-cell--empty').first(),
+        ).not.toHaveCSS('background-image', 'none')
+      }
+      await cells.first().focus()
+      await page.keyboard.press('Tab')
+      await expectVisibleFocus(focused)
+      const wasMarked = await focused.getAttribute('aria-pressed')
+      await focused.press('Enter')
+      await expect(focused).toHaveAttribute(
+        'aria-pressed',
+        wasMarked === 'true' ? 'false' : 'true',
+      )
+      await expectVisibleFocus(focused)
+      await expectNoOverflow(page)
+    }
 
     for (const viewport of [
       { width: 390, height: 844 },
