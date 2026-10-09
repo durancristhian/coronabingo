@@ -1,11 +1,10 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import { FiRotateCcw, FiSettings, FiSmile, FiVolume2 } from 'react-icons/fi'
-import { Tabs } from 'react-tabs'
+import { TabList, Tabs } from 'react-tabs'
 import BackgroundCells from '~/components/BackgroundCells'
 import Celebrations from '~/components/Celebrations'
 import OptionTab from '~/components/OptionTab'
-import OptionTabList from '~/components/OptionTabList'
 import OptionTabPanel from '~/components/OptionTabPanel'
 import Pato from '~/components/Pato'
 import Restart from '~/components/Restart'
@@ -28,40 +27,42 @@ export default function Options({ isAdmin, room }: Props) {
 
   return (
     <Tabs selectedIndex={currentTabIndex} onSelect={setCurrentTabIndex}>
-      <OptionTabList>
-        <OptionTab
-          buttonId="configure-empty-cells"
-          label={t('playerId:empty-cells.title')}
-          Icon={FiSettings}
-          iconBgColor="bg-yellow-300"
-          iconColor="text-yellow-800"
-        ></OptionTab>
-        {isAdmin && (
-          <Fragment>
-            <OptionTab
-              buttonId="celebrations"
-              label={t('playerId:celebrations')}
-              Icon={FiSmile}
-              iconBgColor="bg-green-300"
-              iconColor="text-green-800"
-            ></OptionTab>
-            <OptionTab
-              buttonId="sounds"
-              label={t('playerId:sounds')}
-              Icon={FiVolume2}
-              iconBgColor="bg-green-300"
-              iconColor="text-green-800"
-            ></OptionTab>
-            <OptionTab
-              buttonId="reboot-game"
-              label={t('playerId:replay.reboot-game')}
-              Icon={FiRotateCcw}
-              iconBgColor="bg-red-300"
-              iconColor="text-red-800"
-            ></OptionTab>
-          </Fragment>
-        )}
-      </OptionTabList>
+      <TabList>
+        <div className="cb-option-tabs flex justify-center items-center">
+          <OptionTab
+            buttonId="configure-empty-cells"
+            label={t('playerId:empty-cells.title')}
+            Icon={FiSettings}
+            iconBgColor="bg-yellow-300"
+            iconColor="text-yellow-800"
+          ></OptionTab>
+          {isAdmin && (
+            <Fragment>
+              <OptionTab
+                buttonId="celebrations"
+                label={t('playerId:celebrations')}
+                Icon={FiSmile}
+                iconBgColor="bg-green-300"
+                iconColor="text-green-800"
+              ></OptionTab>
+              <OptionTab
+                buttonId="sounds"
+                label={t('playerId:sounds')}
+                Icon={FiVolume2}
+                iconBgColor="bg-green-300"
+                iconColor="text-green-800"
+              ></OptionTab>
+              <OptionTab
+                buttonId="reboot-game"
+                label={t('playerId:replay.reboot-game')}
+                Icon={FiRotateCcw}
+                iconBgColor="bg-red-300"
+                iconColor="text-red-800"
+              ></OptionTab>
+            </Fragment>
+          )}
+        </div>
+      </TabList>
       <OptionTabPanel
         contentLabel={t('playerId:empty-cells.title')}
         id="modal-background-cells"

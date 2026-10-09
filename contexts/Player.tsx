@@ -6,7 +6,6 @@ import { Player, PlayerBase } from '~/interfaces/models/Player'
 
 const PlayerContext = createContext<PlayerContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
-  updatePlayer: () => void 0,
 })
 
 interface Props {
@@ -22,19 +21,6 @@ const PlayerContextProvider = ({ children }: Props) => {
   const [state, setState] = useState<RemoteData<Error, Player | null>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
-
-  const updatePlayer = (partialPlayer: Partial<PlayerBase>) => {
-    setState(prevState => {
-      if (prevState.type !== REMOTE_DATA.SUCCESS || !prevState.data) {
-        return prevState
-      }
-
-      return {
-        type: REMOTE_DATA.SUCCESS,
-        data: Object.assign({}, prevState.data, partialPlayer),
-      }
-    })
-  }
 
   useEffect(() => {
     if (!roomId || !playerId) return
@@ -91,7 +77,7 @@ const PlayerContextProvider = ({ children }: Props) => {
   }, [roomId, playerId])
 
   return (
-    <PlayerContext.Provider value={{ state, updatePlayer }}>
+    <PlayerContext.Provider value={{ state }}>
       {children}
     </PlayerContext.Provider>
   )

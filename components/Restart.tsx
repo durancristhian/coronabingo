@@ -3,11 +3,11 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useRef, useState } from 'react'
 import { FiRotateCcw } from 'react-icons/fi'
 import Button from '~/components/Button'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import useRoomCode from '~/hooks/useRoomCode'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 import { getRoomRestartedEventParams } from '~/utils/analyticsEvents'
+import { logEvent as log } from '~/utils/gtag'
 
 interface Props {
   room: Room
@@ -15,7 +15,6 @@ interface Props {
 
 export default function Restart({ room }: Props) {
   const { lang, t } = useTranslation()
-  const log = useAnalytics()
   const { login } = useRoomCode()
   const replayInProgress = useRef(false)
   const [inProgress, setInProgress] = useState(false)

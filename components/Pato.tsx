@@ -4,7 +4,6 @@ import React, { ReactNode, useRef, useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import {
   AnalyticsSoundCatalog,
   AnalyticsSoundKey,
@@ -16,6 +15,7 @@ import {
   markFirstAnalyticsUseInPlay,
 } from '~/utils/analyticsEvents'
 import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
+import { logEvent as log } from '~/utils/gtag'
 
 const emojis: { [key: string]: ReactNode } = {
   ar: <Emoji name="flag-ar" />,
@@ -30,7 +30,6 @@ interface Props {
 
 export default function Pato({ extraSounds, room }: Props) {
   const { lang, t } = useTranslation()
-  const log = useAnalytics()
   const updateInProgress = useRef(false)
   const [inProgress, setInProgress] = useState(false)
 

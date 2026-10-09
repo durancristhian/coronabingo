@@ -43,7 +43,7 @@ export default function Players({
 
     setPlayers(playersCopy)
 
-    playerApi.removePlayer(player)
+    player.ref.delete()
   }
 
   const onSubmit = (event: FormEvent) => {

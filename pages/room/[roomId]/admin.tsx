@@ -15,7 +15,6 @@ import Message from '~/components/Message'
 import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
@@ -29,10 +28,10 @@ import { createBatch } from '~/utils/firebase'
 import { getBaseUrl } from '~/utils/getBaseUrl'
 import { isRoomOld } from '~/utils/isRoomOld'
 import { scrollToTop } from '~/utils/scrollToTop'
+import { logEvent as log } from '~/utils/gtag'
 
 export default function RoomAdmin() {
   const { lang, t } = useTranslation()
-  const log = useAnalytics()
   const {
     error: playersError,
     loading: playersLoading,

@@ -5,19 +5,18 @@ import { FiCheck } from 'react-icons/fi'
 import { COLORS } from '~/components/EmptyCell'
 import InputText from '~/components/InputText'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import { Cell } from '~/interfaces/contexts/BackgroundCell'
 import { getBackgroundSelectedEventParams } from '~/utils/analyticsEvents'
 import { getBackgroundAnalyticsValue } from '~/utils/backgroundAnalytics'
 import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
+import { logEvent as log } from '~/utils/gtag'
 
 export default function BackgroundCells() {
   const { backgroundCell, setBackgroundCell } = useContext(
     BackgroundCellContext,
   )
   const { lang, t } = useTranslation()
-  const log = useAnalytics()
   const customUrlAtFocus = useRef('')
   const customUrlWasSaved = useRef(false)
 

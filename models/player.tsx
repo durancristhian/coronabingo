@@ -42,14 +42,9 @@ const excludeExtraFields = (player: Player): PlayerBase => {
   }, {} as PlayerBase)
 }
 
-const removePlayer = async (player: Player) => {
-  return await player.ref.delete()
-}
-
 const playerApi = {
   createPlayer,
   excludeExtraFields,
-  removePlayer,
 }
 
 export default playerApi
