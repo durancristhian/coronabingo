@@ -95,8 +95,8 @@ export default function RoomId() {
                 player.id === room.adminId && 'cb-player-row--host',
               ])}
             >
-              <div className="flex flex-auto flex-wrap items-center">
-                <p>{player.name}</p>
+              <div className="cb-player-details flex flex-auto flex-wrap items-center">
+                <p className="cb-player-name">{player.name}</p>
                 {player.id === room.adminId && (
                   <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                     {t('roomId:is-admin')}
@@ -108,7 +108,7 @@ export default function RoomId() {
                   })}
                 </p>
               </div>
-              <div className="ml-4">
+              <div className="cb-player-actions">
                 <Button
                   aria-label={t('roomId:play')}
                   color="green"

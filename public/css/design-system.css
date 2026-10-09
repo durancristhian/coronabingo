@@ -1,3 +1,10 @@
+/* Next's document uses <Html>, so PurgeCSS cannot discover the html tag. */
+/* purgecss start ignore */
+html {
+  scrollbar-gutter: stable;
+}
+/* purgecss end ignore */
+
 .coronabingo-ui {
   --cb-canvas: #fff4de;
   --cb-shell: #fdfbf7;
@@ -26,6 +33,11 @@
   --cb-radius-surface: 1.125rem;
   --cb-shadow-control: 3px 3px 0 var(--cb-line);
   --cb-shadow-surface: 5px 5px 0 var(--cb-line);
+  --cb-surface-padding: clamp(1rem, 3vw, 1.5rem);
+  /* 35.2px at 400px, 52px at 1200px, with rem bounds for text zoom. */
+  --cb-text-intro: clamp(2.2rem, 1.675rem + 2.1vw, 3.25rem);
+  --cb-focus-ring: oklch(0.491 0.241 292.581);
+  --cb-focus-edge: oklch(1 0 none);
   background: var(--cb-canvas);
   color: var(--cb-ink);
   font-variant-numeric: tabular-nums;
@@ -104,6 +116,8 @@
   font-family: var(--cb-font-heading);
   font-weight: 700;
   letter-spacing: -0.015em;
+  min-inline-size: 0;
+  overflow-wrap: break-word;
 }
 
 /* purgecss start ignore */
@@ -118,7 +132,7 @@
   border-radius: var(--cb-radius-surface);
   box-shadow: var(--cb-shadow-surface);
   color: var(--cb-ink);
-  padding: clamp(1rem, 3vw, 1.5rem);
+  padding: var(--cb-surface-padding);
 }
 
 .coronabingo-ui .cb-button {
@@ -186,6 +200,8 @@
   border-radius: var(--cb-radius-control);
   box-shadow: none;
   color: var(--cb-ink);
+  font-size: max(16px, 1rem);
+  min-inline-size: 0;
 }
 
 .coronabingo-ui .cb-input:hover,
@@ -306,11 +322,12 @@
 
 .coronabingo-ui .cb-home-intro {
   font-family: var(--cb-font-heading);
-  font-size: clamp(1.8rem, 5vw, 3.25rem);
+  font-size: var(--cb-text-intro);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.05;
   max-width: 18ch;
+  text-wrap: balance;
 }
 
 .coronabingo-ui .cb-home-note {
@@ -340,6 +357,32 @@
 
 .coronabingo-ui .cb-list-row:nth-child(even) {
   background: var(--cb-yellow-soft);
+}
+
+.coronabingo-ui .cb-player-field,
+.coronabingo-ui .cb-player-details {
+  min-inline-size: 0;
+}
+
+.coronabingo-ui .cb-player-details {
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
+.coronabingo-ui .cb-player-name {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-wrap: break-word;
+}
+
+.coronabingo-ui .cb-player-details .cb-badge {
+  margin-inline-start: 0;
+  max-inline-size: 100%;
+}
+
+.coronabingo-ui .cb-player-actions {
+  flex: none;
+  margin-inline-start: 1rem;
 }
 
 .coronabingo-ui .cb-list-row.bg-green-100 {
@@ -379,6 +422,38 @@
 
 .coronabingo-ui .cb-ticket-cell--selected {
   background: var(--cb-marked);
+}
+
+.coronabingo-ui .cb-ticket-cell:focus-visible,
+.coronabingo-ui .cb-number-board-cell:focus-visible {
+  position: relative;
+  outline: 2px solid var(--cb-focus-edge);
+  outline-offset: -2px;
+}
+
+/* Paint above the bean marker, inside the cell, without intercepting clicks. */
+.coronabingo-ui .cb-ticket-cell:focus-visible::after,
+.coronabingo-ui .cb-number-board-cell:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  outline: 2px solid var(--cb-focus-ring);
+  outline-offset: -2px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@media (forced-colors: active) {
+  .coronabingo-ui .cb-ticket-cell:focus-visible,
+  .coronabingo-ui .cb-number-board-cell:focus-visible {
+    outline-color: Highlight;
+    outline-offset: -4px;
+  }
+
+  .coronabingo-ui .cb-ticket-cell:focus-visible::after,
+  .coronabingo-ui .cb-number-board-cell:focus-visible::after {
+    display: none;
+  }
 }
 
 .coronabingo-ui .cb-number-board {
@@ -485,12 +560,34 @@
 
 .coronabingo-ui .modal {
   border-radius: var(--cb-radius-surface);
+  max-block-size: none;
   overflow: visible;
 }
 
-.coronabingo-ui .modal .cb-box {
-  max-height: 80vh;
+.coronabingo-ui .cb-modal-panel {
+  display: flex;
+  flex-direction: column;
+  max-block-size: min(80vh, calc(100vh - 2rem));
+  max-block-size: min(80dvh, calc(100dvh - 2rem));
+  padding: 0;
+}
+
+.coronabingo-ui .cb-modal-header {
+  align-items: center;
+  display: flex;
+  flex: none;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: var(--cb-surface-padding);
+}
+
+.coronabingo-ui .cb-modal-body {
+  min-block-size: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--cb-surface-padding);
+  padding-block-end: var(--cb-surface-padding);
+  scrollbar-gutter: stable;
 }
 
 .coronabingo-ui .overlay {
@@ -504,10 +601,10 @@
   border-radius: 999px;
   color: var(--cb-ink);
   display: flex;
-  flex: 0 0 2.5rem;
-  height: 2.5rem;
+  flex: 0 0 2.75rem;
+  block-size: 2.75rem;
   justify-content: center;
-  min-width: 2.5rem;
+  min-inline-size: 2.75rem;
 }
 
 .coronabingo-ui .cb-spinner {
@@ -571,10 +668,6 @@
 
   .coronabingo-ui .cb-box {
     box-shadow: 3px 3px 0 var(--cb-line);
-  }
-
-  .coronabingo-ui .cb-home-intro {
-    font-size: 2.2rem;
   }
 
   .coronabingo-ui .cb-badge {

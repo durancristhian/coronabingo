@@ -87,7 +87,7 @@ export default function Players({
       <form onSubmit={onSubmit}>
         <fieldset disabled={players.length === MAX_PLAYERS || isFormDisabled}>
           <div className="flex items-end">
-            <div className="flex-auto">
+            <div className="cb-player-field flex-auto">
               <InputText
                 id="name"
                 label={t('admin:players.field-name')}
@@ -123,15 +123,15 @@ export default function Players({
                 player.id === room.adminId && 'cb-player-row--host',
               ])}
             >
-              <div className="flex flex-auto items-center">
-                <p>{player.name}</p>
+              <div className="cb-player-details flex flex-auto items-center">
+                <p className="cb-player-name">{player.name}</p>
                 {player.id === room.adminId && (
                   <span className="cb-badge border-2 font-medium ml-4 px-2 py-1 text-xs">
                     {t('admin:players.admin')}
                   </span>
                 )}
               </div>
-              <div className="ml-4">
+              <div className="cb-player-actions">
                 <Button
                   aria-label={t('admin:players.remove-player')}
                   color="red"

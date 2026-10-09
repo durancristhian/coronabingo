@@ -79,7 +79,8 @@ async function expectNoOverflow(page: Page) {
           document.documentElement.clientWidth,
       ),
     )
-    .toBe(0)
+    // A stable scrollbar gutter may make scrollWidth smaller than clientWidth.
+    .toBeLessThanOrEqual(0)
 }
 
 for (const locale of ['es', 'en']) {
