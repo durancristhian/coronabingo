@@ -4,15 +4,14 @@ import React, { ReactNode } from 'react'
 import Container from '~/components/Container'
 import Heading from '~/components/Heading'
 import Select from '~/components/Select'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import i18n from '~/i18n.json'
 import { getLanguageChangedEventParams } from '~/utils/analyticsEvents'
+import { logEvent as log } from '~/utils/gtag'
 
 const allLanguages = i18n.locales
 
 export default function Header({ selectIcon }: { selectIcon?: ReactNode }) {
   const { t, lang } = useTranslation()
-  const log = useAnalytics()
   const router = useRouter()
 
   const languages = allLanguages.map(l => ({

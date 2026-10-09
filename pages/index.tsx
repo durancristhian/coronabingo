@@ -9,8 +9,8 @@ import CreateRoom from '~/components/CreateRoom'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Modal from '~/components/Modal'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import { getTutorialEventParams } from '~/utils/analyticsEvents'
+import { logEvent as log } from '~/utils/gtag'
 
 interface TutorialLoadingProps {
   error?: Error | null
@@ -48,7 +48,6 @@ const TutorialVideo = dynamic(() => import('~/components/TutorialVideo'), {
 
 export default function Index() {
   const { t, lang } = useTranslation()
-  const log = useAnalytics()
   const [showModal, setShowModal] = useState(false)
   const openTutorial = () => {
     log('tutorial_opened', getTutorialEventParams(lang))

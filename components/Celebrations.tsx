@@ -4,13 +4,13 @@ import React, { Fragment, useRef, useState } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { confettiTypes } from '~/components/Confetti'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 import {
   getCelebrationUsedEventParams,
   markFirstAnalyticsUseInPlay,
 } from '~/utils/analyticsEvents'
+import { logEvent as log } from '~/utils/gtag'
 
 interface Props {
   room: Room
@@ -18,7 +18,6 @@ interface Props {
 
 export default function Celebrations({ room }: Props) {
   const { lang, t } = useTranslation()
-  const log = useAnalytics()
   const updateInProgress = useRef(false)
   const [inProgress, setInProgress] = useState(false)
 
