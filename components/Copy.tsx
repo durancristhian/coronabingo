@@ -7,7 +7,6 @@ import Button from '~/components/Button'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
 import useToast from '~/hooks/useToast'
-import { sendWhatsApp } from '~/utils/sendWhatsapp'
 
 interface Props {
   content: string
@@ -21,7 +20,7 @@ export default function Share({ content }: Props) {
   const shareOnWhatsApp = () => {
     setShowModal(false)
 
-    sendWhatsApp(content)
+    window.open(`https://api.whatsapp.com/send?text=${content}`)
   }
 
   const shareOnTelegram = () => {

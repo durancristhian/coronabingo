@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import { BackgrounCell, Cell } from '~/interfaces/contexts/BackgroundCell'
 import {
   getPlayerCardOpenedEventParams,
@@ -8,6 +7,7 @@ import {
 } from '~/utils/analyticsEvents'
 import { getBackgroundAnalyticsValue } from '~/utils/backgroundAnalytics'
 import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
+import { logEvent as log } from '~/utils/gtag'
 
 const defaultContextValue = {
   type: BACKGROUND_CELL_VALUES[0].type,
@@ -58,7 +58,6 @@ const BackgroundCellContextProvider = ({
   trackCardOpened,
 }: Props) => {
   const { lang } = useTranslation()
-  const log = useAnalytics()
   const [backgroundCell, setBackgroundCellState] = useState<Cell>(
     defaultContextValue,
   )

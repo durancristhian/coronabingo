@@ -1,7 +1,6 @@
 import { RemoteData } from '~/interfaces/custom/RemoteData'
-import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { Player } from '~/interfaces/models/Player'
 
 export interface PlayerContextData {
   state: RemoteData<Error, Player | null>
-  updatePlayer: (data: Partial<PlayerBase>) => void
 }

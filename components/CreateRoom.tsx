@@ -5,10 +5,10 @@ import { FiPlus } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import useToast from '~/hooks/useToast'
 import { getRoomCreatedEventParams } from '~/utils/analyticsEvents'
 import { generateRoomCode } from '~/utils/generateRoomCode'
+import { logEvent as log } from '~/utils/gtag'
 
 type RoomApi = typeof import('~/models/room')['default']
 let roomApiPromise: Promise<RoomApi> | null = null
@@ -26,7 +26,6 @@ function loadRoomApi() {
 }
 
 export default function CreateRoom() {
-  const log = useAnalytics()
   const { lang, t } = useTranslation()
   const { createToast, dismissToast, updateToast } = useToast()
   const [name, setName] = useState('')

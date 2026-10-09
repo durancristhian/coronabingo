@@ -1,16 +1,15 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { useRef, useState } from 'react'
 import Anchor from '~/components/Anchor'
-import { useAnalytics } from '~/hooks/useAnalytics'
 import { getTutorialEventParams } from '~/utils/analyticsEvents'
 import { tutorials } from '~/utils/tutorials'
 import { getWatchedFraction } from '~/utils/videoProgress'
+import { logEvent as log } from '~/utils/gtag'
 
 export default function TutorialVideo() {
   const { t, lang } = useTranslation()
   const language = lang === 'en' ? 'en' : 'es'
   const tutorial = tutorials[language]
-  const log = useAnalytics()
   const progress = useRef({ began: false, engaged: false, completed: false })
   const [failed, setFailed] = useState(false)
   const params = getTutorialEventParams(language)

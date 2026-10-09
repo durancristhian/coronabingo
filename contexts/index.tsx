@@ -1,12 +1,10 @@
 import React, { cloneElement } from 'react'
-import { AnalyticsContextProvider } from '~/contexts/Analytics'
 import { FlagsContextProvider } from '~/contexts/Flags'
 import { PlayerContextProvider } from '~/contexts/Player'
 import { PlayersContextProvider } from '~/contexts/Players'
 import { RoomContextProvider } from '~/contexts/Room'
 
 const providers = [
-  AnalyticsContextProvider,
   FlagsContextProvider,
   PlayerContextProvider,
   PlayersContextProvider,
