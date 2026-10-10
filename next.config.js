@@ -49,6 +49,16 @@ const nextConfig = {
         ]
       : []),
     {
+      // Content-versioned asset: publish changed bytes under a new filename.
+      source: '/background-cells/coronavirus.28e4692f.webp',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
       source: '/tutorials/:asset',
       headers: [
         {
