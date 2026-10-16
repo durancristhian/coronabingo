@@ -168,10 +168,11 @@ for (const locale of ['es', 'en']) {
     const errors = collectHydrationErrors(page)
     let requests = 0
     await page.route(
-      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231280485856921',
       route => {
         requests++
         return route.fulfill({
+          headers: { 'Access-Control-Allow-Origin': '*' },
           contentType: 'application/javascript',
           body: `(() => {
           window.__hydAdStartedAfterMount = !!document.querySelector('#__next-route-announcer__');
@@ -183,7 +184,7 @@ for (const locale of ['es', 'en']) {
     )
     const response = await page.goto(locale === 'en' ? '/en/' : '/')
     expect(await response?.text()).not.toContain(
-      'src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"',
+      'src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
     )
     await expect(page.locator('.google-auto-placed')).toHaveCount(1)
     await afterHydration(page)
