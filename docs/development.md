@@ -75,8 +75,8 @@ changed provider versions and other failures remain reportable. This changes
 reporting only; it does not repair Google's serializer or establish user impact.
 
 Run `npm run validate-sentry` for signature/near-miss and SDK normalization checks.
-Run `npm run validate-sentry:browser` after installing Chromium for an isolated,
-minified browser proof: closing a fixture page generates a native visibility
+Run `npm run validate-sentry:browser` after `npx playwright install chromium webkit` for an isolated,
+minified Chromium/WebKit proof: leaving a fixture page generates a native visibility
 change; the real SDK captures the synthetic provider error. All requests are
 intercepted, and a memory transport verifies the known error is omitted while
 missing-marker, different-message and application-frame errors remain visible.

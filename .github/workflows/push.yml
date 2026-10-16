@@ -51,8 +51,8 @@ jobs:
       - name: Check Firestore listener lifecycle
         run: node scripts/validate-firestore-listeners.cjs
 
-      - name: Install Chromium and system dependencies
-        run: npx playwright install --with-deps chromium
+      - name: Install browser engines and system dependencies
+        run: npx playwright install --with-deps chromium webkit
 
       - run: npm run validate-sentry:browser
 

@@ -5,9 +5,9 @@ const os = require('node:os')
 const path = require('node:path')
 const webpack = require('webpack')
 const ts = require('typescript')
-const { chromium } = require('@playwright/test')
+const { chromium, webkit } = require('@playwright/test')
 
-async function main() {
+async function main(engine) {
   const temporary = await fs.mkdtemp(
     path.join(os.tmpdir(), 'coronabingo-sentry-'),
   )
@@ -32,7 +32,7 @@ async function main() {
       import * as Sentry from '@sentry/browser';
       import { createBeforeSend } from './filter';
       const filter = createBeforeSend();
-      window.applicationWrapper = callback => callback();
+      window.applicationWrapper = callback => { const result = callback(); window.applicationFrameReturned = true; return result; };
       class Transport {
         sendEvent(event) { console.log(JSON.stringify({ sent: event })); return Promise.resolve({ status: 'success' }); }
         close() { return Promise.resolve(true); }
@@ -68,7 +68,7 @@ async function main() {
     const google =
       'https://pagead2.googlesyndication.com/pagead/js/r20261015/r20190131/rum_fy2021.js'
     const observations = []
-    browser = await chromium.launch()
+    browser = await engine.launch()
     const context = await browser.newContext({ serviceWorkers: 'block' })
     await context.route('**/*', route => {
       const url = route.request().url()
@@ -110,13 +110,26 @@ async function main() {
         } catch {}
       })
       await page.goto(`https://example.invalid/?variant=${variant}`)
+      if (engine.name() === 'webkit')
+        await page.goto('https://example.invalid/away')
       await page.close()
       const filtered = observations.filter(item => 'filtered' in item)
       assert.equal(filtered.length, 1, `Expected callback capture: ${variant}`)
+      if (variant === 'application')
+        assert.ok(
+          filtered[0].event.exception.values[0].stacktrace.frames
+            .slice(1)
+            .some(
+              frame => frame.filename === 'https://example.invalid/bundle.js',
+            ),
+          'Application control must keep its frame; tail-call optimization can remove a forwarding-only callback',
+        )
       assert.equal(
         filtered[0].filtered,
         variant === 'known',
-        `Filter result: ${variant}`,
+        `Filter result: ${variant}: ${JSON.stringify(
+          filtered[0].event.exception.values[0].stacktrace.frames,
+        )}`,
       )
       assert.equal(
         observations.filter(item => item.sent).length,
@@ -124,14 +137,17 @@ async function main() {
       )
     }
     console.log(
-      'PASS: native visibilitychange, minified SDK wrapper calibration and raw Error parsing; known failure omitted, 3 near misses sent to memory. All network intercepted.',
+      `${engine.name()}: PASS native visibilitychange, minified SDK wrapper calibration and raw Error parsing; known failure omitted, 3 near misses sent to memory. All network intercepted.`,
     )
   } finally {
     if (browser) await browser.close()
     await fs.rm(temporary, { recursive: true, force: true })
   }
 }
-main().catch(error => {
+async function validate() {
+  for (const engine of [chromium, webkit]) await main(engine)
+}
+validate().catch(error => {
   console.error(error)
   process.exitCode = 1
 })
