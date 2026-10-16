@@ -9,6 +9,8 @@
         "lint": "npm run typecheck && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "start": "next start",
         "validate-analytics": "ts-node --project tsconfig.scripts.json scripts/validate-analytics",
+        "validate-sentry": "ts-node --project tsconfig.scripts.json scripts/validate-sentry",
+        "validate-sentry:browser": "node scripts/validate-sentry-browser.cjs",
         "validate-locales": "ts-node --project tsconfig.scripts.json scripts/validate-locales",
         "validate-tickets": "ts-node --project tsconfig.scripts.json scripts/validate-tickets",
         "typecheck": "next typegen && tsc --noEmit",

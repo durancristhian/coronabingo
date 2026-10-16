@@ -44,6 +44,8 @@ jobs:
 
       - run: npm run lint:check
 
+      - run: npm run validate-sentry
+
       - run: npm run test:ui-runner
 
       - name: Check Firestore listener lifecycle
@@ -51,6 +53,8 @@ jobs:
 
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
+
+      - run: npm run validate-sentry:browser
 
       - name: Download Firestore emulator
         run: npx firebase setup:emulators:firestore
