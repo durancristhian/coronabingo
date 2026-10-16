@@ -44,17 +44,13 @@ jobs:
 
       - run: npm run lint:check
 
-      - run: npm run validate-sentry
-
       - run: npm run test:ui-runner
 
       - name: Check Firestore listener lifecycle
         run: node scripts/validate-firestore-listeners.cjs
 
-      - name: Install browser engines and system dependencies
-        run: npx playwright install --with-deps chromium webkit
-
-      - run: npm run validate-sentry:browser
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
 
       - name: Download Firestore emulator
         run: npx firebase setup:emulators:firestore

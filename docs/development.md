@@ -64,28 +64,6 @@ npm run start -- --port 3124
 
 For bundle reports, use `ANALYZE_BUNDLE=1 npm run build` and inspect `.next/analyze/`. Compare equivalent builds and report byte savings separately from measured loading performance.
 
-## Advertising error reporting
-
-`utils/sentry.ts` omits only the diagnosed `int64` warning from the pinned Google
-`r20261015/r20190131/rum_fy2021.js` visibility callback. It checks the original
-provider warning marker, event mechanism, browser event and complete provider
-stack. The SDK wrapper is identified locally in the loaded bundle by returning
-and parsing an Error without throwing, capturing or sending it. Unknown frames,
-changed provider versions and other failures remain reportable. This changes
-reporting only; it does not repair Google's serializer or establish user impact.
-
-Run `npm run validate-sentry` for signature/near-miss and SDK normalization checks.
-Run `npm run validate-sentry:browser` after `npx playwright install chromium webkit` for an isolated,
-minified Chromium/WebKit proof: leaving a fixture page generates a native visibility
-change; the real SDK captures the synthetic provider error. All requests are
-intercepted, and a memory transport verifies the known error is omitted while
-missing-marker, different-message and application-frame errors remain visible.
-No Google source, live ads, Sentry service or database is used by these checks.
-
-A future provider or Sentry upgrade may make the signature stop matching. Review
-fresh retained evidence before changing it; do not broaden it to all `int64` or
-advertising errors. Keep provider failures distinct from gameplay failures.
-
 ## Firestore loading
 
 PERF-10 is implemented in [PR #217](https://github.com/durancristhian/coronabingo/pull/217). Firestore no longer ships in the homepage's initial JavaScript. Equivalent builds before and after this change measured 233,957 and 146,119 gzip-9 bytes, a reduction of 87,838 bytes or 37.5%. This measures initial script bytes, not overall page speed; game routes still load the SDK.

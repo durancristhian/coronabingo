@@ -17,7 +17,6 @@ import pkg from '~/package.json'
 import '~/polyfills/promise-finally'
 import '~/public/css/styles.css'
 import { pageview, updateAnalyticsPageContext } from '~/utils/gtag'
-import { createBeforeSend } from '~/utils/sentry'
 
 const version = pkg.version
 const defaultLanguage = i18n.defaultLocale
@@ -38,7 +37,6 @@ const bodyFont = Atkinson_Hyperlegible_Next({
 if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-    beforeSend: createBeforeSend(),
   })
 }
 
