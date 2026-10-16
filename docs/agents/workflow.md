@@ -36,7 +36,7 @@
 
 Push the task branch, open a PR against its verified base, and link it to the active thread when supported. Describe the problem, acceptance criteria, resulting behavior, validation, and remaining gaps. Include a Preview link for user review. Local ticket paths are not available to remote reviewers; include the necessary non-sensitive specification and evidence summary in the PR.
 
-Monitor GitHub and Vercel checks to a terminal result and read available review comments. Fix in-scope failures and repeat affected checks after pushing. Verify the affected Preview journey under the standing gameplay permission. Distinguish a ready deployment from tested functionality and report any acceptance gap.
+Monitor GitHub and Vercel checks to a terminal result and read available review comments. Fix in-scope failures and repeat affected checks after pushing. Verify the affected Preview journey after confirming isolated dependencies under AGENTS.md. Distinguish a ready deployment from tested functionality and report any acceptance gap.
 
 ## Multiple tickets
 

@@ -32,8 +32,8 @@ export function AdScriptProvider({ children }: { children: ReactNode }) {
       {enabled && (
         <Script
           id="adsense-script"
-          data-ad-client="ca-pub-6231280485856921"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231280485856921"
+          crossOrigin="anonymous"
           strategy="afterInteractive"
           // A late SDK must not reopen manual slots after the loading deadline.
           onReady={() =>

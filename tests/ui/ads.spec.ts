@@ -2,7 +2,8 @@ import { Page } from '@playwright/test'
 import { test, expect } from './fixtures'
 import { createReadyRoom, testPlayerNames } from './room-setup'
 
-const scriptURL = '**://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+const scriptURL =
+  'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231280485856921'
 const reservation = '.cb-ad-reservation'
 const ad = 'ins.adsbygoogle'
 
@@ -94,6 +95,7 @@ for (const locale of ['es', 'en']) {
     await page.route(scriptURL, async route => {
       await gate
       await route.fulfill({
+        headers: { 'Access-Control-Allow-Origin': '*' },
         contentType: 'application/javascript',
         body: sdk(),
       })
@@ -112,6 +114,10 @@ for (const locale of ['es', 'en']) {
     release()
     await expect(page.locator(`${ad} iframe`)).toHaveCount(1)
     await expectRequests(page, 1)
+    const script = page.locator('#adsense-script')
+    await expect(script).toHaveCount(1)
+    await expect(script).toHaveAttribute('src', scriptURL)
+    await expect(script).toHaveAttribute('crossorigin', 'anonymous')
     expect(await contentTop(page)).toBe(top)
     await testInfo.attach(`${locale}-ad-mobile`, {
       body: await page.screenshot(),
@@ -166,6 +172,7 @@ for (const outcome of ['filled', 'unfill-optimized']) {
     await page.setViewportSize({ width: 1280, height: 900 })
     await page.route(scriptURL, route =>
       route.fulfill({
+        headers: { 'Access-Control-Allow-Origin': '*' },
         contentType: 'application/javascript',
         body: sdk(outcome),
       }),
@@ -202,7 +209,11 @@ test('late SDK iframe size changes are checked even while the unit is hidden', a
 }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.route(scriptURL, route =>
-    route.fulfill({ contentType: 'application/javascript', body: sdk() }),
+    route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentType: 'application/javascript',
+      body: sdk(),
+    }),
   )
   await page.goto('/')
   const frame = page.locator(`${ad} iframe`)
@@ -237,6 +248,7 @@ for (const outcome of ['unfilled', 'error']) {
       await page.route(scriptURL, async route => {
         await gate
         await route.fulfill({
+          headers: { 'Access-Control-Allow-Origin': '*' },
           contentType: 'application/javascript',
           body: sdk(outcome),
         })
@@ -267,6 +279,7 @@ test('unfill-optimized content remains visible inside the reservation', async ({
 }) => {
   await page.route(scriptURL, route =>
     route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
       contentType: 'application/javascript',
       body: sdk('unfill-optimized'),
     }),
@@ -321,7 +334,11 @@ test('silent SDK times out and a late load cannot reopen the gap on navigation',
   })
   await page.route(scriptURL, async route => {
     await gate
-    await route.fulfill({ contentType: 'application/javascript', body: sdk() })
+    await route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentType: 'application/javascript',
+      body: sdk(),
+    })
   })
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.locator('#name').fill('Keep my input')
@@ -346,6 +363,7 @@ test('silent slot times out without retry or late reinsertion', async ({
   await page.clock.install()
   await page.route(scriptURL, route =>
     route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
       contentType: 'application/javascript',
       body: sdk('pending'),
     }),
@@ -372,6 +390,7 @@ for (const outcome of ['filled', 'unfill-optimized']) {
     await page.clock.install()
     await page.route(scriptURL, route =>
       route.fulfill({
+        headers: { 'Access-Control-Allow-Origin': '*' },
         contentType: 'application/javascript',
         body: sdk('pending'),
       }),
@@ -402,7 +421,11 @@ test('waits for positive width and stops observing after the request', async ({
   })
   await page.route(scriptURL, async route => {
     await gate
-    await route.fulfill({ contentType: 'application/javascript', body: sdk() })
+    await route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentType: 'application/javascript',
+      body: sdk(),
+    })
   })
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   const hidden = await page.addStyleTag({
@@ -432,7 +455,11 @@ test('late SDK requests only the current route, then initializes each new node o
   await page.route(scriptURL, async route => {
     loads++
     await gate
-    await route.fulfill({ contentType: 'application/javascript', body: sdk() })
+    await route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentType: 'application/javascript',
+      body: sdk(),
+    })
   })
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   const first = await page.locator(reservation).elementHandle()
@@ -474,7 +501,11 @@ test('host draws and player marks do not refresh filled ads', async ({
 }) => {
   for (const page of [host, player]) {
     await page.route(scriptURL, route =>
-      route.fulfill({ contentType: 'application/javascript', body: sdk() }),
+      route.fulfill({
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        contentType: 'application/javascript',
+        body: sdk(),
+      }),
     )
   }
   await createReadyRoom(host, 'PERF-09 game', { useOnlineCaller: true })
@@ -518,7 +549,11 @@ test('SDK ready on a page without a manual slot initializes the next page once',
   let loads = 0
   await page.route(scriptURL, route => {
     loads++
-    return route.fulfill({ contentType: 'application/javascript', body: sdk() })
+    return route.fulfill({
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentType: 'application/javascript',
+      body: sdk(),
+    })
   })
   await page.goto('/perf-09-missing-page')
   await expect(page.locator(reservation)).toHaveCount(0)
