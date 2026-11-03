@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { ReactNode, useRef, useState } from 'react'
+import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
@@ -8,6 +8,7 @@ import {
   AnalyticsSoundCatalog,
   AnalyticsSoundKey,
 } from '~/interfaces/analytics/Events'
+import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 import {
@@ -30,8 +31,7 @@ interface Props {
 
 export default function Pato({ extraSounds, room }: Props) {
   const { lang, t } = useTranslation()
-  const updateInProgress = useRef(false)
-  const [inProgress, setInProgress] = useState(false)
+  const { pending, run } = usePendingOperation()
 
   const sounds = extraSounds ? SOUNDS_EXTRAS : SOUNDS
 
@@ -44,36 +44,24 @@ export default function Pato({ extraSounds, room }: Props) {
     analyticsKey: AnalyticsSoundKey
     url: string
   }) => {
-    if (updateInProgress.current) return
-
-    updateInProgress.current = true
-    setInProgress(true)
-
-    try {
+    return run(async () => {
       await roomApi.updateRoom(room.ref, { soundToPlay: url })
-    } catch (error) {
-      updateInProgress.current = false
-      setInProgress(false)
-      throw error
-    }
 
-    log(
-      'sound_used',
-      getSoundUsedEventParams({
-        firstUseInPlay: markFirstAnalyticsUseInPlay(
-          'sound_used',
-          room.id,
-          room.timesPlayed,
-        ),
-        language: lang,
-        playNumber: room.timesPlayed,
-        soundCatalog: analyticsCatalog,
-        soundKey: analyticsKey,
-      }),
-    )
-
-    updateInProgress.current = false
-    setInProgress(false)
+      log(
+        'sound_used',
+        getSoundUsedEventParams({
+          firstUseInPlay: markFirstAnalyticsUseInPlay(
+            'sound_used',
+            room.id,
+            room.timesPlayed,
+          ),
+          language: lang,
+          playNumber: room.timesPlayed,
+          soundCatalog: analyticsCatalog,
+          soundKey: analyticsKey,
+        }),
+      )
+    })
   }
 
   return (
@@ -94,7 +82,7 @@ export default function Pato({ extraSounds, room }: Props) {
                 <Button
                   id="play-sound"
                   aria-label={t('playerId:play-sound', { name })}
-                  disabled={!!room.soundToPlay || inProgress}
+                  disabled={!!room.soundToPlay || pending}
                   onClick={() =>
                     playSound({ analyticsCatalog, analyticsKey, url })
                   }
