@@ -88,4 +88,48 @@ async function waitForEmulator(owned, signal) {
   }
 }
 
-module.exports = { reservePorts, supervise, waitForService, waitForEmulator }
+async function openInteractiveBrowser({
+  baseURL,
+  firestorePort,
+  headless = false,
+}) {
+  const { chromium } = require('@playwright/test')
+  const browser = await chromium.launch({
+    headless,
+    handleSIGINT: false,
+    handleSIGTERM: false,
+  })
+  try {
+    const context = await browser.newContext({ serviceWorkers: 'block' })
+    const allowed = new Set([baseURL, `http://127.0.0.1:${firestorePort}`])
+    await context.route('**/*', route =>
+      allowed.has(new URL(route.request().url()).origin)
+        ? route.continue()
+        : route.abort('blockedbyclient'),
+    )
+    await context.routeWebSocket(/.*/, socket => {
+      if (new URL(socket.url()).origin === baseURL.replace('http:', 'ws:')) {
+        socket.connectToServer()
+      } else socket.close()
+    })
+    context.on('page', page => {
+      page.on('close', () => {
+        if (!context.pages().length) void browser.close()
+      })
+    })
+    const page = await context.newPage()
+    await page.goto(baseURL)
+    return browser
+  } catch (error) {
+    await browser.close()
+    throw error
+  }
+}
+
+module.exports = {
+  reservePorts,
+  supervise,
+  waitForService,
+  waitForEmulator,
+  openInteractiveBrowser,
+}

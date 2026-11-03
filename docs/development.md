@@ -6,23 +6,28 @@ Setup, validation, and implementation references for Coronabingo. For a project 
 
 Use the Node version in `.nvmrc` and npm version in `package.json`. Dependencies are locked in `package-lock.json`.
 
-```bash
-nvm install
-nvm use
-npm ci
-```
-
-For an initial checkout, create `.env` only if it does not exist:
+Prepare tooling without starting services or creating gameplay data:
 
 ```bash
-if [ ! -e .env ]; then
-  cp .env.template .env
-fi
+bash scripts/setup-worktree.sh
+# With the repository runtime active: npm run setup:worktree
 ```
 
-Obtain Firebase configuration from the environment owner. Firestore is required; gameplay does not require Firebase Authentication. Google Analytics and Sentry are optional. Keep `.env` private. Values exported through `next.config.js` enter the browser bundle and must contain no server credentials.
+The command activates `.nvmrc` through nvm when needed, checks the npm version in `package.json`, runs `npm ci`, and installs/verifies Chromium and the Firestore emulator download. Install Java 21+ first using the [browser prerequisites](#one-time-setup). Linux may also need Chromium system libraries. Reruns reinstall dependencies safely. Dependency installation, development servers and builds must run sequentially within a checkout.
 
-For task worktrees, follow the approved environment-copy procedure in the [workflow](../docs/agents/workflow.md). A local or Preview server can use Production Firestore. Verify its target and data authorization before creating rooms or players.
+Setup keeps the installers' existing download caches and recreates worktree-owned dependencies with `npm ci`. Measured dependency and browser snapshot copies provided no benefit, so there is no custom snapshot cache or automatic T3 hook. A successful manual setup does not prove automatic preparation or absence of network requests.
+
+Setup preserves existing `.env` files. In a task worktree it copies the primary checkout's owner-approved `.env` only when absent, with owner-only permissions; an initial primary clone uses the value-free template. Obtain hosted Firebase configuration from the environment owner. Browser exports in `next.config.js` must contain no server credentials. Copying `.env` does not isolate Firebase or authorize hosted writes.
+
+For isolated interactive development:
+
+```bash
+npm run dev:emulator
+```
+
+Use the Chromium window opened by this command. It shares the [UI runner](#run-and-inspect)'s demo project, five reserved loopback ports, process supervision and worktree-local output. Its browser context blocks traffic outside the owned app and emulator, including external navigation and WebSockets; service workers are disabled. Analytics events remain local and Sentry is disabled. Closing the browser's last tab or pressing Ctrl-C stops only this run's services and discards emulator data. The printed URL opened in an ordinary browser does not provide that network isolation. One runner or interactive session may run per checkout.
+
+For hosted development, verify the Firebase, analytics, error-reporting and feedback targets and data authorization before interaction. Gameplay requires Firestore, but no Firebase Authentication. Google Analytics and Sentry are optional.
 
 Choose an available port:
 
@@ -88,13 +93,12 @@ Use [fixtures.ts](../tests/ui/fixtures.ts) for host/player contexts and network 
 
 ### One-time setup
 
-After `npm ci`, install Java 21+, Chromium, and the Firestore emulator. On macOS:
+Setup requires Java 21+ and installs the lockfile-selected Chromium and Firestore emulator. On macOS:
 
 ```bash
 # The runner detects Homebrew's keg-only JDK.
 brew install openjdk@21
-npx playwright install chromium
-npx firebase setup:emulators:firestore
+bash scripts/setup-worktree.sh
 ```
 
 Linux and WSL need Java on `PATH` or `JAVA_HOME` and `npx playwright install --with-deps chromium`. Native Windows is unsupported by the process-group runner. Browser and npm tool versions follow the lockfile; rerun the browser installer after a Playwright update.
@@ -115,7 +119,7 @@ The runner automatically reserves five available loopback ports for Next.js, Fir
 
 Startup waits for the owned emulator to announce readiness and checks a unique response header from the app. An unexpected service exit aborts the suite, including during Playwright. A port taken during service startup fails safely; rerun the command to select new ports. Existing services are never reused or stopped.
 
-Run `npm run test:ui-runner` for the fast Node regression checks covering port reservation, server identity, and service supervision. CI runs these before the browser suite.
+Run `npm run test:ui-runner` for fast setup and runner regression checks. For UI changes, use the canonical [responsive verification reference](../.better-web-ui.md#responsive-verification). CI runs these before the browser suite.
 
 On a lock error, inspect `.ui-tests-lock/owner.json` and verify its process and services have exited before removing the lock directory. If Java is missing, set `JAVA_HOME` to a JDK 21+ installation.
 

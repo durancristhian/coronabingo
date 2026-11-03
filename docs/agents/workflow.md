@@ -15,8 +15,8 @@
    ```
 
    Replace placeholders. Dependent work uses its agreed base. If fetching fails, report the local base's freshness before relying on it.
-4. Bootstrap each new worktree before implementation or analysis: copy `.env` from the local checkout used to create it, without printing values or overwriting a destination. This is owner-approved when both checkouts target the same environment. Resolve a missing source or existing destination before continuing. Copying `.env` does not isolate Firebase.
-5. Activate `.nvmrc`, run `npm ci`, and confirm Node/npm satisfy the runtime files. Setup is complete only when installation succeeds. Keep `node_modules`, Next.js output, and TypeScript caches local to each checkout.
+4. Bootstrap each new worktree with `bash scripts/setup-worktree.sh`, following the [development guide](../development.md#local-setup). This prepares tooling and preserves environment files without starting services or creating gameplay data. Copying `.env` does not isolate hosted destinations.
+5. Setup is complete only after the command succeeds. Keep dependencies and generated state local to each checkout. A manual run proves manual preparation only; claim automatic T3 preparation only from its actual execution logs.
 6. Resolve the canonical local research directory using the [tracker](issue-tracker.md). Pass absolute ticket/spec paths to skills and agents. Worktrees do not receive ignored research files from Git; use the shared records instead of creating competing copies.
 
 ## Implement and verify
