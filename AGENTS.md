@@ -23,6 +23,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 Keep the root `README.md` concise, in Spanish, and written for public repository visitors. Write all other project documentation outside `research/` in English, including headings, instructions, and explanatory examples. This rule does not change the conversation language or the app's Spanish and English translations.
 
+Update versioned documentation for durable contracts and workflow changes. Make the smallest sufficient edit in the existing section, linking source or configuration instead of copying implementation details or inventories. Keep run logs and task evidence in canonical ignored `research/`; check the documentation diff for redundancy before handoff.
+
 ## Scope and authorization
 
 - Investigation and proposal requests authorize findings and a reviewable proposal. Implement when requested or approved; continue routine steps within that scope without asking again.

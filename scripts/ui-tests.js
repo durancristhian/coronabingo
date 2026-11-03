@@ -9,6 +9,7 @@ const {
   supervise,
   waitForService,
   waitForEmulator,
+  openInteractiveBrowser,
 } = require('./ui-test-runtime')
 
 const root = path.resolve(__dirname, '..')
@@ -17,8 +18,17 @@ const args = process.argv.slice(2)
 const buildOnly = args.includes('--build-only')
 const production = buildOnly || args.includes('--production')
 const skipBuild = args.includes('--skip-build')
+const interactive = args.includes('--interactive')
+const headless = args.includes('--headless')
 const playwrightArgs = args.filter(
-  arg => !['--production', '--build-only', '--skip-build'].includes(arg),
+  arg =>
+    ![
+      '--production',
+      '--build-only',
+      '--skip-build',
+      '--interactive',
+      '--headless',
+    ].includes(arg),
 )
 const env = {
   ...process.env,
@@ -146,6 +156,14 @@ async function main() {
   if (process.platform === 'win32') {
     throw new Error('Run UI tests in WSL, Linux or macOS.')
   }
+  if (interactive && (production || skipBuild || playwrightArgs.length)) {
+    throw new Error(
+      '--interactive starts development services without test arguments',
+    )
+  }
+  if (headless && !interactive) {
+    throw new Error('--headless requires --interactive')
+  }
   if (skipBuild && (!production || buildOnly)) {
     throw new Error('--skip-build requires --production without --build-only')
   }
@@ -158,6 +176,7 @@ async function main() {
   const nextEnvPath = path.join(root, 'next-env.d.ts')
   let previousNextEnv
   let reservation
+  let browser
   try {
     previousNextEnv = await fs.readFile(nextEnvPath, 'utf8').catch(error => {
       if (error.code !== 'ENOENT') throw error
@@ -313,12 +332,30 @@ async function main() {
       signal: interrupt.signal,
       identity: config.id,
     })
+    if (interactive) {
+      browser = await openInteractiveBrowser({
+        baseURL,
+        firestorePort,
+        headless,
+      })
+      console.log(
+        'Isolated development ready. Use the opened browser only; closing it or Ctrl-C stops this run.',
+      )
+      await interruptible(
+        new Promise(resolve => {
+          if (!browser.isConnected()) resolve()
+          else browser.once('disconnected', resolve)
+        }),
+      )
+      return
+    }
     await run(
       process.execPath,
       [require.resolve('@playwright/test/cli'), 'test', ...playwrightArgs],
       { signal: 'SIGINT', name: 'Playwright' },
     )
   } finally {
+    await browser?.close()
     for (const owned of [...ownedProcesses].reverse()) await stop(owned)
     await reservation?.release()
     // Next writes this shared declaration even when distDir is separate.

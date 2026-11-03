@@ -17,7 +17,9 @@
         "ui-tests": "node scripts/ui-tests.js",
         "ui-tests:production": "node scripts/ui-tests.js --production",
         "ui-tests:build": "node scripts/ui-tests.js --build-only",
-        "ui-tests:ci": "node scripts/ui-tests.js --production --skip-build"
+        "ui-tests:ci": "node scripts/ui-tests.js --production --skip-build",
+        "setup:worktree": "bash scripts/setup-worktree.sh",
+        "dev:emulator": "node scripts/ui-tests.js --interactive"
     },
     "husky": {
         "hooks": {
