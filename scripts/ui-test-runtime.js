@@ -94,7 +94,11 @@ async function openInteractiveBrowser({
   headless = false,
 }) {
   const { chromium } = require('@playwright/test')
-  const browser = await chromium.launch({ headless })
+  const browser = await chromium.launch({
+    headless,
+    handleSIGINT: false,
+    handleSIGTERM: false,
+  })
   try {
     const context = await browser.newContext({ serviceWorkers: 'block' })
     const allowed = new Set([baseURL, `http://127.0.0.1:${firestorePort}`])

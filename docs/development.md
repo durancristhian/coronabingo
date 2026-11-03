@@ -15,6 +15,8 @@ bash scripts/setup-worktree.sh
 
 The command activates `.nvmrc` through nvm when needed, checks the npm version in `package.json`, runs `npm ci`, and installs/verifies Chromium and the Firestore emulator download. Install Java 21+ first using the [browser prerequisites](#one-time-setup). Linux may also need Chromium system libraries. Reruns reinstall dependencies safely. Dependency installation, development servers and builds must run sequentially within a checkout.
 
+Setup keeps the installers' existing download caches and recreates worktree-owned dependencies with `npm ci`. Measured dependency and browser snapshot copies provided no benefit, so there is no custom snapshot cache or automatic T3 hook. A successful manual setup does not prove automatic preparation or absence of network requests.
+
 Setup preserves existing `.env` files. In a task worktree it copies the primary checkout's owner-approved `.env` only when absent, with owner-only permissions; an initial primary clone uses the value-free template. Obtain hosted Firebase configuration from the environment owner. Browser exports in `next.config.js` must contain no server credentials. Copying `.env` does not isolate Firebase or authorize hosted writes.
 
 For isolated interactive development:
