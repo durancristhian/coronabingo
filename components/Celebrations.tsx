@@ -1,9 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment } from 'react'
 import { FiFrown, FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { confettiTypes } from '~/components/Confetti'
+import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
 import {
@@ -18,46 +19,34 @@ interface Props {
 
 export default function Celebrations({ room }: Props) {
   const { lang, t } = useTranslation()
-  const updateInProgress = useRef(false)
-  const [inProgress, setInProgress] = useState(false)
+  const { pending, run } = usePendingOperation()
 
   const updateCelebration = async (
     celebrationType: Exclude<Room['confettiType'], ''>,
   ) => {
-    if (updateInProgress.current) return
-
-    updateInProgress.current = true
-    setInProgress(true)
     const isHiding = celebrationType === room.confettiType
 
-    try {
+    return run(async () => {
       await roomApi.updateRoom(room.ref, {
         confettiType: isHiding ? '' : celebrationType,
       })
-    } catch (error) {
-      updateInProgress.current = false
-      setInProgress(false)
-      throw error
-    }
 
-    if (!isHiding) {
-      log(
-        'celebration_used',
-        getCelebrationUsedEventParams({
-          celebrationType,
-          firstUseInPlay: markFirstAnalyticsUseInPlay(
-            'celebration_used',
-            room.id,
-            room.timesPlayed,
-          ),
-          language: lang,
-          playNumber: room.timesPlayed,
-        }),
-      )
-    }
-
-    updateInProgress.current = false
-    setInProgress(false)
+      if (!isHiding) {
+        log(
+          'celebration_used',
+          getCelebrationUsedEventParams({
+            celebrationType,
+            firstUseInPlay: markFirstAnalyticsUseInPlay(
+              'celebration_used',
+              room.id,
+              room.timesPlayed,
+            ),
+            language: lang,
+            playNumber: room.timesPlayed,
+          }),
+        )
+      }
+    })
   }
 
   return (
@@ -72,7 +61,7 @@ export default function Celebrations({ room }: Props) {
             }
             id={`click-${ct}`}
             color={ct === room.confettiType ? 'red' : 'green'}
-            disabled={inProgress}
+            disabled={pending}
             onClick={() => updateCelebration(ct)}
             className="w-full"
             iconLeft={ct === room.confettiType ? <FiFrown /> : <FiSmile />}
