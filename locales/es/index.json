@@ -1,5 +1,5 @@
 {
-  "intro": "¡Hola! Aquí puedes jugar al bingo con otras personas.",
+  "intro": "Bingo online con amigos y familia.",
   "videocall-suggestion": "Si juegan a distancia, pueden hacer una videollamada. Por ejemplo, con",
   "how-to-play-button": "Ver tutorial",
   "how-to-play-modal-title": "Cómo jugar a Coronabingo",
@@ -14,5 +14,40 @@
     "field-name": "Nombre de la sala *",
     "field-submit": "Crear sala"
   },
-  "tutorial-open-video": "Abrir video"
+  "tutorial-open-video": "Abrir video",
+  "description": "Juega gratis, sin registro ni descargas. Crea una sala y comparte los cartones para jugar juntos.",
+  "how-to-play": {
+    "title": "Cómo jugar a Coronabingo",
+    "prepare": {
+      "title": "Prepara la sala",
+      "description": "Crea una sala, agrega los nombres de quienes van a jugar y elige quién dirige la partida. Puedes usar el bolillero online o un bolillero físico."
+    },
+    "share": {
+      "title": "Comparte el enlace",
+      "description": "Cuando la partida esté lista, comparte el enlace de la sala. Cada persona busca su nombre y pulsa «Jugar» para abrir sus dos cartones."
+    },
+    "play": {
+      "title": "Saca los números y marca tus cartones",
+      "description": "Quien dirige saca los números del 1 al 90 con el bolillero online o los registra en el tablero si usa uno físico. Cada persona marca los números en sus propios cartones."
+    }
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "free": {
+      "question": "¿Es gratis? ¿Necesito registrarme?",
+      "answer": "Sí, jugar a Coronabingo es gratis. No necesitas crear una cuenta ni descargar una aplicación: se juega desde el navegador del celular o la computadora."
+    },
+    "join": {
+      "question": "¿Cómo me uno a una partida?",
+      "answer": "Pide el enlace de la sala a quien la preparó. Esa persona debe agregar tu nombre antes de empezar. Abre el enlace, busca tu nombre y pulsa «Jugar»."
+    },
+    "draw": {
+      "question": "¿Puedo usar un bolillero físico?",
+      "answer": "Sí. Al preparar la sala, desactiva «Usar bolillero online». Quien dirige registra en el tablero los números que van saliendo del bolillero físico. Si usas el bolillero online, la aplicación elige al azar el siguiente número cuando quien dirige lo solicita."
+    },
+    "remote": {
+      "question": "¿Podemos jugar a distancia?",
+      "answer": "Sí. Cada persona abre sus cartones desde su dispositivo. Si quieren verse y hablar durante la partida, pueden usar una videollamada aparte, por ejemplo con Google Meet."
+    }
+  }
 }

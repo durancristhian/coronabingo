@@ -141,6 +141,8 @@ npm run ui-tests:ci
 
 [PageMetadata.tsx](../components/PageMetadata.tsx) owns localized titles, descriptions, and social metadata. Only the Spanish homepage at `/` and the English homepage at `/en` are indexable. Their canonical and reciprocal `es`, `en`, and `x-default` links use the Production domain, independently of query parameters or fragments. Legacy `/es` links remain supported.
 
+The [homepage](../pages/index.tsx) also renders localized instructions and FAQs in its initial HTML, independently of opening the video tutorial. Keep this public copy consistent with the actual room setup and player flow.
+
 Room, setup, player, and error pages return `noindex` in their initial HTML and omit homepage canonical/alternate links. Game metadata uses generic translated text, never room names or player identifiers. `noindex` controls search indexing, not access to room data.
 
 [robots.txt](../public/robots.txt) allows crawling so search engines can read `noindex`; it advertises [sitemap.xml](../public/sitemap.xml), which lists only the two canonical homepages. Keep this allowlist and the metadata rules consistent if adding public pages. SEO regression checks are in [seo.spec.ts](../tests/ui/seo.spec.ts), run with `npm run ui-tests -- tests/ui/seo.spec.ts` or the production UI suite.

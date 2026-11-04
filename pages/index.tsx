@@ -6,6 +6,7 @@ import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import CreateRoom from '~/components/CreateRoom'
+import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Modal from '~/components/Modal'
@@ -57,6 +58,7 @@ export default function Index() {
   return (
     <Layout>
       <p className="cb-home-intro">{t('index:intro')}</p>
+      <p className="cb-home-description">{t('index:description')}</p>
       <div className="cb-home-card my-8">
         <Box>
           <CreateRoom />
@@ -79,6 +81,32 @@ export default function Index() {
         >
           {t('index:how-to-play-button')}
         </Button>
+      </div>
+      <div className="cb-home-help">
+        <section className="cb-home-section">
+          <Heading type="h2">{t('index:how-to-play.title')}</Heading>
+          <ol className="cb-home-steps">
+            {['prepare', 'share', 'play'].map(step => (
+              <li key={step}>
+                <Heading type="h3">
+                  {t(`index:how-to-play.${step}.title`)}
+                </Heading>
+                <p>{t(`index:how-to-play.${step}.description`)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className="cb-home-section">
+          <Heading type="h2">{t('index:faq.title')}</Heading>
+          <dl className="cb-home-faq">
+            {['free', 'join', 'draw', 'remote'].map(question => (
+              <div key={question}>
+                <dt>{t(`index:faq.${question}.question`)}</dt>
+                <dd>{t(`index:faq.${question}.answer`)}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
       </div>
       <Modal
         id="modal-how-to-play"

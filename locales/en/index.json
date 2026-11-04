@@ -1,5 +1,5 @@
 {
-  "intro": "Hi! Play bingo here with friends and family.",
+  "intro": "Online bingo with friends and family.",
   "videocall-suggestion": "If you're playing from different places, you can start a video call. For example, with",
   "how-to-play-button": "Watch tutorial",
   "how-to-play-modal-title": "How to play Coronabingo",
@@ -14,5 +14,40 @@
     "field-name": "Room name *",
     "field-submit": "Create room"
   },
-  "tutorial-open-video": "Open video"
+  "tutorial-open-video": "Open video",
+  "description": "Play for free, with no sign-up or downloads. Create a room and share the bingo cards to play together.",
+  "how-to-play": {
+    "title": "How to play Coronabingo",
+    "prepare": {
+      "title": "Set up the room",
+      "description": "Create a room, add the names of everyone playing and choose a host. You can use the online bingo caller or draw numbers from a physical bingo cage."
+    },
+    "share": {
+      "title": "Share the link",
+      "description": "When the game is ready, share the room link. Each person finds their name and selects \"Play\" to open their two bingo cards."
+    },
+    "play": {
+      "title": "Call numbers and mark your cards",
+      "description": "The host draws numbers from 1 to 90 with the online bingo caller, or records them on the number board when using a physical draw. Each person marks the numbers on their own cards."
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "free": {
+      "question": "Is it free? Do I need to sign up?",
+      "answer": "Yes, Coronabingo is free to play. You do not need an account or an app download: play in your phone or computer browser."
+    },
+    "join": {
+      "question": "How do I join a game?",
+      "answer": "Ask the person who set up the room for its link. They need to add your name before starting the game. Open the link, find your name and select \"Play\"."
+    },
+    "draw": {
+      "question": "Can we use a physical bingo cage?",
+      "answer": "Yes. Turn off \"Use online bingo caller\" when setting up the room. The host records each number on the number board as it is drawn from the physical cage. With the online bingo caller, the app randomly chooses the next number when the host requests it."
+    },
+    "remote": {
+      "question": "Can we play remotely?",
+      "answer": "Yes. Each person opens their cards on their own device. To see and talk to each other during the game, you can use a separate video call, for example with Google Meet."
+    }
+  }
 }
