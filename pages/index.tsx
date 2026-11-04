@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
@@ -6,6 +7,7 @@ import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import CreateRoom from '~/components/CreateRoom'
+import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Modal from '~/components/Modal'
@@ -57,28 +59,63 @@ export default function Index() {
   return (
     <Layout>
       <p className="cb-home-intro">{t('index:intro')}</p>
+      <p className="cb-home-description">{t('index:description')}</p>
       <div className="cb-home-card my-8">
         <Box>
           <CreateRoom />
         </Box>
       </div>
-      <p className="cb-home-note">
-        <span>{t('index:videocall-suggestion')} </span>
-        <Anchor href="https://meet.google.com/" id="google-hangouts">
-          Google Meet
-        </Anchor>
-        <span>.</span>
-      </p>
-      <div className="cb-home-tutorial mt-8">
-        <Button
-          aria-label={t('index:how-to-play-button')}
-          id="watch-tutorial"
-          onClick={openTutorial}
-          className="w-full"
-          iconLeft={<FiPlayCircle />}
-        >
-          {t('index:how-to-play-button')}
-        </Button>
+      <div className="cb-home-help">
+        <section className="cb-home-section">
+          <Heading type="h2">{t('index:how-to-play.title')}</Heading>
+          <Button
+            aria-label={t('index:how-to-play-button')}
+            className="cb-home-tutorial"
+            id="watch-tutorial"
+            onClick={openTutorial}
+            iconLeft={<FiPlayCircle aria-hidden="true" />}
+          >
+            {t('index:how-to-play-button')}
+          </Button>
+          <ol className="cb-home-steps">
+            {['prepare', 'share', 'play'].map(step => (
+              <li key={step}>
+                <Heading type="h3">
+                  {t(`index:how-to-play.${step}.title`)}
+                </Heading>
+                <p>{t(`index:how-to-play.${step}.description`)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className="cb-home-section">
+          <Heading type="h2">{t('index:faq.title')}</Heading>
+          <dl className="cb-home-faq">
+            {['free', 'join', 'draw', 'remote'].map(question => (
+              <div key={question}>
+                <dt>{t(`index:faq.${question}.question`)}</dt>
+                <dd>
+                  {question === 'remote' ? (
+                    <Trans
+                      i18nKey="index:faq.remote.answer"
+                      components={[
+                        <Anchor
+                          key="meet"
+                          href="https://meet.google.com/"
+                          id="google-hangouts"
+                        >
+                          Google Meet
+                        </Anchor>,
+                      ]}
+                    />
+                  ) : (
+                    t(`index:faq.${question}.answer`)
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
       </div>
       <Modal
         id="modal-how-to-play"

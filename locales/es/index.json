@@ -1,6 +1,5 @@
 {
-  "intro": "¡Hola! Aquí puedes jugar al bingo con otras personas.",
-  "videocall-suggestion": "Si juegan a distancia, pueden hacer una videollamada. Por ejemplo, con",
+  "intro": "Bingo online con amigos y familia.",
   "how-to-play-button": "Ver tutorial",
   "how-to-play-modal-title": "Cómo jugar a Coronabingo",
   "tutorial-loading": "Cargando tutorial...",
@@ -14,5 +13,40 @@
     "field-name": "Nombre de la sala *",
     "field-submit": "Crear sala"
   },
-  "tutorial-open-video": "Abrir video"
+  "tutorial-open-video": "Abrir video",
+  "description": "Juega gratis, sin registro ni descargas. Crea una sala y comparte los cartones para jugar juntos.",
+  "how-to-play": {
+    "title": "Cómo jugar a Coronabingo",
+    "prepare": {
+      "title": "Prepara la sala",
+      "description": "Crea una sala, agrega los nombres de quienes van a jugar y elige quién dirige la partida."
+    },
+    "share": {
+      "title": "Comparte el enlace",
+      "description": "Cuando esté lista, comparte el enlace de la sala. Cada persona busca su nombre y pulsa «Jugar» para abrir sus dos cartones."
+    },
+    "play": {
+      "title": "Saca los números y marca tus cartones",
+      "description": "Quien dirige saca los números del 1 al 90. Cada persona marca los que tiene en sus cartones."
+    }
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "free": {
+      "question": "¿Es gratis? ¿Necesito registrarme?",
+      "answer": "Sí, es gratis y no necesitas una cuenta. Funciona en el navegador del celular o la computadora."
+    },
+    "join": {
+      "question": "¿Necesito crear una sala para unirme?",
+      "answer": "No. Usa el enlace que te compartieron. Quien prepara la sala debe agregar tu nombre antes de empezar."
+    },
+    "draw": {
+      "question": "¿Puedo usar un bolillero físico?",
+      "answer": "Sí. Desactiva «Usar bolillero online» al preparar la sala y registra los números en el tablero. Con la opción activada, la aplicación saca un número al azar cada vez que quien dirige lo solicita."
+    },
+    "remote": {
+      "question": "¿Podemos jugar a distancia?",
+      "answer": "Sí. Cada persona juega desde su dispositivo. Pueden acompañar la partida con una videollamada aparte, por ejemplo con <0>Google Meet</0>."
+    }
+  }
 }

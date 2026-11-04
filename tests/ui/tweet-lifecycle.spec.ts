@@ -262,7 +262,8 @@ for (const locale of ['es', 'en']) {
   test(`${locale}: initially visible tweets load without a scroll or timer`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width: 1280, height: 1400 })
+    // Include the homepage instructions while keeping the news initially visible.
+    await page.setViewportSize({ width: 1280, height: 2400 })
     await page.route(widgetsURL, route =>
       route.fulfill({
         contentType: 'application/javascript',
@@ -270,6 +271,7 @@ for (const locale of ['es', 'en']) {
       }),
     )
     await page.goto(locale === 'en' ? '/en' : '/')
+    await expect(page.locator('footer h2')).toBeInViewport()
     await expect(page.getByTestId('rendered-tweet')).toHaveCount(4)
     expect(await page.evaluate(() => scrollY)).toBe(0)
   })
