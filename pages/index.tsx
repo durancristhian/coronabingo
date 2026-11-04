@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
+import Button from '~/components/Button'
 import CreateRoom from '~/components/CreateRoom'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
@@ -67,15 +68,15 @@ export default function Index() {
       <div className="cb-home-help">
         <section className="cb-home-section">
           <Heading type="h2">{t('index:how-to-play.title')}</Heading>
-          <button
-            type="button"
+          <Button
+            aria-label={t('index:how-to-play-button')}
             className="cb-home-tutorial"
             id="watch-tutorial"
             onClick={openTutorial}
+            iconLeft={<FiPlayCircle aria-hidden="true" />}
           >
-            <FiPlayCircle aria-hidden="true" />
-            <span>{t('index:how-to-play-button')}</span>
-          </button>
+            {t('index:how-to-play-button')}
+          </Button>
           <ol className="cb-home-steps">
             {['prepare', 'share', 'play'].map(step => (
               <li key={step}>

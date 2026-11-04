@@ -350,33 +350,8 @@ html {
 }
 
 .coronabingo-ui .cb-home-tutorial {
-  align-items: center;
   align-self: flex-start;
-  border-radius: 0.25rem;
-  color: var(--cb-ink);
-  display: inline-flex;
-  font-weight: 700;
-  gap: 0.5rem;
-  min-block-size: 2.75rem;
-  padding-inline: 0.25rem;
-  text-decoration: underline;
-  text-decoration-color: var(--cb-yellow-strong);
-  text-underline-offset: 0.15em;
-}
-
-.coronabingo-ui .cb-home-tutorial:focus-visible {
-  outline: 2px solid var(--cb-focus-ring);
-  outline-offset: 3px;
-}
-
-.coronabingo-ui .cb-home-tutorial:active {
-  opacity: 0.75;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .coronabingo-ui .cb-home-tutorial:hover {
-    text-decoration-thickness: 0.15em;
-  }
+  max-inline-size: 100%;
 }
 
 .coronabingo-ui .cb-home-steps {
