@@ -1,6 +1,5 @@
 {
   "intro": "Online bingo with friends and family.",
-  "videocall-suggestion": "If you're playing from different places, you can start a video call. For example, with",
   "how-to-play-button": "Watch tutorial",
   "how-to-play-modal-title": "How to play Coronabingo",
   "tutorial-loading": "Loading tutorial...",
@@ -20,7 +19,7 @@
     "title": "How to play Coronabingo",
     "prepare": {
       "title": "Set up the room",
-      "description": "Create a room, add the names of everyone playing and choose a host. You can use the online bingo caller or draw numbers from a physical bingo cage."
+      "description": "Create a room, add the names of everyone playing and choose a host."
     },
     "share": {
       "title": "Share the link",
@@ -28,26 +27,26 @@
     },
     "play": {
       "title": "Call numbers and mark your cards",
-      "description": "The host draws numbers from 1 to 90 with the online bingo caller, or records them on the number board when using a physical draw. Each person marks the numbers on their own cards."
+      "description": "The host draws numbers from 1 to 90. Each person marks matching numbers on their own cards."
     }
   },
   "faq": {
     "title": "Frequently asked questions",
     "free": {
       "question": "Is it free? Do I need to sign up?",
-      "answer": "Yes, Coronabingo is free to play. You do not need an account or an app download: play in your phone or computer browser."
+      "answer": "Yes, it is free and no account is needed. Play in your phone or computer browser."
     },
     "join": {
-      "question": "How do I join a game?",
-      "answer": "Ask the person who set up the room for its link. They need to add your name before starting the game. Open the link, find your name and select \"Play\"."
+      "question": "Do I need to create a room to join?",
+      "answer": "No. Use the shared room link. The person setting up the room needs to add your name before starting the game."
     },
     "draw": {
       "question": "Can we use a physical bingo cage?",
-      "answer": "Yes. Turn off \"Use online bingo caller\" when setting up the room. The host records each number on the number board as it is drawn from the physical cage. With the online bingo caller, the app randomly chooses the next number when the host requests it."
+      "answer": "Yes. Turn off \"Use online bingo caller\" when setting up the room, then record the drawn numbers on the number board. When enabled, the app randomly chooses the next number at the host's request."
     },
     "remote": {
       "question": "Can we play remotely?",
-      "answer": "Yes. Each person opens their cards on their own device. To see and talk to each other during the game, you can use a separate video call, for example with Google Meet."
+      "answer": "Yes. Each person plays on their own device. To see and talk to each other, use a separate video call, such as <0>Google Meet</0>."
     }
   }
 }

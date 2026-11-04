@@ -1,10 +1,10 @@
+import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
-import Button from '~/components/Button'
 import CreateRoom from '~/components/CreateRoom'
 import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
@@ -64,27 +64,18 @@ export default function Index() {
           <CreateRoom />
         </Box>
       </div>
-      <p className="cb-home-note">
-        <span>{t('index:videocall-suggestion')} </span>
-        <Anchor href="https://meet.google.com/" id="google-hangouts">
-          Google Meet
-        </Anchor>
-        <span>.</span>
-      </p>
-      <div className="cb-home-tutorial mt-8">
-        <Button
-          aria-label={t('index:how-to-play-button')}
-          id="watch-tutorial"
-          onClick={openTutorial}
-          className="w-full"
-          iconLeft={<FiPlayCircle />}
-        >
-          {t('index:how-to-play-button')}
-        </Button>
-      </div>
       <div className="cb-home-help">
         <section className="cb-home-section">
           <Heading type="h2">{t('index:how-to-play.title')}</Heading>
+          <button
+            type="button"
+            className="cb-home-tutorial"
+            id="watch-tutorial"
+            onClick={openTutorial}
+          >
+            <FiPlayCircle aria-hidden="true" />
+            <span>{t('index:how-to-play-button')}</span>
+          </button>
           <ol className="cb-home-steps">
             {['prepare', 'share', 'play'].map(step => (
               <li key={step}>
@@ -102,7 +93,24 @@ export default function Index() {
             {['free', 'join', 'draw', 'remote'].map(question => (
               <div key={question}>
                 <dt>{t(`index:faq.${question}.question`)}</dt>
-                <dd>{t(`index:faq.${question}.answer`)}</dd>
+                <dd>
+                  {question === 'remote' ? (
+                    <Trans
+                      i18nKey="index:faq.remote.answer"
+                      components={[
+                        <Anchor
+                          key="meet"
+                          href="https://meet.google.com/"
+                          id="google-hangouts"
+                        >
+                          Google Meet
+                        </Anchor>,
+                      ]}
+                    />
+                  ) : (
+                    t(`index:faq.${question}.answer`)
+                  )}
+                </dd>
               </div>
             ))}
           </dl>
