@@ -28,7 +28,7 @@ test('a deletion finishing after navigation cannot change the next room', async 
       return vi.fn()
     },
     collection: () => ({
-      onSnapshot: (next: (value: unknown) => void) => {
+      onSnapshot: (_options: unknown, next: (value: unknown) => void) => {
         rosterListeners.set(id, next)
         return vi.fn()
       },
@@ -69,6 +69,7 @@ test('a deletion finishing after navigation cannot change the next room', async 
           }),
       })
       rosterListeners.get(id)?.({
+        metadata: { hasPendingWrites: false },
         docs: [
           {
             exists: true,

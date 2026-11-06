@@ -95,8 +95,10 @@ const PlayersContextProvider = ({ children }: Props) => {
           .doc(roomId)
           .collection('players')
           .onSnapshot(
+            { includeMetadataChanges: true },
             snapshot => {
               if (!active) return
+              if (snapshot.metadata.hasPendingWrites) return
               if (subscriptionId.current !== currentSubscriptionId) {
                 return
               }

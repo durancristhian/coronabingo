@@ -28,7 +28,7 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
   } as unknown) as Player
   database.doc.mockReturnValue({
     collection: () => ({
-      onSnapshot: (next: typeof snapshot) => {
+      onSnapshot: (_options: unknown, next: typeof snapshot) => {
         snapshot = next
         return vi.fn()
       },
@@ -62,6 +62,7 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
   await waitFor(() => expect(snapshot).toBeDefined())
   act(() =>
     snapshot({
+      metadata: { hasPendingWrites: false },
       docs: [
         {
           exists: true,
@@ -73,6 +74,9 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
     }),
   )
   fireEvent.click(screen.getByRole('button', { name: 'Remove player' }))
+  expect(screen.getByText('Alice')).toBeVisible()
+  // Firestore publishes a local deletion before the server accepts it.
+  act(() => snapshot({ metadata: { hasPendingWrites: true }, docs: [] }))
   expect(screen.getByText('Alice')).toBeVisible()
   await act(async () => {
     rejectDelete(new Error('Permission denied'))
