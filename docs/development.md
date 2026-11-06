@@ -51,6 +51,7 @@ Read the returned path in the next operation; directory numbering and file exten
 
 | Change | Required checks |
 | --- | --- |
+| State transitions and isolated React behavior | `npm run test:unit`; add emulator journeys for database concurrency |
 | Application code | `npm run lint:check`, `npm run build`, `git diff --check` |
 | Translations | `npm run validate-locales` for focused checks; also runs during `prebuild` |
 | Card data or generator | `npm run validate-tickets`; inspect output because its legacy error handler can return success after an assertion failure |
@@ -76,6 +77,14 @@ PERF-10 is implemented in [PR #217](https://github.com/durancristhian/coronabing
 The homepage loads the room model and Firestore when the room-name field receives focus. Submitting shares that load, prevents duplicate submissions, and allows retry after a failed download. The shared contexts stay mounted to preserve room drafts; their data subscriptions load Firestore only when room/player IDs are needed. Game pages also import their data operations, so direct room links load the SDK with the route.
 
 Run `node scripts/validate-firestore-listeners.cjs` to check listener scope, cleanup, navigation during a pending import, and stale callbacks without a database. CI runs this probe and the ES/EN browser tests for cold-home loading, delayed downloads, failure recovery, and room creation.
+
+## Unit and isolated component tests
+
+Run `npm run test:unit` for a single Vitest run or `npm run test:unit:watch` during development. Configuration lives in [vitest.config.mts](../vitest.config.mts); tests live in [tests/unit/](../tests/unit/). CI runs the suite before browser tests.
+
+React Testing Library exercises real components, hooks and providers in jsdom. Database, media, time and router boundaries are controlled; the default database adapter fails unless a test explicitly supplies one. No hosted Firebase configuration is needed. These tests cover room-code grants scoped to room/game, draft reconciliation, rejected deletion, called-number transitions, retired sounds, export preconditions, celebration accessible names and missing-room results.
+
+For a regression, first demonstrate the failing expectation, then correct the application and retain that expectation. Adapt fixtures when interfaces change; do not weaken the expected behavior to accommodate the defect. Isolated database doubles do not prove Firestore concurrency: retain the emulator journeys in [state-transitions.spec.ts](../tests/ui/state-transitions.spec.ts) and [room-code.spec.ts](../tests/ui/room-code.spec.ts).
 
 ## Browser regression tests
 

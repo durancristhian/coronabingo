@@ -58,10 +58,12 @@ for (const locale of ['es', 'en']) {
               await expect(page.locator('#name')).toBeVisible()
             } else {
               await expect(
-                page.getByRole('button', {
-                  name: locale === 'en' ? 'Reload' : 'Recargar',
-                  exact: true,
-                }),
+                page.getByText(
+                  locale === 'en'
+                    ? "This room doesn't exist."
+                    : 'La sala no existe.',
+                  { exact: true },
+                ),
               ).toBeVisible()
             }
             attempts.push({ attempt, phase, errors: [...errors] })

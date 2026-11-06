@@ -4,6 +4,8 @@ import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
+import Message from '~/components/Message'
+import usePendingOperation from '~/hooks/usePendingOperation'
 import { Player } from '~/interfaces/models/Player'
 import { Room, RoomBase } from '~/interfaces/models/Room'
 import playerApi from '~/models/player'
@@ -11,6 +13,7 @@ import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
   isFormDisabled: boolean
+  onPendingChange?: (pending: boolean) => void
   players: Player[]
   room: Room
   setPlayers: (array: Player[]) => void
@@ -19,6 +22,7 @@ interface Props {
 
 export default function Players({
   isFormDisabled,
+  onPendingChange,
   players,
   room,
   setPlayers,
@@ -26,24 +30,26 @@ export default function Players({
 }: Props) {
   const { t } = useTranslation()
   const [name, setName] = useState('')
+  const [removeError, setRemoveError] = useState(false)
+  const { pending, run } = usePendingOperation()
 
   const onRemovePlayer = (index: number, player: Player) => {
-    const cleanAdmin = room.adminId === player.id
-    const changes: Partial<RoomBase> = {}
-
-    if (cleanAdmin) {
-      changes.adminId = ''
-      changes.readyToPlay = false
-    }
-
-    updateRoom(changes)
-
-    const playersCopy = [...players]
-    playersCopy.splice(index, 1)
-
-    setPlayers(playersCopy)
-
-    player.ref.delete()
+    void run(async () => {
+      setRemoveError(false)
+      onPendingChange?.(true)
+      try {
+        // Do not create a removal draft before Firestore confirms deletion.
+        await player.ref.delete()
+        if (room.adminId === player.id) {
+          updateRoom({ adminId: '', readyToPlay: false })
+        }
+        setPlayers(players.filter((_, playerIndex) => playerIndex !== index))
+      } catch {
+        setRemoveError(true)
+      } finally {
+        onPendingChange?.(false)
+      }
+    })
   }
 
   const onSubmit = (event: FormEvent) => {
@@ -71,6 +77,11 @@ export default function Players({
 
   return (
     <div className="mt-8">
+      {removeError && (
+        <div role="alert">
+          <Message type="error">{t('admin:players.remove-error')}</Message>
+        </div>
+      )}
       <p className="flex items-center">
         <span className="mr-1">{t('admin:players.title')}</span>
         <span
@@ -85,7 +96,9 @@ export default function Players({
         </span>
       </p>
       <form onSubmit={onSubmit}>
-        <fieldset disabled={players.length === MAX_PLAYERS || isFormDisabled}>
+        <fieldset
+          disabled={players.length === MAX_PLAYERS || isFormDisabled || pending}
+        >
           <div className="flex items-end">
             <div className="cb-player-field flex-auto">
               <InputText
@@ -137,7 +150,7 @@ export default function Players({
                   color="red"
                   id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(index, player)}
-                  disabled={isFormDisabled}
+                  disabled={isFormDisabled || pending}
                   iconLeft={<FiTrash2 />}
                 />
               </div>

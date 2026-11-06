@@ -1,19 +1,23 @@
 import { useContext } from 'react'
-import {
-  ActionByStateKey,
-  DispatchContext,
-  StateContext,
-} from '~/contexts/Flags'
-
-const NAME = 'roomCode'
+import { RoomCodeContext } from '~/contexts/RoomCode'
+import useRoom from '~/hooks/useRoom'
 
 export default function useRoomCode() {
-  const flags = useContext(StateContext)
-  const dispatch = useContext(DispatchContext)
+  const { grant, grantAccess, revokeAccess } = useContext(RoomCodeContext)
+  const { room } = useRoom()
 
   const login = () => {
-    dispatch.toggle(ActionByStateKey[NAME])
+    if (room?.readyToPlay) {
+      grantAccess({ roomId: room.id, playNumber: room.timesPlayed })
+    }
   }
 
-  return { loggedIn: flags[NAME], login }
+  return {
+    loggedIn:
+      !!room?.readyToPlay &&
+      grant?.roomId === room.id &&
+      grant.playNumber === room.timesPlayed,
+    login,
+    logout: revokeAccess,
+  }
 }

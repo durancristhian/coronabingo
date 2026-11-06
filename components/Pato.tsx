@@ -45,7 +45,10 @@ export default function Pato({ extraSounds, room }: Props) {
     url: string
   }) => {
     return run(async () => {
-      await roomApi.updateRoom(room.ref, { soundToPlay: url })
+      await roomApi.updateRoom(room.ref, {
+        soundToPlay: url,
+        soundCommandId: crypto.randomUUID(),
+      })
 
       log(
         'sound_used',

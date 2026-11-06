@@ -18,7 +18,8 @@
     "add-player": "Add player",
     "remove-player": "Remove player",
     "field-admin-hint": "Choose who will draw or mark the numbers for everyone to see.",
-    "field-admin": "Host"
+    "field-admin": "Host",
+    "remove-error": "We couldn't remove the player. Try again."
   },
   "field-hide-dreams-hint": "The meanings come from Argentina's quiniela lottery. Hide them if you don't use them.",
   "field-hide-dreams": "Hide number meanings",

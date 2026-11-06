@@ -37,5 +37,6 @@ const { FieldValue, Timestamp } = firebase.firestore
 const roomsRef = db.collection('rooms')
 
 const createBatch = () => db.batch()
+const runTransaction = db.runTransaction.bind(db)
 
-export { createBatch, FieldValue, roomsRef, Timestamp }
+export { createBatch, FieldValue, roomsRef, runTransaction, Timestamp }

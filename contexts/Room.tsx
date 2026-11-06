@@ -1,5 +1,11 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { RoomContextData } from '~/interfaces/contexts/Room'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Room, RoomBase } from '~/interfaces/models/Room'
@@ -18,13 +24,24 @@ const RoomContextProvider = ({ children }: Props) => {
   const roomId = router.pathname.startsWith('/room/')
     ? router.query.roomId?.toString()
     : undefined
-  const [state, setState] = useState<RemoteData<Error, Room>>({
+  const draftsByRoom = useRef(new Map<string, Partial<RoomBase>>())
+  const [state, setState] = useState<RemoteData<Error, Room | null>>({
     type: REMOTE_DATA.NOT_ASKED,
   })
 
   const updateRoom = (partialRoom: Partial<RoomBase>) => {
+    if (
+      !roomId ||
+      state.type !== REMOTE_DATA.SUCCESS ||
+      state.data?.id !== roomId
+    )
+      return
+    draftsByRoom.current.set(roomId, {
+      ...draftsByRoom.current.get(roomId),
+      ...partialRoom,
+    })
     setState(prevState => {
-      if (prevState.type !== REMOTE_DATA.SUCCESS) {
+      if (prevState.type !== REMOTE_DATA.SUCCESS || !prevState.data) {
         return prevState
       }
 
@@ -47,20 +64,37 @@ const RoomContextProvider = ({ children }: Props) => {
         if (!active) return
 
         unsubscribe = roomsRef.doc(roomId).onSnapshot(
+          { includeMetadataChanges: true },
           snapshot => {
             if (!active) return
+            if (snapshot.metadata.hasPendingWrites) return
             if (!snapshot.exists) {
+              draftsByRoom.current.delete(roomId)
               setState({
-                type: REMOTE_DATA.FAILURE,
-                error: new Error('Deleted room'),
+                type: REMOTE_DATA.SUCCESS,
+                data: null,
               })
 
               return
             }
 
             const roomData = snapshot.data() as RoomBase
+            const draft = draftsByRoom.current.get(roomId)
+            // Acknowledge saved fields individually; unrelated snapshots must
+            // not erase setup choices that have not reached Firestore yet.
+            const pendingDraft = Object.fromEntries(
+              Object.entries(draft || {}).filter(
+                ([key, value]) => roomData[key as keyof RoomBase] !== value,
+              ),
+            )
+            if (Object.keys(pendingDraft).length) {
+              draftsByRoom.current.set(roomId, pendingDraft)
+            } else {
+              draftsByRoom.current.delete(roomId)
+            }
             const room = {
               ...roomData,
+              ...pendingDraft,
               id: snapshot.id,
               ref: snapshot.ref,
             }

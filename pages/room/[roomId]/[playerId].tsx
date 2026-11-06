@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Box from '~/components/Box'
 import Confetti from '~/components/Confetti'
 import Error from '~/components/Error'
@@ -16,6 +16,7 @@ import SelectedNumbers from '~/components/SelectedNumbers'
 import Sounds from '~/components/Sounds'
 import Tickets from '~/components/Tickets'
 import { BackgroundCellContextProvider } from '~/contexts/BackgroundCell'
+import usePendingOperation from '~/hooks/usePendingOperation'
 import usePlayer from '~/hooks/usePlayer'
 import useRoom from '~/hooks/useRoom'
 import useRoomCode from '~/hooks/useRoomCode'
@@ -28,6 +29,8 @@ export default function RoomPlayer() {
   const { error: playerError, loading: playerLoading, player } = usePlayer()
   const { t } = useTranslation()
   const { loggedIn } = useRoomCode()
+  const [drawError, setDrawError] = useState(false)
+  const { pending: drawPending, run: runDraw } = usePendingOperation()
 
   useEffect(scrollToTop, [])
 
@@ -101,18 +104,14 @@ export default function RoomPlayer() {
     )
   }
 
-  const onNewNumber = (n: number) => {
-    const selectedNumbers = room.selectedNumbers || []
-    let numbers
-
-    if (selectedNumbers.includes(n)) {
-      numbers = selectedNumbers.filter((sn: number) => sn !== n)
-    } else {
-      numbers = [n, ...selectedNumbers]
-    }
-
-    roomApi.updateRoom(room.ref, {
-      selectedNumbers: numbers,
+  const onNewNumber = (number?: number) => {
+    void runDraw(async () => {
+      setDrawError(false)
+      try {
+        await roomApi.changeCalledNumber(room, number)
+      } catch {
+        setDrawError(true)
+      }
     })
   }
 
@@ -123,7 +122,13 @@ export default function RoomPlayer() {
           {t('common:bingo-spinner')}
         </Heading>
         <div className="mt-4">
+          {drawError && (
+            <div role="alert">
+              <Message type="error">{t('playerId:draw-error')}</Message>
+            </div>
+          )}
           <SelectedNumbers
+            pending={drawPending}
             isAdmin={isAdmin}
             onNewNumber={onNewNumber}
             selectedNumbers={room.selectedNumbers || []}

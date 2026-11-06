@@ -145,5 +145,6 @@
     "88": "Pope",
     "89": "Rat",
     "90": "Fear"
-  }
+  },
+  "draw-error": "We couldn't save the called number. Try again."
 }

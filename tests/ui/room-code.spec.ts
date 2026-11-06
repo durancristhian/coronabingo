@@ -152,6 +152,19 @@ test('the host room code protects each game while players enter normally', async
   )
 
   await test.step(
+    'A second host context grants access for the current game',
+    async () => {
+      await player.goto(lobbyURL)
+      await openPlayerLink(player, testPlayerNames.host)
+      await selectCode(player, roomCode)
+      await player
+        .getByRole('button', { name: 'Ingresar', exact: true })
+        .click()
+      await expect(player.getByTestId('bingo-card')).toHaveCount(2)
+    },
+  )
+
+  await test.step(
     'Restarting and starting again requires the host code again',
     async () => {
       await host.locator('#reboot-game:visible').click()
@@ -172,6 +185,10 @@ test('the host room code protects each game while players enter normally', async
       await expect(
         host.getByRole('heading', { name: 'Información de la sala' }),
       ).toBeVisible()
+      await expect(
+        player.getByText('Elige los 3 emojis del código de la sala, en orden.'),
+      ).toBeVisible()
+      await expect(player.getByTestId('bingo-card')).toHaveCount(0)
       await openPlayerLink(host, testPlayerNames.host)
       await expect(
         host.getByText('Elige los 3 emojis del código de la sala, en orden.'),

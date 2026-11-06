@@ -21,15 +21,22 @@ async function replaceAudio(page: Page) {
     soundWindow.playedSounds = []
 
     class TestAudio {
-      duration = 0.5
       volume = 1
+      onended: (() => void) | null = null
+      onerror: (() => void) | null = null
+      private timer: ReturnType<typeof setTimeout> | undefined
 
       constructor(src: string) {
         soundWindow.playedSounds.push(src)
       }
 
       play() {
+        this.timer = setTimeout(() => this.onended?.(), 500)
         return Promise.resolve()
+      }
+
+      pause() {
+        clearTimeout(this.timer)
       }
 
       remove() {

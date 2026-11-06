@@ -145,5 +145,6 @@
     "88": "El Papa",
     "89": "La rata",
     "90": "El miedo"
-  }
+  },
+  "draw-error": "No pudimos guardar el número cantado. Inténtalo de nuevo."
 }

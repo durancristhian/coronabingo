@@ -42,6 +42,8 @@ export default function RoomAdmin() {
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const submitInProgress = useRef(false)
+  const playersBusy = useRef(false)
+  const [playersPending, setPlayersPending] = useState(false)
   const { createToast, dismissToast, updateToast } = useToast()
   const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
 
@@ -88,7 +90,7 @@ export default function RoomAdmin() {
   }
 
   const submitRoom = async () => {
-    if (submitInProgress.current) return
+    if (submitInProgress.current || playersBusy.current) return
 
     submitInProgress.current = true
     setInProgress(true)
@@ -104,6 +106,7 @@ export default function RoomAdmin() {
         readyToPlay: true,
         selectedNumbers: [],
         soundToPlay: '',
+        soundCommandId: '',
         confettiType: '',
       })
 
@@ -182,6 +185,10 @@ export default function RoomAdmin() {
           <Copy content={`${getBaseUrl()}/room/${room.id}`} />
           <Players
             isFormDisabled={inProgress}
+            onPendingChange={pending => {
+              playersBusy.current = pending
+              setPlayersPending(pending)
+            }}
             players={players}
             room={room}
             setPlayers={setPlayers}
@@ -189,7 +196,7 @@ export default function RoomAdmin() {
           />
           <div className="mt-4">
             <Select
-              disabled={!players.length || inProgress}
+              disabled={!players.length || inProgress || playersPending}
               hint={t('admin:players.field-admin-hint')}
               id="adminId"
               label={t('admin:players.field-admin')}
@@ -207,7 +214,7 @@ export default function RoomAdmin() {
                 updateRoom({ bingoSpinner: value })
               }}
               value={room.bingoSpinner}
-              disabled={inProgress}
+              disabled={inProgress || playersPending}
             />
           </div>
           <div className="mt-4">
@@ -219,7 +226,7 @@ export default function RoomAdmin() {
                 updateRoom({ hideNumbersMeaning: value })
               }}
               value={room.hideNumbersMeaning}
-              disabled={inProgress}
+              disabled={inProgress || playersPending}
             />
           </div>
           {isActive && (
@@ -233,7 +240,7 @@ export default function RoomAdmin() {
                     updateRoom({ activateAdminCode: value })
                   }}
                   value={room.activateAdminCode}
-                  disabled={inProgress}
+                  disabled={inProgress || playersPending}
                 />
               </div>
               {room.activateAdminCode && (
@@ -263,7 +270,12 @@ export default function RoomAdmin() {
               color="green"
               id="configure-room"
               className="w-full"
-              disabled={!room.adminId || players.length < 2 || inProgress}
+              disabled={
+                !room.adminId ||
+                players.length < 2 ||
+                inProgress ||
+                playersPending
+              }
               onClick={submitRoom}
               iconLeft={<FiPlay />}
             >
