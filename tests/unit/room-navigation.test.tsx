@@ -20,6 +20,7 @@ test('a deletion finishing after navigation cannot change the next room', async 
     }),
   }
   vi.stubGlobal('scroll', vi.fn())
+  const removed = new Set<string>()
   const roomListeners = new Map<string, (value: unknown) => void>()
   const rosterListeners = new Map<string, (value: unknown) => void>()
   const ref = (id: string) => ({
@@ -70,14 +71,21 @@ test('a deletion finishing after navigation cannot change the next room', async 
       })
       rosterListeners.get(id)?.({
         metadata: { hasPendingWrites: false },
-        docs: [
-          {
-            exists: true,
-            id: `host-${id}`,
-            ref: { delete: () => deletions[id] },
-            data: () => ({ name: `Host ${id}`, tickets: '1,2' }),
-          },
-        ],
+        docs: removed.has(id)
+          ? []
+          : [
+              {
+                exists: true,
+                id: `host-${id}`,
+                ref: {
+                  delete: async () => {
+                    await deletions[id]
+                    removed.add(id)
+                  },
+                },
+                data: () => ({ name: `Host ${id}`, tickets: '1,2' }),
+              },
+            ],
       })
     })
   }
@@ -117,4 +125,11 @@ test('a deletion finishing after navigation cannot change the next room', async 
   await act(async () => {
     completeB()
   })
+  router = routerFixture({
+    pathname: '/room/[roomId]/admin',
+    query: { roomId: 'a' },
+  })
+  view.rerender(tree())
+  await load('a')
+  expect(document.querySelector('#players-list')).not.toBeInTheDocument()
 })

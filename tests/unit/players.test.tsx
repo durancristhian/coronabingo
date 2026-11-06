@@ -1,5 +1,12 @@
 import React from 'react'
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react'
 import { expect, test, vi } from 'vitest'
 import Players from '~/components/Players'
 import { PlayersContextProvider } from '~/contexts/Players'
@@ -36,11 +43,12 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
   })
   const updateRoom = vi.fn()
   function Setup() {
-    const { players, setPlayers } = usePlayers()
+    const { players, setPlayers, removePlayer } = usePlayers()
     return (
       <Players
         players={players}
         setPlayers={setPlayers}
+        removePlayer={removePlayer}
         room={roomFixture({ adminId: 'host' })}
         updateRoom={updateRoom}
         isFormDisabled={false}
@@ -73,19 +81,41 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
       ],
     }),
   )
-  fireEvent.click(screen.getByRole('button', { name: 'Remove player' }))
+  const aliceRemove = () => {
+    const row = screen.getByText('Alice').closest<HTMLElement>('.cb-player-row')
+    if (!row) throw new Error('Alice row is missing')
+    return within(row).getByRole('button', { name: 'Remove player' })
+  }
+  fireEvent.click(aliceRemove())
   expect(screen.getByText('Alice')).toBeVisible()
   // Firestore publishes a local deletion before the server accepts it.
   act(() => snapshot({ metadata: { hasPendingWrites: true }, docs: [] }))
   expect(screen.getByText('Alice')).toBeVisible()
+  // A deleted document may be absent from the query's mutated-key set.
+  act(() =>
+    snapshot({
+      metadata: { hasPendingWrites: false },
+      docs: [
+        {
+          exists: true,
+          id: 'other',
+          ref: {},
+          data: () => ({ name: 'Charlie', tickets: '3,4' }),
+        },
+      ],
+    }),
+  )
+  expect(screen.getByText('Alice')).toBeVisible()
+  expect(screen.getByText('Charlie')).toBeVisible()
   await act(async () => {
     rejectDelete(new Error('Permission denied'))
   })
   expect(screen.getByRole('alert')).toHaveTextContent(/couldn't remove/i)
   expect(updateRoom).not.toHaveBeenCalled()
-  expect(screen.getByRole('button', { name: 'Remove player' })).toBeEnabled()
-  fireEvent.click(screen.getByRole('button', { name: 'Remove player' }))
+  expect(aliceRemove()).toBeEnabled()
+  fireEvent.click(aliceRemove())
   await waitFor(() =>
     expect(screen.queryByText('Alice')).not.toBeInTheDocument(),
   )
+  expect(screen.getByText('Charlie')).toBeVisible()
 })

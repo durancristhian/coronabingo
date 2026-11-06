@@ -16,6 +16,7 @@ interface Props {
   onPendingChange?: (pending: boolean) => void
   players: Player[]
   room: Room
+  removePlayer: (player: Player) => Promise<void>
   setPlayers: (array: Player[]) => void
   updateRoom: (data: Partial<RoomBase>) => void
 }
@@ -26,6 +27,7 @@ export default function Players({
   players,
   room,
   setPlayers,
+  removePlayer,
   updateRoom,
 }: Props) {
   const { t } = useTranslation()
@@ -33,17 +35,15 @@ export default function Players({
   const [removeError, setRemoveError] = useState(false)
   const { pending, run } = usePendingOperation()
 
-  const onRemovePlayer = (index: number, player: Player) => {
+  const onRemovePlayer = (player: Player) => {
     void run(async () => {
       setRemoveError(false)
       onPendingChange?.(true)
       try {
-        // Do not create a removal draft before Firestore confirms deletion.
-        await player.ref.delete()
+        await removePlayer(player)
         if (room.adminId === player.id) {
           updateRoom({ adminId: '', readyToPlay: false })
         }
-        setPlayers(players.filter((_, playerIndex) => playerIndex !== index))
       } catch {
         setRemoveError(true)
       } finally {
@@ -149,7 +149,7 @@ export default function Players({
                   aria-label={t('admin:players.remove-player')}
                   color="red"
                   id={`remove-player-${index + 1}`}
-                  onClick={() => onRemovePlayer(index, player)}
+                  onClick={() => onRemovePlayer(player)}
                   disabled={isFormDisabled || pending}
                   iconLeft={<FiTrash2 />}
                 />

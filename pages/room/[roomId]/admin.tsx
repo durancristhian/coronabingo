@@ -37,6 +37,7 @@ export default function RoomAdmin() {
     loading: playersLoading,
     players,
     setPlayers,
+    removePlayer,
   } = usePlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
@@ -197,6 +198,7 @@ export default function RoomAdmin() {
             players={players}
             room={room}
             setPlayers={setPlayers}
+            removePlayer={removePlayer}
             updateRoom={updateRoom}
           />
           <div className="mt-4">
