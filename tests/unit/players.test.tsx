@@ -3,6 +3,7 @@ import {
   act,
   fireEvent,
   render,
+  renderHook,
   screen,
   waitFor,
   within,
@@ -118,4 +119,72 @@ test('a denied player deletion keeps the player and offers a retry', async () =>
     expect(screen.queryByText('Alice')).not.toBeInTheDocument(),
   )
   expect(screen.getByText('Charlie')).toBeVisible()
+})
+
+test('settling a removal preserves a failed roster subscription until a valid snapshot', async () => {
+  let next!: (value: unknown) => void
+  let fail!: (error: Error) => void
+  let finish!: () => void
+  const deletion = new Promise<void>(resolve => {
+    finish = resolve
+  })
+  const player = ({
+    id: 'host',
+    name: 'Alice',
+    tickets: '1,2',
+    ref: { delete: () => deletion },
+  } as unknown) as Player
+  database.doc.mockReturnValue({
+    collection: () => ({
+      onSnapshot: (
+        _options: unknown,
+        onNext: typeof next,
+        onError: typeof fail,
+      ) => {
+        next = onNext
+        fail = onError
+        return vi.fn()
+      },
+    }),
+  })
+  const wrapper = ({ children }: { children: React.ReactNode }) => (
+    <Translation
+      router={routerFixture({
+        pathname: '/room/[roomId]/admin',
+        query: { roomId: 'a' },
+      })}
+    >
+      <PlayersContextProvider>{children}</PlayersContextProvider>
+    </Translation>
+  )
+  const { result } = renderHook(() => usePlayers(), { wrapper })
+  await waitFor(() => expect(next).toBeDefined())
+  act(() =>
+    next({
+      metadata: { hasPendingWrites: false },
+      docs: [
+        {
+          exists: true,
+          id: player.id,
+          ref: player.ref,
+          data: () => ({ name: 'Alice', tickets: '1,2' }),
+        },
+      ],
+    }),
+  )
+  let removal = Promise.resolve()
+  act(() => {
+    removal = result.current.removePlayer(player)
+  })
+  vi.spyOn(console, 'error').mockImplementation(() => undefined)
+  act(() => fail(new Error('Listener permission denied')))
+  expect(result.current.error).toBe(true)
+  await act(async () => {
+    finish()
+    await removal
+  })
+  expect(result.current.error).toBe(true)
+  act(() => next({ metadata: { hasPendingWrites: false }, docs: [] }))
+  expect(result.current.error).toBe(false)
+  expect(result.current.players).toEqual([])
 })

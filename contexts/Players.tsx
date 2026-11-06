@@ -51,7 +51,7 @@ const PlayersContextProvider = ({ children }: Props) => {
     state: { type: REMOTE_DATA.NOT_ASKED },
   })
 
-  const publishPlayers = (ownerRoomId: string) => {
+  const publishPlayers = (ownerRoomId: string, fromSnapshot = false) => {
     if (
       activeScope.current.roomId !== ownerRoomId ||
       !activeScope.current.shouldListenToPlayers
@@ -66,12 +66,20 @@ const PlayersContextProvider = ({ children }: Props) => {
     pending?.forEach(player => {
       if (!players.some(item => item.id === player.id)) players.push(player)
     })
-    setScopedState({
-      roomId: ownerRoomId,
-      state: {
-        type: REMOTE_DATA.SUCCESS,
-        data: players.sort((a, b) => a.name.localeCompare(b.name)),
-      },
+    setScopedState(previous => {
+      if (
+        !fromSnapshot &&
+        previous.roomId === ownerRoomId &&
+        previous.state.type === REMOTE_DATA.FAILURE
+      )
+        return previous
+      return {
+        roomId: ownerRoomId,
+        state: {
+          type: REMOTE_DATA.SUCCESS,
+          data: players.sort((a, b) => a.name.localeCompare(b.name)),
+        },
+      }
     })
   }
 
@@ -187,7 +195,7 @@ const PlayersContextProvider = ({ children }: Props) => {
                 draftsByRoom.current.delete(roomId)
               // Query metadata may omit an in-flight deletion. Its promise,
               // rather than row absence, owns the completion transition.
-              publishPlayers(roomId)
+              publishPlayers(roomId, true)
             },
             error => {
               if (!active) return

@@ -103,6 +103,8 @@ for (const locale of ['es', 'en']) {
     }
     await remove.click()
     await expect(row).toHaveCount(0)
+    // Absence during a loading/error screen is not a completed deletion.
+    await expect(page.locator('#players-list > div')).toHaveCount(1)
     await page.reload()
     await expect(page.locator('#players-list > div')).toHaveCount(1)
   })
