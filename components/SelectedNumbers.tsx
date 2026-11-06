@@ -5,11 +5,10 @@ import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { TICKET_NUMBERS } from '~/utils/constants'
 
-import { knuthShuffle } from 'knuth-shuffle'
-
 interface Props {
   isAdmin: boolean
-  onNewNumber: (n: number) => void
+  onNewNumber: (n?: number) => void
+  pending?: boolean
   selectedNumbers: number[]
   bingoSpinner: boolean
   nextIconLeft?: ReactNode
@@ -21,18 +20,12 @@ export default function SelectedNumbers({
   onNewNumber,
   selectedNumbers,
   bingoSpinner,
+  pending = false,
   nextIconLeft = <FiChevronsRight aria-hidden="true" />,
   nextIconRight = <FiChevronsLeft aria-hidden="true" />,
 }: Props) {
   const enableForAdmin = isAdmin && !bingoSpinner
   const roomNumbers = [...selectedNumbers]
-
-  const onNextButtonClick = () => {
-    const missingNumbers = TICKET_NUMBERS.filter(n => !roomNumbers.includes(n))
-    const shuffled = knuthShuffle(missingNumbers.slice(0))
-
-    onNewNumber(shuffled[0])
-  }
 
   const { t } = useTranslation()
 
@@ -48,8 +41,8 @@ export default function SelectedNumbers({
           aria-label={t('playerId:next-number')}
           id="next-number"
           className="mb-4 w-full"
-          onClick={onNextButtonClick}
-          disabled={roomNumbers.length === 90}
+          onClick={() => onNewNumber()}
+          disabled={roomNumbers.length >= 90 || pending}
           iconLeft={nextIconLeft}
           iconRight={nextIconRight}
         >
@@ -70,6 +63,7 @@ export default function SelectedNumbers({
                 'cb-number-board-cell--called bg-green-400 font-medium text-green-800',
               enableForAdmin && 'cursor-pointer focus:shadow-outline',
             ])}
+            disabled={pending}
             onClick={() => enableForAdmin && onNewNumber(n)}
           >
             <span className="uppercase">{n}</span>

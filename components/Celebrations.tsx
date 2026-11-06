@@ -55,7 +55,7 @@ export default function Celebrations({ room }: Props) {
         <div key={ct} className={classnames([i !== 0 && 'mt-4'])}>
           <Button
             aria-label={
-              room.confettiType
+              ct === room.confettiType
                 ? t(`playerId:hide-${ct}`)
                 : t(`playerId:show-${ct}`)
             }

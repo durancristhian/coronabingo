@@ -15,6 +15,7 @@ const playerListRoutes = ['/room/[roomId]', '/room/[roomId]/admin']
 const PlayersContext = createContext<PlayersContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
   setPlayers: () => void 0,
+  removePlayer: async () => undefined,
 })
 
 interface Props {
@@ -40,14 +41,93 @@ const PlayersContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
   const shouldListenToPlayers = playerListRoutes.includes(router.pathname)
+  const activeScope = useRef({ roomId, shouldListenToPlayers })
+  activeScope.current = { roomId, shouldListenToPlayers }
+  const serverPlayersByRoom = useRef(new Map<string, Player[]>())
+  const removalsByRoom = useRef(new Map<string, Map<string, Player>>())
   const draftsByRoom = useRef(new Map<string, Player[]>())
   const subscriptionId = useRef(0)
   const [scopedState, setScopedState] = useState<ScopedPlayersState>({
     state: { type: REMOTE_DATA.NOT_ASKED },
   })
 
+  const publishPlayers = (ownerRoomId: string, fromSnapshot = false) => {
+    if (
+      activeScope.current.roomId !== ownerRoomId ||
+      !activeScope.current.shouldListenToPlayers
+    )
+      return
+    const base =
+      draftsByRoom.current.get(ownerRoomId) ||
+      serverPlayersByRoom.current.get(ownerRoomId) ||
+      []
+    const pending = removalsByRoom.current.get(ownerRoomId)
+    const players = [...base]
+    pending?.forEach(player => {
+      if (!players.some(item => item.id === player.id)) players.push(player)
+    })
+    setScopedState(previous => {
+      if (
+        !fromSnapshot &&
+        previous.roomId === ownerRoomId &&
+        previous.state.type === REMOTE_DATA.FAILURE
+      )
+        return previous
+      return {
+        roomId: ownerRoomId,
+        state: {
+          type: REMOTE_DATA.SUCCESS,
+          data: players.sort((a, b) => a.name.localeCompare(b.name)),
+        },
+      }
+    })
+  }
+
+  const removePlayer = async (player: Player) => {
+    if (
+      !roomId ||
+      activeScope.current.roomId !== roomId ||
+      !activeScope.current.shouldListenToPlayers
+    )
+      return
+    const pending =
+      removalsByRoom.current.get(roomId) || new Map<string, Player>()
+    pending.set(player.id, player)
+    removalsByRoom.current.set(roomId, pending)
+    try {
+      await player.ref.delete()
+      const draft = draftsByRoom.current.get(roomId)
+      if (draft)
+        draftsByRoom.current.set(
+          roomId,
+          draft.filter(item => item.id !== player.id),
+        )
+      serverPlayersByRoom.current.set(
+        roomId,
+        (serverPlayersByRoom.current.get(roomId) || []).filter(
+          item => item.id !== player.id,
+        ),
+      )
+    } catch (error) {
+      // Rollback notifications can follow rejection; restore visibility now.
+      const server = serverPlayersByRoom.current.get(roomId) || []
+      if (!server.some(item => item.id === player.id))
+        serverPlayersByRoom.current.set(roomId, [...server, player])
+      throw error
+    } finally {
+      pending.delete(player.id)
+      if (!pending.size) removalsByRoom.current.delete(roomId)
+      publishPlayers(roomId)
+    }
+  }
+
   const sortAndSet = (players: Player[]) => {
-    if (!roomId || !shouldListenToPlayers) {
+    if (
+      !roomId ||
+      !shouldListenToPlayers ||
+      activeScope.current.roomId !== roomId ||
+      !activeScope.current.shouldListenToPlayers
+    ) {
       return
     }
 
@@ -88,8 +168,10 @@ const PlayersContextProvider = ({ children }: Props) => {
           .doc(roomId)
           .collection('players')
           .onSnapshot(
+            { includeMetadataChanges: true },
             snapshot => {
               if (!active) return
+              if (snapshot.metadata.hasPendingWrites) return
               if (subscriptionId.current !== currentSubscriptionId) {
                 return
               }
@@ -107,22 +189,13 @@ const PlayersContextProvider = ({ children }: Props) => {
                 })
                 .sort((a, b) => a.name.localeCompare(b.name))
 
+              serverPlayersByRoom.current.set(roomId, players)
               const draft = draftsByRoom.current.get(roomId)
-
-              if (draft && !haveSamePlayerIds(draft, players)) {
-                setScopedState({
-                  roomId,
-                  state: { type: REMOTE_DATA.SUCCESS, data: draft },
-                })
-
-                return
-              }
-
-              draftsByRoom.current.delete(roomId)
-              setScopedState({
-                roomId,
-                state: { type: REMOTE_DATA.SUCCESS, data: players },
-              })
+              if (draft && haveSamePlayerIds(draft, players))
+                draftsByRoom.current.delete(roomId)
+              // Query metadata may omit an in-flight deletion. Its promise,
+              // rather than row absence, owns the completion transition.
+              publishPlayers(roomId, true)
             },
             error => {
               if (!active) return
@@ -166,6 +239,7 @@ const PlayersContextProvider = ({ children }: Props) => {
       value={{
         state,
         setPlayers: sortAndSet,
+        removePlayer,
       }}
     >
       {children}

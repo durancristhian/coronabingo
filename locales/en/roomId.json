@@ -19,5 +19,6 @@
   "spreadsheet-room": "Room",
   "spreadsheet-link": "Link",
   "spreadsheet-capacity": "Players",
-  "spreadsheet-admin": "Host"
+  "spreadsheet-admin": "Host",
+  "spreadsheet-missing-host": "Choose a host in room setup before exporting."
 }

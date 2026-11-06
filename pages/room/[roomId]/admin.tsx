@@ -37,11 +37,17 @@ export default function RoomAdmin() {
     loading: playersLoading,
     players,
     setPlayers,
+    removePlayer,
   } = usePlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const submitInProgress = useRef(false)
+  const playersBusy = useRef(new Set<string>())
+  const [playersPendingRooms, setPlayersPendingRooms] = useState(
+    new Set<string>(),
+  )
+  const playersPending = !!room && playersPendingRooms.has(room.id)
   const { createToast, dismissToast, updateToast } = useToast()
   const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
 
@@ -88,7 +94,7 @@ export default function RoomAdmin() {
   }
 
   const submitRoom = async () => {
-    if (submitInProgress.current) return
+    if (submitInProgress.current || playersBusy.current.has(room.id)) return
 
     submitInProgress.current = true
     setInProgress(true)
@@ -104,6 +110,7 @@ export default function RoomAdmin() {
         readyToPlay: true,
         selectedNumbers: [],
         soundToPlay: '',
+        soundCommandId: '',
         confettiType: '',
       })
 
@@ -181,15 +188,22 @@ export default function RoomAdmin() {
           />
           <Copy content={`${getBaseUrl()}/room/${room.id}`} />
           <Players
-            isFormDisabled={inProgress}
+            key={room.id}
+            isFormDisabled={inProgress || playersPending}
+            onPendingChange={pending => {
+              if (pending) playersBusy.current.add(room.id)
+              else playersBusy.current.delete(room.id)
+              setPlayersPendingRooms(new Set(playersBusy.current))
+            }}
             players={players}
             room={room}
             setPlayers={setPlayers}
+            removePlayer={removePlayer}
             updateRoom={updateRoom}
           />
           <div className="mt-4">
             <Select
-              disabled={!players.length || inProgress}
+              disabled={!players.length || inProgress || playersPending}
               hint={t('admin:players.field-admin-hint')}
               id="adminId"
               label={t('admin:players.field-admin')}
@@ -207,7 +221,7 @@ export default function RoomAdmin() {
                 updateRoom({ bingoSpinner: value })
               }}
               value={room.bingoSpinner}
-              disabled={inProgress}
+              disabled={inProgress || playersPending}
             />
           </div>
           <div className="mt-4">
@@ -219,7 +233,7 @@ export default function RoomAdmin() {
                 updateRoom({ hideNumbersMeaning: value })
               }}
               value={room.hideNumbersMeaning}
-              disabled={inProgress}
+              disabled={inProgress || playersPending}
             />
           </div>
           {isActive && (
@@ -233,7 +247,7 @@ export default function RoomAdmin() {
                     updateRoom({ activateAdminCode: value })
                   }}
                   value={room.activateAdminCode}
-                  disabled={inProgress}
+                  disabled={inProgress || playersPending}
                 />
               </div>
               {room.activateAdminCode && (
@@ -263,7 +277,12 @@ export default function RoomAdmin() {
               color="green"
               id="configure-room"
               className="w-full"
-              disabled={!room.adminId || players.length < 2 || inProgress}
+              disabled={
+                !room.adminId ||
+                players.length < 2 ||
+                inProgress ||
+                playersPending
+              }
               onClick={submitRoom}
               iconLeft={<FiPlay />}
             >

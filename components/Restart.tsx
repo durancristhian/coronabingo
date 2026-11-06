@@ -15,7 +15,7 @@ interface Props {
 
 export default function Restart({ room }: Props) {
   const { lang, t } = useTranslation()
-  const { login } = useRoomCode()
+  const { logout } = useRoomCode()
   const replayInProgress = useRef(false)
   const [inProgress, setInProgress] = useState(false)
 
@@ -30,6 +30,7 @@ export default function Restart({ room }: Props) {
         readyToPlay: false,
         selectedNumbers: [],
         soundToPlay: '',
+        soundCommandId: '',
         confettiType: '',
         timesPlayed: room.timesPlayed + 1,
       })
@@ -49,7 +50,7 @@ export default function Restart({ room }: Props) {
     )
 
     if (room.activateAdminCode) {
-      login()
+      logout()
     }
 
     Router.push('/room/[roomId]/admin', `/room/${room.id}/admin`)

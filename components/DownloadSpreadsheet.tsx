@@ -63,65 +63,66 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
     }
   }, [prepareSpreadsheet])
 
+  const host = players.find(player => player.id === room.adminId)
+
   const downloadSpreadsheet = async () => {
-    if (isExporting.current || exportState !== 'ready') return
+    if (isExporting.current || exportState !== 'ready' || !host) return
 
     isExporting.current = true
     setExportState('exporting')
 
-    const withoutAdmin = [...players]
-    const adminId = withoutAdmin.findIndex(p => p.id === room.adminId)
-    const [admin] = withoutAdmin.splice(adminId, 1)
-
-    const roomName = [
-      { value: t('roomId:spreadsheet-room'), type: 'string' },
-      { value: room.name, type: 'string' },
-    ]
-    const roomLink = [
-      { value: t('roomId:spreadsheet-link'), type: 'string' },
-      {
-        value: `${getBaseUrl()}/room/${room.id}`,
-        type: 'string',
-      },
-    ]
-    const roomCapacity = [
-      { value: t('roomId:spreadsheet-capacity'), type: 'string' },
-      { value: players.length, type: 'number' },
-    ]
-    const roomAdmin = [
-      { value: t('roomId:spreadsheet-admin'), type: 'string' },
-      { value: admin.name, type: 'string' },
-      { value: admin.tickets, type: 'string' },
-      {
-        value: `${getBaseUrl()}/room/${room.id}/${admin.id}`,
-        type: 'string',
-      },
-    ]
-    const emptyLine = [{ value: '', type: 'string' }]
-    const roomPlayers = withoutAdmin.map(p => [
-      { value: p.name, type: 'string' },
-      { value: p.tickets, type: 'string' },
-      {
-        value: `${getBaseUrl()}/room/${room.id}/${p.id}`,
-        type: 'string',
-      },
-    ])
-
-    const config = {
-      filename: room.name,
-      sheet: {
-        data: [
-          roomName,
-          roomLink,
-          roomCapacity,
-          roomAdmin,
-          emptyLine,
-          ...roomPlayers,
-        ].filter(Boolean),
-      },
-    }
-
     try {
+      const withoutAdmin = players.filter(player => player.id !== host.id)
+      const admin = host
+
+      const roomName = [
+        { value: t('roomId:spreadsheet-room'), type: 'string' },
+        { value: room.name, type: 'string' },
+      ]
+      const roomLink = [
+        { value: t('roomId:spreadsheet-link'), type: 'string' },
+        {
+          value: `${getBaseUrl()}/room/${room.id}`,
+          type: 'string',
+        },
+      ]
+      const roomCapacity = [
+        { value: t('roomId:spreadsheet-capacity'), type: 'string' },
+        { value: players.length, type: 'number' },
+      ]
+      const roomAdmin = [
+        { value: t('roomId:spreadsheet-admin'), type: 'string' },
+        { value: admin.name, type: 'string' },
+        { value: admin.tickets, type: 'string' },
+        {
+          value: `${getBaseUrl()}/room/${room.id}/${admin.id}`,
+          type: 'string',
+        },
+      ]
+      const emptyLine = [{ value: '', type: 'string' }]
+      const roomPlayers = withoutAdmin.map(p => [
+        { value: p.name, type: 'string' },
+        { value: p.tickets, type: 'string' },
+        {
+          value: `${getBaseUrl()}/room/${room.id}/${p.id}`,
+          type: 'string',
+        },
+      ])
+
+      const config = {
+        filename: room.name,
+        sheet: {
+          data: [
+            roomName,
+            roomLink,
+            roomCapacity,
+            roomAdmin,
+            emptyLine,
+            ...roomPlayers,
+          ].filter(Boolean),
+        },
+      }
+
       const zipcelx = await loadZipcelx()
       /* The cell type is widened while building the legacy config. */
       // @ts-ignore
@@ -148,6 +149,9 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
         {t('roomId:spreadsheet-description')}
       </p>
       <div aria-live="polite" className="mt-4">
+        {!host && (
+          <Message type="error">{t('roomId:spreadsheet-missing-host')}</Message>
+        )}
         {exportState === 'error' ? (
           <Fragment>
             <Message type="error">{t('roomId:spreadsheet-load-error')}</Message>
@@ -168,7 +172,7 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
             id="download-spreadsheet"
             onClick={downloadSpreadsheet}
             color="green"
-            disabled={!players.length || exportState !== 'ready'}
+            disabled={!host || exportState !== 'ready'}
             iconLeft={<FiDownload />}
           >
             {buttonLabel}

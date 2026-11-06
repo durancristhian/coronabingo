@@ -13,6 +13,7 @@ export interface RoomBase {
   name: string
   readyToPlay: boolean
   selectedNumbers: number[]
+  soundCommandId?: string
   soundToPlay: string
   timesPlayed: number
   streamerView: boolean

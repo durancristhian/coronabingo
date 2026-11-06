@@ -19,7 +19,9 @@
         "ui-tests:build": "node scripts/ui-tests.js --build-only",
         "ui-tests:ci": "node scripts/ui-tests.js --production --skip-build",
         "setup:worktree": "bash scripts/setup-worktree.sh",
-        "dev:emulator": "node scripts/ui-tests.js --interactive"
+        "dev:emulator": "node scripts/ui-tests.js --interactive",
+        "test:unit": "vitest run",
+        "test:unit:watch": "vitest"
     },
     "husky": {
         "hooks": {
@@ -83,7 +85,12 @@
     "license": "MIT",
     "devDependencies": {
         "@playwright/test": "1.63.0",
+        "@testing-library/dom": "^10.4.2",
+        "@testing-library/jest-dom": "^7.0.1",
+        "@testing-library/react": "^16.3.3",
         "firebase-tools": "15.31.0",
+        "jsdom": "^31.0.0",
+        "vitest": "^5.1.0",
         "webpack": "5.111.1"
     },
     "engines": {

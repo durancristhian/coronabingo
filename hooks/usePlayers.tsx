@@ -3,7 +3,7 @@ import { PlayersContext } from '~/contexts/Players'
 import { REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 
 export default function usePlayers() {
-  const { state, setPlayers } = useContext(PlayersContext)
+  const { state, setPlayers, removePlayer } = useContext(PlayersContext)
 
   return {
     error: state.type === REMOTE_DATA.FAILURE,
@@ -12,5 +12,6 @@ export default function usePlayers() {
       state.type === REMOTE_DATA.LOADING,
     players: state.type === REMOTE_DATA.SUCCESS ? state.data : [],
     setPlayers,
+    removePlayer,
   }
 }

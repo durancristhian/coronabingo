@@ -19,5 +19,6 @@
   "spreadsheet-room": "Sala",
   "spreadsheet-link": "Link",
   "spreadsheet-capacity": "Personas",
-  "spreadsheet-admin": "Dirige el juego"
+  "spreadsheet-admin": "Dirige el juego",
+  "spreadsheet-missing-host": "Elige a quien dirige en la preparación de la sala antes de exportar."
 }

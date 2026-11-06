@@ -18,7 +18,8 @@
     "add-player": "Agregar persona",
     "remove-player": "Eliminar persona",
     "field-admin-hint": "Elige quién va a sacar o marcar los números para que todos los vean.",
-    "field-admin": "Dirige el juego"
+    "field-admin": "Dirige el juego",
+    "remove-error": "No pudimos quitar a la persona. Inténtalo de nuevo."
   },
   "field-hide-dreams-hint": "Los significados vienen de la quiniela argentina. Puedes ocultarlos si no los usan.",
   "field-hide-dreams": "Ocultar los significados de los números",

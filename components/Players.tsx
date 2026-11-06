@@ -4,6 +4,8 @@ import React, { FormEvent, useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
+import Message from '~/components/Message'
+import usePendingOperation from '~/hooks/usePendingOperation'
 import { Player } from '~/interfaces/models/Player'
 import { Room, RoomBase } from '~/interfaces/models/Room'
 import playerApi from '~/models/player'
@@ -11,39 +13,43 @@ import { MAX_PLAYERS } from '~/utils/constants'
 
 interface Props {
   isFormDisabled: boolean
+  onPendingChange?: (pending: boolean) => void
   players: Player[]
   room: Room
+  removePlayer: (player: Player) => Promise<void>
   setPlayers: (array: Player[]) => void
   updateRoom: (data: Partial<RoomBase>) => void
 }
 
 export default function Players({
   isFormDisabled,
+  onPendingChange,
   players,
   room,
   setPlayers,
+  removePlayer,
   updateRoom,
 }: Props) {
   const { t } = useTranslation()
   const [name, setName] = useState('')
+  const [removeError, setRemoveError] = useState(false)
+  const { pending, run } = usePendingOperation()
 
-  const onRemovePlayer = (index: number, player: Player) => {
-    const cleanAdmin = room.adminId === player.id
-    const changes: Partial<RoomBase> = {}
-
-    if (cleanAdmin) {
-      changes.adminId = ''
-      changes.readyToPlay = false
-    }
-
-    updateRoom(changes)
-
-    const playersCopy = [...players]
-    playersCopy.splice(index, 1)
-
-    setPlayers(playersCopy)
-
-    player.ref.delete()
+  const onRemovePlayer = (player: Player) => {
+    void run(async () => {
+      setRemoveError(false)
+      onPendingChange?.(true)
+      try {
+        await removePlayer(player)
+        if (room.adminId === player.id) {
+          updateRoom({ adminId: '', readyToPlay: false })
+        }
+      } catch {
+        setRemoveError(true)
+      } finally {
+        onPendingChange?.(false)
+      }
+    })
   }
 
   const onSubmit = (event: FormEvent) => {
@@ -71,6 +77,11 @@ export default function Players({
 
   return (
     <div className="mt-8">
+      {removeError && (
+        <div role="alert">
+          <Message type="error">{t('admin:players.remove-error')}</Message>
+        </div>
+      )}
       <p className="flex items-center">
         <span className="mr-1">{t('admin:players.title')}</span>
         <span
@@ -85,7 +96,9 @@ export default function Players({
         </span>
       </p>
       <form onSubmit={onSubmit}>
-        <fieldset disabled={players.length === MAX_PLAYERS || isFormDisabled}>
+        <fieldset
+          disabled={players.length === MAX_PLAYERS || isFormDisabled || pending}
+        >
           <div className="flex items-end">
             <div className="cb-player-field flex-auto">
               <InputText
@@ -136,8 +149,8 @@ export default function Players({
                   aria-label={t('admin:players.remove-player')}
                   color="red"
                   id={`remove-player-${index + 1}`}
-                  onClick={() => onRemovePlayer(index, player)}
-                  disabled={isFormDisabled}
+                  onClick={() => onRemovePlayer(player)}
+                  disabled={isFormDisabled || pending}
                   iconLeft={<FiTrash2 />}
                 />
               </div>

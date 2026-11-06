@@ -51,6 +51,8 @@ jobs:
 
       - run: npm run lint:check
 
+      - run: npm run test:unit
+
       - run: npm run test:ui-runner
 
       - name: Check Firestore listener lifecycle
