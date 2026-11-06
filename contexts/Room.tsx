@@ -24,6 +24,8 @@ const RoomContextProvider = ({ children }: Props) => {
   const roomId = router.pathname.startsWith('/room/')
     ? router.query.roomId?.toString()
     : undefined
+  const activeRoomId = useRef(roomId)
+  activeRoomId.current = roomId
   const draftsByRoom = useRef(new Map<string, Partial<RoomBase>>())
   const [state, setState] = useState<RemoteData<Error, Room | null>>({
     type: REMOTE_DATA.NOT_ASKED,
@@ -32,6 +34,7 @@ const RoomContextProvider = ({ children }: Props) => {
   const updateRoom = (partialRoom: Partial<RoomBase>) => {
     if (
       !roomId ||
+      activeRoomId.current !== roomId ||
       state.type !== REMOTE_DATA.SUCCESS ||
       state.data?.id !== roomId
     )
@@ -41,7 +44,11 @@ const RoomContextProvider = ({ children }: Props) => {
       ...partialRoom,
     })
     setState(prevState => {
-      if (prevState.type !== REMOTE_DATA.SUCCESS || !prevState.data) {
+      if (
+        prevState.type !== REMOTE_DATA.SUCCESS ||
+        !prevState.data ||
+        prevState.data.id !== roomId
+      ) {
         return prevState
       }
 

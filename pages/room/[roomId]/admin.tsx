@@ -42,8 +42,11 @@ export default function RoomAdmin() {
   const randomTickets = useRandomTickets()
   const [inProgress, setInProgress] = useState(false)
   const submitInProgress = useRef(false)
-  const playersBusy = useRef(false)
-  const [playersPending, setPlayersPending] = useState(false)
+  const playersBusy = useRef(new Set<string>())
+  const [playersPendingRooms, setPlayersPendingRooms] = useState(
+    new Set<string>(),
+  )
+  const playersPending = !!room && playersPendingRooms.has(room.id)
   const { createToast, dismissToast, updateToast } = useToast()
   const { isActive, incrementInteractions } = useEasterEgg('useRoomExperiments')
 
@@ -90,7 +93,7 @@ export default function RoomAdmin() {
   }
 
   const submitRoom = async () => {
-    if (submitInProgress.current || playersBusy.current) return
+    if (submitInProgress.current || playersBusy.current.has(room.id)) return
 
     submitInProgress.current = true
     setInProgress(true)
@@ -184,10 +187,12 @@ export default function RoomAdmin() {
           />
           <Copy content={`${getBaseUrl()}/room/${room.id}`} />
           <Players
-            isFormDisabled={inProgress}
+            key={room.id}
+            isFormDisabled={inProgress || playersPending}
             onPendingChange={pending => {
-              playersBusy.current = pending
-              setPlayersPending(pending)
+              if (pending) playersBusy.current.add(room.id)
+              else playersBusy.current.delete(room.id)
+              setPlayersPendingRooms(new Set(playersBusy.current))
             }}
             players={players}
             room={room}

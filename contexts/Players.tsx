@@ -40,6 +40,8 @@ const PlayersContextProvider = ({ children }: Props) => {
   const router = useRouter()
   const roomId = router.query.roomId?.toString()
   const shouldListenToPlayers = playerListRoutes.includes(router.pathname)
+  const activeScope = useRef({ roomId, shouldListenToPlayers })
+  activeScope.current = { roomId, shouldListenToPlayers }
   const draftsByRoom = useRef(new Map<string, Player[]>())
   const subscriptionId = useRef(0)
   const [scopedState, setScopedState] = useState<ScopedPlayersState>({
@@ -47,7 +49,12 @@ const PlayersContextProvider = ({ children }: Props) => {
   })
 
   const sortAndSet = (players: Player[]) => {
-    if (!roomId || !shouldListenToPlayers) {
+    if (
+      !roomId ||
+      !shouldListenToPlayers ||
+      activeScope.current.roomId !== roomId ||
+      !activeScope.current.shouldListenToPlayers
+    ) {
       return
     }
 
