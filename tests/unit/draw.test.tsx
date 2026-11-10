@@ -79,9 +79,10 @@ test('two host views calling different numbers preserve both calls', async () =>
   }
   const first = render(<Host />)
   const second = render(<Host />)
-  await waitFor(() =>
-    expect(first.container.querySelector('#ticket-numbers')).not.toBeNull(),
-  )
+  await waitFor(() => {
+    expect(first.container.querySelector('#ticket-numbers')).not.toBeNull()
+    expect(second.container.querySelector('#ticket-numbers')).not.toBeNull()
+  })
   const firstBoard = within(
     first.container.querySelector('#ticket-numbers') as HTMLElement,
   )

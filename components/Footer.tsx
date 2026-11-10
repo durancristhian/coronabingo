@@ -4,7 +4,8 @@ import { FiCoffee, FiMessageSquare, FiTwitter } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import News from '~/components/News'
-import { trustContent, trustPaths } from '~/utils/publicContent'
+import Heading from '~/components/Heading'
+import { publicPath, trustContent, trustPaths } from '~/utils/publicContent'
 
 const TWEETS = [
   '1266490485650198528',
@@ -20,36 +21,47 @@ export default function Footer() {
     <footer className="cb-footer bg-white p-4 shadow">
       <Container size="large">
         <News tweetIds={TWEETS} />
-        <div className="cb-footer-meta md:flex md:items-center md:justify-between">
-          <p className="text-center md:text-left">
-            <span>{t('common:made-by')}</span>
-            <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
-              Cristhian Duran
-            </Anchor>
-          </p>
-          <div className="mt-8 md:mt-0 text-center md:text-left">
-            <ul className="md:flex md:items-center md:justify-center">
-              <li className="mb-2 md:mb-0 md:mr-4">
-                <Anchor
-                  href="https://cafecito.app/durancristhian"
-                  id="donate"
-                  display="block"
-                >
-                  <span className="flex items-center justify-center">
-                    <FiCoffee />
-                    <span className="ml-1">{t('common:donate')}</span>
-                  </span>
-                </Anchor>
-              </li>
-              <li className="mb-2 md:mb-0 md:mr-4">
+        <div className="cb-footer-meta">
+          <section className="cb-footer-group" aria-labelledby="footer-project">
+            <Heading type="h3">
+              <span id="footer-project">{t('common:footer-project')}</span>
+            </Heading>
+            <p>
+              <span>{t('common:made-by')}</span>
+              <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
+                Cristhian Duran
+              </Anchor>
+            </p>
+            <nav aria-labelledby="footer-project">
+              <ul className="cb-footer-list">
+                {trustPaths.map(path => (
+                  <li key={path}>
+                    <a
+                      className="cb-text-link"
+                      href={publicPath(`/${path}`, lang)}
+                    >
+                      {trustContent(lang)[path].title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </section>
+          <nav className="cb-footer-group" aria-labelledby="footer-participate">
+            <Heading type="h3">
+              <span id="footer-participate">
+                {t('common:footer-participate')}
+              </span>
+            </Heading>
+            <ul className="cb-footer-list">
+              <li>
                 <Anchor
                   href="https://forms.gle/egSBrsKSFnEgabff7"
                   id="feedback-form"
-                  display="block"
                 >
-                  <span className="flex items-center justify-center">
-                    <FiMessageSquare />
-                    <span className="ml-1">{t('common:feedback-form')}</span>
+                  <span className="cb-footer-action">
+                    <FiMessageSquare aria-hidden="true" />
+                    <span>{t('common:feedback-form')}</span>
                   </span>
                 </Anchor>
               </li>
@@ -57,35 +69,24 @@ export default function Footer() {
                 <Anchor
                   href="https://twitter.com/corona_bingo"
                   id="coronabingo-twitter"
-                  display="block"
                 >
-                  <span className="flex items-center justify-center">
-                    <FiTwitter />
-                    <span className="ml-1">
-                      {t('common:coronabingo-twitter')}
-                    </span>
+                  <span className="cb-footer-action">
+                    <FiTwitter aria-hidden="true" />
+                    <span>{t('common:coronabingo-twitter')}</span>
+                  </span>
+                </Anchor>
+              </li>
+              <li>
+                <Anchor href="https://cafecito.app/durancristhian" id="donate">
+                  <span className="cb-footer-action">
+                    <FiCoffee aria-hidden="true" />
+                    <span>{t('common:donate')}</span>
                   </span>
                 </Anchor>
               </li>
             </ul>
-          </div>
+          </nav>
         </div>
-        <nav
-          aria-label={lang === 'en' ? 'About this site' : 'Acerca del sitio'}
-        >
-          <ul className="cb-public-links">
-            {trustPaths.map(path => (
-              <li key={path}>
-                <a
-                  className="cb-text-link"
-                  href={`${lang === 'en' ? '/en' : ''}/${path}`}
-                >
-                  {trustContent(lang)[path].title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </Container>
     </footer>
   )

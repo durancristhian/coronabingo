@@ -88,10 +88,16 @@ with the owner-approved public email and contactPoint. Contact details live in
 `publicContact` in that module. Keep telephone and postal address unpublished;
 do not invent an Organization identity to satisfy an audit.
 
+Use `publicPath` for internal navigation in HTML and Markdown so links retain
+the current origin and language on localhost, Preview and Production. Reserve
+`publicUrl` for canonical identity metadata; sitemap and llms.txt discovery URLs
+remain absolute. The shared footer groups project navigation and participation
+links below the news, wrapping into stacked groups on narrow screens.
+
 [llms.txt](../public/llms.txt) follows the [published format](https://llmstxt.org/)
 with use-case and interaction guidance before its H2 link lists. Update the
 [sitemap](../public/sitemap.xml) when adding canonical public pages. Run
-`npm run ui-tests:production -- tests/ui/agent-readiness.spec.ts tests/ui/seo.spec.ts`
+`npm run ui-tests:production -- tests/ui/agent-readiness.spec.ts tests/ui/seo.spec.ts tests/ui/public-navigation.spec.ts`
 for compiled HTTP, discovery-file, metadata and layout checks against isolated
 local destinations. After publishing, repeat GET requests with both Accept
 values against the hosted URL and verify status, Content-Type, Vary and body;

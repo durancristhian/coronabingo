@@ -14,18 +14,20 @@ export const trustPaths = ['about', 'contact', 'privacy'] as const
 export type TrustPage = typeof trustPaths[number]
 export const trustContent = (lang: string) =>
   lang === 'en' ? enTrust : esTrust
-export const publicUrl = (path: string, lang: string) =>
-  `${siteOrigin}${lang === 'en' ? '/en' : ''}${
+export const publicPath = (path: string, lang: string) =>
+  `${lang === 'en' ? '/en' : ''}${
     path === '/' ? (lang === 'en' ? '' : '/') : path
   }`
+export const publicUrl = (path: string, lang: string) =>
+  `${siteOrigin}${publicPath(path, lang)}`
 
 export function publicLinks(lang: string) {
   const content = trustContent(lang)
   return [
-    { label: lang === 'en' ? 'Home' : 'Inicio', url: publicUrl('/', lang) },
+    { label: lang === 'en' ? 'Home' : 'Inicio', url: publicPath('/', lang) },
     ...trustPaths.map(path => ({
       label: content[path].title,
-      url: publicUrl(`/${path}`, lang),
+      url: publicPath(`/${path}`, lang),
     })),
     { label: 'Twitter', url: 'https://twitter.com/corona_bingo' },
     { label: 'Cristhian Duran', url: 'https://twitter.com/DuranCristhian' },
@@ -71,7 +73,7 @@ export function publicMarkdown(path: string, lang: string) {
         )}`,
     ),
     links,
-    `[Agent instructions](${siteOrigin}/llms.txt)`,
+    '[Agent instructions](/llms.txt)',
     '',
   ].join('\n\n')
 }
