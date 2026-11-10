@@ -146,6 +146,14 @@ html {
   gap: 0.5rem;
 }
 
+.cb-footer-credit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 0.25rem;
+  min-block-size: 2.75rem;
+}
+
 .cb-footer-action svg {
   flex-shrink: 0;
 }

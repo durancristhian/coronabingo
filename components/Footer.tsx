@@ -26,14 +26,19 @@ export default function Footer() {
             <Heading type="h3">
               <span id="footer-project">{t('common:footer-project')}</span>
             </Heading>
-            <p>
-              <span>{t('common:made-by')}</span>
-              <Anchor href="https://twitter.com/DuranCristhian" id="my-twitter">
-                Cristhian Duran
-              </Anchor>
-            </p>
             <nav aria-labelledby="footer-project">
               <ul className="cb-footer-list">
+                <li>
+                  <p className="cb-footer-credit">
+                    <span>{t('common:made-by')}</span>
+                    <Anchor
+                      href="https://twitter.com/DuranCristhian"
+                      id="my-twitter"
+                    >
+                      Cristhian Duran
+                    </Anchor>
+                  </p>
+                </li>
                 {trustPaths.map(path => (
                   <li key={path}>
                     <a

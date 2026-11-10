@@ -1,4 +1,19 @@
 import { test, expect } from './fixtures'
+import { Locator } from '@playwright/test'
+
+async function expectProjectRhythm(project: Locator) {
+  const centers = await project.locator('a').evaluateAll(links =>
+    links.map(link => {
+      const range = document.createRange()
+      range.selectNodeContents(link)
+      const rect = range.getBoundingClientRect()
+      return rect.y + rect.height / 2
+    }),
+  )
+  const steps = centers.slice(1).map((center, index) => center - centers[index])
+  expect(steps).toHaveLength(3)
+  expect(Math.max(...steps) - Math.min(...steps)).toBeLessThanOrEqual(1)
+}
 
 for (const lang of ['es', 'en']) {
   const prefix = lang === 'en' ? '/en' : ''
@@ -104,15 +119,31 @@ for (const lang of ['es', 'en']) {
       ).toBe(true)
       for (const link of await footer.locator('.cb-footer-list a').all())
         expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+      await expectProjectRhythm(project)
       if (width === 320 || width === 1280)
         await footer.screenshot({
           path: testInfo.outputPath(`footer-${lang}-${width}.png`),
         })
     }
-    const firstLink = project.locator('nav a').first()
+    const firstLink = project.locator(`nav a[href="${prefix}/about"]`)
     await firstLink.focus()
     await expect(firstLink).toBeFocused()
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(new RegExp(`${prefix}/about$`))
+  })
+
+  test.describe(`${lang} touch footer`, () => {
+    test.use({ hasTouch: true })
+    test('creator and navigation share the same row spacing', async ({
+      page,
+    }) => {
+      await page.goto(`${prefix}/contact`)
+      for (const width of [320, 1280]) {
+        await page.setViewportSize({ width, height: 800 })
+        await expectProjectRhythm(
+          page.locator('footer section[aria-labelledby="footer-project"]'),
+        )
+      }
+    })
   })
 }
