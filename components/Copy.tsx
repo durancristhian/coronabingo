@@ -14,7 +14,7 @@ interface Props {
 
 export default function Share({ content }: Props) {
   const [showModal, setShowModal] = useState(false)
-  const { createToast, dismissToast } = useToast()
+  const { createToast } = useToast()
   const { t } = useTranslation()
 
   const shareOnWhatsApp = () => {
@@ -32,11 +32,7 @@ export default function Share({ content }: Props) {
   const showToast = () => {
     setShowModal(false)
 
-    const toastId = createToast('common:copied', 'information')
-
-    setTimeout(() => {
-      dismissToast(toastId)
-    }, 2000)
+    createToast('common:copied', 'information', 2000)
   }
 
   return (

@@ -4,12 +4,13 @@ import { useRouter } from 'next/router'
 import React, { Fragment } from 'react'
 import {
   applicationSchema,
+  publicUrl,
+  siteOrigin,
   trustContent,
   trustPaths,
   TrustPage,
 } from '~/utils/publicContent'
 
-const origin = 'https://coronabingo.com.ar'
 const pages: Record<string, string> = {
   '/': 'home',
   '/room/[roomId]': 'room',
@@ -24,9 +25,7 @@ export default function PageMetadata() {
   const isHome = pathname === '/'
   const isTrust = trustPaths.some(path => pathname === `/${path}`)
   const isPublic = isHome || isTrust
-  const homeUrl = `${origin}${lang === 'en' ? '/en' : ''}${
-    isHome ? (lang === 'en' ? '' : '/') : pathname
-  }`
+  const pageUrl = publicUrl(pathname, lang)
   const trust = isTrust
     ? trustContent(lang)[pathname.slice(1) as TrustPage]
     : undefined
@@ -61,7 +60,7 @@ export default function PageMetadata() {
           />
           <meta
             property="og:image"
-            content={`${origin}/social.jpg`}
+            content={`${siteOrigin}/social.jpg`}
             key="og:image"
           />
           <meta
@@ -77,7 +76,7 @@ export default function PageMetadata() {
           />
           <meta
             name="twitter:image"
-            content={`${origin}/social.jpg`}
+            content={`${siteOrigin}/social.jpg`}
             key="twitter:image"
           />
         </Fragment>
@@ -96,28 +95,28 @@ export default function PageMetadata() {
       )}
       {isPublic ? (
         <Fragment>
-          <link rel="describedby" href={`${origin}/llms.txt`} key="llms" />
-          <link rel="canonical" href={homeUrl} key="canonical" />
+          <link rel="describedby" href={`${siteOrigin}/llms.txt`} key="llms" />
+          <link rel="canonical" href={pageUrl} key="canonical" />
           <link
             rel="alternate"
             hrefLang="es"
-            href={`${origin}${isHome ? '/' : pathname}`}
+            href={publicUrl(pathname, 'es')}
             key="alternate-es"
           />
           <link
             rel="alternate"
             hrefLang="en"
-            href={`${origin}/en${isHome ? '' : pathname}`}
+            href={publicUrl(pathname, 'en')}
             key="alternate-en"
           />
           <link
             rel="alternate"
             hrefLang="x-default"
-            href={`${origin}${isHome ? '/' : pathname}`}
+            href={publicUrl(pathname, 'es')}
             key="alternate-default"
           />
-          <meta property="og:url" content={homeUrl} key="og:url" />
-          <meta name="twitter:url" content={homeUrl} key="twitter:url" />
+          <meta property="og:url" content={pageUrl} key="og:url" />
+          <meta name="twitter:url" content={pageUrl} key="twitter:url" />
         </Fragment>
       ) : (
         <meta name="robots" content="noindex" key="robots" />

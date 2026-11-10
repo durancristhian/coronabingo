@@ -29,14 +29,7 @@ export default function Restart({ room }: Props) {
     setReplayError(false)
 
     try {
-      await roomApi.updateRoom(room.ref, {
-        readyToPlay: false,
-        selectedNumbers: [],
-        soundToPlay: '',
-        soundCommandId: '',
-        confettiType: '',
-        timesPlayed: room.timesPlayed + 1,
-      })
+      await roomApi.restartGame(room)
     } catch {
       replayInProgress.current = false
       setInProgress(false)

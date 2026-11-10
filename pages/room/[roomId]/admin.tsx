@@ -21,10 +21,8 @@ import useRandomTickets from '~/hooks/useRandomTickets'
 import useRoom from '~/hooks/useRoom'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces/custom/Emojis'
-import playerApi, { defaultPlayerData } from '~/models/player'
-import roomApi, { defaultRoomData } from '~/models/room'
+import roomApi from '~/models/room'
 import { getRoomStartedEventParams } from '~/utils/analyticsEvents'
-import { createBatch } from '~/utils/firebase'
 import { getBaseUrl } from '~/utils/getBaseUrl'
 import { isRoomOld } from '~/utils/isRoomOld'
 import { scrollToTop } from '~/utils/scrollToTop'
@@ -124,29 +122,7 @@ export default function RoomAdmin() {
     const toastId = createToast('admin:saving', 'information')
 
     try {
-      const batch = createBatch()
-
-      batch.update(room.ref, {
-        ...defaultRoomData,
-        ...roomApi.excludeExtraFields(room),
-        readyToPlay: true,
-        selectedNumbers: [],
-        soundToPlay: '',
-        soundCommandId: '',
-        confettiType: '',
-      })
-
-      players.map((player, index) => {
-        batch.set(player.ref, {
-          ...defaultPlayerData,
-          ...playerApi.excludeExtraFields(player),
-          /* TODO: review this case after improving the one with the room above */
-          tickets: randomTickets[index],
-          selectedNumbers: [],
-        })
-      })
-
-      await batch.commit()
+      await roomApi.startGame(room, players, randomTickets)
 
       if (!ownsCompletion()) {
         dismissToast(toastId)
@@ -165,11 +141,7 @@ export default function RoomAdmin() {
         }),
       )
 
-      updateToast('admin:success', 'success', toastId)
-
-      setTimeout(() => {
-        dismissToast(toastId)
-      }, 2000)
+      updateToast('admin:success', 'success', toastId, 2000)
 
       Router.push('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {

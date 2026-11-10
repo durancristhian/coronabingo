@@ -7,7 +7,6 @@ async function revealNews(page: Page) {
 
 const widgetsURL = '**://platform.twitter.com/widgets.js'
 // Controlled provider boundary: the real application mounts/unmounts the embeds.
-// Both factory names cover the old dependency and the owned integration.
 const widgetsScript = `
   function createTweet(id, target) {
     if (!target || !target.isConnected) {
@@ -25,7 +24,7 @@ const widgetsScript = `
       if (callback) callback(this);
       return Promise.resolve(this);
     },
-    widgets: { createTweet, createTweetEmbed: createTweet }
+    widgets: { createTweet }
   };
 `
 

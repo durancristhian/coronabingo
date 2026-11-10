@@ -9,7 +9,10 @@ export const siteOrigin = 'https://coronabingo.com.ar'
 export const publicContact = {
   name: 'Cristhian Duran',
   email: 'durancristhiandev@gmail.com',
+  profileUrl: 'https://twitter.com/DuranCristhian',
+  feedbackUrl: 'https://forms.gle/egSBrsKSFnEgabff7',
 }
+export const publicSocialUrl = 'https://twitter.com/corona_bingo'
 export const trustPaths = ['about', 'contact', 'privacy'] as const
 export type TrustPage = typeof trustPaths[number]
 export const trustContent = (lang: string) =>
@@ -29,15 +32,15 @@ export function publicLinks(lang: string) {
       label: content[path].title,
       url: publicPath(`/${path}`, lang),
     })),
-    { label: 'Twitter', url: 'https://twitter.com/corona_bingo' },
-    { label: 'Cristhian Duran', url: 'https://twitter.com/DuranCristhian' },
+    { label: 'Twitter', url: publicSocialUrl },
+    { label: publicContact.name, url: publicContact.profileUrl },
     {
       label: `${lang === 'en' ? 'Email' : 'Correo'}: ${publicContact.email}`,
       url: `mailto:${publicContact.email}`,
     },
     {
       label: lang === 'en' ? 'Send feedback' : 'Enviar comentarios',
-      url: 'https://forms.gle/egSBrsKSFnEgabff7',
+      url: publicContact.feedbackUrl,
     },
   ]
 }
@@ -98,7 +101,7 @@ export function applicationSchema(lang: string) {
     creator: {
       '@type': 'Person',
       name: publicContact.name,
-      url: 'https://twitter.com/DuranCristhian',
+      url: publicContact.profileUrl,
       email: publicContact.email,
       contactPoint: {
         '@type': 'ContactPoint',
@@ -108,6 +111,6 @@ export function applicationSchema(lang: string) {
         url: publicUrl('/contact', lang),
       },
     },
-    sameAs: ['https://twitter.com/corona_bingo'],
+    sameAs: [publicSocialUrl],
   }
 }

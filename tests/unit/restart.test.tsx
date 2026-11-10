@@ -16,7 +16,7 @@ for (const language of ['es', 'en'] as const) {
     let reject!: (error: Error) => void
     let resolve!: () => void
     const update = vi
-      .spyOn(roomApi, 'updateRoom')
+      .spyOn(roomApi, 'restartGame')
       .mockImplementationOnce(
         () =>
           new Promise<void>((_, fail) => {
@@ -58,14 +58,7 @@ for (const language of ['es', 'en'] as const) {
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(button).toBeDisabled()
     expect(update).toHaveBeenCalledTimes(2)
-    expect(update).toHaveBeenLastCalledWith(room.ref, {
-      readyToPlay: false,
-      selectedNumbers: [],
-      soundToPlay: '',
-      soundCommandId: '',
-      confettiType: '',
-      timesPlayed: 3,
-    })
+    expect(update).toHaveBeenLastCalledWith(room)
     await act(async () => resolve())
     await waitFor(() =>
       expect(Router.push).toHaveBeenCalledWith(

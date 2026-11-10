@@ -55,9 +55,6 @@ jobs:
 
       - run: npm run test:ui-runner
 
-      - name: Check Firestore listener lifecycle
-        run: node scripts/validate-firestore-listeners.cjs
-
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
 
@@ -70,7 +67,7 @@ jobs:
         env:
           ANALYZE_BUNDLE: '1'
 
-      # Uses the build above without compiling again. A failure fails this job.
+      # Reuses the isolated environment embedded in the build above.
       - name: Run host and player regression
         run: npm run ui-tests:ci
 

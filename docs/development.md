@@ -54,7 +54,7 @@ Read the returned path in the next operation; directory numbering and file exten
 | State transitions and isolated React behavior | `npm run test:unit`; add emulator journeys for database concurrency |
 | Application code | `npm run lint:check`, `npm run build`, `git diff --check` |
 | Translations | `npm run validate-locales` for focused checks; also runs during `prebuild` |
-| Card data or generator | `npm run validate-tickets`; metadata inconsistencies and excessive card overlap return a nonzero exit status |
+| Card data or generator | `npm run validate-tickets`; invalid metadata or excessive card overlap fails the command |
 | Analytics | `npm run validate-analytics` and the affected browser journey |
 | Room setup, card assignment, host/player synchronization, marking, reload, or restart | `npm run ui-tests`; use `npm run ui-tests:production` for a compiled build |
 | Documentation only | Content, links, command accuracy, and `git diff --check`; commit hooks still run |
@@ -109,7 +109,11 @@ PERF-10 is implemented in [PR #217](https://github.com/durancristhian/coronabing
 
 The homepage loads the room model and Firestore when the room-name field receives focus. Submitting shares that load, prevents duplicate submissions, and allows retry after a failed download. The shared contexts stay mounted to preserve room drafts; their data subscriptions load Firestore only when room/player IDs are needed. Game pages also import their data operations, so direct room links load the SDK with the route.
 
-Run `node scripts/validate-firestore-listeners.cjs` to check listener scope, cleanup, navigation during a pending import, and stale callbacks without a database. CI runs this probe and the ES/EN browser tests for cold-home loading, delayed downloads, failure recovery, and room creation.
+The [subscription lifetime helper](../utils/firestoreSubscription.ts) owns lazy loading, callback cancellation, and listener cleanup; providers own their snapshot reconciliation. Run `npm run test:unit` to check listener scope, cleanup, navigation during a pending import, stale callbacks, and import failures with real React and controlled database boundaries. CI also runs the ES/EN browser tests for cold-home loading, delayed downloads, failure recovery, and room creation.
+
+## Game transitions
+
+The [room model](../models/room.tsx) owns atomic game start and shared per-game reset fields. Starting replaces player documents to clear prior card marks; restarting preserves room setup and advances the game number. Screens own pending feedback, analytics after acknowledgement, and navigation.
 
 ## Unit and isolated component tests
 

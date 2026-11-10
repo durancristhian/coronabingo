@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react'
+import React from 'react'
 import { FlagsContextProvider } from '~/contexts/Flags'
 import { PlayerContextProvider } from '~/contexts/Player'
 import { PlayersContextProvider } from '~/contexts/Players'
@@ -18,9 +18,6 @@ interface Props {
 }
 
 const Providers = ({ children: initial }: Props) =>
-  providers.reduce(
-    (children, Parent) => cloneElement(<Parent>{children}</Parent>),
-    initial,
-  )
+  providers.reduce((children, Parent) => <Parent>{children}</Parent>, initial)
 
 export default Providers

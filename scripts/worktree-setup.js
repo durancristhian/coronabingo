@@ -4,6 +4,7 @@ const path = require('node:path')
 const os = require('node:os')
 const { createHash } = require('node:crypto')
 const { spawnSync } = require('node:child_process')
+const { toolEnvironment } = require('./tool-environment')
 
 function preserveEnvironment(root, source) {
   const destination = path.join(root, '.env')
@@ -34,22 +35,6 @@ function validateRuntime(root, nodeVersion, npmVersion) {
   }
 }
 
-function javaEnvironment(environment) {
-  const env = { ...environment }
-  if (!env.JAVA_HOME && process.platform === 'darwin') {
-    for (const prefix of ['/opt/homebrew', '/usr/local']) {
-      const javaHome = `${prefix}/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home`
-      if (fs.existsSync(`${javaHome}/bin/java`)) {
-        env.JAVA_HOME = javaHome
-        break
-      }
-    }
-  }
-  if (env.JAVA_HOME)
-    env.PATH = `${env.JAVA_HOME}/bin${path.delimiter}${env.PATH}`
-  return env
-}
-
 async function verifyArtifact(file, metadata) {
   const stat = fs.statSync(file, { throwIfNoEntry: false })
   if (!stat?.isFile() || stat.size !== metadata.expectedSize) return false
@@ -68,15 +53,7 @@ async function main() {
     throw new Error('Stop the owned UI runner before installing dependencies.')
   }
   const started = Date.now()
-  const env = javaEnvironment({
-    ...process.env,
-    NEXT_TELEMETRY_DISABLED: '1',
-    PLAYWRIGHT_SKIP_BROWSER_GC: '1',
-    FIREBASE_TOKEN: '',
-    GOOGLE_APPLICATION_CREDENTIALS: '',
-    FIRESTORE_EMULATOR_VERSION: '',
-    XDG_CONFIG_HOME: path.join(root, '.ui-tests-config'),
-  })
+  const env = { ...toolEnvironment(root), PLAYWRIGHT_SKIP_BROWSER_GC: '1' }
   function run(command, args, capture = false) {
     const result = spawnSync(command, args, {
       cwd: root,

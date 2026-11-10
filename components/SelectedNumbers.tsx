@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, ReactNode } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
-import { TICKET_NUMBERS } from '~/utils/constants'
+import { TICKET_NUMBERS } from '~/utils/bingoNumbers'
 
 interface Props {
   isAdmin: boolean
@@ -42,7 +42,7 @@ export default function SelectedNumbers({
           id="next-number"
           className="mb-4 w-full"
           onClick={() => onNewNumber()}
-          disabled={roomNumbers.length >= 90 || pending}
+          disabled={roomNumbers.length >= TICKET_NUMBERS.length || pending}
           iconLeft={nextIconLeft}
           iconRight={nextIconRight}
         >

@@ -163,6 +163,7 @@ for (const outcome of ['resolve', 'reject'] as const) {
       'admin:success',
       'success',
       2,
+      2000,
     )
     await view.navigate('a')
     expect(view.start()).toBeEnabled()

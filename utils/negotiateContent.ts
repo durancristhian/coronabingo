@@ -1,6 +1,5 @@
 import Negotiator from 'negotiator'
 
-// HTML is the default for absent Accept and wildcard-only requests.
 export const negotiateContent = (accept: string | undefined) =>
   new Negotiator({ headers: { accept } }).mediaType([
     'text/html',

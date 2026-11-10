@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
-import { MAX_PLAYERS } from '~/utils/constants'
+import ticketsMetadata from '~/public/tickets-metadata.json'
+import { createTicketAssignments } from '~/utils/cardAllocation'
 import { knuthShuffle } from 'knuth-shuffle'
 
-const tickets: string[] = []
-const limit = MAX_PLAYERS * 2 + 1
-
-for (let index = 1; index < limit; index += 2) {
-  tickets.push(`${index},${index + 1}`)
-}
+const tickets = createTicketAssignments(ticketsMetadata.ticketCount)
 
 export default function useRandomTickets(): string[] {
   const [randomTickets, setRandomTickets] = useState<string[]>([])

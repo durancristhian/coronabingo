@@ -15,7 +15,16 @@ function validate(t, overlap, metadata = { ticketCount: 2, maxPlayers: 1 }) {
   fs.mkdirSync(path.join(fixture, 'public'))
   // Run an unchanged copy of the real entrypoint without touching the catalog.
   const script = path.join(fixture, 'scripts/validate-tickets.ts')
-  fs.copyFileSync(path.join(root, 'scripts/validate-tickets.ts'), script)
+  for (const source of [
+    'scripts/validate-tickets.ts',
+    'scripts/ticket-catalog.ts',
+    'utils/cardAllocation.ts',
+    'interfaces/custom/Ticket.ts',
+  ]) {
+    const destination = path.join(fixture, source)
+    fs.mkdirSync(path.dirname(destination), { recursive: true })
+    fs.copyFileSync(path.join(root, source), destination)
+  }
   const first = Array.from({ length: 15 }, (_, i) => i + 1)
   const second = first
     .slice(0, overlap)
@@ -46,16 +55,18 @@ function validate(t, overlap, metadata = { ticketCount: 2, maxPlayers: 1 }) {
 test('card validator accepts overlap at the allowed boundary', t => {
   const result = validate(t, 10)
   assert.equal(result.status, 0, result.stderr)
-  assert.match(result.stdout, /There are no tickets/)
+  assert.match(
+    result.stdout,
+    /Ticket catalog counts, capacity and shared-number limits are valid/,
+  )
   assert.equal(result.stderr, '')
 })
 
 test('card validator fails for excessive overlap and preserves diagnostics', t => {
   const result = validate(t, 11)
   assert.match(result.stderr, /AssertionError/)
-  assert.match(result.stdout, /Tickets with problems/)
-  assert.match(result.stdout, /"0":\s*\[\s*"1"\s*\]/)
-  assert.match(result.stdout, /"1":\s*\[\s*"0"\s*\]/)
+  assert.match(result.stderr, /Cards sharing more than 10 numbers/)
+  assert.match(result.stderr, /1 and 2: 11/)
   assert.equal(result.status, 1)
 })
 
@@ -63,5 +74,8 @@ test('card validator still fails for inconsistent metadata', t => {
   const result = validate(t, 10, { ticketCount: 4, maxPlayers: 2 })
   assert.notEqual(result.status, 0)
   assert.match(result.stderr, /Ticket metadata count must match the catalog/)
-  assert.doesNotMatch(result.stdout, /There are no tickets/)
+  assert.doesNotMatch(
+    result.stdout,
+    /Ticket catalog counts, capacity and shared-number limits are valid/,
+  )
 })

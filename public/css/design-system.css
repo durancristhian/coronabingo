@@ -34,7 +34,6 @@ html {
   --cb-shadow-control: 3px 3px 0 var(--cb-line);
   --cb-shadow-surface: 5px 5px 0 var(--cb-line);
   --cb-surface-padding: clamp(1rem, 3vw, 1.5rem);
-  /* 35.2px at 400px, 52px at 1200px, with rem bounds for text zoom. */
   --cb-text-intro: clamp(2.2rem, 1.675rem + 2.1vw, 3.25rem);
   --cb-focus-ring: oklch(0.491 0.241 292.581);
   --cb-focus-edge: oklch(1 0 none);
@@ -554,7 +553,6 @@ html {
   outline-offset: -2px;
 }
 
-/* Paint above the bean marker, inside the cell, without intercepting clicks. */
 .coronabingo-ui .cb-ticket-cell:focus-visible::after,
 .coronabingo-ui .cb-number-board-cell:focus-visible::after {
   content: '';
@@ -815,7 +813,6 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
-/* Public information pages use the existing type and surface tokens. */
 .cb-public-prose > * + * {
   margin-block-start: 1rem;
 }
