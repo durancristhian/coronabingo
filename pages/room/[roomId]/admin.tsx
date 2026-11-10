@@ -1,4 +1,4 @@
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { FiPlay } from 'react-icons/fi'
@@ -41,8 +41,20 @@ export default function RoomAdmin() {
   } = usePlayers()
   const { error: roomError, loading: roomLoading, room, updateRoom } = useRoom()
   const randomTickets = useRandomTickets()
-  const [inProgress, setInProgress] = useState(false)
-  const submitInProgress = useRef(false)
+  const router = useRouter()
+  const activeRoomId = useRef<string | undefined>(undefined)
+  activeRoomId.current = router.query.roomId?.toString()
+  const mounted = useRef(false)
+  const pendingStarts = useRef(new Map<string, symbol>())
+  const [pendingRooms, setPendingRooms] = useState(new Set<string>())
+  const inProgress = !!room && pendingRooms.has(room.id)
+
+  useEffect(() => {
+    mounted.current = true
+    return () => {
+      mounted.current = false
+    }
+  }, [])
   const playersBusy = useRef(new Set<string>())
   const [playersPendingRooms, setPlayersPendingRooms] = useState(
     new Set<string>(),
@@ -94,10 +106,20 @@ export default function RoomAdmin() {
   }
 
   const submitRoom = async () => {
-    if (submitInProgress.current || playersBusy.current.has(room.id)) return
+    if (
+      activeRoomId.current !== room.id ||
+      pendingStarts.current.has(room.id) ||
+      playersBusy.current.has(room.id)
+    )
+      return
 
-    submitInProgress.current = true
-    setInProgress(true)
+    const operation = Symbol(room.id)
+    pendingStarts.current.set(room.id, operation)
+    setPendingRooms(new Set(pendingStarts.current.keys()))
+    const ownsCompletion = () =>
+      mounted.current &&
+      activeRoomId.current === room.id &&
+      pendingStarts.current.get(room.id) === operation
 
     const toastId = createToast('admin:saving', 'information')
 
@@ -126,6 +148,11 @@ export default function RoomAdmin() {
 
       await batch.commit()
 
+      if (!ownsCompletion()) {
+        dismissToast(toastId)
+        return
+      }
+
       log(
         'room_started',
         getRoomStartedEventParams({
@@ -146,10 +173,19 @@ export default function RoomAdmin() {
 
       Router.push('/room/[roomId]', `/room/${room.id}`)
     } catch (e) {
-      submitInProgress.current = false
+      if (!ownsCompletion()) {
+        dismissToast(toastId)
+        return
+      }
       updateToast('admin:error', 'error', toastId)
-
-      setInProgress(false)
+    } finally {
+      // Settle only this room's operation, even after navigation or a revisit.
+      if (pendingStarts.current.get(room.id) === operation) {
+        pendingStarts.current.delete(room.id)
+        if (mounted.current) {
+          setPendingRooms(new Set(pendingStarts.current.keys()))
+        }
+      }
     }
   }
 
