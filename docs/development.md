@@ -54,7 +54,7 @@ Read the returned path in the next operation; directory numbering and file exten
 | State transitions and isolated React behavior | `npm run test:unit`; add emulator journeys for database concurrency |
 | Application code | `npm run lint:check`, `npm run build`, `git diff --check` |
 | Translations | `npm run validate-locales` for focused checks; also runs during `prebuild` |
-| Card data or generator | `npm run validate-tickets`; inspect output because its legacy error handler can return success after an assertion failure |
+| Card data or generator | `npm run validate-tickets`; metadata inconsistencies and excessive card overlap return a nonzero exit status |
 | Analytics | `npm run validate-analytics` and the affected browser journey |
 | Room setup, card assignment, host/player synchronization, marking, reload, or restart | `npm run ui-tests`; use `npm run ui-tests:production` for a compiled build |
 | Documentation only | Content, links, command accuracy, and `git diff --check`; commit hooks still run |

@@ -107,6 +107,7 @@ try {
 
   console.log(`✅ There are no tickets with ${MAX_COINCIDES_ALLOWED} or more`)
 } catch (error) {
+  process.exitCode = 1
   console.error(error)
 
   console.log(`❌ Tickets with problems`)
