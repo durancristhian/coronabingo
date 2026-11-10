@@ -106,9 +106,56 @@ html {
 }
 
 .coronabingo-ui .cb-footer-meta {
-  border-top: 2px solid var(--cb-line-subtle);
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  border-block-start: 2px solid var(--cb-line-subtle);
+  margin-block-start: 1.5rem;
+  padding-block-start: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2rem 3rem;
+}
+
+.cb-footer-group {
+  flex: 1 1 24rem;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.cb-footer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.cb-footer-list .cb-text-link {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.cb-footer-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cb-footer-credit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 0.25rem;
+  min-block-size: 2.75rem;
+}
+
+.cb-footer-action svg {
+  flex-shrink: 0;
 }
 
 .coronabingo-ui .cb-heading {
@@ -729,4 +776,8 @@ html {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+/* Public information pages use the existing type and surface tokens. */
+.cb-public-prose > * + * {
+  margin-block-start: 1rem;
 }
