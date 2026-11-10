@@ -11,6 +11,7 @@ beforeEach(() => {
     throw new Error('Supply a controlled Firestore boundary in this test')
   })
   database.runTransaction.mockReset()
+  database.createBatch.mockReset()
 })
 
 vi.mock('next/router', async importOriginal => {
@@ -24,6 +25,7 @@ vi.mock('~/utils/firebase', async () => {
   return {
     roomsRef: { doc: database.doc },
     runTransaction: database.runTransaction,
+    createBatch: database.createBatch,
     Timestamp: {
       now: () => ({ toDate: () => new Date('2026-11-06T00:00:00Z') }),
       fromDate: (date: Date) => ({ toDate: () => date }),

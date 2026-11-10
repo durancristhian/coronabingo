@@ -42,10 +42,16 @@ const excludeExtraFields = (player: Player): PlayerBase => {
   }, {} as PlayerBase)
 }
 
+const prepareForGame = (player: Player, tickets: string): PlayerBase => ({
+  ...defaultPlayerData,
+  ...excludeExtraFields(player),
+  tickets,
+  selectedNumbers: [],
+})
+
 const playerApi = {
   createPlayer,
-  excludeExtraFields,
+  prepareForGame,
 }
 
 export default playerApi
-export { defaultPlayerData }

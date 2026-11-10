@@ -1,3 +1,4 @@
+import { ZipCelXConfig, ZipCelXRow } from 'zipcelx'
 import useTranslation from 'next-translate/useTranslation'
 import React, {
   Fragment,
@@ -75,22 +76,22 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
       const withoutAdmin = players.filter(player => player.id !== host.id)
       const admin = host
 
-      const roomName = [
+      const roomName: ZipCelXRow = [
         { value: t('roomId:spreadsheet-room'), type: 'string' },
         { value: room.name, type: 'string' },
       ]
-      const roomLink = [
+      const roomLink: ZipCelXRow = [
         { value: t('roomId:spreadsheet-link'), type: 'string' },
         {
           value: `${getBaseUrl()}/room/${room.id}`,
           type: 'string',
         },
       ]
-      const roomCapacity = [
+      const roomCapacity: ZipCelXRow = [
         { value: t('roomId:spreadsheet-capacity'), type: 'string' },
         { value: players.length, type: 'number' },
       ]
-      const roomAdmin = [
+      const roomAdmin: ZipCelXRow = [
         { value: t('roomId:spreadsheet-admin'), type: 'string' },
         { value: admin.name, type: 'string' },
         { value: admin.tickets, type: 'string' },
@@ -99,8 +100,8 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
           type: 'string',
         },
       ]
-      const emptyLine = [{ value: '', type: 'string' }]
-      const roomPlayers = withoutAdmin.map(p => [
+      const emptyLine: ZipCelXRow = [{ value: '', type: 'string' }]
+      const roomPlayers = withoutAdmin.map<ZipCelXRow>(p => [
         { value: p.name, type: 'string' },
         { value: p.tickets, type: 'string' },
         {
@@ -109,7 +110,7 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
         },
       ])
 
-      const config = {
+      const config: ZipCelXConfig = {
         filename: room.name,
         sheet: {
           data: [
@@ -119,13 +120,11 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
             roomAdmin,
             emptyLine,
             ...roomPlayers,
-          ].filter(Boolean),
+          ],
         },
       }
 
       const zipcelx = await loadZipcelx()
-      /* The cell type is widened while building the legacy config. */
-      // @ts-ignore
       await zipcelx(config)
       if (isMounted.current) setExportState('ready')
     } catch {

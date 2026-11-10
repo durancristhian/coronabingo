@@ -9,7 +9,7 @@ import usePendingOperation from '~/hooks/usePendingOperation'
 import { Player } from '~/interfaces/models/Player'
 import { Room, RoomBase } from '~/interfaces/models/Room'
 import playerApi from '~/models/player'
-import { MAX_PLAYERS } from '~/utils/constants'
+import ticketsMetadata from '~/public/tickets-metadata.json'
 
 interface Props {
   isFormDisabled: boolean
@@ -59,7 +59,6 @@ export default function Players({
       name,
     })
 
-    /* TODO: review this */
     setPlayers([
       ...players,
       {
@@ -86,18 +85,22 @@ export default function Players({
         <span className="mr-1">{t('admin:players.title')}</span>
         <span
           className={classnames([
-            players.length === MAX_PLAYERS && 'text-red-600',
+            players.length === ticketsMetadata.maxPlayers && 'text-red-600',
           ])}
         >
           {t('admin:players.amount', {
             amount: players.length,
-            max: MAX_PLAYERS,
+            max: ticketsMetadata.maxPlayers,
           })}
         </span>
       </p>
       <form onSubmit={onSubmit}>
         <fieldset
-          disabled={players.length === MAX_PLAYERS || isFormDisabled || pending}
+          disabled={
+            players.length === ticketsMetadata.maxPlayers ||
+            isFormDisabled ||
+            pending
+          }
         >
           <div className="flex items-end">
             <div className="cb-player-field flex-auto">

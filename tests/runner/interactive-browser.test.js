@@ -21,6 +21,7 @@ test(
       await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
       t.after(() => new Promise(resolve => server.close(resolve)))
       return {
+        server,
         port: server.address().port,
         url: `http://127.0.0.1:${server.address().port}`,
       }
@@ -34,6 +35,10 @@ test(
     const foreign = await serve((_, response) => {
       foreignHits++
       response.end('foreign service')
+    })
+    foreign.server.on('upgrade', (_, socket) => {
+      foreignHits++
+      socket.destroy()
     })
     const browser = await openInteractiveBrowser({
       baseURL: app.url,
@@ -56,6 +61,22 @@ test(
     )
     const popup = await context.newPage()
     await assert.rejects(popup.goto(foreign.url), /ERR_BLOCKED_BY_CLIENT/)
+    assert.equal(
+      await page.evaluate(
+        url =>
+          new Promise(resolve => {
+            const socket = new WebSocket(url)
+            socket.onopen = () => {
+              socket.close()
+              resolve(false)
+            }
+            socket.onclose = () => resolve(true)
+            socket.onerror = () => resolve(true)
+          }),
+        foreign.url.replace('http:', 'ws:'),
+      ),
+      true,
+    )
     assert.equal(foreignHits, 0)
     assert.equal(
       await page.evaluate(
@@ -102,8 +123,7 @@ for (const signal of ['SIGINT', 'SIGTERM']) {
         process.send('ready')
         try { await interrupted } finally {
           await browser.close()
-          await new Promise(resolve => setTimeout(resolve, 200))
-          server.close()
+          await new Promise(resolve => server.close(resolve))
           process.send('cleaned')
           process.disconnect()
         }

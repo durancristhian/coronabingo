@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 import { test, expect } from './fixtures'
-import { BACKGROUND_CELL_VALUES } from '../../utils/constants'
+import { BACKGROUND_CELL_VALUES } from '../../utils/backgroundCatalog'
 
 const copy = {
   es: {

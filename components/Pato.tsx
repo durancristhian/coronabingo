@@ -4,18 +4,13 @@ import React, { ReactNode } from 'react'
 import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
-import {
-  AnalyticsSoundCatalog,
-  AnalyticsSoundKey,
-} from '~/interfaces/analytics/Events'
 import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
-import roomApi from '~/models/room'
 import {
   getSoundUsedEventParams,
   markFirstAnalyticsUseInPlay,
 } from '~/utils/analyticsEvents'
-import { SOUNDS, SOUNDS_EXTRAS } from '~/utils/constants'
+import { Sound, SOUNDS, SOUNDS_EXTRAS } from '~/utils/soundCatalog'
 import { logEvent as log } from '~/utils/gtag'
 
 const emojis: { [key: string]: ReactNode } = {
@@ -39,13 +34,9 @@ export default function Pato({ extraSounds, room }: Props) {
     analyticsCatalog,
     analyticsKey,
     url,
-  }: {
-    analyticsCatalog: AnalyticsSoundCatalog
-    analyticsKey: AnalyticsSoundKey
-    url: string
-  }) => {
+  }: Pick<Sound, 'analyticsCatalog' | 'analyticsKey' | 'url'>) => {
     return run(async () => {
-      await roomApi.updateRoom(room.ref, {
+      await room.ref.update({
         soundToPlay: url,
         soundCommandId: crypto.randomUUID(),
       })

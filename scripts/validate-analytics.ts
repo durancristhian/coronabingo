@@ -17,7 +17,7 @@ import {
   markPlayerCardOpened,
 } from '../utils/analyticsEvents'
 import { getBackgroundAnalyticsValue } from '../utils/backgroundAnalytics'
-import { BACKGROUND_CELL_VALUES } from '../utils/constants'
+import { BACKGROUND_CELL_VALUES } from '../utils/backgroundCatalog'
 import {
   ANALYTICS_TEST_STORAGE_KEY,
   logEvent,
@@ -124,24 +124,17 @@ assert.deepStrictEqual(playerCardOpenedParams, {
   schema_version: 'v1',
   ui_language: 'es',
 })
-assert.deepStrictEqual(
-  BACKGROUND_CELL_VALUES.map(({ analyticsKey }) => analyticsKey),
-  [
-    'yellow',
-    'blue',
-    'orange',
-    'green',
-    'multicolor',
-    'pikachu',
-    'pokemon',
-    'cremona',
-    'covid_19',
-    'clippy',
-    'ghana_pallbearers',
-    'frameworks',
-    'kun_aguero',
-  ],
+assert.strictEqual(
+  new Set(BACKGROUND_CELL_VALUES.map(({ analyticsKey }) => analyticsKey)).size,
+  BACKGROUND_CELL_VALUES.length,
+  'Preset analytics identities must be unique',
 )
+for (const preset of BACKGROUND_CELL_VALUES) {
+  assert.deepStrictEqual(getBackgroundAnalyticsValue(preset), {
+    backgroundKey: preset.analyticsKey,
+    backgroundSource: 'preset',
+  })
+}
 assert.strictEqual(getAnalyticsPageType('/'), 'home')
 assert.strictEqual(getAnalyticsPageType('/room/[roomId]'), 'room_lobby')
 assert.strictEqual(

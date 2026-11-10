@@ -2,14 +2,13 @@ import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext, useRef } from 'react'
 import { FiCheck } from 'react-icons/fi'
-import { COLORS } from '~/components/EmptyCell'
 import InputText from '~/components/InputText'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
 import { Cell } from '~/interfaces/contexts/BackgroundCell'
 import { getBackgroundSelectedEventParams } from '~/utils/analyticsEvents'
 import { getBackgroundAnalyticsValue } from '~/utils/backgroundAnalytics'
-import { getBackgroundCellImageUrl } from '~/utils/backgroundCell'
-import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
+import { getBackgroundCellAppearance } from '~/utils/backgroundCell'
+import { BACKGROUND_CELL_VALUES } from '~/utils/backgroundCatalog'
 import { logEvent as log } from '~/utils/gtag'
 
 export default function BackgroundCells() {
@@ -46,7 +45,7 @@ export default function BackgroundCells() {
     <Fragment>
       <div className="mt-4">
         {BACKGROUND_CELL_VALUES.map(({ analyticsKey, key, type, value }, i) => {
-          const firstOrDefault = Array.isArray(value) ? value[0] : value
+          const appearance = getBackgroundCellAppearance({ type, value })
           const isActive = backgroundCell.value.toString() === value.toString()
 
           return (
@@ -74,18 +73,9 @@ export default function BackgroundCells() {
                 className={classnames([
                   'cb-background-option-preview',
                   'bg-center bg-contain bg-no-repeat w-16',
-                  type === 'color' && COLORS[firstOrDefault],
+                  appearance.className,
                 ])}
-                style={{
-                  ...(type === 'img' && {
-                    backgroundImage: `url(${getBackgroundCellImageUrl(
-                      firstOrDefault,
-                    )})`,
-                  }),
-                  ...(type === 'url' && {
-                    backgroundImage: `url(${firstOrDefault})`,
-                  }),
-                }}
+                style={appearance.style}
               ></div>
               <div className="flex flex-auto items-center mx-4">
                 <p className="text-center truncate">{t(key)}</p>
