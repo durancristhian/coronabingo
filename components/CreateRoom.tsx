@@ -27,7 +27,7 @@ function loadRoomApi() {
 
 export default function CreateRoom() {
   const { lang, t } = useTranslation()
-  const { createToast, dismissToast, updateToast } = useToast()
+  const { createToast, updateToast } = useToast()
   const [name, setName] = useState('')
   const [inProgress, setInProgress] = useState(false)
   const submitting = useRef(false)
@@ -47,13 +47,9 @@ export default function CreateRoom() {
         name,
       })
 
-      updateToast('index:create-room.success', 'success', toastId)
+      updateToast('index:create-room.success', 'success', toastId, 2000)
 
       log('room_created', getRoomCreatedEventParams(lang, createdAt))
-
-      setTimeout(() => {
-        dismissToast(toastId)
-      }, 2000)
 
       Router.push('/room/[roomId]/admin', `/room/${roomId}/admin`)
     } catch (e) {

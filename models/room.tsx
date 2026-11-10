@@ -1,7 +1,13 @@
-import firebase from 'firebase/compat/app'
+import { Player } from '~/interfaces/models/Player'
 import { Room, RoomBase } from '~/interfaces/models/Room'
-import { TICKET_NUMBERS } from '~/utils/constants'
-import { roomsRef, runTransaction, Timestamp } from '~/utils/firebase'
+import playerApi from '~/models/player'
+import { TICKET_NUMBERS } from '~/utils/bingoNumbers'
+import {
+  createBatch,
+  roomsRef,
+  runTransaction,
+  Timestamp,
+} from '~/utils/firebase'
 
 const defaultRoomData: RoomBase = {
   activateAdminCode: false,
@@ -42,12 +48,36 @@ const excludeExtraFields = (room: Room): RoomBase => {
   return roomValues
 }
 
-const updateRoom = (
-  roomRef: firebase.firestore.DocumentReference,
-  roomData: Partial<RoomBase>,
-): Promise<void> => {
-  return roomRef.update(roomData)
+const resetGameData = (): Pick<
+  RoomBase,
+  'selectedNumbers' | 'soundToPlay' | 'soundCommandId' | 'confettiType'
+> => ({
+  selectedNumbers: [],
+  soundToPlay: '',
+  soundCommandId: '',
+  confettiType: '',
+})
+
+const startGame = (room: Room, players: Player[], assignments: string[]) => {
+  const batch = createBatch()
+  batch.update(room.ref, {
+    ...defaultRoomData,
+    ...excludeExtraFields(room),
+    ...resetGameData(),
+    readyToPlay: true,
+  })
+  players.forEach((player, index) => {
+    batch.set(player.ref, playerApi.prepareForGame(player, assignments[index]))
+  })
+  return batch.commit()
 }
+
+const restartGame = (room: Room) =>
+  room.ref.update({
+    ...resetGameData(),
+    readyToPlay: false,
+    timesPlayed: room.timesPlayed + 1,
+  })
 
 const changeCalledNumber = (room: Room, number?: number) =>
   runTransaction(async transaction => {
@@ -93,8 +123,8 @@ const roomApi = {
   changeCalledNumber,
   clearSound,
   createRoom,
-  excludeExtraFields,
-  updateRoom,
+  startGame,
+  restartGame,
 }
 
 export default roomApi

@@ -9,9 +9,8 @@ const {
 } = require('../i18n.json')
 
 const localesPath = join(__dirname, '../locales')
-// @ts-ignore
-const objectsHaveSameKeys = (...objects) => {
-  const allKeys = objects.reduce(
+const objectsHaveSameKeys = (...objects: object[]) => {
+  const allKeys = objects.reduce<string[]>(
     (keys, object) => keys.concat(Object.keys(object)),
     [],
   )

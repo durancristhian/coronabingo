@@ -3,7 +3,7 @@ import {
   AnalyticsBackgroundSource,
 } from '../interfaces/analytics/Events'
 import { Cell } from '../interfaces/contexts/BackgroundCell'
-import { BACKGROUND_CELL_VALUES } from './constants'
+import { BACKGROUND_CELL_VALUES } from './backgroundCatalog'
 
 export interface BackgroundAnalyticsValue {
   backgroundKey: AnalyticsBackgroundKey

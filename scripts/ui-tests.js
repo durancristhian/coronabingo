@@ -3,6 +3,7 @@ const { spawn, spawnSync } = require('node:child_process')
 const fs = require('node:fs/promises')
 const { randomBytes } = require('node:crypto')
 const path = require('node:path')
+const { toolEnvironment } = require('./tool-environment')
 const { environment, validateConfig, distDir } = require('../tests/ui/config')
 const {
   reservePorts,
@@ -31,27 +32,10 @@ const playwrightArgs = args.filter(
     ].includes(arg),
 )
 const env = {
-  ...process.env,
+  ...toolEnvironment(root),
   UI_TEST_RUNNER: '1',
   UI_TEST_MODE: production ? 'production' : 'development',
-  NEXT_TELEMETRY_DISABLED: '1',
-  // The isolated configstore has no Firebase login or telemetry opt-in.
-  FIREBASE_TOKEN: '',
-  FIRESTORE_EMULATOR_VERSION: '',
-  GOOGLE_APPLICATION_CREDENTIALS: '',
-  XDG_CONFIG_HOME: path.join(root, '.ui-tests-config'),
 }
-// Homebrew's keg-only JDK does not replace macOS's /usr/bin/java stub.
-if (!env.JAVA_HOME && process.platform === 'darwin') {
-  for (const prefix of ['/opt/homebrew', '/usr/local']) {
-    const javaHome = `${prefix}/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home`
-    if (require('node:fs').existsSync(`${javaHome}/bin/java`)) {
-      env.JAVA_HOME = javaHome
-      break
-    }
-  }
-}
-if (env.JAVA_HOME) env.PATH = `${env.JAVA_HOME}/bin${path.delimiter}${env.PATH}`
 
 const ownedProcesses = new Set()
 const interrupt = new AbortController()

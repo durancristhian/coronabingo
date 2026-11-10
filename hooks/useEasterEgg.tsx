@@ -1,9 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import {
-  ActionByStateKey,
-  DispatchContext,
-  StateContext,
-} from '~/contexts/Flags'
+import { DispatchContext, StateContext } from '~/contexts/Flags'
 import { Flags } from '~/interfaces/contexts/Flags'
 
 export default function useEasterEgg(name: keyof Flags) {
@@ -14,7 +10,7 @@ export default function useEasterEgg(name: keyof Flags) {
   useEffect(() => {
     if (interactions !== 7) return
 
-    dispatch.toggle(ActionByStateKey[name])
+    dispatch.toggle(name)
   }, [interactions])
 
   const incrementInteractions = () => {

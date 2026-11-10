@@ -1,10 +1,5 @@
 import React, { createContext, ReactNode, useReducer } from 'react'
-import {
-  FlagAction,
-  FlagActions,
-  Flags,
-  FlagsDispatch,
-} from '~/interfaces/contexts/Flags'
+import { Flags, FlagsDispatch } from '~/interfaces/contexts/Flags'
 
 const defaultState = {
   downloadSpreadsheet: false,
@@ -16,36 +11,13 @@ const defaultDispatch = {
   toggle: () => void 0,
 }
 
-const ActionByStateKey = {
-  downloadSpreadsheet: { type: FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE },
-  extraSounds: { type: FlagActions.EXTRA_SOUNDS_TOGGLE },
-  useRoomExperiments: { type: FlagActions.ROOM_EXPERIMENTS_TOGGLE },
-}
-
 const StateContext = createContext<Flags>(defaultState)
 const DispatchContext = createContext<FlagsDispatch>(defaultDispatch)
 
-const reducer = (state: Flags, action: FlagAction) => {
-  switch (action.type) {
-    case FlagActions.DOWNLOAD_SPREADSHEET_TOGGLE:
-      return {
-        ...state,
-        downloadSpreadsheet: !state.downloadSpreadsheet,
-      }
-    case FlagActions.EXTRA_SOUNDS_TOGGLE:
-      return {
-        ...state,
-        extraSounds: !state.extraSounds,
-      }
-    case FlagActions.ROOM_EXPERIMENTS_TOGGLE:
-      return {
-        ...state,
-        useRoomExperiments: !state.useRoomExperiments,
-      }
-    default:
-      return state
-  }
-}
+const reducer = (state: Flags, name: keyof Flags): Flags => ({
+  ...state,
+  [name]: !state[name],
+})
 
 interface Props {
   children: ReactNode
@@ -67,4 +39,4 @@ const FlagsContextProvider = ({ children }: Props) => {
   )
 }
 
-export { ActionByStateKey, DispatchContext, FlagsContextProvider, StateContext }
+export { DispatchContext, FlagsContextProvider, StateContext }

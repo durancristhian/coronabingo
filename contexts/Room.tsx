@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app'
 import { useRouter } from 'next/router'
 import React, {
   createContext,
@@ -9,6 +10,7 @@ import React, {
 import { RoomContextData } from '~/interfaces/contexts/Room'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Room, RoomBase } from '~/interfaces/models/Room'
+import { subscribeToFirestore } from '~/utils/firestoreSubscription'
 
 const RoomContext = createContext<RoomContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
@@ -64,67 +66,51 @@ const RoomContextProvider = ({ children }: Props) => {
 
     setState({ type: REMOTE_DATA.LOADING })
 
-    let active = true
-    let unsubscribe: (() => void) | undefined
-    void import('~/utils/firebase').then(
-      ({ roomsRef }) => {
-        if (!active) return
+    return subscribeToFirestore<firebase.firestore.DocumentSnapshot>(
+      ({ roomsRef }, next, fail) =>
+        roomsRef
+          .doc(roomId)
+          .onSnapshot({ includeMetadataChanges: true }, next, fail),
+      snapshot => {
+        if (snapshot.metadata.hasPendingWrites) return
+        if (!snapshot.exists) {
+          draftsByRoom.current.delete(roomId)
+          setState({
+            type: REMOTE_DATA.SUCCESS,
+            data: null,
+          })
 
-        unsubscribe = roomsRef.doc(roomId).onSnapshot(
-          { includeMetadataChanges: true },
-          snapshot => {
-            if (!active) return
-            if (snapshot.metadata.hasPendingWrites) return
-            if (!snapshot.exists) {
-              draftsByRoom.current.delete(roomId)
-              setState({
-                type: REMOTE_DATA.SUCCESS,
-                data: null,
-              })
+          return
+        }
 
-              return
-            }
-
-            const roomData = snapshot.data() as RoomBase
-            const draft = draftsByRoom.current.get(roomId)
-            // Acknowledge saved fields individually; unrelated snapshots must
-            // not erase setup choices that have not reached Firestore yet.
-            const pendingDraft = Object.fromEntries(
-              Object.entries(draft || {}).filter(
-                ([key, value]) => roomData[key as keyof RoomBase] !== value,
-              ),
-            )
-            if (Object.keys(pendingDraft).length) {
-              draftsByRoom.current.set(roomId, pendingDraft)
-            } else {
-              draftsByRoom.current.delete(roomId)
-            }
-            const room = {
-              ...roomData,
-              ...pendingDraft,
-              id: snapshot.id,
-              ref: snapshot.ref,
-            }
-
-            setState({ type: REMOTE_DATA.SUCCESS, data: room })
-          },
-          error => {
-            if (!active) return
-            setState({ type: REMOTE_DATA.FAILURE, error })
-
-            console.error(error)
-          },
+        const roomData = snapshot.data() as RoomBase
+        const draft = draftsByRoom.current.get(roomId)
+        // Acknowledge saved fields individually; unrelated snapshots must
+        // not erase setup choices that have not reached Firestore yet.
+        const pendingDraft = Object.fromEntries(
+          Object.entries(draft || {}).filter(
+            ([key, value]) => roomData[key as keyof RoomBase] !== value,
+          ),
         )
+        if (Object.keys(pendingDraft).length) {
+          draftsByRoom.current.set(roomId, pendingDraft)
+        } else {
+          draftsByRoom.current.delete(roomId)
+        }
+        const room = {
+          ...roomData,
+          ...pendingDraft,
+          id: snapshot.id,
+          ref: snapshot.ref,
+        }
+
+        setState({ type: REMOTE_DATA.SUCCESS, data: room })
       },
       error => {
-        if (active) setState({ type: REMOTE_DATA.FAILURE, error })
+        setState({ type: REMOTE_DATA.FAILURE, error })
+        console.error(error)
       },
     )
-
-    return () => {
-      active = false
-      unsubscribe?.()
-    }
   }, [roomId])
 
   return (

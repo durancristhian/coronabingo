@@ -6,7 +6,6 @@ import Button from '~/components/Button'
 import { confettiTypes } from '~/components/Confetti'
 import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
-import roomApi from '~/models/room'
 import {
   getCelebrationUsedEventParams,
   markFirstAnalyticsUseInPlay,
@@ -27,7 +26,7 @@ export default function Celebrations({ room }: Props) {
     const isHiding = celebrationType === room.confettiType
 
     return run(async () => {
-      await roomApi.updateRoom(room.ref, {
+      await room.ref.update({
         confettiType: isHiding ? '' : celebrationType,
       })
 

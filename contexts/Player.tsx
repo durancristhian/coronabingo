@@ -1,8 +1,10 @@
+import firebase from 'firebase/compat/app'
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { PlayerContextData } from '~/interfaces/contexts/Player'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { subscribeToFirestore } from '~/utils/firestoreSubscription'
 
 const PlayerContext = createContext<PlayerContextData>({
   state: { type: REMOTE_DATA.NOT_ASKED },
@@ -27,53 +29,37 @@ const PlayerContextProvider = ({ children }: Props) => {
 
     setState({ type: REMOTE_DATA.LOADING })
 
-    let active = true
-    let unsubscribe: (() => void) | undefined
-    void import('~/utils/firebase').then(
-      ({ roomsRef }) => {
-        if (!active) return
+    return subscribeToFirestore<firebase.firestore.DocumentSnapshot>(
+      ({ roomsRef }, next, fail) =>
+        roomsRef
+          .doc(`${roomId}/players/${playerId}`)
+          .onSnapshot({ includeMetadataChanges: true }, next, fail),
+      snapshot => {
+        if (snapshot.metadata.hasPendingWrites) return
 
-        unsubscribe = roomsRef.doc(`${roomId}/players/${playerId}`).onSnapshot(
-          { includeMetadataChanges: true },
-          snapshot => {
-            if (!active) return
-            if (snapshot.metadata.hasPendingWrites) return
+        if (!snapshot.exists) {
+          setState({
+            type: REMOTE_DATA.SUCCESS,
+            data: null,
+          })
 
-            if (!snapshot.exists) {
-              setState({
-                type: REMOTE_DATA.SUCCESS,
-                data: null,
-              })
+          return
+        }
 
-              return
-            }
+        const playerData = snapshot.data() as PlayerBase
+        const player = {
+          ...playerData,
+          id: snapshot.id,
+          ref: snapshot.ref,
+        }
 
-            const playerData = snapshot.data() as PlayerBase
-            const player = {
-              ...playerData,
-              id: snapshot.id,
-              ref: snapshot.ref,
-            }
-
-            setState({ type: REMOTE_DATA.SUCCESS, data: player })
-          },
-          error => {
-            if (!active) return
-            setState({ type: REMOTE_DATA.FAILURE, error })
-
-            console.error(error)
-          },
-        )
+        setState({ type: REMOTE_DATA.SUCCESS, data: player })
       },
       error => {
-        if (active) setState({ type: REMOTE_DATA.FAILURE, error })
+        setState({ type: REMOTE_DATA.FAILURE, error })
+        console.error(error)
       },
     )
-
-    return () => {
-      active = false
-      unsubscribe?.()
-    }
   }, [roomId, playerId])
 
   return (

@@ -85,7 +85,7 @@
   overflow: hidden;
   position: absolute !important;
   width: 1px;
-  white-space: nowrap; /* added line */
+  white-space: nowrap;
 }
 
 .w-1\/10 {

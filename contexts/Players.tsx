@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app'
 import { useRouter } from 'next/router'
 import React, {
   createContext,
@@ -9,6 +10,7 @@ import React, {
 import { PlayersContextData } from '~/interfaces/contexts/Players'
 import { RemoteData, REMOTE_DATA } from '~/interfaces/custom/RemoteData'
 import { Player, PlayerBase } from '~/interfaces/models/Player'
+import { subscribeToFirestore } from '~/utils/firestoreSubscription'
 
 const playerListRoutes = ['/room/[roomId]', '/room/[roomId]/admin']
 
@@ -46,7 +48,6 @@ const PlayersContextProvider = ({ children }: Props) => {
   const serverPlayersByRoom = useRef(new Map<string, Player[]>())
   const removalsByRoom = useRef(new Map<string, Map<string, Player>>())
   const draftsByRoom = useRef(new Map<string, Player[]>())
-  const subscriptionId = useRef(0)
   const [scopedState, setScopedState] = useState<ScopedPlayersState>({
     state: { type: REMOTE_DATA.NOT_ASKED },
   })
@@ -146,8 +147,6 @@ const PlayersContextProvider = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    const currentSubscriptionId = ++subscriptionId.current
-
     if (!roomId || !shouldListenToPlayers) {
       return
     }
@@ -158,75 +157,44 @@ const PlayersContextProvider = ({ children }: Props) => {
         : { roomId, state: { type: REMOTE_DATA.LOADING } },
     )
 
-    let active = true
-    let unsubscribe: (() => void) | undefined
-    void import('~/utils/firebase').then(
-      ({ roomsRef }) => {
-        if (!active) return
-
-        unsubscribe = roomsRef
+    return subscribeToFirestore<firebase.firestore.QuerySnapshot>(
+      ({ roomsRef }, next, fail) =>
+        roomsRef
           .doc(roomId)
           .collection('players')
-          .onSnapshot(
-            { includeMetadataChanges: true },
-            snapshot => {
-              if (!active) return
-              if (snapshot.metadata.hasPendingWrites) return
-              if (subscriptionId.current !== currentSubscriptionId) {
-                return
-              }
+          .onSnapshot({ includeMetadataChanges: true }, next, fail),
+      snapshot => {
+        if (snapshot.metadata.hasPendingWrites) return
 
-              const players = snapshot.docs
-                .filter(p => p.exists)
-                .map(p => {
-                  const playerData = p.data() as PlayerBase
+        const players = snapshot.docs
+          .filter(p => p.exists)
+          .map(p => {
+            const playerData = p.data() as PlayerBase
 
-                  return {
-                    ...playerData,
-                    id: p.id,
-                    ref: p.ref,
-                  }
-                })
-                .sort((a, b) => a.name.localeCompare(b.name))
+            return {
+              ...playerData,
+              id: p.id,
+              ref: p.ref,
+            }
+          })
+          .sort((a, b) => a.name.localeCompare(b.name))
 
-              serverPlayersByRoom.current.set(roomId, players)
-              const draft = draftsByRoom.current.get(roomId)
-              if (draft && haveSamePlayerIds(draft, players))
-                draftsByRoom.current.delete(roomId)
-              // Query metadata may omit an in-flight deletion. Its promise,
-              // rather than row absence, owns the completion transition.
-              publishPlayers(roomId, true)
-            },
-            error => {
-              if (!active) return
-              if (subscriptionId.current !== currentSubscriptionId) {
-                return
-              }
-
-              setScopedState({
-                roomId,
-                state: { type: REMOTE_DATA.FAILURE, error },
-              })
-
-              console.error(error)
-            },
-          )
+        serverPlayersByRoom.current.set(roomId, players)
+        const draft = draftsByRoom.current.get(roomId)
+        if (draft && haveSamePlayerIds(draft, players))
+          draftsByRoom.current.delete(roomId)
+        // Query metadata may omit an in-flight deletion. Its promise,
+        // rather than row absence, owns the completion transition.
+        publishPlayers(roomId, true)
       },
       error => {
-        if (active) {
-          setScopedState({
-            roomId,
-            state: { type: REMOTE_DATA.FAILURE, error },
-          })
-        }
+        setScopedState({
+          roomId,
+          state: { type: REMOTE_DATA.FAILURE, error },
+        })
+        console.error(error)
       },
     )
-
-    return () => {
-      active = false
-      subscriptionId.current += 1
-      unsubscribe?.()
-    }
   }, [roomId, shouldListenToPlayers])
 
   const state =

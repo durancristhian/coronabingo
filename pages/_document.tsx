@@ -26,7 +26,6 @@ export default class extends Document {
     return (
       <Html lang={lang}>
         <Head>
-          {/* Google Search Console */}
           {process.env.NODE_ENV === 'production' && (
             <meta
               name="google-site-verification"

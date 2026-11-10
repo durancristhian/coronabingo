@@ -20,28 +20,35 @@ export default function useToast() {
     </div>
   )
 
-  const createToast = (translationKey: string, messageType: MessageType) =>
-    toast(renderToast(translationKey, messageType), {
-      ...toastConfig,
-    })
+  const dismissAfter = (toastId: ToastId, milliseconds?: number) => {
+    if (milliseconds === undefined) return
+    setTimeout(() => toast.dismiss(toastId), milliseconds)
+  }
 
-  const dismissToast = (toastId: ToastId) => {
-    toast.dismiss(toastId)
+  const createToast = (
+    translationKey: string,
+    messageType: MessageType,
+    dismissAfterMs?: number,
+  ) => {
+    const toastId = toast(renderToast(translationKey, messageType), toastConfig)
+    dismissAfter(toastId, dismissAfterMs)
+    return toastId
   }
 
   const updateToast = (
     translationKey: string,
     messageType: MessageType,
     toastId: ToastId,
+    dismissAfterMs?: number,
   ) => {
     toast.update(toastId, {
       render: renderToast(translationKey, messageType),
     })
+    dismissAfter(toastId, dismissAfterMs)
   }
 
   return {
     createToast,
-    dismissToast,
     updateToast,
   }
 }

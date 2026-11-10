@@ -6,19 +6,17 @@ import RoomCodeCell from '~/components/RoomCodeCell'
 import useRoomCode from '~/hooks/useRoomCode'
 import useToast from '~/hooks/useToast'
 import { Emojis } from '~/interfaces/custom/Emojis'
-import { CODES } from '~/utils/constants'
+import { CODES, ROOM_CODE_LENGTH } from '~/utils/roomCodes'
 
 interface Props {
   roomCode: string
 }
 
 export default function RoomCode({ roomCode }: Props) {
-  const [emojiCode, setEmojiCode] = useState<(keyof Emojis | null)[]>([
-    null,
-    null,
-    null,
-  ])
-  const { createToast, dismissToast } = useToast()
+  const [emojiCode, setEmojiCode] = useState<(keyof Emojis | null)[]>(
+    Array(ROOM_CODE_LENGTH).fill(null),
+  )
+  const { createToast } = useToast()
   const { login } = useRoomCode()
   const { t } = useTranslation()
 
@@ -47,23 +45,13 @@ export default function RoomCode({ roomCode }: Props) {
   }
 
   const submitCode = () => {
-    const userCode = emojiCode.toString()
-
-    if (roomCode === userCode) {
-      const toastId = createToast('common:room-code.success', 'success')
-
-      setTimeout(() => {
-        dismissToast(toastId)
-      }, 2000)
-
-      login()
-    } else {
-      const toastId = createToast('common:room-code.error', 'error')
-
-      setTimeout(() => {
-        dismissToast(toastId)
-      }, 2000)
-    }
+    const matches = roomCode === emojiCode.toString()
+    createToast(
+      matches ? 'common:room-code.success' : 'common:room-code.error',
+      matches ? 'success' : 'error',
+      2000,
+    )
+    if (matches) login()
   }
 
   return (

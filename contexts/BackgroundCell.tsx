@@ -6,7 +6,7 @@ import {
   markPlayerCardOpened,
 } from '~/utils/analyticsEvents'
 import { getBackgroundAnalyticsValue } from '~/utils/backgroundAnalytics'
-import { BACKGROUND_CELL_VALUES } from '~/utils/constants'
+import { BACKGROUND_CELL_VALUES } from '~/utils/backgroundCatalog'
 import { logEvent as log } from '~/utils/gtag'
 
 const defaultContextValue = {

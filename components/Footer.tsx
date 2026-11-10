@@ -5,7 +5,13 @@ import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import News from '~/components/News'
 import Heading from '~/components/Heading'
-import { publicPath, trustContent, trustPaths } from '~/utils/publicContent'
+import {
+  publicContact,
+  publicPath,
+  publicSocialUrl,
+  trustContent,
+  trustPaths,
+} from '~/utils/publicContent'
 
 const TWEETS = [
   '1266490485650198528',
@@ -31,11 +37,8 @@ export default function Footer() {
                 <li>
                   <p className="cb-footer-credit">
                     <span>{t('common:made-by')}</span>
-                    <Anchor
-                      href="https://twitter.com/DuranCristhian"
-                      id="my-twitter"
-                    >
-                      Cristhian Duran
+                    <Anchor href={publicContact.profileUrl} id="my-twitter">
+                      {publicContact.name}
                     </Anchor>
                   </p>
                 </li>
@@ -60,10 +63,7 @@ export default function Footer() {
             </Heading>
             <ul className="cb-footer-list">
               <li>
-                <Anchor
-                  href="https://forms.gle/egSBrsKSFnEgabff7"
-                  id="feedback-form"
-                >
+                <Anchor href={publicContact.feedbackUrl} id="feedback-form">
                   <span className="cb-footer-action">
                     <FiMessageSquare aria-hidden="true" />
                     <span>{t('common:feedback-form')}</span>
@@ -71,10 +71,7 @@ export default function Footer() {
                 </Anchor>
               </li>
               <li>
-                <Anchor
-                  href="https://twitter.com/corona_bingo"
-                  id="coronabingo-twitter"
-                >
+                <Anchor href={publicSocialUrl} id="coronabingo-twitter">
                   <span className="cb-footer-action">
                     <FiTwitter aria-hidden="true" />
                     <span>{t('common:coronabingo-twitter')}</span>

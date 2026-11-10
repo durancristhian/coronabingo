@@ -2,6 +2,7 @@
 const net = require('node:net')
 const { setTimeout: delay } = require('node:timers/promises')
 const { portNames } = require('../tests/ui/config')
+const { isolateBrowserNetwork } = require('./browser-isolation')
 
 async function reservePorts(requested = {}) {
   const servers = new Map()
@@ -101,17 +102,7 @@ async function openInteractiveBrowser({
   })
   try {
     const context = await browser.newContext({ serviceWorkers: 'block' })
-    const allowed = new Set([baseURL, `http://127.0.0.1:${firestorePort}`])
-    await context.route('**/*', route =>
-      allowed.has(new URL(route.request().url()).origin)
-        ? route.continue()
-        : route.abort('blockedbyclient'),
-    )
-    await context.routeWebSocket(/.*/, socket => {
-      if (new URL(socket.url()).origin === baseURL.replace('http:', 'ws:')) {
-        socket.connectToServer()
-      } else socket.close()
-    })
+    await isolateBrowserNetwork(context, { baseURL, firestorePort })
     context.on('page', page => {
       page.on('close', () => {
         if (!context.pages().length) void browser.close()
