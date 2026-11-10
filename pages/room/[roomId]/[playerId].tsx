@@ -160,35 +160,32 @@ export default function RoomPlayer() {
             })}
           </Heading>
         </div>
-        <div className="cb-game-table max-w-6xl mx-auto">
-          <div className="lg:flex lg:justify-center mt-4">
-            <div
-              className={classnames(
-                enableStreamerView ? 'lg:w-2/3' : 'lg:w-1/3',
-              )}
-            >
-              <Box>
-                <div className="mb-4">
-                  <Heading textAlign="center" type="h2">
-                    {t('playerId:last-numbers')}
-                  </Heading>
-                </div>
-                <LastNumbers
-                  hideNumbersMeaning={room.hideNumbersMeaning}
-                  selectedNumbers={room.selectedNumbers}
-                />
-              </Box>
-              <div className="hidden lg:block mt-4">
-                {renderBingoSpinnerAndOptions()}
+        <div
+          className={classnames('cb-game-table max-w-6xl mx-auto', {
+            'cb-game-table--streamer': enableStreamerView,
+          })}
+        >
+          <div className="cb-game-last-numbers">
+            <Box>
+              <div className="mb-4">
+                <Heading textAlign="center" type="h2">
+                  {t('playerId:last-numbers')}
+                </Heading>
               </div>
-            </div>
-            {enableStreamerView ? null : (
-              <div className="pt-4 lg:pt-0 lg:pl-4 lg:w-2/3">
-                <Tickets player={player} />
-              </div>
-            )}
+              <LastNumbers
+                hideNumbersMeaning={room.hideNumbersMeaning}
+                selectedNumbers={room.selectedNumbers}
+              />
+            </Box>
           </div>
-          <div className="lg:hidden mt-4">{renderBingoSpinnerAndOptions()}</div>
+          {enableStreamerView ? null : (
+            <div className="cb-game-cards">
+              <Tickets player={player} />
+            </div>
+          )}
+          <div className="cb-game-controls">
+            {renderBingoSpinnerAndOptions()}
+          </div>
         </div>
         <Confetti type={room.confettiType} />
         <Sounds isAdmin={isAdmin} room={room} />
