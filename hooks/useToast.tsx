@@ -49,6 +49,7 @@ export default function useToast() {
 
   return {
     createToast,
+    dismissToast: toast.dismiss,
     updateToast,
   }
 }

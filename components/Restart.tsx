@@ -3,6 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useRef, useState } from 'react'
 import { FiRotateCcw } from 'react-icons/fi'
 import Button from '~/components/Button'
+import Message from '~/components/Message'
 import useRoomCode from '~/hooks/useRoomCode'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
@@ -18,19 +19,22 @@ export default function Restart({ room }: Props) {
   const { logout } = useRoomCode()
   const replayInProgress = useRef(false)
   const [inProgress, setInProgress] = useState(false)
+  const [replayError, setReplayError] = useState(false)
 
   const replay = async () => {
     if (replayInProgress.current) return
 
     replayInProgress.current = true
     setInProgress(true)
+    setReplayError(false)
 
     try {
       await roomApi.restartGame(room)
-    } catch (error) {
+    } catch {
       replayInProgress.current = false
       setInProgress(false)
-      throw error
+      setReplayError(true)
+      return
     }
 
     log(
@@ -52,6 +56,11 @@ export default function Restart({ room }: Props) {
   return (
     <Fragment>
       <p>{t('playerId:replay.description')}</p>
+      {replayError && (
+        <div role="alert">
+          <Message type="error">{t('playerId:replay.error')}</Message>
+        </div>
+      )}
       <div className="mt-8 text-center">
         <Button
           aria-label={t('playerId:replay.confirm')}

@@ -27,7 +27,7 @@ npm run dev:emulator
 
 Use the Chromium window opened by this command. It shares the [UI runner](#run-and-inspect)'s demo project, five reserved loopback ports, process supervision and worktree-local output. Its browser context blocks traffic outside the owned app and emulator, including external navigation and WebSockets; service workers are disabled. Analytics events remain local and Sentry is disabled. Closing the browser's last tab or pressing Ctrl-C stops only this run's services and discards emulator data. The printed URL opened in an ordinary browser does not provide that network isolation. One runner or interactive session may run per checkout.
 
-For hosted development, verify the Firebase, analytics, error-reporting and feedback targets and data authorization before interaction. Gameplay requires Firestore, but no Firebase Authentication. Google Analytics and Sentry are optional.
+For hosted development, verify the Firebase, analytics, error-reporting and feedback targets and data authorization before interaction. Gameplay requires Firestore, but no Firebase Authentication. Google Analytics and Sentry are optional. Sentry uses the [URL minimization boundary](../utils/sentryPrivacy.ts) before delivery: public page and bundle paths remain, private routes become templates, unknown URLs become opaque, and referrers and free-form breadcrumb payloads are omitted.
 
 Choose an available port:
 
