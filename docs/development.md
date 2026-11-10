@@ -83,8 +83,10 @@ and static assets keep their own responses.
 The Markdown homepage uses the same translation source as the UI. Public
 identity metadata lives in [public content](../utils/publicContent.ts), with
 SoftwareApplication JSON-LD on the homepage. Keep its identity and claims
-consistent with visible content. Organization contact and address fields need
-confirmed public details; do not invent them to satisfy an audit.
+consistent with visible content. The project identifies its creator as a Person
+with the owner-approved public email and contactPoint. Contact details live in
+`publicContact` in that module. Keep telephone and postal address unpublished;
+do not invent an Organization identity to satisfy an audit.
 
 [llms.txt](../public/llms.txt) follows the [published format](https://llmstxt.org/)
 with use-case and interaction guidance before its H2 link lists. Update the

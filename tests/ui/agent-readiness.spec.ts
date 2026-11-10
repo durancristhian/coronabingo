@@ -59,8 +59,19 @@ for (const path of paths) {
         name: 'Coronabingo',
         url: `https://coronabingo.com.ar${path}`,
         offers: { price: '0' },
-        creator: { '@type': 'Person', name: 'Cristhian Duran' },
+        creator: {
+          '@type': 'Person',
+          name: 'Cristhian Duran',
+          email: 'durancristhiandev@gmail.com',
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'support',
+            email: 'durancristhiandev@gmail.com',
+          },
+        },
       })
+      expect(schema.creator).not.toHaveProperty('address')
+      expect(schema.creator).not.toHaveProperty('telephone')
       expect(schema.description.length).toBeGreaterThan(20)
       expect(schema.keywords).toContain(
         path === '/en' ? 'online bingo' : 'bingo online',
@@ -73,6 +84,10 @@ for (const path of paths) {
       ).toHaveCount(1)
     }
     if (path !== '/' && path !== '/en') {
+      await expect(
+        page.locator('article a[href="mailto:durancristhiandev@gmail.com"]'),
+      ).toHaveText(/durancristhiandev@gmail.com/)
+      expect(text).toContain('(mailto:durancristhiandev@gmail.com)')
       const paragraphs = await page.evaluate(
         html =>
           [

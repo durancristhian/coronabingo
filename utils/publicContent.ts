@@ -6,6 +6,10 @@ import esTrust from '~/locales/es/trust.json'
 import enTrust from '~/locales/en/trust.json'
 
 export const siteOrigin = 'https://coronabingo.com.ar'
+export const publicContact = {
+  name: 'Cristhian Duran',
+  email: 'durancristhiandev@gmail.com',
+}
 export const trustPaths = ['about', 'contact', 'privacy'] as const
 export type TrustPage = typeof trustPaths[number]
 export const trustContent = (lang: string) =>
@@ -25,6 +29,10 @@ export function publicLinks(lang: string) {
     })),
     { label: 'Twitter', url: 'https://twitter.com/corona_bingo' },
     { label: 'Cristhian Duran', url: 'https://twitter.com/DuranCristhian' },
+    {
+      label: `${lang === 'en' ? 'Email' : 'Correo'}: ${publicContact.email}`,
+      url: `mailto:${publicContact.email}`,
+    },
     {
       label: lang === 'en' ? 'Send feedback' : 'Enviar comentarios',
       url: 'https://forms.gle/egSBrsKSFnEgabff7',
@@ -87,8 +95,16 @@ export function applicationSchema(lang: string) {
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'ARS' },
     creator: {
       '@type': 'Person',
-      name: 'Cristhian Duran',
+      name: publicContact.name,
       url: 'https://twitter.com/DuranCristhian',
+      email: publicContact.email,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'support',
+        email: publicContact.email,
+        availableLanguage: ['es', 'en'],
+        url: publicUrl('/contact', lang),
+      },
     },
     sameAs: ['https://twitter.com/corona_bingo'],
   }
