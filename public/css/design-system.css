@@ -426,6 +426,44 @@ html {
 
 .coronabingo-ui .cb-game-table {
   position: relative;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: 'last' 'cards' 'controls';
+  margin-block-start: 1rem;
+}
+
+.coronabingo-ui .cb-game-last-numbers {
+  grid-area: last;
+  min-inline-size: 0;
+}
+
+.coronabingo-ui .cb-game-cards {
+  grid-area: cards;
+  min-inline-size: 0;
+}
+
+.coronabingo-ui .cb-game-controls {
+  grid-area: controls;
+  min-inline-size: 0;
+}
+
+.coronabingo-ui .cb-game-table--streamer {
+  grid-template-areas: 'last' 'controls';
+}
+
+@media (min-width: 1024px) {
+  .coronabingo-ui .cb-game-table {
+    grid-template-columns: calc(100% / 3) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 'last cards' 'controls cards';
+    align-items: start;
+  }
+
+  .coronabingo-ui .cb-game-table--streamer {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'last' 'controls';
+    inline-size: calc(200% / 3);
+  }
 }
 
 .coronabingo-ui .cb-list {
