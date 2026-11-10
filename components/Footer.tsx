@@ -4,6 +4,7 @@ import { FiCoffee, FiMessageSquare, FiTwitter } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Container from '~/components/Container'
 import News from '~/components/News'
+import { trustContent, trustPaths } from '~/utils/publicContent'
 
 const TWEETS = [
   '1266490485650198528',
@@ -13,7 +14,7 @@ const TWEETS = [
 ]
 
 export default function Footer() {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
 
   return (
     <footer className="cb-footer bg-white p-4 shadow">
@@ -69,6 +70,22 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <nav
+          aria-label={lang === 'en' ? 'About this site' : 'Acerca del sitio'}
+        >
+          <ul className="cb-public-links">
+            {trustPaths.map(path => (
+              <li key={path}>
+                <a
+                  className="cb-text-link"
+                  href={`${lang === 'en' ? '/en' : ''}/${path}`}
+                >
+                  {trustContent(lang)[path].title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </Container>
     </footer>
   )

@@ -730,3 +730,15 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+/* Public information pages use the existing type and surface tokens. */
+.cb-public-prose > * + * {
+  margin-block-start: 1rem;
+}
+
+.cb-public-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin-block-start: 1rem;
+}

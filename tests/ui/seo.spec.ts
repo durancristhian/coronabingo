@@ -121,6 +121,9 @@ test('creating a room replaces homepage metadata and browser back restores it', 
   page,
 }) => {
   await createRoom(page, 'SEO private room name')
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(
+    0,
+  )
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
     'noindex',
@@ -136,6 +139,9 @@ test('creating a room replaces homepage metadata and browser back restores it', 
     'SEO private room name',
   )
   await page.goBack()
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(
+    1,
+  )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
     `${origin}/`,
@@ -144,7 +150,7 @@ test('creating a room replaces homepage metadata and browser back restores it', 
   expect((await readMetadata(page)).alternates).toEqual(alternates)
 })
 
-test('discovery files list only canonical homepages and errors remain 404', async ({
+test('discovery files list only canonical public pages and errors remain 404', async ({
   request,
   page,
 }) => {
@@ -165,7 +171,13 @@ test('discovery files list only canonical homepages and errors remain 404', asyn
       element => element.textContent,
     )
   }, await sitemap.text())
-  expect(urls).toEqual([`${origin}/`, `${origin}/en`])
+  expect(urls).toEqual([
+    `${origin}/`,
+    `${origin}/en`,
+    ...['', '/en'].flatMap(prefix =>
+      ['about', 'contact', 'privacy'].map(path => `${origin}${prefix}/${path}`),
+    ),
+  ])
   for (const url of urls) {
     const response = await request.get(new URL(url!).pathname, {
       maxRedirects: 0,

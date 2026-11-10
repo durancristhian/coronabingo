@@ -2,6 +2,12 @@ import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { Fragment } from 'react'
+import {
+  applicationSchema,
+  trustContent,
+  trustPaths,
+  TrustPage,
+} from '~/utils/publicContent'
 
 const origin = 'https://coronabingo.com.ar'
 const pages: Record<string, string> = {
@@ -16,16 +22,28 @@ export default function PageMetadata() {
   const { pathname } = useRouter()
   const page = pages[pathname]
   const isHome = pathname === '/'
-  const homeUrl = lang === 'en' ? `${origin}/en` : `${origin}/`
+  const isTrust = trustPaths.some(path => pathname === `/${path}`)
+  const isPublic = isHome || isTrust
+  const homeUrl = `${origin}${lang === 'en' ? '/en' : ''}${
+    isHome ? (lang === 'en' ? '' : '/') : pathname
+  }`
+  const trust = isTrust
+    ? trustContent(lang)[pathname.slice(1) as TrustPage]
+    : undefined
 
   // Route templates keep room/player identifiers out of metadata. Only the
-  // homepage is indexable; error pages retain Next.js's own document title.
-  const title = page ? t(`seo-${page}-title`) : undefined
-  const description = page ? t(`seo-${page}-description`) : undefined
+  // public pages are indexable; error pages retain Next.js's own document title.
+  const title = trust
+    ? `${trust.title} | Coronabingo`
+    : page
+    ? t(`seo-${page}-title`)
+    : undefined
+  const description =
+    trust?.description || (page ? t(`seo-${page}-description`) : undefined)
 
   return (
     <Head>
-      {page && (
+      {(page || trust) && (
         <Fragment>
           <title>{title}</title>
           <meta name="description" content={description} key="description" />
@@ -64,25 +82,38 @@ export default function PageMetadata() {
           />
         </Fragment>
       )}
-      {isHome ? (
+      {isHome && (
+        <script
+          type="application/ld+json"
+          key="application-schema"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(applicationSchema(lang)).replace(
+              /</g,
+              '\\u003c',
+            ),
+          }}
+        />
+      )}
+      {isPublic ? (
         <Fragment>
+          <link rel="describedby" href={`${origin}/llms.txt`} key="llms" />
           <link rel="canonical" href={homeUrl} key="canonical" />
           <link
             rel="alternate"
             hrefLang="es"
-            href={`${origin}/`}
+            href={`${origin}${isHome ? '/' : pathname}`}
             key="alternate-es"
           />
           <link
             rel="alternate"
             hrefLang="en"
-            href={`${origin}/en`}
+            href={`${origin}/en${isHome ? '' : pathname}`}
             key="alternate-en"
           />
           <link
             rel="alternate"
             hrefLang="x-default"
-            href={`${origin}/`}
+            href={`${origin}${isHome ? '/' : pathname}`}
             key="alternate-default"
           />
           <meta property="og:url" content={homeUrl} key="og:url" />

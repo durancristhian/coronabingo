@@ -1,0 +1,27 @@
+{
+  "about": {
+    "title": "About Coronabingo",
+    "description": "What Coronabingo is, who created it and how to play.",
+    "paragraphs": [
+      "Coronabingo is a free web application for playing online bingo with friends and family. It was created by Cristhian Duran. It runs in a phone or computer browser, with no account or application download required. You can use it for an in-person gathering or play remotely, with a separate video call if you want to see and talk to each other.",
+      "One person creates a room, adds the names of everyone playing and chooses a host. After the room link is shared, each participant finds their name and opens their two bingo cards. The host calls numbers from 1 to 90 and each person marks matching numbers on their own cards. You can also use a physical bingo cage and record drawn numbers on the number board. The homepage tutorial and frequently asked questions explain these steps."
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "How to send feedback and report problems with Coronabingo.",
+    "paragraphs": [
+      "Coronabingo provides a feedback form for suggestions, questions and problem reports. It is the same form linked in the application footer. You can also visit the public Coronabingo profile and the profile of its creator, Cristhian Duran. These links identify the project and its published contact channels. There is no guaranteed response time.",
+      "When reporting a problem, describe what you were trying to do, what happened and what you expected. Include your browser, device and application language. Avoid sending room codes, player links, other people's names or private information. A description of the steps is usually enough to start investigating. For questions about game data or external services, use the feedback form and read the privacy page. The form opens in Google Forms, which is a separate service."
+    ]
+  },
+  "privacy": {
+    "title": "Privacy",
+    "description": "Information about game data and external services used by Coronabingo.",
+    "paragraphs": [
+      "You do not need an account to play. The application stores shared room information in Google Cloud Firestore, including room and player names, cards, called numbers, card marks and game options. Room links let people enter rooms and open cards. Share links only with the people playing and avoid full names or sensitive information. A room code is an interface control and is not equivalent to a private account.",
+      "The browser uses local storage for interface preferences and to avoid repeating certain usage events. The site includes Google AdSense advertising, X posts in the footer and an external Google Forms feedback form. It also integrates with Google Analytics for usage measurement and Sentry for error reporting when configured. These providers may receive technical information about a visit and use their own cookies or storage technologies.",
+      "Donation and social links lead to external services with their own policies. Clearing browser storage removes local data, but does not delete data already stored in Firestore or received by external providers. For privacy questions, use the feedback form on the contact page without including private links or codes. This page describes application integrations; it does not establish a retention period or an automatic deletion process."
+    ]
+  }
+}

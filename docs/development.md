@@ -70,6 +70,31 @@ npm run start -- --port 3124
 
 For bundle reports, use `ANALYZE_BUNDLE=1 npm run build` and inspect `.next/analyze/`. Compare equivalent builds and report byte savings separately from measured loading performance.
 
+## Public agent discovery
+
+The homepage and About, Contact and Privacy pages negotiate `text/html` and
+`text/markdown` through [Proxy](../proxy.ts), in both locales. HTML remains the
+default. Negotiated responses use `Vary: Accept` and `private, no-store` to avoid
+mixing formats in shared caches. Unsupported formats return 406. The
+[missing-page fallback](../pages/[...notFound].tsx) preserves HTTP 404 with either
+HTML or a Markdown error containing an instruction link. Existing room routes
+and static assets keep their own responses.
+
+The Markdown homepage uses the same translation source as the UI. Public
+identity metadata lives in [public content](../utils/publicContent.ts), with
+SoftwareApplication JSON-LD on the homepage. Keep its identity and claims
+consistent with visible content. Organization contact and address fields need
+confirmed public details; do not invent them to satisfy an audit.
+
+[llms.txt](../public/llms.txt) follows the [published format](https://llmstxt.org/)
+with use-case and interaction guidance before its H2 link lists. Update the
+[sitemap](../public/sitemap.xml) when adding canonical public pages. Run
+`npm run ui-tests:production -- tests/ui/agent-readiness.spec.ts tests/ui/seo.spec.ts`
+for compiled HTTP, discovery-file, metadata and layout checks against isolated
+local destinations. After publishing, repeat GET requests with both Accept
+values against the hosted URL and verify status, Content-Type, Vary and body;
+local evidence does not prove CDN behavior or search ranking.
+
 ## Firestore loading
 
 PERF-10 is implemented in [PR #217](https://github.com/durancristhian/coronabingo/pull/217). Firestore no longer ships in the homepage's initial JavaScript. Equivalent builds before and after this change measured 233,957 and 146,119 gzip-9 bytes, a reduction of 87,838 bytes or 37.5%. This measures initial script bytes, not overall page speed; game routes still load the SDK.

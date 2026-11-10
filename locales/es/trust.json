@@ -1,0 +1,27 @@
+{
+  "about": {
+    "title": "Acerca de Coronabingo",
+    "description": "Qué es Coronabingo, quién lo creó y cómo se juega.",
+    "paragraphs": [
+      "Coronabingo es una aplicación web gratuita para jugar al bingo online con amigos y familia. Fue creada por Cristhian Duran. Funciona desde el navegador del celular o la computadora, sin crear una cuenta ni descargar una aplicación. Puedes usarla para una reunión presencial o para jugar a distancia, con una videollamada en otro servicio si quieren verse y conversar.",
+      "Una persona crea la sala, agrega los nombres de quienes van a jugar y elige quién dirige la partida. Al compartir el enlace, cada participante busca su nombre y abre sus dos cartones. Quien dirige saca números del 1 al 90 y cada persona marca los que aparecen en sus cartones. También pueden usar un bolillero físico y registrar los números en el tablero. El tutorial y las preguntas frecuentes de la página principal explican estos pasos."
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Cómo enviar comentarios y reportar problemas a Coronabingo.",
+    "paragraphs": [
+      "Coronabingo publica un formulario de comentarios para enviar sugerencias, dudas y reportes de problemas. Es el mismo formulario enlazado en el pie de la aplicación. También puedes consultar el perfil público de Coronabingo y el de su creador, Cristhian Duran. Estos enlaces permiten identificar el proyecto y encontrar sus canales publicados; no hay un plazo de respuesta garantizado.",
+      "Si algo no funciona, describe qué intentabas hacer, qué ocurrió y qué esperabas que pasara. Indica el navegador, el dispositivo y el idioma de la aplicación. Evita enviar códigos de sala, enlaces de jugadores, nombres de otras personas u otros datos privados. Una descripción de los pasos suele ser suficiente para empezar a investigar. Para preguntas sobre los datos del juego o los servicios externos, usa el formulario y consulta también la página de privacidad. El formulario se abre en Google Forms."
+    ]
+  },
+  "privacy": {
+    "title": "Privacidad",
+    "description": "Información sobre los datos del juego y los servicios externos de Coronabingo.",
+    "paragraphs": [
+      "Para jugar no necesitas una cuenta. La aplicación guarda en Google Cloud Firestore la información compartida de las salas: nombres de sala y de jugadores, cartones, números llamados, marcas y opciones de la partida. Los enlaces permiten entrar a las salas y abrir los cartones. Comparte los enlaces solo con quienes van a jugar y evita usar nombres completos u otros datos sensibles. El código de sala es un control de la interfaz y no equivale a una cuenta privada.",
+      "El navegador usa almacenamiento local para preferencias de la interfaz y para evitar repetir ciertos eventos de uso. El sitio incluye Google AdSense para publicidad, publicaciones de X en el pie de página y un formulario externo de Google Forms para comentarios. También tiene integración con Google Analytics para medir el uso y con Sentry para reportar errores cuando están configurados. Estos proveedores pueden recibir información técnica de la visita y usar sus propias cookies o tecnologías de almacenamiento.",
+      "Los enlaces de donaciones y redes sociales llevan a servicios externos con sus propias políticas. Puedes borrar los datos locales desde la configuración del navegador; esto no elimina los datos ya guardados en Firestore ni los recibidos por proveedores externos. Para consultas sobre privacidad, usa el formulario de comentarios de la página de contacto sin incluir enlaces o códigos privados. Esta página describe las integraciones de la aplicación y no establece un plazo de conservación ni un mecanismo automático de eliminación."
+    ]
+  }
+}
