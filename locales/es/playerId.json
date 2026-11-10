@@ -16,6 +16,7 @@
   "celebrations": "Festejos",
   "no-numbers": "No salieron números todavía.",
   "replay": {
+    "error": "No pudimos reiniciar la partida. Inténtalo de nuevo.",
     "reboot-game": "Reiniciar partida",
     "description": "Se borrarán los números que salieron y volverás a preparar la sala. Podrás cambiar quiénes juegan y quién dirige. Al empezar, se repartirán nuevos cartones y se borrarán las marcas.",
     "confirm": "Reiniciar partida"

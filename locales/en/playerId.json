@@ -20,6 +20,7 @@
     "url": "Or paste an image link from the internet"
   },
   "replay": {
+    "error": "We couldn't restart the game. Try again.",
     "reboot-game": "Restart game",
     "description": "This clears the called numbers and returns you to room setup. You can change the players and host. Starting the next game deals new cards and clears all marks.",
     "confirm": "Restart game"
