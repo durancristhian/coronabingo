@@ -7,6 +7,9 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    // Reuses jsdom per worker while keeping per-file module isolation.
+    // `isolate: false` was faster but let module state leak between files.
+    pool: 'vmThreads',
     include: ['tests/unit/**/*.test.{ts,tsx}'],
     setupFiles: ['tests/unit/setup.ts'],
     clearMocks: true,

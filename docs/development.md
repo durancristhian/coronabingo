@@ -4,7 +4,7 @@ Setup, validation, and implementation references for Coronabingo. For a project 
 
 ## Local setup
 
-Use the Node version in `.nvmrc` and npm version in `package.json`. Dependencies are locked in `package-lock.json`.
+Use the Node version in `.nvmrc` and npm version in `package.json`. Dependencies are locked in `package-lock.json`. Dependency install scripts are reviewed in `allowScripts` in `package.json`: approvals are pinned to the reviewed version, so an upgrade reports the package again. Manage that field with `npm install-scripts`.
 
 Prepare tooling without starting services or creating gameplay data:
 
