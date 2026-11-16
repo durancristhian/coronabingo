@@ -11,10 +11,10 @@
    ```bash
    git fetch origin
    git rev-parse origin/main
-   git worktree add -b codex/<slug> ../coronabingo-worktrees/<slug> origin/main
+   git worktree add -b <type>/<slug> ../coronabingo-worktrees/<slug> origin/main
    ```
 
-   Replace placeholders. Dependent work uses its agreed base. If fetching fails, report the local base's freshness before relying on it.
+   Replace placeholders; `<type>` is the work's commit type: `fix`, `feat`, `perf`, or `docs`. Dependent work uses its agreed base. If fetching fails, report the local base's freshness before relying on it.
 4. Each new worktree needs `bash scripts/setup-worktree.sh`, following the [development guide](../development.md#local-setup); T3 runs it automatically on worktree creation. It prepares tooling and preserves environment files without starting services or creating gameplay data. Copying `.env` does not isolate hosted destinations.
 5. Start every worktree session with `npm run check:development` and repeat it after changing revisions. It confirms that setup completed for the current dependencies and tooling, reports whether T3 ran it and the base it started from, and prints the fix when it fails. Keep dependencies and generated state local to each checkout.
 6. Resolve the canonical local research directory using the [tracker](issue-tracker.md). Pass absolute ticket/spec paths to skills and agents. Worktrees do not receive ignored research files from Git; use the shared records instead of creating competing copies.
@@ -29,7 +29,7 @@
 
 1. Update the local tracker, then stage only task-owned versioned changes. Keep `research/` ignored; never force-add it. Review `git diff --cached` and `git diff --cached --check`; exclude secrets, generated output, and browser state.
 2. Commit coherent, verified chunks using `fix:`, `feat:`, `perf:`, or `docs:`. Let hooks run, investigate failures, inspect autofixes, and verify the resulting commit and worktree status.
-3. Review against the fixed base and originating requirements, covering both repository standards and requested behavior. When using `$code-review`, supply the base SHA and canonical specification; commit first so its comparison against `HEAD` includes the implementation.
+3. Review against the fixed base and originating requirements, covering both repository standards and requested behavior. When using `/code-review`, supply the base SHA and canonical specification; commit first so its comparison against `HEAD` includes the implementation.
 4. Correct justified in-scope findings, repeat affected checks, and record the reviewed HEAD. Keep optional suggestions separate. Renew affected reviews when code or base changes.
 
 ## Publish when authorized
@@ -42,7 +42,7 @@ Monitor GitHub and Vercel checks to a terminal result and read available review 
 
 Use this section when the user selects the principal-PR workflow:
 
-- Create `codex/<work>/main` from verified `origin/main`, with a draft principal PR targeting `main`. Ticket branches use `codex/<work>/<ticket>` and target the integration branch. A branch named `codex/<work>` cannot coexist with branches beneath that prefix.
+- Create `<type>/<work>/main` from verified `origin/main`, with a draft principal PR targeting `main`. Ticket branches use `<type>/<work>/<ticket>` and target the integration branch. A branch named `<type>/<work>` cannot coexist with branches beneath that prefix.
 - Start each successive ticket from the accepted integration HEAD. Merge ticket PRs into that branch only under authorization for that workflow, after their criteria, reviews, and checks pass. Record the new base and verify the combined result.
 - Keep the principal PR current with incorporated tickets, evidence, and gaps. It leaves draft when technical work is complete. Its merge to `main` remains a separate authorized action. This workflow is not a native stack.
 - Models, delegation, budgets, and retry limits belong to the execution. Report missing required capabilities without silent substitutions. Preserve blocked work; continue independent tasks from valid bases.
