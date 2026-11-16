@@ -91,6 +91,19 @@ html {
   outline: none;
 }
 
+/* Matches the rounded-lg image it wraps. */
+.coronabingo-ui .cb-image-link {
+  border-radius: 0.5rem;
+}
+
+.coronabingo-ui .cb-image-link:focus {
+  outline: none;
+}
+
+.coronabingo-ui .cb-image-link:focus-visible {
+  box-shadow: 0 0 0 3px var(--cb-purple);
+}
+
 .coronabingo-ui .cb-language-select {
   min-width: 8.5rem;
 }

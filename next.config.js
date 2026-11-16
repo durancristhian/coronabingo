@@ -59,6 +59,16 @@ const nextConfig = {
       ],
     },
     {
+      // Content-versioned news images: publish changed bytes under a new filename.
+      source: '/news/:asset',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
       source: '/tutorials/:asset',
       headers: [
         {

@@ -95,6 +95,15 @@ the current origin and language on localhost, Preview and Production. Reserve
 remain absolute. The shared footer groups project navigation and participation
 links below the news, wrapping into stacked groups on narrow screens.
 
+The footer news are static images of X posts in `public/news/`, listed with
+their localized alt text in [News](../components/News.tsx); the page loads
+nothing from X. They were rendered once with `@xeet/core@0.1.0`, installed
+outside the repository; the unscoped `xeet` package is unrelated. To add or
+refresh a post, resolve it with `xeet.resolve(url, { media: true })`, render
+it with `{ surface: 'web-detail', width: 275, theme: 'light', dpr: 2 }`, and
+convert the PNG to WebP. Name the file `<id>.<first 12 hex of its SHA-256>.webp`:
+`/news/*` is served `immutable`, so changed bytes need a new name.
+
 [llms.txt](../public/llms.txt) follows the [published format](https://llmstxt.org/)
 with use-case and interaction guidance before its H2 link lists. Update the
 [sitemap](../public/sitemap.xml) when adding canonical public pages. Run
