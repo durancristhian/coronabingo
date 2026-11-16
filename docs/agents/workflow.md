@@ -15,8 +15,8 @@
    ```
 
    Replace placeholders. Dependent work uses its agreed base. If fetching fails, report the local base's freshness before relying on it.
-4. Bootstrap each new worktree with `bash scripts/setup-worktree.sh`, following the [development guide](../development.md#local-setup). This prepares tooling and preserves environment files without starting services or creating gameplay data. Copying `.env` does not isolate hosted destinations.
-5. Setup is complete only after the command succeeds. Keep dependencies and generated state local to each checkout. A manual run proves manual preparation only; claim automatic T3 preparation only from its actual execution logs.
+4. Each new worktree needs `bash scripts/setup-worktree.sh`, following the [development guide](../development.md#local-setup). T3 runs it automatically on worktree creation; verify that it actually ran and succeeded, and otherwise run it manually. It prepares tooling and preserves environment files without starting services or creating gameplay data. Copying `.env` does not isolate hosted destinations.
+5. Setup is complete only after the command succeeds. Keep dependencies and generated state local to each checkout. A manual run or retry proves manual preparation only; claim automatic T3 preparation only from its actual execution logs.
 6. Resolve the canonical local research directory using the [tracker](issue-tracker.md). Pass absolute ticket/spec paths to skills and agents. Worktrees do not receive ignored research files from Git; use the shared records instead of creating competing copies.
 
 ## Implement and verify

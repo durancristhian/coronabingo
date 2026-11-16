@@ -41,7 +41,9 @@ for (const path of paths) {
         .vary.toLowerCase()
         .split(/,\s*/),
     ).toContain('accept')
-    expect(html.headers()['cache-control']).toContain('no-store')
+    // Next.js development replaces page Cache-Control; builds keep the proxy's.
+    if (process.env.UI_TEST_MODE === 'production')
+      expect(html.headers()['cache-control']).toContain('no-store')
     const source = await html.text()
     if (path === '/' || path === '/en') {
       const schemaText = await page.evaluate(

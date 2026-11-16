@@ -13,9 +13,9 @@ bash scripts/setup-worktree.sh
 # With the repository runtime active: npm run setup:worktree
 ```
 
-The command activates `.nvmrc` through nvm when needed, checks the npm version in `package.json`, runs `npm ci`, and installs/verifies Chromium and the Firestore emulator download. Install Java 21+ first using the [browser prerequisites](#one-time-setup). Linux may also need Chromium system libraries. Reruns reinstall dependencies safely. Dependency installation, development servers and builds must run sequentially within a checkout.
+The command activates `.nvmrc` through nvm when needed, checks the npm version in `package.json`, runs `npm ci`, and installs/verifies Chromium and the Firestore emulator download. Install Java 21+ first and, on Linux, Chromium's system libraries using the [browser prerequisites](#one-time-setup). Reruns reinstall dependencies safely. Dependency installation, development servers and builds must run sequentially within a checkout.
 
-Setup keeps the installers' existing download caches and recreates worktree-owned dependencies with `npm ci`. Measured dependency and browser snapshot copies provided no benefit, so there is no custom snapshot cache or automatic T3 hook. A successful manual setup does not prove automatic preparation or absence of network requests.
+Setup keeps the installers' existing download caches and recreates worktree-owned dependencies with `npm ci`. Measured dependency and browser snapshot copies provided no benefit, so there is no custom snapshot cache. T3's project action runs this command automatically when it creates a worktree and waits for it before starting the agent; that host configuration is outside Git. A successful manual setup does not prove automatic preparation or absence of network requests.
 
 Setup preserves existing `.env` files. In a task worktree it copies the primary checkout's owner-approved `.env` only when absent, with owner-only permissions; an initial primary clone uses the value-free template. Obtain hosted Firebase configuration from the environment owner. Browser exports in `next.config.js` must contain no server credentials. Copying `.env` does not isolate Firebase or authorize hosted writes.
 
@@ -147,7 +147,17 @@ brew install openjdk@21
 bash scripts/setup-worktree.sh
 ```
 
-Linux and WSL need Java on `PATH` or `JAVA_HOME` and `npx playwright install --with-deps chromium`. Native Windows is unsupported by the process-group runner. Browser and npm tool versions follow the lockfile; rerun the browser installer after a Playwright update.
+On Linux and WSL, install a Java 21+ runtime on `PATH` once; setup installs the browser itself. Its Chromium launch also needs system libraries: if it reports them missing, install them once from the checkout, which then has the lockfile's Playwright, and rerun setup. On Ubuntu:
+
+```bash
+# A headless JRE is enough; Java on PATH needs no JAVA_HOME.
+sudo apt install --no-install-recommends openjdk-21-jre-headless
+bash scripts/setup-worktree.sh
+npx playwright install-deps --dry-run chromium # Lists missing libraries
+npx playwright install-deps chromium           # Asks for sudo; rerun setup after
+```
+
+Native Windows is unsupported by the process-group runner. Browser and npm tool versions follow the lockfile; rerun the browser installer after a Playwright update.
 
 ### Run and inspect
 
@@ -167,7 +177,7 @@ Startup waits for the owned emulator to announce readiness and checks a unique r
 
 Run `npm run test:ui-runner` for fast setup and runner regression checks. For UI changes, use the canonical [responsive verification reference](../.better-web-ui.md#responsive-verification). CI runs these before the browser suite.
 
-On a lock error, inspect `.ui-tests-lock/owner.json` and verify its process and services have exited before removing the lock directory. If Java is missing, set `JAVA_HOME` to a JDK 21+ installation.
+On a lock error, inspect `.ui-tests-lock/owner.json` and verify its process and services have exited before removing the lock directory. If Java is missing, put Java 21+ on `PATH`, or set `JAVA_HOME` to an installation outside `PATH`, such as a JDK the runner does not detect.
 
 The runner stops its services on completion, failure, or Ctrl-C. Data is not exported. Tests use one worker and zero retries. Failures retain screenshots, traces, and reports in `test-results/` and `playwright-report/`; emulator logs are in `tests/ui/*-debug.log`.
 
