@@ -232,3 +232,5 @@ Use the primary checkout's `research/` as the canonical directory across worktre
 Before first updating an existing checkout to the commit that removes research from Git, back up its entire `research/`, including untracked work, outside all worktrees and verify the copy. Git can delete previously tracked files when applying that commit even though the directory is now ignored. After updating, restore missing files and compare differing versions without overwriting local work. Preserve unique records from other worktrees before removing them.
 
 This change removes research from future snapshots; it does not rewrite Git history. Earlier committed records remain recoverable from older revisions.
+
+T3 Ubuntu smoke test: this line exists only to exercise a fresh T3 worktree on Ubuntu (do not merge).
