@@ -1,5 +1,4 @@
 {
-  "view-post": "Ver publicación",
   "feedback-form": "Enviar comentarios",
   "language-es": "Español",
   "language-en": "English",
@@ -25,6 +24,11 @@
   },
   "coronabingo-twitter": "Twitter",
   "news": "Coronabingo y las noticias",
+  "news-post": "Post de {{name}} (@{{handle}}) del {{date}}: «{{text}}».",
+  "news-media-canal-siete": "Incluye un video de 3 minutos y 45 segundos.",
+  "news-media-corona-bingo": "Incluye un enlace a la grabación en Google Drive y cita otro post de @corona_bingo: «{{quote}}», con una foto de @DuranCristhian hablando frente a una notebook.",
+  "news-media-clarin": "Incluye un enlace a la nota en clarin.com, cuya imagen muestra cartones de Coronabingo junto a una videollamada grupal.",
+  "news-media-la-nacion": "Incluye un enlace a la nota en lanacion.com.ar.",
   "loading": "Cargando...",
   "error": "No pudimos cargar la información. Intenta recargar la página.",
   "reload": "Recargar",

@@ -6,6 +6,8 @@ interface Props {
   display?: 'block' | 'inline-block'
   href: string
   id: string
+  /** `image` wraps a single image: no text styles, focus ring follows its corners. */
+  variant?: 'text' | 'image'
 }
 
 export default function Anchor({
@@ -13,6 +15,7 @@ export default function Anchor({
   display = 'inline-block',
   href,
   id,
+  variant = 'text',
 }: Props) {
   return (
     <a
@@ -20,11 +23,15 @@ export default function Anchor({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={classnames([
-        'cb-text-link',
-        'focus:outline-none focus:shadow-outline font-medium text-blue-800 underline',
-        display,
-      ])}
+      className={classnames(
+        variant === 'image'
+          ? ['cb-image-link', 'block']
+          : [
+              'cb-text-link',
+              'focus:outline-none focus:shadow-outline font-medium text-blue-800 underline',
+              display,
+            ],
+      )}
     >
       {children}
     </a>

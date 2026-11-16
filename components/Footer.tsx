@@ -13,20 +13,13 @@ import {
   trustPaths,
 } from '~/utils/publicContent'
 
-const TWEETS = [
-  '1266490485650198528',
-  '1267934678784389121',
-  '1246110709005660163',
-  '1279431298990379012',
-]
-
 export default function Footer() {
   const { t, lang } = useTranslation()
 
   return (
     <footer className="cb-footer bg-white p-4 shadow">
       <Container size="large">
-        <News tweetIds={TWEETS} />
+        <News />
         <div className="cb-footer-meta">
           <section className="cb-footer-group" aria-labelledby="footer-project">
             <Heading type="h3">
