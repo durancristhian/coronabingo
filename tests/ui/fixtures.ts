@@ -1,6 +1,19 @@
-import { test as base, expect, Page } from '@playwright/test'
+import { test as base, expect, BrowserContext, Page } from '@playwright/test'
 import { baseURL, firestorePort } from './environment'
 import { isolateBrowserNetwork } from '../../scripts/browser-isolation'
+
+// The Next.js development overlay covers the app after expected page errors,
+// which tests assert through `pageerror`. Compiled builds have no overlay.
+async function hideDevelopmentOverlay(context: BrowserContext) {
+  if (process.env.UI_TEST_MODE !== 'development') return
+  await context.addInitScript(() => {
+    const style = document.createElement('style')
+    style.textContent = 'nextjs-portal { display: none !important; }'
+    const hide = () => document.documentElement.append(style)
+    if (document.documentElement) hide()
+    else document.addEventListener('DOMContentLoaded', hide, { once: true })
+  })
+}
 
 export const test = base.extend<{ playerPage: Page }>({
   context: async ({ context }, use) => {
@@ -8,6 +21,7 @@ export const test = base.extend<{ playerPage: Page }>({
       baseURL,
       firestorePort,
     })
+    await hideDevelopmentOverlay(context)
     await use(context)
     expect(hostedFirebase, 'No hosted Firebase requests from host').toEqual([])
   },
@@ -23,6 +37,7 @@ export const test = base.extend<{ playerPage: Page }>({
       baseURL,
       firestorePort,
     })
+    await hideDevelopmentOverlay(context)
     const page = await context.newPage()
     try {
       await use(page)
