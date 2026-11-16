@@ -5,9 +5,14 @@ const os = require('node:os')
 const path = require('node:path')
 const { test } = require('node:test')
 const {
+  launchedByT3,
   preserveEnvironment,
+  readSetupRecord,
+  setupInputs,
+  setupProblem,
   validateRuntime,
   verifyArtifact,
+  writeSetupRecord,
 } = require('../../scripts/worktree-setup')
 
 function fixture(t) {
@@ -71,4 +76,84 @@ test('accepts the expected emulator artifact and rejects missing, corrupt or sta
   assert.equal(await verifyArtifact(file, metadata), false)
   fs.writeFileSync(file, 'different-version')
   assert.equal(await verifyArtifact(file, metadata), false)
+})
+
+function preparedWorktree(t) {
+  const root = fixture(t)
+  fs.writeFileSync(path.join(root, '.nvmrc'), '24.21.0\n')
+  fs.writeFileSync(
+    path.join(root, 'package.json'),
+    JSON.stringify({ packageManager: 'npm@11.19.0' }),
+  )
+  fs.writeFileSync(path.join(root, 'package-lock.json'), '{"lock":1}')
+  fs.mkdirSync(path.join(root, 'node_modules'))
+  fs.writeFileSync(
+    path.join(root, 'node_modules', '.package-lock.json'),
+    '{"installed":1}',
+  )
+  fs.writeFileSync(path.join(root, '.env'), 'PRIVATE=local\n')
+  const record = { ...setupInputs(root) }
+  const probes = {
+    nodeVersion: '24.21.0',
+    npmVersion: '11.19.0',
+    javaMajor: 21,
+    chromiumReady: true,
+    emulatorReady: true,
+  }
+  return { root, record, probes }
+}
+
+test('writes a private setup record atomically and reads it back', t => {
+  const root = fixture(t)
+  assert.equal(readSetupRecord(root), null)
+  writeSetupRecord(root, { launchedBy: 'T3' })
+  const file = path.join(root, '.local', 'worktree-setup.json')
+  assert.equal(fs.statSync(file).mode & 0o777, 0o600)
+  assert.equal(fs.statSync(path.dirname(file)).mode & 0o777, 0o700)
+  assert.deepEqual(readSetupRecord(root), { launchedBy: 'T3' })
+  assert.deepEqual(fs.readdirSync(path.dirname(file)), ['worktree-setup.json'])
+})
+
+test('attributes setup to T3 only for its own worktree path', t => {
+  const root = fixture(t)
+  assert.equal(launchedByT3(root, { T3CODE_WORKTREE_PATH: root }), true)
+  assert.equal(launchedByT3(root, { T3CODE_WORKTREE_PATH: '' }), false)
+  assert.equal(launchedByT3(root, {}), false)
+  assert.equal(launchedByT3(root, { T3CODE_WORKTREE_PATH: os.tmpdir() }), false)
+})
+
+test('check passes only while setup inputs and tooling still match', t => {
+  const { root, record, probes } = preparedWorktree(t)
+  assert.equal(setupProblem(root, record, probes), null)
+  assert.match(setupProblem(root, null, probes), /Setup has not completed/)
+  assert.match(
+    setupProblem(root, record, { ...probes, nodeVersion: '26.0.0' }),
+    /Use Node 24.21.0/,
+  )
+  assert.match(
+    setupProblem(root, record, { ...probes, javaMajor: 17 }),
+    /Java 21\+/,
+  )
+  assert.match(
+    setupProblem(root, record, { ...probes, chromiumReady: false }),
+    /Chromium is missing/,
+  )
+  assert.match(
+    setupProblem(root, record, { ...probes, emulatorReady: false }),
+    /Firestore emulator/,
+  )
+  fs.writeFileSync(path.join(root, 'package-lock.json'), '{"lock":2}')
+  assert.match(setupProblem(root, record, probes), /package-lock.json changed/)
+  fs.writeFileSync(path.join(root, 'package-lock.json'), '{"lock":1}')
+  fs.rmSync(path.join(root, 'node_modules'), { recursive: true })
+  assert.match(setupProblem(root, record, probes), /node_modules no longer/)
+  fs.mkdirSync(path.join(root, 'node_modules'))
+  fs.writeFileSync(
+    path.join(root, 'node_modules', '.package-lock.json'),
+    '{"installed":1}',
+  )
+  assert.equal(setupProblem(root, record, probes), null)
+  fs.rmSync(path.join(root, '.env'))
+  fs.symlinkSync(path.join(root, 'package.json'), path.join(root, '.env'))
+  assert.match(setupProblem(root, record, probes), /\.env is missing/)
 })
