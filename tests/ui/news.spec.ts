@@ -49,4 +49,21 @@ for (const locale of ['es', 'en']) {
     }
     expect(providerRequests).toEqual([])
   })
+
+  test(`${locale}: news posts fit a 320px screen without horizontal scroll`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 640 })
+    await page.goto(locale === 'en' ? '/en' : '/')
+    const images = page.locator('footer ul img')
+    await images.last().scrollIntoViewIfNeeded()
+    for (const image of await images.all()) {
+      const box = await image.boundingBox()
+      expect(box?.x).toBeGreaterThanOrEqual(0)
+      expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(320)
+    }
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(320)
+  })
 }
