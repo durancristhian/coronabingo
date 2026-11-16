@@ -99,5 +99,12 @@
         "node": "24.x",
         "npm": "11.x"
     },
-    "packageManager": "npm@11.19.0"
+    "packageManager": "npm@11.19.0",
+    "allowScripts": {
+        "husky@4.3.8": true,
+        "re2@1.26.1": true,
+        "@firebase/util": false,
+        "protobufjs": false,
+        "next-translate-plugin": false
+    }
 }
