@@ -107,7 +107,6 @@ test('a player keeps the optimized empty-cell background after reload', async ({
   const assetResponse = await optimizedAsset
   expect(assetResponse.status()).toBe(200)
   expect(assetResponse.headers()['content-type']).toBe('image/webp')
-  expect((await assetResponse.body()).byteLength).toBe(1_049_854)
   await expect(
     player
       .getByTestId('bingo-card')

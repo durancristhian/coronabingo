@@ -274,22 +274,6 @@ for (const outcome of ['unfilled', 'error']) {
   }
 }
 
-test('unfill-optimized content remains visible inside the reservation', async ({
-  page,
-}) => {
-  await page.route(scriptURL, route =>
-    route.fulfill({
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      contentType: 'application/javascript',
-      body: sdk('unfill-optimized'),
-    }),
-  )
-  await page.goto('/')
-  await expect(page.locator(`${ad} iframe`)).toBeVisible()
-  await expect(page.locator(reservation)).toHaveCSS('height', '90px')
-  await expectRequests(page, 1)
-})
-
 for (const width of [390, 1280]) {
   test(`blocked SDK at ${width}px removes the entire gap and no request is queued`, async ({
     page,

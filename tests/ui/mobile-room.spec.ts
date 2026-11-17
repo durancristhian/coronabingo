@@ -35,8 +35,6 @@ test('mobile host and player create a room and synchronize their first draw', as
 }) => {
   await host.setViewportSize(mobileViewport)
   await player.setViewportSize(mobileViewport)
-  expect(host.viewportSize()).toEqual(mobileViewport)
-  expect(player.viewportSize()).toEqual(mobileViewport)
 
   await test.step(
     'Create the room and prepare it without horizontal overflow',

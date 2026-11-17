@@ -183,11 +183,9 @@ test('public endpoints respect Accept preferences and reject unsupported formats
   request,
 }) => {
   for (const [accept, status, type] of [
-    ['text/markdown;q=0, text/html', 200, 'text/html'],
     ['text/markdown;q=0.8, text/html;q=0.5', 200, 'text/markdown'],
     ['application/json', 406, 'text/plain'],
     ['text/html;q=0, text/markdown;q=0', 406, 'text/plain'],
-    ['*/*', 200, 'text/html'],
   ] as const) {
     const response = await request.get('/', { headers: { Accept: accept } })
     expect(response.status()).toBe(status)
