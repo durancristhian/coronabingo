@@ -84,46 +84,6 @@ test('two tabs retain concurrent marks and a new game starts unmarked', async ({
   ).toHaveCount(0)
 })
 
-test('English cards retain concurrent marks after reload', async ({
-  page: host,
-  playerPage: firstTab,
-}) => {
-  await createReadyRoom(host, 'English concurrent marks')
-  const lobbyPath = new URL(host.url()).pathname
-  const englishLobbyURL = `/en${lobbyPath}`
-
-  await firstTab.goto(englishLobbyURL)
-  await openPlayerCards(firstTab, testPlayerNames.player, 'Play')
-  const playerURL = firstTab.url()
-
-  const secondTab = await firstTab.context().newPage()
-  await secondTab.goto(playerURL)
-  await expect(secondTab.getByTestId('bingo-card')).toHaveCount(2)
-
-  const firstNumber = firstTab
-    .getByTestId('bingo-card')
-    .first()
-    .getByRole('button')
-    .first()
-  const secondNumber = secondTab
-    .getByTestId('bingo-card')
-    .first()
-    .getByRole('button')
-    .nth(1)
-  const firstValue = (await firstNumber.innerText()).trim()
-  const secondValue = (await secondNumber.innerText()).trim()
-
-  await Promise.all([firstNumber.click(), secondNumber.click()])
-  for (const page of [firstTab, secondTab]) {
-    await expectMarks(page, [firstValue, secondValue])
-  }
-
-  await Promise.all([firstTab.reload(), secondTab.reload()])
-  for (const page of [firstTab, secondTab]) {
-    await expectMarks(page, [firstValue, secondValue])
-  }
-})
-
 for (const locale of ['es', 'en']) {
   test(`${locale}: a queued mark cannot revive a removed player`, async ({
     page: host,

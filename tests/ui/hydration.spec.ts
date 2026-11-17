@@ -101,7 +101,7 @@ for (const locale of ['es', 'en']) {
 }
 
 // Replay the first divergent node captured on Production: Auto ads inserts a
-// sibling before the layout content. No advertising SDK or delivery is needed.
+// sibling before the layout content. The stubbed SDK below runs this mutation.
 const insertAutoAd = `
   window.__hydOriginalHeading = document.querySelector('header h1');
   const target = document.querySelector('main.cb-layout > .cb-layout-main');
@@ -111,57 +111,6 @@ const insertAutoAd = `
   ad.innerHTML = '<ins class="adsbygoogle" data-ad-format="auto"></ins>';
   target.parentNode.insertBefore(ad, target);
 `
-
-test('Auto ads insertion before hydration reproduces root recovery', async ({
-  page,
-}) => {
-  const errors = collectHydrationErrors(page)
-  // Defer scripts execute after parsing. Replay before the React runtime, with
-  // every external request still blocked by the isolated fixtures.
-  let injected = false
-  await page.route(
-    /\/_next\/static\/chunks\/(framework[^/]*|main)\.js/,
-    async route => {
-      const response = await route.fetch()
-      injected = true
-      await route.fulfill({
-        response,
-        body: `(() => { ${insertAutoAd} })();\n${await response.text()}`,
-      })
-    },
-  )
-  await page.goto('/')
-  await afterHydration(page)
-  expect(injected).toBe(true)
-  await expect.poll(() => errors.length).toBeGreaterThan(0)
-  await expect(page.locator('header h1')).toHaveText('Coronabingo')
-  expect(
-    await page.evaluate(
-      "window.__hydOriginalHeading === document.querySelector('header h1')",
-    ),
-  ).toBe(false)
-  await expect(page.locator('.google-auto-placed')).toHaveCount(0)
-})
-
-test('the same Auto ads insertion after hydration preserves the root', async ({
-  page,
-}) => {
-  const errors = collectHydrationErrors(page)
-  await page.goto('/')
-  await afterHydration(page)
-  await page.evaluate(`(() => { ${insertAutoAd} })()`)
-  await afterHydration(page)
-  await page.locator('#language').selectOption('en')
-  await expect(page.locator('#language')).toHaveValue('en')
-  await afterHydration(page)
-  expect(errors).toEqual([])
-  expect(
-    await page.evaluate(
-      "window.__hydOriginalHeading === document.querySelector('header h1')",
-    ),
-  ).toBe(true)
-  await expect(page.locator('.google-auto-placed')).toHaveCount(1)
-})
 
 for (const locale of ['es', 'en']) {
   test(`${locale}: the AdSense loader waits for hydration before executing`, async ({

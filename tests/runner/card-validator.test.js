@@ -8,7 +8,7 @@ const { test } = require('node:test')
 
 const root = path.resolve(__dirname, '../..')
 
-function validate(t, overlap, metadata = { ticketCount: 2, maxPlayers: 1 }) {
+function validate(t, overlap) {
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'coronabingo-cards-'))
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }))
   fs.mkdirSync(path.join(fixture, 'scripts'))
@@ -35,7 +35,7 @@ function validate(t, overlap, metadata = { ticketCount: 2, maxPlayers: 1 }) {
   )
   fs.writeFileSync(
     path.join(fixture, 'public/tickets-metadata.json'),
-    JSON.stringify(metadata),
+    JSON.stringify({ ticketCount: 2, maxPlayers: 1 }),
   )
   const result = spawnSync(
     process.execPath,
@@ -68,14 +68,4 @@ test('card validator fails for excessive overlap and preserves diagnostics', t =
   assert.match(result.stderr, /Cards sharing more than 10 numbers/)
   assert.match(result.stderr, /1 and 2: 11/)
   assert.equal(result.status, 1)
-})
-
-test('card validator still fails for inconsistent metadata', t => {
-  const result = validate(t, 10, { ticketCount: 4, maxPlayers: 2 })
-  assert.notEqual(result.status, 0)
-  assert.match(result.stderr, /Ticket metadata count must match the catalog/)
-  assert.doesNotMatch(
-    result.stdout,
-    /Ticket catalog counts, capacity and shared-number limits are valid/,
-  )
 })

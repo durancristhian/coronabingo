@@ -117,6 +117,8 @@ two additional ES/EN tests intercept the real SDK request and assert that the
 loader executes after mount, preserves the SSR heading, and loads once across a
 locale transition. They also reject an early SDK script in the server HTML. The
 isolated runner blocks real advertising and uses disposable Firebase configuration.
+The two ordering replays were later removed: the first asserted React's recovery,
+not application behavior, and the loader tests cover the second.
 
 ## Earlier negative results and limits
 

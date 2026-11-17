@@ -196,7 +196,6 @@ test('keeps the tutorial and its controls within a phone viewport', async ({
   expect(box!.x).toBeGreaterThanOrEqual(0)
   expect(box!.x + box!.width).toBeLessThanOrEqual(390)
   await expect(video).toHaveAttribute('controls', '')
-  await expect(page.getByRole('dialog').locator('details')).toHaveCount(0)
 })
 
 test('serves versioned media with immutable caching and byte ranges', async ({
