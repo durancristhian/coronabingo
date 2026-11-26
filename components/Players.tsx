@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, useState } from 'react'
-import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import Button from '~/components/Button'
 import InputText from '~/components/InputText'
 import Message from '~/components/Message'
+import { PlusIcon, TrashCanIcon } from '~/components/icons'
 import usePendingOperation from '~/hooks/usePendingOperation'
 import { Player } from '~/interfaces/models/Player'
 import { Room, RoomBase } from '~/interfaces/models/Room'
@@ -119,7 +119,7 @@ export default function Players({
                 color="green"
                 type="submit"
                 disabled={!name || isCurrentNameRepeated}
-                iconLeft={<FiPlus />}
+                iconLeft={<PlusIcon />}
               />
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function Players({
                   id={`remove-player-${index + 1}`}
                   onClick={() => onRemovePlayer(player)}
                   disabled={isFormDisabled || pending}
-                  iconLeft={<FiTrash2 />}
+                  iconLeft={<TrashCanIcon />}
                 />
               </div>
             </div>

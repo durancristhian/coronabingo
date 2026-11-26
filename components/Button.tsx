@@ -55,7 +55,7 @@ export default function Button({
       <span className="flex items-center justify-center w-full">
         {iconLeft}
         {children && (
-          <span className={classnames(['ml-4', iconRight && 'mr-4'])}>
+          <span className={classnames(['min-w-0 ml-4', iconRight && 'mr-4'])}>
             {children}
           </span>
         )}

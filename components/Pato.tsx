@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
-import { FiPlayCircle } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Emoji from '~/components/Emoji'
+import { PlayCircleIcon } from '~/components/icons'
 import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
 import {
@@ -80,7 +80,7 @@ export default function Pato({ extraSounds, room }: Props) {
                   onClick={() =>
                     playSound({ analyticsCatalog, analyticsKey, url })
                   }
-                  iconLeft={<FiPlayCircle />}
+                  iconLeft={<PlayCircleIcon />}
                 />
               </div>
               <div className="flex flex-auto items-center">

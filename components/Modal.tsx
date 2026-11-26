@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { ReactNode } from 'react'
-import { FiX } from 'react-icons/fi'
 import ReactModal from 'react-modal'
 import Box from '~/components/Box'
 import Heading from '~/components/Heading'
+import { XIcon } from '~/components/icons'
 
 ReactModal.setAppElement('#__next')
 
@@ -34,7 +34,7 @@ export default function Modal({ children, title, ...rest }: Props) {
             aria-label={t('common:close')}
             title={t('common:close')}
           >
-            <FiX aria-hidden="true" />
+            <XIcon />
           </button>
         </div>
         <div className="cb-modal-body">{children}</div>

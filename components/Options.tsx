@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
-import { FiRotateCcw, FiSettings, FiSmile, FiVolume2 } from 'react-icons/fi'
 import { TabList, Tabs } from 'react-tabs'
 import BackgroundCells from '~/components/BackgroundCells'
 import Celebrations from '~/components/Celebrations'
@@ -8,6 +7,12 @@ import OptionTab from '~/components/OptionTab'
 import OptionTabPanel from '~/components/OptionTabPanel'
 import Pato from '~/components/Pato'
 import Restart from '~/components/Restart'
+import {
+  ArrowRotateLeftIcon,
+  FaceSmileIcon,
+  GearIcon,
+  SpeakerWavesIcon,
+} from '~/components/icons'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import { Room } from '~/interfaces/models/Room'
 
@@ -32,7 +37,7 @@ export default function Options({ isAdmin, room }: Props) {
           <OptionTab
             buttonId="configure-empty-cells"
             label={t('playerId:empty-cells.title')}
-            Icon={FiSettings}
+            Icon={GearIcon}
             iconBgColor="bg-yellow-300"
             iconColor="text-yellow-800"
           ></OptionTab>
@@ -41,21 +46,21 @@ export default function Options({ isAdmin, room }: Props) {
               <OptionTab
                 buttonId="celebrations"
                 label={t('playerId:celebrations')}
-                Icon={FiSmile}
+                Icon={FaceSmileIcon}
                 iconBgColor="bg-green-300"
                 iconColor="text-green-800"
               ></OptionTab>
               <OptionTab
                 buttonId="sounds"
                 label={t('playerId:sounds')}
-                Icon={FiVolume2}
+                Icon={SpeakerWavesIcon}
                 iconBgColor="bg-green-300"
                 iconColor="text-green-800"
               ></OptionTab>
               <OptionTab
                 buttonId="reboot-game"
                 label={t('playerId:replay.reboot-game')}
-                Icon={FiRotateCcw}
+                Icon={ArrowRotateLeftIcon}
                 iconBgColor="bg-red-300"
                 iconColor="text-red-800"
               ></OptionTab>

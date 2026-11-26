@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { FiRefreshCw } from 'react-icons/fi'
 import Button from './Button'
+import { ArrowsCycleIcon } from '~/components/icons'
 
 interface Props {
   message?: string
@@ -17,7 +17,7 @@ export default function Error({ message }: Props) {
       <Button
         id="reload"
         aria-label={t('common:reload')}
-        iconLeft={<FiRefreshCw />}
+        iconLeft={<ArrowsCycleIcon />}
         onClick={() => {
           window.location.reload()
         }}

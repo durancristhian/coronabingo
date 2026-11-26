@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, ReactNode } from 'react'
-import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import Button from '~/components/Button'
+import { ChevronsLeftIcon, ChevronsRightIcon } from '~/components/icons'
 import { TICKET_NUMBERS } from '~/utils/bingoNumbers'
 
 interface Props {
@@ -21,8 +21,8 @@ export default function SelectedNumbers({
   selectedNumbers,
   bingoSpinner,
   pending = false,
-  nextIconLeft = <FiChevronsRight aria-hidden="true" />,
-  nextIconRight = <FiChevronsLeft aria-hidden="true" />,
+  nextIconLeft = <ChevronsRightIcon />,
+  nextIconRight = <ChevronsLeftIcon />,
 }: Props) {
   const enableForAdmin = isAdmin && !bingoSpinner
   const roomNumbers = [...selectedNumbers]

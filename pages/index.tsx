@@ -2,7 +2,6 @@ import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
-import { FiPlayCircle } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
@@ -11,6 +10,7 @@ import Heading from '~/components/Heading'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Modal from '~/components/Modal'
+import { PlayCircleIcon } from '~/components/icons'
 import { getTutorialEventParams } from '~/utils/analyticsEvents'
 import { logEvent as log } from '~/utils/gtag'
 
@@ -73,7 +73,7 @@ export default function Index() {
             className="cb-home-tutorial"
             id="watch-tutorial"
             onClick={openTutorial}
-            iconLeft={<FiPlayCircle aria-hidden="true" />}
+            iconLeft={<PlayCircleIcon />}
           >
             {t('index:how-to-play-button')}
           </Button>

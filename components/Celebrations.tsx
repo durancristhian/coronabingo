@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
-import { FiFrown, FiSmile } from 'react-icons/fi'
 import Button from '~/components/Button'
 import { confettiTypes } from '~/components/Confetti'
+import { FaceFrownIcon, FaceSmileIcon } from '~/components/icons'
 import usePendingOperation from '~/hooks/usePendingOperation'
 import { Room } from '~/interfaces/models/Room'
 import {
@@ -63,12 +63,14 @@ export default function Celebrations({ room }: Props) {
             disabled={pending}
             onClick={() => updateCelebration(ct)}
             className="w-full"
-            iconLeft={ct === room.confettiType ? <FiFrown /> : <FiSmile />}
+            iconLeft={
+              ct === room.confettiType ? <FaceFrownIcon /> : <FaceSmileIcon />
+            }
           >
             {ct === room.confettiType ? (
-              <span className="truncate">{t(`playerId:hide-${ct}`)}</span>
+              <span className="block truncate">{t(`playerId:hide-${ct}`)}</span>
             ) : (
-              <span className="truncate">{t(`playerId:show-${ct}`)}</span>
+              <span className="block truncate">{t(`playerId:show-${ct}`)}</span>
             )}
           </Button>
         </div>

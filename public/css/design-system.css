@@ -204,6 +204,10 @@ html {
   transform: translate(0, 0);
 }
 
+.coronabingo-ui .cb-button svg {
+  flex-shrink: 0;
+}
+
 .coronabingo-ui .cb-button--yellow {
   background: var(--cb-yellow);
   color: var(--cb-ink);
@@ -353,7 +357,6 @@ html {
 
 .coronabingo-ui .cb-message-icon svg {
   height: 1.75rem;
-  stroke-width: 2.5;
   width: 1.75rem;
 }
 

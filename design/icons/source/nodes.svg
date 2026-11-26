@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-aliases="share" data-waive-angle="links run between the three nodes, about 30°" data-waive-off-grid="diagonal links meet the round nodes off the half grid">
+  <circle cx="18" cy="5" r="3"/>
+  <circle cx="6" cy="12" r="3"/>
+  <circle cx="18" cy="19" r="3"/>
+  <path d="M7.7 9.5 15.3 6.2"/>
+  <path d="M7.7 14.5 15.3 17.8"/>
+</svg>

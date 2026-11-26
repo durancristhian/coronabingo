@@ -2,7 +2,6 @@ import classnames from 'classnames'
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect } from 'react'
-import { FiLink2 } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Copy from '~/components/Copy'
@@ -13,6 +12,7 @@ import InputText from '~/components/InputText'
 import Layout from '~/components/Layout'
 import Loading from '~/components/Loading'
 import Message from '~/components/Message'
+import { LinkIcon } from '~/components/icons'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import usePlayers from '~/hooks/usePlayers'
 import useRoom from '~/hooks/useRoom'
@@ -122,7 +122,7 @@ export default function RoomId() {
                       `/room/${room.id}/${player.id}`,
                     )
                   }}
-                  iconLeft={<FiLink2 />}
+                  iconLeft={<LinkIcon />}
                 >
                   {t('roomId:play')}
                 </Button>

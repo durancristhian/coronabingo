@@ -1,0 +1,20 @@
+product: Online bingo for friends and families of mixed ages, often played over a video call
+personality: [playful, warm, friendly]
+sizes: [14, 16, 18, 20, 24, 28, 30]  # icons render at 1em, so these follow the text sizes they sit in
+dir: design/icons
+avoid: [letters or numbers inside icons, except the conventional "i" for information]
+
+# Baked into every drawing: changing it means redrawing every icon (stroke: re-lint and fix instead).
+dna:
+  style: outline
+  stroke: 2
+  grid: 24
+  padding: 1
+  keylines: { circle: 20, square: 18, portrait: [16, 20], landscape: [20, 16] }
+  corners: { family: circular, radius: { large: 2, small: 1 }, largeThreshold: 8 }
+  caps: round
+  joins: round
+  angles: [0, 45, 90]
+  detail: low
+  minGap: 2
+  badge: { position: bottom-right, size: 8, gap: 2 }

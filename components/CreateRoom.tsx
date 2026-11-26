@@ -1,10 +1,10 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { FormEvent, Fragment, useRef, useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import InputText from '~/components/InputText'
+import { PlusIcon } from '~/components/icons'
 import useToast from '~/hooks/useToast'
 import { getRoomCreatedEventParams } from '~/utils/analyticsEvents'
 import { generateRoomCode } from '~/utils/generateRoomCode'
@@ -87,7 +87,7 @@ export default function CreateRoom() {
             disabled={!name || inProgress}
             type="submit"
             id="create-room"
-            iconLeft={<FiPlus />}
+            iconLeft={<PlusIcon />}
           >
             {t('index:create-room.field-submit')}
           </Button>

@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useContext, useRef } from 'react'
-import { FiCheck } from 'react-icons/fi'
 import InputText from '~/components/InputText'
+import { CheckIcon } from '~/components/icons'
 import { BackgroundCellContext } from '~/contexts/BackgroundCell'
 import { Cell } from '~/interfaces/contexts/BackgroundCell'
 import { getBackgroundSelectedEventParams } from '~/utils/analyticsEvents'
@@ -81,7 +81,7 @@ export default function BackgroundCells() {
                 <p className="text-center truncate">{t(key)}</p>
               </div>
               <div className="mr-4">
-                {isActive && <FiCheck className="text-xl" />}
+                {isActive && <CheckIcon className="text-xl" />}
               </div>
             </button>
           )

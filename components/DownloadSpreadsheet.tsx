@@ -7,10 +7,10 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { FiDownload, FiRefreshCw } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import Message from '~/components/Message'
+import { ArrowsCycleIcon, TrayArrowDownIcon } from '~/components/icons'
 import { Player } from '~/interfaces/models/Player'
 import { Room } from '~/interfaces/models/Room'
 import { getBaseUrl } from '~/utils/getBaseUrl'
@@ -159,7 +159,7 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
                 aria-label={t('roomId:spreadsheet-retry')}
                 id="retry-spreadsheet"
                 onClick={prepareSpreadsheet}
-                iconLeft={<FiRefreshCw />}
+                iconLeft={<ArrowsCycleIcon />}
               >
                 {t('roomId:spreadsheet-retry')}
               </Button>
@@ -172,7 +172,7 @@ export default function DownloadSpreadsheet({ players, room }: Props) {
             onClick={downloadSpreadsheet}
             color="green"
             disabled={!host || exportState !== 'ready'}
-            iconLeft={<FiDownload />}
+            iconLeft={<TrayArrowDownIcon />}
           >
             {buttonLabel}
           </Button>
