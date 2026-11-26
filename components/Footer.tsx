@@ -1,7 +1,8 @@
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { FiCoffee, FiMessageSquare, FiTwitter } from 'react-icons/fi'
+import { FiCoffee, FiMessageSquare } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
+import { XIcon } from '~/components/BrandIcons'
 import Container from '~/components/Container'
 import News from '~/components/News'
 import Heading from '~/components/Heading'
@@ -66,7 +67,7 @@ export default function Footer() {
               <li>
                 <Anchor href={publicSocialUrl} id="coronabingo-twitter">
                   <span className="cb-footer-action">
-                    <FiTwitter aria-hidden="true" />
+                    <XIcon />
                     <span>{t('common:coronabingo-twitter')}</span>
                   </span>
                 </Anchor>
