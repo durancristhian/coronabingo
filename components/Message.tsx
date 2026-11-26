@@ -1,12 +1,12 @@
 import classnames from 'classnames'
 import React, { ReactNode } from 'react'
-import { FiInfo, FiThumbsDown, FiThumbsUp } from 'react-icons/fi'
+import { InfoCircleIcon, ThumbDownIcon, ThumbUpIcon } from '~/components/icons'
 import { MessageType } from '~/interfaces/custom/Message'
 
 const ICONS = {
-  error: <FiThumbsDown />,
-  information: <FiInfo />,
-  success: <FiThumbsUp />,
+  error: <ThumbDownIcon />,
+  information: <InfoCircleIcon />,
+  success: <ThumbUpIcon />,
 }
 
 const COLORS = {

@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation'
 import React from 'react'
-import { FiCoffee, FiMessageSquare } from 'react-icons/fi'
 import Anchor from '~/components/Anchor'
 import { XIcon } from '~/components/BrandIcons'
 import Container from '~/components/Container'
 import News from '~/components/News'
 import Heading from '~/components/Heading'
+import { CupSteamIcon, SpeechBubbleIcon } from '~/components/icons'
 import {
   publicContact,
   publicPath,
@@ -59,7 +59,7 @@ export default function Footer() {
               <li>
                 <Anchor href={publicContact.feedbackUrl} id="feedback-form">
                   <span className="cb-footer-action">
-                    <FiMessageSquare aria-hidden="true" />
+                    <SpeechBubbleIcon />
                     <span>{t('common:feedback-form')}</span>
                   </span>
                 </Anchor>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Anchor href="https://cafecito.app/durancristhian" id="donate">
                   <span className="cb-footer-action">
-                    <FiCoffee aria-hidden="true" />
+                    <CupSteamIcon />
                     <span>{t('common:donate')}</span>
                   </span>
                 </Anchor>

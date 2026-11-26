@@ -1,7 +1,6 @@
 import Router, { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
-import { FiPlay } from 'react-icons/fi'
 import Box from '~/components/Box'
 import Button from '~/components/Button'
 import Checkbox from '~/components/Checkbox'
@@ -15,6 +14,7 @@ import Message from '~/components/Message'
 import Players from '~/components/Players'
 import RoomCodeCell from '~/components/RoomCodeCell'
 import Select from '~/components/Select'
+import { PlayIcon } from '~/components/icons'
 import useEasterEgg from '~/hooks/useEasterEgg'
 import usePlayers from '~/hooks/usePlayers'
 import useRandomTickets from '~/hooks/useRandomTickets'
@@ -292,7 +292,7 @@ export default function RoomAdmin() {
                 playersPending
               }
               onClick={submitRoom}
-              iconLeft={<FiPlay />}
+              iconLeft={<PlayIcon />}
             >
               {t('admin:field-submit')}
             </Button>

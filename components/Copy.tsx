@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import { FiCopy, FiShare2 } from 'react-icons/fi'
 import { TelegramIcon, WhatsAppIcon } from '~/components/BrandIcons'
 import Button from '~/components/Button'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
+import { NodesIcon, SquaresStackedIcon } from '~/components/icons'
 import useToast from '~/hooks/useToast'
 
 interface Props {
@@ -41,7 +41,7 @@ export default function Share({ content }: Props) {
         aria-label={t('common:share-link')}
         id="open-share-modal"
         onClick={() => setShowModal(true)}
-        iconLeft={<FiShare2 />}
+        iconLeft={<NodesIcon />}
       >
         {t('common:share-link')}
       </Button>
@@ -58,7 +58,7 @@ export default function Share({ content }: Props) {
           <CopyToClipboard text={content}>
             <RoundedButton
               id="copy-to-clipboard"
-              Icon={FiCopy}
+              Icon={SquaresStackedIcon}
               iconBgColor="bg-gray-500"
               label={t('common:copy')}
               onClick={showToast}

@@ -1,9 +1,9 @@
 import Router from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useRef, useState } from 'react'
-import { FiRotateCcw } from 'react-icons/fi'
 import Button from '~/components/Button'
 import Message from '~/components/Message'
+import { ArrowRotateLeftIcon } from '~/components/icons'
 import useRoomCode from '~/hooks/useRoomCode'
 import { Room } from '~/interfaces/models/Room'
 import roomApi from '~/models/room'
@@ -68,7 +68,7 @@ export default function Restart({ room }: Props) {
           onClick={replay}
           color="green"
           disabled={inProgress}
-          iconLeft={<FiRotateCcw />}
+          iconLeft={<ArrowRotateLeftIcon />}
         >
           {t('playerId:replay.confirm')}
         </Button>

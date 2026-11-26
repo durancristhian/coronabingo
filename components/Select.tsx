@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, ReactNode } from 'react'
-import { FiChevronDown } from 'react-icons/fi'
+import { ChevronDownIcon } from '~/components/icons'
 import { Option } from '~/interfaces/custom/Option'
 
 interface Props {
@@ -20,7 +20,7 @@ export default function Select({
   'aria-label': ariaLabel,
   disabled = false,
   hint = '',
-  icon = <FiChevronDown aria-hidden="true" />,
+  icon = <ChevronDownIcon />,
   id,
   label,
   onChange,
