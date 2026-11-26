@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'
 import { FiCopy, FiShare2 } from 'react-icons/fi'
+import { TelegramIcon, WhatsAppIcon } from '~/components/BrandIcons'
 import Button from '~/components/Button'
 import Modal from '~/components/Modal'
 import RoundedButton from '~/components/RoundedButton'
@@ -66,14 +66,14 @@ export default function Share({ content }: Props) {
           </CopyToClipboard>
           <RoundedButton
             id="share-whatsapp"
-            Icon={FaWhatsapp}
+            Icon={WhatsAppIcon}
             iconBgColor="bg-whatsapp"
             label={t('common:whatsapp-share')}
             onClick={shareOnWhatsApp}
           />
           <RoundedButton
             id="share-telegram"
-            Icon={FaTelegramPlane}
+            Icon={TelegramIcon}
             iconBgColor="bg-telegram"
             label={t('common:telegram-share')}
             onClick={shareOnTelegram}
