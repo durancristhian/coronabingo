@@ -2,8 +2,6 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import Anchor from '~/components/Anchor'
 import Ball from '~/components/Ball'
-import Emoji from '~/components/Emoji'
-import { DREAMS_EMOJIS } from '~/utils/numberMeanings'
 
 interface Props {
   hideNumbersMeaning: boolean
@@ -16,7 +14,6 @@ export default function LastNumbers({
 }: Props) {
   const { t } = useTranslation()
   const [last] = selectedNumbers
-  const emoji = DREAMS_EMOJIS[last - 1]
 
   if (!selectedNumbers.length) {
     return (
@@ -42,10 +39,10 @@ export default function LastNumbers({
             className="appear-after flex flex-auto font-medium items-center"
             key={last}
           >
-            <span className="mr-1">{t(`playerId:dreams.${last}`)}</span>
-            <span className="text-xs">
-              <Emoji name={emoji} />
+            <span className="cb-dream-illustration">
+              <img src={`/dreams/${last}.svg`} alt="" width={48} height={48} />
             </span>
+            <span>{t(`playerId:dreams.${last}`)}</span>
           </p>
           <p className="text-right md:text-sm w-24">
             <Anchor
