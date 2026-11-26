@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><g fill="none" stroke="#2c3850" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<g transform="rotate(-40 32 32)">
+<path d="M32 26V58M32 50h6M32 56h6" stroke-width="3.5"/>
+<circle cx="32" cy="15" r="9" fill="#ffd166"/>
+<circle cx="32" cy="15" r="3.5" fill="#fffdf8" stroke-width="2.5"/>
+</g>
+<g transform="rotate(40 32 32)">
+<path d="M32 26V58M32 50h6M32 56h6" stroke-width="3.5"/>
+<circle cx="32" cy="15" r="9" fill="#ebe6ff"/>
+<circle cx="32" cy="15" r="3.5" fill="#fffdf8" stroke-width="2.5"/>
+</g>
+</g></svg>

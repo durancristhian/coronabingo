@@ -622,6 +622,24 @@ html {
   padding-bottom: 0.5rem;
 }
 
+/* Dream illustrations are drawn for 48px or larger; do not shrink them. */
+.coronabingo-ui .cb-dream-illustration {
+  background: var(--cb-canvas);
+  border: 2px solid var(--cb-line-subtle);
+  border-radius: var(--cb-radius-control);
+  display: grid;
+  flex: none;
+  margin-right: 0.75rem;
+  padding: 0.25rem;
+  place-items: center;
+}
+
+.coronabingo-ui .cb-dream-illustration img {
+  display: block;
+  height: 3rem;
+  width: 3rem;
+}
+
 .coronabingo-ui .cb-ball > span {
   background: var(--cb-surface);
   color: var(--cb-ink);

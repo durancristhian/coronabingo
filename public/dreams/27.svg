@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><g fill="none" stroke="#2c3850" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<g transform="rotate(-20 32 32)">
+<rect x="8" y="20" width="48" height="12" rx="3" fill="#ffd166"/>
+<path d="M13 32v12M18 32v12M23 32v12M28 32v12M33 32v12M38 32v12M43 32v12M48 32v12M53 32v9" stroke-width="2.5"/>
+</g>
+</g></svg>

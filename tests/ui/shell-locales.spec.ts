@@ -108,7 +108,17 @@ test('a player changes the language without leaving the room or cards', async ({
   await host.getByRole('button', { name: 'Próximo número' }).click()
   const drawn = host.getByTestId('called-number').first()
   await expect(drawn).toHaveText(/^(?:[1-9]|[1-8][0-9]|90)$/)
-  await expect(player.getByTestId('called-number')).toHaveText(
-    await drawn.innerText(),
+  const drawnNumber = await drawn.innerText()
+  await expect(player.getByTestId('called-number')).toHaveText(drawnNumber)
+
+  const dreamIllustration = player.locator('.cb-dream-illustration img')
+  await expect(dreamIllustration).toHaveAttribute(
+    'src',
+    `/dreams/${drawnNumber}.svg`,
   )
+  await expect
+    .poll(() =>
+      dreamIllustration.evaluate((img: HTMLImageElement) => img.naturalWidth),
+    )
+    .toBeGreaterThan(0)
 })
