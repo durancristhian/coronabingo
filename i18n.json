@@ -7,7 +7,7 @@
     "/": ["index"],
     "/kitchen-sink": ["playerId"],
     "/room/[roomId]": ["roomId"],
-    "/room/[roomId]/admin": ["admin"],
+    "/room/[roomId]/admin": ["admin", "playerId"],
     "/room/[roomId]/[playerId]": ["playerId"]
   }
 }
