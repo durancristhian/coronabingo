@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-aliases="coffee donate support" data-waive-radius="the handle is a half circle, not a corner">
+  <path d="M10 9L17 9L17 19A2 2 0 0 1 15 21L5 21A2 2 0 0 1 3 19L3 9Z"/>
+  <path d="M17 11h1a3 3 0 0 1 0 6h-1"/>
+  <path d="M8 2v3"/>
+  <path d="M12 2v3"/>
+</svg>
