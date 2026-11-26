@@ -68,9 +68,9 @@ export default function Celebrations({ room }: Props) {
             }
           >
             {ct === room.confettiType ? (
-              <span className="truncate">{t(`playerId:hide-${ct}`)}</span>
+              <span className="block truncate">{t(`playerId:hide-${ct}`)}</span>
             ) : (
-              <span className="truncate">{t(`playerId:show-${ct}`)}</span>
+              <span className="block truncate">{t(`playerId:show-${ct}`)}</span>
             )}
           </Button>
         </div>
