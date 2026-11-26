@@ -23,9 +23,9 @@ function codeChoices(page: Page) {
 }
 
 async function selectCode(page: Page, code: string[]) {
-  for (const emojiClass of code) {
+  for (const emoji of code) {
     await codeChoices(page)
-      .locator(`label:has(i.${emojiClass})`)
+      .getByRole('img', { name: emoji, exact: true })
       .click()
   }
 }
@@ -70,16 +70,26 @@ test('the host room code protects each game while players enter normally', async
   const roomCode = await test.step(
     'Read the generated code from the setup UI',
     async () => {
-      const code = await host
+      const emojis = host
         .getByText('Código de acceso a la sala')
-        .locator('xpath=following-sibling::div[1]//i')
-        .evaluateAll(emojis =>
-          emojis.map(emoji =>
-            Array.from(emoji.classList).find(className =>
-              className.startsWith('em-'),
+        .locator('xpath=following-sibling::div[1]//img')
+      // External traffic is blocked, so these load only from the app itself.
+      await expect
+        .poll(
+          () =>
+            emojis.evaluateAll(images =>
+              images.every(
+                image =>
+                  (image as HTMLImageElement).complete &&
+                  (image as HTMLImageElement).naturalWidth > 0,
+              ),
             ),
-          ),
+          { message: 'The room code emojis load from the app' },
         )
+        .toBe(true)
+      const code = await emojis.evaluateAll(images =>
+        images.map(image => image.getAttribute('alt')),
+      )
 
       expect(code, 'The setup UI shows a three-emoji room code').toHaveLength(3)
       expect(code.every((emoji): emoji is string => Boolean(emoji))).toBe(true)
@@ -114,14 +124,10 @@ test('the host room code protects each game while players enter normally', async
 
       const wrongCode = (
         await codeChoices(host)
-          .locator('input')
-          .evaluateAll(inputs =>
-            inputs
-              .map(input =>
-                Array.from(
-                  input.parentElement?.querySelector('i')?.classList || [],
-                ).find(className => className.startsWith('em-')),
-              )
+          .locator('img')
+          .evaluateAll(emojis =>
+            emojis
+              .map(emoji => emoji.getAttribute('alt'))
               .filter((emoji): emoji is string => Boolean(emoji)),
           )
       )

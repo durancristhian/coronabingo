@@ -9,7 +9,6 @@
 @import 'background-cell.css';
 @import 'ball.css';
 @import 'confetti.css';
-@import 'emojis.css';
 @import 'modal.css';
 @import 'video.css';
 @import 'spinner.css';
@@ -57,6 +56,13 @@
 
 .bg-whatsapp {
   background-color: #25d366;
+}
+
+.cb-emoji {
+  display: inline-block;
+  height: 1.5em;
+  width: 1.5em;
+  vertical-align: middle;
 }
 
 .cursor-poroto {

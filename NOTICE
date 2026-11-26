@@ -1,0 +1,8 @@
+Coronabingo includes third-party material:
+
+Twemoji
+  Files: public/emojis/*.svg
+  Copyright 2019 Twitter, Inc and other contributors
+  Graphics licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
+  Source: https://github.com/twitter/twemoji
+  Changes: files renamed after the emoji names used by the app.

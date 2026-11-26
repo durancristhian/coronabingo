@@ -113,6 +113,16 @@ local destinations. After publishing, repeat GET requests with both Accept
 values against the hosted URL and verify status, Content-Type, Vary and body;
 local evidence does not prove CDN behavior or search ranking.
 
+## Emoji graphics
+
+[Emoji](../components/Emoji.tsx) renders `public/emojis/<name>.svg` for each
+key in [emojiLabels.json](../utils/emojiLabels.json); `npm run test:unit` fails
+when a file is missing. The SVGs are Twemoji graphics, credited in
+[NOTICE](../NOTICE), copied from the `2/svg/<codepoint>.svg` set the app
+previously loaded from a CDN. To add an emoji, take its SVG from that same set,
+published in the [`twemoji@12.0.0` npm package](https://cdn.jsdelivr.net/npm/twemoji@12.0.0/2/svg/),
+so drawings stay consistent; later releases redrew some, such as the pistol.
+
 ## Firestore loading
 
 PERF-10 is implemented in [PR #217](https://github.com/durancristhian/coronabingo/pull/217). Firestore no longer ships in the homepage's initial JavaScript. Equivalent builds before and after this change measured 233,957 and 146,119 gzip-9 bytes, a reduction of 87,838 bytes or 37.5%. This measures initial script bytes, not overall page speed; game routes still load the SDK.
