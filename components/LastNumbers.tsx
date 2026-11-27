@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import React, { Fragment } from 'react'
 import Anchor from '~/components/Anchor'
 import Ball from '~/components/Ball'
+import dreamIllustrations from '~/utils/dreamIllustrations'
 
 interface Props {
   hideNumbersMeaning: boolean
@@ -40,7 +41,12 @@ export default function LastNumbers({
             key={last}
           >
             <span className="cb-dream-illustration">
-              <img src={`/dreams/${last}.svg`} alt="" width={48} height={48} />
+              <img
+                src={dreamIllustrations[last]}
+                alt=""
+                width={48}
+                height={48}
+              />
             </span>
             <span>{t(`playerId:dreams.${last}`)}</span>
           </p>

@@ -109,11 +109,13 @@ const nextConfig = {
       config.resolve.alias[newKey] = join(__dirname, value)
     })
 
+    // Imported files are published as separate content-hashed URLs, which
+    // Next serves as immutable; inlining them would grow the JavaScript.
     config.module.rules.push({
       test: /\.(jpg|jpeg|png|svg|gif|ico|webp|jp2|avif|mp3)$/,
       issuer: /\.[jt]sx?$/,
-      type: 'asset',
-      parser: { dataUrlCondition: { maxSize: 8192 } },
+      type: 'asset/resource',
+      generator: { filename: 'static/media/[name].[hash:8][ext]' },
     })
 
     return config

@@ -113,11 +113,18 @@ local destinations. After publishing, repeat GET requests with both Accept
 values against the hosted URL and verify status, Content-Type, Vary and body;
 local evidence does not prove CDN behavior or search ranking.
 
-## Emoji graphics
+## Static graphics
 
-[Emoji](../components/Emoji.tsx) renders `public/emojis/<name>.svg` for each
-key in [emojiLabels.json](../utils/emojiLabels.json); `npm run test:unit` fails
-when a file is missing. The SVGs are Twemoji graphics, credited in
+Import long-lived graphics from `assets/` instead of serving them from `public/`.
+The webpack rule in [next.config.js](../next.config.js) publishes imported files
+as separate `/_next/static/media/<name>.<hash>.<ext>` URLs, which Next serves
+`immutable`, so changed bytes get a new URL. `public/` files are revalidated on
+every visit unless a header rule marks a content-versioned name `immutable`.
+
+[Emoji](../components/Emoji.tsx) renders `assets/emojis/<name>.svg` for each
+key in [emojiLabels.json](../utils/emojiLabels.json), imported in
+[emojiGraphics](../utils/emojiGraphics.ts); typecheck fails when a key has no
+import. The SVGs are Twemoji graphics, credited in
 [NOTICE](../NOTICE), copied from the `2/svg/<codepoint>.svg` set the app
 previously loaded from a CDN. To add an emoji, take its SVG from that same set,
 published in the [`twemoji@12.0.0` npm package](https://cdn.jsdelivr.net/npm/twemoji@12.0.0/2/svg/),
