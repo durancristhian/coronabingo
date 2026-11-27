@@ -114,7 +114,7 @@ test('a player changes the language without leaving the room or cards', async ({
   const dreamIllustration = player.locator('.cb-dream-illustration img')
   await expect(dreamIllustration).toHaveAttribute(
     'src',
-    `/dreams/${drawnNumber}.svg`,
+    new RegExp(`^/_next/static/media/${drawnNumber}\\.[0-9a-f]{8}\\.svg$`),
   )
   await expect
     .poll(() =>
